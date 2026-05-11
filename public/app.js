@@ -88,6 +88,94 @@ const AI_CONDITION_LABELS = {
   high: "高額品なので持ち歩きが不安"
 };
 
+const OCR_MARK_PATTERNS = [
+  { value: "pt900", label: "Pt900 / Pt950", pattern: /\b(Pt|PT|P)\s*(900|950)\b/i },
+  { value: "pt850", label: "Pt850", pattern: /\b(Pt|PT|P)\s*850\b/i },
+  { value: "k24", label: "K24 / 純金", pattern: /\b(K|KT)\s*24\b|\b24\s*K\b|\b999(?:\.9)?\b|純金/i },
+  { value: "k18", label: "K18 / 750", pattern: /\b(K|KT)\s*18\b|\b18\s*K\b|\b750\b/i },
+  { value: "plated", label: "GP / GF / メッキかも", pattern: /\b(GP|GF|GEP|HGE|RGP)\b|メッキ/i }
+];
+
+function normalizeOcrText(text) {
+  return String(text || "")
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (char) {
+      return String.fromCharCode(char.charCodeAt(0) - 0xFEE0);
+    })
+    .replace(/[｜|]/g, "I")
+    .replace(/[‐‑‒–—ー]/g, "-")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function detectMarkFromText(text) {
+  const normalized = normalizeOcrText(text);
+  for (const item of OCR_MARK_PATTERNS) {
+    if (item.pattern.test(normalized)) {
+      return { ...item, text: normalized };
+    }
+  }
+  return { value: "", label: "", text: normalized };
+}
+
+function setOcrStatus(el, message, state) {
+  if (!el) return;
+  el.textContent = message;
+  el.classList.remove("is-reading", "is-found", "is-missed");
+  if (state) el.classList.add(state);
+}
+
+function resizeImageForOcr(file) {
+  return new Promise(function (resolve, reject) {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = function () {
+      const maxSize = 1400;
+      const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(img.width * scale));
+      canvas.height = Math.max(1, Math.round(img.height * scale));
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas);
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      reject(new Error("image_load_failed"));
+    };
+    img.src = url;
+  });
+}
+
+async function runMarkOcr(file, markSelect, statusEl) {
+  if (!file || !window.Tesseract) {
+    setOcrStatus(statusEl, "OCRを読み込めませんでした。刻印は手動で選択してください。", "is-missed");
+    return;
+  }
+
+  setOcrStatus(statusEl, "刻印候補を読み取り中です。K18、750、Pt900などを探しています。", "is-reading");
+  try {
+    const source = await resizeImageForOcr(file);
+    const result = await window.Tesseract.recognize(source, "eng", {
+      logger: function () {}
+    });
+    const rawText = result && result.data ? result.data.text : "";
+    const detected = detectMarkFromText(rawText);
+    if (detected.value && markSelect) {
+      markSelect.value = detected.value;
+      markSelect.dispatchEvent(new Event("change", { bubbles: true }));
+      setOcrStatus(statusEl, "刻印候補「" + detected.label + "」を検出しました。違う場合は手動で変更してください。", "is-found");
+      track("gold_kaitori_ai_ocr_detected", { detected_mark: detected.value });
+      return;
+    }
+    setOcrStatus(statusEl, "刻印候補は読み取れませんでした。刻印が小さい場合は、手動選択のままで大丈夫です。", "is-missed");
+    track("gold_kaitori_ai_ocr_missed", {});
+  } catch (_) {
+    setOcrStatus(statusEl, "刻印OCRに失敗しました。写真の明るさやピントを変えるか、手動で選択してください。", "is-missed");
+    track("gold_kaitori_ai_ocr_error", {});
+  }
+}
+
 function getAiRoute(data) {
   if (data.condition === "high" || data.weight === "heavy" || data.weight === "many" || data.item === "coin") {
     return {
@@ -171,8 +259,10 @@ function setupAiConcierge() {
   if (!form || !result) return;
 
   const photoInput = form.querySelector("[data-ai-photo]");
+  const markSelect = form.querySelector('select[name="mark"]');
   const photoPreview = document.querySelector("[data-ai-photo-preview]");
   const photoImg = document.querySelector("[data-ai-photo-img]");
+  const ocrStatus = document.querySelector("[data-ocr-status]");
   const title = result.querySelector("[data-ai-title]");
   const summary = result.querySelector("[data-ai-summary]");
   const routeBox = result.querySelector("[data-ai-route]");
@@ -192,7 +282,9 @@ function setupAiConcierge() {
       photoUrl = URL.createObjectURL(file);
       photoImg.src = photoUrl;
       photoPreview.hidden = false;
+      setOcrStatus(ocrStatus, "写真を確認中です。刻印が写っていれば自動で候補を探します。", "is-reading");
       track("gold_kaitori_ai_photo_selected", { file_type: file.type || "unknown" });
+      runMarkOcr(file, markSelect, ocrStatus);
     });
   }
 

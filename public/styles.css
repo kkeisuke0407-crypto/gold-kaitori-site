@@ -469,6 +469,36 @@ button {
   font-size: 13px;
 }
 
+.ocr-status {
+  margin-top: 9px;
+  padding: 10px 11px;
+  border-radius: 7px;
+  border: 1px solid #ead19b;
+  background: #fff7df;
+  color: var(--gold-deep);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.ocr-status.is-reading {
+  border-color: rgba(15, 107, 87, .35);
+  background: #edf8f4;
+  color: var(--green-deep);
+}
+
+.ocr-status.is-found {
+  border-color: rgba(15, 107, 87, .45);
+  background: #e7f7ef;
+  color: var(--green-deep);
+}
+
+.ocr-status.is-missed {
+  border-color: #ead19b;
+  background: #fff7df;
+  color: #735018;
+}
+
 .ai-fields {
   display: grid;
   grid-template-columns: 1fr 1fr;

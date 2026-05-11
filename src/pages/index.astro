@@ -71,7 +71,7 @@ const faqJsonLd = {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260511-3" />
+  <link rel="stylesheet" href="/styles.css?v=20260512-1" />
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -189,12 +189,15 @@ const faqJsonLd = {
               <label>
                 <span>写真チェック（任意）</span>
                 <input type="file" accept="image/*" data-ai-photo />
-                <small>写真はこの画面内で確認します。アップロード保存はしません。</small>
+                <small>写真はこの画面内で確認します。刻印OCRもブラウザ内で処理し、アップロード保存はしません。</small>
               </label>
 
               <div class="ai-photo-preview" data-ai-photo-preview hidden>
                 <img alt="選択した品物の写真プレビュー" data-ai-photo-img />
-                <p data-ai-photo-note>刻印・全体・傷や切れた部分が分かる写真もあると相談しやすくなります。</p>
+                <div>
+                  <p data-ai-photo-note>刻印・全体・傷や切れた部分が分かる写真もあると相談しやすくなります。</p>
+                  <div class="ocr-status" data-ocr-status>写真を選ぶと、刻印候補を自動で読み取ります。</div>
+                </div>
               </div>
 
               <div class="ai-fields">
@@ -822,6 +825,7 @@ const faqJsonLd = {
     </div>
   </footer>
 
-  <script src="/app.js?v=20260511-3" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+  <script src="/app.js?v=20260512-1" defer></script>
 </body>
 </html>
