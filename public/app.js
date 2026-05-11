@@ -271,6 +271,15 @@ function setupAiConcierge() {
   const copyButton = result.querySelector("[data-ai-copy]");
   let photoUrl = "";
 
+  function suppressStickyCta() {
+    const sticky = document.querySelector(".sticky-cta");
+    if (!sticky) return;
+    sticky.classList.add("suppressed");
+    window.setTimeout(function () {
+      sticky.classList.remove("suppressed");
+    }, 12000);
+  }
+
   if (photoInput && photoPreview && photoImg) {
     photoInput.addEventListener("change", function () {
       const file = photoInput.files && photoInput.files[0];
@@ -309,7 +318,10 @@ function setupAiConcierge() {
     pointsList.innerHTML = points.map(function (point) { return "<li>" + point + "</li>"; }).join("");
     message.value = buildAiMessage(data, route);
     result.hidden = false;
-    result.scrollIntoView({ behavior: "smooth", block: "start" });
+    suppressStickyCta();
+    window.setTimeout(function () {
+      result.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 40);
     track("gold_kaitori_ai_check_complete", data);
   });
 
@@ -379,8 +391,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const hero = document.querySelector(".hero");
   const ctaSection = document.querySelector(".cta-section");
+  const aiResult = document.querySelector("[data-ai-result]");
   window.addEventListener("scroll", function () {
     if (dismissed) return;
+    if (aiResult && !aiResult.hidden) {
+      const aiRect = aiResult.getBoundingClientRect();
+      if (aiRect.top < window.innerHeight && aiRect.bottom > 0) {
+        sticky.classList.remove("visible");
+        return;
+      }
+    }
     const heroBottom = hero ? hero.getBoundingClientRect().bottom : 0;
     const ctaTop = ctaSection ? ctaSection.getBoundingClientRect().top : window.innerHeight + 1;
     if (heroBottom < 0 && ctaTop > window.innerHeight) {

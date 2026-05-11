@@ -321,6 +321,188 @@ button {
   padding: 28px 0;
 }
 
+.market-section {
+  background: #fff;
+}
+
+.market-head {
+  max-width: 820px;
+  margin-bottom: 26px;
+}
+
+.market-head p {
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+.market-winner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: #10251f;
+  color: #fff;
+  box-shadow: 0 18px 48px rgba(16, 37, 31, .18);
+}
+
+.market-winner span {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background: #f2c45c;
+  color: #3a2709;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 9px;
+}
+
+.market-winner h3 {
+  font-size: clamp(24px, 2.7vw, 36px);
+  line-height: 1.25;
+}
+
+.market-winner p {
+  color: rgba(255,255,255,.76);
+  margin-top: 10px;
+}
+
+.market-winner .btn {
+  min-width: 260px;
+}
+
+.market-rate-card {
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(201, 147, 47, .5);
+  background: linear-gradient(135deg, #fff7df, #fff);
+  box-shadow: 0 12px 34px rgba(138, 93, 21, .1);
+}
+
+.rate-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.rate-card-head span {
+  color: var(--gold-deep);
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.rate-card-head strong {
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.rate-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.rate-grid div {
+  min-height: 92px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  border-radius: 7px;
+  background: #fff;
+  border: 1px solid #ead19b;
+  padding: 13px;
+}
+
+.rate-grid span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.rate-grid strong {
+  color: var(--green-deep);
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.market-rate-card p {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.market-table {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.market-row {
+  display: grid;
+  grid-template-columns: .68fr 1.22fr 1.1fr;
+}
+
+.market-row > div {
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.market-row > div:last-child {
+  border-right: 0;
+}
+
+.market-row:last-child > div {
+  border-bottom: 0;
+}
+
+.market-row-head {
+  background: var(--green-deep);
+  color: #fff;
+  font-weight: 900;
+}
+
+.market-primary-row {
+  background: #fffaf0;
+}
+
+.market-row strong {
+  font-size: 17px;
+}
+
+.market-row:not(.market-row-head) div {
+  color: var(--soft-ink);
+  font-weight: 700;
+}
+
+.market-note {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: var(--radius);
+  background: #f8f4eb;
+  border: 1px solid var(--line);
+}
+
+.market-note strong {
+  display: block;
+  color: var(--green-deep);
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.market-note p {
+  color: var(--muted);
+}
+
 .ai-section {
   background: linear-gradient(180deg, #fffaf0 0%, #fff 100%);
 }
@@ -511,6 +693,7 @@ button {
   grid-template-columns: 1fr .9fr;
   gap: 20px;
   padding: 22px;
+  scroll-margin-top: 88px;
 }
 
 .ai-result[hidden],
@@ -1728,6 +1911,10 @@ h2 {
   transform: translate(-50%, 0);
 }
 
+.sticky-cta.suppressed {
+  transform: translate(-50%, 140%);
+}
+
 .sticky-cta span {
   font-weight: 800;
   font-size: 13px;
@@ -1846,6 +2033,7 @@ h2 {
   .bridge-box,
   .push-layout,
   .estimate-layout,
+  .market-winner,
   .ai-shell,
   .ai-result,
   .ready-box {
@@ -1943,8 +2131,36 @@ h2 {
   .prep-grid,
   .estimate-card,
   .ai-fields,
+  .rate-grid,
   .last-check-grid {
     grid-template-columns: 1fr;
+  }
+
+  .rate-card-head {
+    display: grid;
+  }
+
+  .market-row,
+  .market-row-head {
+    grid-template-columns: 1fr;
+  }
+
+  .market-row-head {
+    display: none;
+  }
+
+  .market-row {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .market-row:last-child {
+    border-bottom: 0;
+  }
+
+  .market-row > div {
+    border-right: 0;
+    border-bottom: 0;
+    padding: 12px 14px;
   }
 
   .ai-card-head,
