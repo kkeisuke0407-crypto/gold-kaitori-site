@@ -321,6 +321,317 @@ button {
   padding: 28px 0;
 }
 
+.ai-section {
+  background: linear-gradient(180deg, #fffaf0 0%, #fff 100%);
+}
+
+.ai-shell {
+  display: grid;
+  grid-template-columns: .88fr 1.12fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.ai-intro {
+  position: sticky;
+  top: 86px;
+}
+
+.ai-intro p {
+  color: var(--muted);
+  margin: 14px 0 18px;
+}
+
+.ai-trust-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.ai-trust-grid div {
+  min-height: 92px;
+  border: 1px solid #ead19b;
+  border-radius: var(--radius);
+  background: #fff7df;
+  padding: 14px;
+}
+
+.ai-trust-grid strong {
+  display: block;
+  color: var(--gold-deep);
+  font-size: 16px;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.ai-trust-grid span {
+  color: var(--soft-ink);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.ai-card,
+.ai-result {
+  background: #fff;
+  border: 1px solid rgba(201, 147, 47, .45);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 52px rgba(48, 34, 15, .12);
+}
+
+.ai-card {
+  padding: 22px;
+}
+
+.ai-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ai-card-head span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 5px;
+  background: #10251f;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.ai-card-head strong {
+  color: var(--green-deep);
+  font-size: 17px;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.ai-form {
+  display: grid;
+  gap: 16px;
+}
+
+.ai-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.ai-form label > span {
+  color: var(--ink);
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.ai-form input,
+.ai-form select,
+.ai-message-box textarea {
+  width: 100%;
+  border: 1px solid #d9c7ad;
+  border-radius: 7px;
+  background: #fffaf0;
+  color: var(--ink);
+  padding: 12px;
+  min-height: 46px;
+  font: inherit;
+}
+
+.ai-form small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.ai-photo-preview {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fffaf0;
+}
+
+.ai-photo-preview img {
+  width: 108px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 7px;
+  border: 1px solid #ead19b;
+}
+
+.ai-photo-preview p {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.ai-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ai-result {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr .9fr;
+  gap: 20px;
+  padding: 22px;
+}
+
+.ai-result[hidden],
+.ai-photo-preview[hidden] {
+  display: none;
+}
+
+.ai-result-main h3 {
+  font-size: clamp(23px, 2.4vw, 32px);
+  line-height: 1.28;
+  margin: 5px 0 8px;
+}
+
+.ai-result-main p {
+  color: var(--muted);
+}
+
+.ai-result-route {
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: var(--radius);
+  background: #10251f;
+  color: #fff;
+  font-weight: 900;
+}
+
+.ai-result-route span {
+  display: block;
+  color: #f2c45c;
+  font-size: 12px;
+  letter-spacing: .08em;
+  margin-bottom: 3px;
+}
+
+.ai-result-route small {
+  display: block;
+  color: rgba(255,255,255,.78);
+  font-size: 13px;
+  line-height: 1.65;
+  margin-top: 4px;
+}
+
+.ai-result-main ul {
+  list-style: none;
+  display: grid;
+  gap: 9px;
+}
+
+.ai-result-main li {
+  position: relative;
+  padding: 11px 12px 11px 36px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fffaf0;
+  color: var(--soft-ink);
+  font-weight: 700;
+}
+
+.ai-result-main li::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  width: 10px;
+  height: 6px;
+  border-left: 3px solid var(--green);
+  border-bottom: 3px solid var(--green);
+  transform: rotate(-45deg);
+}
+
+.ai-message-box {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 16px;
+  border: 1px solid #ead19b;
+  border-radius: var(--radius);
+  background: #fff7df;
+}
+
+.ai-message-box strong {
+  color: var(--gold-deep);
+  line-height: 1.35;
+}
+
+.ai-message-box textarea {
+  min-height: 176px;
+  resize: vertical;
+  background: #fff;
+}
+
+.ai-message-box p {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.item-proof-section {
+  background: #fffaf0;
+}
+
+.item-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.item-proof-grid article {
+  min-height: 178px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: 0 10px 28px rgba(48, 34, 15, .07);
+}
+
+.item-proof-grid span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: #fff4d7;
+  border: 1px solid #ead19b;
+  color: #735018;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.item-proof-grid strong {
+  display: block;
+  font-size: 19px;
+  line-height: 1.35;
+  margin-bottom: 7px;
+}
+
+.item-proof-grid p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.item-proof-cta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
 .bridge-box {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -1505,8 +1816,14 @@ h2 {
   .bridge-box,
   .push-layout,
   .estimate-layout,
+  .ai-shell,
+  .ai-result,
   .ready-box {
     grid-template-columns: 1fr;
+  }
+
+  .ai-intro {
+    position: static;
   }
 
   .hero {
@@ -1531,6 +1848,7 @@ h2 {
   .proof-grid,
   .route-grid,
   .push-steps,
+  .item-proof-grid,
   .reassurance-grid {
     grid-template-columns: 1fr;
   }
@@ -1594,8 +1912,28 @@ h2 {
   .item-grid,
   .prep-grid,
   .estimate-card,
+  .ai-fields,
   .last-check-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ai-card-head,
+  .ai-photo-preview {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-card-head {
+    display: grid;
+  }
+
+  .ai-card-head strong {
+    text-align: left;
+  }
+
+  .ai-photo-preview img {
+    width: 100%;
+    max-height: 220px;
+    aspect-ratio: 16 / 9;
   }
 
   .section {

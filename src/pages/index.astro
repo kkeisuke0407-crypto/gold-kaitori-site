@@ -71,7 +71,7 @@ const faqJsonLd = {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260511-2" />
+  <link rel="stylesheet" href="/styles.css?v=20260511-3" />
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -89,6 +89,7 @@ const faqJsonLd = {
         <span class="brand-text">金買取査定ナビ</span>
       </a>
       <nav class="nav" aria-label="ページ内ナビゲーション">
+        <a href="#ai-check" data-scroll-to="#ai-check">AIチェック</a>
         <a href="#compare" data-scroll-to="#compare">比較</a>
         <a href="#price" data-scroll-to="#price">価格の見方</a>
         <a href="#items" data-scroll-to="#items">品目別</a>
@@ -105,27 +106,27 @@ const faqJsonLd = {
       </div>
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">売るか迷っている段階でも、まずは無料査定へ</p>
-          <h1>そのK18・プラチナ、<br />しまったままは損かも。</h1>
+          <p class="eyebrow">売るか迷っている段階でも、まずは査定前チェックへ</p>
+          <h1>そのK18・プラチナ、<br />眠らせる前に確認。</h1>
           <p class="hero-lead">
             金やプラチナは、品位・重さ・当日の相場・手数料で査定額が変わります。
-            「売るかは金額を見てから」で大丈夫。まずは手元の品物がいくらになりそうか、無料査定の条件を確認しましょう。
+            AI金買取コンシェルジュで刻印・状態・相談方法を整理してから、無料査定の条件を確認しましょう。
           </p>
           <div class="hero-actions" aria-label="主要アクション">
-            <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="hero_manekiya" rel="nofollow sponsored">まねきや公式で無料査定予約へ</a>
-            <a href="#compare" class="btn btn-secondary" data-scroll-to="#compare" data-track="hero_compare">2社を比較する</a>
+            <a href="#ai-check" class="btn btn-primary" data-scroll-to="#ai-check" data-track="hero_ai_check">30秒で査定前チェック</a>
+            <a href="#" class="btn btn-secondary" data-affiliate="manekiya" data-track="hero_manekiya" rel="nofollow sponsored">まねきや公式で無料査定予約へ</a>
           </div>
-          <p class="cta-microcopy">公式サイトで、査定方法・費用条件・予約導線を確認できます。</p>
+          <p class="cta-microcopy">写真なしでもOK。売るかは査定額と条件を見てから判断できます。</p>
           <ul class="hero-points" aria-label="確認できること">
-            <li>売るかは査定後に判断</li>
-            <li>手数料・キャンセル条件を確認</li>
-            <li>壊れた金製品も相談</li>
-            <li>店頭・出張・宅配を選べる</li>
+            <li>K18・Pt刻印を整理</li>
+            <li>壊れた金製品も相談候補</li>
+            <li>店頭・出張・宅配を提案</li>
+            <li>公式へ送る相談文を作成</li>
           </ul>
         </div>
         <aside class="hero-panel" aria-label="査定前チェック">
           <span class="panel-label">この中に1つでもあれば相談候補</span>
-          <h2>今すぐ査定に出しやすい品物</h2>
+          <h2>写真・刻印・重さをAI視点で整理</h2>
           <div class="quick-grid">
             <a href="#k18" data-scroll-to="#k18">K18・18金</a>
             <a href="#platinum" data-scroll-to="#platinum">プラチナ</a>
@@ -157,6 +158,118 @@ const faqJsonLd = {
           <span>03</span>
           <strong>持ち歩きが不安なら方法を選ぶ</strong>
           <p>店頭・出張・宅配の対応条件を先に確認できます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section ai-section" id="ai-check">
+      <div class="container">
+        <div class="ai-shell">
+          <div class="ai-intro">
+            <span class="section-kicker">AI CONCIERGE</span>
+            <h2>AI金買取コンシェルジュで、査定前に迷いを整理</h2>
+            <p>
+              写真・品目・刻印・重さ・状態から、公式査定で確認すべきポイントと向いている相談方法をまとめます。
+              表示内容は参考情報で、実際の買取価格や買取可否を保証するものではありません。
+            </p>
+            <div class="ai-trust-grid" aria-label="AIチェックでできること">
+              <div><strong>対象品目</strong><span>K18、Pt、金貨、金歯、壊れたアクセサリー</span></div>
+              <div><strong>刻印整理</strong><span>K18、750、K24、Pt900、GP/GFなど</span></div>
+              <div><strong>方法提案</strong><span>店頭・出張・宅配・事前相談の向き不向き</span></div>
+            </div>
+          </div>
+
+          <div class="ai-card" aria-label="AI査定前チェックフォーム">
+            <div class="ai-card-head">
+              <span>30秒チェック</span>
+              <strong>写真なしでも利用できます</strong>
+            </div>
+
+            <form class="ai-form" data-ai-form>
+              <label>
+                <span>写真チェック（任意）</span>
+                <input type="file" accept="image/*" data-ai-photo />
+                <small>写真はこの画面内で確認します。アップロード保存はしません。</small>
+              </label>
+
+              <div class="ai-photo-preview" data-ai-photo-preview hidden>
+                <img alt="選択した品物の写真プレビュー" data-ai-photo-img />
+                <p data-ai-photo-note>刻印・全体・傷や切れた部分が分かる写真もあると相談しやすくなります。</p>
+              </div>
+
+              <div class="ai-fields">
+                <label>
+                  <span>品物</span>
+                  <select name="item">
+                    <option value="necklace">金・プラチナのネックレス</option>
+                    <option value="ring">指輪・リング</option>
+                    <option value="earring">片方ピアス・イヤリング</option>
+                    <option value="coin">金貨・インゴット</option>
+                    <option value="tooth">金歯・金板・破片</option>
+                    <option value="unknown">よく分からない貴金属</option>
+                  </select>
+                </label>
+                <label>
+                  <span>刻印</span>
+                  <select name="mark">
+                    <option value="k18">K18 / 750</option>
+                    <option value="k24">K24 / 純金</option>
+                    <option value="pt900">Pt900 / Pt950</option>
+                    <option value="pt850">Pt850</option>
+                    <option value="unknown">刻印が読めない</option>
+                    <option value="plated">GP / GF / メッキかも</option>
+                  </select>
+                </label>
+                <label>
+                  <span>重さ</span>
+                  <select name="weight">
+                    <option value="unknown">分からない</option>
+                    <option value="light">5g未満</option>
+                    <option value="middle">5〜20gくらい</option>
+                    <option value="heavy">20g以上</option>
+                    <option value="many">複数点ある</option>
+                  </select>
+                </label>
+                <label>
+                  <span>状態</span>
+                  <select name="condition">
+                    <option value="normal">目立つ破損はない</option>
+                    <option value="broken">切れ・石取れ・片方だけ</option>
+                    <option value="old">古い・変色・刻印が薄い</option>
+                    <option value="high">高額品なので持ち歩きが不安</option>
+                  </select>
+                </label>
+                <label>
+                  <span>希望</span>
+                  <select name="preference">
+                    <option value="price">まず金額だけ知りたい</option>
+                    <option value="fast">早く対面で相談したい</option>
+                    <option value="safe">持ち歩かずに相談したい</option>
+                    <option value="private">人に見られず進めたい</option>
+                  </select>
+                </label>
+              </div>
+
+              <button class="btn btn-primary" type="submit" data-track="ai_check_submit">AIで確認ポイントを出す</button>
+            </form>
+          </div>
+
+          <div class="ai-result" data-ai-result hidden aria-live="polite">
+            <div class="ai-result-main">
+              <span class="section-kicker">YOUR RESULT</span>
+              <h3 data-ai-title>査定前チェック結果</h3>
+              <p data-ai-summary></p>
+              <div class="ai-result-route" data-ai-route></div>
+              <ul data-ai-points></ul>
+            </div>
+            <div class="ai-message-box">
+              <strong>公式査定でそのまま伝えやすい相談文</strong>
+              <textarea data-ai-message readonly></textarea>
+              <button type="button" class="btn btn-outline" data-ai-copy>相談文をコピー</button>
+              <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="ai_result_manekiya" rel="nofollow sponsored">この内容で無料査定の条件を見る</a>
+              <p>正確な査定額、手数料、対応エリア、キャンセル条件は公式サイトでご確認ください。</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -219,6 +332,28 @@ const faqJsonLd = {
             <strong>手数料で手取りが変わる</strong>
             <p>査定料、出張料、キャンセル条件、返送料の有無まで見てから売るか決めると安心です。</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section item-proof-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">SELLABLE ITEMS</span>
+          <h2>「これも見てもらえる？」と思った品物ほど、先に確認</h2>
+          <p>競合LPや公式ページで強く見せられているのは、対象品目の具体性です。自分の品物が当てはまると、相談のハードルが下がります。</p>
+        </div>
+        <div class="item-proof-grid">
+          <article><span>K18</span><strong>切れたネックレス</strong><p>チェーンが切れていても、素材として価値が残る場合があります。</p></article>
+          <article><span>Pt</span><strong>古いプラチナ指輪</strong><p>Pt900、Pt850などの刻印と重さを確認してもらえます。</p></article>
+          <article><span>K24</span><strong>金貨・インゴット</strong><p>高額品は持ち運びや入金方法も含めて相談方法を選びます。</p></article>
+          <article><span>Au</span><strong>金歯・金板・破片</strong><p>形がアクセサリーでなくても、金として相談できる場合があります。</p></article>
+          <article><span>PAIR</span><strong>片方だけのピアス</strong><p>セットでなくても、金やプラチナの素材価値を確認できます。</p></article>
+          <article><span>STONE</span><strong>石付きの指輪</strong><p>石やデザインの扱いは店舗で異なるため、実物査定で確認します。</p></article>
+        </div>
+        <div class="item-proof-cta">
+          <a href="#ai-check" class="btn btn-primary" data-scroll-to="#ai-check" data-track="item_proof_ai">手元の品物をAIで整理する</a>
+          <a href="#" class="btn btn-outline" data-affiliate="manekiya" data-track="item_proof_manekiya" rel="nofollow sponsored">まねきや公式で対象品目を見る</a>
         </div>
       </div>
     </section>
@@ -687,6 +822,6 @@ const faqJsonLd = {
     </div>
   </footer>
 
-  <script src="/app.js?v=20260511-2" defer></script>
+  <script src="/app.js?v=20260511-3" defer></script>
 </body>
 </html>
