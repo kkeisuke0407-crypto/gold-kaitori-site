@@ -196,7 +196,7 @@ function getAiRoute(data) {
     };
   }
   return {
-    label: "まずは無料査定の内容を見てみましょう",
+    label: "無料査定だけ先に見てみましょう",
     reason: "売るか決める前に、査定額・費用・キャンセル時の扱いを見ておく流れが合っています。"
   };
 }
@@ -375,8 +375,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sticky = document.createElement("div");
   sticky.className = "sticky-cta";
   sticky.innerHTML =
-    '<span>売るか迷うなら金額だけ聞いてみる</span>' +
-    '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">無料査定予約へ</a>' +
+    '<span>無料なら金額だけ聞いてみる</span>' +
+    '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">今すぐ見る</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
 
