@@ -208,6 +208,8 @@ button {
 }
 
 .hero-alert {
+  position: relative;
+  overflow: hidden;
   display: inline-grid;
   gap: 2px;
   min-width: min(100%, 460px);
@@ -220,6 +222,17 @@ button {
     linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,236,159,.96)),
     #f2c45c;
   box-shadow: 0 18px 42px rgba(0,0,0,.28);
+  animation: attentionPulse 2.8s ease-in-out infinite;
+}
+
+.hero-alert::after {
+  content: "";
+  position: absolute;
+  inset: -30% auto -30% -35%;
+  width: 32%;
+  transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.72), transparent);
+  animation: shineSweep 3.8s ease-in-out infinite;
 }
 
 .hero-alert span {
@@ -232,6 +245,7 @@ button {
   font-size: clamp(22px, 3vw, 34px);
   line-height: 1.12;
   font-weight: 900;
+  animation: microPop 2.8s ease-in-out infinite;
 }
 
 .hero-actions {
@@ -519,6 +533,8 @@ button {
   font-size: clamp(36px, 5.2vw, 64px);
   line-height: 1.04;
   margin: 8px 0 12px;
+  transform-origin: left center;
+  animation: priceBeat 2.6s ease-in-out infinite;
 }
 
 .promo-main p {
@@ -1612,6 +1628,7 @@ h2 {
   color: #fff;
   background: var(--red);
   box-shadow: 0 8px 20px rgba(177, 59, 46, .24);
+  animation: markPop 2.4s ease-in-out infinite;
 }
 
 .comparison-row .mark-normal span {
@@ -2109,9 +2126,21 @@ h2 {
 }
 
 .cta-section {
+  position: relative;
+  overflow: hidden;
   background:
     linear-gradient(135deg, rgba(177, 59, 46, .1), rgba(242, 196, 92, .3)),
     linear-gradient(135deg, #fff7e8, #efe4d2);
+}
+
+.cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 0 35%, rgba(255,255,255,.55) 46%, transparent 58% 100%);
+  transform: translateX(-80%);
+  animation: sectionSweep 5.5s ease-in-out infinite;
 }
 
 .cta-box {
@@ -2288,6 +2317,7 @@ h2 {
 
 .sticky-cta.visible {
   transform: translate(-50%, 0);
+  animation: stickyBounce .46s ease-out both;
 }
 
 .sticky-cta.suppressed {
@@ -2418,9 +2448,77 @@ h2 {
   }
 }
 
+@keyframes attentionPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 18px 42px rgba(0,0,0,.28);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 24px 58px rgba(0,0,0,.34), 0 0 0 5px rgba(242, 196, 92, .18);
+  }
+}
+
+@keyframes microPop {
+  0%, 100% {
+    transform: scale(1);
+  }
+  46%, 58% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes priceBeat {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: none;
+  }
+  48%, 60% {
+    transform: scale(1.035);
+    text-shadow: 0 5px 18px rgba(255,255,255,.42);
+  }
+}
+
+@keyframes markPop {
+  0%, 100% {
+    transform: scale(1);
+  }
+  42%, 54% {
+    transform: scale(1.14);
+  }
+}
+
+@keyframes sectionSweep {
+  0%, 64% {
+    transform: translateX(-90%);
+  }
+  84%, 100% {
+    transform: translateX(90%);
+  }
+}
+
+@keyframes stickyBounce {
+  0% {
+    transform: translate(-50%, 120%) scale(.96);
+  }
+  70% {
+    transform: translate(-50%, -7px) scale(1.015);
+  }
+  100% {
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-primary::after,
-  .rank-primary::after {
+  .rank-primary::after,
+  .hero-alert,
+  .hero-alert::after,
+  .hero-alert strong,
+  .promo-main strong,
+  .comparison-row .mark-best span,
+  .cta-section::before,
+  .sticky-cta.visible {
     animation: none;
   }
 }
