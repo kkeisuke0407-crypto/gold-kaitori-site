@@ -189,6 +189,10 @@ button {
   margin-bottom: 20px;
 }
 
+.no-break {
+  white-space: nowrap;
+}
+
 .hero-lead {
   max-width: 640px;
   font-size: clamp(16px, 2vw, 19px);
@@ -1928,7 +1932,7 @@ h2 {
   }
 
   .hero h1 {
-    font-size: 42px;
+    font-size: 38px;
   }
 
   .hero-actions,
