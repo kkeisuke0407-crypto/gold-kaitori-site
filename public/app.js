@@ -179,25 +179,25 @@ async function runMarkOcr(file, markSelect, statusEl) {
 function getAiRoute(data) {
   if (data.condition === "high" || data.weight === "heavy" || data.weight === "many" || data.item === "coin") {
     return {
-      label: "出張査定の条件確認が向いています",
-      reason: "点数が多い品物や高額品は、持ち歩きの不安・入金方法・本人確認を先に確認すると判断しやすくなります。"
+      label: "出張査定も見ておくとよさそうです",
+      reason: "点数が多い品物や高額品は、持ち歩かずに見てもらえるか、入金方法や本人確認も先に聞いておくと安心です。"
     };
   }
   if (data.preference === "fast") {
     return {
-      label: "店頭査定の予約条件確認が向いています",
-      reason: "対面で説明を聞きたい場合は、営業時間・予約要否・本人確認書類を先に見るとスムーズです。"
+      label: "店頭査定が合いそうです",
+      reason: "対面で説明を聞きたい場合は、営業時間や予約が必要か、本人確認書類を先に見ておくとスムーズです。"
     };
   }
   if (data.preference === "private") {
     return {
-      label: "宅配査定の条件確認が向いています",
-      reason: "外出しにくい、人に見られたくない場合は、送料・返送料・キャンセル時の扱いを確認してから進めるのが安心です。"
+      label: "宅配査定も見ておくとよさそうです",
+      reason: "外出しにくい、人に見られたくない場合は、送料・返送料・キャンセル時の費用を見てから進めると安心です。"
     };
   }
   return {
-    label: "まずは無料査定の相談条件を確認",
-    reason: "売るかを決める前に、査定額・費用条件・キャンセル時の扱いを見て判断材料を作る流れが合っています。"
+    label: "まずは無料査定の内容を見てみましょう",
+    reason: "売るか決める前に、査定額・費用・キャンセル時の扱いを見ておく流れが合っています。"
   };
 }
 
@@ -205,23 +205,23 @@ function buildAiPoints(data) {
   const points = [];
 
   if (data.mark === "k18") {
-    points.push("K18/750は金の含有率を見るときの目安です。重さが分かると、相談時に話が早くなります。");
+    points.push("K18/750は金の割合を見る目安です。重さが分かると、相談するときに話が早いです。");
   } else if (data.mark === "k24") {
     points.push("K24や純金表記は金額が大きくなりやすい品物です。持ち運びや入金方法も一緒に聞いておくと安心です。");
   } else if (data.mark === "pt900" || data.mark === "pt850") {
-    points.push("プラチナはPt900/Pt850など品位で見方が変わります。刻印と重量を実物で確認してもらいましょう。");
+    points.push("プラチナはPt900/Pt850などで金額が変わります。刻印と重さを実物で見てもらいましょう。");
   } else if (data.mark === "plated") {
-    points.push("GP/GFはメッキ系の可能性があります。買取できるかどうかは、実物を見てもらうのが確実です。");
+    points.push("GP/GFはメッキ系の可能性があります。売れるかどうかは、実物を見てもらうのが確実です。");
   } else {
-    points.push("刻印が読めない場合でも、素材を見てもらえることがあります。写真だけで決めず、実物で確認しましょう。");
+    points.push("刻印が読めない場合でも、実物を見れば分かることがあります。写真だけで決めず、一度見てもらいましょう。");
   }
 
   if (data.condition === "broken") {
-    points.push("切れたチェーン、石取れ、片方だけのピアスでも、素材として価値が残る場合があります。");
+    points.push("切れたチェーン、石取れ、片方だけのピアスでも、金やプラチナとして値段が付く場合があります。");
   } else if (data.condition === "old") {
     points.push("古い品物や変色がある品物は、刻印・重量・付属品の有無をまとめて相談すると話が早くなります。");
   } else if (data.condition === "high") {
-    points.push("高額品は査定方法、本人確認、支払い方法、キャンセル条件を先に確認しておくと安心です。");
+    points.push("高額になりそうな品物は、査定方法、本人確認、支払い方法、キャンセル時の費用を先に見ておくと安心です。");
   } else {
     points.push("目立つ破損がない場合も、石やデザイン部分の扱いで査定額が変わることがあります。");
   }
@@ -229,12 +229,12 @@ function buildAiPoints(data) {
   if (data.weight === "unknown") {
     points.push("重さが分からなくても相談できます。分かる場合は家庭用スケールで概算を控えておくと便利です。");
   } else if (data.weight === "many") {
-    points.push("複数点ある場合は、まとめて見てもらえるか、出張で対応できるかを聞くと進めやすいです。");
+    points.push("複数点ある場合は、まとめて見てもらえるか、出張で来てもらえるかを聞くと進めやすいです。");
   } else {
-    points.push("重さの目安があると、当日の相場を見たときにざっくりしたイメージを作りやすくなります。");
+    points.push("重さの目安があると、当日の相場を見たときにざっくりイメージしやすくなります。");
   }
 
-  points.push("ここで分かるのは相談前の整理です。実際の査定額や手数料、対応エリアは申し込み先で確認してください。");
+  points.push("ここで分かるのは、相談前の整理です。実際の査定額や手数料、対応エリアは申し込み先で確認してください。");
   return points;
 }
 
@@ -248,8 +248,8 @@ function buildAiMessage(data, route) {
     item + "の査定をお願いしたいです。",
     "刻印は「" + mark + "」で、重さは「" + weight + "」です。",
     "状態は「" + condition + "」です。",
-    "売却するかは査定額と条件を確認してから判断したいです。",
-    route.label + "と表示されたため、査定方法・費用条件・キャンセル時の扱いも相談したいです。"
+    "売るかは査定額と費用を見てから決めたいです。",
+    route.label + "と表示されたため、査定方法・費用・キャンセル時の扱いも相談したいです。"
   ].join("\n");
 }
 
@@ -312,8 +312,8 @@ function setupAiConcierge() {
     const itemLabel = AI_ITEM_LABELS[data.item] || AI_ITEM_LABELS.unknown;
     const markLabel = AI_MARK_LABELS[data.mark] || AI_MARK_LABELS.unknown;
 
-    title.textContent = itemLabel + "は査定相談の候補です";
-    summary.textContent = markLabel + "、状態、重さの情報をもとに、相談前に見ておきたい点を整理しました。";
+    title.textContent = itemLabel + "は一度見てもらう価値があります";
+    summary.textContent = markLabel + "、状態、重さをもとに、相談前に見ておきたい点を整理しました。";
     routeBox.innerHTML = "<span>おすすめの進め方</span>" + route.label + "<br><small>" + route.reason + "</small>";
     pointsList.innerHTML = points.map(function (point) { return "<li>" + point + "</li>"; }).join("");
     message.value = buildAiMessage(data, route);
@@ -375,7 +375,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const sticky = document.createElement("div");
   sticky.className = "sticky-cta";
   sticky.innerHTML =
-    '<span>売るか迷うなら査定額だけ確認</span>' +
+    '<span>売るか迷うなら金額だけ聞いてみる</span>' +
     '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">無料査定予約へ</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
