@@ -205,15 +205,15 @@ function buildAiPoints(data) {
   const points = [];
 
   if (data.mark === "k18") {
-    points.push("K18/750は金の含有率が査定の目安になります。重さと当日の相場を合わせて確認しましょう。");
+    points.push("K18/750は金の含有率を見るときの目安です。重さが分かると、相談時に話が早くなります。");
   } else if (data.mark === "k24") {
-    points.push("K24や純金表記は高額になりやすい品物です。持ち運びや入金方法も含めて確認しましょう。");
+    points.push("K24や純金表記は金額が大きくなりやすい品物です。持ち運びや入金方法も一緒に聞いておくと安心です。");
   } else if (data.mark === "pt900" || data.mark === "pt850") {
     points.push("プラチナはPt900/Pt850など品位で見方が変わります。刻印と重量を実物で確認してもらいましょう。");
   } else if (data.mark === "plated") {
-    points.push("GP/GFはメッキ系の可能性があります。買取可否や扱いは公式査定で確認してください。");
+    points.push("GP/GFはメッキ系の可能性があります。買取できるかどうかは、実物を見てもらうのが確実です。");
   } else {
-    points.push("刻印が読めない場合でも、素材判定は査定で確認できます。写真ではなく実物確認が大切です。");
+    points.push("刻印が読めない場合でも、素材を見てもらえることがあります。写真だけで決めず、実物で確認しましょう。");
   }
 
   if (data.condition === "broken") {
@@ -229,12 +229,12 @@ function buildAiPoints(data) {
   if (data.weight === "unknown") {
     points.push("重さが分からなくても相談できます。分かる場合は家庭用スケールで概算を控えておくと便利です。");
   } else if (data.weight === "many") {
-    points.push("複数点ある場合は、まとめて査定できるか、出張対応の有無を確認しましょう。");
+    points.push("複数点ある場合は、まとめて見てもらえるか、出張で対応できるかを聞くと進めやすいです。");
   } else {
-    points.push("重さの目安があると、公式の当日相場を見たときに相談前のイメージを作りやすくなります。");
+    points.push("重さの目安があると、当日の相場を見たときにざっくりしたイメージを作りやすくなります。");
   }
 
-  points.push("表示内容は査定前の整理です。実際の査定額、手数料、対応エリア、買取可否は公式サイトで確認してください。");
+  points.push("ここで分かるのは相談前の整理です。実際の査定額や手数料、対応エリアは申し込み先で確認してください。");
   return points;
 }
 
@@ -313,7 +313,7 @@ function setupAiConcierge() {
     const markLabel = AI_MARK_LABELS[data.mark] || AI_MARK_LABELS.unknown;
 
     title.textContent = itemLabel + "は査定相談の候補です";
-    summary.textContent = markLabel + "、状態、重さの情報をもとに、公式査定で確認すべき点を整理しました。";
+    summary.textContent = markLabel + "、状態、重さの情報をもとに、相談前に見ておきたい点を整理しました。";
     routeBox.innerHTML = "<span>おすすめの進め方</span>" + route.label + "<br><small>" + route.reason + "</small>";
     pointsList.innerHTML = points.map(function (point) { return "<li>" + point + "</li>"; }).join("");
     message.value = buildAiMessage(data, route);
