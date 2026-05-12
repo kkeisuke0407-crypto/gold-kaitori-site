@@ -273,6 +273,53 @@ button {
   font-weight: 700;
 }
 
+.rate-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.rate-mini-grid div {
+  min-height: 74px;
+  display: grid;
+  align-content: center;
+  gap: 2px;
+  border-radius: 7px;
+  background: #fff;
+  border: 1px solid #ead19b;
+  padding: 10px;
+}
+
+.rate-mini-grid span,
+.hero-ticket span {
+  display: block;
+  color: var(--gold-deep);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.rate-mini-grid strong {
+  color: var(--green-deep);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.hero-ticket {
+  border: 1px solid #ead19b;
+  background: #fff7df;
+  border-radius: 7px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.hero-ticket strong {
+  display: block;
+  font-size: 14px;
+  line-height: 1.45;
+  margin-top: 3px;
+}
+
 .reassurance-band {
   background: #fff;
   border-bottom: 1px solid var(--line);
@@ -327,6 +374,185 @@ button {
 
 .ai-section {
   background: linear-gradient(180deg, #fffaf0 0%, #fff 100%);
+}
+
+.sell-now-section {
+  background: #fffaf0;
+}
+
+.sell-now-layout {
+  display: grid;
+  grid-template-columns: 1.04fr .96fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.promo-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.promo-main {
+  grid-column: 1 / -1;
+  min-height: 250px;
+  display: grid;
+  align-content: center;
+  border-radius: var(--radius);
+  border: 2px solid #f2c45c;
+  background:
+    linear-gradient(135deg, rgba(242, 196, 92, .98), rgba(255, 245, 205, .96)),
+    #f2c45c;
+  color: #2f210d;
+  padding: 28px;
+  box-shadow: 0 18px 46px rgba(138, 93, 21, .18);
+}
+
+.promo-main span,
+.promo-sub span,
+.example-strip span,
+.visual-note span {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.promo-main strong {
+  display: block;
+  font-size: clamp(36px, 5.2vw, 64px);
+  line-height: 1.04;
+  margin: 8px 0 12px;
+}
+
+.promo-main p {
+  max-width: 560px;
+  color: #5a3a08;
+  font-weight: 800;
+}
+
+.promo-sub {
+  min-height: 124px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(48, 34, 15, .07);
+}
+
+.promo-sub span {
+  color: var(--muted);
+}
+
+.promo-sub strong {
+  color: var(--green-deep);
+  font-size: 28px;
+  line-height: 1.18;
+}
+
+.visual-stack {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 12px;
+}
+
+.visual-stack figure {
+  position: relative;
+  overflow: hidden;
+  min-height: 310px;
+  border-radius: var(--radius);
+  background: #19140f;
+  box-shadow: 0 18px 46px rgba(48, 34, 15, .18);
+}
+
+.visual-stack img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visual-stack figcaption {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  background: rgba(15, 13, 10, .78);
+  color: #fff;
+  font-weight: 900;
+  text-align: center;
+}
+
+.visual-note {
+  border: 1px solid #ead19b;
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 16px;
+}
+
+.visual-note span {
+  color: var(--gold-deep);
+}
+
+.visual-note strong {
+  display: block;
+  color: var(--green-deep);
+  font-size: 20px;
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+.example-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.example-strip article {
+  min-height: 150px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 18px;
+  box-shadow: 0 10px 28px rgba(48, 34, 15, .07);
+}
+
+.example-strip span {
+  color: var(--gold-deep);
+}
+
+.example-strip strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.35;
+  margin: 7px 0;
+}
+
+.example-strip p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.sell-now-cta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.campaign-note {
+  max-width: 760px;
+  margin: 12px auto 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .ai-shell {
@@ -1854,6 +2080,7 @@ h2 {
   .bridge-box,
   .push-layout,
   .estimate-layout,
+  .sell-now-layout,
   .ai-shell,
   .ai-result,
   .ready-box {
@@ -1886,6 +2113,7 @@ h2 {
   .proof-grid,
   .route-grid,
   .push-steps,
+  .example-strip,
   .item-proof-grid,
   .reassurance-grid {
     grid-template-columns: 1fr;
@@ -1945,7 +2173,22 @@ h2 {
     width: 100%;
   }
 
+  .promo-main {
+    min-height: 220px;
+    padding: 22px;
+  }
+
+  .promo-main strong {
+    font-size: 38px;
+  }
+
+  .visual-stack figure {
+    min-height: 240px;
+  }
+
   .quick-grid,
+  .rate-mini-grid,
+  .promo-board,
   .intent-list,
   .item-grid,
   .prep-grid,
