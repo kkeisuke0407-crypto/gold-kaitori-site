@@ -2302,12 +2302,12 @@ h2 {
   bottom: 16px;
   z-index: 80;
   transform: translate(-50%, 140%);
-  width: min(calc(100% - 24px), 820px);
+  width: min(calc(100% - 24px), 860px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 12px 14px;
+  gap: 16px;
+  padding: 14px 16px;
   border-radius: 8px;
   border: 2px solid #f2c45c;
   background:
@@ -2332,24 +2332,6 @@ h2 {
   animation: stickyLuxurySweep 4.6s ease-in-out infinite;
 }
 
-.sticky-cta::after {
-  content: "最大30%UP";
-  position: absolute;
-  top: 0;
-  left: 16px;
-  transform: translateY(-50%);
-  min-height: 26px;
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: 999px;
-  color: #fff;
-  background: linear-gradient(135deg, #b13b2e, #7f2119);
-  box-shadow: 0 8px 20px rgba(177, 59, 46, .26);
-  font-size: 12px;
-  font-weight: 900;
-}
-
 .sticky-cta.visible {
   transform: translate(-50%, 0);
   animation: stickyBounce .46s ease-out both;
@@ -2362,17 +2344,28 @@ h2 {
 .sticky-copy {
   position: relative;
   z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   display: grid;
-  gap: 1px;
+  gap: 3px;
   padding-left: 4px;
   text-align: left;
 }
 
 .sticky-copy span {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #b13b2e, #7f2119);
   color: var(--red);
+  color: #fff;
   font-weight: 900;
   font-size: 12px;
   line-height: 1.2;
+  box-shadow: 0 8px 20px rgba(177, 59, 46, .18);
 }
 
 .sticky-copy strong {
@@ -2393,8 +2386,9 @@ h2 {
 .sticky-cta .btn {
   position: relative;
   z-index: 1;
-  min-height: 50px;
-  padding: 12px 20px;
+  min-height: 52px;
+  min-width: 210px;
+  padding: 12px 22px;
   font-size: 15px;
   flex: 0 0 auto;
   box-shadow: 0 14px 30px rgba(7, 62, 49, .28);
@@ -2816,9 +2810,12 @@ h2 {
     padding-left: 0;
   }
 
-  .sticky-cta::after {
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .sticky-copy span {
+    justify-self: center;
+  }
+
+  .sticky-cta .btn {
+    min-width: 0;
   }
 
   .footer-inner nav {
