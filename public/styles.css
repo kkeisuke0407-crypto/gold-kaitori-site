@@ -2302,12 +2302,12 @@ h2 {
   bottom: 16px;
   z-index: 80;
   transform: translate(-50%, 140%);
-  width: min(calc(100% - 24px), 860px);
+  width: min(calc(100% - 32px), 760px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 16px;
+  gap: 12px;
+  padding: 12px 14px;
   border-radius: 8px;
   border: 2px solid #f2c45c;
   background:
@@ -2371,7 +2371,7 @@ h2 {
 .sticky-copy strong {
   display: block;
   color: #2f210d;
-  font-size: clamp(15px, 2.1vw, 20px);
+  font-size: 17px;
   line-height: 1.25;
   font-weight: 900;
 }
@@ -2386,13 +2386,13 @@ h2 {
 .sticky-cta .btn {
   position: relative;
   z-index: 1;
-  min-height: 62px;
-  min-width: 270px;
-  padding: 15px 28px;
+  min-height: 54px;
+  min-width: 220px;
+  padding: 13px 22px;
   border-radius: 9px;
-  font-size: 18px;
+  font-size: 16px;
   flex: 0 0 auto;
-  box-shadow: 0 18px 38px rgba(7, 62, 49, .34), 0 0 0 4px rgba(15, 107, 87, .12);
+  box-shadow: 0 15px 32px rgba(7, 62, 49, .3), 0 0 0 3px rgba(15, 107, 87, .1);
 }
 
 .sticky-close {
