@@ -375,8 +375,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sticky = document.createElement("div");
   sticky.className = "sticky-cta";
   sticky.innerHTML =
-    '<span>無料なら査定額だけ聞いてみる</span>' +
-    '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">今すぐ見る</a>' +
+    '<div class="sticky-copy"><span>今月の注目</span><strong>無料なら査定額だけ聞いてみる</strong><small>電話申し込み限定 最大30%UP</small></div>' +
+    '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">今すぐ無料査定へ</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
 

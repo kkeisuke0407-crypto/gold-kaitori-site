@@ -2299,20 +2299,55 @@ h2 {
 .sticky-cta {
   position: fixed;
   left: 50%;
-  bottom: 14px;
+  bottom: 16px;
   z-index: 80;
   transform: translate(-50%, 140%);
-  width: min(calc(100% - 28px), 720px);
+  width: min(calc(100% - 24px), 820px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px;
+  gap: 14px;
+  padding: 12px 14px;
   border-radius: 8px;
-  background: rgba(22, 18, 13, .94);
-  color: #fff;
-  box-shadow: 0 18px 50px rgba(0,0,0,.28);
+  border: 2px solid #f2c45c;
+  background:
+    linear-gradient(135deg, rgba(255, 248, 220, .98), rgba(255, 255, 255, .98)),
+    #fff;
+  color: #2f210d;
+  box-shadow: 0 22px 70px rgba(35, 21, 6, .34), 0 0 0 5px rgba(242, 196, 92, .18);
   transition: transform .2s ease;
+  overflow: hidden;
+}
+
+.sticky-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 9% 20%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 18%, rgba(242,196,92,.55) 0 2px, transparent 4px),
+    linear-gradient(100deg, transparent 0 34%, rgba(255,255,255,.7) 45%, transparent 56% 100%);
+  transform: translateX(-70%);
+  animation: stickyLuxurySweep 4.6s ease-in-out infinite;
+}
+
+.sticky-cta::after {
+  content: "最大30%UP";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  transform: translateY(-50%);
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, #b13b2e, #7f2119);
+  box-shadow: 0 8px 20px rgba(177, 59, 46, .26);
+  font-size: 12px;
+  font-weight: 900;
 }
 
 .sticky-cta.visible {
@@ -2324,26 +2359,58 @@ h2 {
   transform: translate(-50%, 140%);
 }
 
-.sticky-cta span {
-  font-weight: 800;
-  font-size: 13px;
+.sticky-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1px;
+  padding-left: 4px;
+  text-align: left;
+}
+
+.sticky-copy span {
+  color: var(--red);
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.sticky-copy strong {
+  display: block;
+  color: #2f210d;
+  font-size: clamp(15px, 2.1vw, 20px);
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.sticky-copy small {
+  color: var(--gold-deep);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.25;
 }
 
 .sticky-cta .btn {
-  min-height: 44px;
-  padding: 10px 16px;
-  font-size: 14px;
+  position: relative;
+  z-index: 1;
+  min-height: 50px;
+  padding: 12px 20px;
+  font-size: 15px;
   flex: 0 0 auto;
+  box-shadow: 0 14px 30px rgba(7, 62, 49, .28);
 }
 
 .sticky-close {
-  width: 34px;
-  height: 34px;
+  position: relative;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
   border: 0;
   border-radius: 6px;
-  background: rgba(255,255,255,.12);
-  color: #fff;
+  background: rgba(47, 33, 13, .1);
+  color: #5f4b27;
   cursor: pointer;
+  font-weight: 900;
 }
 
 .policy-page {
@@ -2509,6 +2576,15 @@ h2 {
   }
 }
 
+@keyframes stickyLuxurySweep {
+  0%, 58% {
+    transform: translateX(-78%);
+  }
+  82%, 100% {
+    transform: translateX(78%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-primary::after,
   .rank-primary::after,
@@ -2518,7 +2594,8 @@ h2 {
   .promo-main strong,
   .comparison-row .mark-best span,
   .cta-section::before,
-  .sticky-cta.visible {
+  .sticky-cta.visible,
+  .sticky-cta::before {
     animation: none;
   }
 }
@@ -2727,6 +2804,21 @@ h2 {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
+  }
+
+  .sticky-cta {
+    gap: 10px;
+    padding: 16px 12px 12px;
+  }
+
+  .sticky-copy {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .sticky-cta::after {
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .footer-inner nav {
