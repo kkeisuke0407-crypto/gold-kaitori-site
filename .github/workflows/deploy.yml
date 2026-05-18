@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # 金相場の発表後に毎日再ビルドする（15:30 JST）
+    - cron: "30 6 * * *"
 
 permissions:
   contents: read

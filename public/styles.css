@@ -156,7 +156,7 @@ button {
   z-index: 1;
   min-height: 650px;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, .65fr);
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, .78fr);
   align-items: center;
   gap: 42px;
   padding-top: 48px;
@@ -287,6 +287,13 @@ button {
   margin-bottom: 26px;
 }
 
+.hero-lead strong {
+  color: #fff2ad;
+  font-size: 1.08em;
+  font-weight: 900;
+  text-shadow: 0 0 18px rgba(242, 196, 92, .5);
+}
+
 .hero-alert {
   position: relative;
   overflow: hidden;
@@ -326,6 +333,14 @@ button {
   line-height: 1.12;
   font-weight: 900;
   animation: microPop 2.8s ease-in-out infinite;
+}
+
+.hero-alert small {
+  display: inline-block;
+  margin-left: 8px;
+  color: #7f2119;
+  font-size: .48em;
+  vertical-align: .18em;
 }
 
 .hero-actions {
@@ -469,6 +484,162 @@ button {
   font-size: 14px;
   line-height: 1.45;
   margin-top: 3px;
+}
+
+.hero-market-panel {
+  padding: 24px;
+  border-color: rgba(242, 196, 92, .9);
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255, 242, 173, .58), transparent 30%),
+    linear-gradient(145deg, rgba(255,255,255,.98), rgba(255, 244, 211, .95));
+  box-shadow: 0 28px 70px rgba(0,0,0,.3), 0 0 0 1px rgba(255, 242, 173, .42);
+}
+
+.hero-market-panel h2 {
+  margin-bottom: 14px;
+}
+
+.market-price-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 3px;
+  padding: 18px;
+  border-radius: 8px;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(177, 59, 46, .98), rgba(77, 42, 6, .98)),
+    #7f2119;
+  box-shadow: 0 18px 36px rgba(127, 33, 25, .24);
+}
+
+.market-price-card::after {
+  content: "";
+  position: absolute;
+  inset: -35% auto -35% -36%;
+  width: 34%;
+  transform: rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.48), transparent);
+  animation: shineSweep 3.2s ease-in-out infinite;
+}
+
+.market-price-card span {
+  color: #fff2ad;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.market-price-card strong {
+  font-size: clamp(40px, 5.8vw, 62px);
+  line-height: .98;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.market-price-card small {
+  font-size: .38em;
+}
+
+.market-price-card em {
+  color: rgba(255,255,255,.8);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.market-chart {
+  margin: 14px 0;
+  padding: 12px 12px 10px;
+  border: 1px solid rgba(201, 147, 47, .45);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fff, #fff8e5);
+}
+
+.market-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgba(201, 147, 47, .14));
+}
+
+.chart-area {
+  fill: url(#goldChartArea);
+}
+
+.chart-line {
+  fill: none;
+  stroke: url(#goldChartLine);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chart-dot {
+  fill: #fff2ad;
+  stroke: #c9932f;
+  stroke-width: .9;
+}
+
+.chart-dot-latest {
+  fill: #b13b2e;
+  stroke: #fff2ad;
+  stroke-width: 1.1;
+  animation: markPop 2.2s ease-in-out infinite;
+}
+
+.chart-labels {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-top: -2px;
+  color: #6f5a32;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.chart-labels strong {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #7f2119;
+  background: #fff2ad;
+  box-shadow: 0 8px 18px rgba(242, 196, 92, .22);
+}
+
+.chart-labels span:last-child {
+  text-align: right;
+}
+
+.market-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.market-mini-grid div {
+  min-height: 70px;
+  display: grid;
+  align-content: center;
+  gap: 2px;
+  padding: 10px;
+  border-radius: 7px;
+  background: #fff;
+  border: 1px solid #ead19b;
+}
+
+.market-mini-grid span {
+  color: var(--gold-deep);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.market-mini-grid strong {
+  color: var(--green-deep);
+  font-size: 18px;
+  line-height: 1.2;
 }
 
 .reassurance-band {
@@ -1234,6 +1405,13 @@ button {
 .hero-panel p {
   color: var(--muted);
   font-size: 13px;
+}
+
+.hero-panel p a {
+  color: var(--green-deep);
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .mini-formula {
@@ -2769,6 +2947,8 @@ h2 {
   .manekiya-pop::after,
   .manekiya-table-name,
   .manekiya-btn-text,
+  .market-price-card::after,
+  .chart-dot-latest,
   .promo-main strong,
   .comparison-row .mark-best span,
   .cta-section::before,

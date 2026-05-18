@@ -3,6 +3,91 @@ const PAGE_TITLE = "K18・プラチナを売る前に無料査定｜金買取査
 const PAGE_DESC = "K18、18金ネックレス、プラチナを売る前に確認。査定だけでも相談したい方へ、買取価格や手数料、店頭・出張・宅配査定の違いをまとめました。";
 const CANONICAL = "https://kaitori.hakobu-family.com/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-gold-appraisal.png";
+const MARKET_SOURCE_URL = "https://www.gold-tsutsumida.co.jp/trans-gold/";
+
+const fallbackMarket = {
+  updatedAt: "2026年5月18日 14時00分",
+  retail: 25748,
+  retailDiff: -397,
+  buy: 25392,
+  buyDiff: -397,
+  history: [
+    { label: "4/20", buy: 26655 },
+    { label: "4/21", buy: 26943 },
+    { label: "4/22", buy: 26546 },
+    { label: "4/23", buy: 26633 },
+    { label: "4/24", buy: 26403 },
+    { label: "4/27", buy: 26230 },
+    { label: "4/28", buy: 26299 },
+    { label: "4/30", buy: 25660 },
+    { label: "5/1", buy: 25551 },
+    { label: "5/11", buy: 25846 },
+    { label: "5/12", buy: 26310 },
+    { label: "5/13", buy: 26183 },
+    { label: "5/14", buy: 26076 },
+    { label: "5/15", buy: 25789 },
+    { label: "5/18", buy: 25392 }
+  ]
+};
+
+function yen(value) {
+  return `${Number(value).toLocaleString("ja-JP")}円`;
+}
+
+function parseYen(value) {
+  return Number(String(value || "").replace(/[^\d-]/g, ""));
+}
+
+async function getGoldMarket() {
+  try {
+    const response = await fetch(MARKET_SOURCE_URL);
+    if (!response.ok) throw new Error("market_fetch_failed");
+    const html = await response.text();
+    const compact = html.replace(/\s+/g, " ");
+    const updatedAt = compact.match(/(\d{4}年\d{1,2}月\d{1,2}日\s+\d{1,2}時\d{2}分)\s+発表/)?.[1] || fallbackMarket.updatedAt;
+    const today = compact.match(/金地金\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円/);
+    if (!today) throw new Error("market_parse_failed");
+    const rowPattern = /(\d{1,2}\/\d{1,2})\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円/g;
+    const history = [];
+    for (const match of compact.matchAll(rowPattern)) {
+      history.push({ label: match[1], buy: parseYen(match[4]) });
+    }
+    return {
+      updatedAt,
+      retail: parseYen(today[1]),
+      retailDiff: parseYen(today[2]),
+      buy: parseYen(today[3]),
+      buyDiff: parseYen(today[4]),
+      history: history.length >= 6 ? history.reverse() : fallbackMarket.history,
+      sourceUrl: MARKET_SOURCE_URL
+    };
+  } catch (_) {
+    return { ...fallbackMarket, sourceUrl: MARKET_SOURCE_URL };
+  }
+}
+
+function buildChartPoints(history) {
+  const points = history.slice(-15);
+  const values = points.map((point) => point.buy);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = Math.max(1, max - min);
+  return points.map((point, index) => {
+    const x = 10 + (index * 80) / Math.max(1, points.length - 1);
+    const y = 78 - ((point.buy - min) / range) * 50;
+    return { ...point, x: Number(x.toFixed(2)), y: Number(y.toFixed(2)) };
+  });
+}
+
+const goldMarket = await getGoldMarket();
+const marketChartPoints = buildChartPoints(goldMarket.history);
+const marketPath = marketChartPoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
+const marketAreaPath = `${marketPath} L ${marketChartPoints.at(-1)?.x || 90} 88 L ${marketChartPoints[0]?.x || 10} 88 Z`;
+const firstMarketPoint = goldMarket.history[0]?.buy || goldMarket.buy;
+const marketRiseRate = Math.max(0, Math.round(((goldMarket.buy - firstMarketPoint) / firstMarketPoint) * 100));
+const k18Estimate = Math.round(goldMarket.buy * 0.75);
+const marketDirection = "前日比";
+const marketDiffLabel = `${goldMarket.buyDiff >= 0 ? "+" : ""}${yen(goldMarket.buyDiff)}`;
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -71,7 +156,7 @@ const faqJsonLd = {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260518-2" />
+  <link rel="stylesheet" href="/styles.css?v=20260518-3" />
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -107,15 +192,15 @@ const faqJsonLd = {
       </div>
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">金・プラチナ買取、迷ったら比較してからでOK</p>
-          <h1>金・<span class="no-break">プラチナ</span>買取は、<br />まず<span class="manekiya-pop">まねきや</span>を見てください。</h1>
+          <p class="eyebrow">緊急速報 金相場は歴史的な高値圏</p>
+          <h1>金相場が高騰中。<br />高額で売る<span class="no-break">チャンス</span>です。</h1>
           <p class="hero-lead">
-            相場、キャンペーン、査定方法、費用を比べると、最初に見るべき候補がかなり絞れます。
-            売るかは査定額を聞いてから。まずは無料で金額だけ確認しましょう。
+            本日の金地金買取価格は<strong>{yen(goldMarket.buy)}/g</strong>。相場が高い今は、しまったままのK18やプラチナを見直すタイミングです。
+            売るかは査定額を聞いてから。まずは<span class="manekiya-pop manekiya-pop-invert">まねきや</span>で無料査定を確認しましょう。
           </p>
           <div class="hero-alert">
-            <span>このページの一押し</span>
-            <strong><span class="manekiya-pop manekiya-pop-invert">まねきや</span> 電話申し込み限定 最大30%UP</strong>
+            <span>本日の金地金買取価格</span>
+            <strong>{yen(goldMarket.buy)}/g <small>{marketDirection} {marketDiffLabel}</small></strong>
           </div>
           <div class="hero-actions" aria-label="主要アクション">
             <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="hero_manekiya_primary" rel="nofollow sponsored"><span class="manekiya-btn-text">まねきや</span>の無料査定を見る</a>
@@ -123,26 +208,50 @@ const faqJsonLd = {
           </div>
           <p class="cta-microcopy">査定料・出張料は無料。売るかは金額を見てから判断できます。</p>
           <ul class="hero-points" aria-label="確認できること">
+            <li>金地金 {yen(goldMarket.buy)}/g</li>
+            <li>K18目安 約{yen(k18Estimate)}/g</li>
             <li>電話申し込み限定 最大30%UP</li>
             <li>査定料・出張料0円</li>
-            <li>壊れた金製品も見てもらえる</li>
-            <li>売るかは金額を聞いてから</li>
           </ul>
         </div>
-        <aside class="hero-panel" aria-label="査定前チェック">
-          <span class="panel-label">比較した結論</span>
-          <h2><span class="manekiya-pop">まねきや</span>は「金額だけ先に知りたい」人に向いています</h2>
-          <div class="rate-mini-grid" aria-label="参考相場">
-            <div><span>K18</span><strong>19,416円/g</strong></div>
-            <div><span>Pt900</span><strong>9,945円/g</strong></div>
-            <div><span>査定料</span><strong>無料</strong></div>
-            <div><span>電話限定</span><strong>最大30%UP</strong></div>
+        <aside class="hero-panel hero-market-panel" aria-label="金相場の推移">
+          <span class="panel-label">毎日更新</span>
+          <h2>金相場は高値圏。売る前に今日の査定額を確認</h2>
+          <div class="market-price-card">
+            <span>金地金 買取価格</span>
+            <strong>{yen(goldMarket.buy)}<small>/g</small></strong>
+            <em>{goldMarket.updatedAt} 発表</em>
           </div>
-          <div class="hero-ticket">
-            <span>捨てる前に見せたい品物</span>
-            <strong>切れたネックレス・古い指輪・金歯・プラチナ</strong>
+          <div class="market-chart" aria-label="金地金買取価格の直近推移">
+            <svg viewBox="0 0 100 92" role="img" aria-label="金地金買取価格の直近推移グラフ">
+              <defs>
+                <linearGradient id="goldChartLine" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0%" stop-color="#f2c45c" />
+                  <stop offset="48%" stop-color="#fff2ad" />
+                  <stop offset="100%" stop-color="#b13b2e" />
+                </linearGradient>
+                <linearGradient id="goldChartArea" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#f2c45c" stop-opacity=".44" />
+                  <stop offset="100%" stop-color="#f2c45c" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path class="chart-area" d={marketAreaPath}></path>
+              <path class="chart-line" d={marketPath}></path>
+              {marketChartPoints.map((point, index) => (
+                <circle class={index === marketChartPoints.length - 1 ? "chart-dot chart-dot-latest" : "chart-dot"} cx={point.x} cy={point.y} r={index === marketChartPoints.length - 1 ? 2.4 : 1.4}></circle>
+              ))}
+            </svg>
+            <div class="chart-labels">
+              <span>{marketChartPoints[0]?.label}</span>
+              <strong>高値圏で推移</strong>
+              <span>{marketChartPoints.at(-1)?.label}</span>
+            </div>
           </div>
-          <p>30%UPは電話申し込み限定です。地金・金貨・インゴット・金券などは対象外です。</p>
+          <div class="market-mini-grid" aria-label="相場の見方">
+            <div><span>K18目安</span><strong>約{yen(k18Estimate)}/g</strong></div>
+            <div><span>直近推移</span><strong>{marketRiseRate > 0 ? `+${marketRiseRate}%` : "高値圏"}</strong></div>
+          </div>
+          <p>相場は毎日変動します。実際の査定額は品位・重量・状態・手数料・査定日で変わります。<a href={goldMarket.sourceUrl} target="_blank" rel="noopener noreferrer">相場出典</a></p>
         </aside>
       </div>
     </section>
