@@ -4,6 +4,7 @@ const PAGE_DESC = "K18、18金ネックレス、プラチナを売る前に確�
 const CANONICAL = "https://kaitori.hakobu-family.com/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-gold-appraisal.png";
 const MARKET_SOURCE_URL = "https://www.gold-tsutsumida.co.jp/trans-gold/";
+const MARKET_YEARLY_SOURCE_URL = "https://gold.tanaka.co.jp/commodity/souba/y-gold.php";
 
 const fallbackMarket = {
   updatedAt: "2026年5月18日 14時00分",
@@ -29,6 +30,19 @@ const fallbackMarket = {
     { label: "5/18", buy: 25392 }
   ]
 };
+
+const fallbackLongTermMarket = [
+  { label: "2000", value: 1014 },
+  { label: "2005", value: 1619 },
+  { label: "2010", value: 3477 },
+  { label: "2015", value: 4564 },
+  { label: "2020", value: 6122 },
+  { label: "2021", value: 6402 },
+  { label: "2022", value: 7649 },
+  { label: "2023", value: 8834 },
+  { label: "2024", value: 11718 },
+  { label: "2025", value: 17302 }
+];
 
 function yen(value) {
   return `${Number(value).toLocaleString("ja-JP")}円`;
@@ -66,25 +80,51 @@ async function getGoldMarket() {
   }
 }
 
+async function getLongTermGoldMarket() {
+  try {
+    const response = await fetch(MARKET_YEARLY_SOURCE_URL);
+    if (!response.ok) throw new Error("long_market_fetch_failed");
+    const html = await response.text();
+    const compact = html.replace(/\s+/g, " ");
+    const rowPattern = /\b(20\d{2})\s+[\d,.]+\s+[\d,.]+\s+[\d,.]+\s+[\d.]+\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)/g;
+    const rows = [];
+    for (const match of compact.matchAll(rowPattern)) {
+      const year = Number(match[1]);
+      if (year >= 2000 && year <= 2025) {
+        rows.push({ label: String(year), value: parseYen(match[4]) });
+      }
+    }
+    const uniqueRows = [...new Map(rows.map((row) => [row.label, row])).values()]
+      .sort((a, b) => Number(a.label) - Number(b.label));
+    return uniqueRows.length >= 10 ? uniqueRows : fallbackLongTermMarket;
+  } catch (_) {
+    return fallbackLongTermMarket;
+  }
+}
+
 function buildChartPoints(history) {
-  const points = history.slice(-15);
-  const values = points.map((point) => point.buy);
+  const points = history;
+  const values = points.map((point) => point.value);
   const min = Math.min(...values);
   const max = Math.max(...values);
   const range = Math.max(1, max - min);
   return points.map((point, index) => {
     const x = 10 + (index * 80) / Math.max(1, points.length - 1);
-    const y = 78 - ((point.buy - min) / range) * 50;
+    const y = 78 - ((point.value - min) / range) * 50;
     return { ...point, x: Number(x.toFixed(2)), y: Number(y.toFixed(2)) };
   });
 }
 
 const goldMarket = await getGoldMarket();
-const marketChartPoints = buildChartPoints(goldMarket.history);
+const longTermMarket = await getLongTermGoldMarket();
+const longTermChartData = [...longTermMarket, { label: "2026", value: goldMarket.buy, current: true }];
+const marketMilestones = ["2000", "2010", "2020", "2025"].map((label) => longTermMarket.find((point) => point.label === label)).filter(Boolean);
+marketMilestones.push({ label: "現在", value: goldMarket.buy });
+const marketChartPoints = buildChartPoints(longTermChartData);
 const marketPath = marketChartPoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
 const marketAreaPath = `${marketPath} L ${marketChartPoints.at(-1)?.x || 90} 88 L ${marketChartPoints[0]?.x || 10} 88 Z`;
-const firstMarketPoint = goldMarket.history[0]?.buy || goldMarket.buy;
-const marketRiseRate = Math.max(0, Math.round(((goldMarket.buy - firstMarketPoint) / firstMarketPoint) * 100));
+const firstMarketPoint = longTermMarket[0]?.value || goldMarket.buy;
+const marketRiseRate = Math.max(0, Math.round((goldMarket.buy / firstMarketPoint) * 10) / 10);
 const k18Estimate = Math.round(goldMarket.buy * 0.75);
 
 const faqJsonLd = {
@@ -154,7 +194,7 @@ const faqJsonLd = {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260518-4" />
+  <link rel="stylesheet" href="/styles.css?v=20260518-5" />
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -212,16 +252,16 @@ const faqJsonLd = {
             <li>売るかは金額を聞いてから</li>
           </ul>
         </div>
-        <aside class="hero-panel hero-market-panel" aria-label="金相場の推移">
+        <aside class="hero-panel hero-market-panel" aria-label="2000年から現在までの金相場推移">
           <span class="panel-label">毎日更新</span>
-          <h2>金相場は高値圏。売る前に今日の査定額を確認</h2>
+          <h2>2000年から見ると、金相場は大きく上昇しています</h2>
           <div class="market-price-card">
             <span>金地金 買取価格</span>
             <strong>{yen(goldMarket.buy)}<small>/g</small></strong>
             <em>{goldMarket.updatedAt} 発表</em>
           </div>
-          <div class="market-chart" aria-label="金地金買取価格の直近推移">
-            <svg viewBox="0 0 100 92" role="img" aria-label="金地金買取価格の直近推移グラフ">
+          <div class="market-chart long-market-chart" aria-label="2000年から現在までの金相場推移">
+            <svg viewBox="0 0 100 100" role="img" aria-label="2000年から現在までの金相場推移グラフ">
               <defs>
                 <linearGradient id="goldChartLine" x1="0" x2="1" y1="0" y2="0">
                   <stop offset="0%" stop-color="#f2c45c" />
@@ -233,23 +273,42 @@ const faqJsonLd = {
                   <stop offset="100%" stop-color="#f2c45c" stop-opacity="0" />
                 </linearGradient>
               </defs>
+              <g class="chart-grid" aria-hidden="true">
+                <line x1="10" y1="28" x2="90" y2="28"></line>
+                <line x1="10" y1="53" x2="90" y2="53"></line>
+                <line x1="10" y1="78" x2="90" y2="78"></line>
+              </g>
               <path class="chart-area" d={marketAreaPath}></path>
               <path class="chart-line" d={marketPath}></path>
               {marketChartPoints.map((point, index) => (
                 <circle class={index === marketChartPoints.length - 1 ? "chart-dot chart-dot-latest" : "chart-dot"} cx={point.x} cy={point.y} r={index === marketChartPoints.length - 1 ? 2.4 : 1.4}></circle>
               ))}
+              {marketChartPoints.filter((point) => ["2000", "2005", "2010", "2015", "2020", "2025", "2026"].includes(point.label)).map((point) => (
+                <g class="chart-year-label" transform={`translate(${point.x}, ${point.y})`}>
+                  <text y="-6">{point.label}</text>
+                  <text y="8">{Math.round(point.value / 1000).toLocaleString("ja-JP")}千円</text>
+                </g>
+              ))}
             </svg>
             <div class="chart-labels">
-              <span>{marketChartPoints[0]?.label}</span>
-              <strong>高値圏で推移</strong>
+              <span>2000年 約{yen(firstMarketPoint)}/g</span>
+              <strong>約{marketRiseRate}倍</strong>
               <span>{marketChartPoints.at(-1)?.label}</span>
             </div>
           </div>
+          <div class="market-year-strip" aria-label="主要年の金価格">
+            {marketMilestones.map((point) => (
+              <div>
+                <span>{point.label}</span>
+                <strong>{yen(point.value)}</strong>
+              </div>
+            ))}
+          </div>
           <div class="market-mini-grid" aria-label="相場の見方">
             <div><span>K18目安</span><strong>約{yen(k18Estimate)}/g</strong></div>
-            <div><span>直近推移</span><strong>{marketRiseRate > 0 ? `+${marketRiseRate}%` : "高値圏"}</strong></div>
+            <div><span>2000年比</span><strong>約{marketRiseRate}倍</strong></div>
           </div>
-          <p>相場は毎日変動します。実際の査定額は品位・重量・状態・手数料・査定日で変わります。<a href={goldMarket.sourceUrl} target="_blank" rel="noopener noreferrer">相場出典</a></p>
+          <p>2000〜2025年は田中貴金属の年平均参考小売価格、2026年は本日の金地金買取価格を表示。実際の査定額は品位・重量・状態・手数料・査定日で変わります。<a href={MARKET_YEARLY_SOURCE_URL} target="_blank" rel="noopener noreferrer">年次データ</a></p>
         </aside>
       </div>
     </section>

@@ -566,6 +566,12 @@ button {
   fill: url(#goldChartArea);
 }
 
+.chart-grid line {
+  stroke: rgba(122, 77, 9, .18);
+  stroke-width: .5;
+  stroke-dasharray: 2 2;
+}
+
 .chart-line {
   fill: none;
   stroke: url(#goldChartLine);
@@ -587,9 +593,27 @@ button {
   animation: markPop 2.2s ease-in-out infinite;
 }
 
+.chart-year-label {
+  font-weight: 900;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: rgba(255,255,255,.78);
+  stroke-width: .7;
+  fill: #4b3008;
+}
+
+.chart-year-label text:first-child {
+  font-size: 3.4px;
+}
+
+.chart-year-label text:last-child {
+  font-size: 3px;
+  fill: #7f2119;
+}
+
 .chart-labels {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, .55fr);
   align-items: center;
   gap: 8px;
   margin-top: -2px;
@@ -611,6 +635,38 @@ button {
 
 .chart-labels span:last-child {
   text-align: right;
+}
+
+.market-year-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin: 10px 0 12px;
+}
+
+.market-year-strip div {
+  min-height: 50px;
+  display: grid;
+  align-content: center;
+  gap: 1px;
+  padding: 7px 4px;
+  border-radius: 7px;
+  background: #fff;
+  border: 1px solid #ead19b;
+  text-align: center;
+}
+
+.market-year-strip span {
+  color: #7a4d09;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.market-year-strip strong {
+  color: #1d2a21;
+  font-size: clamp(11px, 1.6vw, 13px);
+  line-height: 1.15;
+  font-weight: 900;
 }
 
 .market-mini-grid {
@@ -3078,6 +3134,10 @@ h2 {
 
   .promo-main strong {
     font-size: 38px;
+  }
+
+  .market-year-strip {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .visual-stack figure {
