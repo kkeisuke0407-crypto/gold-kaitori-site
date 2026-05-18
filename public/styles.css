@@ -188,6 +188,86 @@ button {
   margin-bottom: 14px;
 }
 
+.manekiya-pop {
+  position: relative;
+  display: inline-block;
+  padding: 0 .08em;
+  color: #b13b2e;
+  font-weight: 900;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.78),
+    0 9px 20px rgba(177, 59, 46, .26);
+  isolation: isolate;
+  animation: manekiyaPulse 2.2s ease-in-out infinite;
+}
+
+.manekiya-pop::before {
+  content: "";
+  position: absolute;
+  left: -.08em;
+  right: -.08em;
+  bottom: .04em;
+  height: .34em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(242, 196, 92, .38), rgba(255, 240, 150, .86), rgba(242, 196, 92, .38));
+  z-index: -1;
+  box-shadow: 0 6px 18px rgba(242, 196, 92, .28);
+}
+
+.manekiya-pop::after {
+  content: "";
+  position: absolute;
+  inset: -.06em -.16em;
+  border-radius: .35em;
+  background: linear-gradient(115deg, transparent 0 38%, rgba(255,255,255,.82) 48%, transparent 58% 100%);
+  transform: translateX(-90%);
+  z-index: -1;
+  animation: manekiyaShine 3.4s ease-in-out infinite;
+}
+
+.manekiya-pop-small {
+  padding: 0 .05em;
+  animation-duration: 2.8s;
+}
+
+.manekiya-pop-invert {
+  color: #fff7cf;
+  text-shadow:
+    0 2px 0 rgba(80, 30, 16, .36),
+    0 0 18px rgba(255, 228, 116, .72);
+}
+
+.manekiya-pop-invert::before {
+  background: linear-gradient(90deg, rgba(177, 59, 46, .34), rgba(242, 196, 92, .92), rgba(177, 59, 46, .34));
+}
+
+.manekiya-table-name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  color: #3a1d05;
+  background: linear-gradient(135deg, #fff2ad, #f2c45c);
+  box-shadow: 0 8px 22px rgba(242, 196, 92, .34);
+  font-weight: 900;
+  animation: manekiyaPulse 2.4s ease-in-out infinite;
+}
+
+.manekiya-btn-text {
+  position: relative;
+  display: inline-block;
+  color: #fff7cf;
+  text-shadow: 0 0 14px rgba(255, 235, 142, .7);
+  animation: manekiyaBtnGlow 1.8s ease-in-out infinite;
+}
+
+.btn-outline .manekiya-btn-text,
+.btn-secondary .manekiya-btn-text {
+  color: #b13b2e;
+  text-shadow: 0 5px 14px rgba(177, 59, 46, .22);
+}
+
 .hero h1 {
   font-size: clamp(40px, 6.4vw, 78px);
   line-height: 1.05;
@@ -2645,12 +2725,50 @@ h2 {
   }
 }
 
+@keyframes manekiyaPulse {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  45%, 58% {
+    transform: translateY(-1px) scale(1.045);
+  }
+}
+
+@keyframes manekiyaShine {
+  0%, 62% {
+    transform: translateX(-92%);
+    opacity: 0;
+  }
+  70% {
+    opacity: .95;
+  }
+  88%, 100% {
+    transform: translateX(92%);
+    opacity: 0;
+  }
+}
+
+@keyframes manekiyaBtnGlow {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  48%, 60% {
+    transform: scale(1.06);
+    filter: brightness(1.22);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-primary::after,
   .rank-primary::after,
   .hero-alert,
   .hero-alert::after,
   .hero-alert strong,
+  .manekiya-pop,
+  .manekiya-pop::after,
+  .manekiya-table-name,
+  .manekiya-btn-text,
   .promo-main strong,
   .comparison-row .mark-best span,
   .cta-section::before,
