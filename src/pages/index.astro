@@ -86,8 +86,6 @@ const marketAreaPath = `${marketPath} L ${marketChartPoints.at(-1)?.x || 90} 88 
 const firstMarketPoint = goldMarket.history[0]?.buy || goldMarket.buy;
 const marketRiseRate = Math.max(0, Math.round(((goldMarket.buy - firstMarketPoint) / firstMarketPoint) * 100));
 const k18Estimate = Math.round(goldMarket.buy * 0.75);
-const marketDirection = "前日比";
-const marketDiffLabel = `${goldMarket.buyDiff >= 0 ? "+" : ""}${yen(goldMarket.buyDiff)}`;
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -156,7 +154,7 @@ const faqJsonLd = {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260518-3" />
+  <link rel="stylesheet" href="/styles.css?v=20260518-4" />
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -195,12 +193,12 @@ const faqJsonLd = {
           <p class="eyebrow">緊急速報 金相場は歴史的な高値圏</p>
           <h1>金相場が高騰中。<br />高額で売る<span class="no-break">チャンス</span>です。</h1>
           <p class="hero-lead">
-            本日の金地金買取価格は<strong>{yen(goldMarket.buy)}/g</strong>。相場が高い今は、しまったままのK18やプラチナを見直すタイミングです。
+            相場が高い今は、しまったままのK18やプラチナを見直すタイミングです。
             売るかは査定額を聞いてから。まずは<span class="manekiya-pop manekiya-pop-invert">まねきや</span>で無料査定を確認しましょう。
           </p>
           <div class="hero-alert">
-            <span>本日の金地金買取価格</span>
-            <strong>{yen(goldMarket.buy)}/g <small>{marketDirection} {marketDiffLabel}</small></strong>
+            <span>5月限定キャンペーン</span>
+            <strong>買取金額 最大30%UP <small>電話申し込み限定</small></strong>
           </div>
           <div class="hero-actions" aria-label="主要アクション">
             <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="hero_manekiya_primary" rel="nofollow sponsored"><span class="manekiya-btn-text">まねきや</span>の無料査定を見る</a>
@@ -208,10 +206,10 @@ const faqJsonLd = {
           </div>
           <p class="cta-microcopy">査定料・出張料は無料。売るかは金額を見てから判断できます。</p>
           <ul class="hero-points" aria-label="確認できること">
-            <li>金地金 {yen(goldMarket.buy)}/g</li>
-            <li>K18目安 約{yen(k18Estimate)}/g</li>
             <li>電話申し込み限定 最大30%UP</li>
+            <li>5/1〜5/31の注目条件</li>
             <li>査定料・出張料0円</li>
+            <li>売るかは金額を聞いてから</li>
           </ul>
         </div>
         <aside class="hero-panel hero-market-panel" aria-label="金相場の推移">
