@@ -1274,6 +1274,22 @@ button {
   background: #fffaf0;
 }
 
+.item-proof-section-top {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 248, 226, .96), rgba(255, 255, 255, .98)),
+    radial-gradient(circle at 14% 6%, rgba(242, 196, 92, .35), transparent 30%);
+}
+
+.item-proof-section-top .section-head h2 {
+  color: #251701;
+}
+
+.item-proof-section-top .section-head p {
+  font-weight: 800;
+}
+
 .item-proof-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1281,12 +1297,34 @@ button {
 }
 
 .item-proof-grid article {
+  position: relative;
   min-height: 178px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 18px;
   box-shadow: 0 10px 28px rgba(48, 34, 15, .07);
+}
+
+.item-proof-grid-strong article {
+  border: 2px solid #e6c76e;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,250,235,.98)),
+    #fff;
+  box-shadow: 0 14px 34px rgba(96, 66, 13, .13);
+}
+
+.item-proof-grid-strong article::after {
+  content: "査定対象";
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  background: #0f6b4f;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
 }
 
 .item-proof-grid span {
@@ -1530,6 +1568,24 @@ button {
   background: #f8f4eb;
 }
 
+.proof-section-top {
+  background:
+    radial-gradient(circle at 86% 0%, rgba(242, 196, 92, .25), transparent 34%),
+    linear-gradient(180deg, #fff 0%, #f8f1df 100%);
+}
+
+.proof-section-top .proof-layout > div:first-child {
+  padding: 24px;
+  border: 2px solid #d7a531;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.84);
+  box-shadow: 0 18px 40px rgba(62, 43, 10, .13);
+}
+
+.proof-section-top .proof-grid article {
+  border-color: #e3c06b;
+}
+
 .proof-layout {
   display: grid;
   grid-template-columns: .82fr 1.18fr;
@@ -1583,6 +1639,40 @@ button {
 
 .intent-strip {
   background: #fff;
+}
+
+.intent-strip-top {
+  background: #0f352b;
+  color: #fff;
+}
+
+.intent-strip-top .section-kicker {
+  color: #f2c45c;
+}
+
+.intent-strip-top h2,
+.intent-strip-top p {
+  color: #fff;
+}
+
+.intent-strip-top p {
+  margin-top: 12px;
+  color: rgba(255,255,255,.78);
+  font-weight: 700;
+}
+
+.intent-strip-top .intent-list div {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(242,196,92,.45);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+.intent-strip-top .intent-list strong {
+  color: #f8d77c;
+}
+
+.intent-strip-top .intent-list span {
+  color: rgba(255,255,255,.84);
 }
 
 .intent-grid {
