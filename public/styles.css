@@ -10,6 +10,8 @@
   --green: #0f6b57;
   --green-deep: #094235;
   --red: #b13b2e;
+  --night: #0b1713;
+  --copper: #9e412d;
   --line: #e7d9c6;
   --shadow: 0 18px 60px rgba(45, 31, 13, .14);
   --radius: 8px;
@@ -125,10 +127,12 @@ button {
 
 .hero {
   position: relative;
-  min-height: 650px;
+  min-height: 690px;
   overflow: hidden;
   color: #fff;
-  background: #19140f;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(242, 196, 92, .18), transparent 30%),
+    linear-gradient(135deg, #08120f 0%, #14241f 58%, #2a1909 100%);
 }
 
 .hero-bg {
@@ -141,8 +145,20 @@ button {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(15, 13, 10, .94) 0%, rgba(15, 13, 10, .82) 42%, rgba(15, 13, 10, .24) 100%),
-    linear-gradient(0deg, rgba(15, 13, 10, .74) 0%, rgba(15, 13, 10, 0) 45%);
+    linear-gradient(90deg, rgba(7, 18, 15, .96) 0%, rgba(7, 18, 15, .83) 43%, rgba(7, 18, 15, .26) 100%),
+    linear-gradient(0deg, rgba(7, 18, 15, .84) 0%, rgba(7, 18, 15, 0) 48%);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 78px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 62px);
+  mask-image: linear-gradient(90deg, rgba(0,0,0,.8), transparent 72%);
+  opacity: .72;
 }
 
 .hero-bg img {
@@ -154,7 +170,7 @@ button {
 .hero-inner {
   position: relative;
   z-index: 1;
-  min-height: 650px;
+  min-height: 690px;
   display: grid;
   grid-template-columns: minmax(0, 1.02fr) minmax(360px, .78fr);
   align-items: center;
@@ -182,8 +198,9 @@ button {
   min-height: 30px;
   padding: 4px 10px;
   border-radius: 999px;
-  color: #2d1c05;
-  background: linear-gradient(135deg, #ffe79c, #d99b27);
+  color: #fff9df;
+  background: linear-gradient(135deg, #9e412d, #0f6b57);
+  border: 1px solid rgba(255, 231, 156, .54);
   box-shadow: 0 10px 28px rgba(0,0,0,.2);
   margin-bottom: 14px;
 }
@@ -269,7 +286,7 @@ button {
 }
 
 .hero h1 {
-  font-size: clamp(40px, 6.4vw, 78px);
+  font-size: clamp(40px, 6.1vw, 72px);
   line-height: 1.05;
   letter-spacing: 0;
   font-weight: 900;
@@ -284,7 +301,7 @@ button {
   max-width: 640px;
   font-size: clamp(16px, 2vw, 19px);
   color: rgba(255,255,255,.82);
-  margin-bottom: 26px;
+  margin-bottom: 22px;
 }
 
 .hero-lead strong {
@@ -302,13 +319,13 @@ button {
   min-width: min(100%, 460px);
   padding: 14px 18px;
   margin: 0 0 18px;
-  border: 2px solid #f2c45c;
+  border: 2px solid #ffe08a;
   border-radius: 8px;
   color: #2f210d;
   background:
     linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,236,159,.96)),
     #f2c45c;
-  box-shadow: 0 18px 42px rgba(0,0,0,.28);
+  box-shadow: 0 18px 42px rgba(0,0,0,.32), 0 0 0 6px rgba(242, 196, 92, .12);
   animation: attentionPulse 2.8s ease-in-out infinite;
 }
 
@@ -355,6 +372,62 @@ button {
   font-size: 13px;
   font-weight: 700;
   margin-top: 10px;
+}
+
+.reservation-rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  max-width: 650px;
+  margin: 16px 0 14px;
+}
+
+.reservation-rail div {
+  position: relative;
+  overflow: hidden;
+  min-height: 92px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(242, 196, 92, .5);
+  background: rgba(255,255,255,.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+  backdrop-filter: blur(10px);
+}
+
+.reservation-rail div::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, #9e412d, #f2c45c, #0f6b57);
+}
+
+.reservation-rail span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #251701;
+  background: #f2c45c;
+  font-size: 12px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.reservation-rail strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.reservation-rail small {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255,255,255,.75);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .btn {
@@ -3136,6 +3209,10 @@ h2 {
     padding-top: 40px;
   }
 
+  .reservation-rail {
+    grid-template-columns: 1fr;
+  }
+
   .hero-panel {
     max-width: 560px;
   }
@@ -3201,6 +3278,10 @@ h2 {
     gap: 28px;
     padding-top: 34px;
     padding-bottom: 38px;
+  }
+
+  .reservation-rail div {
+    min-height: 78px;
   }
 
   .hero h1 {

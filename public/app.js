@@ -196,8 +196,8 @@ function getAiRoute(data) {
     };
   }
   return {
-    label: "無料査定の内容を先に見てみましょう",
-    reason: "売るか決める前に、査定額・費用・キャンセル時の扱いを見ておく流れが合っています。"
+    label: "無料査定予約の内容を先に見てみましょう",
+    reason: "売却を決める前に、査定額・費用・キャンセル時の扱いを見ておく流れが合っています。"
   };
 }
 
@@ -248,7 +248,7 @@ function buildAiMessage(data, route) {
     item + "の査定をお願いしたいです。",
     "刻印は「" + mark + "」で、重さは「" + weight + "」です。",
     "状態は「" + condition + "」です。",
-    "売るかは査定額と費用を見てから決めたいです。",
+    "売却するかは査定額と費用を見てから決めたいです。",
     route.label + "と表示されたため、査定方法・費用・キャンセル時の扱いも相談したいです。"
   ].join("\n");
 }
@@ -375,8 +375,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sticky = document.createElement("div");
   sticky.className = "sticky-cta";
   sticky.innerHTML =
-    '<div class="sticky-copy"><span>今月の注目</span><strong>無料なら査定額だけ聞いてみる</strong><small>電話申し込み限定 最大30%UP</small></div>' +
-    '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">今すぐ無料査定へ</a>' +
+    '<div class="sticky-copy"><span>予約で確認</span><strong>WEB査定予約・電話相談へ</strong><small>電話申し込み限定 最大30%UP</small></div>' +
+    '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
 
