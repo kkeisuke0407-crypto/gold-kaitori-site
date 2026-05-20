@@ -58,21 +58,29 @@ async function getGoldMarket() {
     if (!response.ok) throw new Error("market_fetch_failed");
     const html = await response.text();
     const compact = html.replace(/\s+/g, " ");
-    const updatedAt = compact.match(/(\d{4}年\d{1,2}月\d{1,2}日\s+\d{1,2}時\d{2}分)\s+発表/)?.[1] || fallbackMarket.updatedAt;
-    const today = compact.match(/金地金\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円/);
-    if (!today) throw new Error("market_parse_failed");
-    const rowPattern = /(\d{1,2}\/\d{1,2})\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円\s+([\d,]+)\s+円\s+([+-]?[\d,]+)\s+円/g;
-    const history = [];
+    const rowPattern = /<tr>\s*<td[^>]*class=["']head["'][^>]*>(\d{1,2})\/(\d{1,2})<\/td>\s*<td[^>]*>([\d,]+)<span>円<\/span><\/td>\s*<td[^>]*>([+-]?[\d,]+)<span>円<\/span><\/td>\s*<td[^>]*>([\d,]+)<span>円<\/span><\/td>\s*<td[^>]*>([+-]?[\d,]+)<span>円<\/span><\/td>/g;
+    const rows = [];
     for (const match of compact.matchAll(rowPattern)) {
-      history.push({ label: match[1], buy: parseYen(match[4]) });
+      rows.push({
+        month: Number(match[1]),
+        day: Number(match[2]),
+        label: `${match[1]}/${match[2]}`,
+        retail: parseYen(match[3]),
+        retailDiff: parseYen(match[4]),
+        buy: parseYen(match[5]),
+        buyDiff: parseYen(match[6])
+      });
     }
+    const today = rows[0];
+    if (!today) throw new Error("market_parse_failed");
+    const buildYear = new Date().getFullYear();
     return {
-      updatedAt,
-      retail: parseYen(today[1]),
-      retailDiff: parseYen(today[2]),
-      buy: parseYen(today[3]),
-      buyDiff: parseYen(today[4]),
-      history: history.length >= 6 ? history.reverse() : fallbackMarket.history,
+      updatedAt: `${buildYear}年${today.month}月${today.day}日 更新`,
+      retail: today.retail,
+      retailDiff: today.retailDiff,
+      buy: today.buy,
+      buyDiff: today.buyDiff,
+      history: rows.length >= 6 ? rows.map((row) => ({ label: row.label, buy: row.buy })).reverse() : fallbackMarket.history,
       sourceUrl: MARKET_SOURCE_URL
     };
   } catch (_) {
@@ -263,7 +271,7 @@ const faqJsonLd = {
           <div class="market-price-card">
             <span>金地金 買取価格</span>
             <strong>{yen(goldMarket.buy)}<small>/g</small></strong>
-            <em>{goldMarket.updatedAt} 発表</em>
+            <em>{goldMarket.updatedAt}</em>
           </div>
           <div class="market-chart long-market-chart" aria-label="2000年から現在までの金相場推移">
             <svg viewBox="0 0 100 100" role="img" aria-label="2000年から現在までの金相場推移グラフ">
