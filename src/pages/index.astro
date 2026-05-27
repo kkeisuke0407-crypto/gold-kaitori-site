@@ -5,6 +5,8 @@ const CANONICAL = "https://kaitori.hakobu-family.com/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-appraisal-reservation.png";
 const MARKET_SOURCE_URL = "https://www.gold-tsutsumida.co.jp/trans-gold/";
 const MARKET_YEARLY_SOURCE_URL = "https://gold.tanaka.co.jp/commodity/souba/y-gold.php";
+const CAMPAIGN_END = Date.parse("2026-05-31T23:59:59+09:00");
+const campaignActive = Date.now() <= CAMPAIGN_END;
 
 const fallbackMarket = {
   updatedAt: "2026年5月18日 14時00分",
@@ -212,7 +214,7 @@ const faqJsonLd = {
     gtag('config', 'AW-18129603657');
   </script>
 </head>
-<body>
+<body data-landing-intent="general">
   <header class="site-header">
     <div class="container header-inner">
       <a href="/" class="brand" aria-label="金買取査定ナビ">
@@ -238,18 +240,25 @@ const faqJsonLd = {
       </div>
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">電話相談・WEB査定予約へ</p>
-          <h1>金相場が高い今、<br />査定額だけ先に<span class="no-break">確認</span>。</h1>
-          <p class="hero-lead">
+          <p class="eyebrow" data-intent-eyebrow>電話相談・WEB査定予約へ</p>
+          <h1 data-intent-title>金相場が高い今、<br />査定額だけ先に<span class="no-break">確認</span>。</h1>
+          <p class="hero-lead" data-intent-lead>
             相場が高い今は、しまったままのK18やプラチナを見直すタイミングです。
             売却するかは後で大丈夫。まずは<span class="manekiya-pop manekiya-pop-invert">まねきや</span>で、電話相談またはWEB査定予約の条件を確認しましょう。
           </p>
-          <div class="hero-alert">
-            <span>5月限定キャンペーン</span>
-            <strong>買取金額 最大30%UP <small>電話申し込み限定</small></strong>
-          </div>
+          {campaignActive ? (
+            <div class="hero-alert">
+              <span>5月限定キャンペーン</span>
+              <strong>買取金額 最大30%UP <small>電話申し込み限定</small></strong>
+            </div>
+          ) : (
+            <div class="hero-alert">
+              <span>査定前に確認</span>
+              <strong>査定額と費用を確認 <small>売却判断はその後でOK</small></strong>
+            </div>
+          )}
           <div class="hero-actions" aria-label="主要アクション">
-            <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="hero_manekiya_primary" rel="nofollow sponsored">WEB査定予約へ進む</a>
+            <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="hero_manekiya_primary" data-intent-primary rel="nofollow sponsored">WEB査定予約へ進む</a>
             <a href="#" class="btn btn-secondary" data-affiliate="manekiya" data-track="hero_phone_secondary" rel="nofollow sponsored">電話相談の条件を見る</a>
           </div>
           <p class="cta-microcopy">電話相談またはWEB査定予約から進めます。金額確認だけのつもりでも始めやすいです。</p>
@@ -259,8 +268,8 @@ const faqJsonLd = {
             <div><span>03</span><strong>金額を聞く</strong><small>売却判断は査定額を見てから</small></div>
           </div>
           <ul class="hero-points" aria-label="確認できること">
-            <li>電話申し込み限定 最大30%UP</li>
-            <li>5/1〜5/31の注目条件</li>
+            {campaignActive ? <li>電話申し込み限定 最大30%UP</li> : <li>査定額を見てから売却判断</li>}
+            {campaignActive ? <li>5/1〜5/31の注目条件</li> : <li>電話・WEBで査定予約を確認</li>}
             <li>査定料・出張料0円</li>
             <li>予約後に査定額を確認</li>
           </ul>
@@ -359,7 +368,7 @@ const faqJsonLd = {
           <div><strong>品位</strong><span>K18、K24、Pt850、Pt900など</span></div>
           <div><strong>重量</strong><span>グラム数と石・装飾部分の扱い</span></div>
           <div><strong>費用</strong><span>査定料、出張料、送料、キャンセル時費用</span></div>
-          <div><strong>条件</strong><span>電話申し込み限定30%UPなどの適用可否</span></div>
+          <div><strong>条件</strong><span>{campaignActive ? "電話申し込み限定30%UPなどの適用可否" : "査定方法・費用・キャンセル時の扱い"}</span></div>
         </div>
       </div>
     </section>
@@ -372,7 +381,7 @@ const faqJsonLd = {
           <p>
             高く売りたい人が一番知りたいのは「結局いくらになるのか」です。
             <span class="manekiya-pop manekiya-pop-small">まねきや</span>なら、査定額・費用・買取方法を見てから判断できます。
-            5月は電話申し込み限定の最大30%UPもあるので、対象品なら電話相談やWEB査定予約で先に確認する価値があります。
+            {campaignActive ? "5月は電話申し込み限定の最大30%UPもあるので、対象品なら電話相談やWEB査定予約で先に確認する価値があります。" : "電話相談やWEB査定予約で査定額と費用を確認してから、売却するか決められます。"}
           </p>
           <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="top_proof_manekiya" rel="nofollow sponsored">査定予約で金額を確認する</a>
         </div>
@@ -384,8 +393,8 @@ const faqJsonLd = {
           </article>
           <article>
             <span>02</span>
-            <h3>今月の上乗せ条件が強い</h3>
-            <p>電話申し込み限定で最大30%UP。対象外品目はありますが、当てはまれば大きいです。</p>
+            <h3>{campaignActive ? "今月の上乗せ条件が強い" : "査定額を見て判断できる"}</h3>
+            <p>{campaignActive ? "電話申し込み限定で最大30%UP。対象外品目はありますが、当てはまれば大きいです。" : "査定額や費用を見てから、売るかどうかを判断できます。"}</p>
           </article>
           <article>
             <span>03</span>
@@ -416,7 +425,7 @@ const faqJsonLd = {
           </div>
           <ul>
             <li>査定は無料。売却判断は金額を聞いてからでよい</li>
-            <li>電話申し込み限定で、買取金額 最大30%UPを確認できる</li>
+            <li>{campaignActive ? "電話申し込み限定で、買取金額 最大30%UPを確認できる" : "電話相談またはWEB査定予約で金額と条件を確認できる"}</li>
             <li>切れたネックレスや古い指輪も相談しやすい</li>
             <li>店頭・出張・宅配から、自分に合う方法を選びやすい</li>
           </ul>
@@ -429,11 +438,19 @@ const faqJsonLd = {
             <div role="columnheader"><span class="manekiya-table-name">まねきや</span> <span class="pr-chip">PR</span></div>
             <div role="columnheader">おたからや <span class="pr-chip">PR</span></div>
           </div>
-          <div class="comparison-row" role="row">
-            <div role="cell">電話申し込み限定キャンペーン</div>
-            <div class="mark-best" role="cell"><span>◎</span>最大30%UPを確認</div>
-            <div class="mark-normal" role="cell"><span>○</span>条件はリンク先で確認</div>
-          </div>
+          {campaignActive ? (
+            <div class="comparison-row" role="row">
+              <div role="cell">電話申し込み限定キャンペーン</div>
+              <div class="mark-best" role="cell"><span>◎</span>最大30%UPを確認</div>
+              <div class="mark-normal" role="cell"><span>○</span>条件はリンク先で確認</div>
+            </div>
+          ) : (
+            <div class="comparison-row" role="row">
+              <div role="cell">査定前に確認できること</div>
+              <div class="mark-best" role="cell"><span>◎</span>金額・費用・方法を確認</div>
+              <div class="mark-normal" role="cell"><span>○</span>条件はリンク先で確認</div>
+            </div>
+          )}
           <div class="comparison-row" role="row">
             <div role="cell">査定方法の選びやすさ</div>
             <div class="mark-best" role="cell"><span>◎</span>店頭・出張・宅配</div>
@@ -464,14 +481,14 @@ const faqJsonLd = {
             <div class="winner-box">
               <span>先に見る理由</span>
               <strong>無料査定予約で金額・費用・買取方法をまとめて確認できます</strong>
-              <p>今月は電話申し込み限定で最大30%UP。対象外はありますが、当てはまる品物なら最初に見ておきたい内容です。</p>
+              <p>{campaignActive ? "今月は電話申し込み限定で最大30%UP。対象外はありますが、当てはまる品物なら最初に見ておきたい内容です。" : "査定額と費用を見てから判断したい方が、最初に条件を確認しやすい内容です。"}</p>
             </div>
             <dl class="fact-grid">
               <div><dt>査定方法</dt><dd>店頭・出張・宅配</dd></div>
               <div><dt>対象</dt><dd>金、K18、プラチナ、ブランド品など</dd></div>
               <div><dt>見られる内容</dt><dd>相場、買取実績、買取方法</dd></div>
               <div><dt>壊れた品物</dt><dd>切れたチェーンや片方ピアスも相談可</dd></div>
-              <div><dt>注意点</dt><dd>30%UPは電話申し込み限定。地金・金貨・インゴット・金券などは対象外</dd></div>
+              <div><dt>注意点</dt><dd>{campaignActive ? "30%UPは電話申し込み限定。地金・金貨・インゴット・金券などは対象外" : "査定額や対象品、対応方法の最新条件はリンク先で確認"}</dd></div>
             </dl>
             <div class="card-action">
               <a href="#" class="btn btn-primary btn-wide" data-affiliate="manekiya" data-track="compare_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>
@@ -527,21 +544,30 @@ const faqJsonLd = {
       <div class="container">
         <div class="section-head">
           <span class="section-kicker">今見る理由</span>
-          <h2><span class="manekiya-pop">まねきや</span>を先に見るなら、今月の条件はここ</h2>
-          <p>比較で候補を絞ったら、次はキャンペーン・費用・対象外を確認。査定予約後に金額を確認して、売却判断は後でできます。</p>
+          <h2><span class="manekiya-pop">まねきや</span>を先に見るなら、{campaignActive ? "今月の条件はここ" : "査定前の確認はここ"}</h2>
+          <p>{campaignActive ? "比較で候補を絞ったら、次はキャンペーン・費用・対象外を確認。査定予約後に金額を確認して、売却判断は後でできます。" : "比較で候補を絞ったら、次は費用・査定方法・対象品を確認。査定予約後に金額を確認して、売却判断は後でできます。"}</p>
         </div>
 
         <div class="sell-now-layout">
           <div class="promo-board">
-            <div class="promo-main">
-              <div class="promo-corner">今月中</div>
-              <span>5/1〜5/31</span>
-              <strong>買取金額 最大30%UP</strong>
-              <p>電話申し込み限定。対象外はありますが、当てはまる品物なら今のうちに見ておきたい内容です。</p>
-            </div>
+            {campaignActive ? (
+              <div class="promo-main">
+                <div class="promo-corner">今月中</div>
+                <span>5/1〜5/31</span>
+                <strong>買取金額 最大30%UP</strong>
+                <p>電話申し込み限定。対象外はありますが、当てはまる品物なら今のうちに見ておきたい内容です。</p>
+              </div>
+            ) : (
+              <div class="promo-main">
+                <div class="promo-corner">まず確認</div>
+                <span>売却を決める前に</span>
+                <strong>査定額と費用を確認</strong>
+                <p>査定方法や対象品を見てから、売却するかどうかを判断できます。</p>
+              </div>
+            )}
             <div class="promo-sub"><span>査定料</span><strong>無料</strong></div>
             <div class="promo-sub"><span>出張料</span><strong>無料</strong></div>
-            <div class="promo-sub"><span>対象外</span><strong>地金など</strong></div>
+            <div class="promo-sub"><span>{campaignActive ? "対象外" : "判断"}</span><strong>{campaignActive ? "地金など" : "査定後でOK"}</strong></div>
           </div>
 
           <div class="visual-stack" aria-label="金買取のイメージ">
@@ -575,10 +601,10 @@ const faqJsonLd = {
         </div>
 
         <div class="sell-now-cta">
-          <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="sell_now_manekiya" rel="nofollow sponsored">最大30%UPの予約条件を見る</a>
+          <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="sell_now_manekiya" rel="nofollow sponsored">{campaignActive ? "最大30%UPの予約条件を見る" : "WEB査定予約の条件を見る"}</a>
           <a href="#ai-check" class="btn btn-outline" data-scroll-to="#ai-check" data-track="sell_now_check">手元の品物を30秒で整理</a>
         </div>
-        <p class="campaign-note">※キャンペーンは電話申し込み限定です。地金、金貨、インゴット、金券など一部対象外があります。最新の内容はリンク先で確認してください。</p>
+        <p class="campaign-note">{campaignActive ? "※キャンペーンは電話申し込み限定です。地金、金貨、インゴット、金券など一部対象外があります。最新の内容はリンク先で確認してください。" : "※査定対象、費用、対応方法などの最新の内容はリンク先で確認してください。"}</p>
       </div>
     </section>
 
@@ -1093,7 +1119,7 @@ const faqJsonLd = {
     </div>
   </footer>
 
+  <script src="/app.js?v=20260527-3" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
-  <script src="/app.js?v=20260520-1" defer></script>
 </body>
 </html>

@@ -1,11 +1,46 @@
-/* Gold appraisal LP tracking and affiliate link injection.
- * Replace the placeholder URLs after ASP link URLs are issued.
- */
+/* Gold appraisal LP tracking and affiliate link injection. */
 
 const AFFILIATE_LINKS = {
-  manekiya: "https://manekiya.shop/gold/af2",
+  manekiya: "https://ad-fam.com/ad/p/r?_site=49248&_article=16522",
   otakaraya: "https://lp.otakaraya.jp/lp-gold-a/"
 };
+
+const MANEKIYA_CAMPAIGN_END = Date.parse("2026-05-31T23:59:59+09:00");
+const FORWARDED_AD_PARAMS = new Set([
+  "gclid",
+  "gbraid",
+  "wbraid",
+  "gad_source",
+  "gad_campaignid",
+  "campaignid",
+  "keyword",
+  "matchtype",
+  "device",
+  "network",
+  "creative"
+]);
+
+function isCampaignActive() {
+  return Date.now() <= MANEKIYA_CAMPAIGN_END;
+}
+
+function shouldForwardParam(name) {
+  return FORWARDED_AD_PARAMS.has(name) || name.toLowerCase().indexOf("utm_") === 0;
+}
+
+function getAffiliateLink(key) {
+  const rawUrl = AFFILIATE_LINKS[key];
+  if (!rawUrl || key !== "manekiya") return rawUrl || "#";
+
+  const destination = new URL(rawUrl);
+  const incoming = new URLSearchParams(window.location.search);
+  incoming.forEach(function (value, name) {
+    if (shouldForwardParam(name) && !destination.searchParams.has(name)) {
+      destination.searchParams.set(name, value);
+    }
+  });
+  return destination.toString();
+}
 
 function track(eventName, params) {
   try {
@@ -21,6 +56,7 @@ function wireTrackedLink(el) {
     const params = {
       track_name: el.getAttribute("data-track") || "",
       affiliate_key: affiliateKey,
+      landing_intent: document.body.getAttribute("data-landing-intent") || "general",
       link_url: destination,
       transport_type: "beacon"
     };
@@ -29,6 +65,8 @@ function wireTrackedLink(el) {
       track("gold_kaitori_engagement_click", params);
       return;
     }
+
+    track("cta_click", params);
 
     const isPrimaryClick = !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0;
     const isOutboundLink = el.tagName === "A" && destination && destination !== "#";
@@ -340,15 +378,151 @@ function setupAiConcierge() {
   }
 }
 
+function setupCampaignExpiryPresentation() {
+  if (isCampaignActive()) return;
+
+  const heroAlert = document.querySelector(".hero-alert");
+  if (heroAlert) {
+    heroAlert.innerHTML = "<span>査定前に確認</span><strong>査定額と費用を確認 <small>売却判断はその後でOK</small></strong>";
+  }
+
+  const heroPoints = document.querySelectorAll(".hero-points li");
+  if (heroPoints.length >= 2) {
+    heroPoints[0].textContent = "査定額を見てから売却判断";
+    heroPoints[1].textContent = "電話・WEBで査定予約を確認";
+  }
+
+  const intentCondition = document.querySelector(".intent-list div:last-child span");
+  if (intentCondition) intentCondition.textContent = "査定方法・費用・キャンセル時の扱い";
+
+  const proofText = document.querySelector("#manekiya-reason .proof-layout > div:first-child p");
+  if (proofText) {
+    proofText.innerHTML = '高く売りたい人が一番知りたいのは「結局いくらになるのか」です。<span class="manekiya-pop manekiya-pop-small">まねきや</span>なら、査定額・費用・買取方法を見てから判断できます。電話相談やWEB査定予約で査定額と費用を確認してから、売却するか決められます。';
+  }
+
+  const proofPromoCard = document.querySelector("#manekiya-reason .proof-grid article:nth-child(2)");
+  if (proofPromoCard) {
+    const heading = proofPromoCard.querySelector("h3");
+    const text = proofPromoCard.querySelector("p");
+    if (heading) heading.textContent = "査定額を見て判断できる";
+    if (text) text.textContent = "査定額や費用を見てから、売るかどうかを判断できます。";
+  }
+
+  const readyPoints = document.querySelectorAll(".ready-box li");
+  if (readyPoints.length >= 2) {
+    readyPoints[1].textContent = "電話相談またはWEB査定予約で金額と条件を確認できる";
+  }
+
+  const campaignRow = document.querySelector(".comparison-board .comparison-row:nth-child(2)");
+  if (campaignRow) {
+    const cells = campaignRow.querySelectorAll("div");
+    if (cells.length >= 3) {
+      cells[0].textContent = "査定前に確認できること";
+      cells[1].innerHTML = "<span>◎</span>金額・費用・方法を確認";
+      cells[2].innerHTML = "<span>○</span>条件はリンク先で確認";
+    }
+  }
+
+  const winnerText = document.querySelector(".winner-box p");
+  if (winnerText) winnerText.textContent = "査定額と費用を見てから判断したい方が、最初に条件を確認しやすい内容です。";
+
+  const attention = document.querySelector(".rank-primary .fact-grid div:last-child dd");
+  if (attention) attention.textContent = "査定額や対象品、対応方法の最新条件はリンク先で確認";
+
+  const sellHeading = document.querySelector(".sell-now-section .section-head h2");
+  const sellIntro = document.querySelector(".sell-now-section .section-head p");
+  if (sellHeading) sellHeading.innerHTML = '<span class="manekiya-pop">まねきや</span>を先に見るなら、査定前の確認はここ';
+  if (sellIntro) sellIntro.textContent = "比較で候補を絞ったら、次は費用・査定方法・対象品を確認。査定予約後に金額を確認して、売却判断は後でできます。";
+
+  const promoMain = document.querySelector(".promo-main");
+  if (promoMain) {
+    promoMain.innerHTML = '<div class="promo-corner">まず確認</div><span>売却を決める前に</span><strong>査定額と費用を確認</strong><p>査定方法や対象品を見てから、売却するかどうかを判断できます。</p>';
+  }
+
+  const promoLast = document.querySelector(".promo-board .promo-sub:last-child");
+  if (promoLast) promoLast.innerHTML = "<span>判断</span><strong>査定後でOK</strong>";
+
+  const sellButton = document.querySelector('[data-track="sell_now_manekiya"]');
+  const campaignNote = document.querySelector(".campaign-note");
+  if (sellButton) sellButton.textContent = "WEB査定予約の条件を見る";
+  if (campaignNote) campaignNote.textContent = "※査定対象、費用、対応方法などの最新の内容はリンク先で確認してください。";
+}
+
+function setupLandingIntent() {
+  const requestedIntent = new URLSearchParams(window.location.search).get("intent") || "";
+  const variants = {
+    k18: {
+      eyebrow: "K18ネックレスの査定を検討中の方へ",
+      title: "K18なら、<br />まず無料<span class=\"no-break\">査定</span>。",
+      lead: "切れたネックレスや古い18金アクセサリーも、金として値段が付く場合があります。売却を決める前に、電話相談またはWEB査定予約で金額と条件を確認しましょう。",
+      primary: "K18のWEB査定予約へ進む"
+    },
+    platinum: {
+      eyebrow: "プラチナ指輪の査定を検討中の方へ",
+      title: "プラチナなら、<br />まず無料<span class=\"no-break\">査定</span>。",
+      lead: "Pt900やPt850の指輪・ネックレスは、刻印や重さで査定額が変わります。古い品物でも、まず電話相談またはWEB査定予約で条件を確認しましょう。",
+      primary: "プラチナのWEB査定予約へ進む"
+    }
+  };
+  const variant = variants[requestedIntent];
+  const intent = variant ? requestedIntent : "general";
+  document.body.setAttribute("data-landing-intent", intent);
+  if (!variant) return;
+
+  const eyebrow = document.querySelector("[data-intent-eyebrow]");
+  const title = document.querySelector("[data-intent-title]");
+  const lead = document.querySelector("[data-intent-lead]");
+  const primary = document.querySelector("[data-intent-primary]");
+  if (eyebrow) eyebrow.textContent = variant.eyebrow;
+  if (title) title.innerHTML = variant.title;
+  if (lead) lead.textContent = variant.lead;
+  if (primary) primary.textContent = variant.primary;
+  track("gold_kaitori_landing_intent", { landing_intent: intent });
+}
+
+function setupFunnelMeasurement() {
+  const comparison = document.querySelector("#compare");
+  if (comparison && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        track("comparison_view", {
+          landing_intent: document.body.getAttribute("data-landing-intent") || "general"
+        });
+        observer.disconnect();
+      });
+    }, { threshold: 0.25 });
+    observer.observe(comparison);
+  }
+
+  const recordedDepths = new Set();
+  window.addEventListener("scroll", function () {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+    const rate = window.scrollY / maxScroll;
+    [0.5, 0.75].forEach(function (threshold) {
+      if (rate < threshold || recordedDepths.has(threshold)) return;
+      recordedDepths.add(threshold);
+      track(threshold === 0.5 ? "scroll_50" : "scroll_75", {
+        landing_intent: document.body.getAttribute("data-landing-intent") || "general"
+      });
+    });
+  }, { passive: true });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  setupCampaignExpiryPresentation();
+  setupLandingIntent();
+
   document.querySelectorAll("[data-affiliate]").forEach(function (el) {
     const key = el.getAttribute("data-affiliate");
-    if (AFFILIATE_LINKS[key]) el.setAttribute("href", AFFILIATE_LINKS[key]);
+    if (AFFILIATE_LINKS[key]) el.setAttribute("href", getAffiliateLink(key));
   });
 
   document.querySelectorAll("[data-track]").forEach(wireTrackedLink);
 
   setupAiConcierge();
+  setupFunnelMeasurement();
 
   document.querySelectorAll("[data-scroll-to]").forEach(function (el) {
     el.addEventListener("click", function (event) {
@@ -375,8 +549,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sticky = document.createElement("div");
   sticky.className = "sticky-cta";
   sticky.innerHTML =
-    '<div class="sticky-copy"><span>予約で確認</span><strong>WEB査定予約・電話相談へ</strong><small>電話申し込み限定 最大30%UP</small></div>' +
-    '<a class="btn btn-primary" href="' + AFFILIATE_LINKS.manekiya + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>' +
+    '<div class="sticky-copy"><span>予約で確認</span><strong>WEB査定予約・電話相談へ</strong><small>' + (isCampaignActive() ? "電話申し込み限定 最大30%UP" : "査定額を見てから売却判断") + '</small></div>' +
+    '<a class="btn btn-primary" href="' + getAffiliateLink("manekiya") + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
 
