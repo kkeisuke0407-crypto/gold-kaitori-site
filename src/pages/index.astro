@@ -204,7 +204,7 @@ const faqJsonLd = {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=20260520-2" />
+  <link rel="stylesheet" href="/styles.css?v=20260527-1" />
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -360,15 +360,15 @@ const faqJsonLd = {
     <section class="section intent-strip intent-strip-top">
       <div class="container intent-grid">
         <div>
-          <span class="section-kicker">相場だけでは不十分</span>
-          <h2>同じ金でも、手取りはここで変わります</h2>
-          <p>検索で出てくる相場はあくまで目安です。実際の査定額は、品位・重さ・状態・費用・キャンペーン条件まで見ないと判断できません。</p>
+          <span class="section-kicker" data-intent-strip-kicker>相場だけでは不十分</span>
+          <h2 data-intent-strip-title>同じ金でも、手取りはここで変わります</h2>
+          <p data-intent-strip-lead>検索で出てくる相場はあくまで目安です。実際の査定額は、品位・重さ・状態・費用・キャンペーン条件まで見ないと判断できません。</p>
         </div>
         <div class="intent-list">
-          <div><strong>品位</strong><span>K18、K24、Pt850、Pt900など</span></div>
-          <div><strong>重量</strong><span>グラム数と石・装飾部分の扱い</span></div>
-          <div><strong>費用</strong><span>査定料、出張料、送料、キャンセル時費用</span></div>
-          <div><strong>条件</strong><span>{campaignActive ? "電話申し込み限定30%UPなどの適用可否" : "査定方法・費用・キャンセル時の扱い"}</span></div>
+          <div><strong data-intent-factor-label="0">品位</strong><span data-intent-factor-copy="0">K18、K24、Pt850、Pt900など</span></div>
+          <div><strong data-intent-factor-label="1">重量</strong><span data-intent-factor-copy="1">グラム数と石・装飾部分の扱い</span></div>
+          <div><strong data-intent-factor-label="2">費用</strong><span data-intent-factor-copy="2">査定料、出張料、送料、キャンセル時費用</span></div>
+          <div><strong data-intent-factor-label="3">条件</strong><span data-intent-factor-copy="3">{campaignActive ? "電話申し込み限定30%UPなどの適用可否" : "査定方法・費用・キャンセル時の扱い"}</span></div>
         </div>
       </div>
     </section>
@@ -377,8 +377,8 @@ const faqJsonLd = {
       <div class="container proof-layout">
         <div>
           <span class="section-kicker"><span class="manekiya-pop manekiya-pop-small">まねきや</span>を先に見る理由</span>
-          <h2>まだ迷っている段階でも、<span class="manekiya-pop">まねきや</span>は予約しやすい</h2>
-          <p>
+          <h2 data-intent-proof-title>まだ迷っている段階でも、<span class="manekiya-pop">まねきや</span>は予約しやすい</h2>
+          <p data-intent-proof-lead>
             高く売りたい人が一番知りたいのは「結局いくらになるのか」です。
             <span class="manekiya-pop manekiya-pop-small">まねきや</span>なら、査定額・費用・買取方法を見てから判断できます。
             {campaignActive ? "5月は電話申し込み限定の最大30%UPもあるので、対象品なら電話相談やWEB査定予約で先に確認する価値があります。" : "電話相談やWEB査定予約で査定額と費用を確認してから、売却するか決められます。"}
@@ -421,7 +421,7 @@ const faqJsonLd = {
         <div class="ready-box ready-box-top">
           <div>
             <span class="section-kicker">結論</span>
-            <h3>金額だけ先に知りたいなら、<span class="manekiya-pop">まねきや</span>で査定予約する流れでOK</h3>
+            <h3 data-intent-conclusion-title>金額だけ先に知りたいなら、<span class="manekiya-pop">まねきや</span>で査定予約する流れでOK</h3>
           </div>
           <ul>
             <li>査定は無料。売却判断は金額を聞いてからでよい</li>
@@ -1119,7 +1119,7 @@ const faqJsonLd = {
     </div>
   </footer>
 
-  <script src="/app.js?v=20260527-3" defer></script>
+  <script src="/app.js?v=20260527-4" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
 </body>
 </html>

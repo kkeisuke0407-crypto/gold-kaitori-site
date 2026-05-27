@@ -451,6 +451,42 @@ function setupCampaignExpiryPresentation() {
 function setupLandingIntent() {
   const requestedIntent = new URLSearchParams(window.location.search).get("intent") || "";
   const variants = {
+    fee: {
+      eyebrow: "金を売る前に、費用条件を確認したい方へ",
+      title: "金の買取、<br />手数料まで<span class=\"no-break\">確認</span>。",
+      lead: "高く見えても、手数料を差し引いたら受取額が変わることがあります。まねきやは公式に査定料・キャンセル料・手数料がかからないと案内しています。まず査定額を確認してから判断しましょう。",
+      primary: "手数料0円の査定予約へ",
+      stripKicker: "手取りで比較",
+      stripTitle: "査定額から引かれる費用を、先に確認",
+      stripLead: "買取価格だけを見て決める前に、費用条件まで確認しておくと安心です。まねきや公式では、査定料・キャンセル料・手数料は一切かからないと案内されています。",
+      factors: [
+        ["査定額", "品位と重量を見た実際の提示額"],
+        ["査定料", "公式案内では無料"],
+        ["キャンセル料", "公式案内では不要"],
+        ["方法", "店頭・出張・宅配の条件を確認"]
+      ],
+      proofTitle: "手数料で迷うなら、<span class=\"manekiya-pop\">まねきや</span>を先に確認",
+      proofLead: "まねきや公式では査定料・キャンセル料・手数料が一切かからないと案内されています。査定予約で金額を確認してから、納得できる場合だけ売却を判断できます。",
+      conclusionTitle: "手数料を引かれたくないなら、<span class=\"manekiya-pop\">まねきや</span>で査定額を確認"
+    },
+    unmarked: {
+      eyebrow: "刻印が見えない金製品をお持ちの方へ",
+      title: "刻印がなくても、<br />査定で<span class=\"no-break\">確認</span>。",
+      lead: "古い指輪やアクセサリーは、刻印が薄い・読めないことがあります。自分で価値を決めて処分せず、まずは査定方法と対象品の条件を確認しましょう。",
+      primary: "刻印が見えない品のWEB査定予約へ",
+      stripKicker: "捨てる前に確認",
+      stripTitle: "刻印が読めない品も、見た目だけで判断しない",
+      stripLead: "刻印が薄い、見当たらない、素材が分からない品物は、品位を確認できる査定先へ相談することが第一歩です。",
+      factors: [
+        ["刻印", "見えない・薄い・読めない品物も相談"],
+        ["品目", "指輪・ネックレス・古いアクセサリー"],
+        ["状態", "傷・変色があってもまず確認"],
+        ["判断", "査定額を聞いてから売却を決める"]
+      ],
+      proofTitle: "素材が分からない品も、<span class=\"manekiya-pop\">まねきや</span>へ相談しやすい",
+      proofLead: "素材が分からないまま処分してしまう前に、査定対象かどうかを確認しましょう。まねきや公式FAQでは、詳細不明の品物も無料査定と案内されています。",
+      conclusionTitle: "刻印が読めない品なら、<span class=\"manekiya-pop\">まねきや</span>で査定対象を確認"
+    },
     k18: {
       eyebrow: "K18ネックレスの査定を検討中の方へ",
       title: "K18なら、<br />まず無料<span class=\"no-break\">査定</span>。",
@@ -467,6 +503,7 @@ function setupLandingIntent() {
   const variant = variants[requestedIntent];
   const intent = variant ? requestedIntent : "general";
   document.body.setAttribute("data-landing-intent", intent);
+  track("gold_kaitori_landing_intent", { landing_intent: intent });
   if (!variant) return;
 
   const eyebrow = document.querySelector("[data-intent-eyebrow]");
@@ -477,7 +514,27 @@ function setupLandingIntent() {
   if (title) title.innerHTML = variant.title;
   if (lead) lead.textContent = variant.lead;
   if (primary) primary.textContent = variant.primary;
-  track("gold_kaitori_landing_intent", { landing_intent: intent });
+
+  if (variant.stripTitle) {
+    const stripKicker = document.querySelector("[data-intent-strip-kicker]");
+    const stripTitle = document.querySelector("[data-intent-strip-title]");
+    const stripLead = document.querySelector("[data-intent-strip-lead]");
+    const proofTitle = document.querySelector("[data-intent-proof-title]");
+    const proofLead = document.querySelector("[data-intent-proof-lead]");
+    const conclusionTitle = document.querySelector("[data-intent-conclusion-title]");
+    if (stripKicker) stripKicker.textContent = variant.stripKicker;
+    if (stripTitle) stripTitle.textContent = variant.stripTitle;
+    if (stripLead) stripLead.textContent = variant.stripLead;
+    if (proofTitle) proofTitle.innerHTML = variant.proofTitle;
+    if (proofLead) proofLead.textContent = variant.proofLead;
+    if (conclusionTitle) conclusionTitle.innerHTML = variant.conclusionTitle;
+    variant.factors.forEach(function (factor, index) {
+      const label = document.querySelector('[data-intent-factor-label="' + index + '"]');
+      const copy = document.querySelector('[data-intent-factor-copy="' + index + '"]');
+      if (label) label.textContent = factor[0];
+      if (copy) copy.textContent = factor[1];
+    });
+  }
 }
 
 function setupFunnelMeasurement() {
@@ -532,7 +589,8 @@ document.addEventListener("DOMContentLoaded", function () {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
       track("gold_kaitori_scroll_click", {
         track_name: el.getAttribute("data-track") || "",
-        target: el.getAttribute("data-scroll-to")
+        target: el.getAttribute("data-scroll-to"),
+        landing_intent: document.body.getAttribute("data-landing-intent") || "general"
       });
     });
   });
@@ -542,15 +600,25 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!button) return;
     button.addEventListener("click", function () {
       item.classList.toggle("open");
-      track("gold_kaitori_faq_toggle", { question: button.textContent.trim() });
+      track("gold_kaitori_faq_toggle", {
+        question: button.textContent.trim(),
+        landing_intent: document.body.getAttribute("data-landing-intent") || "general"
+      });
     });
   });
 
   const sticky = document.createElement("div");
   sticky.className = "sticky-cta";
+  const landingIntent = document.body.getAttribute("data-landing-intent") || "general";
+  const stickyLabels = {
+    fee: "手数料0円の査定予約へ",
+    unmarked: "刻印なし品の査定予約へ",
+    platinum: "プラチナの査定予約へ",
+    k18: "K18の査定予約へ"
+  };
   sticky.innerHTML =
     '<div class="sticky-copy"><span>予約で確認</span><strong>WEB査定予約・電話相談へ</strong><small>' + (isCampaignActive() ? "電話申し込み限定 最大30%UP" : "査定額を見てから売却判断") + '</small></div>' +
-    '<a class="btn btn-primary" href="' + getAffiliateLink("manekiya") + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>' +
+    '<a class="btn btn-primary" href="' + getAffiliateLink("manekiya") + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">' + (stickyLabels[landingIntent] || "WEB査定予約へ進む") + '</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
 

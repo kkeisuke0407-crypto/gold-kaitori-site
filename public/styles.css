@@ -181,6 +181,7 @@ button {
 
 .hero-copy {
   max-width: 690px;
+  min-width: 0;
 }
 
 .eyebrow,
@@ -560,6 +561,7 @@ button {
 }
 
 .hero-market-panel {
+  min-width: 0;
   padding: 24px;
   border-color: rgba(242, 196, 92, .9);
   background:
@@ -3286,6 +3288,10 @@ h2 {
 
   .hero h1 {
     font-size: 38px;
+  }
+
+  .hero-lead {
+    overflow-wrap: anywhere;
   }
 
   .hero-actions,
