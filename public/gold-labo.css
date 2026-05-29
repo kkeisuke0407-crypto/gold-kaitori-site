@@ -151,14 +151,20 @@ body { font-family: var(--font); color: #222; background: var(--white); padding-
   color: var(--white);
   line-height: 1.4;
 }
-.hero-img-wrap { position: relative; z-index: 1; }
+.hero-img-wrap {
+  position: relative;
+  z-index: 1;
+  height: 340px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
 .hero-img-wrap img {
   width: 100%;
-  max-width: 400px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   display: block;
-  margin: 0 auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 /* Campaign bar */
