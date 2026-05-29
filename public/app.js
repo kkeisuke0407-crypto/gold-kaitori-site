@@ -381,71 +381,13 @@ function setupAiConcierge() {
 function setupCampaignExpiryPresentation() {
   if (isCampaignActive()) return;
 
-  const heroAlert = document.querySelector(".hero-alert");
-  if (heroAlert) {
-    heroAlert.innerHTML = "<span>査定前に確認</span><strong>査定額と費用を確認 <small>売却判断はその後でOK</small></strong>";
-  }
-
-  const heroPoints = document.querySelectorAll(".hero-points li");
-  if (heroPoints.length >= 2) {
-    heroPoints[0].textContent = "査定額を見てから売却判断";
-    heroPoints[1].textContent = "電話・WEBで査定予約を確認";
-  }
-
-  const intentCondition = document.querySelector(".intent-list div:last-child span");
-  if (intentCondition) intentCondition.textContent = "査定方法・費用・キャンセル時の扱い";
-
-  const proofText = document.querySelector("#manekiya-reason .proof-layout > div:first-child p");
-  if (proofText) {
-    proofText.innerHTML = '公式サイトでは、買取単価、専門査定、他店で断られた品の相談、高額取引への対応が強く打ち出されています。金額だけでなく、宝石・デザイン価値まで見てもらえるかで手取りは変わります。';
-  }
-
-  const proofPromoCard = document.querySelector("#manekiya-reason .proof-grid article:nth-child(2)");
-  if (proofPromoCard) {
-    const heading = proofPromoCard.querySelector("h3");
-    const text = proofPromoCard.querySelector("p");
-    if (heading) heading.textContent = "鑑定スペシャリストが査定";
-    if (text) text.textContent = "素材だけでなく、宝石やデザイン価値まで含めて正しく見てもらえる点が強みです。";
-  }
-
-  const readyPoints = document.querySelectorAll(".ready-box li");
-  if (readyPoints.length >= 2) {
-    readyPoints[1].textContent = "電話相談またはWEB査定予約で金額と条件を確認できる";
-  }
-
-  const campaignRow = document.querySelector(".comparison-board .comparison-row:nth-child(2)");
-  if (campaignRow) {
-    const cells = campaignRow.querySelectorAll("div");
-    if (cells.length >= 3) {
-      cells[0].textContent = "査定前に確認できること";
-      cells[1].innerHTML = "<span>◎</span>金額・費用・方法を確認";
-      cells[2].innerHTML = "<span>○</span>条件はリンク先で確認";
-    }
-  }
-
-  const winnerText = document.querySelector(".winner-box p");
-  if (winnerText) winnerText.textContent = "査定額と費用を見てから判断したい方が、最初に条件を確認しやすい内容です。";
-
-  const attention = document.querySelector(".rank-primary .fact-grid div:last-child dd");
-  if (attention) attention.textContent = "査定額や対象品、対応方法の最新条件はリンク先で確認";
-
-  const sellHeading = document.querySelector(".sell-now-section .section-head h2");
-  const sellIntro = document.querySelector(".sell-now-section .section-head p");
-  if (sellHeading) sellHeading.innerHTML = '<span class="manekiya-pop">まねきや</span>を先に見るなら、査定前の確認はここ';
-  if (sellIntro) sellIntro.textContent = "比較で候補を絞ったら、次は費用・査定方法・対象品を確認。査定予約後に金額を確認して、売却判断は後でできます。";
-
-  const promoMain = document.querySelector(".promo-main");
-  if (promoMain) {
-    promoMain.innerHTML = '<div class="promo-corner">まず確認</div><span>売却を決める前に</span><strong>査定額と費用を確認</strong><p>査定方法や対象品を見てから、売却するかどうかを判断できます。</p>';
-  }
-
-  const promoLast = document.querySelector(".promo-board .promo-sub:last-child");
-  if (promoLast) promoLast.innerHTML = "<span>判断</span><strong>査定後でOK</strong>";
-
-  const sellButton = document.querySelector('[data-track="sell_now_manekiya"]');
-  const campaignNote = document.querySelector(".campaign-note");
-  if (sellButton) sellButton.textContent = "電話相談の条件を見る";
-  if (campaignNote) campaignNote.textContent = "※査定対象、費用、対応方法などの最新の内容はリンク先で確認してください。";
+  // After the campaign window closes, swap any campaign-sensitive copy to its
+  // post-campaign variant. Markup carries the replacement HTML in
+  // data-campaign-alt so this stays decoupled from the page structure.
+  document.querySelectorAll("[data-campaign-alt]").forEach(function (el) {
+    const alt = el.getAttribute("data-campaign-alt");
+    if (alt !== null) el.innerHTML = alt;
+  });
 }
 
 function setupLandingIntent() {
