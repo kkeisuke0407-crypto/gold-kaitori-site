@@ -3,17 +3,21 @@ const PAGE_TITLE = "K18・プラチナの無料査定予約｜金買取査定ナ
 const PAGE_DESC = "K18、18金ネックレス、プラチナの査定額を知りたい方へ。電話相談・WEB査定予約に進む前に、買取価格や手数料、店頭・出張・宅配査定の違いをまとめました。";
 const CANONICAL = "https://kaitori.hakobu-family.com/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-appraisal-reservation.png";
-const MARKET_SOURCE_URL = "https://www.gold-tsutsumida.co.jp/trans-gold/";
+const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
 const MARKET_YEARLY_SOURCE_URL = "https://gold.tanaka.co.jp/commodity/souba/y-gold.php";
 const CAMPAIGN_END = Date.parse("2026-05-31T23:59:59+09:00");
 const campaignActive = Date.now() <= CAMPAIGN_END;
 
 const fallbackMarket = {
-  updatedAt: "2026年5月18日 14時00分",
-  retail: 25748,
-  retailDiff: -397,
-  buy: 25392,
-  buyDiff: -397,
+  updatedAt: "2026年5月29日 現在",
+  retail: 0,
+  retailDiff: 0,
+  buy: 25132,
+  buyDiff: 195,
+  k18: 18824,
+  platinum: 10602,
+  platinumDiff: -26,
+  pt900: 9648,
   history: [
     { label: "4/20", buy: 26655 },
     { label: "4/21", buy: 26943 },
@@ -59,30 +63,46 @@ async function getGoldMarket() {
     const response = await fetch(MARKET_SOURCE_URL);
     if (!response.ok) throw new Error("market_fetch_failed");
     const html = await response.text();
-    const compact = html.replace(/\s+/g, " ");
-    const rowPattern = /<tr>\s*<td[^>]*class=["']head["'][^>]*>(\d{1,2})\/(\d{1,2})<\/td>\s*<td[^>]*>([\d,]+)<span>円<\/span><\/td>\s*<td[^>]*>([+-]?[\d,]+)<span>円<\/span><\/td>\s*<td[^>]*>([\d,]+)<span>円<\/span><\/td>\s*<td[^>]*>([+-]?[\d,]+)<span>円<\/span><\/td>/g;
-    const rows = [];
-    for (const match of compact.matchAll(rowPattern)) {
-      rows.push({
-        month: Number(match[1]),
-        day: Number(match[2]),
-        label: `${match[1]}/${match[2]}`,
-        retail: parseYen(match[3]),
-        retailDiff: parseYen(match[4]),
-        buy: parseYen(match[5]),
-        buyDiff: parseYen(match[6])
-      });
-    }
-    const today = rows[0];
-    if (!today) throw new Error("market_parse_failed");
-    const buildYear = new Date().getFullYear();
+    const text = html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;|&#160;/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const updated = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
+    const goldBlock = text.match(/金\s+([\d,]+)円\s*（前日比\s*([+-]?\d[\d,]*)\s*円）/);
+    const ptBlock = text.match(/Pt\s+([\d,]+)円\s*（前日比\s*([+-]?\d[\d,]*)\s*円）/);
+    const k18Block = text.match(/K18\s+([\d,]+)円/);
+    const pt900Block = text.match(/Pt900\s+([\d,]+)円/);
+    if (!goldBlock) throw new Error("market_parse_failed");
+    const month = updated ? Number(updated[2]) : new Date().getMonth() + 1;
+    const day = updated ? Number(updated[3]) : new Date().getDate();
+    const buildYear = updated ? Number(updated[1]) : new Date().getFullYear();
+    const today = {
+      month,
+      day,
+      label: `${month}/${day}`,
+      retail: 0,
+      retailDiff: 0,
+      buy: parseYen(goldBlock[1]),
+      buyDiff: parseYen(goldBlock[2]),
+      k18: k18Block ? parseYen(k18Block[1]) : undefined,
+      platinum: ptBlock ? parseYen(ptBlock[1]) : undefined,
+      platinumDiff: ptBlock ? parseYen(ptBlock[2]) : undefined,
+      pt900: pt900Block ? parseYen(pt900Block[1]) : undefined
+    };
     return {
       updatedAt: `${buildYear}年${today.month}月${today.day}日 更新`,
       retail: today.retail,
       retailDiff: today.retailDiff,
       buy: today.buy,
       buyDiff: today.buyDiff,
-      history: rows.length >= 6 ? rows.map((row) => ({ label: row.label, buy: row.buy })).reverse() : fallbackMarket.history,
+      k18: today.k18,
+      platinum: today.platinum,
+      platinumDiff: today.platinumDiff,
+      pt900: today.pt900,
+      history: fallbackMarket.history,
       sourceUrl: MARKET_SOURCE_URL
     };
   } catch (_) {
@@ -135,7 +155,7 @@ const marketPath = marketChartPoints.map((point, index) => `${index === 0 ? "M" 
 const marketAreaPath = `${marketPath} L ${marketChartPoints.at(-1)?.x || 90} 88 L ${marketChartPoints[0]?.x || 10} 88 Z`;
 const firstMarketPoint = longTermMarket[0]?.value || goldMarket.buy;
 const marketRiseRate = Math.max(0, Math.round((goldMarket.buy / firstMarketPoint) * 10) / 10);
-const k18Estimate = Math.round(goldMarket.buy * 0.75);
+const k18Estimate = goldMarket.k18 || Math.round(goldMarket.buy * 0.75);
 
 const faqJsonLd = {
   "@context": "https://schema.org",
@@ -264,14 +284,19 @@ const faqJsonLd = {
               <strong>査定額と費用を確認 <small>売却判断はその後でOK</small></strong>
             </div>
           )}
-          <div class="hero-actions" aria-label="主要アクション">
-            <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="hero_manekiya_primary" data-intent-primary rel="nofollow sponsored">WEB査定予約へ進む</a>
-            <a href="#" class="btn btn-secondary" data-affiliate="manekiya" data-track="hero_phone_secondary" rel="nofollow sponsored">電話相談の条件を見る</a>
+          <div class="phone-priority" aria-label="電話申し込み導線">
+            <span>成果地点に近い進み方</span>
+            <strong>{campaignActive ? "対象品なら、電話相談で30%UP条件を先に確認" : "電話相談で査定額と費用を先に確認"}</strong>
+            <p>リンク先の公式ページで電話番号・受付条件を確認してから相談できます。売るかどうかは査定額を聞いてからで大丈夫です。</p>
           </div>
-          <p class="cta-microcopy">電話相談またはWEB査定予約から進めます。金額確認だけのつもりでも始めやすいです。</p>
+          <div class="hero-actions" aria-label="主要アクション">
+            <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="hero_phone_primary" data-intent-primary rel="nofollow sponsored">公式で電話相談へ進む</a>
+            <a href="#" class="btn btn-secondary" data-affiliate="manekiya" data-track="hero_web_secondary" rel="nofollow sponsored">WEB査定予約も見る</a>
+          </div>
+          <p class="cta-microcopy">電話申し込み限定30%UPは、対象品・期間・条件があります。最新条件はリンク先で確認してください。</p>
           <div class="reservation-rail" aria-label="査定予約までの流れ">
             <div><span>01</span><strong>品物を選ぶ</strong><small>K18・プラチナ・壊れたアクセサリー</small></div>
-            <div><span>02</span><strong>電話/WEBで予約</strong><small>査定方法と費用を確認</small></div>
+            <div><span>02</span><strong>公式で電話相談</strong><small>番号・受付条件・対象品を確認</small></div>
             <div><span>03</span><strong>金額を聞く</strong><small>売却判断は査定額を見てから</small></div>
           </div>
           <ul class="hero-points" aria-label="確認できること">
@@ -337,7 +362,7 @@ const faqJsonLd = {
             <div><span>K18目安</span><strong>約{yen(k18Estimate)}/g</strong></div>
             <div><span>2000年比</span><strong>約{marketRiseRate}倍</strong></div>
           </div>
-          <p>2000〜2025年は田中貴金属の年平均参考小売価格、2026年は本日の金地金買取価格を表示。実際の査定額は品位・重量・状態・手数料・査定日で変わります。<a href={MARKET_YEARLY_SOURCE_URL} target="_blank" rel="noopener noreferrer">年次データ</a></p>
+          <p>2000〜2025年は田中貴金属の年平均参考小売価格、2026年はまねきや公式の本日買取相場を表示。実際の査定額は品位・重量・状態・手数料・査定日で変わります。<a href={MARKET_YEARLY_SOURCE_URL} target="_blank" rel="noopener noreferrer">年次データ</a> / <a href={goldMarket.sourceUrl} target="_blank" rel="noopener noreferrer">本日相場</a></p>
         </aside>
       </div>
     </section>
@@ -359,7 +384,7 @@ const faqJsonLd = {
         </div>
         <div class="item-proof-cta">
           <a href="#ai-check" class="btn btn-primary" data-scroll-to="#ai-check" data-track="top_item_ai">査定前に30秒で整理する</a>
-          <a href="#" class="btn btn-outline" data-affiliate="manekiya" data-track="top_item_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>
+          <a href="#" class="btn btn-outline" data-affiliate="manekiya" data-track="top_item_phone" rel="nofollow sponsored">電話相談できるか確認</a>
         </div>
       </div>
     </section>
@@ -383,36 +408,71 @@ const faqJsonLd = {
     <section class="section proof-section proof-section-top" id="manekiya-reason">
       <div class="container proof-layout">
         <div>
-          <span class="section-kicker"><span class="manekiya-pop manekiya-pop-small">まねきや</span>を先に見る理由</span>
-          <h2 data-intent-proof-title>まだ迷っている段階でも、<span class="manekiya-pop">まねきや</span>は予約しやすい</h2>
+          <span class="section-kicker"><span class="manekiya-pop manekiya-pop-small">まねきや</span>が選ばれる4つの理由</span>
+          <h2 data-intent-proof-title>金・プラチナを売る前に、<span class="manekiya-pop">まねきや</span>を見ておきたい理由</h2>
           <p data-intent-proof-lead>
-            高く売りたい人が一番知りたいのは「結局いくらになるのか」です。
-            <span class="manekiya-pop manekiya-pop-small">まねきや</span>なら、査定額・費用・買取方法を見てから判断できます。
-            {campaignActive ? "5月は電話申し込み限定の最大30%UPもあるので、対象品なら電話相談やWEB査定予約で先に確認する価値があります。" : "電話相談やWEB査定予約で査定額と費用を確認してから、売却するか決められます。"}
+            公式LPでは、買取単価、専門査定、他店で断られた品の相談、高額取引への対応が強く打ち出されています。
+            金額だけでなく、宝石・デザイン価値まで見てもらえるかで手取りは変わります。
           </p>
           <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="top_proof_manekiya" rel="nofollow sponsored">査定予約で金額を確認する</a>
         </div>
         <div class="proof-grid">
           <article>
             <span>01</span>
-            <h3>予約だけでも始めやすい</h3>
-            <p>先に売却を決める必要はありません。査定額と条件を見てから判断できます。</p>
+            <h3>買取単価に自信</h3>
+            <p>公式LPでは、業者間取引の単価を一般利用者にも伝えると案内されています。</p>
           </article>
           <article>
             <span>02</span>
-            <h3>{campaignActive ? "今月の上乗せ条件が強い" : "査定額を見て判断できる"}</h3>
-            <p>{campaignActive ? "電話申し込み限定で最大30%UP。対象外品目はありますが、当てはまれば大きいです。" : "査定額や費用を見てから、売るかどうかを判断できます。"}</p>
+            <h3>鑑定スペシャリストが査定</h3>
+            <p>素材だけでなく、宝石やデザイン価値まで含めて正しく見てもらえる点が強みです。</p>
           </article>
           <article>
             <span>03</span>
-            <h3>店頭・出張・宅配を選べる</h3>
-            <p>高額品を持ち歩きたくない人や、点数が多い人でも予約方法を選びやすいです。</p>
+            <h3>他店で断られた品も相談</h3>
+            <p>金・プラチナ以外の工業用製品など、査定が難しい品も相談できると案内されています。</p>
           </article>
           <article>
             <span>04</span>
-            <h3>壊れた品物も相談しやすい</h3>
-            <p>切れたチェーン、片方ピアス、古い指輪も、捨てる前に見てもらう価値があります。</p>
+            <h3>高額取引にも対応</h3>
+            <p>公式LPでは、1,000万円以上の高額買取でも現金支払い・振込対応が可能と案内されています。</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section voices-section" aria-label="お客様の声とGoogle口コミの確認ポイント">
+      <div class="container voices-layout">
+        <div class="section-head">
+          <span class="section-kicker">公式LPのお客様の声</span>
+          <h2>「怖そう」「本当に高い？」の不安を消す材料も見ておきたい</h2>
+          <p>公式LPには、説明の分かりやすさ、X線査定、金相場高騰で購入額より高く売れた声などが掲載されています。</p>
+        </div>
+        <div class="voice-cards">
+          <article>
+            <span>お客様の声</span>
+            <strong>もっと早く行けば良かった</strong>
+            <p>古銭や金貨の処分に悩んでいた方が、店内の雰囲気や説明の丁寧さに安心したという内容が紹介されています。</p>
+          </article>
+          <article>
+            <span>お客様の声</span>
+            <strong>X線の機械で細かく査定</strong>
+            <p>刻印のない金やプラチナ製品も、含有量を測定して査定できるという体験談が掲載されています。</p>
+          </article>
+          <article>
+            <span>お客様の声</span>
+            <strong>購入額より高く売れた声も</strong>
+            <p>インゴットや宝石・ダイヤの買取で、金相場の上昇を実感した声が紹介されています。</p>
+          </article>
+          <article class="google-review-card">
+            <span>Google口コミ</span>
+            <strong>公式LPでは最大4.7評価を訴求</strong>
+            <p>店舗ごとの最新口コミで、接客・説明の丁寧さ・待ち時間・査定スピードを確認してから進めます。</p>
+          </article>
+        </div>
+        <div class="voices-cta">
+          <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="voices_phone" rel="nofollow sponsored">口コミを見て電話相談へ進む</a>
+          <p>口コミ評価やキャンペーン条件は変動します。最新情報はリンク先の公式ページ・各店舗情報で確認してください。</p>
         </div>
       </div>
     </section>
@@ -436,7 +496,7 @@ const faqJsonLd = {
             <li>切れたネックレスや古い指輪も相談しやすい</li>
             <li>店頭・出張・宅配から、自分に合う方法を選びやすい</li>
           </ul>
-            <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="ready_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>
+            <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="ready_phone" rel="nofollow sponsored">公式で電話相談へ進む</a>
         </div>
 
         <div class="comparison-board comparison-board-top" aria-label="まねきやとおたからやの比較">
@@ -498,7 +558,7 @@ const faqJsonLd = {
               <div><dt>注意点</dt><dd>{campaignActive ? "30%UPは電話申し込み限定。地金・金貨・インゴット・金券などは対象外" : "査定額や対象品、対応方法の最新条件はリンク先で確認"}</dd></div>
             </dl>
             <div class="card-action">
-              <a href="#" class="btn btn-primary btn-wide" data-affiliate="manekiya" data-track="compare_manekiya" rel="nofollow sponsored">WEB査定予約へ進む</a>
+              <a href="#" class="btn btn-primary btn-wide btn-phone-primary" data-affiliate="manekiya" data-track="compare_phone" rel="nofollow sponsored">30%UPの電話条件を確認</a>
               <p>査定額は品物の状態・重量・相場・査定日で変動します。</p>
             </div>
           </article>
@@ -608,7 +668,7 @@ const faqJsonLd = {
         </div>
 
         <div class="sell-now-cta">
-          <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="sell_now_manekiya" rel="nofollow sponsored">{campaignActive ? "最大30%UPの予約条件を見る" : "WEB査定予約の条件を見る"}</a>
+          <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="sell_now_phone" rel="nofollow sponsored">{campaignActive ? "電話申し込み30%UPを確認" : "電話相談の条件を見る"}</a>
           <a href="#ai-check" class="btn btn-outline" data-scroll-to="#ai-check" data-track="sell_now_check">手元の品物を30秒で整理</a>
         </div>
         <p class="campaign-note">{campaignActive ? "※キャンペーンは電話申し込み限定です。地金、金貨、インゴット、金券など一部対象外があります。最新の内容はリンク先で確認してください。" : "※査定対象、費用、対応方法などの最新の内容はリンク先で確認してください。"}</p>
@@ -722,7 +782,7 @@ const faqJsonLd = {
               <strong>そのまま伝えやすい相談文</strong>
               <textarea data-ai-message readonly></textarea>
               <button type="button" class="btn btn-outline" data-ai-copy>相談文をコピー</button>
-              <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="ai_result_manekiya" rel="nofollow sponsored">このままWEB査定予約へ進む</a>
+              <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="ai_result_phone" rel="nofollow sponsored">相談文を持って電話条件を確認</a>
               <p>正確な査定額や費用は、申し込み先で確認してください。</p>
             </div>
           </div>
@@ -738,7 +798,7 @@ const faqJsonLd = {
           <h2>悩むより、査定予約で金額を聞いた方が早いです</h2>
           <p>無料査定なら、売却するかどうかは査定額を見てから判断できます。今の相場でいくらになりそうか、まず確認しましょう。</p>
         </div>
-        <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="bridge_manekiya" rel="nofollow sponsored">今すぐWEB査定予約へ進む</a>
+        <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="bridge_phone" rel="nofollow sponsored">公式で電話番号を確認する</a>
       </div>
     </section>
 
@@ -869,7 +929,7 @@ const faqJsonLd = {
           <span class="section-kicker">相談前のメモ</span>
           <h2>30秒で整理して、そのまま査定予約へ</h2>
           <p>正確な金額は査定で決まります。先にこの4つを見ておくと、申し込み後の話が早いです。</p>
-          <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="estimate_manekiya" rel="nofollow sponsored">このままWEB査定予約へ進む</a>
+          <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="estimate_phone" rel="nofollow sponsored">査定額を電話で相談する</a>
         </div>
         <div class="estimate-card">
           <div>
@@ -938,7 +998,7 @@ const faqJsonLd = {
           </article>
           <article>
             <span>02</span>
-            <h3>WEB査定予約へ進む</h3>
+            <h3>公式ページで電話番号を確認</h3>
             <p>店頭・出張・宅配のうち、行きやすい方法を選びます。</p>
           </article>
           <article>
@@ -948,7 +1008,7 @@ const faqJsonLd = {
           </article>
         </div>
         <div class="flow-cta">
-          <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="flow_manekiya" rel="nofollow sponsored"><span class="manekiya-btn-text">まねきや</span>でWEB査定予約の流れを見る</a>
+          <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="flow_phone" rel="nofollow sponsored"><span class="manekiya-btn-text">まねきや</span>で電話相談の流れを見る</a>
         </div>
       </div>
     </section>
@@ -1073,7 +1133,7 @@ const faqJsonLd = {
         <h2>しまったままの金、今日の相場で一度見てもらいましょう</h2>
         <p>無料で査定額だけ聞けるなら、悩み続けるより早いです。売却するかは査定額を見てから判断できます。</p>
         <div class="hero-actions">
-          <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="bottom_manekiya" rel="nofollow sponsored"><span class="manekiya-btn-text">まねきや</span>公式でWEB査定予約へ</a>
+          <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="bottom_phone" rel="nofollow sponsored"><span class="manekiya-btn-text">まねきや</span>公式で電話相談へ</a>
           <a href="#" class="btn btn-secondary" data-affiliate="otakaraya" data-track="bottom_otakaraya" rel="nofollow sponsored">おたからやの条件も見る</a>
         </div>
       </div>

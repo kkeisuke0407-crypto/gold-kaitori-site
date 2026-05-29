@@ -397,15 +397,15 @@ function setupCampaignExpiryPresentation() {
 
   const proofText = document.querySelector("#manekiya-reason .proof-layout > div:first-child p");
   if (proofText) {
-    proofText.innerHTML = '高く売りたい人が一番知りたいのは「結局いくらになるのか」です。<span class="manekiya-pop manekiya-pop-small">まねきや</span>なら、査定額・費用・買取方法を見てから判断できます。電話相談やWEB査定予約で査定額と費用を確認してから、売却するか決められます。';
+    proofText.innerHTML = '公式LPでは、買取単価、専門査定、他店で断られた品の相談、高額取引への対応が強く打ち出されています。金額だけでなく、宝石・デザイン価値まで見てもらえるかで手取りは変わります。';
   }
 
   const proofPromoCard = document.querySelector("#manekiya-reason .proof-grid article:nth-child(2)");
   if (proofPromoCard) {
     const heading = proofPromoCard.querySelector("h3");
     const text = proofPromoCard.querySelector("p");
-    if (heading) heading.textContent = "査定額を見て判断できる";
-    if (text) text.textContent = "査定額や費用を見てから、売るかどうかを判断できます。";
+    if (heading) heading.textContent = "鑑定スペシャリストが査定";
+    if (text) text.textContent = "素材だけでなく、宝石やデザイン価値まで含めて正しく見てもらえる点が強みです。";
   }
 
   const readyPoints = document.querySelectorAll(".ready-box li");
@@ -444,7 +444,7 @@ function setupCampaignExpiryPresentation() {
 
   const sellButton = document.querySelector('[data-track="sell_now_manekiya"]');
   const campaignNote = document.querySelector(".campaign-note");
-  if (sellButton) sellButton.textContent = "WEB査定予約の条件を見る";
+  if (sellButton) sellButton.textContent = "電話相談の条件を見る";
   if (campaignNote) campaignNote.textContent = "※査定対象、費用、対応方法などの最新の内容はリンク先で確認してください。";
 }
 
@@ -455,7 +455,7 @@ function setupLandingIntent() {
       eyebrow: "金を売る前に、費用条件を確認したい方へ",
       title: "金の買取、<br />手数料まで<span class=\"no-break\">確認</span>。",
       lead: "高く見えても、手数料を差し引いたら受取額が変わることがあります。まねきやは公式に査定料・キャンセル料・手数料がかからないと案内しています。まず査定額を確認してから判断しましょう。",
-      primary: "手数料0円の査定予約へ",
+      primary: "手数料0円か電話で確認",
       stripKicker: "手取りで比較",
       stripTitle: "査定額から引かれる費用を、先に確認",
       stripLead: "買取価格だけを見て決める前に、費用条件まで確認しておくと安心です。まねきや公式では、査定料・キャンセル料・手数料は一切かからないと案内されています。",
@@ -473,7 +473,7 @@ function setupLandingIntent() {
       eyebrow: "刻印が見えない金製品をお持ちの方へ",
       title: "刻印がなくても、<br />査定で<span class=\"no-break\">確認</span>。",
       lead: "古い指輪やアクセサリーは、刻印が薄い・読めないことがあります。自分で価値を決めて処分せず、まずは査定方法と対象品の条件を確認しましょう。",
-      primary: "刻印が見えない品のWEB査定予約へ",
+      primary: "刻印なし品を電話で相談",
       stripKicker: "捨てる前に確認",
       stripTitle: "刻印が読めない品も、見た目だけで判断しない",
       stripLead: "刻印が薄い、見当たらない、素材が分からない品物は、品位を確認できる査定先へ相談することが第一歩です。",
@@ -491,13 +491,13 @@ function setupLandingIntent() {
       eyebrow: "K18ネックレスの査定を検討中の方へ",
       title: "K18なら、<br />まず無料<span class=\"no-break\">査定</span>。",
       lead: "切れたネックレスや古い18金アクセサリーも、金として値段が付く場合があります。売却を決める前に、電話相談またはWEB査定予約で金額と条件を確認しましょう。",
-      primary: "K18のWEB査定予約へ進む"
+      primary: "K18を電話で査定相談"
     },
     platinum: {
       eyebrow: "プラチナ指輪の査定を検討中の方へ",
       title: "プラチナなら、<br />まず無料<span class=\"no-break\">査定</span>。",
       lead: "Pt900やPt850の指輪・ネックレスは、刻印や重さで査定額が変わります。古い品物でも、まず電話相談またはWEB査定予約で条件を確認しましょう。",
-      primary: "プラチナのWEB査定予約へ進む"
+      primary: "プラチナ指輪を電話相談"
     }
   };
   const variant = variants[requestedIntent];
@@ -611,14 +611,14 @@ document.addEventListener("DOMContentLoaded", function () {
   sticky.className = "sticky-cta";
   const landingIntent = document.body.getAttribute("data-landing-intent") || "general";
   const stickyLabels = {
-    fee: "手数料0円の査定予約へ",
-    unmarked: "刻印なし品の査定予約へ",
-    platinum: "プラチナの査定予約へ",
-    k18: "K18の査定予約へ"
+    fee: "手数料を電話で確認",
+    unmarked: "刻印なし品を電話相談",
+    platinum: "プラチナを電話相談",
+    k18: "K18を電話相談"
   };
   sticky.innerHTML =
-    '<div class="sticky-copy"><span>予約で確認</span><strong>WEB査定予約・電話相談へ</strong><small>' + (isCampaignActive() ? "電話申し込み限定 最大30%UP" : "査定額を見てから売却判断") + '</small></div>' +
-    '<a class="btn btn-primary" href="' + getAffiliateLink("manekiya") + '" data-affiliate="manekiya" data-track="sticky_manekiya" rel="nofollow sponsored">' + (stickyLabels[landingIntent] || "WEB査定予約へ進む") + '</a>' +
+    '<div class="sticky-copy"><span>電話相談へ</span><strong>公式で電話番号を確認</strong><small>' + (isCampaignActive() ? "電話申し込み限定 最大30%UP" : "査定額を見てから売却判断") + '</small></div>' +
+    '<a class="btn btn-primary btn-phone-primary" href="' + getAffiliateLink("manekiya") + '" data-affiliate="manekiya" data-track="sticky_phone" rel="nofollow sponsored">' + (stickyLabels[landingIntent] || "電話相談へ進む") + '</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
 
