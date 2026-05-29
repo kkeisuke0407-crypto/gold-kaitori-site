@@ -471,17 +471,25 @@ const faqJsonLd = {
           <div class="rate-panel">
             <div class="rate-panel-head">
               <span>貴金属の価格相場</span>
-              <strong>参考例 <small>1gあたり</small></strong>
+              <strong>1gあたりの参考価格</strong>
+            </div>
+            <div class="rate-hero">
+              <div>
+                <span>金 K24</span>
+                <strong>25,132円<small>/g</small></strong>
+              </div>
+              <div>
+                <span>K18</span>
+                <strong>18,824円<small>/g</small></strong>
+              </div>
             </div>
             <div class="rate-grid">
-              <div class="rate-feature"><span>金 K24</span><strong>25,132円</strong></div>
-              <div class="rate-feature"><span>プラチナ Pt1000</span><strong>10,602円</strong></div>
-              <div class="rate-feature"><span>K18</span><strong>18,824円</strong></div>
-              <div class="rate-feature"><span>Pt900</span><strong>9,648円</strong></div>
-              <div><span>K22</span><strong>22,920円</strong></div>
-              <div><span>K20</span><strong>20,457円</strong></div>
-              <div><span>K14</span><strong>14,577円</strong></div>
-              <div><span>Pt850</span><strong>9,065円</strong></div>
+              <div class="rate-feature rate-platinum"><span>プラチナ Pt1000</span><strong>10,602円<small>/g</small></strong></div>
+              <div class="rate-feature rate-platinum"><span>Pt900</span><strong>9,648円<small>/g</small></strong></div>
+              <div><span>K22</span><strong>22,920円<small>/g</small></strong></div>
+              <div><span>K20</span><strong>20,457円<small>/g</small></strong></div>
+              <div><span>K14</span><strong>14,577円<small>/g</small></strong></div>
+              <div><span>Pt850</span><strong>9,065円<small>/g</small></strong></div>
             </div>
             <p>金額は公式サイト掲載の参考価格です。形状、状態、査定日、手数料等により実際の金額は変わります。</p>
           </div>
@@ -492,12 +500,18 @@ const faqJsonLd = {
           </figure>
         </div>
 
-        <div class="case-amount-grid" aria-label="公式サイト掲載の買取事例">
-          <article><span>インゴット 1kg</span><strong>27,682,000円</strong></article>
-          <article><span>石取れ指輪・不揃いピアス等</span><strong>36,750,000円</strong></article>
-          <article><span>ネックレストップ・喜平など</span><strong>7,930,000円</strong></article>
-          <article><span>金歯</span><strong>960,000円</strong></article>
-          <article><span>金板の破片</span><strong>750,000円</strong></article>
+        <div class="case-showcase">
+          <div class="case-showcase-head">
+            <span>公式サイト掲載の買取事例</span>
+            <strong>「これも売れる？」を、金額の実例で確認</strong>
+          </div>
+          <div class="case-amount-grid" aria-label="公式サイト掲載の買取事例">
+            <article class="case-big"><em>高額例</em><span>石取れ指輪・不揃いピアス等</span><strong>36,750,000円</strong></article>
+            <article><em>地金</em><span>インゴット 1kg</span><strong>27,682,000円</strong></article>
+            <article><em>喜平</em><span>ネックレストップ・喜平など</span><strong>7,930,000円</strong></article>
+            <article><em>小物</em><span>金歯</span><strong>960,000円</strong></article>
+            <article><em>破片</em><span>金板の破片</span><strong>750,000円</strong></article>
+          </div>
         </div>
       </div>
     </section>
@@ -508,14 +522,14 @@ const faqJsonLd = {
           <span class="section-kicker">他社と差がつく査定</span>
           <h2>宝石やデザイン部分まで見てもらえるかで、査定額は変わります</h2>
           <p>公式サイトでは、地金だけでなく、ルビー、オパール、エメラルド、マザーオブパール、デザイン代まで分けて見る査定例が紹介されています。</p>
-          <div class="breakdown-card">
-            <div><span>地金 18K</span><strong>450,000円</strong></div>
+          <div class="breakdown-card" aria-label="公式サイト掲載の査定内訳例">
+            <div class="breakdown-main"><span>地金 18K</span><strong>450,000円</strong></div>
             <div><span>ルビー</span><strong>15,000円</strong></div>
             <div><span>オパール</span><strong>5,000円</strong></div>
             <div><span>エメラルド</span><strong>20,000円</strong></div>
             <div><span>マザーオブパール</span><strong>5,000円</strong></div>
             <div><span>デザイン代</span><strong>50,000円</strong></div>
-            <div class="breakdown-total"><span>合計例</span><strong>545,000円</strong></div>
+            <div class="breakdown-total"><span>合計例</span><strong>545,000円</strong><small>宝石・デザイン部分も含めた例</small></div>
           </div>
           <p class="breakdown-note">上記は公式サイト掲載の査定例をもとにした表示です。実際の査定額は品物ごとに異なります。</p>
         </div>
