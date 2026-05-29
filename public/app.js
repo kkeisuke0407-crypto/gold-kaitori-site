@@ -397,7 +397,7 @@ function setupCampaignExpiryPresentation() {
 
   const proofText = document.querySelector("#manekiya-reason .proof-layout > div:first-child p");
   if (proofText) {
-    proofText.innerHTML = '公式LPでは、買取単価、専門査定、他店で断られた品の相談、高額取引への対応が強く打ち出されています。金額だけでなく、宝石・デザイン価値まで見てもらえるかで手取りは変わります。';
+    proofText.innerHTML = '公式サイトでは、買取単価、専門査定、他店で断られた品の相談、高額取引への対応が強く打ち出されています。金額だけでなく、宝石・デザイン価値まで見てもらえるかで手取りは変わります。';
   }
 
   const proofPromoCard = document.querySelector("#manekiya-reason .proof-grid article:nth-child(2)");

@@ -285,7 +285,7 @@ const faqJsonLd = {
             </div>
           )}
           <div class="phone-priority" aria-label="電話申し込み導線">
-            <span>成果地点に近い進み方</span>
+            <span>迷ったらこの進み方</span>
             <strong>{campaignActive ? "対象品なら、電話相談で30%UP条件を先に確認" : "電話相談で査定額と費用を先に確認"}</strong>
             <p>リンク先の公式ページで電話番号・受付条件を確認してから相談できます。売るかどうかは査定額を聞いてからで大丈夫です。</p>
           </div>
@@ -411,7 +411,7 @@ const faqJsonLd = {
           <span class="section-kicker"><span class="manekiya-pop manekiya-pop-small">まねきや</span>が選ばれる4つの理由</span>
           <h2 data-intent-proof-title>金・プラチナを売る前に、<span class="manekiya-pop">まねきや</span>を見ておきたい理由</h2>
           <p data-intent-proof-lead>
-            公式LPでは、買取単価、専門査定、他店で断られた品の相談、高額取引への対応が強く打ち出されています。
+            公式サイトでは、買取単価、専門査定、他店で断られた品の相談、高額取引への対応が強く打ち出されています。
             金額だけでなく、宝石・デザイン価値まで見てもらえるかで手取りは変わります。
           </p>
           <a href="#" class="btn btn-primary" data-affiliate="manekiya" data-track="top_proof_manekiya" rel="nofollow sponsored">査定予約で金額を確認する</a>
@@ -420,7 +420,7 @@ const faqJsonLd = {
           <article>
             <span>01</span>
             <h3>買取単価に自信</h3>
-            <p>公式LPでは、業者間取引の単価を一般利用者にも伝えると案内されています。</p>
+            <p>公式サイトでは、業者間取引の単価を一般利用者にも伝えると案内されています。</p>
           </article>
           <article>
             <span>02</span>
@@ -435,7 +435,7 @@ const faqJsonLd = {
           <article>
             <span>04</span>
             <h3>高額取引にも対応</h3>
-            <p>公式LPでは、1,000万円以上の高額買取でも現金支払い・振込対応が可能と案内されています。</p>
+            <p>公式サイトでは、1,000万円以上の高額買取でも現金支払い・振込対応が可能と案内されています。</p>
           </article>
         </div>
       </div>
@@ -443,31 +443,42 @@ const faqJsonLd = {
 
     <section class="section voices-section" aria-label="お客様の声とGoogle口コミの確認ポイント">
       <div class="container voices-layout">
-        <div class="section-head">
-          <span class="section-kicker">公式LPのお客様の声</span>
-          <h2>「怖そう」「本当に高い？」の不安を消す材料も見ておきたい</h2>
-          <p>公式LPには、説明の分かりやすさ、X線査定、金相場高騰で購入額より高く売れた声などが掲載されています。</p>
+        <div class="voices-hero">
+          <div>
+            <span class="section-kicker">お客様の声・口コミ</span>
+            <h2>初めての買取で不安なら、説明の丁寧さまで見ておきたい</h2>
+            <p>公式サイトには、店内の雰囲気、査定説明、X線による測定、金相場高騰で購入額より高く売れた声などが掲載されています。</p>
+          </div>
+          <div class="review-score-card" aria-label="Google口コミ評価の訴求">
+            <span>Google口コミ</span>
+            <strong>最大4.7</strong>
+            <small>公式サイト掲載情報より。評価は店舗・時期で変動します。</small>
+          </div>
         </div>
         <div class="voice-cards">
           <article>
-            <span>お客様の声</span>
+            <span>VOICE 01</span>
             <strong>もっと早く行けば良かった</strong>
             <p>古銭や金貨の処分に悩んでいた方が、店内の雰囲気や説明の丁寧さに安心したという内容が紹介されています。</p>
           </article>
           <article>
-            <span>お客様の声</span>
+            <span>VOICE 02</span>
             <strong>X線の機械で細かく査定</strong>
             <p>刻印のない金やプラチナ製品も、含有量を測定して査定できるという体験談が掲載されています。</p>
           </article>
           <article>
-            <span>お客様の声</span>
+            <span>VOICE 03</span>
             <strong>購入額より高く売れた声も</strong>
             <p>インゴットや宝石・ダイヤの買取で、金相場の上昇を実感した声が紹介されています。</p>
           </article>
-          <article class="google-review-card">
-            <span>Google口コミ</span>
-            <strong>公式LPでは最大4.7評価を訴求</strong>
-            <p>店舗ごとの最新口コミで、接客・説明の丁寧さ・待ち時間・査定スピードを確認してから進めます。</p>
+          <article class="google-review-card voice-check-card">
+            <span>CHECK</span>
+            <strong>口コミで見るポイント</strong>
+            <ul>
+              <li>査定理由を説明してくれるか</li>
+              <li>待ち時間や予約のしやすさ</li>
+              <li>高額品でも相談しやすいか</li>
+            </ul>
           </article>
         </div>
         <div class="voices-cta">
@@ -576,7 +587,7 @@ const faqJsonLd = {
               <div><dt>対象</dt><dd>金、貴金属、ブランド品など</dd></div>
               <div><dt>使いやすさ</dt><dd>全国展開の知名度がある</dd></div>
               <div><dt>比較用</dt><dd>もう1社見たい時に</dd></div>
-              <div><dt>見ておきたいこと</dt><dd>申込条件、通電条件、店舗条件</dd></div>
+              <div><dt>見ておきたいこと</dt><dd>申込条件、対応店舗、査定方法</dd></div>
             </dl>
             <div class="card-action">
               <a href="#" class="btn btn-outline btn-wide" data-affiliate="otakaraya" data-track="compare_otakaraya" rel="nofollow sponsored">おたからやの条件も見る</a>
