@@ -614,7 +614,7 @@ function setupAppraisalReport() {
   const AXIS_MIN = 0.70, AXIS_MAX = 1.00;
   const FLOOR = 0.80;      // 買い叩きライン
   const BOUNDARY = 0.85;   // 買い叩き/適正の境
-  const FAIR_LOW = 0.92, FAIR_HIGH = 1.00;
+  const FAIR_LOW = 0.88, FAIR_HIGH = 1.00;
   const yenLabel = function (v) { return Math.round(v).toLocaleString("ja-JP") + "円"; };
   const toX = function (frac) {
     const x = (frac - AXIS_MIN) / (AXIS_MAX - AXIS_MIN);
@@ -649,7 +649,7 @@ function setupAppraisalReport() {
     const floor = Math.round(gross * FLOOR);
     const hasStone = stoneValue() === "stone";
 
-    labelEl.textContent = "あなたの適正額レンジ";
+    labelEl.textContent = "あなたの適正売却価格レンジ";
     rangeEl.textContent = "約 " + fairLow.toLocaleString("ja-JP") + "〜" + fairHigh.toLocaleString("ja-JP") + "円";
     rateEl.textContent = yenLabel(rate) + "/g（" + (PURITY_LABELS[purity] || "プラチナ") + "）";
     weightEl.textContent = weight + "g";
