@@ -592,9 +592,106 @@ function setupPlatinumCalculator() {
   form.addEventListener("submit", estimate);
 }
 
+function setupAppraisalReport() {
+  const form = document.querySelector("[data-appraisal]");
+  const report = document.querySelector("[data-appraisal-report]");
+  if (!form || !report) return;
+
+  const puritySelect = form.querySelector("[data-appraisal-purity]");
+  const weightInput = form.querySelector("[data-appraisal-weight]");
+  const rangeEl = report.querySelector("[data-report-range]");
+  const labelEl = report.querySelector("[data-report-label]");
+  const rateEl = report.querySelector("[data-report-rate]");
+  const weightEl = report.querySelector("[data-report-weight]");
+  const floorEl = report.querySelector("[data-report-floor]");
+  const noteEl = report.querySelector("[data-report-note]");
+  const lineEl = report.querySelector("[data-report-line]");
+  const rangeBar = report.querySelector("[data-report-rangebar]");
+  const lowZone = report.querySelector(".rep-zone-low");
+
+  const PURITY_LABELS = { pt1000: "Pt1000", pt950: "Pt950", pt900: "Pt900", pt850: "Pt850", k18: "K18 / 金とのコンビ" };
+  // ものさしの軸：地金額の70%〜100%を可視化
+  const AXIS_MIN = 0.70, AXIS_MAX = 1.00;
+  const FLOOR = 0.80;      // 買い叩きライン
+  const BOUNDARY = 0.85;   // 買い叩き/適正の境
+  const FAIR_LOW = 0.88, FAIR_HIGH = 1.00;
+  const yenLabel = function (v) { return Math.round(v).toLocaleString("ja-JP") + "円"; };
+  const toX = function (frac) {
+    const x = (frac - AXIS_MIN) / (AXIS_MAX - AXIS_MIN);
+    return Math.max(0, Math.min(1, x)) * 100;
+  };
+
+  function rateFor(purity) {
+    const value = Number(form.getAttribute("data-rate-" + purity));
+    return Number.isFinite(value) ? value : 0;
+  }
+  function stoneValue() {
+    const checked = form.querySelector("[data-appraisal-stone]:checked");
+    return checked ? checked.value : "none";
+  }
+
+  function generate(event) {
+    if (event) event.preventDefault();
+    const purity = String(puritySelect.value || "pt900");
+    const weight = parseFloat(weightInput.value);
+    if (!Number.isFinite(weight) || weight <= 0) {
+      report.hidden = false;
+      labelEl.textContent = "重さを入れてください";
+      rangeEl.textContent = "—";
+      noteEl.textContent = "指輪の重さが分からない場合は、3〜5gを目安に入れてみてください。";
+      weightInput.focus();
+      return;
+    }
+    const rate = rateFor(purity);
+    const gross = rate * weight;
+    const fairLow = Math.round(gross * FAIR_LOW);
+    const fairHigh = Math.round(gross * FAIR_HIGH);
+    const floor = Math.round(gross * FLOOR);
+    const hasStone = stoneValue() === "stone";
+
+    labelEl.textContent = "あなたの適正売却価格レンジ";
+    rangeEl.textContent = "約 " + fairLow.toLocaleString("ja-JP") + "〜" + fairHigh.toLocaleString("ja-JP") + "円";
+    rateEl.textContent = yenLabel(rate) + "/g（" + (PURITY_LABELS[purity] || "プラチナ") + "）";
+    weightEl.textContent = weight + "g";
+    floorEl.textContent = "約 " + floor.toLocaleString("ja-JP") + "円";
+    noteEl.textContent = hasStone
+      ? "宝石・装飾ありのため、地金の適正額に石・デザイン分が上振れする可能性があります。提示額がこの地金レンジを下回らないかをまず確認しましょう。"
+      : "地金の適正額レンジです。提示額がこのレンジを下回る、特に買い叩きラインを割る場合は、当日単価を聞いて理由を確認しましょう。";
+
+    // ものさし描画
+    if (lowZone) lowZone.style.flexBasis = toX(BOUNDARY) + "%";
+    if (lineEl) lineEl.style.left = toX(FLOOR) + "%";
+    if (rangeBar) {
+      const left = toX(FAIR_LOW);
+      rangeBar.style.left = left + "%";
+      rangeBar.style.width = (toX(FAIR_HIGH) - left) + "%";
+    }
+
+    report.hidden = false;
+    window.setTimeout(function () { report.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 40);
+    track("appraisal_complete", {
+      landing_intent: document.body.getAttribute("data-landing-intent") || "general",
+      purity: purity,
+      weight_g: weight,
+      stone: hasStone ? 1 : 0,
+      fair_high: fairHigh
+    });
+  }
+
+  let started = false;
+  function markStart() {
+    if (started) return;
+    started = true;
+    track("appraisal_start", { landing_intent: document.body.getAttribute("data-landing-intent") || "general" });
+  }
+  if (weightInput) weightInput.addEventListener("focus", markStart);
+  if (puritySelect) puritySelect.addEventListener("change", markStart);
+  form.addEventListener("submit", generate);
+}
+
 function setupStickyCta() {
   const bar = document.querySelector("[data-sticky-cta]");
-  const heroActions = document.querySelector(".platinum-hero .hero-actions");
+  const heroActions = document.querySelector(".platinum-hero .hero-actions, .rep-hero .rep-hero-actions");
   if (!bar || !heroActions) return;
 
   // FVのCTAが画面外に出たら固定バーを表示（離脱直前の受け皿）
@@ -660,6 +757,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setupAiConcierge();
   setupPlatinumCalculator();
+  setupAppraisalReport();
   setupStickyCta();
   setupFunnelMeasurement();
 
