@@ -537,6 +537,61 @@ function setupLandingIntent() {
   }
 }
 
+function setupPlatinumCalculator() {
+  const form = document.querySelector("[data-platinum-calc]");
+  const result = document.querySelector("[data-calc-result]");
+  if (!form || !result) return;
+
+  const puritySelect = form.querySelector("[data-calc-purity]");
+  const weightInput = form.querySelector("[data-calc-weight]");
+  const amountEl = result.querySelector("[data-calc-amount]");
+  const noteEl = result.querySelector("[data-calc-note]");
+
+  const PURITY_LABELS = {
+    pt1000: "Pt1000",
+    pt950: "Pt950",
+    pt900: "Pt900",
+    pt850: "Pt850",
+    k18: "K18 / 金とのコンビ"
+  };
+
+  function rateFor(purity) {
+    const value = Number(form.getAttribute("data-rate-" + purity));
+    return Number.isFinite(value) ? value : 0;
+  }
+
+  function estimate(event) {
+    if (event) event.preventDefault();
+    const purity = String(puritySelect.value || "pt900");
+    const weight = parseFloat(weightInput.value);
+    if (!Number.isFinite(weight) || weight <= 0) {
+      result.hidden = false;
+      amountEl.textContent = "重さを入れてください";
+      noteEl.textContent = "指輪の重さが分からない場合は、3〜5gを目安に入れてみてください。";
+      weightInput.focus();
+      return;
+    }
+    const rate = rateFor(purity);
+    const high = Math.round(rate * weight);
+    const low = Math.round(rate * weight * 0.9);
+    amountEl.textContent = "約 " + low.toLocaleString("ja-JP") + "〜" + high.toLocaleString("ja-JP") + "円";
+    noteEl.textContent =
+      (PURITY_LABELS[purity] || "プラチナ") + " " + weight + "g × 当日単価 " + rate.toLocaleString("ja-JP") + "円/g での目安です。宝石・デザイン部分や状態で実額は変わります。";
+    result.hidden = false;
+    window.setTimeout(function () {
+      result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }, 40);
+    track("calc_estimate", {
+      landing_intent: document.body.getAttribute("data-landing-intent") || "general",
+      purity: purity,
+      weight_g: weight,
+      estimate_high: high
+    });
+  }
+
+  form.addEventListener("submit", estimate);
+}
+
 function setupFunnelMeasurement() {
   const comparison = document.querySelector("#compare");
   if (comparison && "IntersectionObserver" in window) {
@@ -579,6 +634,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll("[data-track]").forEach(wireTrackedLink);
 
   setupAiConcierge();
+  setupPlatinumCalculator();
   setupFunnelMeasurement();
 
   document.querySelectorAll("[data-scroll-to]").forEach(function (el) {
