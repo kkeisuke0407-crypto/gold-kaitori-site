@@ -592,6 +592,31 @@ function setupPlatinumCalculator() {
   form.addEventListener("submit", estimate);
 }
 
+function setupStickyCta() {
+  const bar = document.querySelector("[data-sticky-cta]");
+  const heroActions = document.querySelector(".platinum-hero .hero-actions");
+  if (!bar || !heroActions) return;
+
+  // FVのCTAが画面外に出たら固定バーを表示（離脱直前の受け皿）
+  if ("IntersectionObserver" in window) {
+    let shown = false;
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.hidden = entry.isIntersecting;
+        if (!entry.isIntersecting && !shown) {
+          shown = true;
+          track("sticky_cta_show", {
+            landing_intent: document.body.getAttribute("data-landing-intent") || "general"
+          });
+        }
+      });
+    }, { threshold: 0 });
+    observer.observe(heroActions);
+  } else {
+    bar.hidden = false;
+  }
+}
+
 function setupFunnelMeasurement() {
   const comparison = document.querySelector("#compare");
   if (comparison && "IntersectionObserver" in window) {
@@ -635,6 +660,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   setupAiConcierge();
   setupPlatinumCalculator();
+  setupStickyCta();
   setupFunnelMeasurement();
 
   document.querySelectorAll("[data-scroll-to]").forEach(function (el) {
