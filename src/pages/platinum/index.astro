@@ -163,7 +163,7 @@ const faqJsonLd = {
       <div class="container hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">Pt900・Pt950・Pt850の指輪をお持ちの方へ</p>
-          <h1>あなたのプラチナ指輪、<br />今日<span class="no-break">いくら</span>？</h1>
+          <h1>プラチナ指輪、<br />今日<span class="no-break">いくら</span>？</h1>
           <p class="hero-lead">
             プラチナの買取価格は <strong>当日の単価 × 重さ</strong> で決まります。
             下の概算ですぐ目安が分かります。<span class="manekiya-pop manekiya-pop-invert">手数料0円・提示額がそのまま手取り</span>の相談先を、目的別に整理しました。
@@ -417,7 +417,7 @@ const faqJsonLd = {
       <div class="container">
         <div class="section-head">
           <span class="section-kicker">流れ</span>
-          <h2>3ステップで、プラチナ指輪の金額が分かります</h2>
+          <h2>3ステップで、プラチナ指輪の金額が分かる</h2>
         </div>
         <div class="flow-grid">
           <article>
@@ -457,7 +457,7 @@ const faqJsonLd = {
             <div><strong>方法</strong><span>店頭・出張・宅配</span></div>
           </div>
         </div>
-        <h2>プラチナ指輪、今日の単価で一度だけ聞いてみる</h2>
+        <h2>プラチナ指輪、今日の単価で一度だけ聞いてみませんか</h2>
         <p>金額を聞いてから、売るかどうかを決められます。悩み続けるより、まず概算と条件を確認するのが早いです。</p>
         <div class="hero-actions">
           <a href="#" class="btn btn-primary btn-phone-primary" data-affiliate="manekiya" data-track="platinum_bottom_phone" rel="nofollow sponsored">電話でプラチナの概算を聞く</a>
@@ -514,6 +514,15 @@ const faqJsonLd = {
 </html>
 
 <style>
+  /* hidden属性をdisplay:gridが上書きする問題を修正 */
+  [data-calc-result][hidden] { display: none !important; }
+
+  /* 全幅セクション見出しのみ text-wrap: balance（2カラム内は明示的な<br>で制御） */
+  .section-head h2,
+  .flow-section .section-head h2,
+  .cta-section h2,
+  .faq-section .section-head h2 { text-wrap: balance; }
+
   .header-pr { margin-left: auto; }
   .platinum-hero .hero-inner { align-items: start; }
   .platinum-rate-panel { display: block; }
