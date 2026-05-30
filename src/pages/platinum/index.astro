@@ -329,7 +329,11 @@ const faqJsonLd = {
         </div>
 
         <div class="purpose-nav" aria-label="目的別の相談先">
-          <article class="purpose-card">
+          <article class="purpose-card purpose-card-top">
+            <div class="rank-badge rank-gold" aria-label="手数料・手取り重視で1位">
+              <span class="rank-crown" aria-hidden="true">👑</span>
+              <span class="rank-no">手取り重視<small>No.1</small></span>
+            </div>
             <div class="purpose-head">
               <span>こんな人に</span>
               <h3>手数料・手取りで損したくない</h3>
@@ -347,7 +351,11 @@ const faqJsonLd = {
             <a href="#" class="btn btn-primary btn-wide btn-phone-primary" data-affiliate="manekiya" data-track="platinum_compare_manekiya" rel="nofollow sponsored">手取りの条件を電話で確認</a>
           </article>
 
-          <article class="purpose-card">
+          <article class="purpose-card purpose-card-second">
+            <div class="rank-badge rank-silver" aria-label="店舗網・対面で1位">
+              <span class="rank-crown" aria-hidden="true">🥈</span>
+              <span class="rank-no">店舗網重視<small>No.1</small></span>
+            </div>
             <div class="purpose-head">
               <span>こんな人に</span>
               <h3>近所で対面・持ち込みで安心したい</h3>
@@ -498,6 +506,16 @@ const faqJsonLd = {
     </section>
   </main>
 
+  <!-- スマホ下部固定CTAバー：競合A系の定石。FVのCTAが画面外に出たら表示 -->
+  <div class="sticky-cta" data-sticky-cta hidden aria-label="プラチナ概算のショートカット">
+    <a href="#" class="sticky-cta-btn sticky-cta-phone" data-affiliate="manekiya" data-track="platinum_sticky_phone" rel="nofollow sponsored">
+      <span class="sticky-cta-icon" aria-hidden="true">☎</span>電話で概算を聞く
+    </a>
+    <a href="#estimate" class="sticky-cta-btn sticky-cta-calc" data-scroll-to="#estimate" data-track="platinum_sticky_calc">
+      30秒で概算
+    </a>
+  </div>
+
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>プラチナ指輪の査定額ナビ</p>
@@ -509,7 +527,7 @@ const faqJsonLd = {
     </div>
   </footer>
 
-  <script src="/app.js?v=20260527-4" defer></script>
+  <script src="/app.js?v=20260530-1" defer></script>
 </body>
 </html>
 
@@ -636,9 +654,92 @@ const faqJsonLd = {
   .purpose-points li { padding-left: 16px; position: relative; }
   .purpose-points li::before { content: "・"; position: absolute; left: 0; }
 
+  /* ── 比較カードの順位突出（競合ランキングの核） ── */
+  .purpose-card { position: relative; }
+  .rank-badge {
+    position: absolute;
+    top: -14px; left: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px 6px 10px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 1;
+    color: #4e320a;
+    box-shadow: 0 6px 16px rgba(120, 90, 20, 0.22);
+  }
+  .rank-badge .rank-crown { font-size: 16px; }
+  .rank-badge .rank-no small {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 12px;
+    font-weight: 900;
+  }
+  .rank-gold {
+    background: linear-gradient(180deg, #ffe9a8, #f1c45c);
+    border: 1px solid #d7a531;
+  }
+  .rank-silver {
+    background: linear-gradient(180deg, #f3f5f7, #d9dee4);
+    border: 1px solid #b9c1cb;
+    color: #3a4654;
+  }
+  /* 1位カードを物理的に突出：枠太・影・わずかに拡大 */
+  .purpose-card-top {
+    border: 2px solid #d7a531;
+    box-shadow: 0 16px 38px rgba(215, 165, 49, 0.28);
+    background: linear-gradient(180deg, #fffdf6, #fff);
+  }
+  .purpose-card-second {
+    border-color: #cfd6dd;
+  }
+
+  /* ── スマホ下部固定CTAバー（最重要・競合A系の定石） ── */
+  .sticky-cta { display: none; }
+  .sticky-cta[hidden] { display: none !important; }
   @media (max-width: 820px) {
     .calc-shell,
     .fee-honest-layout,
     .purpose-nav { grid-template-columns: 1fr; }
+
+    .sticky-cta {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 80;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 8px;
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 -6px 20px rgba(78, 50, 10, 0.16);
+      backdrop-filter: blur(6px);
+    }
+    .sticky-cta[hidden] { display: none !important; }
+    .sticky-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 50px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 15px;
+      text-decoration: none;
+      padding: 0 8px;
+    }
+    .sticky-cta-phone {
+      background: var(--green-deep, #2e7d52);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(46, 125, 82, 0.32);
+    }
+    .sticky-cta-phone .sticky-cta-icon { font-size: 17px; }
+    .sticky-cta-calc {
+      background: #1f2937;
+      color: #fff;
+    }
+    /* 固定バーぶんの余白を確保（最終CTA等が隠れないように） */
+    .site-footer { padding-bottom: 84px; }
   }
 </style>
