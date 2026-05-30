@@ -1,0 +1,652 @@
+---
+const PAGE_TITLE = "プラチナ指輪 査定額検査｜その査定額は「正常」か「異常値」か";
+const PAGE_DESC = "提示された査定額が、当日単価の基準値に対して正常か異常値かを検査します。プラチナ指輪(Pt900/Pt950)の売却禁止ラインを発行。買い叩きの可能性を、価格ではなく判定で確認できます。";
+const CANONICAL = "https://kaitori.hakobu-family.com/pt-lab/";
+const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
+const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
+
+const fallbackRates = {
+  updatedAt: "2026年5月29日 現在",
+  pt1000: 10602,
+  pt900: 9648,
+  pt850: 9065,
+  k18: 18824
+};
+
+function parseYen(value) {
+  return Number(String(value || "").replace(/[^\d-]/g, ""));
+}
+function yen(value) {
+  return `${Number(value).toLocaleString("ja-JP")}円`;
+}
+
+async function getPlatinumRates() {
+  try {
+    const response = await fetch(MARKET_SOURCE_URL);
+    if (!response.ok) throw new Error("rate_fetch_failed");
+    const html = await response.text();
+    const text = html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;|&#160;/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const updated = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
+    const pt1000 = text.match(/Pt\s+([\d,]+)円/);
+    const pt900 = text.match(/Pt900\s+([\d,]+)円/);
+    const pt850 = text.match(/Pt850\s+([\d,]+)円/);
+    const k18 = text.match(/K18\s+([\d,]+)円/);
+    if (!pt900 && !pt1000) throw new Error("rate_parse_failed");
+    return {
+      updatedAt: updated ? `${updated[1]}年${updated[2]}月${updated[3]}日 更新` : fallbackRates.updatedAt,
+      pt1000: pt1000 ? parseYen(pt1000[1]) : fallbackRates.pt1000,
+      pt900: pt900 ? parseYen(pt900[1]) : fallbackRates.pt900,
+      pt850: pt850 ? parseYen(pt850[1]) : fallbackRates.pt850,
+      k18: k18 ? parseYen(k18[1]) : fallbackRates.k18
+    };
+  } catch (_) {
+    return { ...fallbackRates };
+  }
+}
+
+const rates = await getPlatinumRates();
+const pt950 = Math.round((rates.pt1000 + rates.pt900) / 2);
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{PAGE_TITLE}</title>
+  <meta name="description" content={PAGE_DESC} />
+  <link rel="canonical" href={CANONICAL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={PAGE_TITLE} />
+  <meta property="og:description" content={PAGE_DESC} />
+  <meta property="og:url" content={CANONICAL} />
+  <meta property="og:image" content={OGP_IMAGE} />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-DMCWVLP3E3');
+    gtag('config', 'AW-18129603657');
+  </script>
+  <script is:inline>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+      t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxnujpnscp");
+  </script>
+</head>
+<body
+  data-landing-intent="pt_lab"
+  data-rate-pt1000={rates.pt1000}
+  data-rate-pt950={pt950}
+  data-rate-pt900={rates.pt900}
+  data-rate-pt850={rates.pt850}
+  data-rate-k18={rates.k18}
+>
+  <div class="lab">
+    <!-- 検査機関ヘッダー -->
+    <header class="lab-head">
+      <div class="lab-org">
+        <span class="lab-mark">Pt</span>
+        <span class="lab-org-name">適正査定ラボ<small>Pt-LAB</small></span>
+      </div>
+      <span class="lab-pr">PR</span>
+    </header>
+
+    <!-- 順路インジケータ -->
+    <ol class="lab-steps" data-steps aria-hidden="true">
+      <li data-step="0" class="is-active">受付</li>
+      <li data-step="1">検体</li>
+      <li data-step="2">検査</li>
+      <li data-step="3">結果</li>
+    </ol>
+
+    <main class="lab-stage">
+      <!-- Phase 0 受付 -->
+      <section class="phase is-active" data-lab-phase="0">
+        <p class="lab-kicker">プラチナ指輪 査定額検査</p>
+        <h1 class="lab-title">その査定額は、<br /><b>正常</b>ですか？</h1>
+        <p class="lab-desc">当日の買取単価をもとに、提示された査定額が「正常」か「異常値」かを検査します。価格ではなく、<b>判定</b>をお返しします。</p>
+
+        <div class="reception">
+          <span class="reception-q">受付｜まず1つだけ</span>
+          <p class="reception-lead">すでに査定額を提示されていますか？</p>
+          <div class="reception-choice">
+            <button type="button" class="rc-btn rc-primary" data-mode="inspect">
+              <b>はい・査定済み</b><small>その額が適正か検査する</small>
+            </button>
+            <button type="button" class="rc-btn" data-mode="issue">
+              <b>いいえ・これから</b><small>基準値と禁止ラインを発行する</small>
+            </button>
+          </div>
+        </div>
+
+        <p class="lab-foot">本日の基準単価：Pt900 {yen(rates.pt900)}/g・Pt950 {yen(pt950)}/g（{rates.updatedAt}）</p>
+      </section>
+
+      <!-- Phase 1 検体登録 -->
+      <section class="phase" data-lab-phase="1" hidden>
+        <p class="lab-kicker">検体登録｜問診票</p>
+        <h2 class="lab-h2">検体情報をご記入ください</h2>
+
+        <form class="intake" data-intake>
+          <label class="field" data-field>
+            <span>刻印（検体の種別）</span>
+            <select data-purity>
+              <option value="pt900">Pt900</option>
+              <option value="pt950">Pt950</option>
+              <option value="pt1000">Pt1000</option>
+              <option value="pt850">Pt850</option>
+              <option value="k18">K18 / 金とのコンビ</option>
+            </select>
+          </label>
+
+          <label class="field" data-field>
+            <span>重量（g）<small>分からなければ指輪は3〜5g目安</small></span>
+            <div class="unit-input">
+              <input type="number" inputmode="decimal" min="0" step="0.1" placeholder="例：4.0" data-weight />
+              <i>g</i>
+            </div>
+          </label>
+
+          <label class="field field-offer" data-field data-offer-field hidden>
+            <span>提示された査定額（検査対象値）</span>
+            <div class="unit-input">
+              <input type="number" inputmode="numeric" min="0" step="1" placeholder="例：32000" data-offer />
+              <i>円</i>
+            </div>
+          </label>
+
+          <button type="submit" class="lab-submit" data-start>検査を開始する</button>
+          <p class="intake-note">個人情報は入力・送信されません。当日単価でその場で照合する検査です。</p>
+        </form>
+      </section>
+
+      <!-- Phase 2 検査中 -->
+      <section class="phase phase-scan" data-lab-phase="2" hidden>
+        <div class="scan">
+          <div class="scan-window">
+            <span class="scan-line"></span>
+          </div>
+          <p class="scan-text">当日単価で照合中…</p>
+        </div>
+      </section>
+
+      <!-- Phase 3 結果票 -->
+      <section class="phase" data-lab-phase="3" hidden>
+        <article class="result-sheet" data-sheet>
+          <div class="rs-head">
+            <span>検査結果票</span>
+            <span class="rs-no" data-r-no>No.—</span>
+          </div>
+          <dl class="rs-meta">
+            <div><dt>検体</dt><dd data-r-item>—</dd></div>
+            <div><dt>重量</dt><dd data-r-weight>—</dd></div>
+            <div><dt>検査日</dt><dd data-r-date>—</dd></div>
+          </dl>
+
+          <div class="rs-row">
+            <span class="rs-label">基準値（正常範囲）</span>
+            <span class="rs-value num" data-r-range>—</span>
+          </div>
+          <div class="rs-row rs-row-forbid">
+            <span class="rs-label">売却禁止ライン</span>
+            <span class="rs-value num" data-r-forbid>—</span>
+          </div>
+          <div class="rs-row rs-row-offer" data-r-offer-row hidden>
+            <span class="rs-label">検査対象（提示額）</span>
+            <span class="rs-value num" data-r-offer>—</span>
+          </div>
+
+          <!-- ものさし -->
+          <div class="ruler" data-ruler>
+            <div class="ruler-bar">
+              <span class="rz rz-bad" data-rz-bad></span>
+              <span class="rz rz-warn" data-rz-warn></span>
+              <span class="rz rz-ok"></span>
+            </div>
+            <span class="ruler-mark" data-r-mark hidden><i>提示額</i></span>
+            <div class="ruler-cap"><span>異常値</span><span>要注意</span><span>正常</span></div>
+          </div>
+
+          <!-- 判定スタンプ -->
+          <div class="verdict" data-verdict>
+            <span class="verdict-label">判定</span>
+            <strong class="verdict-stamp" data-verdict-stamp>—</strong>
+            <span class="verdict-sub" data-verdict-sub></span>
+          </div>
+        </article>
+
+        <button type="button" class="lab-submit" data-to-findings>所見と対応を見る</button>
+      </section>
+
+      <!-- Phase 4 所見 + 持ち帰り -->
+      <section class="phase" data-lab-phase="4" hidden>
+        <article class="findings" data-findings>
+          <span class="findings-label">所見</span>
+          <p class="findings-body" data-findings-body>—</p>
+          <ul class="findings-reasons" data-findings-reasons hidden>
+            <li>グラム単価を相場より低く設定している</li>
+            <li>査定後に手数料・目減りで差し引かれる</li>
+            <li>その場での即決を誘導されている</li>
+          </ul>
+        </article>
+
+        <div class="takehome">
+          <button type="button" class="lab-save" data-save>検査結果証を保存する</button>
+
+          <div class="second" data-second>
+            <span class="second-label" data-second-label>異常値が出た方へ</span>
+            <p class="second-lead" data-second-lead>基準値を満たすかどうか、別の検査機関でセカンドオピニオン（再査定）を受けてください。</p>
+            <a href="#" class="lab-cta" data-affiliate="manekiya" data-track="lab_recheck" rel="nofollow sponsored">基準値を満たすか再査定する</a>
+            <a href="#" class="lab-cta-sub" data-affiliate="manekiya" data-track="lab_phone" rel="nofollow sponsored">☎ 結果票の数字を伝えて聞く</a>
+          </div>
+        </div>
+
+        <p class="lab-disclaimer">※本検査は当日単価×重量による目安です。宝石・デザイン・状態で実額は変わります。正式な額は再査定で確定します。当ページは広告（PR）を含みます。</p>
+
+        <button type="button" class="lab-restart" data-restart>別の検体をもう一度検査する</button>
+      </section>
+    </main>
+
+    <canvas data-cert-canvas width="720" height="960" hidden></canvas>
+  </div>
+
+  <style>
+    :root{
+      --ink:#13243A; --body:#3C4856; --sub:#8A97A4; --line:#E3E8ED;
+      --lab:#1B4D7A; --ok:#1F9D6B; --okbg:#EAF6F1; --warn:#C8862A; --warnbg:#FBF3E6;
+      --bad:#C4361F; --badbg:#FCEFEC; --paper:#FBFCFD;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+    body{ background:#EEF1F4; color:var(--ink);
+      font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,sans-serif; -webkit-font-smoothing:antialiased; }
+    .num{ font-family:ui-monospace,"SF Mono","Roboto Mono",Menlo,monospace; font-variant-numeric:tabular-nums; letter-spacing:.01em; }
+    [hidden]{ display:none !important; }
+
+    .lab{ max-width:480px; margin:0 auto; min-height:100vh; background:#fff; display:flex; flex-direction:column; }
+
+    .lab-head{ display:flex; align-items:center; gap:8px; padding:14px 18px; border-bottom:1px solid var(--line); }
+    .lab-mark{ width:30px; height:30px; border-radius:7px; background:var(--lab); color:#fff; font-weight:900; font-size:13px; display:grid; place-items:center; }
+    .lab-org-name{ font-weight:900; font-size:15px; display:flex; flex-direction:column; line-height:1.1; }
+    .lab-org-name small{ font-weight:700; font-size:10px; color:var(--sub); letter-spacing:.14em; }
+    .lab-pr{ margin-left:auto; font-size:10px; color:var(--sub); border:1px solid var(--line); border-radius:4px; padding:2px 6px; }
+
+    .lab-steps{ display:flex; gap:6px; list-style:none; margin:0; padding:12px 18px 0; counter-reset:s; }
+    .lab-steps li{ flex:1; font-size:11px; font-weight:700; color:var(--sub); text-align:center; padding-bottom:8px; border-bottom:2px solid var(--line); }
+    .lab-steps li.is-active{ color:var(--lab); border-color:var(--lab); }
+    .lab-steps li.is-done{ color:var(--ok); border-color:var(--ok); }
+
+    .lab-stage{ padding:18px; flex:1; }
+    .phase{ animation:fade .35s ease-out; }
+    @keyframes fade{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:none;} }
+
+    .lab-kicker{ font-size:12px; font-weight:900; color:var(--lab); letter-spacing:.06em; margin:0 0 8px; }
+    .lab-title{ font-size:28px; font-weight:900; line-height:1.28; margin:0 0 12px; }
+    .lab-title b{ color:var(--ok); }
+    .lab-desc{ font-size:14px; line-height:1.85; color:var(--body); margin:0 0 22px; }
+    .lab-desc b{ color:var(--ink); }
+
+    .reception{ border:1px solid var(--line); border-radius:12px; padding:18px; background:var(--paper); }
+    .reception-q{ font-size:11px; font-weight:900; color:var(--lab); letter-spacing:.06em; }
+    .reception-lead{ font-size:16px; font-weight:700; margin:8px 0 14px; }
+    .reception-choice{ display:grid; gap:10px; }
+    .rc-btn{ text-align:left; border:1px solid var(--line); background:#fff; border-radius:10px; padding:14px 16px; cursor:pointer; display:flex; flex-direction:column; gap:3px; font-family:inherit; }
+    .rc-btn b{ font-size:15px; color:var(--ink); }
+    .rc-btn small{ font-size:12px; color:var(--sub); }
+    .rc-btn:active{ transform:scale(.99); }
+    .rc-primary{ border-color:var(--lab); box-shadow:0 0 0 3px rgba(27,77,122,.08); }
+
+    .lab-foot{ font-size:12px; color:var(--sub); margin-top:18px; text-align:center; }
+
+    .lab-h2{ font-size:21px; font-weight:900; margin:0 0 18px; }
+    .intake{ display:grid; gap:16px; }
+    .field{ display:grid; gap:7px; }
+    .field > span{ font-size:13px; font-weight:900; }
+    .field small{ font-weight:400; color:var(--sub); font-size:11px; margin-left:6px; }
+    .field select{ height:52px; padding:0 14px; font-size:16px; border:1px solid var(--line); border-radius:8px; background:#fff; font-family:inherit; }
+    .unit-input{ position:relative; }
+    .unit-input input{ width:100%; height:52px; padding:0 38px 0 14px; font-size:16px; border:1px solid var(--line); border-radius:8px; font-family:inherit; text-align:right; }
+    .unit-input i{ position:absolute; right:14px; top:50%; transform:translateY(-50%); color:var(--sub); font-style:normal; font-size:14px; }
+    .field select:focus, .unit-input input:focus{ outline:none; border-color:var(--lab); box-shadow:0 0 0 3px rgba(27,77,122,.12); }
+    .field.is-ok > span::after{ content:" ✓"; color:var(--ok); }
+
+    .lab-submit{ width:100%; min-height:54px; border:0; border-radius:10px; background:var(--lab); color:#fff; font-weight:900; font-size:16px; cursor:pointer; font-family:inherit; margin-top:4px; }
+    .lab-submit:active{ transform:scale(.99); }
+    .intake-note{ font-size:11px; color:var(--sub); margin:0; }
+
+    /* 検査中 */
+    .phase-scan{ min-height:60vh; display:grid; place-items:center; }
+    .scan{ text-align:center; }
+    .scan-window{ width:240px; height:120px; border:1px solid var(--line); border-radius:10px; position:relative; overflow:hidden; margin:0 auto; background:var(--paper); }
+    .scan-line{ position:absolute; top:0; left:0; width:100%; height:2px; background:var(--lab); box-shadow:0 0 8px rgba(27,77,122,.5); animation:scan 1.1s ease-in-out infinite; }
+    @keyframes scan{ 0%{ top:0; } 50%{ top:118px; } 100%{ top:0; } }
+    .scan-text{ font-size:13px; color:var(--sub); margin-top:16px; letter-spacing:.04em; }
+
+    /* 結果票 */
+    .result-sheet{ border:1px solid var(--line); border-radius:12px; padding:20px; background:#fff; box-shadow:0 1px 2px rgba(19,36,58,.04),0 6px 22px rgba(19,36,58,.07); }
+    .rs-head{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:10px; }
+    .rs-head > span:first-child{ font-weight:900; font-size:16px; letter-spacing:.04em; }
+    .rs-no{ font-size:11px; color:var(--sub); }
+    .rs-meta{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin:12px 0; }
+    .rs-meta div{ display:flex; flex-direction:column; gap:2px; }
+    .rs-meta dt{ font-size:11px; color:var(--sub); margin:0; }
+    .rs-meta dd{ font-size:14px; font-weight:700; margin:0; }
+    .rs-row{ display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-top:1px dashed var(--line); }
+    .rs-label{ font-size:13px; color:var(--body); font-weight:700; }
+    .rs-value{ font-size:16px; font-weight:900; }
+    .rs-row-forbid .rs-value{ color:var(--bad); }
+    .rs-row-offer{ border-top:1px solid var(--ink); }
+    .rs-row-offer .rs-value{ font-size:20px; }
+
+    .ruler{ margin:16px 0 6px; }
+    .ruler-bar{ display:flex; height:30px; border-radius:6px; overflow:hidden; border:1px solid var(--line); position:relative; }
+    .rz{ height:100%; }
+    .rz-bad{ background:#e0735f; }
+    .rz-warn{ background:#e6b35a; }
+    .rz-ok{ background:#46a577; flex:1; }
+    .ruler{ position:relative; padding-bottom:30px; }
+    .ruler-mark{ position:absolute; top:10px; width:0; border-left:2px solid var(--ink); height:38px; }
+    .ruler-mark i{ position:absolute; top:-16px; left:50%; transform:translateX(-50%); white-space:nowrap; font-style:normal; font-size:10px; font-weight:900; color:var(--ink); }
+    .ruler-mark::after{ content:"▲"; position:absolute; bottom:-14px; left:-6px; font-size:11px; color:var(--ink); }
+    .ruler-cap{ display:flex; justify-content:space-between; font-size:10px; color:var(--sub); margin-top:6px; }
+
+    .verdict{ margin-top:14px; border-radius:10px; padding:16px; text-align:center; }
+    .verdict-label{ font-size:11px; font-weight:900; letter-spacing:.1em; opacity:.7; }
+    .verdict-stamp{ display:block; font-size:34px; font-weight:900; line-height:1.1; margin:4px 0; animation:stamp .3s ease-out .2s both; }
+    .verdict-sub{ font-size:13px; font-weight:700; }
+    @keyframes stamp{ from{ transform:scale(1.12); opacity:0; } to{ transform:scale(1); opacity:1; } }
+    .verdict.v-ok{ background:var(--okbg); color:var(--ok); }
+    .verdict.v-warn{ background:var(--warnbg); color:var(--warn); }
+    .verdict.v-bad{ background:var(--badbg); color:var(--bad); }
+    .verdict.v-issue{ background:#eef3f8; color:var(--lab); }
+
+    /* 所見 */
+    .findings{ border:1px solid var(--line); border-radius:12px; padding:18px; background:var(--paper); }
+    .findings-label{ font-size:11px; font-weight:900; color:var(--lab); letter-spacing:.06em; }
+    .findings-body{ font-size:15px; line-height:1.8; margin:8px 0 0; font-weight:700; }
+    .findings-body b{ color:var(--bad); }
+    .findings-reasons{ margin:12px 0 0; padding-left:18px; display:grid; gap:6px; font-size:13px; color:var(--body); }
+
+    .takehome{ margin-top:18px; }
+    .lab-save{ width:100%; min-height:50px; border:1px solid var(--line); background:#fff; border-radius:10px; font-weight:900; font-size:14px; cursor:pointer; font-family:inherit; }
+    .lab-save:active{ transform:scale(.99); }
+    .second{ margin-top:16px; border:1px solid var(--line); border-radius:12px; padding:16px; }
+    .second-label{ font-size:11px; font-weight:900; color:var(--lab); letter-spacing:.06em; }
+    .second-lead{ font-size:14px; line-height:1.8; margin:6px 0 12px; color:var(--body); }
+    .lab-cta{ display:flex; align-items:center; justify-content:center; min-height:54px; border-radius:10px; background:var(--ok); color:#fff; font-weight:900; font-size:16px; text-decoration:none; }
+    .lab-cta:active{ transform:scale(.99); }
+    .lab-cta-sub{ display:block; text-align:center; margin-top:10px; font-size:14px; font-weight:700; color:var(--lab); text-decoration:none; }
+
+    .lab-disclaimer{ font-size:11px; color:var(--sub); line-height:1.7; margin:16px 0 0; }
+    .lab-restart{ display:block; width:100%; margin-top:14px; background:none; border:0; color:var(--sub); font-size:12px; text-decoration:underline; cursor:pointer; font-family:inherit; }
+  </style>
+
+  <script>
+    const root = document.body;
+    const AFF = "https://ad-fam.com/ad/p/r?_site=49248&_article=16522";
+    const KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+
+    function track(name, params){
+      try{
+        if(window.dataLayer) window.dataLayer.push({ event:name, ...(params||{}) });
+        if(typeof gtag === "function") gtag("event", name, params||{});
+      }catch(_){}
+    }
+    function affLink(){
+      try{
+        const u = new URL(AFF);
+        new URLSearchParams(location.search).forEach(function(v,k){
+          if(KEEP.test(k) && !u.searchParams.has(k)) u.searchParams.set(k,v);
+        });
+        return u.toString();
+      }catch(_){ return AFF; }
+    }
+    function rateFor(p){ const v = Number(root.getAttribute("data-rate-"+p)); return Number.isFinite(v)? v : 0; }
+    function round100(x){ return Math.round(x/100)*100; }
+    function yen(v){ return Number(v).toLocaleString("ja-JP") + "円"; }
+
+    const PURITY_LABEL = { pt900:"Pt900", pt950:"Pt950", pt1000:"Pt1000", pt850:"Pt850", k18:"K18/コンビ" };
+    // 検査基準（地金額に対する係数）
+    const RANGE_LOW = 0.933, RANGE_HIGH = 1.00, FORBID = 0.907, AXIS_MIN = 0.80;
+
+    const phases = Array.from(document.querySelectorAll("[data-lab-phase]"));
+    const steps = Array.from(document.querySelectorAll("[data-steps] li"));
+    const stepForPhase = { 0:0, 1:1, 2:2, 3:3, 4:3 };
+
+    let state = { mode:"inspect", purity:"pt900", weight:0, offer:0, result:null };
+
+    function showPhase(n){
+      phases.forEach(function(p){ p.hidden = (Number(p.getAttribute("data-lab-phase")) !== n); });
+      const active = stepForPhase[n];
+      steps.forEach(function(li){
+        const s = Number(li.getAttribute("data-step"));
+        li.classList.toggle("is-active", s === active);
+        li.classList.toggle("is-done", s < active);
+      });
+      window.scrollTo({ top:0, behavior:"smooth" });
+    }
+
+    // Phase 0 → mode select
+    document.querySelectorAll("[data-mode]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.mode = btn.getAttribute("data-mode");
+        document.querySelector("[data-offer-field]").hidden = (state.mode !== "inspect");
+        track("lab_intake_start", { lab_mode: state.mode });
+        showPhase(1);
+      });
+    });
+
+    // フィールド入力で✓
+    document.querySelectorAll("[data-intake] [data-field]").forEach(function(f){
+      const input = f.querySelector("input,select");
+      if(!input) return;
+      input.addEventListener("input", function(){
+        const ok = input.value !== "" && (input.type !== "number" || parseFloat(input.value) > 0);
+        f.classList.toggle("is-ok", ok);
+      });
+    });
+
+    // Phase 1 → 検査
+    document.querySelector("[data-intake]").addEventListener("submit", function(e){
+      e.preventDefault();
+      const purity = document.querySelector("[data-purity]").value;
+      const weight = parseFloat(document.querySelector("[data-weight]").value);
+      const offer = parseFloat(document.querySelector("[data-offer]").value);
+      if(!Number.isFinite(weight) || weight <= 0){
+        document.querySelector("[data-weight]").focus(); return;
+      }
+      if(state.mode === "inspect" && (!Number.isFinite(offer) || offer <= 0)){
+        document.querySelector("[data-offer]").focus(); return;
+      }
+      state.purity = purity; state.weight = weight; state.offer = offer || 0;
+      showPhase(2);
+      window.setTimeout(runInspection, 1100);
+    });
+
+    function compute(){
+      const rate = rateFor(state.purity);
+      const gross = rate * state.weight;
+      const normalLow = round100(gross * RANGE_LOW);
+      const normalHigh = round100(gross * RANGE_HIGH);
+      const forbid = round100(gross * FORBID);
+      let verdict = "issue";
+      if(state.mode === "inspect"){
+        if(state.offer >= normalLow) verdict = "ok";
+        else if(state.offer >= forbid) verdict = "warn";
+        else verdict = "bad";
+      }
+      const loss = Math.max(0, normalHigh - state.offer);
+      return { rate, gross, normalLow, normalHigh, forbid, verdict, loss };
+    }
+
+    function toX(value, gross){
+      const f = value / gross;
+      const x = (f - AXIS_MIN) / (RANGE_HIGH - AXIS_MIN);
+      return Math.max(0, Math.min(1, x)) * 100;
+    }
+
+    function runInspection(){
+      const r = compute();
+      state.result = r;
+      const q = function(s){ return document.querySelector(s); };
+
+      const no = "PT-" + new Date().toISOString().slice(0,10).replace(/-/g,"") + "-" + Math.floor(Math.random()*900+100);
+      q("[data-r-no]").textContent = no;
+      q("[data-r-item]").textContent = (PURITY_LABEL[state.purity]||"プラチナ") + " リング";
+      q("[data-r-weight]").textContent = state.weight + " g";
+      q("[data-r-date]").textContent = new Date().toLocaleDateString("ja-JP");
+      q("[data-r-range]").textContent = r.normalLow.toLocaleString("ja-JP") + " 〜 " + r.normalHigh.toLocaleString("ja-JP") + " 円";
+      q("[data-r-forbid]").textContent = r.forbid.toLocaleString("ja-JP") + " 円 未満";
+
+      // ものさしゾーン
+      const forbidX = toX(r.forbid, r.gross);
+      const lowX = toX(r.normalLow, r.gross);
+      q("[data-rz-bad]").style.width = forbidX + "%";
+      q("[data-rz-warn]").style.width = (lowX - forbidX) + "%";
+
+      const offerRow = q("[data-r-offer-row]");
+      const mark = q("[data-r-mark]");
+      const verdictBox = q("[data-verdict]");
+      const stamp = q("[data-verdict-stamp]");
+      const vsub = q("[data-verdict-sub]");
+      verdictBox.className = "verdict";
+
+      if(state.mode === "inspect"){
+        offerRow.hidden = false;
+        q("[data-r-offer]").textContent = state.offer.toLocaleString("ja-JP") + " 円";
+        mark.hidden = false;
+        mark.style.left = toX(state.offer, r.gross) + "%";
+        if(r.verdict === "ok"){ verdictBox.classList.add("v-ok"); stamp.textContent = "正常"; vsub.textContent = "適正な水準です"; }
+        else if(r.verdict === "warn"){ verdictBox.classList.add("v-warn"); stamp.textContent = "要注意"; vsub.textContent = "やや低い・確認を推奨"; }
+        else { verdictBox.classList.add("v-bad"); stamp.textContent = "異常値"; vsub.textContent = "⚠ 再確認を推奨します"; }
+      } else {
+        offerRow.hidden = true;
+        mark.hidden = true;
+        verdictBox.classList.add("v-issue");
+        stamp.textContent = "基準値 発行";
+        vsub.textContent = "この数字を下回る提示は異常値です";
+      }
+
+      buildFindings(r);
+      track("inspection_complete", {
+        lab_mode: state.mode, verdict: r.verdict, purity: state.purity,
+        weight_g: state.weight, offer: state.offer, loss_max: r.loss,
+        landing_intent: "pt_lab"
+      });
+      showPhase(3);
+    }
+
+    function buildFindings(r){
+      const body = document.querySelector("[data-findings-body]");
+      const reasons = document.querySelector("[data-findings-reasons]");
+      const sLabel = document.querySelector("[data-second-label]");
+      const sLead = document.querySelector("[data-second-lead]");
+      if(state.mode !== "inspect"){
+        body.innerHTML = "基準値は <b style='color:var(--ink)'>" + r.normalLow.toLocaleString("ja-JP") + "〜" + r.normalHigh.toLocaleString("ja-JP") + "円</b>、売却禁止ラインは <b>" + r.forbid.toLocaleString("ja-JP") + "円</b>です。店で提示された額がこの禁止ラインを下回ったら「異常値」と判断してください。";
+        reasons.hidden = true;
+        sLabel.textContent = "これから査定を受ける方へ";
+        sLead.textContent = "この結果証を持参し、基準値を満たすか複数の検査機関で照合してください。";
+        return;
+      }
+      if(r.verdict === "bad"){
+        body.innerHTML = "提示額は基準値を <b>最大 " + r.loss.toLocaleString("ja-JP") + "円</b> 下回っています。この差は、次のいずれかで生じます：";
+        reasons.hidden = false;
+        sLabel.textContent = "異常値が出た方へ";
+        sLead.textContent = "基準値を満たすかどうか、別の検査機関でセカンドオピニオン（再査定）を受けてください。";
+      } else if(r.verdict === "warn"){
+        body.innerHTML = "提示額は基準値の下限をやや下回っています（差 最大 <b>" + r.loss.toLocaleString("ja-JP") + "円</b>）。一度、別の検査機関で再査定し直す価値があります。";
+        reasons.hidden = false;
+        sLabel.textContent = "要注意と出た方へ";
+        sLead.textContent = "基準値を満たすか、セカンドオピニオン（再査定）で確認してください。";
+      } else {
+        body.innerHTML = "提示額は基準値の正常範囲内です。買い叩きの兆候はありません。<b style='color:var(--ok)'>適正な水準</b>と判断できます。";
+        reasons.hidden = true;
+        sLabel.textContent = "念のため確認したい方へ";
+        sLead.textContent = "より高い水準が出るか、別の検査機関で再査定して比べることもできます。";
+      }
+    }
+
+    document.querySelector("[data-to-findings]").addEventListener("click", function(){ showPhase(4); });
+    document.querySelector("[data-restart]").addEventListener("click", function(){ showPhase(0); });
+
+    // 検査結果証の保存（canvasに描画してPNG）
+    document.querySelector("[data-save]").addEventListener("click", function(){
+      const r = state.result; if(!r) return;
+      const c = document.querySelector("[data-cert-canvas]");
+      const x = c.getContext("2d");
+      x.fillStyle = "#fff"; x.fillRect(0,0,720,960);
+      x.strokeStyle = "#13243A"; x.lineWidth = 3; x.strokeRect(24,24,672,912);
+      x.fillStyle = "#13243A"; x.textBaseline = "top";
+      x.font = "900 38px sans-serif"; x.fillText("検査結果票", 56, 64);
+      x.font = "700 22px sans-serif"; x.fillStyle = "#8A97A4";
+      x.fillText("適正査定ラボ Pt-LAB", 56, 118);
+      x.fillStyle = "#E3E8ED"; x.fillRect(56,168,608,2);
+      x.fillStyle = "#3C4856"; x.font = "700 26px sans-serif";
+      const rows = [
+        ["検体", (PURITY_LABEL[state.purity]||"プラチナ")+" リング"],
+        ["重量", state.weight + " g"],
+        ["基準値（正常範囲）", r.normalLow.toLocaleString("ja-JP")+"〜"+r.normalHigh.toLocaleString("ja-JP")+" 円"],
+        ["売却禁止ライン", r.forbid.toLocaleString("ja-JP")+" 円 未満"]
+      ];
+      if(state.mode === "inspect") rows.push(["検査対象（提示額）", state.offer.toLocaleString("ja-JP")+" 円"]);
+      let yy = 200;
+      rows.forEach(function(row){
+        x.fillStyle = "#8A97A4"; x.font = "700 20px sans-serif"; x.fillText(row[0], 56, yy);
+        x.fillStyle = "#13243A"; x.font = "900 30px sans-serif"; x.fillText(row[1], 56, yy+26);
+        yy += 92;
+      });
+      const vmap = { ok:["正常","#1F9D6B","#EAF6F1"], warn:["要注意","#C8862A","#FBF3E6"], bad:["異常値","#C4361F","#FCEFEC"], issue:["基準値 発行","#1B4D7A","#eef3f8"] };
+      const v = vmap[r.verdict];
+      x.fillStyle = v[2]; x.fillRect(56, yy+10, 608, 120);
+      x.fillStyle = v[1]; x.font = "900 56px sans-serif"; x.fillText("判定：" + v[0], 80, yy+34);
+      x.fillStyle = "#8A97A4"; x.font = "400 18px sans-serif";
+      x.fillText("発行日 " + new Date().toLocaleDateString("ja-JP") + " ／ 当日単価による目安です", 56, 880);
+
+      try{
+        const url = c.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.href = url; a.download = "検査結果証.png"; a.click();
+      }catch(_){}
+      track("lab_save", { lab_mode: state.mode, verdict: r.verdict });
+    });
+
+    // 送客（セカンドオピニオン）＝ gold_kaitori_affiliate_click を発火
+    document.querySelectorAll("[data-affiliate]").forEach(function(el){
+      el.setAttribute("href", affLink());
+      el.addEventListener("click", function(e){
+        const dest = el.getAttribute("href") || AFF;
+        const trackName = el.getAttribute("data-track") || "";
+        const params = { track_name: trackName, affiliate_key:"manekiya", landing_intent:"pt_lab", link_url:dest,
+          verdict: state.result ? state.result.verdict : "", lab_mode: state.mode };
+        track(trackName === "lab_phone" ? "lab_phone_click" : "lab_recheck_click", params);
+        const primary = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0;
+        if(primary && dest && dest !== "#"){
+          e.preventDefault();
+          let done = false;
+          const go = function(){ if(done) return; done = true; window.location.href = dest; };
+          track("gold_kaitori_affiliate_click", { ...params, event_callback: go, event_timeout: 1500 });
+          window.setTimeout(go, 1500);
+        } else {
+          track("gold_kaitori_affiliate_click", params);
+        }
+      });
+    });
+
+    track("lab_open", { landing_intent:"pt_lab" });
+  </script>
+</body>
+</html>
