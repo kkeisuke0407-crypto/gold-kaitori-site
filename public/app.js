@@ -49,10 +49,47 @@ function track(eventName, params) {
   } catch (_) {}
 }
 
+// 適正額チェッカーのファネル計測（共通の付帯情報を載せる）
+function fireFunnel(name, extra) {
+  track(name, Object.assign({
+    fv_variant: document.body.getAttribute("data-fv-variant") || "",
+    landing_intent: document.body.getAttribute("data-landing-intent") || "general"
+  }, extra || {}));
+}
+
+// FV見出しの3パターンABテスト（A/B/C をランダム割当・localStorageで固定）
+function setupFvAbTest() {
+  const el = document.querySelector("[data-fv-headline]");
+  if (!el) return;
+  const variants = {
+    A: 'その指輪、<br /><span class="rep-h1-em">いくらなら売っていい？</span>',
+    B: 'その査定額、<br /><span class="rep-h1-em">本当に適正</span>ですか？',
+    C: '知らずに売ると、<br /><span class="rep-h1-em">数万円損する</span>かも。'
+  };
+  const keys = ["A", "B", "C"];
+  let v = null;
+  try { v = localStorage.getItem("fv_variant"); } catch (_) {}
+  if (!v || !variants[v]) {
+    v = keys[Math.floor(Math.random() * keys.length)];
+    try { localStorage.setItem("fv_variant", v); } catch (_) {}
+  }
+  el.innerHTML = variants[v];
+  document.body.setAttribute("data-fv-variant", v);
+  track("fv_variant_assigned", { fv_variant: v });
+}
+
 function wireTrackedLink(el) {
   el.addEventListener("click", function (event) {
     const affiliateKey = el.getAttribute("data-affiliate") || "";
     const destination = el.getAttribute("href") || "";
+
+    // ファネル計測：電話クリック / まねきや送客クリック
+    const trackName = el.getAttribute("data-track") || "";
+    if (trackName.indexOf("phone") >= 0) {
+      fireFunnel("phone_click", { track_name: trackName });
+    } else if (affiliateKey === "manekiya") {
+      fireFunnel("manekiya_click", { track_name: trackName });
+    }
     const params = {
       track_name: el.getAttribute("data-track") || "",
       affiliate_key: affiliateKey,
@@ -608,6 +645,10 @@ function setupAppraisalReport() {
   const lineEl = report.querySelector("[data-report-line]");
   const rangeBar = report.querySelector("[data-report-rangebar]");
   const lowZone = report.querySelector(".rep-zone-low");
+  const lossEl = report.querySelector("[data-report-loss]");
+  const lossBox = report.querySelector("[data-report-loss-box]");
+  const echoEl = document.querySelector("[data-report-echo]");
+  const memoEl = document.querySelector("[data-report-memo]");
 
   const PURITY_LABELS = { pt1000: "Pt1000", pt950: "Pt950", pt900: "Pt900", pt850: "Pt850", k18: "K18 / 金とのコンビ" };
   // ものさしの軸：地金額の70%〜100%を可視化
@@ -647,6 +688,7 @@ function setupAppraisalReport() {
     const fairLow = Math.round(gross * FAIR_LOW);
     const fairHigh = Math.round(gross * FAIR_HIGH);
     const floor = Math.round(gross * FLOOR);
+    const loss = Math.max(0, fairHigh - floor);
     const hasStone = stoneValue() === "stone";
 
     labelEl.textContent = "あなたの適正売却価格レンジ";
@@ -654,6 +696,14 @@ function setupAppraisalReport() {
     rateEl.textContent = yenLabel(rate) + "/g（" + (PURITY_LABELS[purity] || "プラチナ") + "）";
     weightEl.textContent = weight + "g";
     floorEl.textContent = "約 " + floor.toLocaleString("ja-JP") + "円";
+    if (lossEl) lossEl.textContent = loss.toLocaleString("ja-JP") + "円";
+    if (lossBox) lossBox.hidden = false;
+    if (echoEl) echoEl.textContent = "約" + fairHigh.toLocaleString("ja-JP") + "円";
+    if (memoEl) {
+      memoEl.textContent = "「" + (PURITY_LABELS[purity] || "プラチナ") + "・" + weight +
+        "gの指輪です。本日単価で算出した適正額は約" + fairLow.toLocaleString("ja-JP") +
+        "〜" + fairHigh.toLocaleString("ja-JP") + "円。これ以上出せますか？」";
+    }
     noteEl.textContent = hasStone
       ? "宝石・装飾ありのため、地金の適正額に石・デザイン分が上振れする可能性があります。提示額がこの地金レンジを下回らないかをまず確認しましょう。"
       : "地金の適正額レンジです。提示額がこのレンジを下回る、特に買い叩きラインを割る場合は、当日単価を聞いて理由を確認しましょう。";
@@ -669,12 +719,12 @@ function setupAppraisalReport() {
 
     report.hidden = false;
     window.setTimeout(function () { report.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, 40);
-    track("appraisal_complete", {
-      landing_intent: document.body.getAttribute("data-landing-intent") || "general",
+    fireFunnel("appraisal_complete", {
       purity: purity,
       weight_g: weight,
       stone: hasStone ? 1 : 0,
-      fair_high: fairHigh
+      fair_high: fairHigh,
+      loss_max: loss
     });
   }
 
@@ -686,6 +736,15 @@ function setupAppraisalReport() {
   }
   if (weightInput) weightInput.addEventListener("focus", markStart);
   if (puritySelect) puritySelect.addEventListener("change", markStart);
+
+  // ②重さ入力（最初の入力で1回だけ計測）
+  let weightFired = false;
+  if (weightInput) weightInput.addEventListener("input", function () {
+    if (weightFired) return;
+    weightFired = true;
+    fireFunnel("weight_input");
+  });
+
   form.addEventListener("submit", generate);
 }
 
@@ -723,6 +782,7 @@ function setupFunnelMeasurement() {
         track("comparison_view", {
           landing_intent: document.body.getAttribute("data-landing-intent") || "general"
         });
+        fireFunnel("step3_view");
         observer.disconnect();
       });
     }, { threshold: 0.25 });
@@ -747,6 +807,8 @@ function setupFunnelMeasurement() {
 document.addEventListener("DOMContentLoaded", function () {
   setupCampaignExpiryPresentation();
   setupLandingIntent();
+  setupFvAbTest();
+  fireFunnel("fv_view"); // ①FV表示
 
   document.querySelectorAll("[data-affiliate]").forEach(function (el) {
     const key = el.getAttribute("data-affiliate");
@@ -760,6 +822,21 @@ document.addEventListener("DOMContentLoaded", function () {
   setupAppraisalReport();
   setupStickyCta();
   setupFunnelMeasurement();
+
+  // ⑦相談メモのコピー
+  const copyBtn = document.querySelector("[data-report-copy]");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async function () {
+      const memo = document.querySelector("[data-report-memo]");
+      const text = memo ? memo.textContent.trim() : "";
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = "コピーしました";
+        window.setTimeout(function () { copyBtn.textContent = "この文をコピーする"; }, 1800);
+      } catch (_) {}
+      fireFunnel("copy_click");
+    });
+  }
 
   document.querySelectorAll("[data-scroll-to]").forEach(function (el) {
     el.addEventListener("click", function (event) {
