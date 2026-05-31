@@ -212,11 +212,7 @@ button {
   padding: 0 .08em;
   color: #b13b2e;
   font-weight: 900;
-  text-shadow:
-    0 2px 0 rgba(255,255,255,.78),
-    0 9px 20px rgba(177, 59, 46, .26);
   isolation: isolate;
-  animation: manekiyaPulse 2.2s ease-in-out infinite;
 }
 
 .manekiya-pop::before {
@@ -225,34 +221,23 @@ button {
   left: -.08em;
   right: -.08em;
   bottom: .04em;
-  height: .34em;
+  height: .22em;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(242, 196, 92, .38), rgba(255, 240, 150, .86), rgba(242, 196, 92, .38));
+  background: linear-gradient(90deg, rgba(242, 196, 92, .32), rgba(255, 240, 150, .6), rgba(242, 196, 92, .32));
   z-index: -1;
-  box-shadow: 0 6px 18px rgba(242, 196, 92, .28);
 }
 
 .manekiya-pop::after {
-  content: "";
-  position: absolute;
-  inset: -.06em -.16em;
-  border-radius: .35em;
-  background: linear-gradient(115deg, transparent 0 38%, rgba(255,255,255,.82) 48%, transparent 58% 100%);
-  transform: translateX(-90%);
-  z-index: -1;
-  animation: manekiyaShine 3.4s ease-in-out infinite;
+  content: none;
 }
 
 .manekiya-pop-small {
   padding: 0 .05em;
-  animation-duration: 2.8s;
 }
 
 .manekiya-pop-invert {
   color: #fff7cf;
-  text-shadow:
-    0 2px 0 rgba(80, 30, 16, .36),
-    0 0 18px rgba(255, 228, 116, .72);
+  text-shadow: 0 1px 2px rgba(80, 30, 16, .45);
 }
 
 .manekiya-pop-invert::before {
@@ -267,17 +252,14 @@ button {
   border-radius: 999px;
   color: #3a1d05;
   background: linear-gradient(135deg, #fff2ad, #f2c45c);
-  box-shadow: 0 8px 22px rgba(242, 196, 92, .34);
   font-weight: 900;
-  animation: manekiyaPulse 2.4s ease-in-out infinite;
 }
 
 .manekiya-btn-text {
   position: relative;
   display: inline-block;
   color: #fff7cf;
-  text-shadow: 0 0 14px rgba(255, 235, 142, .7);
-  animation: manekiyaBtnGlow 1.8s ease-in-out infinite;
+  text-shadow: 0 1px 2px rgba(120, 60, 10, .35);
 }
 
 .btn-outline .manekiya-btn-text,
