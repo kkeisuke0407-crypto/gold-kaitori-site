@@ -42,6 +42,26 @@ function getAffiliateLink(key) {
   return destination.toString();
 }
 
+// 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
+window.addEventListener("load", function () {
+  var search = window.location.search;
+  if (!search) return;
+  var incoming = new URLSearchParams(search);
+  document.querySelectorAll("a[href]").forEach(function (a) {
+    var href = a.getAttribute("href");
+    if (!href) return;
+    var lower = href.toLowerCase();
+    if (lower.charAt(0) === "#" || lower.startsWith("javascript") || lower.startsWith("mailto") || lower.startsWith("tel")) return;
+    try {
+      var u = new URL(href, window.location.href);
+      incoming.forEach(function (v, k) {
+        if (!u.searchParams.has(k)) u.searchParams.set(k, v);
+      });
+      a.setAttribute("href", u.toString());
+    } catch (_) {}
+  });
+});
+
 function track(eventName, params) {
   try {
     if (window.dataLayer) window.dataLayer.push({ event: eventName, ...(params || {}) });

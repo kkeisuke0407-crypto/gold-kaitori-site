@@ -628,6 +628,23 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         .observe(fv);
     } else if(sticky){ sticky.hidden = false; }
     track("lp2nd_open", { landing_intent:"lp2nd" });
+    // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
+    window.addEventListener("load", function(){
+      var search = window.location.search;
+      if(!search) return;
+      var incoming = new URLSearchParams(search);
+      document.querySelectorAll("a[href]").forEach(function(a){
+        var href = a.getAttribute("href");
+        if(!href) return;
+        var lower = href.toLowerCase();
+        if(lower.charAt(0)==="#"||lower.startsWith("javascript")||lower.startsWith("mailto")||lower.startsWith("tel")) return;
+        try{
+          var u=new URL(href, window.location.href);
+          incoming.forEach(function(v,k){ if(!u.searchParams.has(k)) u.searchParams.set(k,v); });
+          a.setAttribute("href", u.toString());
+        }catch(_){}
+      });
+    });
   </script>
 </body>
 </html>
