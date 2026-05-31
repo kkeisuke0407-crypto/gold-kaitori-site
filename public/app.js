@@ -62,9 +62,9 @@ function setupFvAbTest() {
   const el = document.querySelector("[data-fv-headline]");
   if (!el) return;
   const variants = {
-    A: 'その指輪、<br /><span class="rep-h1-em">いくらなら売っていい？</span>',
-    B: 'その査定額、<br /><span class="rep-h1-em">本当に適正</span>ですか？',
-    C: '知らずに売ると、<br /><span class="rep-h1-em">数万円損する</span>かも。'
+    A: 'この指輪、<br /><span class="rep-h1-em">いくらくらいで売れる？</span>',
+    B: 'その買取金額、<br /><span class="rep-h1-em">安すぎないか心配</span>…',
+    C: 'よく分からないまま売って、<br /><span class="rep-h1-em">損したくない。</span>'
   };
   const keys = ["A", "B", "C"];
   let v = null;
@@ -653,7 +653,7 @@ function setupAppraisalReport() {
   const PURITY_LABELS = { pt1000: "Pt1000", pt950: "Pt950", pt900: "Pt900", pt850: "Pt850", k18: "K18 / 金とのコンビ" };
   // ものさしの軸：地金額の70%〜100%を可視化
   const AXIS_MIN = 0.70, AXIS_MAX = 1.00;
-  const FLOOR = 0.80;      // 買い叩きライン
+  const FLOOR = 0.80;      // これ以下は安すぎ（下限）
   const BOUNDARY = 0.85;   // 買い叩き/適正の境
   const FAIR_LOW = 0.88, FAIR_HIGH = 1.00;
   const yenLabel = function (v) { return Math.round(v).toLocaleString("ja-JP") + "円"; };
@@ -691,7 +691,7 @@ function setupAppraisalReport() {
     const loss = Math.max(0, fairHigh - floor);
     const hasStone = stoneValue() === "stone";
 
-    labelEl.textContent = "あなたの適正売却価格レンジ";
+    labelEl.textContent = "だいたいこのくらいで売れそう";
     rangeEl.textContent = "約 " + fairLow.toLocaleString("ja-JP") + "〜" + fairHigh.toLocaleString("ja-JP") + "円";
     rateEl.textContent = yenLabel(rate) + "/g（" + (PURITY_LABELS[purity] || "プラチナ") + "）";
     weightEl.textContent = weight + "g";
@@ -701,12 +701,12 @@ function setupAppraisalReport() {
     if (echoEl) echoEl.textContent = "約" + fairHigh.toLocaleString("ja-JP") + "円";
     if (memoEl) {
       memoEl.textContent = "「" + (PURITY_LABELS[purity] || "プラチナ") + "・" + weight +
-        "gの指輪です。本日単価で算出した適正額は約" + fairLow.toLocaleString("ja-JP") +
-        "〜" + fairHigh.toLocaleString("ja-JP") + "円。これ以上出せますか？」";
+        "gの指輪です。今日の値段だと約" + fairLow.toLocaleString("ja-JP") +
+        "〜" + fairHigh.toLocaleString("ja-JP") + "円くらいって見たんですが、これ以上出せますか？」";
     }
     noteEl.textContent = hasStone
-      ? "宝石・装飾ありのため、地金の適正額に石・デザイン分が上振れする可能性があります。提示額がこの地金レンジを下回らないかをまず確認しましょう。"
-      : "地金の適正額レンジです。提示額がこのレンジを下回る、特に買い叩きラインを割る場合は、当日単価を聞いて理由を確認しましょう。";
+      ? "石やデザインが付いているので、上の金額より高くなることもあります。お店で見せたとき、この金額より大きく下がらないか確認してみてください。"
+      : "金属だけの金額の目安です。これより大きく下がるとき、特にいちばん下の金額を切るときは、今日の1gの値段を聞いてみましょう。";
 
     // ものさし描画
     if (lowZone) lowZone.style.flexBasis = toX(BOUNDARY) + "%";

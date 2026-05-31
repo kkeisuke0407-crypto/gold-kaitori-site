@@ -1,6 +1,6 @@
 ---
-const PAGE_TITLE = "プラチナ指輪の適正額レポート｜査定前に「買い叩かれない数字」を3分で";
-const PAGE_DESC = "あなたのプラチナ指輪(Pt900/Pt950)の適正額レンジと、買い叩かれないための「買い叩きライン」を3分で。査定に行く前に、当日単価で算出した自分専用の適正額レポートを持てます。結婚指輪・古い指輪も。";
+const PAGE_TITLE = "プラチナ指輪は今いくら？｜売る前に買取金額の目安をチェック";
+const PAGE_DESC = "プラチナ指輪(Pt900/Pt950)が今だいたいいくらで売れそうか、重さと刻印を選ぶだけで30秒でわかります。安く買われないためのコツや、どこに持っていけばいいかも紹介。結婚指輪・古い指輪もOK。";
 const CANONICAL = "https://kaitori.hakobu-family.com/pt-shindan/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
 const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
@@ -62,34 +62,34 @@ const faqJsonLd = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "「適正額レポート」とは何ですか？",
+      "name": "ここで出る金額って何ですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "当日のプラチナ買取単価をもとに、あなたの指輪の適正額レンジと、これを下回ると買い叩きと判断できる「買い叩きライン」を算出した、自分専用の目安レポートです。査定前に持っておくことで、提示額が適正かを自分で判断できます。実額は刻印・重量・宝石やデザイン・査定日で変わります。"
+        "text": "今日のプラチナの値段と、入力した重さでざっくり計算した「だいたいの金額」です。売る前に目安を知っておくと、お店で安く買われにくくなります。石やデザイン、状態によって実際の金額は変わります。"
       }
     },
     {
       "@type": "Question",
-      "name": "なぜ単一の金額でなく「レンジ」で出すのですか？",
+      "name": "なぜピッタリの金額じゃなく、幅があるんですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "地金の重さと当日単価で下限はほぼ決まりますが、状態・デザイン・宝石の有無で上振れするためです。1点の額を約束する店ほど内訳が不透明なことがあります。適正レンジと内訳を開示することが、買い叩きを防ぐ一番の武器になります。"
+        "text": "金属だけの値段はだいたい決まりますが、状態やデザイン、石の有無で上がることがあるためです。なので「これくらい〜これくらい」と幅で出しています。"
       }
     },
     {
       "@type": "Question",
-      "name": "結婚指輪や古いプラチナ指輪でもレポートは出ますか？",
+      "name": "結婚指輪や古い指輪でも分かりますか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "はい。刻印が薄い・片方だけ・金とのコンビでも、プラチナとして地金の適正額の目安が出せます。自分で価値を決めて処分する前に、まず適正額を確認してください。"
+        "text": "はい。刻印が薄い・片方だけ・金と混ざった指輪でも、だいたいの目安が出せます。捨てたりする前に、まず一度見てみてください。"
       }
     },
     {
       "@type": "Question",
-      "name": "このページは買取店の公式サイトですか？",
+      "name": "このページはお店の公式サイトですか？",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "いいえ。当サイトは買取店の公式サイトではなく、広告（PR）を含む案内ページです。レポートは目安であり、最新の価格・条件はリンク先の公式ページで確認してください。"
+        "text": "いいえ。広告（PR）を含む案内ページです。金額はあくまで目安なので、正確な値段や条件はリンク先のお店で確認してください。"
       }
     }
   ]
@@ -137,7 +137,7 @@ const faqJsonLd = {
     <div class="container header-inner">
       <a href="/pt-shindan/" class="brand" aria-label="金買取査定ナビ">
         <span class="brand-mark rep-mark">Pt</span>
-        <span class="brand-text">プラチナ指輪 売却前診断</span>
+        <span class="brand-text">プラチナ指輪 買取金額チェック</span>
       </a>
       <span class="pr-chip header-pr">PR</span>
     </div>
@@ -148,38 +148,38 @@ const faqJsonLd = {
     <section class="rep-hero">
       <div class="container rep-hero-inner">
         <div class="rep-hero-copy">
-          <p class="rep-eyebrow">結婚指輪・プラチナ指輪をお持ちの方へ</p>
-          <h1 class="rep-h1" data-fv-headline>その指輪、<br /><span class="rep-h1-em">いくらなら売っていい？</span></h1>
-          <p class="rep-subbrand">プラチナ指輪 適正価格チェッカー</p>
-          <p class="rep-lead">買い叩かれないための<strong>参考価格</strong>を、たった30秒で算出。当日単価で、自分専用の<strong>適正額レポート</strong>を作ります。</p>
+          <p class="rep-eyebrow">プラチナや結婚指輪を売ろうか迷っている方へ</p>
+          <h1 class="rep-h1" data-fv-headline>この指輪、<br /><span class="rep-h1-em">いくらくらいで売れる？</span></h1>
+          <p class="rep-subbrand">プラチナ指輪の買取金額しらべ</p>
+          <p class="rep-lead">重さと刻印を選ぶだけで、<strong>今だいたいいくらで売れそうか</strong>が30秒でわかります。売るかどうかは、金額を見てから決めればOKです。</p>
           <div class="rep-hero-actions">
-            <a href="#shindan" class="btn rep-btn rep-btn-primary" data-scroll-to="#shindan" data-track="report_hero_start">30秒で無料診断する</a>
-            <a href="#" class="btn rep-btn rep-btn-ghost" data-affiliate="manekiya" data-track="report_hero_phone" rel="nofollow sponsored">電話で適正額を聞く</a>
+            <a href="#shindan" class="btn rep-btn rep-btn-primary" data-scroll-to="#shindan" data-track="report_hero_start">30秒で金額の目安を見る</a>
+            <a href="#" class="btn rep-btn rep-btn-ghost" data-affiliate="manekiya" data-track="report_hero_phone" rel="nofollow sponsored">電話で聞いてみる</a>
           </div>
           <ul class="rep-hero-points">
-            <li>あなたの指輪の<b>適正売却価格レンジ</b></li>
-            <li>これ以下は損する<b>買い叩きライン</b></li>
-            <li>査定で損しない<b>複数比較のコツ</b></li>
+            <li>だいたい<b>いくらで売れそうか</b></li>
+            <li>これより安いと<b>損かも、の目安</b></li>
+            <li>安く買われないための<b>かんたんなコツ</b></li>
           </ul>
         </div>
 
         <!-- レポートのチラ見せ -->
-        <aside class="rep-hero-card" aria-label="適正額レポートの見本">
+        <aside class="rep-hero-card" aria-label="金額の目安の見本">
           <div class="rep-card rep-card-teaser">
-            <div class="rep-card-seal" aria-hidden="true">適正額<br />REPORT</div>
-            <span class="rep-card-kicker">SAMPLE / 適正額レポート</span>
+            <div class="rep-card-seal" aria-hidden="true">金額の<br />目安</div>
+            <span class="rep-card-kicker">見本 / 金額の目安</span>
             <div class="rep-card-amount">
-              <span>あなたの適正額レンジ（例）</span>
+              <span>だいたいの金額（例）</span>
               <strong>約35,000〜38,600円</strong>
             </div>
             <div class="rep-ruler rep-ruler-static" aria-hidden="true">
               <div class="rep-ruler-bar">
-                <span class="rep-ruler-zone rep-zone-low">買い叩き</span>
-                <span class="rep-ruler-zone rep-zone-fair">適正</span>
+                <span class="rep-ruler-zone rep-zone-low">安すぎ</span>
+                <span class="rep-ruler-zone rep-zone-fair">このくらい</span>
               </div>
               <span class="rep-ruler-marker" style="left:72%"></span>
             </div>
-            <p class="rep-card-foot">本日Pt900単価 {yen(rates.pt900)}/g をもとに算出。あなたの指輪で作れます。</p>
+            <p class="rep-card-foot">今日のプラチナの値段（Pt900 {yen(rates.pt900)}/g）で計算しています。</p>
           </div>
         </aside>
       </div>
@@ -192,12 +192,12 @@ const faqJsonLd = {
       </div>
     </section>
 
-    <!-- ② 適正レンジ診断＝ものさし／③ レポート生成 -->
+    <!-- ② 金額の目安／③ 結果表示 -->
     <section class="section rep-shindan-section" id="shindan">
       <div class="container">
         <div class="rep-section-head">
-          <span class="rep-kicker">STEP 1 / 30秒で診断</span>
-          <h2 class="rep-h2">あなたの指輪、<br />いくらなら売っていい？</h2>
+          <span class="rep-kicker">STEP 1 / かんたん入力</span>
+          <h2 class="rep-h2">まず、だいたいの<br />金額を見てみましょう。</h2>
         </div>
 
         <div class="rep-shindan-grid">
@@ -231,89 +231,89 @@ const faqJsonLd = {
                 <label><input type="radio" name="stone" value="stone" data-appraisal-stone /> 宝石・石付き</label>
               </div>
             </fieldset>
-            <button type="submit" class="btn rep-btn rep-btn-primary rep-btn-wide" data-track="report_generate">適正額レポートを作る</button>
-            <p class="rep-form-note">入力情報は送信されません。当日単価をもとにその場で計算する目安です。</p>
+            <button type="submit" class="btn rep-btn rep-btn-primary rep-btn-wide" data-track="report_generate">金額の目安を見る</button>
+            <p class="rep-form-note">入力した内容はどこにも送られません。今日の値段でその場で計算するだけです。</p>
           </form>
 
           <!-- ③ 生成されるレポート -->
           <div class="rep-card rep-card-result" data-appraisal-report hidden aria-live="polite">
-            <div class="rep-card-seal" aria-hidden="true">適正額<br />REPORT</div>
-            <span class="rep-card-kicker">あなたの適正額レポート</span>
+            <div class="rep-card-seal" aria-hidden="true">金額の<br />目安</div>
+            <span class="rep-card-kicker">あなたの指輪の目安</span>
             <div class="rep-card-amount">
-              <span data-report-label>適正額レンジ</span>
+              <span data-report-label>だいたいこのくらい</span>
               <strong data-report-range>—</strong>
             </div>
 
             <div class="rep-loss" data-report-loss-box hidden>
-              <span>⚠ 相場を知らずに売ると</span>
-              <strong>想定損失 最大 <b data-report-loss>—</b></strong>
-              <small>適正額の上限と「買い叩きライン」の差</small>
+              <span>⚠ 何も知らずに売ると</span>
+              <strong>最大 <b data-report-loss>—</b> くらい損するかも</strong>
+              <small>高めに売れた場合と、安く買われた場合の差です</small>
             </div>
-            <p class="rep-loss-lead">だから「<b>1社で決めない</b>」が、損しない唯一の防衛策です。</p>
+            <p class="rep-loss-lead">だから、<b>1社だけで決めない</b>のが安心です。何社か聞いてから決めましょう。</p>
 
-            <div class="rep-ruler" aria-label="適正額のものさし">
+            <div class="rep-ruler" aria-label="金額の目安">
               <div class="rep-ruler-bar">
-                <span class="rep-ruler-zone rep-zone-low">買い叩き</span>
-                <span class="rep-ruler-zone rep-zone-fair">適正</span>
+                <span class="rep-ruler-zone rep-zone-low">安すぎ</span>
+                <span class="rep-ruler-zone rep-zone-fair">このくらい</span>
               </div>
-              <span class="rep-ruler-line" data-report-line><i>買い叩きライン</i></span>
+              <span class="rep-ruler-line" data-report-line><i>これ以下は安すぎ</i></span>
               <span class="rep-ruler-range" data-report-rangebar></span>
             </div>
 
             <dl class="rep-breakdown">
-              <div><dt>当日単価</dt><dd data-report-rate>—</dd></div>
+              <div><dt>今日の値段</dt><dd data-report-rate>—</dd></div>
               <div><dt>重さ</dt><dd data-report-weight>—</dd></div>
-              <div class="rep-breakdown-warn"><dt>買い叩きライン</dt><dd data-report-floor>—</dd></div>
+              <div class="rep-breakdown-warn"><dt>これ以下は安すぎ</dt><dd data-report-floor>—</dd></div>
             </dl>
 
             <p class="rep-report-note" data-report-note></p>
 
             <div class="rep-warn-box">
-              <strong>⚠ ただし、実際の査定ではこの額より下がることがあります</strong>
+              <strong>⚠ ただし、お店によってはこの金額より下がることもあります</strong>
               <ul>
-                <li>手数料・目減り計算で差し引かれる</li>
-                <li>宝石・デザイン部分を0円査定にされる</li>
-                <li>その場の即決で安く流される</li>
+                <li>あとから手数料を引かれる</li>
+                <li>石やデザインの分を0円にされる</li>
+                <li>その場で急かされて安く売ってしまう</li>
               </ul>
-              <p>だから<b>1社で決めず、この適正額を守れる相談先で複数比較</b>するのが、損しない一番の近道です。</p>
+              <p>なので、<b>1社だけで決めずに、何社か聞いて比べる</b>のが一番安心です。</p>
             </div>
 
-            <a href="#compare" class="btn rep-btn rep-btn-primary rep-btn-wide" data-scroll-to="#compare" data-track="report_cta_compare">この適正額を守れる相談先を見る</a>
-            <a href="#" class="rep-report-sub" data-affiliate="manekiya" data-track="report_cta_phone" rel="nofollow sponsored">または、電話でこの適正額を伝えて聞く →</a>
-            <small class="rep-report-disclaimer">※適正額は当日単価×重さの目安です。宝石・デザイン・状態で実額は変わります。正式な金額は査定で確定します。</small>
+            <a href="#compare" class="btn rep-btn rep-btn-primary rep-btn-wide" data-scroll-to="#compare" data-track="report_cta_compare">どこに持っていけばいいか見る</a>
+            <a href="#" class="rep-report-sub" data-affiliate="manekiya" data-track="report_cta_phone" rel="nofollow sponsored">または、電話でこの金額を伝えて聞いてみる →</a>
+            <small class="rep-report-disclaimer">※この金額は今日の値段と重さで計算した目安です。石やデザイン、状態によって実際の金額は変わります。</small>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ④ 武装ブリーフィング -->
+    <!-- ④ 安く買われないためのコツ -->
     <section class="section rep-armor-section">
       <div class="container">
         <div class="rep-section-head">
-          <span class="rep-kicker">STEP 2 / 武装する</span>
-          <h2 class="rep-h2">店があなたを買い叩く、3つの手口。</h2>
-          <p class="rep-sub">レポートの数字を持っていれば、どれも怖くありません。</p>
+          <span class="rep-kicker">STEP 2 / 知っておくと安心</span>
+          <h2 class="rep-h2">安く買われやすい、3つのパターン。</h2>
+          <p class="rep-sub">だいたいの金額を知っていれば、どれもかんたんに防げます。</p>
         </div>
         <div class="rep-armor-grid">
           <article class="rep-armor-card">
-            <span class="rep-armor-no">手口 01</span>
-            <h3>グラム単価を下げる</h3>
-            <p>「手数料無料」と言いながら、単価そのものを相場より下げて回収する。<b>→ レポートの当日単価を見せて「この単価で計算して」と言う。</b></p>
+            <span class="rep-armor-no">パターン 01</span>
+            <h3>1gあたりの値段を低くする</h3>
+            <p>「手数料0円」と言いつつ、1gの値段を相場より低くしているお店があります。<b>→「今日の1gの値段はいくらですか？」と聞いてみましょう。</b></p>
           </article>
           <article class="rep-armor-card">
-            <span class="rep-armor-no">手口 02</span>
-            <h3>後出しで費用を引く</h3>
-            <p>査定後に出張料・手数料・送料を差し引く。<b>→「提示額がそのまま手取りですか？引かれる費用は？」と先に聞く。</b></p>
+            <span class="rep-armor-no">パターン 02</span>
+            <h3>あとから費用を引く</h3>
+            <p>査定のあとで、手数料や送料を引かれることがあります。<b>→「この金額、そのまま受け取れますか？」と先に聞きましょう。</b></p>
           </article>
           <article class="rep-armor-card">
-            <span class="rep-armor-no">手口 03</span>
-            <h3>その場で決めさせる</h3>
-            <p>「今だけ」「今日決めれば」で即決を迫る。<b>→「適正レンジは分かっているので、持ち帰って比べます」で十分。</b></p>
+            <span class="rep-armor-no">パターン 03</span>
+            <h3>その場で急かす</h3>
+            <p>「今日だけ」「今決めれば」と急かしてくることがあります。<b>→「一度持ち帰って考えます」と言って大丈夫です。</b></p>
           </article>
         </div>
         <div class="rep-armor-line">
-          <strong>覚える一言：</strong>「今日のグラム単価はいくらですか？　提示額はそのまま手取りですか？」<br />
-          — この2つを聞くだけで、買い叩きはほぼ防げます。
+          <strong>覚えておく一言：</strong>「今日の1gの値段は？」「この金額、そのまま受け取れますか？」<br />
+          — この2つを聞くだけで、安く買われるのはほぼ防げます。
         </div>
       </div>
     </section>
@@ -322,53 +322,53 @@ const faqJsonLd = {
     <section class="section rep-pick-section" id="compare">
       <div class="container">
         <div class="rep-section-head">
-          <span class="rep-kicker">STEP 3 / 複数比較して選ぶ</span>
-          <h2 class="rep-h2">あなたの<span class="rep-echo" data-report-echo>適正額</span>を守るなら、<br />まず「1社で決めない」こと。</h2>
-          <p class="rep-sub">同じ指輪でも、店によって提示額は変わります。下の2つの条件を満たす相談先で、この数字を基準に比べてください。</p>
+          <span class="rep-kicker">STEP 3 / どこに持っていく？</span>
+          <h2 class="rep-h2"><span class="rep-echo" data-report-echo>この金額</span>くらいで売るなら、<br />1社だけで決めないのが安心。</h2>
+          <p class="rep-sub">同じ指輪でも、お店によって金額は変わります。下の2つに当てはまるお店で、この金額を目安に聞いてみてください。</p>
         </div>
         <div class="rep-criteria">
-          <span class="rep-criteria-label">損しない相談先の選び方</span>
+          <span class="rep-criteria-label">お店選びのポイント</span>
           <ul>
-            <li>提示額がそのまま手取り（後出し費用なし）</li>
-            <li>当日のグラム単価をその場で開示してくれる</li>
+            <li>出た金額が、そのまま受け取れる（あとから引かれない）</li>
+            <li>今日の1gの値段を、その場で教えてくれる</li>
           </ul>
         </div>
         <div class="rep-pick-grid">
           <article class="rep-pick-card rep-pick-top">
-            <div class="rank-badge rank-gold"><span aria-hidden="true">👑</span><span class="rank-no">手取り重視<small>No.1</small></span></div>
-            <div class="rep-pick-head"><span>こんな人に</span><h3>手数料で手取りを減らしたくない</h3></div>
+            <div class="rank-badge rank-gold"><span aria-hidden="true">👑</span><span class="rank-no">迷ったらここ</span></div>
+            <div class="rep-pick-head"><span>こんな人に</span><h3>手数料を引かれて、手取りが減るのがイヤな人</h3></div>
             <div class="rep-pick-name"><strong class="rep-brand">まねきや</strong><span class="pr-chip">PR</span></div>
-            <p class="rep-pick-lead">国内外に独自の販売ルートを持ち、国内相場にとらわれない高水準の買取価格が強み。最新の<b>X線検査機</b>で刻印のない指輪や状態の悪い品も正確に成分分析するため、「適正額を下回らせたくない」人の本命です。</p>
+            <p class="rep-pick-lead">海外にも売り先を持っているお店で、その分、高めの金額が出やすいのが特長です。<b>X線の機械</b>で調べてくれるので、刻印がない指輪や古い指輪でも、ちゃんと見てもらえます。</p>
             <ul class="rep-pick-points">
-              <li><b>手数料が無料</b>（通常10%）。提示額がそのまま手取りに近い</li>
-              <li><b>X線検査</b>で刻印なし・変形・キズあり・金とのコンビも正確に査定</li>
-              <li>査定料・出張料・キャンセル料の負担なし</li>
-              <li>店頭・出張・宅配から選べる／WEB申込は約1分</li>
+              <li><b>手数料が0円</b>。出た金額をそのまま受け取りやすい</li>
+              <li>刻印のない指輪や、変形・キズありでも調べてもらえる</li>
+              <li>査定料・出張料・キャンセル料も0円</li>
+              <li>お店・出張・宅配から選べる（ネット申込は1分ほど）</li>
             </ul>
-            <div class="rep-pick-flag">電話申込で買取額UPキャンペーンの対象になる場合あり<small>※実施状況・期限・条件は公式でご確認ください</small></div>
-            <a href="#" class="btn rep-btn rep-btn-primary rep-btn-wide" data-affiliate="manekiya" data-track="report_pick_manekiya" rel="nofollow sponsored">この適正額で無料査定する</a>
-            <a href="#" class="rep-pick-phone" data-affiliate="manekiya" data-track="report_pick_manekiya_phone" rel="nofollow sponsored">☎ 電話でこの数字を伝えて聞く</a>
+            <div class="rep-pick-flag">電話で申し込むと買取額アップの対象になることも<small>※今やっているかは公式ページでご確認ください</small></div>
+            <a href="#" class="btn rep-btn rep-btn-primary rep-btn-wide" data-affiliate="manekiya" data-track="report_pick_manekiya" rel="nofollow sponsored">無料で査定してもらう</a>
+            <a href="#" class="rep-pick-phone" data-affiliate="manekiya" data-track="report_pick_manekiya_phone" rel="nofollow sponsored">☎ 電話で聞いてみる</a>
           </article>
           <article class="rep-pick-card rep-pick-second">
-            <div class="rank-badge rank-silver"><span aria-hidden="true">🏅</span><span class="rank-no">大手で選ぶ<small>No.1</small></span></div>
-            <div class="rep-pick-head"><span>こんな人に</span><h3>大手の安心感・対面で相談したい</h3></div>
+            <div class="rank-badge rank-silver"><span aria-hidden="true">🏅</span><span class="rank-no">大手で安心</span></div>
+            <div class="rep-pick-head"><span>こんな人に</span><h3>大手のお店に、直接持っていって相談したい人</h3></div>
             <div class="rep-pick-name"><strong class="rep-brand">おたからや</strong><span class="pr-chip">PR</span></div>
-            <p class="rep-pick-lead">買取専門<b>26年</b>、世界<b>1,800店舗以上</b>を展開する大手。長年の実績と大手ならではの資金力で、安心して任せられる買取価格を実現。手数料も無料で、金・プラチナの価値を正しく評価してくれます。</p>
+            <p class="rep-pick-lead">買取専門で<b>26年</b>、世界に<b>1,800店舗以上</b>ある大手です。お店の数が多いので、近くに持っていきやすいのが安心。手数料も0円です。</p>
             <ul class="rep-pick-points">
-              <li><b>世界1,800店舗以上</b>・買取専門26年の大手で安心</li>
-              <li>大手の<b>資金力で買取額UP</b>を狙える</li>
-              <li>査定料・手数料・出張料が無料</li>
-              <li>近所の店舗への持ち込み・出張買取に対応</li>
+              <li>世界<b>1,800店舗以上</b>、26年やっている大手で安心</li>
+              <li>大手なので、高めの金額が出ることも</li>
+              <li>査定料・手数料・出張料は0円</li>
+              <li>近くのお店への持ち込みも、出張もOK</li>
             </ul>
-            <div class="rep-pick-flag">期間限定キャンペーン実施中<small>※実施状況・期限・条件は公式でご確認ください</small></div>
-            <a href="#" class="btn rep-btn rep-btn-primary rep-btn-wide" data-affiliate="otakaraya" data-track="report_pick_otakaraya" rel="nofollow sponsored">この適正額で無料査定する</a>
-            <a href="#" class="rep-pick-phone" data-affiliate="otakaraya" data-track="report_pick_otakaraya_link" rel="nofollow sponsored">店舗・条件を見てみる →</a>
+            <div class="rep-pick-flag">今だけのキャンペーンをやっていることも<small>※今やっているかは公式ページでご確認ください</small></div>
+            <a href="#" class="btn rep-btn rep-btn-primary rep-btn-wide" data-affiliate="otakaraya" data-track="report_pick_otakaraya" rel="nofollow sponsored">無料で査定してもらう</a>
+            <a href="#" class="rep-pick-phone" data-affiliate="otakaraya" data-track="report_pick_otakaraya_link" rel="nofollow sponsored">お店や条件を見てみる →</a>
           </article>
         </div>
-        <p class="rep-pick-tip">迷ったら、<b>まねきや</b>と<b>おたからや</b>の2社で相見積もりを取り、高い方に売るのが一番損しません。どちらも査定だけ・無料でOKです。</p>
+        <p class="rep-pick-tip">迷ったら、<b>まねきや</b>と<b>おたからや</b>の両方に査定してもらって、高い方に売るのが一番損しません。どちらも査定だけ・無料で大丈夫です。</p>
         <div class="rep-memo">
-          <span class="rep-memo-label">コピーして使える相談メモ</span>
-          <p data-report-memo>「プラチナの指輪です。本日単価で算出した適正額を基準に相談したいです。これ以上出せますか？」</p>
+          <span class="rep-memo-label">お店で見せれば伝わる、ひとことメモ</span>
+          <p data-report-memo>「プラチナの指輪です。今日の値段だと◯円くらいって見たんですが、これ以上出せますか？」</p>
           <button type="button" class="rep-memo-btn" data-report-copy data-track="report_copy">この文をコピーする</button>
         </div>
         <p class="campaign-note">※当ページは広告（PR）を含みます。各社の最新の価格・手数料・対応条件はリンク先の公式ページで確認してください。</p>
@@ -378,20 +378,20 @@ const faqJsonLd = {
     <!-- 安心バー -->
     <section class="reassurance-band rep-reassure" aria-label="査定前の安心ポイント">
       <div class="container reassurance-grid">
-        <div><span>01</span><strong>聞くだけ無料・売るのは後で決められる</strong><p>適正額と費用を見てから、売るかどうかを判断できます。</p></div>
-        <div><span>02</span><strong>状態が悪くても値段が付くことがある</strong><p>変形・刻印薄・片方だけの結婚指輪も、まず見てもらえます。</p></div>
-        <div><span>03</span><strong>持ち歩きが不安なら出張・宅配も</strong><p>高額品や複数点は、家にいながら相談する方法もあります。</p></div>
+        <div><span>01</span><strong>査定だけでもOK・売るかは後で決められる</strong><p>金額を見てから、売るかどうか決めて大丈夫です。</p></div>
+        <div><span>02</span><strong>古くても値段が付くことがある</strong><p>変形・刻印が薄い・片方だけの結婚指輪も、まず見てもらえます。</p></div>
+        <div><span>03</span><strong>持ち歩くのが不安なら出張・宅配も</strong><p>家にいながら見てもらう方法もあります。</p></div>
       </div>
     </section>
 
     <!-- 最終CTA -->
     <section class="section rep-final-section">
       <div class="container rep-final-box">
-        <h2 class="rep-h2">適正額を握ってから、売る。</h2>
-        <p>診断すれば、あなたはもう"言い値"で売る側ではありません。今日の単価で適正額を確認し、損しない相談先で複数比較しましょう。</p>
+        <h2 class="rep-h2">まずは、だいたいの金額を知ってから。</h2>
+        <p>いくらくらいか分かっていれば、安く買われる心配がぐっと減ります。30秒でわかるので、売る前に一度見てみてください。</p>
         <div class="rep-hero-actions rep-final-actions">
-          <a href="#shindan" class="btn rep-btn rep-btn-primary" data-scroll-to="#shindan" data-track="report_final_start">30秒で無料診断する</a>
-          <a href="#" class="btn rep-btn rep-btn-ghost" data-affiliate="manekiya" data-track="report_final_phone" rel="nofollow sponsored">電話で適正額を聞く</a>
+          <a href="#shindan" class="btn rep-btn rep-btn-primary" data-scroll-to="#shindan" data-track="report_final_start">30秒で金額の目安を見る</a>
+          <a href="#" class="btn rep-btn rep-btn-ghost" data-affiliate="manekiya" data-track="report_final_phone" rel="nofollow sponsored">電話で聞いてみる</a>
         </div>
       </div>
     </section>
@@ -400,24 +400,24 @@ const faqJsonLd = {
       <div class="container">
         <div class="rep-section-head"><span class="rep-kicker">FAQ</span><h2 class="rep-h2">よくある質問</h2></div>
         <div class="faq-list">
-          <article class="faq-item open"><button class="faq-q" type="button">「適正額レポート」とは何ですか？</button><div class="faq-a">当日のプラチナ単価をもとに、あなたの指輪の適正額レンジと「買い叩きライン」を算出した自分専用の目安です。査定前に持つことで、提示額が適正か自分で判断できます。実額は刻印・重量・宝石・査定日で変わります。</div></article>
-          <article class="faq-item"><button class="faq-q" type="button">なぜ単一の額でなく「レンジ」なのですか？</button><div class="faq-a">重さと当日単価で下限はほぼ決まりますが、状態・デザイン・宝石で上振れするためです。内訳を開示することが買い叩きを防ぐ武器になります。</div></article>
-          <article class="faq-item"><button class="faq-q" type="button">結婚指輪や古い指輪でも出ますか？</button><div class="faq-a">はい。刻印が薄い・片方だけ・金とのコンビでも、プラチナとして地金の目安が出せます。処分する前にまず確認してください。</div></article>
-          <article class="faq-item"><button class="faq-q" type="button">このページは公式サイトですか？</button><div class="faq-a">いいえ。当サイトは広告（PR）を含む案内ページです。レポートは目安で、最新の価格・条件はリンク先で確認してください。</div></article>
+          <article class="faq-item open"><button class="faq-q" type="button">ここで出る金額って何ですか？</button><div class="faq-a">今日のプラチナの値段と、入力した重さでざっくり計算した「だいたいの金額」です。売る前に目安を知っておくと、お店で安く買われにくくなります。石やデザイン、状態によって実際の金額は変わります。</div></article>
+          <article class="faq-item"><button class="faq-q" type="button">なぜピッタリの金額じゃなく、幅があるんですか？</button><div class="faq-a">金属だけの値段はだいたい決まりますが、状態やデザイン、石の有無で上がることがあるためです。なので「これくらい〜これくらい」と幅で出しています。</div></article>
+          <article class="faq-item"><button class="faq-q" type="button">結婚指輪や古い指輪でも分かりますか？</button><div class="faq-a">はい。刻印が薄い・片方だけ・金と混ざった指輪でも、だいたいの目安が出せます。捨てたりする前に、まず一度見てみてください。</div></article>
+          <article class="faq-item"><button class="faq-q" type="button">このページはお店の公式サイトですか？</button><div class="faq-a">いいえ。広告（PR）を含む案内ページです。金額はあくまで目安なので、正確な値段や条件はリンク先のお店で確認してください。</div></article>
         </div>
       </div>
     </section>
   </main>
 
   <!-- 固定CTAバー(SP) -->
-  <div class="sticky-cta rep-sticky" data-sticky-cta hidden aria-label="適正額レポートのショートカット">
-    <a href="#" class="sticky-cta-btn sticky-cta-phone" data-affiliate="manekiya" data-track="report_sticky_phone" rel="nofollow sponsored"><span class="sticky-cta-icon" aria-hidden="true">☎</span>電話で適正額</a>
-    <a href="#shindan" class="sticky-cta-btn sticky-cta-calc" data-scroll-to="#shindan" data-track="report_sticky_start">レポートを作る</a>
+  <div class="sticky-cta rep-sticky" data-sticky-cta hidden aria-label="買取金額チェックのショートカット">
+    <a href="#" class="sticky-cta-btn sticky-cta-phone" data-affiliate="manekiya" data-track="report_sticky_phone" rel="nofollow sponsored"><span class="sticky-cta-icon" aria-hidden="true">☎</span>電話で聞く</a>
+    <a href="#shindan" class="sticky-cta-btn sticky-cta-calc" data-scroll-to="#shindan" data-track="report_sticky_start">金額を見る</a>
   </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>プラチナ適正額レポート</p>
+      <p>プラチナ指輪 買取金額チェック</p>
       <nav>
         <a href="/privacy/">プライバシーポリシー</a>
         <a href="/disclosure/">広告掲載について</a>
@@ -426,7 +426,7 @@ const faqJsonLd = {
     </div>
   </footer>
 
-  <script src="/app.js?v=20260530-4" defer></script>
+  <script src="/app.js?v=20260531-1" defer></script>
 </body>
 </html>
 
@@ -521,7 +521,7 @@ const faqJsonLd = {
   .rep-btn-outline { background:#fff; color:var(--rep-cool); border-color:var(--rep-cool2); }
   .rep-btn-wide { width:100%; }
 
-  /* 武装 */
+  /* 安く買われないためのコツ */
   .rep-armor-section { background:linear-gradient(180deg,#241f1b,#15110e); color:#f4efe6; }
   .rep-armor-section .rep-kicker { color:#e3c987; }
   .rep-armor-section .rep-h2 { color:#fff; }
