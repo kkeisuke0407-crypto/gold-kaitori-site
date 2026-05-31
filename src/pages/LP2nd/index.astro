@@ -1,0 +1,633 @@
+---
+const PAGE_TITLE = "プラチナ指輪 高額買取おすすめTOP3｜結婚指輪・Pt900も無料査定";
+const PAGE_DESC = "プラチナ指輪を高く売るならどこ？本日のPt900・Pt850相場と、結婚指輪・刻印入り・宝石付きにも対応した買取店をランキングと比較表でやさしく解説。査定は無料・売るかは後で決められます。";
+const CANONICAL = "https://kaitori.hakobu-family.com/LP2nd/";
+const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
+const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
+
+const fallbackRates = {
+  updatedAt: "2026年5月29日 現在",
+  pt1000: 10602, pt950: 10125, pt900: 9648, pt850: 9065
+};
+function parseYen(v) { return Number(String(v || "").replace(/[^\d-]/g, "")); }
+function yen(v) { return `${Number(v).toLocaleString("ja-JP")}円`; }
+
+async function getRates() {
+  try {
+    const res = await fetch(MARKET_SOURCE_URL);
+    if (!res.ok) throw new Error("fail");
+    const text = (await res.text())
+      .replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/g, " ").replace(/\s+/g, " ").trim();
+    const u = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
+    const pt1000 = text.match(/Pt\s+([\d,]+)円/);
+    const pt900 = text.match(/Pt900\s+([\d,]+)円/);
+    const pt850 = text.match(/Pt850\s+([\d,]+)円/);
+    if (!pt900 && !pt1000) throw new Error("parse");
+    const r1000 = pt1000 ? parseYen(pt1000[1]) : fallbackRates.pt1000;
+    const r900 = pt900 ? parseYen(pt900[1]) : fallbackRates.pt900;
+    return {
+      updatedAt: u ? `${u[1]}年${u[2]}月${u[3]}日 更新` : fallbackRates.updatedAt,
+      pt1000: r1000, pt950: Math.round((r1000 + r900) / 2),
+      pt900: r900, pt850: pt850 ? parseYen(pt850[1]) : fallbackRates.pt850
+    };
+  } catch (_) { return { ...fallbackRates }; }
+}
+const rates = await getRates();
+// 指輪の重量別 参考額（地金のみのおおよそ。状態・宝石で変動）
+const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("ja-JP")}〜${Math.round(rates.pt900 * w).toLocaleString("ja-JP")}円`;
+
+const faqJsonLd = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": [
+    ["プラチナ指輪は1点だけでも査定できますか？", "はい、1点からでも無料で査定してもらえます。点数が少なくても断られることはほとんどありません。"],
+    ["Pt900の指輪はいくらで売れますか？", "重さ×その日のグラム単価がおおよその目安です。本日のPt900は約" + yen(rates.pt900) + "/gで、例えば4gの指輪なら地金だけで" + ringEx(4) + "ほどが目安です（状態・宝石で変わります）。"],
+    ["結婚指輪や婚約指輪も売れますか？", "売れます。シンプルな結婚指輪はプラチナの地金として、宝石付きの婚約指輪は石も合わせて見てもらえます。"],
+    ["刻印入りの指輪でも買取できますか？", "イニシャルや日付の刻印があっても、プラチナとしての価値は変わりません。問題なく買取できます。"],
+    ["片方だけの指輪でも売れますか？", "片方だけ・ペアの一方だけでも売れます。地金として重さで査定されます。"],
+    ["ダイヤや宝石付きの指輪は高くなりますか？", "石の種類や大きさによっては、地金に上乗せされて高くなることがあります。石も見てくれるお店を選ぶのがおすすめです。"],
+    ["鑑定書や保証書がなくても大丈夫ですか？", "なくても査定・買取できます。あれば査定がスムーズになることがありますが、必須ではありません。"],
+    ["査定後にキャンセルできますか？", "ほとんどのお店で、査定額に納得できなければ無料でキャンセルできます。売るかは金額を見てから決められます。"],
+    ["出張査定は無料ですか？", "今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各店の公式でご確認ください。"],
+    ["どのタイミングで売るのがよいですか？", "プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。"]
+  ].map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
+};
+
+// アフィリエイトリンク（manekiya / otakaraya は実リンク、buraibaは要設定）
+const AFF_MANEKIYA = "https://ad-fam.com/ad/p/r?_site=49248&_article=16522";
+const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{PAGE_TITLE}</title>
+  <meta name="description" content={PAGE_DESC} />
+  <link rel="canonical" href={CANONICAL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={PAGE_TITLE} />
+  <meta property="og:description" content={PAGE_DESC} />
+  <meta property="og:url" content={CANONICAL} />
+  <meta property="og:image" content={OGP_IMAGE} />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+  </script>
+  <script is:inline>
+    (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+      t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxnujpnscp");
+  </script>
+</head>
+<body data-landing-intent="lp2nd"
+  data-aff-manekiya={AFF_MANEKIYA} data-aff-otakaraya={AFF_OTAKARAYA} data-aff-buraiba="#">
+
+  <!-- 追従ヘッダー -->
+  <header class="hd">
+    <div class="hd-in">
+      <span class="hd-brand"><span class="hd-mark">Pt</span>プラチナ指輪買取比較<i class="pr">PR</i></span>
+      <a href="#" class="hd-cta" data-aff="manekiya" data-track="hd_web" rel="nofollow sponsored">無料査定</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01 FV -->
+    <section class="fv">
+      <div class="wrap">
+        <p class="fv-eyebrow">📈 プラチナ相場が高めの今がチャンス</p>
+        <h1 class="fv-h1">プラチナ指輪を<br /><span class="hl">高く売る</span>ならどこ？<br /><span class="fv-rank">高額買取おすすめ<b>TOP3</b></span></h1>
+        <p class="fv-sub">Pt900・Pt850・結婚指輪・刻印入り・宝石付きも査定対象。<br />査定は無料、売るかどうかは金額を見てから決められます。</p>
+
+        <div class="rate-chip">
+          <span>本日のプラチナ相場</span>
+          <b>Pt900 {yen(rates.pt900)}/g</b><b>Pt850 {yen(rates.pt850)}/g</b>
+          <small>{rates.updatedAt}</small>
+        </div>
+
+        <!-- 3社ミニ比較表 -->
+        <div class="mini">
+          <div class="mini-row mini-head"><span>順位</span><span>買取価格</span><span>手数料</span><span>指輪対応</span><span></span></div>
+          <div class="mini-row mini-1">
+            <span class="mini-rk"><i class="crown">👑</i>1位</span><span><b>◎ 高水準</b></span><span>0円</span><span>◎</span>
+            <a href="#" class="mini-btn" data-aff="manekiya" data-track="fv_mini_manekiya" rel="nofollow sponsored">査定</a>
+          </div>
+          <div class="mini-row">
+            <span class="mini-rk">🥈2位</span><span>○</span><span>0円</span><span>◎</span>
+            <a href="#" class="mini-btn ghost" data-aff="otakaraya" data-track="fv_mini_otakaraya" rel="nofollow sponsored">査定</a>
+          </div>
+          <div class="mini-row">
+            <span class="mini-rk">🥉3位</span><span>○</span><span>0円</span><span>○</span>
+            <a href="#" class="mini-btn ghost" data-aff="buraiba" data-track="fv_mini_buraiba" rel="nofollow sponsored">査定</a>
+          </div>
+        </div>
+
+        <!-- 1位強調バナー -->
+        <div class="fv-pick">
+          <span class="fv-pick-tag">迷ったらここ</span>
+          <p>手数料0円で、刻印のない指輪や古い結婚指輪もていねいに見てくれる<b>まねきや</b>が一番人気です。</p>
+        </div>
+
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="fv_web" rel="nofollow sponsored">WEBで無料査定</a>
+        </div>
+        <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
+      </div>
+    </section>
+
+    <!-- 02 相場 -->
+    <section class="sec sec-mint" id="rate">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💎 相場</span><h2>本日のプラチナ買取相場</h2><p>純度（刻印）によって1gあたりの金額が変わります。</p></div>
+        <div class="rate-grid">
+          <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
+          <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
+          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
+          <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
+        </div>
+        <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場</p>
+
+        <div class="rate-ex">
+          <h3>指輪の重さ別・参考買取額（Pt900の場合）</h3>
+          <ul>
+            <li><span>細めの指輪（約3g）</span><b>{ringEx(3)}</b></li>
+            <li><span>標準的な指輪（約5g）</span><b>{ringEx(5)}</b></li>
+            <li><span>太め・甲丸（約10g）</span><b>{ringEx(10)}</b></li>
+          </ul>
+          <p class="note">※結婚指輪・婚約指輪・コンビリング（金とのミックス）もOK。上の金額は地金だけのおおよその目安で、宝石・ブランド・デザインがあるとさらに上がることがあります。重量・状態で変わります。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 高く売るコツ -->
+    <section class="sec" id="point">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">✓ コツ</span><h2>プラチナ指輪を高く売る5つのコツ</h2><p>お店選びの前に、これだけ知っておくと損しません。</p></div>
+        <div class="point-grid">
+          <div class="point"><i>01</i><h3>手数料0円のお店を選ぶ</h3><p>査定額が高くても、手数料を引かれたら手取りは減ります。まず「手数料0円」を確認。</p></div>
+          <div class="point"><i>02</i><h3>相場を公開しているお店を選ぶ</h3><p>その日のグラム単価を出しているお店は、金額の根拠がはっきりしていて安心です。</p></div>
+          <div class="point"><i>03</i><h3>宝石も見てくれるお店を選ぶ</h3><p>ダイヤなど石付きの指輪は、石も評価してくれるお店だと高くなりやすいです。</p></div>
+          <div class="point"><i>04</i><h3>結婚指輪・刻印入りの対応を確認</h3><p>イニシャル刻印や片方だけでも、ちゃんと買い取ってくれるか先に確認しましょう。</p></div>
+          <div class="point"><i>05</i><h3>2社以上で見積もりを取る</h3><p>同じ指輪でもお店で金額は変わります。2社くらい聞いて、高い方に売るのが一番お得です。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 総合比較表 -->
+    <section class="sec sec-cream" id="table">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">📊 比較</span><h2>おすすめ3社をまとめて比較</h2><p>横にスクロールして見られます。</p></div>
+        <div class="tbl-scroll">
+          <table class="tbl">
+            <thead>
+              <tr><th>項目</th><th class="th1">👑 まねきや</th><th>🥈 おたからや</th><th>🥉 ブラリバ</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>総合評価</td><td class="td1">★4.8</td><td>★4.6</td><td>★4.4</td></tr>
+              <tr><td>Pt900の買取</td><td class="td1"><b>◎ 高水準</b></td><td>○</td><td>○</td></tr>
+              <tr><td>手数料</td><td class="td1">◎ 0円</td><td>0円</td><td>0円</td></tr>
+              <tr><td>査定方法</td><td class="td1">店頭/出張/宅配</td><td>店頭/出張</td><td>店頭/出張/宅配</td></tr>
+              <tr><td>結婚指輪対応</td><td class="td1">◎</td><td>○</td><td>○</td></tr>
+              <tr><td>刻印入り対応</td><td class="td1">◎</td><td>○</td><td>○</td></tr>
+              <tr><td>宝石付き評価</td><td class="td1">○</td><td>○</td><td>◎</td></tr>
+              <tr><td>キャンペーン</td><td class="td1">買取額UPあり</td><td>あり</td><td>—</td></tr>
+              <tr><td>受付</td><td class="td1">WEB/電話</td><td>WEB/電話</td><td>WEB/電話</td></tr>
+              <tr class="tbl-cta">
+                <td></td>
+                <td class="td1"><a href="#" class="btn btn-web sm" data-aff="manekiya" data-track="tbl_manekiya" rel="nofollow sponsored">無料査定</a></td>
+                <td><a href="#" class="btn btn-ghost sm" data-aff="otakaraya" data-track="tbl_otakaraya" rel="nofollow sponsored">無料査定</a></td>
+                <td><a href="#" class="btn btn-ghost sm" data-aff="buraiba" data-track="tbl_buraiba" rel="nofollow sponsored">無料査定</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">※買取価格は相場・重量・状態で変わります。◎○は編集部による目安です。最新の条件は各公式でご確認ください。</p>
+      </div>
+    </section>
+
+    <!-- 05 ランキング -->
+    <section class="sec" id="ranking">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">🏆 ランキング</span><h2>プラチナ指輪 高額買取ランキング</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
+
+        <!-- 1位 -->
+        <article class="rk rk-1">
+          <div class="rk-ribbon"><i>👑</i>第1位</div>
+          <div class="rk-head"><h3>まねきや</h3><span class="rk-star">★4.8</span><i class="pr">PR</i></div>
+          <p class="rk-for">プラチナ指輪を、できるだけ高く・手取りを減らさず売りたい人に</p>
+          <ul class="rk-reasons">
+            <li><b>手数料0円</b>。出た金額をそのまま受け取りやすい</li>
+            <li><b>X線の機械</b>で刻印のない指輪・古い指輪も正確に調べてくれる</li>
+            <li>海外にも売り先があり、高めの金額が出やすい</li>
+          </ul>
+          <div class="rk-meta">
+            <div><span>対応できる指輪</span><b>結婚指輪・刻印入り・片方だけ・コンビOK</b></div>
+            <div><span>買取方法</span><b>店頭・出張・宅配（料金0円）</b></div>
+            <div><span>キャンペーン</span><b>電話申込で買取額UPの対象になることも</b></div>
+          </div>
+          <div class="rk-reviews">
+            <p>💬「結婚指輪を売りました。手数料0円で、思ったより高くて安心」<small>40代・女性</small></p>
+            <p>💬「刻印のある古い指輪も、ちゃんと値段が付きました」<small>50代・女性</small></p>
+          </div>
+          <a href="#" class="btn btn-web full" data-aff="manekiya" data-track="rk_manekiya_web" rel="nofollow sponsored">まねきやで無料査定する</a>
+          <a href="#" class="btn btn-phone full" data-aff="manekiya" data-track="rk_manekiya_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
+        </article>
+
+        <!-- 2位 -->
+        <article class="rk rk-2">
+          <div class="rk-ribbon"><i>🥈</i>第2位</div>
+          <div class="rk-head"><h3>おたからや</h3><span class="rk-star">★4.6</span><i class="pr">PR</i></div>
+          <p class="rk-for">大手のお店に、直接持っていって相談したい人に</p>
+          <ul class="rk-reasons">
+            <li>世界<b>1,800店舗以上</b>・買取専門26年の大手で安心</li>
+            <li>大手なので高めの金額が出ることも</li>
+            <li>査定料・手数料・出張料が0円</li>
+          </ul>
+          <div class="rk-meta">
+            <div><span>対応できる指輪</span><b>結婚指輪・宝石付きもOK</b></div>
+            <div><span>買取方法</span><b>店頭・出張</b></div>
+            <div><span>キャンペーン</span><b>期間限定キャンペーンあり</b></div>
+          </div>
+          <div class="rk-reviews">
+            <p>💬「近所に店舗があって、その場で現金にしてもらえました」<small>60代・女性</small></p>
+            <p>💬「イニシャル入りでも問題なく買い取ってもらえました」<small>30代・女性</small></p>
+          </div>
+          <a href="#" class="btn btn-ghost full" data-aff="otakaraya" data-track="rk_otakaraya" rel="nofollow sponsored">おたからやで無料査定する</a>
+        </article>
+
+        <!-- 3位 -->
+        <article class="rk rk-3">
+          <div class="rk-ribbon"><i>🥉</i>第3位</div>
+          <div class="rk-head"><h3>ブラリバ</h3><span class="rk-star">★4.4</span><i class="pr">PR</i></div>
+          <p class="rk-for">ダイヤや宝石付きの指輪を、石ごと評価してほしい人に</p>
+          <ul class="rk-reasons">
+            <li>デザインや宝石も合わせて見てくれる</li>
+            <li>買取手数料・査定料が0円</li>
+            <li>宅配キットで送るだけのらくらく査定</li>
+          </ul>
+          <div class="rk-meta">
+            <div><span>対応できる指輪</span><b>宝石付き・ブランド・デザインリング</b></div>
+            <div><span>買取方法</span><b>店頭・出張・宅配</b></div>
+            <div><span>キャンペーン</span><b>公式ページでご確認ください</b></div>
+          </div>
+          <div class="rk-reviews">
+            <p>💬「ダイヤが取れていた指輪も、問題なく買い取ってくれました」<small>40代・女性</small></p>
+            <p>💬「宅配キットに入れて送るだけで楽でした」<small>30代・女性</small></p>
+          </div>
+          <a href="#" class="btn btn-ghost full" data-aff="buraiba" data-track="rk_buraiba" rel="nofollow sponsored">ブラリバで無料査定する</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 1位深掘り -->
+    <section class="sec sec-mint" id="deep">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">👑 1位くわしく</span><h2>なぜ「まねきや」が1位なの？</h2></div>
+        <div class="deep">
+          <ul class="deep-merit">
+            <li><b>手数料0円</b>で、提示された金額をそのまま受け取りやすい</li>
+            <li><b>X線の機械</b>で、刻印がない指輪・古い指輪も正確に調べてくれる</li>
+            <li>海外にも売り先を持っていて、高めの金額が出やすい</li>
+            <li>結婚指輪・刻印入り・片方だけ・金とのコンビもOK</li>
+          </ul>
+          <div class="flow">
+            <h3>査定のかんたんな流れ</h3>
+            <ol>
+              <li><b>申し込み</b><span>WEB（1分ほど）か電話で予約</span></li>
+              <li><b>査定</b><span>店頭・出張・宅配から選べる</span></li>
+              <li><b>金額を確認</b><span>納得したら、その場で現金</span></li>
+            </ol>
+            <p class="flow-fee">査定料・出張料・キャンセル料はすべて<b>0円</b>。売るかは金額を見てから決められます。</p>
+          </div>
+        </div>
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="deep_web" rel="nofollow sponsored">WEBで無料査定</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 口コミ -->
+    <section class="sec" id="voice">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💬 口コミ</span><h2>実際に売った人の声</h2></div>
+        <div class="voice-grid">
+          <div class="voice"><span class="stars">★★★★★</span><p>「結婚指輪を整理したくて査定に。手数料0円で、相場が上がっているからと高めに買い取ってもらえました。」</p><small>結婚指輪／40代・女性</small></div>
+          <div class="voice"><span class="stars">★★★★★</span><p>「日付の刻印が入っていたので不安でしたが、プラチナの価値は変わらないと説明され、納得して売れました。」</p><small>刻印入り／50代・男性</small></div>
+          <div class="voice"><span class="stars">★★★★☆</span><p>「Pt900のリングを2本。その日の相場で計算してくれて、金額の根拠がはっきりしていて安心でした。」</p><small>Pt900リング／30代・女性</small></div>
+          <div class="voice"><span class="stars">★★★★★</span><p>「ダイヤ付きの指輪を、地金と石の両方で見てもらえました。思っていたより高くなりました。」</p><small>ダイヤ付き／40代・女性</small></div>
+          <div class="voice"><span class="stars">★★★★☆</span><p>「片方なくしてしまった指輪も、重さで買い取ってくれました。捨てなくてよかったです。」</p><small>壊れた・片方／60代・女性</small></div>
+        </div>
+        <p class="note">※個人の感想です。査定額・条件には個人差があります。</p>
+      </div>
+    </section>
+
+    <!-- 08 不安解消 -->
+    <section class="sec sec-cream" id="worry">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">🤔 よくある不安</span><h2>こんな指輪でも売れる？</h2></div>
+        <div class="worry-grid">
+          <div class="worry"><h3>結婚指輪を売るのは問題ない？</h3><p>まったく問題ありません。買い替えや整理で売る方はとても多いです。</p></div>
+          <div class="worry"><h3>イニシャル刻印があっても売れる？</h3><p>売れます。刻印があってもプラチナの価値は変わりません。</p></div>
+          <div class="worry"><h3>片方だけでも売れる？</h3><p>売れます。片方だけ・ペアの一方だけでも重さで査定されます。</p></div>
+          <div class="worry"><h3>鑑定書・保証書がなくても売れる？</h3><p>なくても大丈夫です。あれば査定がスムーズになることもあります。</p></div>
+          <div class="worry"><h3>ダイヤ付きは別で評価される？</h3><p>石の種類や大きさによっては、地金に上乗せされて高くなることがあります。</p></div>
+          <div class="worry"><h3>古いデザインでも売れる？</h3><p>売れます。デザインが古くても、プラチナとしての価値はしっかりあります。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 FAQ -->
+    <section class="sec" id="faq">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">❓ FAQ</span><h2>よくある質問</h2></div>
+        <div class="faq">
+          <details open><summary>プラチナ指輪は1点だけでも査定できますか？</summary><p>はい、1点からでも無料で査定してもらえます。点数が少なくても断られることはほとんどありません。</p></details>
+          <details><summary>Pt900の指輪はいくらで売れますか？</summary><p>重さ×その日のグラム単価がおおよその目安です。本日のPt900は約{yen(rates.pt900)}/gで、4gの指輪なら地金だけで{ringEx(4)}ほどが目安です。</p></details>
+          <details><summary>結婚指輪や婚約指輪も売れますか？</summary><p>売れます。シンプルな結婚指輪は地金として、宝石付きの婚約指輪は石も合わせて見てもらえます。</p></details>
+          <details><summary>刻印入りの指輪でも買取できますか？</summary><p>イニシャルや日付の刻印があっても、プラチナの価値は変わりません。問題なく買取できます。</p></details>
+          <details><summary>片方だけの指輪でも売れますか？</summary><p>片方だけ・ペアの一方だけでも売れます。地金として重さで査定されます。</p></details>
+          <details><summary>ダイヤや宝石付きの指輪は高くなりますか？</summary><p>石の種類や大きさによっては、地金に上乗せされて高くなることがあります。</p></details>
+          <details><summary>鑑定書や保証書がなくても大丈夫ですか？</summary><p>なくても査定・買取できます。あれば査定がスムーズになることがあります。</p></details>
+          <details><summary>査定後にキャンセルできますか？</summary><p>多くのお店で、金額に納得できなければ無料でキャンセルできます。</p></details>
+          <details><summary>出張査定は無料ですか？</summary><p>今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各公式でご確認ください。</p></details>
+          <details><summary>どのタイミングで売るのがよいですか？</summary><p>プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 最終CTA -->
+    <section class="sec sec-final" id="final">
+      <div class="wrap">
+        <h2>迷ったら、まずは1位の「まねきや」へ。</h2>
+        <p>プラチナ相場が高めの今のうちに、無料査定で金額だけでも確認しておきましょう。査定だけ・売らなくてもOKです。</p>
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="final_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="final_web" rel="nofollow sponsored">WEBで無料査定</a>
+        </div>
+        <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ft">
+    <div class="wrap">
+      <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。買取価格・手数料・対応条件などの最新情報は、各社の公式ページでご確認ください。掲載の◎○や順位は編集部の判断によるものです。</p>
+      <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
+      <small>プラチナ指輪買取比較</small>
+    </div>
+  </footer>
+
+  <!-- スマホ下部固定CTA -->
+  <div class="sticky" data-sticky hidden>
+    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>電話で査定</a>
+    <a href="#" class="sticky-web" data-aff="manekiya" data-track="sticky_web" rel="nofollow sponsored">WEB無料査定</a>
+  </div>
+
+  <style>
+    :root{
+      --bg:#fff; --mint:#EAF6F2; --cream:#FFF7EC; --green:#0E9E8E; --green-d:#0B8276; --green-dd:#0a6a60;
+      --ink:#23303A; --body:#4A5862; --sub:#8B98A1; --line:#E5EDEA; --gold:#F2B33D; --gold-d:#D9962A;
+      --coral:#FF7A59; --coral-d:#F26442; --star:#FFB02E; --hot:#E8604C;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+    body{ background:var(--bg); color:var(--ink); font-family:"Noto Sans JP",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; padding-bottom:64px; line-height:1.7; }
+    [hidden]{ display:none !important; }
+    .wrap{ max-width:520px; margin:0 auto; padding:0 16px; }
+    b{ font-weight:900; }
+    .pr{ font-style:normal; font-size:10px; font-weight:700; color:var(--sub); border:1px solid var(--line); border-radius:4px; padding:1px 5px; }
+
+    /* ヘッダー */
+    .hd{ position:sticky; top:0; z-index:50; background:rgba(255,255,255,.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+    .hd-in{ max-width:520px; margin:0 auto; padding:9px 16px; display:flex; align-items:center; gap:8px; }
+    .hd-brand{ display:flex; align-items:center; gap:6px; font-weight:900; font-size:14px; }
+    .hd-mark{ width:26px; height:26px; border-radius:8px; background:linear-gradient(150deg,var(--green),var(--green-d)); color:#fff; font-size:11px; display:grid; place-items:center; }
+    .hd-cta{ margin-left:auto; background:var(--green-d); color:#fff; font-weight:900; font-size:13px; text-decoration:none; padding:8px 16px; border-radius:999px; }
+
+    /* ボタン共通 */
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 20px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .08s; }
+    .btn:active{ transform:scale(.98); }
+    .btn i{ font-style:normal; }
+    .btn-web{ background:var(--green-d); color:#fff; }
+    .btn-phone{ background:var(--coral); color:#fff; box-shadow:0 8px 18px rgba(255,122,89,.3); }
+    .btn-ghost{ background:#fff; color:var(--green-d); border:2px solid var(--green-d); box-shadow:none; }
+    .btn.full{ display:flex; width:100%; margin-top:10px; }
+    .btn.sm{ min-height:42px; font-size:13px; padding:0 12px; box-shadow:none; }
+    .cta-pair{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+    .cta-note{ text-align:center; font-size:12px; color:var(--sub); margin:8px 0 0; }
+
+    /* 01 FV */
+    .fv{ background:linear-gradient(180deg,#EAF6F2, #fff); padding:24px 0 34px; }
+    .fv-eyebrow{ display:inline-block; background:#fff; border:1px solid var(--line); color:var(--green-d); font-weight:900; font-size:12px; border-radius:999px; padding:5px 12px; margin:0 0 12px; }
+    .fv-h1{ font-size:30px; font-weight:900; line-height:1.32; margin:0 0 12px; letter-spacing:.01em; }
+    .fv-h1 .hl{ color:var(--green-d); }
+    .fv-rank{ display:inline-block; margin-top:6px; background:var(--gold); color:#5a3d00; border-radius:10px; padding:2px 12px; font-size:24px; }
+    .fv-rank b{ color:var(--coral-d); }
+    .fv-sub{ font-size:14px; color:var(--body); margin:0 0 16px; }
+    .rate-chip{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; box-shadow:0 6px 18px rgba(20,60,50,.06); }
+    .rate-chip>span{ font-size:12px; font-weight:900; color:var(--green-d); width:100%; }
+    .rate-chip b{ font-size:16px; }
+    .rate-chip small{ width:100%; color:var(--sub); font-size:11px; }
+
+    /* ミニ比較表 */
+    .mini{ margin-top:16px; background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:0 8px 22px rgba(20,60,50,.07); }
+    .mini-row{ display:grid; grid-template-columns:1fr 1fr .8fr .7fr 1fr; align-items:center; gap:4px; padding:11px 12px; border-top:1px solid var(--line); font-size:13px; text-align:center; }
+    .mini-head{ border-top:0; background:#F4F8F6; color:var(--sub); font-size:11px; font-weight:700; }
+    .mini-1{ background:#FFFCF2; }
+    .mini-rk{ font-weight:900; display:flex; align-items:center; justify-content:center; gap:3px; }
+    .crown{ font-style:normal; }
+    .mini-btn{ background:var(--green-d); color:#fff; text-decoration:none; font-weight:900; font-size:12px; border-radius:999px; padding:7px 0; }
+    .mini-btn.ghost{ background:#fff; color:var(--green-d); border:1.5px solid var(--green-d); }
+
+    .fv-pick{ margin-top:14px; background:#fff; border:2px solid var(--gold); border-radius:14px; padding:12px 14px; position:relative; }
+    .fv-pick-tag{ position:absolute; top:-11px; left:14px; background:var(--gold); color:#5a3d00; font-weight:900; font-size:11px; border-radius:999px; padding:3px 10px; }
+    .fv-pick p{ margin:4px 0 0; font-size:13px; }
+
+    /* セクション共通 */
+    .sec{ padding:38px 0; }
+    .sec-mint{ background:var(--mint); }
+    .sec-cream{ background:var(--cream); }
+    .sec-head{ text-align:center; margin-bottom:22px; }
+    .chip{ display:inline-block; background:#fff; border:1px solid var(--line); color:var(--green-d); font-weight:900; font-size:12px; border-radius:999px; padding:5px 14px; }
+    .sec-head h2{ font-size:23px; font-weight:900; margin:10px 0 6px; line-height:1.4; }
+    .sec-head p{ font-size:13px; color:var(--body); margin:0; }
+    .note{ font-size:11px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
+
+    /* 02 相場 */
+    .rate-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .rate-grid>div{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .rate-grid span{ display:block; font-size:13px; color:var(--sub); font-weight:700; }
+    .rate-grid b{ font-size:22px; color:var(--ink); }
+    .rate-grid small{ color:var(--sub); font-size:12px; }
+    .rate-hot{ border-color:var(--green) !important; background:#F2FBF8 !important; }
+    .rate-hot b{ color:var(--green-d); }
+    .rate-updated{ text-align:center; font-size:11px; color:var(--sub); margin:10px 0 0; }
+    .rate-ex{ margin-top:20px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .rate-ex h3{ font-size:15px; margin:0 0 10px; }
+    .rate-ex ul{ list-style:none; margin:0; padding:0; }
+    .rate-ex li{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-top:1px dashed var(--line); font-size:14px; }
+    .rate-ex li span{ color:var(--body); }
+    .rate-ex li b{ color:var(--green-d); }
+
+    /* 03 コツ */
+    .point-grid{ display:grid; gap:12px; }
+    .point{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 16px 16px 56px; position:relative; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .point i{ position:absolute; left:14px; top:16px; width:32px; height:32px; border-radius:10px; background:var(--mint); color:var(--green-d); font-style:normal; font-weight:900; display:grid; place-items:center; font-size:14px; }
+    .point h3{ font-size:15px; margin:0 0 4px; }
+    .point p{ font-size:13px; color:var(--body); margin:0; }
+
+    /* 04 比較表 */
+    .tbl-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:16px; border:1px solid var(--line); }
+    .tbl{ width:100%; min-width:460px; border-collapse:collapse; background:#fff; font-size:13px; }
+    .tbl th,.tbl td{ padding:11px 10px; text-align:center; border-bottom:1px solid var(--line); }
+    .tbl thead th{ background:#F4F8F6; font-size:13px; position:sticky; top:0; }
+    .tbl th:first-child,.tbl td:first-child{ text-align:left; color:var(--sub); font-weight:700; background:#FAFCFB; position:sticky; left:0; }
+    .th1,.td1{ background:#FFFCF2 !important; }
+    .td1 b{ color:var(--green-d); }
+    .tbl-cta td{ padding:12px 8px; }
+
+    /* 05 ランキング */
+    .rk{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px 16px 16px; margin-bottom:18px; box-shadow:0 10px 26px rgba(20,60,50,.08); position:relative; }
+    .rk-1{ border:2px solid var(--gold); box-shadow:0 14px 32px rgba(217,150,42,.18); }
+    .rk-ribbon{ position:absolute; top:-14px; left:16px; background:var(--sub); color:#fff; font-weight:900; font-size:13px; border-radius:999px; padding:5px 14px; display:flex; align-items:center; gap:4px; }
+    .rk-ribbon i{ font-style:normal; }
+    .rk-1 .rk-ribbon{ background:linear-gradient(135deg,#f6c64d,var(--gold-d)); color:#5a3d00; }
+    .rk-2 .rk-ribbon{ background:#9AA7B0; }
+    .rk-3 .rk-ribbon{ background:#C8A06A; }
+    .rk-head{ display:flex; align-items:center; gap:8px; margin-top:6px; }
+    .rk-head h3{ font-size:22px; margin:0; }
+    .rk-star{ color:var(--star); font-weight:900; font-size:14px; }
+    .rk-head .pr{ margin-left:auto; }
+    .rk-for{ font-size:13px; color:var(--green-d); font-weight:700; background:var(--mint); border-radius:8px; padding:7px 10px; margin:10px 0; }
+    .rk-reasons{ list-style:none; margin:0 0 12px; padding:0; display:grid; gap:7px; }
+    .rk-reasons li{ font-size:13.5px; padding-left:24px; position:relative; }
+    .rk-reasons li::before{ content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
+    .rk-meta{ display:grid; gap:8px; background:#FAFCFB; border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; }
+    .rk-meta div{ display:grid; grid-template-columns:88px 1fr; gap:8px; font-size:12.5px; }
+    .rk-meta span{ color:var(--sub); }
+    .rk-reviews{ display:grid; gap:7px; margin-bottom:6px; }
+    .rk-reviews p{ font-size:12.5px; color:var(--body); background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin:0; }
+    .rk-reviews small{ display:block; color:var(--sub); margin-top:2px; }
+
+    /* 06 深掘り */
+    .deep{ display:grid; gap:14px; }
+    .deep-merit{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+    .deep-merit li{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:13.5px; }
+    .flow{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .flow h3{ font-size:15px; margin:0 0 12px; }
+    .flow ol{ margin:0; padding:0; list-style:none; display:grid; gap:10px; counter-reset:f; }
+    .flow li{ display:flex; align-items:baseline; gap:10px; font-size:13.5px; counter-increment:f; }
+    .flow li::before{ content:counter(f); flex:0 0 26px; width:26px; height:26px; background:var(--green-d); color:#fff; border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:13px; }
+    .flow li b{ margin-right:4px; }
+    .flow li span{ color:var(--body); }
+    .flow-fee{ font-size:13px; background:var(--mint); border-radius:10px; padding:10px 12px; margin:12px 0 0; }
+
+    /* 07 口コミ */
+    .voice-grid{ display:grid; gap:12px; }
+    .voice{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px 16px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .stars{ color:var(--star); font-size:14px; letter-spacing:1px; }
+    .voice p{ font-size:13.5px; margin:6px 0; }
+    .voice small{ color:var(--sub); font-weight:700; }
+
+    /* 08 不安解消 */
+    .worry-grid{ display:grid; gap:10px; }
+    .worry{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+    .worry h3{ font-size:14px; margin:0 0 5px; color:var(--green-d); }
+    .worry h3::before{ content:"Q. "; }
+    .worry p{ font-size:13px; color:var(--body); margin:0; }
+    .worry p::before{ content:"A. "; font-weight:900; color:var(--ink); }
+
+    /* 09 FAQ */
+    .faq{ display:grid; gap:10px; }
+    .faq details{ background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    .faq summary{ list-style:none; cursor:pointer; padding:14px 40px 14px 16px; font-weight:700; font-size:14px; position:relative; }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq summary::after{ content:"+"; position:absolute; right:16px; top:12px; font-size:20px; color:var(--green-d); }
+    .faq details[open] summary::after{ content:"−"; }
+    .faq p{ margin:0; padding:0 16px 14px; font-size:13px; color:var(--body); }
+
+    /* 10 最終CTA */
+    .sec-final{ background:linear-gradient(180deg,#fff,var(--mint)); text-align:center; }
+    .sec-final h2{ font-size:22px; font-weight:900; margin:0 0 8px; line-height:1.45; }
+    .sec-final>.wrap>p{ font-size:14px; color:var(--body); margin:0 0 4px; }
+
+    /* フッター */
+    .ft{ background:#23303A; color:#cfd8de; padding:24px 0; }
+    .ft-note{ font-size:11px; line-height:1.7; margin:0 0 12px; }
+    .ft nav{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:10px; }
+    .ft a{ color:#aeecdf; color:#a9d5cd; font-size:12px; }
+    .ft small{ color:#7d8a92; font-size:11px; }
+
+    /* スマホ下部固定 */
+    .sticky{ position:fixed; left:0; right:0; bottom:0; z-index:60; display:grid; grid-template-columns:1fr 1.2fr; gap:8px; padding:8px 10px; background:rgba(255,255,255,.97); backdrop-filter:blur(6px); border-top:1px solid var(--line); }
+    .sticky a{ text-decoration:none; font-weight:900; border-radius:999px; min-height:50px; display:flex; align-items:center; justify-content:center; gap:5px; font-size:14px; }
+    .sticky i{ font-style:normal; }
+    .sticky-phone{ background:var(--coral); color:#fff; }
+    .sticky-web{ background:var(--green-d); color:#fff; }
+
+    @media (min-width:600px){
+      .fv-h1{ font-size:34px; }
+      .point-grid,.voice-grid,.worry-grid{ grid-template-columns:1fr 1fr; }
+    }
+  </style>
+
+  <script>
+    var AFF = {
+      manekiya: document.body.getAttribute("data-aff-manekiya"),
+      otakaraya: document.body.getAttribute("data-aff-otakaraya"),
+      buraiba: document.body.getAttribute("data-aff-buraiba")
+    };
+    var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+    function track(name, params){
+      try{ if(window.dataLayer) window.dataLayer.push({event:name, ...(params||{})});
+        if(typeof gtag==="function") gtag("event", name, params||{}); }catch(_){}
+    }
+    function affLink(raw){
+      if(!raw || raw === "#") return "#";
+      try{ var u=new URL(raw);
+        new URLSearchParams(location.search).forEach(function(v,k){ if(KEEP.test(k)&&!u.searchParams.has(k)) u.searchParams.set(k,v); });
+        return u.toString();
+      }catch(_){ return raw; }
+    }
+    // アフィリンク注入＋計測
+    document.querySelectorAll("[data-aff]").forEach(function(el){
+      var key = el.getAttribute("data-aff");
+      var url = affLink(AFF[key]);
+      el.setAttribute("href", url);
+      el.addEventListener("click", function(e){
+        var tn = el.getAttribute("data-track") || "";
+        var params = { affiliate_key:key, track_name:tn, landing_intent:"lp2nd", link_url:url };
+        track(tn.indexOf("phone")>=0 ? "phone_click" : "web_click", params);
+        if(url && url !== "#"){
+          var primary = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button===0;
+          if(primary){
+            e.preventDefault();
+            var done=false; var go=function(){ if(done) return; done=true; location.href=url; };
+            track("gold_kaitori_affiliate_click", { ...params, event_callback:go, event_timeout:1500 });
+            setTimeout(go,1500);
+          } else { track("gold_kaitori_affiliate_click", params); }
+        } else { e.preventDefault(); }
+      });
+    });
+    // スマホ下部固定CTA：FVを過ぎたら表示
+    var sticky = document.querySelector("[data-sticky]");
+    var fv = document.querySelector(".fv");
+    if(sticky && fv && "IntersectionObserver" in window){
+      new IntersectionObserver(function(es){ es.forEach(function(en){ sticky.hidden = en.isIntersecting; }); }, {threshold:0})
+        .observe(fv);
+    } else if(sticky){ sticky.hidden = false; }
+    track("lp2nd_open", { landing_intent:"lp2nd" });
+  </script>
+</body>
+</html>
