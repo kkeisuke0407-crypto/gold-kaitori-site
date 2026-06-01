@@ -104,16 +104,19 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <img src="/images/fv-hero.jpg" alt="プラチナ指輪を高く売るならどこ？高額買取おすすめTOP3｜まねきや・おたからや・ブラリバ" width="1536" height="1024" loading="eager" class="fv-hero-img" />
         </h1>
 
-        <!-- キャンペーンバナー -->
+        <!-- キャンペーンバナー（期間外は自動で非表示） -->
         <div class="camp2">
-          <a href="#" class="camp2-banner" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
-            <span class="camp2-term">6/1〜6/30 期間限定</span>
-            <span class="camp2-cond">まねきや｜お電話申込の方限定</span>
-            <span class="camp2-main">買取金額 <em>最大<b>30%</b>UP</em></span>
-          </a>
+          {campDays > 0 && (
+            <a href="#" class="camp2-banner" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
+              <span class="camp2-term">6/1〜6/30 期間限定</span>
+              <span class="camp2-cond">まねきや｜お電話申込の方限定</span>
+              <span class="camp2-main">買取金額 <em>最大<b>30%</b>UP</em></span>
+            </a>
+          )}
           <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
             <i>☎</i>電話で無料査定
           </a>
+          {campDays > 0 && <p class="camp2-note">※「最大30%UP」はまねきや公式のお電話申込限定キャンペーン（2026年6月1日〜6月30日）に基づく表記です。買取金額の上乗せ率は品目・状態により異なり上限があります。適用条件・対象・期間は変更される場合があるため、最新の適用可否は公式サイトでご確認ください。</p>}
         </div>
 
         <!-- プラチナ相場チップ -->
@@ -144,17 +147,23 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               <tr class="fv-tr-camp">
                 <td class="fv-td-item">当サイト限定<br />キャンペーン</td>
                 <td class="fv-td fv-td1">
-                  <span class="camp-badge">手数料10%無料</span><br />
-                  <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
+                  {campDays > 0 ? (
+                    <>
+                      <span class="camp-badge">手数料10%無料</span><br />
+                      <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
+                    </>
+                  ) : (
+                    <b>公式キャンペーン<br />要確認</b>
+                  )}
                 </td>
                 <td class="fv-td"><span class="mk ok">〇</span><b>買取価格<br />最大20%UP</b></td>
                 <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
               </tr>
               <tr>
                 <td class="fv-td-item">買取価格</td>
-                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>業界最高水準+α</b></td>
-                <td class="fv-td"><span class="mk ok">〇</span>高い</td>
-                <td class="fv-td"><span class="mk ok">〇</span>高い</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>高価買取に強み<br />（編集部評価）</b></td>
+                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
+                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
               </tr>
               <tr>
                 <td class="fv-td-item">査定士</td>
@@ -497,7 +506,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <li>プライバシーマーク・Pマーク取得</li>
         </ul>
       </div>
-      <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。買取価格・手数料・対応条件などの最新情報は、各社の公式ページでご確認ください。掲載の◎○や順位は編集部の判断によるものです。</p>
+      <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。掲載の◎○△や順位・「高価買取」等の評価は当編集部の主観的な判断によるもので、買取価格の優劣を保証するものではありません。「最大30%UP」などのキャンペーンは各社公式の内容に基づく表記で、適用条件・上乗せ率の上限・対象品目・実施期間があり、予告なく変更・終了する場合があります。買取価格・手数料・キャンペーンの適用可否など最新かつ正確な情報は、必ず各社の公式ページでご確認ください。</p>
       <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
       <small>プラチナ指輪買取比較</small>
     </div>
@@ -569,6 +578,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       letter-spacing:.02em; box-shadow:0 1px 2px rgba(0,0,0,.25);
     }
     .camp2-cond{ display:block; margin-top:5px; font-size:clamp(11px,3.2vw,15px); font-weight:700; text-shadow:0 1px 3px rgba(0,0,0,.45); }
+    .camp2-note{ font-size:10px; color:var(--sub); line-height:1.55; margin:8px 4px 0; }
     .camp2-main{ display:block; margin-top:1px; font-size:clamp(15px,4.6vw,22px); font-weight:900; line-height:1.1; text-shadow:0 1px 4px rgba(0,0,0,.4); }
     .camp2-main em{ font-style:normal; }
     .camp2-main b{
