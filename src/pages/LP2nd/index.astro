@@ -521,7 +521,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .hd-cta{ margin-left:auto; background:var(--green-d); color:#fff; font-weight:900; font-size:13px; text-decoration:none; padding:8px 16px; border-radius:999px; }
 
     /* ボタン共通 */
-    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 20px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .12s,box-shadow .12s; }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 14px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .12s,box-shadow .12s; white-space:nowrap; font-size:15px; line-height:1.2; }
     .btn:active{ transform:scale(.97); }
     .btn i{ font-style:normal; }
     .btn-web{ background:var(--green-d); color:#fff; }
@@ -535,7 +535,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .btn-ghost{ background:#fff; color:var(--green-d); border:2px solid var(--green-d); box-shadow:none; }
     .btn.full{ display:flex; width:100%; margin-top:10px; }
     .btn.sm{ min-height:42px; font-size:13px; padding:0 12px; box-shadow:none; }
-    .cta-pair{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+    .cta-pair{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:18px; }
+    .cta-pair .btn{ padding:0 6px; font-size:clamp(13px,3.7vw,15px); }
+    .cta-pair .btn i{ font-size:14px; }
     .cta-note{ text-align:center; font-size:12px; color:var(--sub); margin:8px 0 0; }
 
     /* 01 FV */
