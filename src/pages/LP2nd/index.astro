@@ -124,7 +124,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
             <i>☎</i>電話で無料査定
           </a>
-          {campDays > 0 && <p class="camp2-note">※「最大30%UP」はまねきや公式のお電話申込限定キャンペーン（2026年6月1日〜6月30日）に基づく表記です。買取金額の上乗せ率は品目・状態により異なり上限があります。適用条件・対象・期間は変更される場合があるため、最新の適用可否は公式サイトでご確認ください。</p>}
         </div>
 
         <!-- プラチナ相場チップ -->
@@ -576,22 +575,22 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     /* 背景画像バナー＋文字オーバーレイ */
     .camp2{ margin:0 0 16px; }
     .camp2-banner{
-      position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
-      aspect-ratio:995/295; width:100%; padding:6% 12% 6% 12%; box-sizing:border-box;
+      position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+      aspect-ratio:995/295; width:100%; padding:2.5% 6%; box-sizing:border-box;
       background:url("/images/camp-banner-bg.png") center/100% 100% no-repeat;
       text-decoration:none; color:#fff; text-align:center; filter:drop-shadow(0 6px 14px rgba(183,28,22,.28));
     }
     .camp2-term{
       display:inline-block; background:linear-gradient(180deg,#FFE9A8,#F2C14A); color:#7a2a00;
-      font-weight:900; font-size:clamp(10px,2.9vw,13px); border-radius:999px; padding:2px 14px;
+      font-weight:900; font-size:clamp(11px,3.3vw,15px); border-radius:999px; padding:3px 16px;
       letter-spacing:.02em; box-shadow:0 1px 2px rgba(0,0,0,.25);
     }
-    .camp2-cond{ display:block; margin-top:5px; font-size:clamp(11px,3.2vw,15px); font-weight:700; text-shadow:0 1px 3px rgba(0,0,0,.45); }
+    .camp2-cond{ display:block; font-size:clamp(12px,3.9vw,18px); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.45); }
     .camp2-note{ font-size:10px; color:var(--sub); line-height:1.55; margin:8px 4px 0; }
-    .camp2-main{ display:block; margin-top:1px; font-size:clamp(15px,4.6vw,22px); font-weight:900; line-height:1.1; text-shadow:0 1px 4px rgba(0,0,0,.4); }
+    .camp2-main{ display:block; font-size:clamp(18px,5.8vw,28px); font-weight:900; line-height:1.05; text-shadow:0 1px 4px rgba(0,0,0,.4); }
     .camp2-main em{ font-style:normal; }
     .camp2-main b{
-      font-style:normal; font-size:clamp(26px,8.2vw,40px); vertical-align:-3px; padding:0 2px;
+      font-style:normal; font-size:clamp(34px,11vw,52px); vertical-align:-4px; padding:0 2px;
       background:linear-gradient(180deg,#FFF4C2,#FFD24D 55%,#E8A317);
       -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
       text-shadow:0 2px 3px rgba(0,0,0,.25);
