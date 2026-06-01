@@ -118,7 +118,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
         <!-- プラチナ相場チップ -->
         <div class="rate-chip">
-          <span>本日のプラチナ相場</span>
+          <span><i class="live-dot"></i>本日のプラチナ相場</span>
           <b>Pt900 {yen(rates.pt900)}/g</b><b>Pt850 {yen(rates.pt850)}/g</b>
           <small>{rates.updatedAt}</small>
         </div>
@@ -129,7 +129,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <thead>
               <tr>
                 <th class="fv-th-item"></th>
-                <th class="fv-th fv-th1"><span class="fv-rk-badge">👑 1位</span>まねきや</th>
+                <th class="fv-th fv-th1 fv-th-gold"><span class="fv-rk-badge">👑 1位</span>まねきや</th>
                 <th class="fv-th"><span class="fv-rk-badge2">🥈 2位</span>おたからや</th>
                 <th class="fv-th"><span class="fv-rk-badge3">🥉 3位</span>ブラリバ</th>
               </tr>
@@ -265,6 +265,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
         <!-- 1位 -->
         <article class="rk rk-1">
+          <div class="rk-editor-pick">編集部イチオシ</div>
           <div class="rk-ribbon"><i>👑</i>第1位</div>
           <div class="rk-head"><h3>まねきや</h3><span class="rk-star">★4.8</span><i class="pr">PR</i></div>
           <p class="rk-for">プラチナ指輪を、できるだけ高く・手取りを減らさず売りたい人に</p>
@@ -520,11 +521,17 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .hd-cta{ margin-left:auto; background:var(--green-d); color:#fff; font-weight:900; font-size:13px; text-decoration:none; padding:8px 16px; border-radius:999px; }
 
     /* ボタン共通 */
-    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 20px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .08s; }
-    .btn:active{ transform:scale(.98); }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 20px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .12s,box-shadow .12s; }
+    .btn:active{ transform:scale(.97); }
     .btn i{ font-style:normal; }
     .btn-web{ background:var(--green-d); color:#fff; }
-    .btn-phone{ background:var(--coral); color:#fff; box-shadow:0 8px 18px rgba(255,122,89,.3); }
+    /* 電話ボタンをゴールドで統一 */
+    .btn-phone{
+      background:linear-gradient(180deg,#FFD24D,#F2A100); color:#7a2a00;
+      box-shadow:0 8px 0 #C97E00, 0 12px 18px rgba(201,126,0,.32);
+      border:2px solid #fff3cf;
+    }
+    .btn-phone:hover{ transform:translateY(-2px); box-shadow:0 10px 0 #C97E00, 0 16px 22px rgba(201,126,0,.35); }
     .btn-ghost{ background:#fff; color:var(--green-d); border:2px solid var(--green-d); box-shadow:none; }
     .btn.full{ display:flex; width:100%; margin-top:10px; }
     .btn.sm{ min-height:42px; font-size:13px; padding:0 12px; box-shadow:none; }
@@ -576,7 +583,36 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       0%,100%{ transform:scale(1); }
       50%{ transform:scale(1.06); }
     }
-    @media (prefers-reduced-motion:reduce){ .camp2-cta{ animation:none; } }
+    /* ライブドット（相場チップ） */
+    .live-dot{
+      display:inline-block; width:8px; height:8px; border-radius:50%;
+      background:#E0322C; margin-right:5px; vertical-align:middle;
+      animation:livepulse 1.4s ease-in-out infinite;
+    }
+    @keyframes livepulse{
+      0%,100%{ opacity:1; transform:scale(1); }
+      50%{ opacity:.35; transform:scale(.7); }
+    }
+    /* 編集部イチオシリボン */
+    .rk-editor-pick{
+      position:absolute; top:-14px; right:16px;
+      background:linear-gradient(135deg,#f6c64d,var(--gold-d)); color:#5a3d00;
+      font-weight:900; font-size:11px; border-radius:999px; padding:4px 13px;
+      box-shadow:0 2px 6px rgba(201,126,0,.35);
+    }
+    /* 比較表まねきや列ゴールドグラデ */
+    .fv-th-gold{
+      background:linear-gradient(180deg,#FFF4C2,#FFE08A) !important;
+      border-bottom:2px solid var(--gold);
+    }
+    /* スクロールフェードイン */
+    .fade-in{ opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease; }
+    .fade-in.visible{ opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion:reduce){
+      .camp2-cta{ animation:none; }
+      .live-dot{ animation:none; }
+      .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
+    }
     /* ヒーロー画像 */
     .fv-hero-wrap{ margin:0 0 14px; font-size:0; line-height:0; }
     .fv-hero-img{ width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.12); }
@@ -810,6 +846,16 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         }catch(_){}
       });
     });
+  </script>
+  <script is:inline>
+    (function(){
+      var els = document.querySelectorAll('.sec, .rk, .voice, .fv-tbl-wrap, .point-img, .rk-voice-block');
+      els.forEach(function(el){ el.classList.add('fade-in'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.07 });
+      els.forEach(function(el){ io.observe(el); });
+    })();
   </script>
 </body>
 </html>
