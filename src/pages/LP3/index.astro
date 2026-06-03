@@ -3,38 +3,8 @@ const PAGE_TITLE = "金買取 高額おすすめTOP3｜ネックレス・指輪�
 const PAGE_DESC = "金・貴金属を高く売るならどこ？本日のK24・K18相場と、ネックレス・指輪・金貨・インゴット・壊れた金・金歯にも対応した買取店をランキングと比較表でやさしく解説。査定は無料・売るかは後で決められます。";
 const CANONICAL = "https://kaitori.hakobu-family.com/LP3/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/fv-hero-gold.png";
-const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
 
-const fallbackRates = {
-  updatedAt: "2026年5月29日 現在",
-  k24: 24500, k22: 22450, k18: 18375, k14: 14290
-};
-function parseYen(v) { return Number(String(v || "").replace(/[^\d-]/g, "")); }
-function yen(v) { return `${Number(v).toLocaleString("ja-JP")}円`; }
-
-async function getRates() {
-  try {
-    const res = await fetch(MARKET_SOURCE_URL);
-    if (!res.ok) throw new Error("fail");
-    const text = (await res.text())
-      .replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/g, " ").replace(/\s+/g, " ").trim();
-    const u = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
-    const k24 = text.match(/K24\s+([\d,]+)円/) || text.match(/24金\s+([\d,]+)円/);
-    const k22 = text.match(/K22\s+([\d,]+)円/) || text.match(/22金\s+([\d,]+)円/);
-    const k18 = text.match(/K18\s+([\d,]+)円/) || text.match(/18金\s+([\d,]+)円/);
-    const k14 = text.match(/K14\s+([\d,]+)円/) || text.match(/14金\s+([\d,]+)円/);
-    if (!k24 && !k18) throw new Error("parse");
-    const r24 = k24 ? parseYen(k24[1]) : fallbackRates.k24;
-    return {
-      updatedAt: u ? `${u[1]}年${u[2]}月${u[3]}日 更新` : fallbackRates.updatedAt,
-      k24: r24,
-      k22: k22 ? parseYen(k22[1]) : Math.round(r24 * 22 / 24),
-      k18: k18 ? parseYen(k18[1]) : Math.round(r24 * 18 / 24),
-      k14: k14 ? parseYen(k14[1]) : Math.round(r24 * 14 / 24)
-    };
-  } catch (_) { return { ...fallbackRates }; }
-}
+import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
 const rates = await getRates();
 // 重さ別の参考買取額（既定はK18基準）
 const goldEx = (w, karat = rates.k18) => `約${Math.round(karat * w * 0.9).toLocaleString("ja-JP")}〜${Math.round(karat * w).toLocaleString("ja-JP")}円`;
