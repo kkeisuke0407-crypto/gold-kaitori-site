@@ -1,12 +1,13 @@
 ---
-const PAGE_TITLE = "プラチナ指輪 高額買取おすすめTOP3｜結婚指輪・Pt900も無料査定";
-const PAGE_DESC = "プラチナ指輪を高く売るならどこ？本日のPt900・Pt850相場と、結婚指輪・刻印入り・宝石付きにも対応した買取店をランキングと比較表でやさしく解説。査定は無料・売るかは後で決められます。";
-const CANONICAL = "https://kaitori.hakobu-family.com/LP2nd/";
-const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
+const PAGE_TITLE = "金買取 高額おすすめTOP3｜ネックレス・指輪・金貨・K18も無料査定";
+const PAGE_DESC = "金・貴金属を高く売るならどこ？本日のK24・K18相場と、ネックレス・指輪・金貨・インゴット・壊れた金・金歯にも対応した買取店をランキングと比較表でやさしく解説。査定は無料・売るかは後で決められます。";
+const CANONICAL = "https://kaitori.hakobu-family.com/LP3/";
+const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/fv-hero-gold.png";
 
 import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
 const rates = await getRates();
-const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("ja-JP")}〜${Math.round(rates.pt900 * w).toLocaleString("ja-JP")}円`;
+// 重さ別の参考買取額（既定はK18基準）
+const goldEx = (w, karat = rates.k18) => `約${Math.round(karat * w * 0.9).toLocaleString("ja-JP")}〜${Math.round(karat * w).toLocaleString("ja-JP")}円`;
 // キャンペーン残日数（まねきや 6/30まで）
 const campEnd = new Date('2026-06-30T23:59:59+09:00');
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
@@ -15,18 +16,16 @@ const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
 const faqJsonLd = {
   "@context": "https://schema.org", "@type": "FAQPage",
   "mainEntity": [
-    ["プラチナ指輪は1点だけでも査定できますか？", "はい、1点からでも無料で査定してもらえます。点数が少なくても断られることはほとんどありません。"],
-    ["Pt900の指輪はいくらで売れますか？", "重さ×その日のグラム単価がおおよその目安です。本日のPt900は約" + yen(rates.pt900) + "/gで、例えば4gの指輪なら地金だけで" + ringEx(4) + "ほどが目安です（状態・宝石で変わります）。"],
-    ["結婚指輪や婚約指輪も売れますか？", "売れます。シンプルな結婚指輪はプラチナの地金として、宝石付きの婚約指輪は石も合わせて見てもらえます。"],
-    ["刻印入りの指輪でも買取できますか？", "イニシャルや日付の刻印があっても、プラチナとしての価値は変わりません。問題なく買取できます。"],
-    ["片方だけの指輪でも売れますか？", "片方だけ・ペアの一方だけでも売れます。地金として重さで査定されます。"],
-    ["ダイヤや宝石付きの指輪は高くなりますか？", "石の種類や大きさによっては、地金に上乗せされて高くなることがあります。石も見てくれるお店を選ぶのがおすすめです。"],
+    ["金は1点だけでも査定できますか？", "はい、1点からでも無料で査定してもらえます。ネックレス1本・指輪1個でも断られることはほとんどありません。"],
+    ["K18のネックレスはいくらで売れますか？", "重さ×その日のグラム単価がおおよその目安です。本日のK18は約" + yen(rates.k18) + "/gで、例えば10gのネックレスなら" + goldEx(10) + "ほどが目安です（状態・デザインで変わります）。"],
+    ["壊れた金・切れたネックレスでも売れますか？", "売れます。壊れていても曲がっていても、金としての価値は重さで変わりません。地金として査定されます。"],
+    ["刻印（K18・750など）がない金でも買取できますか？", "X線などの成分分析で純度を調べてもらえるため、刻印がなくても査定・買取できます。"],
+    ["金貨・インゴット（地金）も売れますか？", "売れます。メイプルリーフやウィーン金貨などの金貨、インゴットも相場に応じて査定されます。"],
+    ["金歯やメダル、仏具の金も買取できますか？", "買取できます。金歯（差し歯）・記念メダル・仏具など、金が含まれていれば査定対象です。"],
     ["鑑定書や保証書がなくても大丈夫ですか？", "なくても査定・買取できます。あれば査定がスムーズになることがありますが、必須ではありません。"],
     ["査定後にキャンセルできますか？", "ほとんどのお店で、査定額に納得できなければ無料でキャンセルできます。売るかは金額を見てから決められます。"],
     ["出張査定は無料ですか？", "今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各店の公式でご確認ください。"],
-    ["どのタイミングで売るのがよいですか？", "プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。"],
-    ["指輪を売ると税金はかかりますか？", "多くの場合は非課税です。貴金属の売却益は譲渡所得にあたり、給与所得者ならその年の利益が合計50万円までは特別控除でかからないことがほとんどです。高額な場合や営利目的の売買は扱いが異なるため、詳しくは国税庁の案内や税務署・税理士にご確認ください。"],
-    ["買取にクーリングオフは使えますか？", "訪問購入（出張買取）の場合、原則として契約書面を受け取った日から8日間はクーリングオフ（申込みの撤回）ができます。一方で、店頭買取・宅配買取は対象外です。詳しい条件は各店の契約書面でご確認ください。"]
+    ["どのタイミングで売るのがよいですか？", "金相場は毎日動き、今は過去最高水準で推移しています。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。"]
   ].map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
 };
 
@@ -66,7 +65,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     })(window, document, "clarity", "script", "wxnujpnscp");
   </script>
 </head>
-<body data-landing-intent="lp2nd"
+<body data-landing-intent="lp3"
   data-aff-manekiya={AFF_MANEKIYA} data-aff-otakaraya={AFF_OTAKARAYA} data-aff-buraiba="#">
 
   <main>
@@ -75,7 +74,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <!-- ヒーロー画像 -->
         <h1 class="fv-hero-wrap">
-          <img src="/images/fv-hero.webp" alt="プラチナ指輪を高く売るならどこ？高額買取おすすめTOP3｜まねきや・おたからや・ブラリバ" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" />
+          <img src="/images/fv-hero-gold.webp" alt="金・貴金属を高く売るならどこ？高額買取おすすめTOP3｜まねきや・おたからや・ブラリバ" width="1659" height="948" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" />
         </h1>
 
         <!-- 信頼ストリップ -->
@@ -100,16 +99,15 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </a>
         </div>
 
-        <!-- プラチナ相場チップ -->
+        <!-- 金相場チップ -->
         <div class="rate-chip">
-          <span><i class="live-dot"></i>本日のプラチナ相場</span>
-          <b>Pt900 {yen(rates.pt900)}/g</b><b>Pt850 {yen(rates.pt850)}/g</b>
-          <span class="rate-trend">📈 歴史的な高値圏</span>
+          <span><i class="live-dot"></i>本日の金買取相場</span>
+          <b>K24 {yen(rates.k24)}/g</b><b>K18 {yen(rates.k18)}/g</b>
           <small>{rates.updatedAt}</small>
         </div>
 
         <!-- 3社比較表 -->
-        <div class="fv-tbl-head"><span class="fv-tbl-ttl">プラチナ買取 3社比較</span><i class="pr">PR</i></div>
+        <div class="fv-tbl-head"><span class="fv-tbl-ttl">金・貴金属買取 3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
             <thead>
@@ -126,6 +124,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td class="fv-td fv-td1"><span class="stars gold">★★★★★</span><br /><b>5.0</b></td>
                 <td class="fv-td"><span class="stars">★★★★☆</span><br />4.0</td>
                 <td class="fv-td"><span class="stars">★★★☆☆</span><br />3.0</td>
+              </tr>
+              <tr>
+                <td class="fv-td-item">対応品目</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>金全般・金貨<br />地金・金歯もOK</td>
+                <td class="fv-td"><span class="mk ok">〇</span>金・貴金属<br />全般</td>
+                <td class="fv-td"><span class="mk ok">〇</span>金・ブランド<br />宝石中心</td>
               </tr>
               <tr class="fv-tr-camp">
                 <td class="fv-td-item">当サイト限定<br />キャンペーン</td>
@@ -215,46 +219,23 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 02 相場 -->
     <section class="sec sec-mint" id="rate">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">💎 相場</span><h2>本日のプラチナ買取相場</h2><p>純度（刻印）によって1gあたりの金額が変わります。</p></div>
+        <div class="sec-head"><span class="chip">💰 相場</span><h2>本日の金買取相場</h2><p>純度（K24・K18など刻印）によって1gあたりの金額が変わります。</p></div>
         <div class="rate-grid">
-          <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
-          <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
-          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
-          <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
+          <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small></div>
+          <div><span>K22</span><b>{yen(rates.k22)}</b><small>/g</small></div>
+          <div><span>K18</span><b>{yen(rates.k18)}</b><small>/g</small></div>
+          <div><span>K14</span><b>{yen(rates.k14)}</b><small>/g</small></div>
         </div>
         <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場</p>
-        <p class="rate-trend-lg">📈 プラチナは歴史的な高値圏です。相場は毎日動くので、高いうちに金額を確認しておくのがおすすめです。</p>
 
         <div class="rate-ex">
-          <h3>指輪の重さ別・参考買取額（Pt900の場合）</h3>
+          <h3>品目別・参考買取額（K18の場合）</h3>
           <ul>
-            <li><span>細めの指輪（約3g）</span><b>{ringEx(3)}</b></li>
-            <li><span>標準的な指輪（約5g）</span><b>{ringEx(5)}</b></li>
-            <li><span>太め・甲丸（約10g）</span><b>{ringEx(10)}</b></li>
+            <li><span>指輪（約3g）</span><b>{goldEx(3)}</b></li>
+            <li><span>ネックレス（約10g）</span><b>{goldEx(10)}</b></li>
+            <li><span>メイプル金貨1oz（約31g・K24）</span><b>{goldEx(31, rates.k24)}</b></li>
           </ul>
-          <p class="note">※結婚指輪・婚約指輪・コンビリング（金とのミックス）もOK。上の金額は地金だけのおおよその目安で、宝石・ブランド・デザインがあるとさらに上がることがあります。重量・状態で変わります。</p>
-        </div>
-
-        <!-- A-3 買取額の計算式 -->
-        <div class="calc">
-          <h3>買取額はどう決まる？</h3>
-          <p class="calc-formula">
-            <span>1gの相場</span><i>×</i><span>純度</span><i>×</i><span>重さ(g)</span><i>＝</i><b>買取額の目安</b>
-          </p>
-          <p class="note">結婚指輪の重さは1本あたり約3〜7gが目安です。Pt900なら本日の相場 約{yen(rates.pt900)}/g が計算のベースになります（宝石・ブランド・デザインは別途プラス評価）。</p>
-        </div>
-
-        <!-- A-2 純度・刻印の見分け方 -->
-        <div class="purity">
-          <h3>純度・刻印の見分け方</h3>
-          <ul class="purity-list">
-            <li><b>Pt1000</b><span>純度99.9%以上。最も高い純度</span></li>
-            <li><b>Pt950</b><span>純度95%。ブランドジュエリーに多い</span></li>
-            <li><b>Pt900</b><span>純度90%。結婚指輪の定番</span></li>
-            <li><b>Pt850</b><span>純度85%。チェーン類などに多い</span></li>
-          </ul>
-          <p class="purity-where">刻印は指輪の<b>内側</b>に小さく入っています。「Pt900」「PT900」などの表記が目印です。</p>
-          <p class="purity-warn">⚠️ <b>「PP」「PTP」「PTF」「GP」</b>などはプラチナメッキ（表面だけプラチナ）の可能性があり、買取対象外のことがあります。刻印が読めない・刻印がない場合でも、<b>X線検査</b>で正確に成分を調べてもらえるので心配いりません。</p>
+          <p class="note">※ネックレス・指輪・ブレスレット・金貨・インゴット（地金）・金歯・壊れた金もOK。上の金額はおおよその目安で、純度・重量・デザイン・状態によって変わります。K24（純金）はK18より高くなります。</p>
         </div>
       </div>
     </section>
@@ -264,7 +245,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <div class="sec-head"><span class="chip">🔑 売る前に</span><h2>高く売るための3つのポイント</h2><p>お店選びの前に、これだけ知っておきましょう。</p></div>
         <a href="#" class="point-img" data-aff="manekiya" data-track="point_img" rel="nofollow sponsored">
-          <img src="/images/point-3diff.webp" alt="売る前に知っておきたい3つの差｜売るタイミング・相見積もり・キャンペーン｜まねきや 電話申込で買取金額最大30%UP" width="1024" height="1536" loading="lazy" />
+          <img src="/images/point-3diff-gold.webp" alt="金を売る前に知っておきたい3つの差｜売るタイミング・相見積もり・キャンペーン｜まねきや 電話申込で買取金額最大30%UP" width="1024" height="1536" loading="lazy" />
         </a>
         <a href="#" class="camp2-cta" data-aff="manekiya" data-track="point_phone" rel="nofollow sponsored">
           <i>☎</i>電話で無料相談してみる
@@ -276,7 +257,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 05 ランキング -->
     <section class="sec" id="ranking">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">🏆 ランキング</span><h2>プラチナ指輪 高額買取ランキング</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
+        <div class="sec-head"><span class="chip">🏆 ランキング</span><h2>金・貴金属 高額買取ランキング</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
 
         <!-- 1位 -->
         <article class="rk rk-1">
@@ -286,7 +267,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <a href="#" data-aff="manekiya" data-track="rk_head_bn" rel="nofollow sponsored" style="display:block;margin:10px 0;">
             <img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
           </a>
-          <p class="rk-for">プラチナ指輪を、できるだけ高く・手取りを減らさず売りたい人に</p>
+          <p class="rk-for">金・貴金属を、できるだけ高く・手取りを減らさず売りたい人に</p>
           <ul class="rk-reasons">
             <li>✅ <b>査定料・キャンセル料0円！</b></li>
             <li>✅ <b>手数料0円</b>で圧倒的高価買取</li>
@@ -298,7 +279,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <li>✅ 他店で断られた金・貴金属も<b>買取可能</b></li>
           </ul>
           <div class="rk-meta">
-            <div><span>対応できる指輪</span><b>結婚指輪・刻印入り・片方だけ・コンビOK</b></div>
+            <div><span>対応品目</span><b>ネックレス・指輪・金貨・地金・金歯・壊れた金もOK</b></div>
             <div><span>買取方法</span><b>店頭・出張・宅配（料金0円）</b></div>
             <div><span>キャンペーン</span><b>電話申込で買取額UPの対象になることも</b></div>
           </div>
@@ -330,8 +311,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               <p>X線を使って詳しく成分を検査してくれるため、刻印のないものでも正確に査定してもらえました。丁寧に説明してくれて、買取額にも大満足。また利用したいと思います。</p>
               <small>指輪・貴金属</small>
             </div>
-            <div class="voice"><span class="stars">★★★★★</span><p>「結婚指輪を売りました。手数料0円で、思ったより高くて安心」</p><small>50代・女性／Pt900結婚指輪</small></div>
-            <div class="voice"><span class="stars">★★★★★</span><p>「相場が上がっているとのことで、良い金額で買ってもらえて満足です。」</p><small>30代・女性／Pt900リング2本</small></div>
+            <div class="voice"><span class="stars">★★★★★</span><p>「切れたネックレスを売りました。手数料0円で、思ったより高くて安心」</p><small>50代・女性／K18ネックレス</small></div>
+            <div class="voice"><span class="stars">★★★★★</span><p>「金相場が上がっているとのことで、良い金額で買ってもらえて満足です。」</p><small>30代・女性／K18リング2本</small></div>
           </div>
           <p class="note">※まねきや公式掲載のお客様の声を一部要約。個人の感想です。査定額・条件には個人差があります。</p>
         </div>
@@ -350,13 +331,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <li>査定料・手数料・出張料が0円</li>
           </ul>
           <div class="rk-meta">
-            <div><span>対応できる指輪</span><b>結婚指輪・宝石付きもOK</b></div>
+            <div><span>対応品目</span><b>金・貴金属・金貨・宝石付きもOK</b></div>
             <div><span>買取方法</span><b>店頭・出張</b></div>
             <div><span>キャンペーン</span><b>期間限定キャンペーンあり</b></div>
           </div>
           <div class="rk-reviews">
             <p>💬「近所に店舗があって、その場で現金にしてもらえました」<small>60代・女性</small></p>
-            <p>💬「イニシャル入りでも問題なく買い取ってもらえました」<small>30代・女性</small></p>
+            <p>💬「古いネックレスや金貨も問題なく買い取ってもらえました」<small>30代・女性</small></p>
           </div>
           <a href="#" class="btn btn-ghost full" data-aff="otakaraya" data-track="rk_otakaraya" rel="nofollow sponsored">おたからやで無料査定する</a>
         </article>
@@ -368,19 +349,19 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <a href="#" data-aff="buraiba" data-track="rk_head_bn" rel="nofollow sponsored" style="display:block;margin:10px 0;">
             <img src="/images/300_250-3.jpg" alt="ブラリバ" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
           </a>
-          <p class="rk-for">ダイヤや宝石付きの指輪を、石ごと評価してほしい人に</p>
+          <p class="rk-for">金にダイヤや宝石・ブランドが付いたものを、石ごと評価してほしい人に</p>
           <ul class="rk-reasons">
-            <li>デザインや宝石も合わせて見てくれる</li>
+            <li>金地金＋デザインや宝石も合わせて見てくれる</li>
             <li>買取手数料・査定料が0円</li>
             <li>宅配キットで送るだけのらくらく査定</li>
           </ul>
           <div class="rk-meta">
-            <div><span>対応できる指輪</span><b>宝石付き・ブランド・デザインリング</b></div>
+            <div><span>対応品目</span><b>金・宝石付き・ブランドジュエリー</b></div>
             <div><span>買取方法</span><b>店頭・出張・宅配</b></div>
             <div><span>キャンペーン</span><b>公式ページでご確認ください</b></div>
           </div>
           <div class="rk-reviews">
-            <p>💬「ダイヤが取れていた指輪も、問題なく買い取ってくれました」<small>40代・女性</small></p>
+            <p>💬「石が取れたK18の指輪も、問題なく買い取ってくれました」<small>40代・女性</small></p>
             <p>💬「宅配キットに入れて送るだけで楽でした」<small>30代・女性</small></p>
           </div>
           <a href="#" class="btn btn-ghost full" data-aff="buraiba" data-track="rk_buraiba" rel="nofollow sponsored">ブラリバで無料査定する</a>
@@ -395,9 +376,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <div class="deep">
           <ul class="deep-merit">
             <li><b>手数料0円</b>で、提示された金額をそのまま受け取りやすい</li>
-            <li><b>X線の機械</b>で、刻印がない指輪・古い指輪も正確に調べてくれる</li>
+            <li><b>X線の機械</b>で、刻印のない金・古い金製品も純度を正確に調べてくれる</li>
             <li>海外にも売り先を持っていて、高めの金額が出やすい</li>
-            <li>結婚指輪・刻印入り・片方だけ・金とのコンビもOK</li>
+            <li>ネックレス・指輪・金貨・地金・金歯・壊れた金もOK</li>
           </ul>
           <div class="flow">
             <h3>査定のかんたんな流れ</h3>
@@ -416,75 +397,54 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
     </section>
 
-    <!-- 07 売るのをためらう方へ -->
-    <section class="sec" id="push">
-      <div class="wrap">
-        <div class="sec-head"><span class="chip">💍 はじめに</span><h2>「指輪を手放すこと」に<br />迷っている方へ</h2></div>
-        <p class="push-lead">使わなくなった指輪を売るのは、思い出を手放すことではありません。<b>気持ちの区切りをつけて、次の一歩へ進むための前向きな選択</b>です。</p>
-        <ul class="push-points">
-          <li><i>🤝</i><div><b>手放す方は珍しくありません</b>買い替え・整理・ライフステージの変化などで、結婚指輪や婚約指輪を売る方はたくさんいます。</div></li>
-          <li><i>🔒</i><div><b>刻印は工房で消えてなくなります</b>イニシャルや日付の刻印は、地金として溶かす過程でなくなります。個人情報が残る心配はありません。</div></li>
-          <li><i>💰</i><div><b>今は相場が高めです</b>プラチナは歴史的な高値圏。眠らせておくより、価値のあるうちに金額を知るだけでも損はありません。</div></li>
-        </ul>
-        <div class="push-safe">
-          <b>👜 女性おひとりでも安心して相談できます</b>
-          <ul>
-            <li>女性スタッフによる査定を選べるお店もあります</li>
-            <li>人目が気になる方は、自宅で完結する<b>宅配買取</b>や<b>出張買取</b>も選べます</li>
-            <li>もちろん「査定額を聞くだけ」でOK。その場で売らなくて大丈夫です</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <!-- 08 不安解消 -->
     <section class="sec sec-cream" id="worry">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">🤔 よくある不安</span><h2>こんな指輪でも売れる？</h2></div>
+        <div class="sec-head"><span class="chip">🤔 よくある不安</span><h2>こんな金でも売れる？</h2></div>
         <div class="fits">
-          <p class="fits-ttl">こんな指輪も査定対象です</p>
+          <p class="fits-ttl">こんな金製品も査定対象です</p>
           <ul>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" stroke="#0e7864" stroke-width="2.5"/><circle cx="16" cy="16" r="4" stroke="#0e7864" stroke-width="1.5"/><text x="16" y="10" text-anchor="middle" font-size="5" fill="#0e7864" font-family="sans-serif">I♥U</text></svg>
-              刻印入りの結婚指輪
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 8 Q16 22 26 8" stroke="#c8a000" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="16" cy="20" r="2.4" fill="#c8a000"/></svg>
+              金のネックレス
             </li>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" stroke="#0e7864" stroke-width="2.5"/><text x="16" y="20" text-anchor="middle" font-size="8" fill="#0e7864" font-family="sans-serif">A</text></svg>
-              イニシャル入りリング
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12 Q11 18 14 13" stroke="#c8a000" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M18 13 Q21 18 27 12" stroke="#c8a000" stroke-width="2.5" stroke-linecap="round" fill="none"/><text x="16" y="24" text-anchor="middle" font-size="9" fill="#c00" font-family="sans-serif">!</text></svg>
+              切れた・壊れた金
             </li>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="16" r="7" stroke="#0e7864" stroke-width="2.5"/><line x1="17" y1="16" x2="26" y2="16" stroke="#0e7864" stroke-width="2" stroke-dasharray="3 2"/><text x="26" y="20" text-anchor="middle" font-size="7" fill="#aaa" font-family="sans-serif">?</text></svg>
-              片方だけの指輪
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="9" stroke="#c8a000" stroke-width="2.5"/><circle cx="16" cy="16" r="5" stroke="#c8a000" stroke-width="1.2"/><text x="16" y="19" text-anchor="middle" font-size="6" fill="#c8a000" font-family="sans-serif">¥</text></svg>
+              金貨・コイン
             </li>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 20 Q12 10 16 14 Q20 18 24 12" stroke="#0e7864" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M8 24 Q12 14 16 18 Q20 22 24 16" stroke="#0e7864" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".5"/></svg>
-              変形・曲がったリング
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 13 L24 13 L26 21 L6 21 Z" fill="#c8a000" opacity=".85"/><text x="16" y="19" text-anchor="middle" font-size="5" fill="#fff" font-family="sans-serif">Au</text></svg>
+              インゴット（地金）
             </li>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="17" r="7" stroke="#0e7864" stroke-width="2.5"/><polygon points="16,4 18.5,10 25,10 19.5,14 21.5,21 16,17 10.5,21 12.5,14 7,10 13.5,10" fill="#0e7864" opacity=".85"/></svg>
-              ダイヤ・宝石付きリング
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="16" r="6" stroke="#c8a000" stroke-width="2.5"/><circle cx="21" cy="16" r="6" stroke="#c8a000" stroke-width="2.5"/></svg>
+              喜平チェーン
             </li>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" stroke="#0e7864" stroke-width="2.5"/><circle cx="16" cy="16" r="5" stroke="#0e7864" stroke-width="1.2" stroke-dasharray="2 2"/><text x="16" y="20" text-anchor="middle" font-size="6" fill="#0e7864" font-family="sans-serif">OLD</text></svg>
-              古いデザインの指輪
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 7 Q9 14 12 22 Q16 26 20 22 Q23 14 20 7 Z" fill="#c8a000" opacity=".85"/></svg>
+              金歯・差し歯
             </li>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" stroke="#0e7864" stroke-width="2.5"/><line x1="9" y1="24" x2="23" y2="8" stroke="#ccc" stroke-width="1.5"/><text x="22" y="12" font-size="6" fill="#999" font-family="sans-serif">?</text></svg>
-              鑑定書・保証書なし
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" stroke="#c8a000" stroke-width="2.5"/><text x="16" y="19" text-anchor="middle" font-size="6" fill="#999" font-family="sans-serif">刻印?</text></svg>
+              刻印が読めない金
             </li>
             <li>
-              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" stroke="#0e7864" stroke-width="2.5"/><path d="M16 8 A8 8 0 0 1 24 16" stroke="#c8a000" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
-              金とのコンビリング
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,5 18.5,11 25,11 19.5,15 21.5,22 16,18 10.5,22 12.5,15 7,11 13.5,11" fill="#c8a000" opacity=".85"/></svg>
+              宝石・ダイヤ付きの金
             </li>
           </ul>
         </div>
         <div class="worry-grid">
-          <div class="worry"><h3>結婚指輪を売るのは問題ない？</h3><p>まったく問題ありません。買い替えや整理で売る方はとても多いです。</p></div>
-          <div class="worry"><h3>イニシャル刻印があっても売れる？</h3><p>売れます。刻印があってもプラチナの価値は変わりません。</p></div>
-          <div class="worry"><h3>片方だけでも売れる？</h3><p>売れます。片方だけ・ペアの一方だけでも重さで査定されます。</p></div>
+          <div class="worry"><h3>切れた・壊れた金でも売れる？</h3><p>売れます。壊れていても曲がっていても、金は重さで査定されます。</p></div>
+          <div class="worry"><h3>刻印（K18・750）がなくても売れる？</h3><p>売れます。X線などで純度を調べてもらえるので、刻印がなくても査定できます。</p></div>
+          <div class="worry"><h3>金歯やメダルの金も売れる？</h3><p>売れます。金が含まれていれば、金歯・記念メダル・仏具なども査定対象です。</p></div>
           <div class="worry"><h3>鑑定書・保証書がなくても売れる？</h3><p>なくても大丈夫です。あれば査定がスムーズになることもあります。</p></div>
-          <div class="worry"><h3>ダイヤ付きは別で評価される？</h3><p>石の種類や大きさによっては、地金に上乗せされて高くなることがあります。</p></div>
-          <div class="worry"><h3>古いデザインでも売れる？</h3><p>売れます。デザインが古くても、プラチナとしての価値はしっかりあります。</p></div>
+          <div class="worry"><h3>宝石・ダイヤ付きは別で評価される？</h3><p>石の種類や大きさによっては、金地金に上乗せされて高くなることがあります。</p></div>
+          <div class="worry"><h3>古いデザインでも売れる？</h3><p>売れます。デザインが古くても、金としての価値はしっかりあります。</p></div>
         </div>
       </div>
     </section>
@@ -494,18 +454,16 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <div class="sec-head"><span class="chip">❓ FAQ</span><h2>よくある質問</h2></div>
         <div class="faq">
-          <details open><summary>プラチナ指輪は1点だけでも査定できますか？</summary><p>はい、1点からでも無料で査定してもらえます。点数が少なくても断られることはほとんどありません。</p></details>
-          <details><summary>Pt900の指輪はいくらで売れますか？</summary><p>重さ×その日のグラム単価がおおよその目安です。本日のPt900は約{yen(rates.pt900)}/gで、4gの指輪なら地金だけで{ringEx(4)}ほどが目安です。</p></details>
-          <details><summary>結婚指輪や婚約指輪も売れますか？</summary><p>売れます。シンプルな結婚指輪は地金として、宝石付きの婚約指輪は石も合わせて見てもらえます。</p></details>
-          <details><summary>刻印入りの指輪でも買取できますか？</summary><p>イニシャルや日付の刻印があっても、プラチナの価値は変わりません。問題なく買取できます。</p></details>
-          <details><summary>片方だけの指輪でも売れますか？</summary><p>片方だけ・ペアの一方だけでも売れます。地金として重さで査定されます。</p></details>
-          <details><summary>ダイヤや宝石付きの指輪は高くなりますか？</summary><p>石の種類や大きさによっては、地金に上乗せされて高くなることがあります。</p></details>
+          <details open><summary>金は1点だけでも査定できますか？</summary><p>はい、1点からでも無料で査定してもらえます。ネックレス1本・指輪1個でも断られることはほとんどありません。</p></details>
+          <details><summary>K18のネックレスはいくらで売れますか？</summary><p>重さ×その日のグラム単価がおおよその目安です。本日のK18は約{yen(rates.k18)}/gで、10gのネックレスなら{goldEx(10)}ほどが目安です。</p></details>
+          <details><summary>壊れた金・切れたネックレスも売れますか？</summary><p>売れます。壊れていても曲がっていても、金は重さで査定されるので価値は変わりません。</p></details>
+          <details><summary>刻印（K18・750）がない金でも買取できますか？</summary><p>X線などの成分分析で純度を調べてもらえるため、刻印がなくても問題なく買取できます。</p></details>
+          <details><summary>金貨やインゴット（地金）も売れますか？</summary><p>売れます。メイプルリーフなどの金貨やインゴットも、その日の相場に応じて査定されます。</p></details>
+          <details><summary>金歯やメダル、仏具の金も買取できますか？</summary><p>買取できます。金が含まれていれば、金歯・記念メダル・仏具なども査定対象です。</p></details>
           <details><summary>鑑定書や保証書がなくても大丈夫ですか？</summary><p>なくても査定・買取できます。あれば査定がスムーズになることがあります。</p></details>
           <details><summary>査定後にキャンセルできますか？</summary><p>多くのお店で、金額に納得できなければ無料でキャンセルできます。</p></details>
           <details><summary>出張査定は無料ですか？</summary><p>今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各公式でご確認ください。</p></details>
-          <details><summary>どのタイミングで売るのがよいですか？</summary><p>プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
-          <details><summary>指輪を売ると税金はかかりますか？</summary><p>多くの場合は非課税です。貴金属の売却益は譲渡所得にあたり、給与所得者ならその年の利益（売却益）が合計50万円までは特別控除でかからないことがほとんどです。高額な場合や営利目的の売買は扱いが異なるため、詳しくは国税庁の案内や税務署・税理士にご確認ください。</p></details>
-          <details><summary>買取にクーリングオフは使えますか？</summary><p>訪問購入（出張買取）の場合、原則として契約書面を受け取った日から8日間はクーリングオフ（申込みの撤回）ができます。一方で、店頭買取・宅配買取は対象外です。詳しい条件は各店の契約書面でご確認ください。</p></details>
+          <details><summary>どのタイミングで売るのがよいですか？</summary><p>金相場は毎日動き、今は過去最高水準で推移しています。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
         </div>
       </div>
     </section>
@@ -514,7 +472,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <section class="sec sec-final" id="final">
       <div class="wrap">
         <h2>迷ったら、まずは1位の「まねきや」へ。</h2>
-        <p>プラチナ相場が高めの今のうちに、無料査定で金額だけでも確認しておきましょう。査定だけ・売らなくてもOKです。</p>
+        <p>金相場が過去最高水準の今のうちに、無料査定で金額だけでも確認しておきましょう。査定だけ・売らなくてもOKです。</p>
         <div class="cta-pair">
           <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="final_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
           <a href="#" class="btn btn-web" data-aff="manekiya" data-track="final_web" rel="nofollow sponsored">ネットで無料査定（最短30秒）</a>
@@ -535,13 +493,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <li>プライバシーマーク・Pマーク取得</li>
         </ul>
       </div>
-      <div class="ft-method">
-        <p class="ft-method-ttl">📝 編集部の比較方法について</p>
-        <p>当編集部では、買取価格の水準・手数料・対応できる指輪の幅・買取方法（店頭／出張／宅配）・口コミ評価・運営体制などをもとに、プラチナ指輪の買取店を比較・評価しています。相場やキャンペーン内容は随時見直し、情報の更新に努めています（最終更新：{rates.updatedAt}）。</p>
-      </div>
       <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。掲載の◎○△や順位・「高価買取」等の評価は当編集部の主観的な判断によるもので、買取価格の優劣を保証するものではありません。「最大30%UP」などのキャンペーンは各社公式の内容に基づく表記で、適用条件・上乗せ率の上限・対象品目・実施期間があり、予告なく変更・終了する場合があります。買取価格・手数料・キャンペーンの適用可否など最新かつ正確な情報は、必ず各社の公式ページでご確認ください。</p>
       <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
-      <small>プラチナ指輪買取比較</small>
+      <small>金・貴金属買取比較</small>
     </div>
   </footer>
 
@@ -739,41 +693,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-ex li span{ color:var(--body); }
     .rate-ex li b{ color:var(--green-d); }
 
-    /* B-2 相場トレンド */
-    .rate-trend{ display:inline-flex; align-items:center; background:#FFF3E0; color:var(--coral-d); font-weight:900; font-size:11px; border-radius:999px; padding:3px 10px; }
-    .rate-trend-lg{ text-align:center; font-size:12.5px; font-weight:700; color:var(--coral-d); background:#FFF3E0; border-radius:10px; padding:9px 12px; margin:10px 0 0; line-height:1.6; }
-
-    /* A-3 計算式 */
-    .calc{ margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
-    .calc h3{ font-size:15px; margin:0 0 12px; }
-    .calc-formula{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; margin:0 0 6px; }
-    .calc-formula span{ background:var(--mint); color:var(--green-d); font-weight:900; font-size:12.5px; border-radius:8px; padding:6px 10px; }
-    .calc-formula i{ font-style:normal; font-weight:900; color:var(--sub); font-size:14px; }
-    .calc-formula b{ background:var(--green-d); color:#fff; font-size:13px; border-radius:8px; padding:6px 12px; }
-
-    /* A-2 純度・刻印 */
-    .purity{ margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
-    .purity h3{ font-size:15px; margin:0 0 12px; }
-    .purity-list{ list-style:none; margin:0 0 12px; padding:0; display:grid; gap:8px; }
-    .purity-list li{ display:flex; align-items:baseline; gap:10px; font-size:13px; padding:8px 12px; background:#FAFCFB; border:1px solid var(--line); border-radius:10px; }
-    .purity-list b{ flex:0 0 64px; color:var(--green-d); font-size:14px; }
-    .purity-list span{ color:var(--body); }
-    .purity-where{ font-size:13px; color:var(--body); margin:0 0 10px; line-height:1.7; }
-    .purity-warn{ font-size:12.5px; color:var(--body); background:#FFF7EC; border:1px solid var(--gold); border-radius:10px; padding:10px 12px; margin:0; line-height:1.7; }
-
-    /* 07 ためらう方へ */
-    .push-lead{ font-size:14.5px; line-height:1.85; color:var(--body); text-align:center; margin:0 0 18px; }
-    .push-points{ list-style:none; margin:0 0 16px; padding:0; display:grid; gap:10px; }
-    .push-points li{ display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
-    .push-points i{ font-style:normal; font-size:24px; flex-shrink:0; line-height:1.2; }
-    .push-points b{ display:block; font-size:14px; color:var(--green-d); margin-bottom:3px; }
-    .push-points div{ font-size:13px; color:var(--body); line-height:1.7; }
-    .push-safe{ background:var(--cream); border:1px solid var(--gold); border-radius:16px; padding:16px; }
-    .push-safe>b{ display:block; font-size:14.5px; color:var(--gold-d); margin-bottom:10px; }
-    .push-safe ul{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
-    .push-safe li{ font-size:13px; color:var(--body); line-height:1.6; padding-left:20px; position:relative; }
-    .push-safe li::before{ content:"✓"; position:absolute; left:0; color:var(--gold-d); font-weight:900; }
-
     /* 03 高く売るポイント（画像） */
     .point-img{ display:block; font-size:0; line-height:0; border-radius:14px; overflow:hidden; box-shadow:0 8px 22px rgba(20,60,50,.1); }
     .point-img img{ width:100%; height:auto; display:block; }
@@ -868,9 +787,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .ft-trust ul{ list-style:none; margin:0; padding:0; }
     .ft-trust li{ font-size:11.5px; line-height:1.7; color:#cfd8de; padding-left:14px; position:relative; }
     .ft-trust li::before{ content:"・"; position:absolute; left:0; }
-    .ft-method{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px 16px; margin:0 0 14px; }
-    .ft-method-ttl{ font-size:12px; font-weight:900; color:#e7eef2; margin:0 0 8px; }
-    .ft-method p:not(.ft-method-ttl){ font-size:11.5px; line-height:1.8; color:#cfd8de; margin:0; }
     .ft-note{ font-size:11px; line-height:1.7; margin:0 0 12px; }
     .ft nav{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:10px; }
     .ft a{ color:#aeecdf; color:#a9d5cd; font-size:12px; }
@@ -918,7 +834,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       el.setAttribute("href", url);
       el.addEventListener("click", function(e){
         var tn = el.getAttribute("data-track") || "";
-        var params = { affiliate_key:key, track_name:tn, landing_intent:"lp2nd", link_url:url };
+        var params = { affiliate_key:key, track_name:tn, landing_intent:"lp3", link_url:url };
         track(tn.indexOf("phone")>=0 ? "phone_click" : "web_click", params);
         if(url && url !== "#"){
           var primary = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button===0;
@@ -938,7 +854,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       new IntersectionObserver(function(es){ es.forEach(function(en){ sticky.hidden = en.isIntersecting; }); }, {threshold:0})
         .observe(fv);
     } else if(sticky){ sticky.hidden = false; }
-    track("lp2nd_open", { landing_intent:"lp2nd" });
+    track("lp3_open", { landing_intent:"lp3" });
     // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
     window.addEventListener("load", function(){
       var search = window.location.search;

@@ -34,10 +34,15 @@ export function yen(value) {
 function withDerived(base) {
   const pt1000 = base.pt1000;
   const pt900 = base.pt900;
+  // 金のカラット別単価。K24＝「金」買取単価。K22/K14は単独表記がないため純度比で概算する
+  const k24 = base.gold;
   return {
     ...base,
     // Pt950 は相場ページに単独表記がないため Pt1000 と Pt900 から概算する
     pt950: Math.round((pt1000 + pt900) / 2),
+    k24,
+    k22: base.k22 != null ? base.k22 : Math.round((k24 * 22) / 24),
+    k14: base.k14 != null ? base.k14 : Math.round((k24 * 14) / 24),
     sourceUrl: MARKET_SOURCE_URL,
   };
 }
@@ -60,7 +65,9 @@ async function fetchRates() {
     const ptB = text.match(/Pt\s+([\d,]+)円(?:\s*（前日比\s*([+-]?\d[\d,]*)\s*円）)?/);
     const pt900M = text.match(/Pt900\s+([\d,]+)円/);
     const pt850M = text.match(/Pt850\s+([\d,]+)円/);
-    const k18M = text.match(/K18\s+([\d,]+)円/);
+    const k18M = text.match(/K18\s+([\d,]+)円/) || text.match(/18金\s+([\d,]+)円/);
+    const k22M = text.match(/K22\s+([\d,]+)円/) || text.match(/22金\s+([\d,]+)円/);
+    const k14M = text.match(/K14\s+([\d,]+)円/) || text.match(/14金\s+([\d,]+)円/);
 
     // 主要な数字（プラチナと金）がどれも取れない場合のみ失敗扱い
     if (!ptB && !pt900M && !goldB) throw new Error("rate_parse_failed");
@@ -75,6 +82,8 @@ async function fetchRates() {
       gold: goldB ? parseYen(goldB[1]) : FALLBACK.gold,
       goldDiff: goldB && goldB[2] != null ? parseYen(goldB[2]) : FALLBACK.goldDiff,
       k18: k18M ? parseYen(k18M[1]) : FALLBACK.k18,
+      k22: k22M ? parseYen(k22M[1]) : null,
+      k14: k14M ? parseYen(k14M[1]) : null,
     };
     return withDerived(base);
   } catch (_) {
