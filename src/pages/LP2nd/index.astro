@@ -52,7 +52,9 @@ const faqJsonLd = {
     ["鑑定書や保証書がなくても大丈夫ですか？", "なくても査定・買取できます。あれば査定がスムーズになることがありますが、必須ではありません。"],
     ["査定後にキャンセルできますか？", "ほとんどのお店で、査定額に納得できなければ無料でキャンセルできます。売るかは金額を見てから決められます。"],
     ["出張査定は無料ですか？", "今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各店の公式でご確認ください。"],
-    ["どのタイミングで売るのがよいですか？", "プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。"]
+    ["どのタイミングで売るのがよいですか？", "プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。"],
+    ["指輪を売ると税金はかかりますか？", "多くの場合は非課税です。貴金属の売却益は譲渡所得にあたり、給与所得者ならその年の利益が合計50万円までは特別控除でかからないことがほとんどです。高額な場合や営利目的の売買は扱いが異なるため、詳しくは国税庁の案内や税務署・税理士にご確認ください。"],
+    ["買取にクーリングオフは使えますか？", "訪問購入（出張買取）の場合、原則として契約書面を受け取った日から8日間はクーリングオフ（申込みの撤回）ができます。一方で、店頭買取・宅配買取は対象外です。詳しい条件は各店の契約書面でご確認ください。"]
   ].map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
 };
 
@@ -120,6 +122,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <div class="rate-chip">
           <span><i class="live-dot"></i>本日のプラチナ相場</span>
           <b>Pt900 {yen(rates.pt900)}/g</b><b>Pt850 {yen(rates.pt850)}/g</b>
+          <span class="rate-trend">📈 歴史的な高値圏</span>
           <small>{rates.updatedAt}</small>
         </div>
 
@@ -231,6 +234,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
         </div>
         <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場</p>
+        <p class="rate-trend-lg">📈 プラチナは歴史的な高値圏です。相場は毎日動くので、高いうちに金額を確認しておくのがおすすめです。</p>
 
         <div class="rate-ex">
           <h3>指輪の重さ別・参考買取額（Pt900の場合）</h3>
@@ -240,6 +244,28 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <li><span>太め・甲丸（約10g）</span><b>{ringEx(10)}</b></li>
           </ul>
           <p class="note">※結婚指輪・婚約指輪・コンビリング（金とのミックス）もOK。上の金額は地金だけのおおよその目安で、宝石・ブランド・デザインがあるとさらに上がることがあります。重量・状態で変わります。</p>
+        </div>
+
+        <!-- A-3 買取額の計算式 -->
+        <div class="calc">
+          <h3>買取額はどう決まる？</h3>
+          <p class="calc-formula">
+            <span>1gの相場</span><i>×</i><span>純度</span><i>×</i><span>重さ(g)</span><i>＝</i><b>買取額の目安</b>
+          </p>
+          <p class="note">結婚指輪の重さは1本あたり約3〜7gが目安です。Pt900なら本日の相場 約{yen(rates.pt900)}/g が計算のベースになります（宝石・ブランド・デザインは別途プラス評価）。</p>
+        </div>
+
+        <!-- A-2 純度・刻印の見分け方 -->
+        <div class="purity">
+          <h3>純度・刻印の見分け方</h3>
+          <ul class="purity-list">
+            <li><b>Pt1000</b><span>純度99.9%以上。最も高い純度</span></li>
+            <li><b>Pt950</b><span>純度95%。ブランドジュエリーに多い</span></li>
+            <li><b>Pt900</b><span>純度90%。結婚指輪の定番</span></li>
+            <li><b>Pt850</b><span>純度85%。チェーン類などに多い</span></li>
+          </ul>
+          <p class="purity-where">刻印は指輪の<b>内側</b>に小さく入っています。「Pt900」「PT900」などの表記が目印です。</p>
+          <p class="purity-warn">⚠️ <b>「PP」「PTP」「PTF」「GP」</b>などはプラチナメッキ（表面だけプラチナ）の可能性があり、買取対象外のことがあります。刻印が読めない・刻印がない場合でも、<b>X線検査</b>で正確に成分を調べてもらえるので心配いりません。</p>
         </div>
       </div>
     </section>
@@ -391,6 +417,27 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
     </section>
 
+    <!-- 07 売るのをためらう方へ -->
+    <section class="sec" id="push">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💍 はじめに</span><h2>「指輪を手放すこと」に<br />迷っている方へ</h2></div>
+        <p class="push-lead">使わなくなった指輪を売るのは、思い出を手放すことではありません。<b>気持ちの区切りをつけて、次の一歩へ進むための前向きな選択</b>です。</p>
+        <ul class="push-points">
+          <li><i>🤝</i><div><b>手放す方は珍しくありません</b>買い替え・整理・ライフステージの変化などで、結婚指輪や婚約指輪を売る方はたくさんいます。</div></li>
+          <li><i>🔒</i><div><b>刻印は工房で消えてなくなります</b>イニシャルや日付の刻印は、地金として溶かす過程でなくなります。個人情報が残る心配はありません。</div></li>
+          <li><i>💰</i><div><b>今は相場が高めです</b>プラチナは歴史的な高値圏。眠らせておくより、価値のあるうちに金額を知るだけでも損はありません。</div></li>
+        </ul>
+        <div class="push-safe">
+          <b>👜 女性おひとりでも安心して相談できます</b>
+          <ul>
+            <li>女性スタッフによる査定を選べるお店もあります</li>
+            <li>人目が気になる方は、自宅で完結する<b>宅配買取</b>や<b>出張買取</b>も選べます</li>
+            <li>もちろん「査定額を聞くだけ」でOK。その場で売らなくて大丈夫です</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- 08 不安解消 -->
     <section class="sec sec-cream" id="worry">
       <div class="wrap">
@@ -458,6 +505,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <details><summary>査定後にキャンセルできますか？</summary><p>多くのお店で、金額に納得できなければ無料でキャンセルできます。</p></details>
           <details><summary>出張査定は無料ですか？</summary><p>今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各公式でご確認ください。</p></details>
           <details><summary>どのタイミングで売るのがよいですか？</summary><p>プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
+          <details><summary>指輪を売ると税金はかかりますか？</summary><p>多くの場合は非課税です。貴金属の売却益は譲渡所得にあたり、給与所得者ならその年の利益（売却益）が合計50万円までは特別控除でかからないことがほとんどです。高額な場合や営利目的の売買は扱いが異なるため、詳しくは国税庁の案内や税務署・税理士にご確認ください。</p></details>
+          <details><summary>買取にクーリングオフは使えますか？</summary><p>訪問購入（出張買取）の場合、原則として契約書面を受け取った日から8日間はクーリングオフ（申込みの撤回）ができます。一方で、店頭買取・宅配買取は対象外です。詳しい条件は各店の契約書面でご確認ください。</p></details>
         </div>
       </div>
     </section>
@@ -486,6 +535,10 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <li>AACD（日本流通自主管理協会）正会員 R-0100</li>
           <li>プライバシーマーク・Pマーク取得</li>
         </ul>
+      </div>
+      <div class="ft-method">
+        <p class="ft-method-ttl">📝 編集部の比較方法について</p>
+        <p>当編集部では、買取価格の水準・手数料・対応できる指輪の幅・買取方法（店頭／出張／宅配）・口コミ評価・運営体制などをもとに、プラチナ指輪の買取店を比較・評価しています。相場やキャンペーン内容は随時見直し、情報の更新に努めています（最終更新：{rates.updatedAt}）。</p>
       </div>
       <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。買取価格・手数料・対応条件などの最新情報は、各社の公式ページでご確認ください。掲載の◎○や順位は編集部の判断によるものです。</p>
       <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
@@ -674,6 +727,41 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-ex li span{ color:var(--body); }
     .rate-ex li b{ color:var(--green-d); }
 
+    /* B-2 相場トレンド */
+    .rate-trend{ display:inline-flex; align-items:center; background:#FFF3E0; color:var(--coral-d); font-weight:900; font-size:11px; border-radius:999px; padding:3px 10px; }
+    .rate-trend-lg{ text-align:center; font-size:12.5px; font-weight:700; color:var(--coral-d); background:#FFF3E0; border-radius:10px; padding:9px 12px; margin:10px 0 0; line-height:1.6; }
+
+    /* A-3 計算式 */
+    .calc{ margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .calc h3{ font-size:15px; margin:0 0 12px; }
+    .calc-formula{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; margin:0 0 6px; }
+    .calc-formula span{ background:var(--mint); color:var(--green-d); font-weight:900; font-size:12.5px; border-radius:8px; padding:6px 10px; }
+    .calc-formula i{ font-style:normal; font-weight:900; color:var(--sub); font-size:14px; }
+    .calc-formula b{ background:var(--green-d); color:#fff; font-size:13px; border-radius:8px; padding:6px 12px; }
+
+    /* A-2 純度・刻印 */
+    .purity{ margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .purity h3{ font-size:15px; margin:0 0 12px; }
+    .purity-list{ list-style:none; margin:0 0 12px; padding:0; display:grid; gap:8px; }
+    .purity-list li{ display:flex; align-items:baseline; gap:10px; font-size:13px; padding:8px 12px; background:#FAFCFB; border:1px solid var(--line); border-radius:10px; }
+    .purity-list b{ flex:0 0 64px; color:var(--green-d); font-size:14px; }
+    .purity-list span{ color:var(--body); }
+    .purity-where{ font-size:13px; color:var(--body); margin:0 0 10px; line-height:1.7; }
+    .purity-warn{ font-size:12.5px; color:var(--body); background:#FFF7EC; border:1px solid var(--gold); border-radius:10px; padding:10px 12px; margin:0; line-height:1.7; }
+
+    /* 07 ためらう方へ */
+    .push-lead{ font-size:14.5px; line-height:1.85; color:var(--body); text-align:center; margin:0 0 18px; }
+    .push-points{ list-style:none; margin:0 0 16px; padding:0; display:grid; gap:10px; }
+    .push-points li{ display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .push-points i{ font-style:normal; font-size:24px; flex-shrink:0; line-height:1.2; }
+    .push-points b{ display:block; font-size:14px; color:var(--green-d); margin-bottom:3px; }
+    .push-points div{ font-size:13px; color:var(--body); line-height:1.7; }
+    .push-safe{ background:var(--cream); border:1px solid var(--gold); border-radius:16px; padding:16px; }
+    .push-safe>b{ display:block; font-size:14.5px; color:var(--gold-d); margin-bottom:10px; }
+    .push-safe ul{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+    .push-safe li{ font-size:13px; color:var(--body); line-height:1.6; padding-left:20px; position:relative; }
+    .push-safe li::before{ content:"✓"; position:absolute; left:0; color:var(--gold-d); font-weight:900; }
+
     /* 03 高く売るポイント（画像） */
     .point-img{ display:block; font-size:0; line-height:0; border-radius:14px; overflow:hidden; box-shadow:0 8px 22px rgba(20,60,50,.1); }
     .point-img img{ width:100%; height:auto; display:block; }
@@ -768,6 +856,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .ft-trust ul{ list-style:none; margin:0; padding:0; }
     .ft-trust li{ font-size:11.5px; line-height:1.7; color:#cfd8de; padding-left:14px; position:relative; }
     .ft-trust li::before{ content:"・"; position:absolute; left:0; }
+    .ft-method{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px 16px; margin:0 0 14px; }
+    .ft-method-ttl{ font-size:12px; font-weight:900; color:#e7eef2; margin:0 0 8px; }
+    .ft-method p:not(.ft-method-ttl){ font-size:11.5px; line-height:1.8; color:#cfd8de; margin:0; }
     .ft-note{ font-size:11px; line-height:1.7; margin:0 0 12px; }
     .ft nav{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:10px; }
     .ft a{ color:#aeecdf; color:#a9d5cd; font-size:12px; }
