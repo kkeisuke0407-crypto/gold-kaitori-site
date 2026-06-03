@@ -231,53 +231,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
     </section>
 
-    <!-- 02 相場 -->
-    <section class="sec sec-mint" id="rate">
-      <div class="wrap">
-        <div class="sec-head"><span class="chip">💎 相場</span><h2>本日のプラチナ買取相場</h2><p>純度（刻印）によって1gあたりの金額が変わります。</p></div>
-        <div class="rate-grid">
-          <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
-          <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
-          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
-          <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
-        </div>
-        <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場</p>
-        <p class="rate-trend-lg">📈 プラチナは歴史的な高値圏です。相場は毎日動くので、高いうちに金額を確認しておくのがおすすめです。</p>
-
-        <div class="rate-ex">
-          <h3>指輪の重さ別・参考買取額（Pt900の場合）</h3>
-          <ul>
-            <li><span>細めの指輪（約3g）</span><b>{ringEx(3)}</b></li>
-            <li><span>標準的な指輪（約5g）</span><b>{ringEx(5)}</b></li>
-            <li><span>太め・甲丸（約10g）</span><b>{ringEx(10)}</b></li>
-          </ul>
-          <p class="note">※結婚指輪・婚約指輪・コンビリング（金とのミックス）もOK。上の金額は地金だけのおおよその目安で、宝石・ブランド・デザインがあるとさらに上がることがあります。重量・状態で変わります。</p>
-        </div>
-
-        <!-- A-3 買取額の計算式 -->
-        <div class="calc">
-          <h3>買取額はどう決まる？</h3>
-          <p class="calc-formula">
-            <span>1gの相場</span><i>×</i><span>純度</span><i>×</i><span>重さ(g)</span><i>＝</i><b>買取額の目安</b>
-          </p>
-          <p class="note">結婚指輪の重さは1本あたり約3〜7gが目安です。Pt900なら本日の相場 約{yen(rates.pt900)}/g が計算のベースになります（宝石・ブランド・デザインは別途プラス評価）。</p>
-        </div>
-
-        <!-- A-2 純度・刻印の見分け方 -->
-        <div class="purity">
-          <h3>純度・刻印の見分け方</h3>
-          <ul class="purity-list">
-            <li><b>Pt1000</b><span>純度99.9%以上。最も高い純度</span></li>
-            <li><b>Pt950</b><span>純度95%。ブランドジュエリーに多い</span></li>
-            <li><b>Pt900</b><span>純度90%。結婚指輪の定番</span></li>
-            <li><b>Pt850</b><span>純度85%。チェーン類などに多い</span></li>
-          </ul>
-          <p class="purity-where">刻印は指輪の<b>内側</b>に小さく入っています。「Pt900」「PT900」などの表記が目印です。</p>
-          <p class="purity-warn">⚠️ <b>「PP」「PTP」「PTF」「GP」</b>などはプラチナメッキ（表面だけプラチナ）の可能性があり、買取対象外のことがあります。刻印が読めない・刻印がない場合でも、<b>X線検査</b>で正確に成分を調べてもらえるので心配いりません。</p>
-        </div>
-      </div>
-    </section>
-
     <!-- 03 高く売るコツ -->
     <section class="sec" id="point">
       <div class="wrap">
@@ -435,27 +388,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
     </section>
 
-    <!-- 07 売るのをためらう方へ -->
-    <section class="sec" id="push">
-      <div class="wrap">
-        <div class="sec-head"><span class="chip">💍 はじめに</span><h2>「指輪を手放すこと」に<br />迷っている方へ</h2></div>
-        <p class="push-lead">使わなくなった指輪を売るのは、思い出を手放すことではありません。<b>気持ちの区切りをつけて、次の一歩へ進むための前向きな選択</b>です。</p>
-        <ul class="push-points">
-          <li><i>🤝</i><div><b>手放す方は珍しくありません</b>買い替え・整理・ライフステージの変化などで、結婚指輪や婚約指輪を売る方はたくさんいます。</div></li>
-          <li><i>🔒</i><div><b>刻印は工房で消えてなくなります</b>イニシャルや日付の刻印は、地金として溶かす過程でなくなります。個人情報が残る心配はありません。</div></li>
-          <li><i>💰</i><div><b>今は相場が高めです</b>プラチナは歴史的な高値圏。眠らせておくより、価値のあるうちに金額を知るだけでも損はありません。</div></li>
-        </ul>
-        <div class="push-safe">
-          <b>👜 女性おひとりでも安心して相談できます</b>
-          <ul>
-            <li>女性スタッフによる査定を選べるお店もあります</li>
-            <li>人目が気になる方は、自宅で完結する<b>宅配買取</b>や<b>出張買取</b>も選べます</li>
-            <li>もちろん「査定額を聞くだけ」でOK。その場で売らなくて大丈夫です</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <!-- 08 不安解消 -->
     <section class="sec sec-cream" id="worry">
       <div class="wrap">
@@ -525,6 +457,76 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <details><summary>どのタイミングで売るのがよいですか？</summary><p>プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
           <details><summary>指輪を売ると税金はかかりますか？</summary><p>多くの場合は非課税です。貴金属の売却益は譲渡所得にあたり、給与所得者ならその年の利益（売却益）が合計50万円までは特別控除でかからないことがほとんどです。高額な場合や営利目的の売買は扱いが異なるため、詳しくは国税庁の案内や税務署・税理士にご確認ください。</p></details>
           <details><summary>買取にクーリングオフは使えますか？</summary><p>訪問購入（出張買取）の場合、原則として契約書面を受け取った日から8日間はクーリングオフ（申込みの撤回）ができます。一方で、店頭買取・宅配買取は対象外です。詳しい条件は各店の契約書面でご確認ください。</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 相場・純度・計算（じっくり読みたい人向け：顕在導線を塞がないよう下部に配置） -->
+    <section class="sec sec-mint" id="rate">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💎 相場・純度</span><h2>プラチナの相場と純度を知る</h2><p>売る前に知っておくと安心。じっくり確認したい方向けです。</p></div>
+
+        <!-- 純度・刻印の見分け方 -->
+        <div class="purity">
+          <h3>純度・刻印の見分け方</h3>
+          <ul class="purity-list">
+            <li><b>Pt1000</b><span>純度99.9%以上。最も高い純度</span></li>
+            <li><b>Pt950</b><span>純度95%。ブランドジュエリーに多い</span></li>
+            <li><b>Pt900</b><span>純度90%。結婚指輪の定番</span></li>
+            <li><b>Pt850</b><span>純度85%。チェーン類などに多い</span></li>
+          </ul>
+          <p class="purity-where">刻印は指輪の<b>内側</b>に小さく入っています。「Pt900」「PT900」などの表記が目印です。</p>
+          <p class="purity-warn">⚠️ <b>「PP」「PTP」「PTF」「GP」</b>などはプラチナメッキ（表面だけプラチナ）の可能性があり、買取対象外のことがあります。刻印が読めない・刻印がない場合でも、<b>X線検査</b>で正確に成分を調べてもらえるので心配いりません。</p>
+        </div>
+
+        <!-- 本日の相場 -->
+        <div class="rate-grid">
+          <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
+          <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
+          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
+          <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
+        </div>
+        <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場</p>
+        <p class="rate-trend-lg">📈 プラチナは歴史的な高値圏です。相場は毎日動くので、高いうちに金額を確認しておくのがおすすめです。</p>
+
+        <div class="rate-ex">
+          <h3>指輪の重さ別・参考買取額（Pt900の場合）</h3>
+          <ul>
+            <li><span>細めの指輪（約3g）</span><b>{ringEx(3)}</b></li>
+            <li><span>標準的な指輪（約5g）</span><b>{ringEx(5)}</b></li>
+            <li><span>太め・甲丸（約10g）</span><b>{ringEx(10)}</b></li>
+          </ul>
+          <p class="note">※結婚指輪・婚約指輪・コンビリング（金とのミックス）もOK。上の金額は地金だけのおおよその目安で、宝石・ブランド・デザインがあるとさらに上がることがあります。重量・状態で変わります。</p>
+        </div>
+
+        <!-- 買取額の計算式 -->
+        <div class="calc">
+          <h3>買取額はどう決まる？</h3>
+          <p class="calc-formula">
+            <span>1gの相場</span><i>×</i><span>純度</span><i>×</i><span>重さ(g)</span><i>＝</i><b>買取額の目安</b>
+          </p>
+          <p class="note">結婚指輪の重さは1本あたり約3〜7gが目安です。Pt900なら本日の相場 約{yen(rates.pt900)}/g が計算のベースになります（宝石・ブランド・デザインは別途プラス評価）。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 売るのをためらう方へ（心理：最後の一押し） -->
+    <section class="sec" id="push">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💍 最後に</span><h2>「指輪を手放すこと」に<br />迷っている方へ</h2></div>
+        <p class="push-lead">使わなくなった指輪を売るのは、思い出を手放すことではありません。<b>気持ちの区切りをつけて、次の一歩へ進むための前向きな選択</b>です。</p>
+        <ul class="push-points">
+          <li><i>🤝</i><div><b>手放す方は珍しくありません</b>買い替え・整理・ライフステージの変化などで、結婚指輪や婚約指輪を売る方はたくさんいます。</div></li>
+          <li><i>🔒</i><div><b>刻印は工房で消えてなくなります</b>イニシャルや日付の刻印は、地金として溶かす過程でなくなります。個人情報が残る心配はありません。</div></li>
+          <li><i>💰</i><div><b>今は相場が高めです</b>プラチナは歴史的な高値圏。眠らせておくより、価値のあるうちに金額を知るだけでも損はありません。</div></li>
+        </ul>
+        <div class="push-safe">
+          <b>👜 女性おひとりでも安心して相談できます</b>
+          <ul>
+            <li>女性スタッフによる査定を選べるお店もあります</li>
+            <li>人目が気になる方は、自宅で完結する<b>宅配買取</b>や<b>出張買取</b>も選べます</li>
+            <li>もちろん「査定額を聞くだけ」でOK。その場で売らなくて大丈夫です</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -609,7 +611,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .cta-pair{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
     .cta-pair .btn{ width:92%; margin:0 auto; padding:0 16px; font-size:clamp(14px,4vw,16px); white-space:nowrap; }
     .cta-pair .btn i{ font-size:14px; }
-    .cta-note{ text-align:center; font-size:12px; color:var(--sub); margin:8px 0 0; }
+    .cta-note{ text-align:center; font-size:13px; color:var(--sub); margin:8px 0 0; }
 
     /* 01 FV */
     .fv{ background:linear-gradient(180deg,#EAF6F2, #fff); padding:24px 0 34px; }
@@ -695,21 +697,21 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .trust-strip span{ color:var(--sub); font-size:9px; line-height:1.25; font-weight:700; }
     .fv-hero-img{ width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.12); }
     .rate-chip{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; box-shadow:0 6px 18px rgba(20,60,50,.06); }
-    .rate-chip>span{ font-size:12px; font-weight:900; color:var(--green-d); width:100%; }
+    .rate-chip>span{ font-size:13px; font-weight:900; color:var(--green-d); width:100%; }
     .rate-chip b{ font-size:16px; }
-    .rate-chip small{ width:100%; color:var(--sub); font-size:11px; }
+    .rate-chip small{ width:100%; color:var(--sub); font-size:12px; }
 
     /* FV 3社比較表 */
     .fv-tbl-head{ display:flex; align-items:center; gap:8px; margin:16px 0 6px; }
     .fv-tbl-ttl{ font-weight:900; font-size:14px; color:var(--ink); }
     .fv-tbl-head .pr{ margin-left:auto; }
     .fv-tbl-wrap{ margin:0 0 8px; overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:16px; border:1px solid var(--line); box-shadow:0 6px 18px rgba(20,60,50,.07); }
-    .fv-tbl{ width:100%; min-width:340px; border-collapse:collapse; background:#fff; font-size:12px; }
+    .fv-tbl{ width:100%; min-width:340px; border-collapse:collapse; background:#fff; font-size:12.5px; }
     .fv-tbl th,.fv-tbl td{ padding:10px 8px; text-align:center; border-bottom:1px solid var(--line); vertical-align:middle; line-height:1.35; }
     .fv-th-item{ background:#F4F8F6; font-size:0; width:0; padding:0; }
     .fv-th{ background:#F4F8F6; font-weight:900; font-size:13px; color:var(--ink); }
     .fv-th1{ background:#FFFCF2; }
-    .fv-td-item{ text-align:left; font-size:11px; font-weight:700; color:var(--sub); background:#FAFCFB; padding:10px 8px; white-space:nowrap; position:sticky; left:0; z-index:1; }
+    .fv-td-item{ text-align:left; font-size:12px; font-weight:700; color:var(--ink); background:#FAFCFB; padding:10px 8px; white-space:nowrap; position:sticky; left:0; z-index:1; }
     .fv-td{ background:#fff; }
     .fv-td1{ background:#FFFCF2; }
     .fv-td .mk{ display:block; font-size:20px; font-weight:900; line-height:1; margin-bottom:3px; }
