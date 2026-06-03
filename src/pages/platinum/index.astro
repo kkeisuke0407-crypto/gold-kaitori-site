@@ -3,60 +3,11 @@ const PAGE_TITLE = "プラチナ指輪はいくら？Pt900・Pt950の買取価�
 const PAGE_DESC = "Pt900・Pt950・Pt850のプラチナ指輪が今いくらになるか、当日の買取単価と概算計算で確認。手数料0円・提示額がそのまま手取りの相談先を、目的別に整理しました。結婚指輪や古い指輪もまず査定額を確認。";
 const CANONICAL = "https://kaitori.hakobu-family.com/platinum/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
-const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
 
-const fallbackRates = {
-  updatedAt: "2026年5月29日 現在",
-  pt1000: 10602,
-  pt900: 9648,
-  pt850: 9065,
-  k18: 18824,
-  gold: 25132
-};
-
-function parseYen(value) {
-  return Number(String(value || "").replace(/[^\d-]/g, ""));
-}
-
-function yen(value) {
-  return `${Number(value).toLocaleString("ja-JP")}円`;
-}
-
-async function getPlatinumRates() {
-  try {
-    const response = await fetch(MARKET_SOURCE_URL);
-    if (!response.ok) throw new Error("rate_fetch_failed");
-    const html = await response.text();
-    const text = html
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-      .replace(/&nbsp;|&#160;/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-    const updated = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
-    const pt1000 = text.match(/Pt\s+([\d,]+)円/);
-    const pt900 = text.match(/Pt900\s+([\d,]+)円/);
-    const pt850 = text.match(/Pt850\s+([\d,]+)円/);
-    const k18 = text.match(/K18\s+([\d,]+)円/);
-    const gold = text.match(/金\s+([\d,]+)円/);
-    if (!pt900 && !pt1000) throw new Error("rate_parse_failed");
-    return {
-      updatedAt: updated ? `${updated[1]}年${updated[2]}月${updated[3]}日 更新` : fallbackRates.updatedAt,
-      pt1000: pt1000 ? parseYen(pt1000[1]) : fallbackRates.pt1000,
-      pt900: pt900 ? parseYen(pt900[1]) : fallbackRates.pt900,
-      pt850: pt850 ? parseYen(pt850[1]) : fallbackRates.pt850,
-      k18: k18 ? parseYen(k18[1]) : fallbackRates.k18,
-      gold: gold ? parseYen(gold[1]) : fallbackRates.gold
-    };
-  } catch (_) {
-    return { ...fallbackRates };
-  }
-}
-
-const rates = await getPlatinumRates();
+import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
+const rates = await getRates();
 // Pt950はPt1000とPt900の中間として概算（実額は査定時に確定）
-const pt950 = Math.round((rates.pt1000 + rates.pt900) / 2);
+const pt950 = rates.pt950;
 // FVの代表例：Pt900の指輪 約4g
 const sampleWeight = 4;
 const sampleLow = Math.round(rates.pt900 * sampleWeight * 0.9);

@@ -3,36 +3,8 @@ const PAGE_TITLE = "プラチナ指輪 高額買取おすすめTOP3｜結婚指�
 const PAGE_DESC = "プラチナ指輪を高く売るならどこ？本日のPt900・Pt850相場と、結婚指輪・刻印入り・宝石付きにも対応した買取店をランキングと比較表でやさしく解説。査定は無料・売るかは後で決められます。";
 const CANONICAL = "https://kaitori.hakobu-family.com/LP2nd/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
-const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
 
-const fallbackRates = {
-  updatedAt: "2026年5月29日 現在",
-  pt1000: 10602, pt950: 10125, pt900: 9648, pt850: 9065
-};
-function parseYen(v) { return Number(String(v || "").replace(/[^\d-]/g, "")); }
-function yen(v) { return `${Number(v).toLocaleString("ja-JP")}円`; }
-
-async function getRates() {
-  try {
-    const res = await fetch(MARKET_SOURCE_URL);
-    if (!res.ok) throw new Error("fail");
-    const text = (await res.text())
-      .replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/g, " ").replace(/\s+/g, " ").trim();
-    const u = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
-    const pt1000 = text.match(/Pt\s+([\d,]+)円/);
-    const pt900 = text.match(/Pt900\s+([\d,]+)円/);
-    const pt850 = text.match(/Pt850\s+([\d,]+)円/);
-    if (!pt900 && !pt1000) throw new Error("parse");
-    const r1000 = pt1000 ? parseYen(pt1000[1]) : fallbackRates.pt1000;
-    const r900 = pt900 ? parseYen(pt900[1]) : fallbackRates.pt900;
-    return {
-      updatedAt: u ? `${u[1]}年${u[2]}月${u[3]}日 更新` : fallbackRates.updatedAt,
-      pt1000: r1000, pt950: Math.round((r1000 + r900) / 2),
-      pt900: r900, pt850: pt850 ? parseYen(pt850[1]) : fallbackRates.pt850
-    };
-  } catch (_) { return { ...fallbackRates }; }
-}
+import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
 const rates = await getRates();
 const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("ja-JP")}〜${Math.round(rates.pt900 * w).toLocaleString("ja-JP")}円`;
 // キャンペーン残日数（まねきや 6/30まで）

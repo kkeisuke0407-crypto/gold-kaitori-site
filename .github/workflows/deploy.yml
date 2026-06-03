@@ -5,8 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    # 金相場の発表後に毎日再ビルドする（15:30 JST）
-    - cron: "30 6 * * *"
+    # 金・プラチナ相場を毎日最新化するための再ビルド（取りこぼし防止に複数回実行）
+    # ※GitHubのスケジュールは混雑時に遅延・スキップされることがあるため冗長化している
+    - cron: "30 6 * * *"   # 15:30 JST（相場発表後）
+    - cron: "0 22 * * *"   #  7:00 JST（翌朝の保険）
 
 permissions:
   contents: read

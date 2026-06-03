@@ -3,58 +3,10 @@ const PAGE_TITLE = "プラチナ指輪は今いくら？｜売る前に買取金
 const PAGE_DESC = "プラチナ指輪(Pt900/Pt950)が今だいたいいくらで売れそうか、重さと刻印を選ぶだけで30秒でわかります。安く買われないためのコツや、どこに持っていけばいいかも紹介。結婚指輪・古い指輪もOK。";
 const CANONICAL = "https://kaitori.hakobu-family.com/pt-shindan/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
-const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
 
-const fallbackRates = {
-  updatedAt: "2026年5月29日 現在",
-  pt1000: 10602,
-  pt900: 9648,
-  pt850: 9065,
-  k18: 18824,
-  gold: 25132
-};
-
-function parseYen(value) {
-  return Number(String(value || "").replace(/[^\d-]/g, ""));
-}
-function yen(value) {
-  return `${Number(value).toLocaleString("ja-JP")}円`;
-}
-
-async function getPlatinumRates() {
-  try {
-    const response = await fetch(MARKET_SOURCE_URL);
-    if (!response.ok) throw new Error("rate_fetch_failed");
-    const html = await response.text();
-    const text = html
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-      .replace(/&nbsp;|&#160;/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-    const updated = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
-    const pt1000 = text.match(/Pt\s+([\d,]+)円/);
-    const pt900 = text.match(/Pt900\s+([\d,]+)円/);
-    const pt850 = text.match(/Pt850\s+([\d,]+)円/);
-    const k18 = text.match(/K18\s+([\d,]+)円/);
-    const gold = text.match(/金\s+([\d,]+)円/);
-    if (!pt900 && !pt1000) throw new Error("rate_parse_failed");
-    return {
-      updatedAt: updated ? `${updated[1]}年${updated[2]}月${updated[3]}日 更新` : fallbackRates.updatedAt,
-      pt1000: pt1000 ? parseYen(pt1000[1]) : fallbackRates.pt1000,
-      pt900: pt900 ? parseYen(pt900[1]) : fallbackRates.pt900,
-      pt850: pt850 ? parseYen(pt850[1]) : fallbackRates.pt850,
-      k18: k18 ? parseYen(k18[1]) : fallbackRates.k18,
-      gold: gold ? parseYen(gold[1]) : fallbackRates.gold
-    };
-  } catch (_) {
-    return { ...fallbackRates };
-  }
-}
-
-const rates = await getPlatinumRates();
-const pt950 = Math.round((rates.pt1000 + rates.pt900) / 2);
+import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
+const rates = await getRates();
+const pt950 = rates.pt950;
 
 const faqJsonLd = {
   "@context": "https://schema.org",

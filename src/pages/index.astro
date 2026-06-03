@@ -3,7 +3,7 @@ const PAGE_TITLE = "K18・プラチナの無料査定予約｜金買取査定ナ
 const PAGE_DESC = "K18、18金ネックレス、プラチナの査定額を知りたい方へ。電話相談・WEB査定予約に進む前に、買取価格や手数料、店頭・出張・宅配査定の違いをまとめました。";
 const CANONICAL = "https://kaitori.hakobu-family.com/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-appraisal-reservation.png";
-const MARKET_SOURCE_URL = "https://manekiya.shop/rate/";
+import { getRates } from "../lib/rates.js";
 const MARKET_YEARLY_SOURCE_URL = "https://gold.tanaka.co.jp/commodity/souba/y-gold.php";
 const CAMPAIGN_END = Date.parse("2026-05-31T23:59:59+09:00");
 const campaignActive = Date.now() <= CAMPAIGN_END;
@@ -59,55 +59,21 @@ function parseYen(value) {
 }
 
 async function getGoldMarket() {
-  try {
-    const response = await fetch(MARKET_SOURCE_URL);
-    if (!response.ok) throw new Error("market_fetch_failed");
-    const html = await response.text();
-    const text = html
-      .replace(/<script[\s\S]*?<\/script>/gi, " ")
-      .replace(/<style[\s\S]*?<\/style>/gi, " ")
-      .replace(/<[^>]+>/g, " ")
-      .replace(/&nbsp;|&#160;/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-    const updated = text.match(/※(20\d{2})年(\d{1,2})月(\d{1,2})日現在/);
-    const goldBlock = text.match(/金\s+([\d,]+)円\s*（前日比\s*([+-]?\d[\d,]*)\s*円）/);
-    const ptBlock = text.match(/Pt\s+([\d,]+)円\s*（前日比\s*([+-]?\d[\d,]*)\s*円）/);
-    const k18Block = text.match(/K18\s+([\d,]+)円/);
-    const pt900Block = text.match(/Pt900\s+([\d,]+)円/);
-    if (!goldBlock) throw new Error("market_parse_failed");
-    const month = updated ? Number(updated[2]) : new Date().getMonth() + 1;
-    const day = updated ? Number(updated[3]) : new Date().getDate();
-    const buildYear = updated ? Number(updated[1]) : new Date().getFullYear();
-    const today = {
-      month,
-      day,
-      label: `${month}/${day}`,
-      retail: 0,
-      retailDiff: 0,
-      buy: parseYen(goldBlock[1]),
-      buyDiff: parseYen(goldBlock[2]),
-      k18: k18Block ? parseYen(k18Block[1]) : undefined,
-      platinum: ptBlock ? parseYen(ptBlock[1]) : undefined,
-      platinumDiff: ptBlock ? parseYen(ptBlock[2]) : undefined,
-      pt900: pt900Block ? parseYen(pt900Block[1]) : undefined
-    };
-    return {
-      updatedAt: `${buildYear}年${today.month}月${today.day}日 更新`,
-      retail: today.retail,
-      retailDiff: today.retailDiff,
-      buy: today.buy,
-      buyDiff: today.buyDiff,
-      k18: today.k18,
-      platinum: today.platinum,
-      platinumDiff: today.platinumDiff,
-      pt900: today.pt900,
-      history: fallbackMarket.history,
-      sourceUrl: MARKET_SOURCE_URL
-    };
-  } catch (_) {
-    return { ...fallbackMarket, sourceUrl: MARKET_SOURCE_URL };
-  }
+  // 相場は全ページ共通の取得元（src/lib/rates.js）から取得し、ページ間で必ず同じ数字にする
+  const r = await getRates();
+  return {
+    updatedAt: r.updatedAt,
+    retail: 0,
+    retailDiff: 0,
+    buy: r.gold,
+    buyDiff: r.goldDiff,
+    k18: r.k18,
+    platinum: r.pt1000,
+    platinumDiff: r.ptDiff,
+    pt900: r.pt900,
+    history: fallbackMarket.history,
+    sourceUrl: r.sourceUrl
+  };
 }
 
 async function getLongTermGoldMarket() {
