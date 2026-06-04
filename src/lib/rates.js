@@ -49,8 +49,17 @@ function withDerived(base) {
 
 async function fetchRates() {
   try {
-    const res = await fetch(MARKET_SOURCE_URL);
-    if (!res.ok) throw new Error("rate_fetch_failed");
+    // 多くのサイトはデフォルトUA（"node"）を弾く／別内容を返すため、ブラウザ相当のヘッダを送る
+    const res = await fetch(MARKET_SOURCE_URL, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "ja,en;q=0.8",
+      },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!res.ok) throw new Error(`rate_fetch_failed status=${res.status}`);
     const text = (await res.text())
       .replace(/<script[\s\S]*?<\/script>/gi, " ")
       .replace(/<style[\s\S]*?<\/style>/gi, " ")
@@ -70,7 +79,10 @@ async function fetchRates() {
     const k14M = text.match(/K14\s+([\d,]+)円/) || text.match(/14金\s+([\d,]+)円/);
 
     // 主要な数字（プラチナと金）がどれも取れない場合のみ失敗扱い
-    if (!ptB && !pt900M && !goldB) throw new Error("rate_parse_failed");
+    if (!ptB && !pt900M && !goldB) {
+      console.warn("[rates] パース失敗：取得HTMLに相場表記が見つかりません。先頭抜粋:", text.slice(0, 200));
+      throw new Error("rate_parse_failed");
+    }
 
     const base = {
       ok: true,
@@ -85,8 +97,10 @@ async function fetchRates() {
       k22: k22M ? parseYen(k22M[1]) : null,
       k14: k14M ? parseYen(k14M[1]) : null,
     };
+    console.log(`[rates] 取得成功 ${base.updatedAt} / 金 ${base.gold}・Pt900 ${base.pt900}・K18 ${base.k18}`);
     return withDerived(base);
-  } catch (_) {
+  } catch (e) {
+    console.warn(`[rates] 取得失敗のためフォールバック値を使用（${FALLBACK.updatedAt}）:`, e && e.message);
     return withDerived({ ok: false, ...FALLBACK });
   }
 }
