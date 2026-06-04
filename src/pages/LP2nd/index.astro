@@ -24,6 +24,11 @@ const faqJsonLd = {
     ["鑑定書や保証書がなくても大丈夫ですか？", "なくても査定・買取できます。あれば査定がスムーズになることがありますが、必須ではありません。"],
     ["査定後にキャンセルできますか？", "ほとんどのお店で、査定額に納得できなければ無料でキャンセルできます。売るかは金額を見てから決められます。"],
     ["出張査定は無料ですか？", "今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各店の公式でご確認ください。"],
+    ["Pt900の結婚指輪は売れますか？", "売れます。Pt900は結婚指輪で最も多い純度で、地金として重さ×単価で査定されます。本日のPt900は約" + yen(rates.pt900) + "/gです。"],
+    ["名前（イニシャル）入りの指輪は売れますか？", "売れます。名前や日付の刻印が入っていても、プラチナとしての価値は変わりません。溶かして地金にする過程で刻印は残りません。"],
+    ["離婚した結婚指輪も売れますか？", "もちろん売れます。買い替えや気持ちの整理で手放す方はとても多く、片方だけ・ペアの一方だけでも査定できます。"],
+    ["20年前の古いプラチナ指輪でも売れますか？", "売れます。デザインが古くても、プラチナの地金としての価値はしっかりあります。むしろ相場は当時より高くなっている場合が多いです。"],
+    ["プラチナか分からない指輪も査定できますか？", "できます。刻印が読めない・刻印がない場合でも、X線検査で成分を正確に調べてもらえます。まずは無料査定で確認するのがおすすめです。"],
     ["どのタイミングで売るのがよいですか？", "プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。"],
     ["指輪を売ると税金はかかりますか？", "多くの場合は非課税です。貴金属の売却益は譲渡所得にあたり、給与所得者ならその年の利益が合計50万円までは特別控除でかからないことがほとんどです。高額な場合や営利目的の売買は扱いが異なるため、詳しくは国税庁の案内や税務署・税理士にご確認ください。"],
     ["買取にクーリングオフは使えますか？", "訪問購入（出張買取）の場合、原則として契約書面を受け取った日から8日間はクーリングオフ（申込みの撤回）ができます。一方で、店頭買取・宅配買取は対象外です。詳しい条件は各店の契約書面でご確認ください。"]
@@ -115,6 +120,31 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           )}
         </div>
 
+        <!-- ① 本日のプラチナ相場（価格を最速で表示）＋ ② 重さ別参考価格 -->
+        <div class="fv-rate" id="rate">
+          <p class="fv-rate-ttl"><i class="live-dot"></i>本日のプラチナ買取相場</p>
+          <div class="rate-grid">
+            <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
+            <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
+            <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
+            <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
+          </div>
+          <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場 ／ 📈 歴史的な高値圏</p>
+
+          <div class="rate-ex">
+            <h3>あなたの指輪は今いくら？（Pt900・重さ別の目安）</h3>
+            <ul>
+              <li><span>細めの指輪（約3g）</span><b>{ringEx(3)}</b></li>
+              <li><span>標準的な指輪（約5g）</span><b>{ringEx(5)}</b></li>
+              <li><span>太め・甲丸（約10g）</span><b>{ringEx(10)}</b></li>
+            </ul>
+            <p class="note">※地金だけのおおよその目安。結婚指輪・婚約指輪・コンビ（金とのミックス）もOK。宝石・ブランド・デザインでさらに上がることがあります（重量・状態で変動）。</p>
+          </div>
+          <a href="#" class="camp2-cta" data-aff="manekiya" data-track="rate_top_phone" rel="nofollow sponsored">
+            <i>☎</i>この相場で「今いくら？」を電話で聞く
+          </a>
+        </div>
+
         <!-- 3社比較表 -->
         <div class="fv-tbl-head"><span class="fv-tbl-ttl">プラチナ買取 3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
@@ -186,14 +216,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </table>
         </div>
         <p class="note">※買取価格・キャンペーン内容は変更になる場合があります。最新情報は各社公式でご確認ください。</p>
-
-        <!-- プラチナ相場チップ（3社比較の下） -->
-        <div class="rate-chip">
-          <span><i class="live-dot"></i>本日のプラチナ相場</span>
-          <b>Pt900 {yen(rates.pt900)}/g</b><b>Pt850 {yen(rates.pt850)}/g</b>
-          <span class="rate-trend">📈 歴史的な高値圏</span>
-          <small>{rates.updatedAt}</small>
-        </div>
 
         <div class="cta-pair">
           <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_phone" rel="nofollow sponsored"><i>☎</i>電話で30%UP条件を確認する</a>
@@ -451,6 +473,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <details><summary>鑑定書や保証書がなくても大丈夫ですか？</summary><p>なくても査定・買取できます。あれば査定がスムーズになることがあります。</p></details>
           <details><summary>査定後にキャンセルできますか？</summary><p>多くのお店で、金額に納得できなければ無料でキャンセルできます。</p></details>
           <details><summary>出張査定は無料ですか？</summary><p>今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各公式でご確認ください。</p></details>
+          <details><summary>Pt900の結婚指輪は売れますか？</summary><p>売れます。Pt900は結婚指輪で最も多い純度で、地金として重さ×単価で査定されます。本日のPt900は約{yen(rates.pt900)}/gです。</p></details>
+          <details><summary>名前（イニシャル）入りの指輪は売れますか？</summary><p>売れます。名前や日付の刻印が入っていても、プラチナとしての価値は変わりません。溶かして地金にする過程で刻印は残りません。</p></details>
+          <details><summary>離婚した結婚指輪も売れますか？</summary><p>もちろん売れます。買い替えや気持ちの整理で手放す方はとても多く、片方だけ・ペアの一方だけでも査定できます。</p></details>
+          <details><summary>20年前の古いプラチナ指輪でも売れますか？</summary><p>売れます。デザインが古くても、プラチナの地金としての価値はしっかりあります。むしろ相場は当時より高くなっている場合が多いです。</p></details>
+          <details><summary>プラチナか分からない指輪も査定できますか？</summary><p>できます。刻印が読めない・刻印がない場合でも、X線検査で成分を正確に調べてもらえます。まずは無料査定で確認するのがおすすめです。</p></details>
           <details><summary>どのタイミングで売るのがよいですか？</summary><p>プラチナ相場は毎日動きます。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
           <details><summary>指輪を売ると税金はかかりますか？</summary><p>多くの場合は非課税です。貴金属の売却益は譲渡所得にあたり、給与所得者ならその年の利益（売却益）が合計50万円までは特別控除でかからないことがほとんどです。高額な場合や営利目的の売買は扱いが異なるため、詳しくは国税庁の案内や税務署・税理士にご確認ください。</p></details>
           <details><summary>買取にクーリングオフは使えますか？</summary><p>訪問購入（出張買取）の場合、原則として契約書面を受け取った日から8日間はクーリングオフ（申込みの撤回）ができます。一方で、店頭買取・宅配買取は対象外です。詳しい条件は各店の契約書面でご確認ください。</p></details>
@@ -458,10 +485,10 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
     </section>
 
-    <!-- 11 相場・純度・計算（じっくり読みたい人向け：顕在導線を塞がないよう下部に配置） -->
-    <section class="sec sec-mint" id="rate">
+    <!-- 11 純度・計算（じっくり読みたい人向け：価格は上部で表示済み） -->
+    <section class="sec sec-mint" id="purity">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">💎 相場・純度</span><h2>プラチナの相場と純度を知る</h2><p>売る前に知っておくと安心。じっくり確認したい方向けです。</p></div>
+        <div class="sec-head"><span class="chip">🔎 純度・計算</span><h2>純度（刻印）と買取額の決まり方</h2><p>売る前に知っておくと安心。じっくり確認したい方向けです。</p></div>
 
         <!-- 純度・刻印の見分け方 -->
         <div class="purity">
@@ -474,26 +501,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </ul>
           <p class="purity-where">刻印は指輪の<b>内側</b>に小さく入っています。「Pt900」「PT900」などの表記が目印です。</p>
           <p class="purity-warn">⚠️ <b>「PP」「PTP」「PTF」「GP」</b>などはプラチナメッキ（表面だけプラチナ）の可能性があり、買取対象外のことがあります。刻印が読めない・刻印がない場合でも、<b>X線検査</b>で正確に成分を調べてもらえるので心配いりません。</p>
-        </div>
-
-        <!-- 本日の相場 -->
-        <div class="rate-grid">
-          <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
-          <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
-          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
-          <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
-        </div>
-        <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場</p>
-        <p class="rate-trend-lg">📈 プラチナは歴史的な高値圏です。相場は毎日動くので、高いうちに金額を確認しておくのがおすすめです。</p>
-
-        <div class="rate-ex">
-          <h3>指輪の重さ別・参考買取額（Pt900の場合）</h3>
-          <ul>
-            <li><span>細めの指輪（約3g）</span><b>{ringEx(3)}</b></li>
-            <li><span>標準的な指輪（約5g）</span><b>{ringEx(5)}</b></li>
-            <li><span>太め・甲丸（約10g）</span><b>{ringEx(10)}</b></li>
-          </ul>
-          <p class="note">※結婚指輪・婚約指輪・コンビリング（金とのミックス）もOK。上の金額は地金だけのおおよその目安で、宝石・ブランド・デザインがあるとさらに上がることがあります。重量・状態で変わります。</p>
         </div>
 
         <!-- 買取額の計算式 -->
@@ -715,6 +722,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .trust-strip b{ color:var(--green-d); font-size:clamp(15px,4.6vw,19px); line-height:1.1; }
     .trust-strip span{ color:var(--sub); font-size:9px; line-height:1.25; font-weight:700; }
     .fv-hero-img{ width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.12); }
+    /* ① FV直下の相場ブロック（価格を最速で見せる） */
+    .fv-rate{ margin:14px 0; padding:14px; background:#F2FBF8; border:2px solid var(--green); border-radius:16px; box-shadow:0 8px 22px rgba(14,120,100,.10); }
+    .fv-rate-ttl{ display:flex; align-items:center; gap:6px; font-size:15px; font-weight:900; color:var(--green-d); margin:0 0 10px; }
+    .fv-rate .rate-grid{ margin:0; }
+    .fv-rate .rate-ex{ margin-top:14px; }
+    .fv-rate .camp2-cta{ margin-top:12px; }
+
     .rate-chip{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; box-shadow:0 6px 18px rgba(20,60,50,.06); }
     .rate-chip>span{ font-size:13px; font-weight:900; color:var(--green-d); width:100%; }
     .rate-chip b{ font-size:16px; }
