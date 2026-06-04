@@ -693,6 +693,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       .live-dot{ animation:none; }
       .fv-banner-link{ animation:none; }
       .fv-banner-link::after{ animation:none; display:none; }
+      .fv-hero-wrap::after{ animation:none; display:none; }
       .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
     }
 
@@ -716,7 +717,14 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     }
 
     /* ヒーロー画像 */
-    .fv-hero-wrap{ margin:0 0 14px; font-size:0; line-height:0; }
+    .fv-hero-wrap{ position:relative; overflow:hidden; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.12); margin:0 0 14px; font-size:0; line-height:0; }
+    /* ヒーローのキラッ（光が斜めに横切る） */
+    .fv-hero-wrap::after{
+      content:""; position:absolute; top:-25%; left:-75%; width:50%; height:150%;
+      background:linear-gradient(100deg, transparent, rgba(255,255,255,.7), transparent);
+      transform:skewX(-18deg); pointer-events:none; z-index:2;
+      animation:bannerShine 3.6s ease-in-out infinite;
+    }
     .trust-strip{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:0 0 14px; padding:0; }
     .trust-strip li{ background:var(--mint); border:1px solid #d6ece4; border-radius:10px; padding:8px 4px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:2px; }
     .trust-strip b{ color:var(--green-d); font-size:clamp(15px,4.6vw,19px); line-height:1.1; }
