@@ -1,0 +1,904 @@
+---
+const PAGE_TITLE = "結婚指輪は売れる？｜名前入り・刻印・片方だけOK 高額買取おすすめTOP3";
+const PAGE_DESC = "結婚指輪を売っていいか迷う方へ。名前入り・イニシャル・離婚した指輪・片方だけ・古い指輪でも“査定対象”になるケースが多いです。本日のプラチナ相場と参考買取額、おすすめ買取店をやさしく解説。査定は無料・売るかは後で決められます。";
+const CANONICAL = "https://kaitori.hakobu-family.com/LP4/";
+const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
+
+import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
+const rates = await getRates();
+const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("ja-JP")}〜${Math.round(rates.pt900 * w).toLocaleString("ja-JP")}円`;
+// キャンペーン残日数（まねきや 6/30まで）
+const campEnd = new Date('2026-06-30T23:59:59+09:00');
+const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
+
+const faqJsonLd = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": [
+    ["結婚指輪を売るのは問題ないですか？", "まったく問題ありません。買い替えやライフステージの変化、整理のために結婚指輪を手放す方はとても多くいます。まずは金額を知るだけでも大丈夫です。"],
+    ["離婚した指輪を売る人は多いですか？", "多いです。気持ちの区切りとして査定に出す方は珍しくありません。名前入り・片方だけでも査定対象になります。"],
+    ["名前（イニシャル）入りでも売れますか？", "売れます。名前や日付の刻印があっても、プラチナの価値は変わりません。刻印は地金に溶かす工程で残らないため、情報が残る心配もありません。"],
+    ["片方だけでも売れますか？", "売れます。片方だけ・ペアの一方だけでも、地金として重さで査定されます。"],
+    ["婚約指輪も売れますか？", "売れます。婚約指輪はプラチナ等の地金に加え、ダイヤなどの宝石も合わせて評価してもらえることがあります。"],
+    ["保証書・鑑定書がなくても売れますか？", "なくても査定・買取できます。あれば査定がスムーズになることがありますが、必須ではありません。"],
+    ["査定後に断れますか？", "断れます。多くのお店で、金額に納得できなければ無料でキャンセルできます。売るかは金額を見てから決められます。"]
+  ].map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
+};
+
+// アフィリエイトリンク（manekiya / otakaraya は実リンク、buraibaは要設定）
+const AFF_MANEKIYA = "https://ad-fam.com/ad/p/r?_site=49248&_article=16522";
+const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{PAGE_TITLE}</title>
+  <meta name="description" content={PAGE_DESC} />
+  <link rel="canonical" href={CANONICAL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={PAGE_TITLE} />
+  <meta property="og:description" content={PAGE_DESC} />
+  <meta property="og:url" content={CANONICAL} />
+  <meta property="og:image" content={OGP_IMAGE} />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+  </script>
+  <script is:inline>
+    (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+      t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxnujpnscp");
+  </script>
+</head>
+<body data-landing-intent="lp4"
+  data-aff-manekiya={AFF_MANEKIYA} data-aff-otakaraya={AFF_OTAKARAYA} data-aff-buraiba="#">
+
+  <main>
+    <!-- 01 FV -->
+    <section class="fv">
+      <div class="wrap">
+        <!-- ヒーロー画像 -->
+        <h1 class="fv-hero-wrap">
+          <img src="/images/fv-hero-pt2.webp" alt="結婚指輪は売れる？名前入り・刻印・片方だけでも査定対象｜高額買取おすすめTOP3｜まねきや・おたからや・ブラリバ" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" />
+        </h1>
+
+        <!-- 信頼ストリップ -->
+        <ul class="trust-strip">
+          <li><b>★4.8</b><span>Google口コミ</span></li>
+          <li><b>120万点</b><span>査定実績</span></li>
+          <li><b>0円</b><span>査定・出張・<br />キャンセル料</span></li>
+          <li><b>OK</b><span>他店で<br />断られた品も</span></li>
+        </ul>
+
+        <!-- 結論ボックス（結婚指輪向け） -->
+        <div class="fv-conc">
+          <p class="fv-conc-ttl">結婚指輪は売れる？</p>
+          <p class="fv-conc-sub">刻印入り・名前入り・片方だけでも“査定対象”になります</p>
+          <ul>
+            <li>高額買取<b>おすすめTOP3</b>を比較</li>
+            <li>電話申込で買取金額<b>最大30%UP</b></li>
+            <li>名前入り・刻印・片方だけ・婚約指輪もOK</li>
+            <li><b>査定だけでもOK</b>／売るかは金額を見てから</li>
+          </ul>
+          <div class="cta-pair">
+            <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_conc_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定する</a>
+            <a href="#" class="btn btn-web" data-aff="manekiya" data-track="fv_conc_web" rel="nofollow sponsored">WEBで査定する</a>
+          </div>
+        </div>
+
+        <!-- ④ キャンペーンバナー（電話申込限定 最大30%UP・手数料完全無料）ポコポコ＋キラキラ -->
+        <div class="fv-banner">
+          {campDays > 0 ? (
+            <a href="#" class="fv-banner-link" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
+              <img src="/images/fv-camp30.webp" alt="6/1〜6/30 期間限定 まねきや お電話申込の方限定 買取金額 最大30%UP・買取手数料完全無料 今すぐ電話で申し込む" width="1536" height="1024" loading="eager" decoding="async" />
+            </a>
+          ) : (
+            <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
+              <i>☎</i>電話で無料査定する
+            </a>
+          )}
+        </div>
+
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定する</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="fv_web" rel="nofollow sponsored">WEBで無料査定</a>
+        </div>
+        <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
+      </div>
+    </section>
+
+    <!-- 02 共感セクション -->
+    <section class="sec sec-cream" id="empathy">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">😟 売る前の不安</span><h2>結婚指輪を売る前に、<br />こんな不安ありませんか？</h2></div>
+        <ul class="fear-list">
+          <li><b>名前が入っている</b></li>
+          <li><b>イニシャルが入っている</b></li>
+          <li><b>離婚して使わなくなった</b></li>
+          <li><b>片方しか残っていない</b></li>
+          <li><b>傷だらけになっている</b></li>
+          <li><b>20年以上前の指輪</b></li>
+          <li><b>そもそも、本当に売っていいのか迷う</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 03 回答セクション -->
+    <section class="sec" id="answer">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">✅ 結論</span><h2>実は結婚指輪は<br />“査定対象になる”ことが多いです</h2></div>
+        <div class="answer-box">
+          <p class="answer-lead">結婚指輪は<b>デザイン</b>ではなく、<b>プラチナや金などの素材の価値</b>を中心に査定されます。</p>
+          <p>そのため、次のような指輪でも査定対象になることがあります。</p>
+          <ul class="answer-list">
+            <li>名前・イニシャル入り</li>
+            <li>傷あり・変形</li>
+            <li>片方だけ</li>
+            <li>古いデザイン</li>
+          </ul>
+          <p class="answer-note">🔒 名前や刻印は、地金に溶かす工程で残りません。個人情報が残る心配はありません。</p>
+        </div>
+        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="answer_phone" rel="nofollow sponsored">
+          <i>☎</i>うちの指輪は売れる？を電話で聞く
+        </a>
+        <p class="point-cta-note">9時〜21時（年中無休）／査定だけ・相談だけでもOK</p>
+      </div>
+    </section>
+
+    <!-- 04 相場セクション（結婚指輪向け参考価格） -->
+    <section class="sec sec-mint" id="rate">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💎 相場</span><h2>本日のプラチナ買取相場</h2><p>結婚指輪はPt900が定番。重さ×単価がおおよその目安です。</p></div>
+        <div class="rate-grid">
+          <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
+          <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
+          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
+          <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
+        </div>
+        <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場 ／ 📈 歴史的な高値圏</p>
+
+        <div class="rate-ex">
+          <h3>結婚指輪の参考買取額（Pt900の場合）</h3>
+          <ul>
+            <li><span>結婚指輪 1本（約3g）</span><b>{ringEx(3)}</b></li>
+            <li><span>結婚指輪 ペア（2本・約6g）</span><b>{ringEx(6)}</b></li>
+            <li><span>ペア＋婚約指輪（約10g）</span><b>{ringEx(10)}</b></li>
+          </ul>
+          <p class="note">※地金だけのおおよその目安。婚約指輪の宝石（ダイヤ等）は別途プラス評価。重量・状態で変わります。</p>
+        </div>
+        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="rate_phone" rel="nofollow sponsored">
+          <i>☎</i>相場が高いうちに無料査定で金額を確認する
+        </a>
+        <p class="point-cta-note">電話申込で買取金額 最大30%UP／査定だけ・相談だけでもOK</p>
+      </div>
+    </section>
+
+    <!-- 05 比較表（ここで初めて3社） -->
+    <section class="sec" id="ranking">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">🏆 比較</span><h2>結婚指輪 高額買取おすすめTOP3</h2><p>編集部がおすすめする3社を比較しました。</p></div>
+        <div class="fv-tbl-head"><span class="fv-tbl-ttl">結婚指輪 買取 3社比較</span><i class="pr">PR</i></div>
+        <div class="fv-tbl-wrap">
+          <table class="fv-tbl">
+            <thead>
+              <tr>
+                <th class="fv-th-item"></th>
+                <th class="fv-th fv-th1 fv-th-gold"><span class="fv-rk-badge">👑 1位</span>まねきや<br /><a href="#" data-aff="manekiya" data-track="fv_tbl_bn_manekiya" rel="nofollow sponsored" style="display:block;"><img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
+                <th class="fv-th"><span class="fv-rk-badge2">🥈 2位</span>おたからや<br /><a href="#" data-aff="otakaraya" data-track="fv_tbl_bn_otakaraya" rel="nofollow sponsored" style="display:block;"><img src="/images/300_250-2.jpg" alt="おたからや" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
+                <th class="fv-th"><span class="fv-rk-badge3">🥉 3位</span>ブラリバ<br /><a href="#" data-aff="buraiba" data-track="fv_tbl_bn_buraiba" rel="nofollow sponsored" style="display:block;"><img src="/images/300_250-3.jpg" alt="ブラリバ" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fv-td-item">買取価格</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>高価買取に強み<br />（編集部評価）</b></td>
+                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
+                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
+              </tr>
+              <tr>
+                <td class="fv-td-item">手数料</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>0円（完全無料）</b></td>
+                <td class="fv-td"><span class="mk ok">〇</span>0円</td>
+                <td class="fv-td"><span class="mk ok">〇</span>0円</td>
+              </tr>
+              <tr class="fv-tr-camp">
+                <td class="fv-td-item">当サイト限定<br />キャンペーン</td>
+                <td class="fv-td fv-td1">
+                  {campDays > 0 ? (
+                    <>
+                      <span class="camp-badge">手数料10%無料</span><br />
+                      <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
+                    </>
+                  ) : (
+                    <b>公式キャンペーン<br />要確認</b>
+                  )}
+                </td>
+                <td class="fv-td"><span class="mk ok">〇</span><b>買取価格<br />最大20%UP</b></td>
+                <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
+              </tr>
+              <tr>
+                <td class="fv-td-item">結婚指輪<br />対応</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>刻印・名前入り<br />片方だけもOK</td>
+                <td class="fv-td"><span class="mk good">◎</span>結婚指輪<br />対応</td>
+                <td class="fv-td"><span class="mk ok">〇</span>宝石付き中心</td>
+              </tr>
+              <tr>
+                <td class="fv-td-item">査定方法</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>店舗・宅配<br />・出張</td>
+                <td class="fv-td"><span class="mk ok">〇</span>店舗・出張</td>
+                <td class="fv-td"><span class="mk good">◎</span>店舗・宅配<br />・出張</td>
+              </tr>
+              <tr class="fv-tr-cta">
+                <td class="fv-td-item">電話相談</td>
+                <td class="fv-td fv-td1">
+                  <small class="cta-sub">＼査定だけでもOK／</small>
+                  <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>30%UP条件を聞く</a>
+                  <a href="#" class="btn btn-web sm mt4" data-aff="manekiya" data-track="fv_tbl_web" rel="nofollow sponsored">WEBで査定</a>
+                  {campDays > 0 && <p class="countdown">⏳ キャンペーン終了まで<br /><b>あと{campDays}日！</b></p>}
+                </td>
+                <td class="fv-td">
+                  <a href="#" class="btn btn-ghost sm" data-aff="otakaraya" data-track="fv_tbl_otakaraya" rel="nofollow sponsored">公式サイト</a>
+                </td>
+                <td class="fv-td">
+                  <a href="#" class="btn btn-ghost sm" data-aff="buraiba" data-track="fv_tbl_buraiba" rel="nofollow sponsored">公式サイト</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">※買取価格・キャンペーン内容は変更になる場合があります。最新情報は各社公式でご確認ください。</p>
+      </div>
+    </section>
+
+    <!-- 06 1位深掘り -->
+    <section class="sec sec-mint" id="deep">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">👑 1位くわしく</span><h2>なぜ「まねきや」が1位なの？</h2></div>
+        <div class="deep">
+          <div class="deep-rings">
+            <p class="deep-rings-ttl">💍 こんな結婚指輪も“対応できる指輪”です</p>
+            <ul>
+              <li>結婚指輪</li><li>婚約指輪</li><li>刻印・名前入り</li><li>片方だけ</li><li>金とのコンビ</li>
+            </ul>
+          </div>
+          <ul class="deep-merit">
+            <li><b>手数料0円</b>で、提示された金額をそのまま受け取りやすい</li>
+            <li><b>X線の機械</b>で、刻印がない指輪・古い指輪も正確に調べてくれる</li>
+            <li>海外にも売り先を持っていて、高めの金額が出やすい</li>
+            <li>名前入り・離婚した指輪・20年以上前の指輪もまず相談OK</li>
+          </ul>
+          <div class="flow">
+            <h3>査定のかんたんな流れ</h3>
+            <ol>
+              <li><b>申し込み</b><span>WEB（1分ほど）か電話で予約</span></li>
+              <li><b>査定</b><span>店頭・出張・宅配から選べる</span></li>
+              <li><b>金額を確認</b><span>納得したら、その場で現金</span></li>
+            </ol>
+            <p class="flow-fee">査定料・出張料・キャンセル料はすべて<b>0円</b>。売るかは金額を見てから決められます。</p>
+          </div>
+        </div>
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="deep_web" rel="nofollow sponsored">ネットで無料査定（最短30秒）</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 口コミ（結婚指輪を売った人の声） -->
+    <section class="sec sec-cream" id="voice">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💬 口コミ</span><h2>結婚指輪を売った方の声</h2></div>
+        <div class="rk-voice-list">
+          <div class="voice voice-lg">
+            <span class="stars">★★★★★</span>
+            <b class="voice-ttl">結婚指輪を売りました。手数料0円で安心でした。</b>
+            <p>離婚をきっかけに、ずっとしまっていた結婚指輪を思い切って査定に。名前の刻印が入っていて不安でしたが問題なく査定対象で、手数料0円。思ったより高くて、気持ちの整理もつきました。</p>
+            <small>50代・女性／Pt900 結婚指輪</small>
+          </div>
+          <div class="voice voice-lg">
+            <span class="stars">★★★★★</span>
+            <b class="voice-ttl">片方だけ・傷ありでも査定してもらえました。</b>
+            <p>片方をなくしてしまった結婚指輪と、傷だらけの指輪をまとめて。「片方だけでも大丈夫ですよ」と言ってもらえて安心。丁寧に説明してくれて、納得して売れました。</p>
+            <small>40代・女性／Pt900 結婚指輪（片方）</small>
+          </div>
+          <div class="voice"><span class="stars">★★★★★</span><p>「20年前の古い結婚指輪。相場が上がっていて、予想より良い金額に。」</p><small>60代・女性／Pt900 ペア</small></div>
+          <div class="voice"><span class="stars">★★★★★</span><p>「婚約指輪のダイヤも一緒に見てもらえて、地金＋石で評価されました。」</p><small>30代・女性／婚約指輪</small></div>
+        </div>
+        <p class="note">※公式掲載のお客様の声を一部要約。個人の感想です。査定額・条件には個人差があります。</p>
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="voice_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定する</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="voice_web" rel="nofollow sponsored">WEBで無料査定</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="faq">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">❓ FAQ</span><h2>よくある質問</h2></div>
+        <div class="faq">
+          <details open><summary>結婚指輪を売るのは問題ないですか？</summary><p>まったく問題ありません。買い替えやライフステージの変化、整理のために結婚指輪を手放す方はとても多くいます。まずは金額を知るだけでも大丈夫です。</p></details>
+          <details><summary>離婚した指輪を売る人は多いですか？</summary><p>多いです。気持ちの区切りとして査定に出す方は珍しくありません。名前入り・片方だけでも査定対象になります。</p></details>
+          <details><summary>名前（イニシャル）入りでも売れますか？</summary><p>売れます。名前や日付の刻印があっても、プラチナの価値は変わりません。刻印は地金に溶かす工程で残らないため、情報が残る心配もありません。</p></details>
+          <details><summary>片方だけでも売れますか？</summary><p>売れます。片方だけ・ペアの一方だけでも、地金として重さで査定されます。</p></details>
+          <details><summary>婚約指輪も売れますか？</summary><p>売れます。婚約指輪はプラチナ等の地金に加え、ダイヤなどの宝石も合わせて評価してもらえることがあります。</p></details>
+          <details><summary>保証書・鑑定書がなくても売れますか？</summary><p>なくても査定・買取できます。あれば査定がスムーズになることがありますが、必須ではありません。</p></details>
+          <details><summary>査定後に断れますか？</summary><p>断れます。多くのお店で、金額に納得できなければ無料でキャンセルできます。売るかは金額を見てから決められます。</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 売るのをためらう方へ（心理：最後の一押し） -->
+    <section class="sec" id="push">
+      <div class="wrap">
+        <div class="sec-head"><span class="chip">💍 最後に</span><h2>「指輪を手放すこと」に<br />迷っている方へ</h2></div>
+        <p class="push-lead">結婚指輪を売ることは、<b>思い出を手放すこと</b>ではありません。<b>気持ちの区切りをつけて、次の一歩へ進むための前向きな選択</b>です。</p>
+        <ul class="push-trio">
+          <li>結婚指輪を売ることは、珍しいことではありません</li>
+          <li>ライフステージの変化や整理のために査定を受ける方は多くいます</li>
+          <li>まずは金額を確認してから、考えても大丈夫です</li>
+        </ul>
+        <ul class="push-points">
+          <li><i>🤝</i><div><b>手放す方は珍しくありません</b>買い替え・整理・ライフステージの変化などで、結婚指輪や婚約指輪を売る方はたくさんいます。</div></li>
+          <li><i>🔒</i><div><b>刻印は工房で消えてなくなります</b>イニシャルや日付の刻印は、地金として溶かす過程でなくなります。個人情報が残る心配はありません。</div></li>
+          <li><i>💰</i><div><b>今は相場が高めです</b>プラチナは歴史的な高値圏。眠らせておくより、価値のあるうちに金額を知るだけでも損はありません。</div></li>
+        </ul>
+        <div class="push-safe">
+          <b>👜 女性おひとりでも安心して相談できます</b>
+          <ul>
+            <li>女性スタッフによる査定を選べるお店もあります</li>
+            <li>人目が気になる方は、自宅で完結する<b>宅配買取</b>や<b>出張買取</b>も選べます</li>
+            <li>もちろん「査定額を聞くだけ」でOK。その場で売らなくて大丈夫です</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 最終CTA -->
+    <section class="sec sec-final" id="final">
+      <div class="wrap">
+        <h2>迷ったら、まずは1位の「まねきや」へ。</h2>
+        <p>相場が高めの今のうちに、無料査定で金額だけでも確認しておきましょう。名前入り・片方だけ・古い指輪でもまずは相談OK。査定だけ・売らなくても大丈夫です。</p>
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="final_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="final_web" rel="nofollow sponsored">ネットで無料査定（最短30秒）</a>
+        </div>
+        <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft-trust">
+        <p class="ft-trust-ttl">掲載1位「まねきや」運営会社情報</p>
+        <ul>
+          <li>運営：株式会社水野（2008年創業）</li>
+          <li>古物商許可番号：大阪府公安委員会 第621012100382号</li>
+          <li>AACD（日本流通自主管理協会）正会員 R-0100</li>
+          <li>プライバシーマーク・Pマーク取得</li>
+        </ul>
+      </div>
+      <div class="ft-method">
+        <p class="ft-method-ttl">📝 編集部の比較方法について</p>
+        <p>当編集部では、買取価格の水準・手数料・対応できる指輪の幅・買取方法（店頭／出張／宅配）・口コミ評価・運営体制などをもとに、プラチナ指輪の買取店を比較・評価しています。相場やキャンペーン内容は随時見直し、情報の更新に努めています（最終更新：{rates.updatedAt}）。</p>
+      </div>
+      <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。掲載の◎○△や順位・「高価買取」等の評価は当編集部の主観的な判断によるもので、買取価格の優劣を保証するものではありません。「最大30%UP」などのキャンペーンは各社公式の内容に基づく表記で、適用条件・上乗せ率の上限・対象品目・実施期間があり、予告なく変更・終了する場合があります。買取価格・手数料・キャンペーンの適用可否など最新かつ正確な情報は、必ず各社の公式ページでご確認ください。</p>
+      <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
+      <small>結婚指輪 買取比較</small>
+    </div>
+  </footer>
+
+  <!-- スマホ下部固定CTA -->
+  <div class="sticky" data-sticky hidden>
+    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>電話で査定</a>
+    <a href="#" class="sticky-web" data-aff="manekiya" data-track="sticky_web" rel="nofollow sponsored">WEB無料査定</a>
+  </div>
+
+  <style>
+    :root{
+      --bg:#fff; --mint:#EAF6F2; --cream:#FFF7EC; --green:#0E9E8E; --green-d:#0B8276; --green-dd:#0a6a60;
+      --ink:#23303A; --body:#4A5862; --sub:#8B98A1; --line:#E5EDEA; --gold:#F2B33D; --gold-d:#D9962A;
+      --coral:#FF7A59; --coral-d:#F26442; --star:#FFB02E; --hot:#E8604C;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+    body{ background:var(--bg); color:var(--ink); font-family:"Noto Sans JP",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; padding-bottom:64px; line-height:1.7; }
+    [hidden]{ display:none !important; }
+    .wrap{ max-width:520px; margin:0 auto; padding:0 16px; }
+    b{ font-weight:900; }
+    .pr{ font-style:normal; font-size:10px; font-weight:700; color:var(--sub); border:1px solid var(--line); border-radius:4px; padding:1px 5px; }
+
+    /* ヘッダー */
+    .hd{ position:sticky; top:0; z-index:50; background:rgba(255,255,255,.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+    .hd-in{ max-width:520px; margin:0 auto; padding:9px 16px; display:flex; align-items:center; gap:8px; }
+    .hd-brand{ display:flex; align-items:center; gap:6px; font-weight:900; font-size:14px; }
+    .hd-mark{ width:26px; height:26px; border-radius:8px; background:linear-gradient(150deg,var(--green),var(--green-d)); color:#fff; font-size:11px; display:grid; place-items:center; }
+    .hd-cta{ margin-left:auto; background:var(--green-d); color:#fff; font-weight:900; font-size:13px; text-decoration:none; padding:8px 16px; border-radius:999px; }
+
+    /* ボタン共通 */
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 14px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .12s,box-shadow .12s; white-space:nowrap; font-size:15px; line-height:1.2; }
+    .btn:active{ transform:scale(.97); }
+    .btn i{ font-style:normal; }
+    .btn-web{ background:var(--green-d); color:#fff; }
+    /* 電話ボタンをゴールドで統一 */
+    .btn-phone{
+      background:linear-gradient(180deg,#FFD24D,#F2A100); color:#7a2a00;
+      box-shadow:0 8px 0 #C97E00, 0 12px 18px rgba(201,126,0,.32);
+      border:2px solid #fff3cf;
+    }
+    .btn-phone:hover{ transform:translateY(-2px); box-shadow:0 10px 0 #C97E00, 0 16px 22px rgba(201,126,0,.35); }
+    .btn-ghost{ background:#fff; color:var(--green-d); border:2px solid var(--green-d); box-shadow:none; }
+    .btn.full{ display:flex; width:100%; margin-top:10px; }
+    .btn.sm{ min-height:42px; font-size:13px; padding:0 12px; box-shadow:none; }
+    .cta-pair{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+    .cta-pair .btn{ width:92%; margin:0 auto; padding:0 16px; font-size:clamp(14px,4vw,16px); white-space:nowrap; }
+    .cta-pair .btn i{ font-size:14px; }
+    .cta-note{ text-align:center; font-size:13px; color:var(--sub); margin:8px 0 0; }
+
+    /* 01 FV */
+    .fv{ background:linear-gradient(180deg,#EAF6F2, #fff); padding:24px 0 34px; }
+    .camp-img{ display:block; margin:0 0 16px; border-radius:14px; overflow:hidden; box-shadow:0 8px 20px rgba(183,28,22,.28); text-decoration:none; }
+    .camp-img img{ width:100%; height:auto; display:block; }
+
+    /* 背景画像バナー＋文字オーバーレイ */
+    .camp2{ margin:0 0 16px; }
+    .camp2-banner{
+      position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+      aspect-ratio:995/295; width:100%; padding:2.5% 6%; box-sizing:border-box;
+      background:url("/images/camp-banner-bg.webp") center/100% 100% no-repeat;
+      text-decoration:none; color:#fff; text-align:center; filter:drop-shadow(0 6px 14px rgba(183,28,22,.28));
+    }
+    .camp2-term{
+      display:inline-block; background:linear-gradient(180deg,#FFE9A8,#F2C14A); color:#7a2a00;
+      font-weight:900; font-size:clamp(9px,2.6vw,13px); border-radius:999px; padding:2px 10px;
+      letter-spacing:.02em; box-shadow:0 1px 2px rgba(0,0,0,.25);
+    }
+    .camp2-cond{ display:block; font-size:clamp(10px,3.2vw,15px); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.45); white-space:nowrap; }
+    .camp2-note{ font-size:10px; color:var(--sub); line-height:1.55; margin:8px 4px 0; }
+    .camp2-main{ display:block; font-size:clamp(14px,4.6vw,22px); font-weight:900; line-height:1.05; text-shadow:0 1px 4px rgba(0,0,0,.4); }
+    .camp2-main em{ font-style:normal; }
+    .camp2-main b{
+      font-style:normal; font-size:clamp(28px,9vw,44px); vertical-align:-4px; padding:0 2px;
+      background:linear-gradient(180deg,#FFF4C2,#FFD24D 55%,#E8A317);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      text-shadow:0 2px 3px rgba(0,0,0,.25);
+    }
+    /* ポコポコ動くCTAボタン */
+    .camp2-cta{
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      width:92%; margin:10px auto 0; padding:14px 0; border-radius:999px;
+      background:linear-gradient(180deg,#FFD24D,#F2A100); color:#7a2a00;
+      font-size:clamp(16px,4.6vw,20px); font-weight:900; text-decoration:none;
+      box-shadow:0 8px 0 #C97E00, 0 12px 18px rgba(201,126,0,.35);
+      border:2px solid #fff3cf; animation:pokopoko 1.1s ease-in-out infinite;
+    }
+    .camp2-cta i{
+      font-style:normal; display:inline-flex; align-items:center; justify-content:center;
+      width:30px; height:30px; border-radius:50%; background:#E0322C; color:#fff; font-size:16px;
+    }
+    .camp2-cta:active{ transform:translateY(4px); box-shadow:0 4px 0 #C97E00, 0 6px 10px rgba(201,126,0,.3); }
+    @keyframes pokopoko{
+      0%,100%{ transform:scale(1); }
+      50%{ transform:scale(1.06); }
+    }
+    /* ライブドット（相場チップ） */
+    .live-dot{
+      display:inline-block; width:8px; height:8px; border-radius:50%;
+      background:#E0322C; margin-right:5px; vertical-align:middle;
+      animation:livepulse 1.4s ease-in-out infinite;
+    }
+    @keyframes livepulse{
+      0%,100%{ opacity:1; transform:scale(1); }
+      50%{ opacity:.35; transform:scale(.7); }
+    }
+    /* 編集部イチオシリボン */
+    .rk-editor-pick{
+      position:absolute; top:-14px; right:16px;
+      background:linear-gradient(135deg,#f6c64d,var(--gold-d)); color:#5a3d00;
+      font-weight:900; font-size:11px; border-radius:999px; padding:4px 13px;
+      box-shadow:0 2px 6px rgba(201,126,0,.35);
+    }
+    /* 比較表まねきや列ゴールドグラデ */
+    .fv-th-gold{
+      background:linear-gradient(180deg,#FFF4C2,#FFE08A) !important;
+      border-bottom:2px solid var(--gold);
+    }
+    /* スクロールフェードイン */
+    .fade-in{ opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease; }
+    .fade-in.visible{ opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion:reduce){
+      .camp2-cta{ animation:none; }
+      .live-dot{ animation:none; }
+      .fv-banner-link{ animation:none; }
+      .fv-banner-link::after{ animation:none; display:none; }
+      .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
+    }
+
+    /* ④ キャンペーンバナー（ポコポコ＋キラキラ） */
+    .fv-banner{ margin:14px 0; }
+    .fv-banner-link{
+      display:block; position:relative; border-radius:14px; overflow:hidden;
+      box-shadow:0 10px 24px rgba(201,126,0,.32);
+      animation:pokopoko 1.15s ease-in-out infinite;
+    }
+    .fv-banner-link img{ width:100%; height:auto; display:block; }
+    /* キラキラ：斜めの光が定期的に横切る */
+    .fv-banner-link::after{
+      content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%;
+      background:linear-gradient(100deg, transparent, rgba(255,255,255,.65), transparent);
+      transform:skewX(-18deg); pointer-events:none;
+      animation:bannerShine 2.8s ease-in-out infinite;
+    }
+    @keyframes bannerShine{
+      0%{ left:-70%; } 55%{ left:130%; } 100%{ left:130%; }
+    }
+
+    /* ヒーロー画像 */
+    .fv-hero-wrap{ margin:0 0 14px; font-size:0; line-height:0; }
+    .trust-strip{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:0 0 14px; padding:0; }
+    .trust-strip li{ background:var(--mint); border:1px solid #d6ece4; border-radius:10px; padding:8px 4px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:2px; }
+    .trust-strip b{ color:var(--green-d); font-size:clamp(15px,4.6vw,19px); line-height:1.1; }
+    .trust-strip span{ color:var(--sub); font-size:9px; line-height:1.25; font-weight:700; }
+    .fv-hero-img{ width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.12); }
+    /* ① FV直下の相場ブロック（価格を最速で見せる） */
+    .fv-rate{ margin:14px 0; padding:14px; background:#F2FBF8; border:2px solid var(--green); border-radius:16px; box-shadow:0 8px 22px rgba(14,120,100,.10); }
+    .fv-rate-ttl{ display:flex; align-items:center; gap:6px; font-size:15px; font-weight:900; color:var(--green-d); margin:0 0 10px; }
+    .fv-rate .rate-grid{ margin:0; }
+    .fv-rate .rate-ex{ margin-top:14px; }
+    .fv-rate .camp2-cta{ margin-top:12px; }
+
+    .rate-chip{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; box-shadow:0 6px 18px rgba(20,60,50,.06); }
+    .rate-chip>span{ font-size:13px; font-weight:900; color:var(--green-d); width:100%; }
+    .rate-chip b{ font-size:16px; }
+    .rate-chip small{ width:100%; color:var(--sub); font-size:12px; }
+
+    /* FV 3社比較表 */
+    .fv-tbl-head{ display:flex; align-items:center; gap:8px; margin:16px 0 6px; }
+    .fv-tbl-ttl{ font-weight:900; font-size:14px; color:var(--ink); }
+    .fv-tbl-head .pr{ margin-left:auto; }
+    .fv-tbl-wrap{ margin:0 0 8px; overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:16px; border:1px solid var(--line); box-shadow:0 6px 18px rgba(20,60,50,.07); }
+    .fv-tbl{ width:100%; min-width:340px; border-collapse:collapse; background:#fff; font-size:12.5px; }
+    .fv-tbl th,.fv-tbl td{ padding:10px 8px; text-align:center; border-bottom:1px solid var(--line); vertical-align:middle; line-height:1.35; }
+    .fv-th-item{ background:#F4F8F6; font-size:0; width:0; padding:0; }
+    .fv-th{ background:#F4F8F6; font-weight:900; font-size:13px; color:var(--ink); }
+    .fv-th1{ background:#FFFCF2; }
+    .fv-td-item{ text-align:left; font-size:12px; font-weight:700; color:var(--ink); background:#FAFCFB; padding:10px 8px; white-space:nowrap; position:sticky; left:0; z-index:1; }
+    .fv-td{ background:#fff; }
+    .fv-td1{ background:#FFFCF2; }
+    .fv-td .mk{ display:block; font-size:20px; font-weight:900; line-height:1; margin-bottom:3px; }
+    .mk.good{ color:#E8920A; }
+    .mk.ok{ color:#3AA17E; }
+    .mk.tri{ color:#C99A3A; }
+    .mk.bad{ color:#C0392B; }
+    .fv-td1 b,.fv-td1 strong{ color:var(--green-d); }
+    .fv-td.gray{ color:var(--sub); }
+    .fv-rk-badge{ display:block; font-size:11px; color:var(--coral-d); font-weight:900; margin-bottom:3px; }
+    .fv-rk-badge2,.fv-rk-badge3{ display:block; font-size:11px; color:var(--sub); font-weight:700; margin-bottom:3px; }
+    .fv-tr-camp .fv-td{ background:#FFF8F0; }
+    .fv-tr-camp .fv-td1{ background:#FFF3E0; }
+    .camp-badge{ display:inline-block; background:#E0322C; color:#fff; font-size:10px; font-weight:900; border-radius:999px; padding:1px 8px; margin-bottom:4px; }
+    .up30{ font-size:13px; line-height:1.3; color:var(--coral-d); }
+    .up30 em{ font-style:normal; font-size:22px; font-weight:900; }
+    .fv-tr-cta .fv-td,.fv-tr-cta .fv-td1{ padding:10px 6px; vertical-align:top; }
+    .cta-sub{ display:block; font-size:10px; color:var(--sub); margin-bottom:5px; }
+    .mt4{ margin-top:4px; }
+    .countdown{ margin:6px 0 0; font-size:10px; color:var(--coral-d); line-height:1.4; }
+    .countdown b{ font-size:13px; }
+
+    /* セクション共通 */
+    .sec{ padding:38px 0; }
+    .sec-mint{ background:var(--mint); background-image:url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%230e7864' fill-opacity='.06'/%3E%3C/svg%3E"); }
+    .sec-cream{ background:var(--cream); background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12 L12 0 L24 12 L12 24 Z' fill='none' stroke='%23c8a000' stroke-opacity='.07' stroke-width='1'/%3E%3C/svg%3E"); }
+    .sec-head{ text-align:center; margin-bottom:22px; }
+    .chip{ display:inline-block; background:#fff; border:1px solid var(--line); color:var(--green-d); font-weight:900; font-size:12px; border-radius:999px; padding:5px 14px; }
+    .sec-head h2{ font-size:23px; font-weight:900; margin:10px 0 6px; line-height:1.4; }
+    .sec-head p{ font-size:13px; color:var(--body); margin:0; }
+    .note{ font-size:11px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
+
+    /* 02 相場 */
+    .rate-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .rate-grid>div{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .rate-grid span{ display:block; font-size:13px; color:var(--sub); font-weight:700; }
+    .rate-grid b{ font-size:22px; color:var(--ink); }
+    .rate-grid small{ color:var(--sub); font-size:12px; }
+    .rate-hot{ border-color:var(--green) !important; background:#F2FBF8 !important; }
+    .rate-hot b{ color:var(--green-d); }
+    .rate-updated{ text-align:center; font-size:11px; color:var(--sub); margin:10px 0 0; }
+    .rate-ex{ margin-top:20px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .rate-ex h3{ font-size:15px; margin:0 0 10px; }
+    .rate-ex ul{ list-style:none; margin:0; padding:0; }
+    .rate-ex li{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-top:1px dashed var(--line); font-size:14px; }
+    .rate-ex li span{ color:var(--body); }
+    .rate-ex li b{ color:var(--green-d); }
+
+    /* ① FV結論ボックス（最初の数秒で結論に答える・55歳以上も読める大きさ） */
+    .fv-conc{ background:#fff; border:2px solid var(--green); border-radius:16px; padding:16px 16px 14px; margin:14px 0; box-shadow:0 8px 22px rgba(14,120,100,.12); }
+    .fv-conc-ttl{ font-size:19px; font-weight:900; text-align:center; margin:0 0 12px; color:var(--ink); line-height:1.4; }
+    .fv-conc ul{ list-style:none; margin:0 0 14px; padding:0; display:grid; gap:9px; }
+    .fv-conc li{ font-size:16px; font-weight:700; padding-left:28px; position:relative; line-height:1.5; color:var(--ink); }
+    .fv-conc li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--green); font-weight:900; font-size:18px; }
+    .fv-conc li b{ color:var(--green-d); }
+    .fv-conc .cta-pair{ margin-top:0; }
+    .fv-conc-sub{ font-size:13.5px; font-weight:700; color:var(--coral-d); text-align:center; margin:-6px 0 12px; line-height:1.5; }
+
+    /* 03 回答セクション */
+    .answer-box{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .answer-lead{ font-size:15px; font-weight:700; color:var(--ink); margin:0 0 8px; line-height:1.8; }
+    .answer-box>p{ font-size:13.5px; color:var(--body); margin:0 0 10px; line-height:1.8; }
+    .answer-list{ list-style:none; margin:0 0 12px; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .answer-list li{ background:var(--mint); color:var(--green-d); font-weight:700; font-size:13px; border-radius:10px; padding:8px 10px; text-align:center; }
+    .answer-note{ font-size:13px; font-weight:700; color:var(--green-d); background:#F2FBF8; border:1px solid var(--green); border-radius:10px; padding:10px 12px; margin:0; line-height:1.7; }
+
+    /* 1位詳細：対応できる指輪 */
+    .deep-rings{ background:#fff; border:2px solid var(--gold); border-radius:14px; padding:12px 14px; margin-bottom:12px; }
+    .deep-rings-ttl{ font-size:14px; font-weight:900; color:var(--gold-d); margin:0 0 8px; }
+    .deep-rings ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px; }
+    .deep-rings li{ background:var(--cream); border:1px solid var(--gold); color:#7a5a00; font-size:12.5px; font-weight:700; border-radius:999px; padding:4px 11px; }
+
+    /* 情緒セクションの締めトリオ */
+    .push-trio{ list-style:none; margin:0 0 14px; padding:0; display:grid; gap:8px; }
+    .push-trio li{ font-size:14px; font-weight:700; color:var(--ink); background:#fff; border:1px solid var(--line); border-left:4px solid var(--green); border-radius:10px; padding:10px 12px; line-height:1.6; }
+
+    /* ④ 特典カード（30%UP・手数料無料を独立して強く見せる） */
+    .perk-cards{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 10px; }
+    .perk{ position:relative; border-radius:14px; padding:12px 8px; text-align:center; color:#fff; box-shadow:0 6px 16px rgba(0,0,0,.14); }
+    .perk-30{ background:linear-gradient(160deg,#FF7A59,#E0322C); }
+    .perk-fee{ background:linear-gradient(160deg,#12B39E,#0B8276); }
+    .perk-cap{ display:inline-block; font-size:12px; font-weight:700; background:rgba(255,255,255,.22); border-radius:999px; padding:2px 11px; }
+    .perk-main{ display:block; margin-top:6px; font-size:21px; font-weight:900; line-height:1.1; }
+    .perk-main em{ font-style:normal; font-size:31px; vertical-align:-2px; padding:0 1px; }
+
+    /* ⑤ FV口コミ1件 */
+    .fv-voice{ background:#fff; border:1px solid var(--line); border-left:4px solid var(--gold); border-radius:14px; padding:14px 16px; margin-top:14px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .fv-voice-ttl{ display:block; font-size:15px; font-weight:900; color:var(--green-d); margin:6px 0 4px; line-height:1.5; }
+    .fv-voice-txt{ font-size:13.5px; font-weight:500; color:var(--ink); margin:4px 0; line-height:1.8; }
+    .fv-voice small{ color:var(--sub); font-weight:700; font-size:12px; }
+
+    /* ⑥ 損したくない人向け（不安→まねきやの答え） */
+    .fear-list{ list-style:none; margin:0 0 16px; padding:0; display:grid; gap:10px; }
+    .fear-list li{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px 12px 40px; position:relative; }
+    .fear-list li::before{ content:"😟"; position:absolute; left:12px; top:11px; font-size:16px; }
+    .fear-list b{ display:block; font-size:14.5px; color:var(--ink); }
+    .fear-list span{ display:block; font-size:13px; color:var(--green-d); font-weight:700; margin-top:3px; line-height:1.6; }
+
+    /* B-2 相場トレンド */
+    .rate-trend{ display:inline-flex; align-items:center; background:#FFF3E0; color:var(--coral-d); font-weight:900; font-size:11px; border-radius:999px; padding:3px 10px; }
+    .rate-trend-lg{ text-align:center; font-size:12.5px; font-weight:700; color:var(--coral-d); background:#FFF3E0; border-radius:10px; padding:9px 12px; margin:10px 0 0; line-height:1.6; }
+
+    /* A-3 計算式 */
+    .calc{ margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .calc h3{ font-size:15px; margin:0 0 12px; }
+    .calc-formula{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:6px; margin:0 0 6px; }
+    .calc-formula span{ background:var(--mint); color:var(--green-d); font-weight:900; font-size:12.5px; border-radius:8px; padding:6px 10px; }
+    .calc-formula i{ font-style:normal; font-weight:900; color:var(--sub); font-size:14px; }
+    .calc-formula b{ background:var(--green-d); color:#fff; font-size:13px; border-radius:8px; padding:6px 12px; }
+
+    /* A-2 純度・刻印 */
+    .purity{ margin-top:14px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .purity h3{ font-size:15px; margin:0 0 12px; }
+    .purity-list{ list-style:none; margin:0 0 12px; padding:0; display:grid; gap:8px; }
+    .purity-list li{ display:flex; align-items:baseline; gap:10px; font-size:13px; padding:8px 12px; background:#FAFCFB; border:1px solid var(--line); border-radius:10px; }
+    .purity-list b{ flex:0 0 64px; color:var(--green-d); font-size:14px; }
+    .purity-list span{ color:var(--body); }
+    .purity-where{ font-size:13px; color:var(--body); margin:0 0 10px; line-height:1.7; }
+    .purity-warn{ font-size:12.5px; color:var(--body); background:#FFF7EC; border:1px solid var(--gold); border-radius:10px; padding:10px 12px; margin:0; line-height:1.7; }
+
+    /* 07 ためらう方へ */
+    .push-lead{ font-size:14.5px; line-height:1.85; color:var(--body); text-align:center; margin:0 0 18px; }
+    .push-points{ list-style:none; margin:0 0 16px; padding:0; display:grid; gap:10px; }
+    .push-points li{ display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .push-points i{ font-style:normal; font-size:24px; flex-shrink:0; line-height:1.2; }
+    .push-points b{ display:block; font-size:14px; color:var(--green-d); margin-bottom:3px; }
+    .push-points div{ font-size:13px; color:var(--body); line-height:1.7; }
+    .push-safe{ background:var(--cream); border:1px solid var(--gold); border-radius:16px; padding:16px; }
+    .push-safe>b{ display:block; font-size:14.5px; color:var(--gold-d); margin-bottom:10px; }
+    .push-safe ul{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+    .push-safe li{ font-size:13px; color:var(--body); line-height:1.6; padding-left:20px; position:relative; }
+    .push-safe li::before{ content:"✓"; position:absolute; left:0; color:var(--gold-d); font-weight:900; }
+
+    /* 03 高く売るポイント（画像） */
+    .point-img{ display:block; font-size:0; line-height:0; border-radius:14px; overflow:hidden; box-shadow:0 8px 22px rgba(20,60,50,.1); }
+    .point-img img{ width:100%; height:auto; display:block; }
+    .point-cta{ margin-top:16px; }
+    .point-cta-note{ text-align:center; font-size:12px; color:var(--sub); margin:8px 0 0; }
+
+
+    /* まねきや口コミブロック（ランキング内） */
+    .rk-voice-block{ background:var(--cream); border:1px solid var(--gold); border-radius:16px; padding:18px 16px 14px; margin-bottom:18px; }
+    .rk-voice-ttl{ font-weight:900; font-size:14px; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .rk-voice-list{ display:grid; gap:12px; }
+
+    /* 05 ランキング */
+    .rk{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px 16px 16px; margin-bottom:18px; box-shadow:0 10px 26px rgba(20,60,50,.08); position:relative; }
+    .rk-1{ border:2px solid var(--gold); box-shadow:0 14px 32px rgba(217,150,42,.18); }
+    .rk-ribbon{ position:absolute; top:-14px; left:16px; background:var(--sub); color:#fff; font-weight:900; font-size:13px; border-radius:999px; padding:5px 14px; display:flex; align-items:center; gap:4px; }
+    .rk-ribbon i{ font-style:normal; }
+    .rk-1 .rk-ribbon{ background:linear-gradient(135deg,#f6c64d,var(--gold-d)); color:#5a3d00; }
+    .rk-2 .rk-ribbon{ background:#9AA7B0; }
+    .rk-3 .rk-ribbon{ background:#C8A06A; }
+    .rk-camp-img{ display:block; border-radius:12px; overflow:hidden; margin:14px 0; box-shadow:0 6px 16px rgba(183,28,22,.25); text-decoration:none; }
+    .rk-camp-img img{ width:100%; height:auto; display:block; }
+    .rk-head{ display:flex; align-items:center; gap:8px; margin-top:6px; }
+    .rk-head h3{ font-size:22px; margin:0; }
+    .rk-star{ color:var(--star); font-weight:900; font-size:14px; }
+    .rk-head .pr{ margin-left:auto; }
+    .rk-for{ font-size:13px; color:var(--green-d); font-weight:700; background:var(--mint); border-radius:8px; padding:7px 10px; margin:10px 0; }
+    .rk-reasons{ list-style:none; margin:0 0 12px; padding:0; display:grid; gap:7px; }
+    .rk-reasons li{ font-size:13.5px; padding-left:24px; position:relative; }
+    .rk-reasons li::before{ content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
+    .rk-meta{ display:grid; gap:8px; background:#FAFCFB; border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; }
+    .rk-meta div{ display:grid; grid-template-columns:88px 1fr; gap:8px; font-size:12.5px; }
+    .rk-meta span{ color:var(--sub); }
+    .rk-reviews{ display:grid; gap:7px; margin-bottom:6px; }
+    .rk-reviews p{ font-size:12.5px; color:var(--body); background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin:0; }
+    .rk-reviews small{ display:block; color:var(--sub); margin-top:2px; }
+
+    /* 06 深掘り */
+    .deep{ display:grid; gap:14px; }
+    .deep-merit{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+    .deep-merit li{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:13.5px; }
+    .flow{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .flow h3{ font-size:15px; margin:0 0 12px; }
+    .flow ol{ margin:0; padding:0; list-style:none; display:grid; gap:10px; counter-reset:f; }
+    .flow li{ display:flex; align-items:baseline; gap:10px; font-size:13.5px; counter-increment:f; }
+    .flow li::before{ content:counter(f); flex:0 0 26px; width:26px; height:26px; background:var(--green-d); color:#fff; border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:13px; }
+    .flow li b{ margin-right:4px; }
+    .flow li span{ color:var(--body); }
+    .flow-fee{ font-size:13px; background:var(--mint); border-radius:10px; padding:10px 12px; margin:12px 0 0; }
+
+    /* 07 口コミ */
+    .voice-list{ display:grid; gap:12px; }
+    .voice-grid{ display:grid; gap:12px; }
+    .voice{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px 16px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .voice-lg{ border-left:4px solid var(--green); }
+    .voice-ttl{ display:block; font-size:14.5px; color:var(--green-d); font-weight:900; margin:6px 0 4px; }
+    .stars{ color:var(--star); font-size:14px; letter-spacing:1px; }
+    .voice p{ font-size:13.5px; margin:6px 0; line-height:1.7; }
+    .voice small{ color:var(--sub); font-weight:700; }
+
+    /* 08 不安解消 */
+    .fits{ background:#F2FBF8; border:1px solid var(--green); border-radius:16px; padding:16px; margin-bottom:14px; }
+    .fits-ttl{ font-size:15px; font-weight:900; color:var(--green-d); margin:0 0 12px; text-align:center; }
+    .fits ul{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+    .fits li{ font-size:13px; color:var(--ink); font-weight:700; display:flex; align-items:center; gap:8px; }
+    .fits li svg{ flex-shrink:0; }
+    .worry-grid{ display:grid; gap:10px; }
+    .worry{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+    .worry h3{ font-size:14px; margin:0 0 5px; color:var(--green-d); }
+    .worry h3::before{ content:"Q. "; }
+    .worry p{ font-size:13px; color:var(--body); margin:0; }
+    .worry p::before{ content:"A. "; font-weight:900; color:var(--ink); }
+
+    /* 09 FAQ */
+    .faq{ display:grid; gap:10px; }
+    .faq details{ background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    .faq summary{ list-style:none; cursor:pointer; padding:14px 40px 14px 16px; font-weight:700; font-size:14px; position:relative; }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq summary::after{ content:"+"; position:absolute; right:16px; top:12px; font-size:20px; color:var(--green-d); }
+    .faq details[open] summary::after{ content:"−"; }
+    .faq p{ margin:0; padding:0 16px 14px; font-size:13px; color:var(--body); }
+
+    /* 10 最終CTA */
+    .sec-final{ background:linear-gradient(180deg,#fff,var(--mint)); text-align:center; }
+    .sec-final h2{ font-size:22px; font-weight:900; margin:0 0 8px; line-height:1.45; }
+    .sec-final>.wrap>p{ font-size:14px; color:var(--body); margin:0 0 4px; }
+
+    /* フッター */
+    .ft{ background:#23303A; color:#cfd8de; padding:24px 0; }
+    .ft-trust{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px 16px; margin:0 0 14px; }
+    .ft-trust-ttl{ font-size:12px; font-weight:900; color:#e7eef2; margin:0 0 8px; }
+    .ft-trust ul{ list-style:none; margin:0; padding:0; }
+    .ft-trust li{ font-size:11.5px; line-height:1.7; color:#cfd8de; padding-left:14px; position:relative; }
+    .ft-trust li::before{ content:"・"; position:absolute; left:0; }
+    .ft-method{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px 16px; margin:0 0 14px; }
+    .ft-method-ttl{ font-size:12px; font-weight:900; color:#e7eef2; margin:0 0 8px; }
+    .ft-method p:not(.ft-method-ttl){ font-size:11.5px; line-height:1.8; color:#cfd8de; margin:0; }
+    .ft-note{ font-size:11px; line-height:1.7; margin:0 0 12px; }
+    .ft nav{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:10px; }
+    .ft a{ color:#aeecdf; color:#a9d5cd; font-size:12px; }
+    .ft small{ color:#7d8a92; font-size:11px; }
+
+    /* スマホ下部固定 */
+    .sticky{ position:fixed; left:0; right:0; bottom:0; z-index:60; display:grid; grid-template-columns:1.4fr 1fr; gap:8px; padding:8px 10px; background:rgba(255,255,255,.97); backdrop-filter:blur(6px); border-top:1px solid var(--line); }
+    .sticky a{ text-decoration:none; font-weight:900; border-radius:999px; min-height:50px; display:flex; align-items:center; justify-content:center; gap:6px; font-size:14px; }
+    .sticky i{ font-style:normal; }
+    .sticky-phone{
+      background:linear-gradient(180deg,#FFD24D,#F2A100); color:#7a2a00;
+      box-shadow:0 5px 0 #C97E00, 0 8px 14px rgba(201,126,0,.3);
+      border:2px solid #fff3cf; animation:pokopoko 1.1s ease-in-out infinite;
+    }
+    .sticky-phone i{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#E0322C; color:#fff; font-size:14px; }
+    .sticky-web{ background:var(--green-d); color:#fff; }
+
+    @media (min-width:600px){
+      .voice-grid,.worry-grid{ grid-template-columns:1fr 1fr; }
+    }
+  </style>
+
+  <script>
+    var AFF = {
+      manekiya: document.body.getAttribute("data-aff-manekiya"),
+      otakaraya: document.body.getAttribute("data-aff-otakaraya"),
+      buraiba: document.body.getAttribute("data-aff-buraiba")
+    };
+    var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+    function track(name, params){
+      try{ if(window.dataLayer) window.dataLayer.push({event:name, ...(params||{})});
+        if(typeof gtag==="function") gtag("event", name, params||{}); }catch(_){}
+    }
+    function affLink(raw){
+      if(!raw || raw === "#") return "#";
+      try{ var u=new URL(raw);
+        new URLSearchParams(location.search).forEach(function(v,k){ if(KEEP.test(k)&&!u.searchParams.has(k)) u.searchParams.set(k,v); });
+        return u.toString();
+      }catch(_){ return raw; }
+    }
+    // アフィリンク注入＋計測
+    document.querySelectorAll("[data-aff]").forEach(function(el){
+      var key = el.getAttribute("data-aff");
+      var url = affLink(AFF[key]);
+      el.setAttribute("href", url);
+      el.addEventListener("click", function(e){
+        var tn = el.getAttribute("data-track") || "";
+        var params = { affiliate_key:key, track_name:tn, landing_intent:"lp4", link_url:url };
+        track(tn.indexOf("phone")>=0 ? "phone_click" : "web_click", params);
+        if(url && url !== "#"){
+          var primary = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button===0;
+          if(primary){
+            e.preventDefault();
+            var done=false; var go=function(){ if(done) return; done=true; location.href=url; };
+            track("gold_kaitori_affiliate_click", { ...params, event_callback:go, event_timeout:1500 });
+            setTimeout(go,1500);
+          } else { track("gold_kaitori_affiliate_click", params); }
+        } else { e.preventDefault(); }
+      });
+    });
+    // スマホ下部固定CTA：FVを過ぎたら表示
+    var sticky = document.querySelector("[data-sticky]");
+    var fv = document.querySelector(".fv");
+    if(sticky && fv && "IntersectionObserver" in window){
+      new IntersectionObserver(function(es){ es.forEach(function(en){ sticky.hidden = en.isIntersecting; }); }, {threshold:0})
+        .observe(fv);
+    } else if(sticky){ sticky.hidden = false; }
+    track("lp4_open", { landing_intent:"lp4" });
+    // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
+    window.addEventListener("load", function(){
+      var search = window.location.search;
+      if(!search) return;
+      var incoming = new URLSearchParams(search);
+      document.querySelectorAll("a[href]").forEach(function(a){
+        var href = a.getAttribute("href");
+        if(!href) return;
+        var lower = href.toLowerCase();
+        if(lower.charAt(0)==="#"||lower.startsWith("javascript")||lower.startsWith("mailto")||lower.startsWith("tel")) return;
+        try{
+          var u=new URL(href, window.location.href);
+          incoming.forEach(function(v,k){ if(!u.searchParams.has(k)) u.searchParams.set(k,v); });
+          a.setAttribute("href", u.toString());
+        }catch(_){}
+      });
+    });
+  </script>
+  <script is:inline>
+    (function(){
+      var els = document.querySelectorAll('.sec, .rk, .voice, .fv-tbl-wrap, .point-img, .rk-voice-block');
+      els.forEach(function(el){ el.classList.add('fade-in'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.07 });
+      els.forEach(function(el){ io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
