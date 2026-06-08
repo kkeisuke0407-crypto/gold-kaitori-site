@@ -101,22 +101,18 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </div>
         </div>
 
-        <!-- ④ 特典カード（比較表とは独立して強く見せる） -->
-        <div class="perk-cards">
-          {campDays > 0 && (
-            <div class="perk perk-30">
-              <span class="perk-cap">電話申込限定</span>
-              <b class="perk-main">最大<em>30%</em>UP</b>
-            </div>
+        <!-- ④ キャンペーンバナー（電話申込限定 最大30%UP・手数料完全無料）ポコポコ＋キラキラ -->
+        <div class="fv-banner">
+          {campDays > 0 ? (
+            <a href="#" class="fv-banner-link" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
+              <img src="/images/fv-camp30.webp" alt="6/1〜6/30 期間限定 まねきや お電話申込の方限定 買取金額 最大30%UP・買取手数料完全無料 今すぐ電話で申し込む" width="1536" height="1024" loading="eager" decoding="async" />
+            </a>
+          ) : (
+            <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
+              <i>☎</i>電話で無料査定する
+            </a>
           )}
-          <div class="perk perk-fee">
-            <span class="perk-cap">買取手数料</span>
-            <b class="perk-main">完全<em>無料</em></b>
-          </div>
         </div>
-        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
-          <i>☎</i>電話で30%UP条件を確認する
-        </a>
 
         <!-- 金相場チップ -->
         <div class="rate-chip">
@@ -555,6 +551,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .perk-cap{ display:inline-block; font-size:12px; font-weight:700; background:rgba(255,255,255,.22); border-radius:999px; padding:2px 11px; }
     .perk-main{ display:block; margin-top:6px; font-size:21px; font-weight:900; line-height:1.1; }
     .perk-main em{ font-style:normal; font-size:31px; vertical-align:-2px; padding:0 1px; }
+    /* ④ キャンペーンバナー（ポコポコ＋キラキラ） */
+    .fv-banner{ margin:14px 0; }
+    .fv-banner-link{ display:block; position:relative; border-radius:14px; overflow:hidden; box-shadow:0 10px 24px rgba(201,126,0,.32); animation:pokopoko 1.15s ease-in-out infinite; }
+    .fv-banner-link img{ width:100%; height:auto; display:block; }
+    .fv-banner-link::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.65), transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    @keyframes bannerShine{ 0%{ left:-70%; } 55%{ left:130%; } 100%{ left:130%; } }
     .camp-img{ display:block; margin:0 0 16px; border-radius:14px; overflow:hidden; box-shadow:0 8px 20px rgba(183,28,22,.28); text-decoration:none; }
     .camp-img img{ width:100%; height:auto; display:block; }
 
@@ -626,6 +628,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fade-in.visible{ opacity:1; transform:translateY(0); }
     @media (prefers-reduced-motion:reduce){
       .camp2-cta{ animation:none; }
+      .fv-banner-link{ animation:none; }
+      .fv-banner-link::after{ animation:none; display:none; }
       .live-dot{ animation:none; }
       .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
     }
