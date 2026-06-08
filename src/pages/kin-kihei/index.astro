@@ -2,7 +2,7 @@
 const PAGE_TITLE = "18金・喜平・インゴットの買取価格・査定条件を比較｜売る前にチェック";
 const PAGE_DESC = "18金喜平・K18ネックレス・喜平ブレスレット・インゴット・18金指輪を売る前に。重さ・純度・手数料・キャンセル条件を含めて査定の見方を整理。";
 const CANONICAL = "https://kaitori.hakobu-family.com/kin-kihei/";
-const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/fv-hero-gold.png";
+const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/og-gold.webp";
 
 import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
 const rates = await getRates();
@@ -555,15 +555,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-conc li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--green); font-weight:900; font-size:18px; }
     .fv-conc li b{ color:var(--green-d); }
     .fv-conc .cta-pair{ margin-top:0; }
-
-    /* ④ 特典カード（30%UP・手数料無料を独立して強く見せる） */
-    .perk-cards{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 0 10px; }
-    .perk{ position:relative; border-radius:14px; padding:12px 8px; text-align:center; color:#fff; box-shadow:0 6px 16px rgba(0,0,0,.14); }
-    .perk-30{ background:linear-gradient(160deg,#FF7A59,#E0322C); }
-    .perk-fee{ background:linear-gradient(160deg,#12B39E,#0B8276); }
-    .perk-cap{ display:inline-block; font-size:12px; font-weight:700; background:rgba(255,255,255,.22); border-radius:999px; padding:2px 11px; }
-    .perk-main{ display:block; margin-top:6px; font-size:21px; font-weight:900; line-height:1.1; }
-    .perk-main em{ font-style:normal; font-size:31px; vertical-align:-2px; padding:0 1px; }
     /* ④ キャンペーンバナー（ポコポコ＋キラキラ） */
     .fv-banner{ margin:14px 0; }
     .fv-banner-link{ display:block; position:relative; border-radius:14px; overflow:hidden; box-shadow:0 10px 24px rgba(201,126,0,.32); animation:pokopoko 1.15s ease-in-out infinite; }
