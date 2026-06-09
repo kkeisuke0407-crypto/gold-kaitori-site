@@ -87,47 +87,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
 
         <!-- ① 結論ボックス：最初の数秒で結論に答える -->
-        <div class="fv-conc">
-          <p class="fv-conc-ttl">18金・喜平・インゴットを売る前に、査定条件を比較</p>
-          <p class="fv-conc-sub">重さ・純度・品物の種類によって査定の見方は変わります。手数料やキャンセル条件も含めて、売る前に確認したいポイントを整理しました。</p>
-          <ul>
-            <li>1位 <b>まねきや</b>（編集部評価）</li>
-            <li>買取<b>手数料0円</b>＝手取りが減りにくい</li>
-            <li>電話申込で買取金額<b>最大30%UP</b></li>
-            <li>金貨・地金・金歯・壊れた金・片方だけもOK</li>
-            <li><b>査定だけでもOK</b>／売るかは金額を見てから</li>
-          </ul>
-          <div class="cta-pair">
-            <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_conc_phone" rel="nofollow sponsored"><i>☎</i>今の査定額を電話で聞く</a>
-            <a href="#" class="btn btn-web" data-aff="manekiya" data-track="fv_conc_web" rel="nofollow sponsored">WEBで査定予約する</a>
-          </div>
-        </div>
-
-        <!-- FV直下の不安解消3点＋対象商品 -->
-        <div class="fv-q3"><span>Q. g数で査定は変わる？</span><span>Q. 手数料は？</span><span>Q. 査定だけでもいい？</span></div>
-        <p class="fv-target">対象：18金喜平 / K18ネックレス / 喜平ブレスレット / インゴット / 18金指輪 / 18金リング</p>
-
-        <!-- ④ キャンペーンバナー（電話申込限定 最大30%UP・手数料完全無料）ポコポコ＋キラキラ -->
-        <div class="fv-banner">
-          {campDays > 0 ? (
-            <a href="#" class="fv-banner-link" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
-              <img src="/images/fv-camp30.webp" alt="6/1〜6/30 期間限定 まねきや お電話申込の方限定 買取金額 最大30%UP・買取手数料完全無料 今すぐ電話で申し込む" width="1536" height="1024" loading="eager" decoding="async" />
-            </a>
-          ) : (
-            <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
-              <i>☎</i>電話で無料査定する
-            </a>
-          )}
-        </div>
-
-        <!-- 金相場チップ -->
-        <div class="rate-chip">
-          <span><i class="live-dot"></i>本日の金買取相場</span>
-          <b>K24 {yen(rates.k24)}/g</b><b>K18 {yen(rates.k18)}/g</b>
-          <small>{rates.updatedAt}</small>
-        </div>
-
-        <!-- 3社比較表 -->
         <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ 金買取おすすめ3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
@@ -195,6 +154,33 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </tbody>
           </table>
         </div>
+
+        <!-- FV直下の不安解消3点＋対象商品 -->
+        <div class="fv-q3"><span>Q. g数で査定は変わる？</span><span>Q. 手数料は？</span><span>Q. 査定だけでもいい？</span></div>
+        <p class="fv-target">対象：18金喜平 / K18ネックレス / 喜平ブレスレット / インゴット / 18金指輪 / 18金リング</p>
+
+        <!-- ④ キャンペーンバナー（電話申込限定 最大30%UP・手数料完全無料）ポコポコ＋キラキラ -->
+        <div class="fv-banner">
+          {campDays > 0 ? (
+            <a href="#" class="fv-banner-link" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
+              <img src="/images/fv-camp30.webp" alt="6/1〜6/30 期間限定 まねきや お電話申込の方限定 買取金額 最大30%UP・買取手数料完全無料 今すぐ電話で申し込む" width="1536" height="1024" loading="eager" decoding="async" />
+            </a>
+          ) : (
+            <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
+              <i>☎</i>電話で無料査定する
+            </a>
+          )}
+        </div>
+
+        <!-- 金相場チップ -->
+        <div class="rate-chip">
+          <span><i class="live-dot"></i>本日の金買取相場</span>
+          <b>K24 {yen(rates.k24)}/g</b><b>K18 {yen(rates.k18)}/g</b>
+          <small>{rates.updatedAt}</small>
+        </div>
+
+        <!-- 3社比較表 -->
+        
         <p class="note">※買取価格・キャンペーン内容は変更になる場合があります。最新情報は各社公式でご確認ください。</p>
 
         <div class="cta-pair">
@@ -257,20 +243,31 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
           </a>
           <p class="rk-for">金・貴金属を、できるだけ高く・手取りを減らさず売りたい人に</p>
-          <ul class="rk-reasons">
-            <li>✅ <b>査定料・キャンセル料0円！</b></li>
-            <li>✅ <b>手数料0円</b>で圧倒的高価買取</li>
-            <li>✅ 日本全国買取OK／査定数<b>120万点突破！</b></li>
-            <li>✅ Google口コミ平均<b>4.8以上</b></li>
-            <li>✅ 電話のみ！買取金額<b>最大30%UP</b></li>
-            <li>✅ 売るのは査定金額を聞いてから、<b>電話相談だけでもOK</b></li>
-            <li>✅ <b>1,000万円以上</b>でもその場で現金支払い</li>
-            <li>✅ 他店で断られた金・貴金属も<b>買取可能</b></li>
-          </ul>
-          <div class="rk-meta">
-            <div><span>対応品目</span><b>ネックレス・指輪・金貨・地金・金歯・壊れた金もOK</b></div>
-            <div><span>買取方法</span><b>店頭・出張・宅配（料金0円）</b></div>
-            <div><span>キャンペーン</span><b>電話申込で買取額UPの対象になることも</b></div>
+          <table class="rk-spec">
+            <tbody>
+              <tr class="rs-head"><th>買取価格</th><th>買取方法</th><th>状態不良<br />の品物</th><th>査定士</th></tr>
+              <tr class="rs-val">
+                <td><span class="rs-ic">🎯</span>業界最高<br />水準＋α</td>
+                <td><span class="rs-ic">🎯</span>店舗・出張<br />・宅配</td>
+                <td><span class="rs-ic">🎯</span>査定可能</td>
+                <td><span class="rs-ic">🎯</span>鑑定スペ<br />シャリスト</td>
+              </tr>
+              <tr class="rs-head"><th colspan="2">対応スピード</th><th colspan="2">キャンペーン</th></tr>
+              <tr class="rs-val">
+                <td colspan="2"><span class="rs-ic">🎯</span>即日現金化</td>
+                <td colspan="2"><b class="rs-camp">買取金額<br />最大<em>30%</em>UP</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="rk-osusume">
+            <div class="rk-osusume-h">💡 おすすめポイント</div>
+            <ul>
+              <li><span class="chk">✓</span><span><mark>手数料10%無料</mark>で高額査定の確率UP</span></li>
+              <li><span class="chk">✓</span><span>電話申し込みで<mark>最大30%買取額UP</mark></span></li>
+              <li><span class="chk">✓</span><span><mark>1,000万円以上</mark>でもその場で現金支払い</span></li>
+              <li><span class="chk">✓</span><span>他店で断られた金・貴金属も<mark>買取可能</mark></span></li>
+              <li><span class="chk">✓</span><span><mark>売るのは査定金額を聞いてからでOK</mark></span></li>
+            </ul>
           </div>
           <a href="#" class="camp-img" data-aff="manekiya" data-track="rk_camp" rel="nofollow sponsored">
             <img src="/images/camp-30up.webp" alt="6/1〜6/30期間限定 まねきや お電話申込の方限定 買取金額最大30%UP 今すぐ電話で申し込む" width="1627" height="796" loading="lazy" />
@@ -279,6 +276,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </article>
 
         <!-- まねきや口コミ -->
+        <!-- ランキング1位の下・口コミの上 挿入画像 -->
+        <a href="#" class="rk-insert-img" data-aff="manekiya" data-track="rk1_insert" rel="nofollow sponsored">
+          <img src="/images/rk1-manekiya.png" alt="Google口コミ4.8獲得！業界トップクラスの金買取店はまねきや。金・貴金属を売るなら高価買取専門店まねきやへ" loading="lazy" decoding="async" />
+        </a>
+
         <div class="rk-voice-block">
           <div class="rk-voice-ttl">まねきやを利用したお客様の声</div>
           <div class="rk-voice-list">
@@ -885,6 +887,31 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tr-cta .btn i{ font-size:13px; }
     .fv-tr-cta .fv-td{ vertical-align:middle; text-align:center; }
     .fv-tr-cta .fv-td1{ vertical-align:top; }
+  
+    /* ===== ランキング1位 2nd化（スペックカード/おすすめ/挿入画像/口コミ横スクロール） ===== */
+    .camp-img{ position:relative; animation:pokopoko 1.15s ease-in-out infinite; }
+    .camp-img::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    @media (prefers-reduced-motion:reduce){ .camp-img{ animation:none; } .camp-img::after{ animation:none; display:none; } }
+    .rk-spec{ width:100%; table-layout:fixed; border-collapse:separate; border-spacing:0; margin:4px 0 12px; border:2px solid #C8102E; border-radius:6px; overflow:hidden; }
+    .rk-spec th{ background:#C8102E; color:#fff; font-weight:900; font-size:11.5px; text-align:center; padding:7px 3px; line-height:1.3; border-right:1px solid rgba(255,255,255,.45); border-bottom:1px solid #fff; }
+    .rk-spec .rs-head th:last-child{ border-right:none; }
+    .rk-spec td{ background:#fff; text-align:center; font-size:12px; font-weight:700; color:var(--ink); padding:11px 5px; line-height:1.45; vertical-align:middle; border-right:1px solid #F1CDD2; border-bottom:1px solid #F1CDD2; }
+    .rk-spec td:last-child{ border-right:none; }
+    .rk-spec .rs-val td{ border-bottom:none; }
+    .rk-spec .rs-ic{ display:block; font-size:24px; line-height:1; margin-bottom:7px; }
+    .rk-spec .rs-camp{ display:inline-block; color:var(--ink); font-weight:900; font-size:12px; line-height:1.35; }
+    .rk-spec .rs-camp em{ font-style:normal; color:#D81F1F; font-size:16px; }
+    .rk-osusume{ border:2px solid var(--gold); border-radius:8px; overflow:hidden; margin:0 0 16px; }
+    .rk-osusume-h{ background:linear-gradient(135deg,#F4A81F,#D9962A); color:#fff; font-weight:900; font-size:14px; padding:9px 13px; text-shadow:0 1px 2px rgba(0,0,0,.18); }
+    .rk-osusume ul{ list-style:none; margin:0; padding:12px 14px; display:grid; gap:10px; background:#FFFDF6; }
+    .rk-osusume li{ font-size:13px; line-height:1.55; font-weight:700; color:var(--ink); display:flex; gap:7px; align-items:flex-start; }
+    .rk-osusume .chk{ color:#1AA251; font-weight:900; flex:0 0 auto; font-size:15px; }
+    .rk-osusume mark{ background:#FFF1A6; color:inherit; font-weight:900; padding:0 3px; border-radius:3px; }
+    .rk-insert-img{ display:block; margin:0 0 18px; border-radius:14px; overflow:hidden; box-shadow:0 6px 18px rgba(20,60,50,.12); text-decoration:none; }
+    .rk-insert-img img{ width:100%; height:auto; display:block; }
+    .rk-voice-list{ display:flex; flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; gap:12px; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
+    .rk-voice-list > *{ flex:0 0 86%; scroll-snap-align:center; }
+    .rk-voice-block::after{ content:"← スワイプで他の口コミ →"; display:block; text-align:center; font-size:11px; color:var(--sub); margin-top:6px; }
   </style>
 
   <script>
