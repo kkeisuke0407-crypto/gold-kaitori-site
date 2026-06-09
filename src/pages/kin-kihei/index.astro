@@ -86,7 +86,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </div>
 
 
-        <!-- ① 結論ボックス：最初の数秒で結論に答える -->
+        <!-- 金相場チップ -->
+        <div class="rate-chip">
+          <span><i class="live-dot"></i>本日の金買取相場</span>
+          <b>K24 {yen(rates.k24)}/g</b><b>K18 {yen(rates.k18)}/g</b>
+          <small>{rates.updatedAt}</small>
+        </div>
+
         <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ 金買取おすすめ3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
@@ -172,23 +178,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           )}
         </div>
 
-        <!-- 金相場チップ -->
-        <div class="rate-chip">
-          <span><i class="live-dot"></i>本日の金買取相場</span>
-          <b>K24 {yen(rates.k24)}/g</b><b>K18 {yen(rates.k18)}/g</b>
-          <small>{rates.updatedAt}</small>
-        </div>
 
-        <!-- 3社比較表 -->
-        
-        <p class="note">※買取価格・キャンペーン内容は変更になる場合があります。最新情報は各社公式でご確認ください。</p>
-
-        <div class="cta-pair">
-          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_phone" rel="nofollow sponsored"><i>☎</i>電話で30%UP条件を確認する</a>
-          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="fv_web" rel="nofollow sponsored">WEBで無料査定</a>
-        </div>
-        <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
-      </div>
+              </div>
     </section>
 
     <!-- 02 相場 -->
@@ -276,10 +267,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </article>
 
         <!-- まねきや口コミ -->
-        <!-- ランキング1位の下・口コミの上 挿入画像 -->
-        <a href="#" class="rk-insert-img" data-aff="manekiya" data-track="rk1_insert" rel="nofollow sponsored">
-          <img src="/images/rk1-manekiya.png" alt="Google口コミ4.8獲得！業界トップクラスの金買取店はまねきや。金・貴金属を売るなら高価買取専門店まねきやへ" loading="lazy" decoding="async" />
-        </a>
+        <!-- まねきや 金買取実績 -->
+        <img class="rk-zisseki" src="/images/kin_zisseki.webp" alt="まねきやの金・貴金属 買取実績" width="1024" height="1536" loading="lazy" decoding="async" />
 
         <div class="rk-voice-block">
           <div class="rk-voice-ttl">まねきやを利用したお客様の声</div>
@@ -308,8 +297,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <p class="note">※まねきや公式掲載のお客様の声を一部要約。個人の感想です。査定額・条件には個人差があります。</p>
         </div>
 
-        <!-- まねきや 金買取実績 -->
-        <img class="rk-zisseki" src="/images/kin_zisseki.webp" alt="まねきやの金・貴金属 買取実績" width="1024" height="1536" loading="lazy" decoding="async" />
+
 
         <!-- 2位 -->
         <article class="rk rk-2">
