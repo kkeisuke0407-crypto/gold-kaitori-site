@@ -10,8 +10,8 @@ const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("j
 // キャンペーン残日数（まねきや 6/30まで）
 const campEnd = new Date('2026-06-30T23:59:59+09:00');
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
-const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
 const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
+const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
 
 const faqJsonLd = {
   "@context": "https://schema.org", "@type": "FAQPage",
@@ -73,7 +73,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     })(window, document, "clarity", "script", "wxnujpnscp");
   </script>
 </head>
-<body data-landing-intent="lp_pt"
+<body data-landing-intent="lp2nd"
   data-aff-manekiya={AFF_MANEKIYA} data-aff-otakaraya={AFF_OTAKARAYA} data-aff-buraiba="https://brandrevalue.com/">
 
   <main>
@@ -84,7 +84,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <h1 class="fv-hero-wrap">
           <a href="#" class="fv-hero-link" data-aff="manekiya" data-track="fv_hero" rel="nofollow sponsored"><img src="/images/hero-pt-kaitori.webp" alt="Pt900・Pt950のプラチナ指輪、売る前に査定条件を比較｜まねきや・おたからや・ブラリバ" width="1672" height="941" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" /></a>
         </h1>
-
         <div class="fv-datebadge">
           <span class="fv-db-tag"><i class="fv-db-dot"></i>最新版</span>
           <span class="fv-db-date">{todayLabel}</span>
@@ -92,43 +91,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </div>
 
 
-        <!-- ① 結論ボックス：最初の数秒で結論に答える -->
-        <div class="fv-conc">
-          <p class="fv-conc-ttl">Pt900・Pt950のプラチナ指輪、売る前に査定条件を比較</p>
-          <p class="fv-conc-sub">査定料・キャンセル条件・電話相談・WEB査定予約のしやすさを比較。金額だけでなく、売る前に確認したい条件を整理しました。</p>
-          <ul>
-            <li>1位 <b>まねきや</b>（編集部評価）</li>
-            <li>買取<b>手数料0円</b>＝手取りが減りにくい</li>
-            <li>電話申込で買取金額<b>最大30%UP</b></li>
-            <li>結婚指輪・刻印・片方だけ・石付きも査定対象</li>
-            <li><b>査定だけでもOK</b>／売るかは金額を見てから</li>
-          </ul>
-          <div class="cta-pair">
-            <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_conc_phone" rel="nofollow sponsored"><i>☎</i>今の査定額を電話で聞く</a>
-            <a href="#" class="btn btn-web" data-aff="manekiya" data-track="fv_conc_web" rel="nofollow sponsored">WEBで査定予約する</a>
-          </div>
-        </div>
-
-        <!-- FV直下の不安解消3点＋対象商品 -->
-        <div class="fv-q3"><span>Q. 査定だけでもいい？</span><span>Q. 手数料は？</span><span>Q. 古い指輪でもいい？</span></div>
-        <p class="fv-target">対象：Pt900指輪 / Pt950指輪 / プラチナリング / 古い指輪 / 宝石付き指輪</p>
-
-        <!-- ④ キャンペーンバナー（電話申込限定 最大30%UP・手数料完全無料）ポコポコ＋キラキラ -->
-        <div class="fv-banner">
-          {campDays > 0 ? (
-            <a href="#" class="fv-banner-link" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
-              <img src="/images/fv-camp30.webp" alt="6/1〜6/30 期間限定 まねきや お電話申込の方限定 買取金額 最大30%UP・買取手数料完全無料 今すぐ電話で申し込む" width="1536" height="1024" loading="eager" decoding="async" />
-            </a>
-          ) : (
-            <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
-              <i>☎</i>電話で無料査定する
-            </a>
-          )}
-        </div>
-
         <!-- ① 本日のプラチナ相場（価格を最速で表示）＋ ② 重さ別参考価格 -->
         <div class="fv-rate" id="rate">
-          <p class="fv-rate-ttl"><i class="live-dot"></i>プラチナ指輪を売る前に確認したい相場の見方</p>
+          <p class="fv-rate-ttl"><i class="live-dot"></i>本日のプラチナ買取相場</p>
           <div class="rate-grid">
             <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
             <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
@@ -146,9 +111,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </ul>
             <p class="note">※地金だけのおおよその目安。結婚指輪・婚約指輪・コンビ（金とのミックス）もOK。宝石・ブランド・デザインでさらに上がることがあります（重量・状態で変動）。</p>
           </div>
-          <a href="#" class="camp2-cta" data-aff="manekiya" data-track="rate_top_phone" rel="nofollow sponsored">
-            <i>☎</i>今いくら？を電話で聞く
-          </a>
         </div>
 
         <!-- 3社比較表 -->
@@ -163,19 +125,19 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               </tr>
             </thead>
             <tbody>
-                            <tr class="cmp-band"><td colspan="3">買取価格</td></tr>
+              <tr class="cmp-band"><td colspan="3">買取価格</td></tr>
               <tr>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span><b>高価買取に強み<br />（編集部評価）</b></td>
                 <td class="fv-td"><span class="mk ok">〇</span>高め</td>
                 <td class="fv-td"><span class="mk ok">〇</span>高め</td>
               </tr>
-                            <tr class="cmp-band"><td colspan="3">手数料</td></tr>
+              <tr class="cmp-band"><td colspan="3">手数料</td></tr>
               <tr>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span><b>0円（完全無料）</b></td>
                 <td class="fv-td"><span class="mk ok">〇</span>0円</td>
                 <td class="fv-td"><span class="mk ok">〇</span>0円</td>
               </tr>
-                            <tr class="cmp-band"><td colspan="3">当サイト限定キャンペーン</td></tr>
+              <tr class="cmp-band"><td colspan="3">当サイト限定キャンペーン</td></tr>
               <tr class="fv-tr-camp">
                 <td class="fv-td fv-td1">
                   {campDays > 0 ? (
@@ -190,19 +152,19 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td class="fv-td"><span class="mk ok">〇</span><b>買取価格<br />最大20%UP</b></td>
                 <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
               </tr>
-                            <tr class="cmp-band"><td colspan="3">結婚指輪刻印対応</td></tr>
+              <tr class="cmp-band"><td colspan="3">結婚指輪・刻印対応</td></tr>
               <tr>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span>結婚指輪・刻印<br />名前入り・片方OK</td>
                 <td class="fv-td"><span class="mk good">◎</span>結婚指輪<br />対応</td>
                 <td class="fv-td"><span class="mk ok">〇</span>宝石付き<br />中心</td>
               </tr>
-                            <tr class="cmp-band"><td colspan="3">壊れた品でもOK</td></tr>
+              <tr class="cmp-band"><td colspan="3">壊れた品でもOK</td></tr>
               <tr>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span>他社で断られた<br />物でもOK</td>
                 <td class="fv-td"><span class="mk good">◎</span>他社で断られた<br />物でもOK</td>
                 <td class="fv-td"><span class="mk tri">△</span>要相談</td>
               </tr>
-                            <tr class="cmp-band"><td colspan="3">査定方法</td></tr>
+              <tr class="cmp-band"><td colspan="3">査定方法</td></tr>
               <tr>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span>店舗・宅配<br />・出張</td>
                 <td class="fv-td"><span class="mk ok">〇</span>店舗・出張</td>
@@ -211,7 +173,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               <tr class="fv-tr-cta">
                 <td class="fv-td fv-td1">
                   <small class="cta-sub">＼査定だけでもOK／</small>
-                  <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>30%UP条件を聞く</a>
+                  <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>無料で電話相談</a>
                   <a href="#" class="btn btn-web sm mt4" data-aff="manekiya" data-track="fv_tbl_web" rel="nofollow sponsored">WEBで査定</a>
                   {campDays > 0 && <p class="countdown">⏳ キャンペーン終了まで<br /><b>あと{campDays}日！</b></p>}
                 </td>
@@ -225,31 +187,31 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </tbody>
           </table>
         </div>
-        <p class="note">※買取価格・キャンペーン内容は変更になる場合があります。最新情報は各社公式でご確認ください。</p>
-
-        <p class="cta-rec">📞 一番高くなりやすいのは“電話申込”（まねきや限定で最大30%UP）</p>
-        <div class="cta-pair">
-          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="fv_phone" rel="nofollow sponsored"><i>☎</i>今の査定額を電話で聞く</a>
-          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="fv_web" rel="nofollow sponsored">WEBで査定予約する</a>
+        <!-- 大きい30%UP CTA（比較表の下） -->
+        <div class="fv-banner">
+          {campDays > 0 ? (
+            <a href="#" class="fv-banner-link" data-aff="manekiya" data-track="camp_fv" rel="nofollow sponsored">
+              <img src="/images/fv-camp30.webp" alt="6/1〜6/30 期間限定 まねきや お電話申込の方限定 買取金額 最大30%UP・買取手数料完全無料 今すぐ電話で申し込む" width="1536" height="1024" loading="lazy" decoding="async" />
+            </a>
+          ) : (
+            <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
+              <i>☎</i>まずは無料電話で査定だけ聞く
+            </a>
+          )}
         </div>
-        <p class="cta-note">📞 電話申込で最大30%UP／無料・出張＆宅配OK・売らなくても大丈夫</p>
 
-        <!-- ⑤ 比較表の下に口コミを1件だけ前出し（LP3にもそのまま流用可） -->
-        <div class="fv-voice">
-          <span class="stars">★★★★★</span>
-          <b class="fv-voice-ttl">何でも相談できるスタッフさんで、安心！</b>
-          <p class="fv-voice-txt">友人の紹介でまねきやさんへ。初めは緊張しましたが、疑問にもとても詳しく親切に答えてくださり、安心して取引できました。無理な要望にも嫌な顔ひとつせず交渉してくださり、予想より高く買い取っていただいて大変満足しています。</p>
-          <small>ブランド品・貴金属</small>
-        </div>
       </div>
     </section>
 
-    <!-- ⑥ 損したくない人向け訴求（不安→まねきやの答え／LP3にも流用可） -->
-    <section class="sec" id="fear">
+    <!-- 03 高く売るコツ -->
+    <section class="sec" id="point">
       <div class="wrap">
-        <img class="fuan-img" src="/images/fuan.webp" alt="売る前のこんな不安、先に解消します（査定後に断れる・手数料0円・X線で適正査定・相見積もりOK）" width="1024" height="1536" loading="lazy" decoding="async" />
-        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="fear_phone" rel="nofollow sponsored">
-          <i>☎</i>不安なことをそのまま電話で聞く
+        <div class="sec-head"><h2>高く売るための3つのポイント</h2><p>お店選びの前に、これだけ知っておきましょう。</p></div>
+        <a href="#" class="point-img" data-aff="manekiya" data-track="point_img" rel="nofollow sponsored">
+          <img src="/images/point-3diff.webp" alt="売る前に知っておきたい3つの差｜売るタイミング・相見積もり・キャンペーン｜まねきや 電話申込で買取金額最大30%UP" width="1024" height="1536" loading="lazy" />
+        </a>
+        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="point_phone" rel="nofollow sponsored">
+          <i>☎</i>まずは無料電話で査定だけ聞く
         </a>
         <p class="point-cta-note">9時〜21時（年中無休）／査定だけ・相談だけでもOK</p>
       </div>
@@ -258,7 +220,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 05 ランキング -->
     <section class="sec" id="ranking">
       <div class="wrap">
-        <div class="sec-head"><h2>プラチナ指輪の査定相談先を比較</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
+        <div class="sec-head"><h2>プラチナ指輪 高額買取ランキング</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
 
         <!-- 1位 -->
         <article class="rk rk-1">
@@ -269,26 +231,42 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
           </a>
           <p class="rk-for">プラチナ指輪を、できるだけ高く・手取りを減らさず売りたい人に</p>
-          <ul class="rk-reasons">
-            <li>✅ <b>査定料・キャンセル料0円！</b></li>
-            <li>✅ <b>手数料0円</b>で圧倒的高価買取</li>
-            <li>✅ 日本全国買取OK／査定数<b>120万点突破！</b></li>
-            <li>✅ Google口コミ平均<b>4.8以上</b></li>
-            <li>✅ 電話のみ！買取金額<b>最大30%UP</b></li>
-            <li>✅ 売るのは査定金額を聞いてから、<b>電話相談だけでもOK</b></li>
-            <li>✅ <b>1,000万円以上</b>でもその場で現金支払い</li>
-            <li>✅ 他店で断られた金・貴金属も<b>買取可能</b></li>
-          </ul>
-          <div class="rk-meta">
-            <div><span>対応できる指輪</span><b>結婚指輪・刻印入り・片方だけ・コンビOK</b></div>
-            <div><span>買取方法</span><b>店頭・出張・宅配（料金0円）</b></div>
-            <div><span>キャンペーン</span><b>電話申込で買取額UPの対象になることも</b></div>
+          <table class="rk-spec">
+            <tbody>
+              <tr class="rs-head"><th>買取価格</th><th>買取方法</th><th>状態不良<br />の品物</th><th>査定士</th></tr>
+              <tr class="rs-val">
+                <td><span class="rs-ic">🎯</span>業界最高<br />水準＋α</td>
+                <td><span class="rs-ic">🎯</span>店舗・出張<br />・宅配</td>
+                <td><span class="rs-ic">🎯</span>査定可能</td>
+                <td><span class="rs-ic">🎯</span>鑑定スペ<br />シャリスト</td>
+              </tr>
+              <tr class="rs-head"><th colspan="2">対応スピード</th><th colspan="2">キャンペーン</th></tr>
+              <tr class="rs-val">
+                <td colspan="2"><span class="rs-ic">🎯</span>即日現金化</td>
+                <td colspan="2"><b class="rs-camp">買取金額<br />最大<em>30%</em>UP</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="rk-osusume">
+            <div class="rk-osusume-h">💡 おすすめポイント</div>
+            <ul>
+              <li><span class="chk">✓</span><span><mark>手数料10%無料</mark>で高額査定の確率UP</span></li>
+              <li><span class="chk">✓</span><span>電話申し込みで<mark>最大30%買取額UP</mark></span></li>
+              <li><span class="chk">✓</span><span><mark>1,000万円以上</mark>でもその場で現金支払い</span></li>
+              <li><span class="chk">✓</span><span>他店で断られた金・貴金属も<mark>買取可能</mark></span></li>
+              <li><span class="chk">✓</span><span><mark>売るのは査定金額を聞いてからでOK</mark></span></li>
+            </ul>
           </div>
           <a href="#" class="camp-img" data-aff="manekiya" data-track="rk_camp" rel="nofollow sponsored">
             <img src="/images/camp-30up.webp" alt="6/1〜6/30期間限定 まねきや お電話申込の方限定 買取金額最大30%UP 今すぐ電話で申し込む" width="1627" height="796" loading="lazy" />
           </a>
           <a href="#" class="btn btn-web full" data-aff="manekiya" data-track="rk_manekiya_web" rel="nofollow sponsored">まねきやで無料査定する</a>
         </article>
+
+        <!-- ランキング1位の下・口コミの上 挿入画像 -->
+        <a href="#" class="rk-insert-img" data-aff="manekiya" data-track="rk1_insert" rel="nofollow sponsored">
+          <img src="/images/rk1-manekiya.png" alt="Google口コミ4.8獲得！業界トップクラスの金買取店はまねきや。金・貴金属を売るなら高価買取専門店まねきやへ" loading="lazy" decoding="async" />
+        </a>
 
         <!-- まねきや口コミ -->
         <div class="rk-voice-block">
@@ -370,15 +348,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
     </section>
 
-    <!-- 03 高く売るコツ -->
-    <section class="sec" id="point">
+    <!-- ⑥ 損したくない人向け訴求（不安→まねきやの答え／LP3にも流用可） -->
+    <section class="sec" id="fear">
       <div class="wrap">
-        <div class="sec-head"><h2>高く売るための3つのポイント</h2><p>お店選びの前に、これだけ知っておきましょう。</p></div>
-        <a href="#" class="point-img" data-aff="manekiya" data-track="point_img" rel="nofollow sponsored">
-          <img src="/images/point-3diff.webp" alt="売る前に知っておきたい3つの差｜売るタイミング・相見積もり・キャンペーン｜まねきや 電話申込で買取金額最大30%UP" width="1024" height="1536" loading="lazy" />
-        </a>
-        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="point_phone" rel="nofollow sponsored">
-          <i>☎</i>電話で無料相談してみる
+        <img class="fuan-img" src="/images/fuan.webp" alt="売る前のこんな不安、先に解消します（査定後に断れる・手数料0円・X線で適正査定・相見積もりOK）" width="1024" height="1536" loading="lazy" decoding="async" />
+        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="fear_phone" rel="nofollow sponsored">
+          <i>☎</i>まずは無料電話で査定だけ聞く
         </a>
         <p class="point-cta-note">9時〜21時（年中無休）／査定だけ・相談だけでもOK</p>
       </div>
@@ -406,7 +381,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </div>
         </div>
         <div class="cta-pair">
-          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>今の査定額を電話で聞く</a>
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>まずは無料電話で査定だけ聞く</a>
           <a href="#" class="btn btn-web" data-aff="manekiya" data-track="deep_web" rel="nofollow sponsored">WEBで査定予約する</a>
         </div>
       </div>
@@ -547,7 +522,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <p>プラチナ相場が高めの今のうちに、無料査定で金額だけでも確認しておきましょう。査定だけ・売らなくてもOKです。</p>
         <p class="cta-rec">📞 一番高くなりやすいのは“電話申込”（まねきや限定で最大30%UP）</p>
         <div class="cta-pair">
-          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="final_phone" rel="nofollow sponsored"><i>☎</i>今の査定額を電話で聞く</a>
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="final_phone" rel="nofollow sponsored"><i>☎</i>まずは無料電話で査定だけ聞く</a>
           <a href="#" class="btn btn-web" data-aff="manekiya" data-track="final_web" rel="nofollow sponsored">WEBで査定予約する</a>
         </div>
         <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
@@ -572,13 +547,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
       <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。掲載の◎○△や順位・「高価買取」等の評価は当編集部の主観的な判断によるもので、買取価格の優劣を保証するものではありません。「最大30%UP」などのキャンペーンは各社公式の内容に基づく表記で、適用条件・上乗せ率の上限・対象品目・実施期間があり、予告なく変更・終了する場合があります。買取価格・手数料・キャンペーンの適用可否など最新かつ正確な情報は、必ず各社の公式ページでご確認ください。</p>
       <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
-      <small>プラチナ指輪 査定条件の比較</small>
+      <small>プラチナ指輪買取比較</small>
     </div>
   </footer>
 
   <!-- スマホ下部固定CTA -->
   <div class="sticky" data-sticky hidden>
-    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>今すぐ電話で聞く</a>
+    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>まずは無料で査定だけ聞く</a>
     <a href="#" class="sticky-web" data-aff="manekiya" data-track="sticky_web" rel="nofollow sponsored">WEB査定予約</a>
   </div>
 
@@ -704,6 +679,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       .live-dot{ animation:none; }
       .fv-banner-link{ animation:none; }
       .fv-banner-link::after{ animation:none; display:none; }
+      .camp-img{ animation:none; }
+      .camp-img::after{ animation:none; display:none; }
       .fv-hero-wrap::after{ animation:none; display:none; }
       .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
     }
@@ -815,10 +792,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     /* ① FV結論ボックス（最初の数秒で結論に答える・55歳以上も読める大きさ） */
     .fv-conc{ background:#fff; border:2px solid var(--green); border-radius:16px; padding:16px 16px 14px; margin:14px 0; box-shadow:0 8px 22px rgba(14,120,100,.12); }
     .fv-conc-ttl{ font-size:19px; font-weight:900; text-align:center; margin:0 0 12px; color:var(--ink); line-height:1.4; }
-    .fv-conc-sub{ font-size:13px; font-weight:700; color:var(--body); text-align:center; margin:-6px 0 12px; line-height:1.7; }
-    .fv-q3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:0 0 10px; }
-    .fv-q3 span{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 5px; font-size:11.5px; font-weight:700; color:var(--green-d); text-align:center; line-height:1.4; }
-    .fv-target{ font-size:11.5px; color:var(--sub); text-align:center; margin:0 0 14px; line-height:1.6; }
     .fv-conc ul{ list-style:none; margin:0 0 14px; padding:0; display:grid; gap:9px; }
     .fv-conc li{ font-size:16px; font-weight:700; padding-left:28px; position:relative; line-height:1.5; color:var(--ink); }
     .fv-conc li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--green); font-weight:900; font-size:18px; }
@@ -1032,7 +1005,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-updated{ font-size:12px; }
       .fv-hero-link{ display:block; font-size:0; }
   
-    /* ===== 共通改善（チップ撤去/CTA四角/縦帯比較表/日付バッジ） ===== */
+    /* ===== LP2nd 個別ブラッシュアップ ===== */
     .fv-datebadge{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; width:100%; margin:0 auto 14px; padding:9px 14px; background:#fff; border:1px solid #F0DBB0; border-radius:12px; box-shadow:0 4px 14px rgba(183,28,28,.13); font-weight:900; }
     .fv-db-tag{ display:inline-flex; align-items:center; gap:6px; background:linear-gradient(180deg,#E0322C,#B71C1C); color:#fff; font-size:15px; padding:7px 14px; border-radius:999px; letter-spacing:.04em; }
     .fv-db-dot{ width:9px; height:9px; border-radius:50%; background:#fff; animation:dbpulse 1.5s ease-out infinite; }
@@ -1040,14 +1013,67 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-db-date{ font-size:16.5px; color:var(--ink); letter-spacing:.01em; }
     .fv-db-txt{ font-size:16.5px; color:#B71C1C; }
     @media (max-width:360px){ .fv-db-tag{ font-size:13px; } .fv-db-date,.fv-db-txt{ font-size:14.5px; } }
+    .fv-cta1{ text-align:center; background:#FFF7EC; border:2px dashed var(--gold); border-radius:14px; padding:15px 14px; margin:0 0 14px; }
+    .fv-cta1-badge{ display:inline-block; background:var(--gold-d); color:#fff; font-weight:900; font-size:12px; border-radius:999px; padding:3px 12px; margin-bottom:7px; }
+    .fv-cta1 p{ margin:0; font-size:18px; font-weight:900; color:var(--ink); line-height:1.5; }
+    .fv-cta1 b{ color:var(--coral-d); }
+    .wrap{ padding:0 10px; }
+    .fv-rate,.rate-ex{ padding-left:12px; padding-right:12px; }
+    .rk{ padding-left:12px; padding-right:12px; }
+    .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:12px; }
+    .fv-tbl th,.fv-tbl td{ padding:9px 4px; }
+    .fv-th-item,.fv-td-item{ white-space:normal; position:static; font-size:11px; }
+    .fv-tbl-wrap{ overflow-x:hidden; }
+    .fv-tbl-wrap::after{ display:none; }
+    .fv-td .mk.good,.mk.good{ color:#D81F1F; font-weight:900; }
+    .fv-td .mk.good{ font-size:22px; }
+    .camp2-cta{ font-size:clamp(17px,5vw,21px); }
+    .camp2-cta-lg{ font-size:clamp(18px,5.4vw,22px); margin-top:6px; }
+    .btn-phone{ font-size:clamp(15px,4.6vw,18px); }
+    .rk-1 .rk-reasons{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .rk-1 .rk-reasons li{ background:#F2FBF8; border:1px solid var(--line); border-radius:10px; padding:9px 10px; font-size:12px; line-height:1.45; }
+    .rk-1 .rk-reasons li::before{ display:none; }
+    @media (max-width:380px){ .rk-1 .rk-reasons{ grid-template-columns:1fr; } }
+    /* 口コミ：横スワイプ（縦スクロール不可） */
+    .rk-voice-list{ display:flex; flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; gap:12px; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
+    .rk-voice-list > *{ flex:0 0 86%; scroll-snap-align:center; }
+    .rk-voice-block::after{ content:"← スワイプで他の口コミ →"; display:block; text-align:center; font-size:11px; color:var(--sub); margin-top:6px; }
+    /* まねきや30%CTA：ポコポコ＋キラキラ（FVバナーと同じ動き） */
+    .camp-img{ position:relative; animation:pokopoko 1.15s ease-in-out infinite; }
+    .camp-img::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    /* ランキング1位スペック表（カード型） */
+    .rk-spec{ width:100%; table-layout:fixed; border-collapse:separate; border-spacing:0; margin:4px 0 12px; border:2px solid #C8102E; border-radius:6px; overflow:hidden; }
+    .rk-spec th{ background:#C8102E; color:#fff; font-weight:900; font-size:11.5px; text-align:center; padding:7px 3px; line-height:1.3; border-right:1px solid rgba(255,255,255,.45); border-bottom:1px solid #fff; }
+    .rk-spec .rs-head th:last-child{ border-right:none; }
+    .rk-spec td{ background:#fff; text-align:center; font-size:12px; font-weight:700; color:var(--ink); padding:11px 5px; line-height:1.45; vertical-align:middle; border-right:1px solid #F1CDD2; border-bottom:1px solid #F1CDD2; }
+    .rk-spec td:last-child{ border-right:none; }
+    .rk-spec .rs-val td{ border-bottom:none; }
+    .rk-spec .rs-ic{ display:block; font-size:24px; line-height:1; margin-bottom:7px; }
+    .rk-spec .rs-ic.ring{ color:#F2A20C; font-weight:900; font-size:26px; }
+    .rk-spec .rs-long{ font-size:11px; font-weight:700; color:var(--body); line-height:1.6; vertical-align:middle; border-left:1px solid #F1CDD2; }
+    .rk-spec .rs-camp{ display:inline-block; color:var(--ink); font-weight:900; font-size:12px; line-height:1.35; }
+    .rk-spec .rs-camp em{ font-style:normal; color:#D81F1F; font-size:16px; }
+    /* おすすめポイント（ゴールド） */
+    .rk-osusume{ border:2px solid var(--gold); border-radius:8px; overflow:hidden; margin:0 0 16px; }
+    .rk-osusume-h{ background:linear-gradient(135deg,#F4A81F,#D9962A); color:#fff; font-weight:900; font-size:14px; padding:9px 13px; text-shadow:0 1px 2px rgba(0,0,0,.18); }
+    .rk-osusume ul{ list-style:none; margin:0; padding:12px 14px; display:grid; gap:10px; background:#FFFDF6; }
+    .rk-osusume li{ font-size:13px; line-height:1.55; font-weight:700; color:var(--ink); display:flex; gap:7px; align-items:flex-start; }
+    .rk-osusume .chk{ color:#1AA251; font-weight:900; flex:0 0 auto; font-size:15px; }
+    .rk-osusume mark{ background:#FFF1A6; color:inherit; font-weight:900; padding:0 3px; border-radius:3px; }
+    /* 挿入画像 */
+    .rk-insert-img{ display:block; margin:0 0 18px; border-radius:14px; overflow:hidden; box-shadow:0 6px 18px rgba(20,60,50,.12); text-decoration:none; }
+    .rk-insert-img img{ width:100%; height:auto; display:block; }
+  
+    /* ===== LP2nd 追加修正 ===== */
     .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:12.5px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
     .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:12px; }
     .fv-tbl th,.fv-tbl td{ padding:9px 5px; }
     .fv-tbl-wrap{ overflow-x:hidden; }
-    .fv-tbl-wrap::after{ display:none; }
+    /* CTAを四角に統一 */
     .btn{ border-radius:10px; }
     .camp2-cta{ border-radius:12px; }
     .sticky a{ border-radius:10px; }
+    /* 比較表CTA行：はみ出し防止＆公式サイトを天地中央へ */
     .fv-tr-cta .btn{ display:flex; width:100%; max-width:160px; margin-left:auto; margin-right:auto; white-space:normal; min-height:38px; font-size:12px; padding:0 6px; line-height:1.2; border-radius:8px; }
     .fv-tr-cta .btn-phone{ font-size:12.5px; }
     .fv-tr-cta .btn i{ font-size:13px; }
@@ -1084,7 +1110,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         if(!url || url === "#"){ e.preventDefault(); return; }
         var tn = el.getAttribute("data-track") || "";
         var isPhone = tn.indexOf("phone")>=0;
-        var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp_pt", link_url:url, transport_type:"beacon" };
+        var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp2nd", link_url:url, transport_type:"beacon" };
         // 計測はbeaconでバックグラウンド送信し、遷移は止めない（即時にhrefへ）
         track(isPhone ? "phone_click" : "web_click", params);
         track("gold_kaitori_affiliate_click", params);
@@ -1098,7 +1124,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       new IntersectionObserver(function(es){ es.forEach(function(en){ sticky.hidden = en.isIntersecting; }); }, {threshold:0})
         .observe(fv);
     } else if(sticky){ sticky.hidden = false; }
-    track("lp_pt_open", { landing_intent:"lp_pt" });
+    track("lp2nd_open", { landing_intent:"lp2nd" });
     // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
     window.addEventListener("load", function(){
       var search = window.location.search;
