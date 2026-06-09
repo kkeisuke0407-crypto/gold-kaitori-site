@@ -93,6 +93,21 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <small>{rates.updatedAt}</small>
         </div>
 
+        <!-- 比較訴求コピー（kaitori-hikaku専用） -->
+        <div class="hikaku-appeal">
+          <p class="ha-lead">「最初のお店で売ってしまった…」<br /><em>そんな後悔をしないために。</em></p>
+          <p class="ha-body">買取価格はお店ごとに異なり、<br />同じ品物でも<strong class="ha-hi">50万円以上差</strong>がつくことがあります。</p>
+          <p class="ha-body">まずは<strong class="ha-num">2〜3社を比較</strong>して、<br /><em>一番高く買い取ってくれるお店</em>を選びましょう。</p>
+        </div>
+
+        <!-- ▼ 訴求画像：08_23_46.png をリポジトリに追加（hikaku-50man-sa.png 推奨）したら下のコメントを外して有効化 -->
+        <!--
+        <a href="#" class="hikaku-appeal-img" data-aff="manekiya" data-track="fv_hikaku_appeal" rel="nofollow sponsored">
+          <img src="/images/hikaku-50man-sa.png" alt="同じ品物でもお店ごとに50万円以上の差。まずは2〜3社を比較して一番高いお店を選ぼう" loading="lazy" decoding="async" />
+        </a>
+        -->
+        <!-- /訴求画像 -->
+
         <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ 買取おすすめ3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
@@ -637,6 +652,17 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-chip>span{ font-size:12px; font-weight:900; color:var(--green-d); width:100%; }
     .rate-chip b{ font-size:16px; }
     .rate-chip small{ width:100%; color:var(--sub); font-size:11px; }
+    /* 比較訴求コピー＋画像 */
+    .hikaku-appeal{ background:linear-gradient(180deg,#FFFDF6,#FFF7EC); border:2px solid var(--gold); border-radius:16px; padding:18px 16px; margin:14px 0 12px; box-shadow:0 8px 22px rgba(217,150,42,.16); text-align:center; }
+    .hikaku-appeal .ha-lead{ font-size:18px; font-weight:900; color:var(--ink); line-height:1.55; margin:0 0 13px; }
+    .hikaku-appeal .ha-lead em{ font-style:normal; color:var(--green-d); border-bottom:3px solid var(--gold); padding-bottom:1px; }
+    .hikaku-appeal .ha-body{ font-size:14.5px; font-weight:700; color:var(--body); line-height:1.75; margin:0 0 10px; }
+    .hikaku-appeal .ha-body:last-child{ margin-bottom:0; }
+    .hikaku-appeal .ha-hi{ display:inline-block; color:#D81F1F; font-weight:900; font-size:19px; background:linear-gradient(transparent 60%, #FFE08A 60%); padding:0 4px; }
+    .hikaku-appeal .ha-num{ color:var(--green-d); font-weight:900; background:linear-gradient(transparent 60%, #BFEFE6 60%); padding:0 3px; }
+    .hikaku-appeal .ha-body em{ font-style:normal; color:var(--ink); font-weight:900; }
+    .hikaku-appeal-img{ display:block; margin:0 0 14px; border-radius:14px; overflow:hidden; box-shadow:0 6px 18px rgba(20,60,50,.12); text-decoration:none; }
+    .hikaku-appeal-img img{ width:100%; height:auto; display:block; }
 
     /* FV 3社比較表 */
     .fv-tbl-head{ display:flex; align-items:center; gap:8px; margin:16px 0 6px; }
