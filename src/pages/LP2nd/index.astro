@@ -114,7 +114,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </div>
 
         <!-- 3社比較表 -->
-        <div class="fv-tbl-head"><span class="fv-tbl-ttl">プラチナ買取 3社比較</span><i class="pr">PR</i></div>
+        <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ プラチナ買取おすすめ3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
             <thead>
@@ -231,21 +231,22 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
           </a>
           <p class="rk-for">プラチナ指輪を、できるだけ高く・手取りを減らさず売りたい人に</p>
-          <ul class="rk-reasons">
-            <li>✅ <b>査定料・キャンセル料0円！</b></li>
-            <li>✅ <b>手数料0円</b>で圧倒的高価買取</li>
-            <li>✅ 日本全国買取OK／査定数<b>120万点突破！</b></li>
-            <li>✅ Google口コミ平均<b>4.8以上</b></li>
-            <li>✅ 電話のみ！買取金額<b>最大30%UP</b></li>
-            <li>✅ 売るのは査定金額を聞いてから、<b>電話相談だけでもOK</b></li>
-            <li>✅ <b>1,000万円以上</b>でもその場で現金支払い</li>
-            <li>✅ 他店で断られた金・貴金属も<b>買取可能</b></li>
-          </ul>
-          <div class="rk-meta">
-            <div><span>対応できる指輪</span><b>結婚指輪・刻印入り・片方だけ・コンビOK</b></div>
-            <div><span>買取方法</span><b>店頭・出張・宅配（料金0円）</b></div>
-            <div><span>キャンペーン</span><b>電話申込で買取額UPの対象になることも</b></div>
-          </div>
+          <table class="rk-spec">
+            <tbody>
+              <tr><th>買取価格</th><td>相場通り</td></tr>
+              <tr><th>買取エリア</th><td>全国20店舗以上</td></tr>
+              <tr><th>査定員の質</th><td>専門スタッフ</td></tr>
+              <tr><th>買取対象</th><td>ジュエリー、アクセサリー、仏像仏具、眼鏡、時計、食器、金歯、など</td></tr>
+              <tr><th>クーリングオフ</th><td>可能</td></tr>
+              <tr><th>査定料</th><td>無料</td></tr>
+              <tr><th>買取方法</th><td>出張・宅配・店頭</td></tr>
+              <tr><th>おススメ<br />ポイント</th><td>
+                <span class="rk-spec-pt"><b>［還元率］</b>買取手数料10%が無料。手残り額が最大化</span>
+                <span class="rk-spec-pt"><b>［技術力］</b>最新X線分析機を完備。刻印なしや金歯も特定</span>
+                <span class="rk-spec-pt"><b>［透明性］</b>業者価格を一般に開放。実質受取額がトップ級</span>
+              </td></tr>
+            </tbody>
+          </table>
           <a href="#" class="camp-img" data-aff="manekiya" data-track="rk_camp" rel="nofollow sponsored">
             <img src="/images/camp-30up.webp" alt="6/1〜6/30期間限定 まねきや お電話申込の方限定 買取金額最大30%UP 今すぐ電話で申し込む" width="1627" height="796" loading="lazy" />
           </a>
@@ -663,6 +664,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       .live-dot{ animation:none; }
       .fv-banner-link{ animation:none; }
       .fv-banner-link::after{ animation:none; display:none; }
+      .camp-img{ animation:none; }
+      .camp-img::after{ animation:none; display:none; }
       .fv-hero-wrap::after{ animation:none; display:none; }
       .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
     }
@@ -1016,9 +1019,19 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rk-1 .rk-reasons li{ background:#F2FBF8; border:1px solid var(--line); border-radius:10px; padding:9px 10px; font-size:12px; line-height:1.45; }
     .rk-1 .rk-reasons li::before{ display:none; }
     @media (max-width:380px){ .rk-1 .rk-reasons{ grid-template-columns:1fr; } }
-    .rk-voice-list{ display:flex; flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
-    .rk-voice-list > *{ flex:0 0 86%; scroll-snap-align:center; }
-    .rk-voice-block::after{ content:"← スワイプで他の口コミ →"; display:block; text-align:center; font-size:11px; color:var(--sub); margin-top:6px; }
+    .rk-voice-list{ display:grid; gap:12px; }
+    /* まねきや30%CTA：ポコポコ＋キラキラ（FVバナーと同じ動き） */
+    .camp-img{ position:relative; animation:pokopoko 1.15s ease-in-out infinite; }
+    .camp-img::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    /* ランキング1位スペック表 */
+    .rk-spec{ width:100%; border-collapse:separate; border-spacing:0; margin:4px 0 14px; font-size:13px; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    .rk-spec th,.rk-spec td{ border-bottom:1px solid var(--line); padding:9px 11px; text-align:left; vertical-align:top; }
+    .rk-spec tr:last-child th,.rk-spec tr:last-child td{ border-bottom:none; }
+    .rk-spec th{ width:33%; background:#F2FBF8; color:var(--ink); font-weight:900; line-height:1.4; }
+    .rk-spec td{ background:#fff; color:var(--body); font-weight:700; line-height:1.55; }
+    .rk-spec-pt{ display:block; }
+    .rk-spec-pt + .rk-spec-pt{ margin-top:5px; }
+    .rk-spec-pt b{ color:var(--green-d); }
   
     /* ===== LP2nd 追加修正 ===== */
     .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:12.5px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
