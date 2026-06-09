@@ -10,6 +10,7 @@ const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("j
 // キャンペーン残日数（まねきや 6/30まで）
 const campEnd = new Date('2026-06-30T23:59:59+09:00');
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
 const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
 
 const faqJsonLd = {
@@ -74,6 +75,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <a href="#" class="fv-hero-link" data-aff="manekiya" data-track="fv_hero" rel="nofollow sponsored"><img src="/images/fv-hero-pt2.webp" alt="結婚指輪は売れる？名前入り・刻印・片方だけでも査定対象｜高額買取おすすめTOP3｜まねきや・おたからや・ブラリバ" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" /></a>
         </h1>
 
+        <div class="fv-datebadge">
+          <span class="fv-db-tag"><i class="fv-db-dot"></i>最新版</span>
+          <span class="fv-db-date">{todayLabel}</span>
+          <span class="fv-db-txt">📍 全国買取強化中</span>
+        </div>
+
 
         <!-- 結論ボックス（結婚指輪向け） -->
         <div class="fv-conc">
@@ -115,7 +122,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 02 共感セクション -->
     <section class="sec sec-cream" id="empathy">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">😟 売る前の不安</span><h2>結婚指輪を売る前に、<br />こんな不安ありませんか？</h2></div>
+        <div class="sec-head"><h2>結婚指輪を売る前に、<br />こんな不安ありませんか？</h2></div>
         <ul class="fear-list">
           <li><b>名前が入っている</b></li>
           <li><b>イニシャルが入っている</b></li>
@@ -131,7 +138,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 03 回答セクション -->
     <section class="sec" id="answer">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">✅ 結論</span><h2>実は結婚指輪は<br />“査定対象になる”ことが多いです</h2></div>
+        <div class="sec-head"><h2>実は結婚指輪は<br />“査定対象になる”ことが多いです</h2></div>
         <div class="answer-box">
           <p class="answer-lead">結婚指輪は<b>デザイン</b>ではなく、<b>プラチナや金などの素材の価値</b>を中心に査定されます。</p>
           <p>そのため、次のような指輪でも査定対象になることがあります。</p>
@@ -153,7 +160,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 04 相場セクション（結婚指輪向け参考価格） -->
     <section class="sec sec-mint" id="rate">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">💎 相場</span><h2>本日のプラチナ買取相場</h2><p>結婚指輪はPt900が定番。重さ×単価がおおよその目安です。</p></div>
+        <div class="sec-head"><h2>本日のプラチナ買取相場</h2><p>結婚指輪はPt900が定番。重さ×単価がおおよその目安です。</p></div>
         <div class="rate-grid">
           <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
           <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
@@ -181,33 +188,32 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 05 比較表（ここで初めて3社） -->
     <section class="sec" id="ranking">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">🏆 比較</span><h2>結婚指輪 高額買取おすすめTOP3</h2><p>編集部がおすすめする3社を比較しました。</p></div>
-        <div class="fv-tbl-head"><span class="fv-tbl-ttl">結婚指輪 買取 3社比較</span><i class="pr">PR</i></div>
+        <div class="sec-head"><h2>結婚指輪 高額買取おすすめTOP3</h2><p>編集部がおすすめする3社を比較しました。</p></div>
+        <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ 結婚指輪買取おすすめ3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
             <thead>
               <tr>
-                <th class="fv-th-item"></th>
                 <th class="fv-th fv-th1 fv-th-gold"><span class="fv-rk-badge">👑 1位</span>まねきや<br /><a href="#" data-aff="manekiya" data-track="fv_tbl_bn_manekiya" rel="nofollow sponsored" style="display:block;"><img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
                 <th class="fv-th"><span class="fv-rk-badge2">🥈 2位</span>おたからや<br /><a href="#" data-aff="otakaraya" data-track="fv_tbl_bn_otakaraya" rel="nofollow sponsored" style="display:block;"><img src="/images/300_250-2.jpg" alt="おたからや" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
                 <th class="fv-th"><span class="fv-rk-badge3">🥉 3位</span>ブラリバ<br /><a href="#" data-aff="buraiba" data-track="fv_tbl_bn_buraiba" rel="nofollow sponsored" style="display:block;"><img src="/images/300_250-3.jpg" alt="ブラリバ" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
               </tr>
             </thead>
             <tbody>
+                            <tr class="cmp-band"><td colspan="3">買取価格</td></tr>
               <tr>
-                <td class="fv-td-item">買取価格</td>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span><b>高価買取に強み<br />（編集部評価）</b></td>
                 <td class="fv-td"><span class="mk ok">〇</span>高め</td>
                 <td class="fv-td"><span class="mk ok">〇</span>高め</td>
               </tr>
+                            <tr class="cmp-band"><td colspan="3">手数料</td></tr>
               <tr>
-                <td class="fv-td-item">手数料</td>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span><b>0円（完全無料）</b></td>
                 <td class="fv-td"><span class="mk ok">〇</span>0円</td>
                 <td class="fv-td"><span class="mk ok">〇</span>0円</td>
               </tr>
+                            <tr class="cmp-band"><td colspan="3">当サイト限定キャンペーン</td></tr>
               <tr class="fv-tr-camp">
-                <td class="fv-td-item">当サイト限定<br />キャンペーン</td>
                 <td class="fv-td fv-td1">
                   {campDays > 0 ? (
                     <>
@@ -221,20 +227,19 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td class="fv-td"><span class="mk ok">〇</span><b>買取価格<br />最大20%UP</b></td>
                 <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
               </tr>
+                            <tr class="cmp-band"><td colspan="3">結婚指輪対応</td></tr>
               <tr>
-                <td class="fv-td-item">結婚指輪<br />対応</td>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span>刻印・名前入り<br />片方だけもOK</td>
                 <td class="fv-td"><span class="mk good">◎</span>結婚指輪<br />対応</td>
                 <td class="fv-td"><span class="mk ok">〇</span>宝石付き中心</td>
               </tr>
+                            <tr class="cmp-band"><td colspan="3">査定方法</td></tr>
               <tr>
-                <td class="fv-td-item">査定方法</td>
                 <td class="fv-td fv-td1"><span class="mk good">◎</span>店舗・宅配<br />・出張</td>
                 <td class="fv-td"><span class="mk ok">〇</span>店舗・出張</td>
                 <td class="fv-td"><span class="mk good">◎</span>店舗・宅配<br />・出張</td>
               </tr>
               <tr class="fv-tr-cta">
-                <td class="fv-td-item">電話相談</td>
                 <td class="fv-td fv-td1">
                   <small class="cta-sub">＼査定だけでもOK／</small>
                   <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>30%UP条件を聞く</a>
@@ -258,7 +263,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 06 1位深掘り -->
     <section class="sec sec-mint" id="deep">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">👑 1位くわしく</span><h2>なぜ「まねきや」が1位なの？</h2></div>
+        <div class="sec-head"><h2>なぜ「まねきや」が1位なの？</h2></div>
         <div class="deep">
           <div class="deep-rings">
             <p class="deep-rings-ttl">💍 こんな結婚指輪も“対応できる指輪”です</p>
@@ -292,7 +297,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 07 口コミ（結婚指輪を売った人の声） -->
     <section class="sec sec-cream" id="voice">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">💬 口コミ</span><h2>結婚指輪を売った方の声</h2></div>
+        <div class="sec-head"><h2>結婚指輪を売った方の声</h2></div>
         <div class="rk-voice-list">
           <div class="voice voice-lg">
             <span class="stars">★★★★★</span>
@@ -319,7 +324,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
     <section class="sec" id="faq">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">❓ FAQ</span><h2>よくある質問</h2></div>
+        <div class="sec-head"><h2>よくある質問</h2></div>
         <div class="faq">
           <details open><summary>結婚指輪を売るのは問題ないですか？</summary><p>まったく問題ありません。買い替えやライフステージの変化、整理のために結婚指輪を手放す方はとても多くいます。まずは金額を知るだけでも大丈夫です。</p></details>
           <details><summary>離婚した指輪を売る人は多いですか？</summary><p>多いです。気持ちの区切りとして査定に出す方は珍しくありません。名前入り・片方だけでも査定対象になります。</p></details>
@@ -335,7 +340,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 12 売るのをためらう方へ（心理：最後の一押し） -->
     <section class="sec" id="push">
       <div class="wrap">
-        <div class="sec-head"><span class="chip">💍 最後に</span><h2>「指輪を手放すこと」に<br />迷っている方へ</h2></div>
+        <div class="sec-head"><h2>「指輪を手放すこと」に<br />迷っている方へ</h2></div>
         <p class="push-lead">結婚指輪を売ることは、<b>思い出を手放すこと</b>ではありません。<b>気持ちの区切りをつけて、次の一歩へ進むための前向きな選択</b>です。</p>
         <ul class="push-trio">
           <li>結婚指輪を売ることは、珍しいことではありません</li>
@@ -858,6 +863,28 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .note{ font-size:12px; }
     .rate-updated{ font-size:12px; }
       .fv-hero-link{ display:block; font-size:0; }
+  
+    /* ===== 共通改善（チップ撤去/CTA四角/縦帯比較表/日付バッジ） ===== */
+    .fv-datebadge{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; width:100%; margin:0 auto 14px; padding:9px 14px; background:#fff; border:1px solid #F0DBB0; border-radius:12px; box-shadow:0 4px 14px rgba(183,28,28,.13); font-weight:900; }
+    .fv-db-tag{ display:inline-flex; align-items:center; gap:6px; background:linear-gradient(180deg,#E0322C,#B71C1C); color:#fff; font-size:15px; padding:7px 14px; border-radius:999px; letter-spacing:.04em; }
+    .fv-db-dot{ width:9px; height:9px; border-radius:50%; background:#fff; animation:dbpulse 1.5s ease-out infinite; }
+    @keyframes dbpulse{ 0%{box-shadow:0 0 0 0 rgba(255,255,255,.85)} 70%{box-shadow:0 0 0 7px rgba(255,255,255,0)} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0)} }
+    .fv-db-date{ font-size:16.5px; color:var(--ink); letter-spacing:.01em; }
+    .fv-db-txt{ font-size:16.5px; color:#B71C1C; }
+    @media (max-width:360px){ .fv-db-tag{ font-size:13px; } .fv-db-date,.fv-db-txt{ font-size:14.5px; } }
+    .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:12.5px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
+    .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:12px; }
+    .fv-tbl th,.fv-tbl td{ padding:9px 5px; }
+    .fv-tbl-wrap{ overflow-x:hidden; }
+    .fv-tbl-wrap::after{ display:none; }
+    .btn{ border-radius:10px; }
+    .camp2-cta{ border-radius:12px; }
+    .sticky a{ border-radius:10px; }
+    .fv-tr-cta .btn{ display:flex; width:100%; max-width:160px; margin-left:auto; margin-right:auto; white-space:normal; min-height:38px; font-size:12px; padding:0 6px; line-height:1.2; border-radius:8px; }
+    .fv-tr-cta .btn-phone{ font-size:12.5px; }
+    .fv-tr-cta .btn i{ font-size:13px; }
+    .fv-tr-cta .fv-td{ vertical-align:middle; text-align:center; }
+    .fv-tr-cta .fv-td1{ vertical-align:top; }
   </style>
 
   <script>
