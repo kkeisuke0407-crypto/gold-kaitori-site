@@ -57,7 +57,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" /></noscript>
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
@@ -991,6 +992,42 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     @media (min-width:600px){
       .voice-grid,.worry-grid{ grid-template-columns:1fr 1fr; }
     }
+  
+    /* ===== ブラッシュアップ（構成不変・視覚/CWVのみ） ===== */
+    /* ① 電話CTAに光が流れる */
+    .btn-phone{ position:relative; overflow:hidden; }
+    .btn-phone::after{ content:""; position:absolute; top:-30%; left:-65%; width:35%; height:160%;
+      background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+      transform:skewX(-18deg); pointer-events:none; animation:bbCtaShine 3.2s ease-in-out infinite; }
+    @keyframes bbCtaShine{ 0%{ left:-65%; } 60%,100%{ left:145%; } }
+    /* ② trust-strip 可読性UP */
+    .trust-strip span{ font-size:11px; line-height:1.3; }
+    /* ③ 比較表 横スクロール示唆（モバイル） */
+    .fv-tbl-wrap{ position:relative; }
+    @media (max-width:600px){
+      .fv-tbl-wrap::after{ content:"→"; position:absolute; top:6px; right:6px; z-index:2;
+        font-weight:900; font-size:12px; color:var(--green-d); background:rgba(255,255,255,.92);
+        border:1px solid var(--line); border-radius:999px; padding:1px 7px;
+        animation:bbScrollHint 1.4s ease-in-out infinite; }
+    }
+    @keyframes bbScrollHint{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
+    /* ⑤ スティッキー：微脈動＋iPhoneセーフエリア */
+    .sticky{ padding-bottom:calc(8px + env(safe-area-inset-bottom)); }
+    .sticky-phone{ animation:bbStickyPulse 1.9s ease-in-out infinite; }
+    @keyframes bbStickyPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.03); } }
+    /* ⑦ 安心訴求（既存文言）をやわらかく強調 */
+    .cta-note{ background:#F2FBF8; border-radius:10px; padding:8px 10px; }
+    /* ⑧ ランキングカード ホバー浮上＋1位の影強調 */
+    .rk{ transition:transform .18s ease, box-shadow .18s ease; }
+    .rk:hover{ transform:translateY(-4px); }
+    .rk-1{ box-shadow:0 16px 36px rgba(217,150,42,.22); }
+    /* ⑨ 薄色テキストのコントラスト改善（AA寄せ） */
+    :root{ --sub:#6E7B85; }
+    /* ⑩ CLS保険：画像は縦横比維持 */
+    .fv-hero-img,.point-img img,.camp-img img,.rk-zisseki,.fuan-img,.fv-banner-link img{ height:auto; }
+    @media (prefers-reduced-motion:reduce){
+      .btn-phone::after,.sticky-phone,.fv-tbl-wrap::after{ animation:none; }
+    }
   </style>
 
   <script>
@@ -1063,6 +1100,22 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
       }, { threshold: 0.07 });
       els.forEach(function(el){ io.observe(el); });
+    })();
+  </script>
+  <script is:inline>
+    (function(){
+      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if(!('IntersectionObserver' in window)) return;
+      function animate(el){
+        var raw=(el.textContent||'').replace(/[^\d]/g,''); if(!raw) return;
+        var end=+raw, suffix=(el.textContent||'').replace(/[\d,]/g,''), t0=null;
+        function step(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/700);
+          el.textContent=Math.round(end*p).toLocaleString('ja-JP')+suffix;
+          if(p<1){ requestAnimationFrame(step); } else { el.textContent=end.toLocaleString('ja-JP')+suffix; } }
+        requestAnimationFrame(step);
+      }
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); } }); },{threshold:0.35});
+      document.querySelectorAll('.rate-grid b').forEach(function(el){ io.observe(el); });
     })();
   </script>
 </body>
