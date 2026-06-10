@@ -193,7 +193,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <div class="sec-head"><h2>金・プラチナを売る前に確認したい比較ポイント</h2><p>金（K24・K18）もプラチナ（Pt1000・Pt900）も、純度（刻印）によって1gあたりの金額が変わります。</p></div>
         <div class="rate-grid">
-          <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small><span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span></div>
+          <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small>{rates.goldDiff !== 0 && (<span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span>)}</div>
           <div><span>K22</span><b>{yen(rates.k22)}</b><small>/g</small></div>
           <div><span>K18</span><b>{yen(rates.k18)}</b><small>/g</small></div>
           <div><span>K14</span><b>{yen(rates.k14)}</b><small>/g</small></div>

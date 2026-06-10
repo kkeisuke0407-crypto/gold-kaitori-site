@@ -162,7 +162,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <div class="sec-head"><h2>本日のプラチナ地金（インゴット）買取相場</h2><p>結婚指輪はPt900が定番。重さ×単価がおおよその目安です。</p></div>
         <div class="rate-grid">
-          <div class="rate-hot"><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small><span class={"rate-diff " + (rates.ptDiff>=0?"up":"down")}>前日比 {rates.ptDiff>=0?"+":"−"}{Math.abs(rates.ptDiff).toLocaleString("ja-JP")}円</span></div>
+          <div class="rate-hot"><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small>{rates.ptDiff !== 0 && (<span class={"rate-diff " + (rates.ptDiff>=0?"up":"down")}>前日比 {rates.ptDiff>=0?"+":"−"}{Math.abs(rates.ptDiff).toLocaleString("ja-JP")}円</span>)}</div>
           <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
           <div><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
           <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
