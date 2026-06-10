@@ -49,22 +49,26 @@ async function fetchText(url) {
   return text;
 }
 
-// テキスト中の「○,○○○」形式の金額を全部拾う（4〜6桁・カンマ区切り）。
-function pricesInRange(text, [lo, hi]) {
-  const out = [];
-  for (const m of text.matchAll(/(\d{1,2},\d{3})(?!\d)/g)) {
-    const n = Number(m[1].replace(/,/g, ""));
-    if (n >= lo && n <= hi) out.push(n);
-  }
-  return out;
-}
+const toNum = (s) => Number(String(s).replace(/[^\d]/g, ""));
+const inRange = (n, [lo, hi]) => n >= lo && n <= hi;
 
-// 金額レンジで金・プラチナを切り分け、各クラスタの最小値=買取価格(買取<小売)とみなす。
+// 完全なカンマ区切り数値だけを拾う正規表現（左右に数字やカンマが続かない）。
+// これにより「717,822」「405,943」等のコイン/バー価格が「17,822」「5,943」へ断片化されるのを防ぐ。
+const FULL_NUM = /(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d.,])/g;
+
+// 金・プラチナの「買取価格」を抽出する。
+//  優先：田中式の「買取価格前日比）〔値〕」ラベル直後（コイン/バー価格に汚染されない）。
+//  予備：『買取』直後に現れる完全数値（三菱など他ソース向け）。
+// いずれも妥当性レンジで金/プラチナを振り分け、レンジ内の最大値（＝最高純度の買取単価）を採用。
 function extractBuyPrices(text) {
-  const golds = pricesInRange(text, GOLD_RANGE);
-  const pts = pricesInRange(text, PT_RANGE);
-  const gold = golds.length ? Math.min(...golds) : null;
-  const pt1000 = pts.length ? Math.min(...pts) : null;
+  let buys = [...text.matchAll(/買取価格前日比[）)]?\s*([\d,]{4,})/g)].map((m) => toNum(m[1]));
+  if (buys.length < 2) {
+    buys = [...text.matchAll(new RegExp("買取[^0-9]{0,10}(" + FULL_NUM.source + ")", "g"))].map((m) => toNum(m[1]));
+  }
+  const golds = buys.filter((n) => inRange(n, GOLD_RANGE));
+  const pts = buys.filter((n) => inRange(n, PT_RANGE));
+  const gold = golds.length ? Math.max(...golds) : null;
+  const pt1000 = pts.length ? Math.max(...pts) : null;
   return { gold, pt1000, _golds: golds, _pts: pts };
 }
 
