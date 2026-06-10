@@ -23,6 +23,8 @@ const UA =
 const GOLD_RANGE = [14001, 80000];
 const PT_RANGE = [2000, 14000];
 
+const DEBUG = process.env.DEBUG_RATES === "1";
+
 async function fetchText(url) {
   const res = await fetch(url, {
     headers: {
@@ -32,6 +34,7 @@ async function fetchText(url) {
     },
     signal: AbortSignal.timeout(20000),
   });
+  if (DEBUG) console.log(`[debug] GET ${url} → status=${res.status}`);
   if (!res.ok) throw new Error(`status=${res.status}`);
   const html = await res.text();
   const text = html
@@ -69,6 +72,13 @@ async function fromSource(name, urls) {
     const texts = [];
     for (const u of urls) texts.push(await fetchText(u));
     const joined = texts.join(" ");
+    if (DEBUG) {
+      console.log(`\n[debug] ===== ${name} stripped text (先頭2500字) =====\n${joined.slice(0, 2500)}\n[debug] ===== ここまで =====`);
+      // 金/プラチナ/パラジウム/銀 などラベル周辺の金額を文脈付きで全部出す
+      for (const m of joined.matchAll(/(.{14})(\d{1,3}(?:,\d{3})+)(.{6})/g)) {
+        console.log(`[debug] price: …${m[1]}〔${m[2]}〕${m[3]}…`);
+      }
+    }
     const { gold, pt1000, _golds, _pts } = extractBuyPrices(joined);
     console.log(`[update-rates] ${name}: gold候補=${JSON.stringify(_golds.slice(0, 6))} pt候補=${JSON.stringify(_pts.slice(0, 6))}`);
     if (gold == null || pt1000 == null) {
@@ -92,6 +102,15 @@ function jstDateString(d = new Date()) {
 }
 
 async function main() {
+  if (DEBUG) {
+    console.log("[debug] DEBUG_RATES=1：田中・三菱の両方をダンプします（書き込みなし）");
+    await fromSource("田中貴金属(souba)", ["https://gold.tanaka.co.jp/commodity/souba/"]);
+    await fromSource("田中貴金属(top)", ["https://gold.tanaka.co.jp/"]);
+    await fromSource("三菱マテリアル(gold)", ["https://gold.mmc.co.jp/market/gold-price/"]);
+    await fromSource("三菱マテリアル(pt)", ["https://gold.mmc.co.jp/market/platinum-price/"]);
+    return;
+  }
+
   let prev = {};
   try {
     prev = JSON.parse(readFileSync(DATA_PATH, "utf-8"));

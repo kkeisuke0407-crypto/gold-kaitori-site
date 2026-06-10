@@ -1,0 +1,22 @@
+name: Debug rates fetch
+
+# 手動実行専用。取得元(田中貴金属/三菱マテリアル)の生テキストと価格候補をログに出すだけ。
+# デプロイもコミットもしない。パーサ調整の調査用。
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Dump rates sources
+        env:
+          DEBUG_RATES: "1"
+        run: node scripts/update-rates.mjs
