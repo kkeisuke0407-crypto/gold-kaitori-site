@@ -121,6 +121,10 @@ async function main() {
   if (prevDay.date !== iso) {
     goldDiff = gold - prevDay.gold;
     ptDiff = pt1000 - prevDay.pt1000;
+    // 1日であり得ない大きさの差（前回シード/取得元切替などの段差）は前日比として採用しない。
+    // 日次変動は通常数%以内。閾値(12%)超えは段差とみなし0扱いにして誤報を防ぐ。
+    if (Math.abs(goldDiff) > gold * 0.12) goldDiff = 0;
+    if (Math.abs(ptDiff) > pt1000 * 0.12) ptDiff = 0;
     prevDay = { date: iso, gold, pt1000 };
   }
 
