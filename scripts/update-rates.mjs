@@ -24,7 +24,6 @@ const GOLD_RANGE = [14001, 80000];
 const PT_RANGE = [2000, 14000];
 
 const DEBUG = process.env.DEBUG_RATES === "1";
-let lastDebug = null;
 
 async function fetchText(url) {
   const res = await fetch(url, {
@@ -49,22 +48,26 @@ async function fetchText(url) {
   return text;
 }
 
-// テキスト中の「○,○○○」形式の金額を全部拾う（4〜6桁・カンマ区切り）。
-function pricesInRange(text, [lo, hi]) {
-  const out = [];
-  for (const m of text.matchAll(/(\d{1,2},\d{3})(?!\d)/g)) {
-    const n = Number(m[1].replace(/,/g, ""));
-    if (n >= lo && n <= hi) out.push(n);
-  }
-  return out;
-}
+const toNum = (s) => Number(String(s).replace(/[^\d]/g, ""));
+const inRange = (n, [lo, hi]) => n >= lo && n <= hi;
 
-// 金額レンジで金・プラチナを切り分け、各クラスタの最小値=買取価格(買取<小売)とみなす。
+// 完全なカンマ区切り数値だけを拾う正規表現（左右に数字やカンマが続かない）。
+// これにより「717,822」「405,943」等のコイン/バー価格が「17,822」「5,943」へ断片化されるのを防ぐ。
+const FULL_NUM = /(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d.,])/g;
+
+// 金・プラチナの「買取価格」を抽出する。
+//  優先：田中式の「買取価格前日比）〔値〕」ラベル直後（コイン/バー価格に汚染されない）。
+//  予備：『買取』直後に現れる完全数値（三菱など他ソース向け）。
+// いずれも妥当性レンジで金/プラチナを振り分け、レンジ内の最大値（＝最高純度の買取単価）を採用。
 function extractBuyPrices(text) {
-  const golds = pricesInRange(text, GOLD_RANGE);
-  const pts = pricesInRange(text, PT_RANGE);
-  const gold = golds.length ? Math.min(...golds) : null;
-  const pt1000 = pts.length ? Math.min(...pts) : null;
+  let buys = [...text.matchAll(/買取価格前日比[）)]?\s*([\d,]{4,})/g)].map((m) => toNum(m[1]));
+  if (buys.length < 2) {
+    buys = [...text.matchAll(new RegExp("買取[^0-9]{0,10}(" + FULL_NUM.source + ")", "g"))].map((m) => toNum(m[1]));
+  }
+  const golds = buys.filter((n) => inRange(n, GOLD_RANGE));
+  const pts = buys.filter((n) => inRange(n, PT_RANGE));
+  const gold = golds.length ? Math.max(...golds) : null;
+  const pt1000 = pts.length ? Math.max(...pts) : null;
   return { gold, pt1000, _golds: golds, _pts: pts };
 }
 
@@ -82,14 +85,6 @@ async function fromSource(name, urls) {
     }
     const { gold, pt1000, _golds, _pts } = extractBuyPrices(joined);
     console.log(`[update-rates] ${name}: gold候補=${JSON.stringify(_golds.slice(0, 6))} pt候補=${JSON.stringify(_pts.slice(0, 6))}`);
-    // 調査用：採用ソースの候補・抜粋を main() で rates.json に一時埋め込みできるよう保持
-    lastDebug = {
-      source: name,
-      golds: _golds,
-      pts: _pts,
-      // 「金/プラチナ/パラジウム/銀」付近の金額を文脈付きで抜粋
-      context: [...joined.matchAll(/(.{10})(\d{1,3}(?:,\d{3})+)\s*円?(.{4})/g)].slice(0, 40).map((m) => `${m[1]}〔${m[2]}〕${m[3]}`),
-    };
     if (gold == null || pt1000 == null) {
       throw new Error(`値が取れない gold=${gold} pt1000=${pt1000}`);
     }
@@ -170,7 +165,6 @@ async function main() {
     pt850: Math.round(pt1000 * 0.85),
     ptDiff,
     prevDay,
-    _debug: lastDebug, // 調査用（確認後に削除する）
   };
 
   writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
