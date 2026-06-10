@@ -24,7 +24,6 @@ const GOLD_RANGE = [14001, 80000];
 const PT_RANGE = [2000, 14000];
 
 const DEBUG = process.env.DEBUG_RATES === "1";
-let lastDebug = null;
 
 async function fetchText(url) {
   const res = await fetch(url, {
@@ -86,14 +85,6 @@ async function fromSource(name, urls) {
     }
     const { gold, pt1000, _golds, _pts } = extractBuyPrices(joined);
     console.log(`[update-rates] ${name}: gold候補=${JSON.stringify(_golds.slice(0, 6))} pt候補=${JSON.stringify(_pts.slice(0, 6))}`);
-    // 調査用：採用ソースの候補・抜粋を main() で rates.json に一時埋め込みできるよう保持
-    lastDebug = {
-      source: name,
-      golds: _golds,
-      pts: _pts,
-      // 「金/プラチナ/パラジウム/銀」付近の金額を文脈付きで抜粋
-      context: [...joined.matchAll(/(.{10})(\d{1,3}(?:,\d{3})+)\s*円?(.{4})/g)].slice(0, 40).map((m) => `${m[1]}〔${m[2]}〕${m[3]}`),
-    };
     if (gold == null || pt1000 == null) {
       throw new Error(`値が取れない gold=${gold} pt1000=${pt1000}`);
     }
@@ -174,7 +165,6 @@ async function main() {
     pt850: Math.round(pt1000 * 0.85),
     ptDiff,
     prevDay,
-    _debug: lastDebug, // 調査用（確認後に削除する）
   };
 
   writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
