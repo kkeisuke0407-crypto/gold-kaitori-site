@@ -6,14 +6,14 @@ on:
   workflow_dispatch:
   schedule:
     # 金・プラチナ相場を毎日最新化するための再ビルド。
-    # まねきやは午前中に当日相場へ更新されるため、朝イチ(7時台)だと前日値を拾う。
-    # そこで「まねきや更新後」の時間帯に複数回実行する（GitHubのcronは遅延・スキップがあるため冗長化）。
-    - cron: "30 1 * * *"   # 10:30 JST（まねきや更新後・メインの更新）
+    # 取得元は 田中貴金属（主）→ 三菱マテリアル（副）。両社とも営業日の午前に当日価格へ更新される。
+    # GitHubのcronは遅延・スキップがあるため、時間帯を分けて冗長化する。
+    - cron: "30 1 * * *"   # 10:30 JST（メインの更新）
     - cron: "30 6 * * *"   # 15:30 JST（昼の取りこぼし対策）
     - cron: "30 10 * * *"  # 19:30 JST（夕方の保険）
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -34,8 +34,23 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Update rates (田中貴金属 → 三菱マテリアル → 前回成功データ維持)
+        run: npm run update-rates
+        continue-on-error: true
       - name: Build
         run: npm run build
+      - name: Persist rates.json (last-good を保存し凍結を防止)
+        if: github.ref == 'refs/heads/main'
+        run: |
+          if ! git diff --quiet -- src/data/rates.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add src/data/rates.json
+            git commit -m "chore(rates): 相場データ自動更新 [skip ci]"
+            git push
+          else
+            echo "rates.json に変更なし"
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
