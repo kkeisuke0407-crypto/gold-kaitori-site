@@ -160,14 +160,15 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 04 相場セクション（結婚指輪向け参考価格） -->
     <section class="sec sec-mint" id="rate">
       <div class="wrap">
-        <div class="sec-head"><h2>本日のプラチナ買取相場</h2><p>結婚指輪はPt900が定番。重さ×単価がおおよその目安です。</p></div>
+        <div class="sec-head"><h2>本日のプラチナ地金（インゴット）買取相場</h2><p>結婚指輪はPt900が定番。重さ×単価がおおよその目安です。</p></div>
         <div class="rate-grid">
           <div><span>Pt1000</span><b>{yen(rates.pt1000)}</b><small>/g</small></div>
           <div><span>Pt950</span><b>{yen(rates.pt950)}</b><small>/g</small></div>
-          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small></div>
+          <div class="rate-hot"><span>Pt900</span><b>{yen(rates.pt900)}</b><small>/g</small><span class={"rate-diff " + (rates.ptDiff>=0?"up":"down")}>前日比 {rates.ptDiff>=0?"+":"−"}{Math.abs(rates.ptDiff).toLocaleString("ja-JP")}円</span></div>
           <div><span>Pt850</span><b>{yen(rates.pt850)}</b><small>/g</small></div>
         </div>
         <p class="rate-updated">{rates.updatedAt} ／ 📈 歴史的な高値圏</p>
+        <p class="rate-note-ingot">※上記は地金（インゴット）1gあたりの素材価格です。ネックレス・指輪などの製品は、石・留め具・加工・ブランドにより買取価格が変わります。</p>
 
         <div class="rate-ex">
           <h3>結婚指輪の参考買取額（Pt900の場合）</h3>
@@ -217,7 +218,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td class="fv-td fv-td1">
                   {campDays > 0 ? (
                     <>
-                      <span class="camp-badge">手数料10%無料</span><br />
+                      <span class="camp-badge">査定・出張・キャンセル料0円</span><br />
                       <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
                     </>
                   ) : (
@@ -620,6 +621,10 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-grid span{ display:block; font-size:13px; color:var(--sub); font-weight:700; }
     .rate-grid b{ font-size:22px; color:var(--ink); }
     .rate-grid small{ color:var(--sub); font-size:12px; }
+    .rate-grid .rate-diff{ display:inline-block; margin-top:5px; font-size:11px; font-weight:900; padding:1px 8px; border-radius:999px; line-height:1.6; }
+    .rate-diff.up{ background:#FDE7E7; color:#C0271F; }
+    .rate-diff.down{ background:#E7EEFD; color:#2A5BD7; }
+    .rate-note-ingot{ font-size:11px; color:var(--sub); line-height:1.6; margin:8px 0 0; }
     .rate-hot{ border-color:var(--green) !important; background:#F2FBF8 !important; }
     .rate-hot b{ color:var(--green-d); }
     .rate-updated{ text-align:center; font-size:11px; color:var(--sub); margin:10px 0 0; }
