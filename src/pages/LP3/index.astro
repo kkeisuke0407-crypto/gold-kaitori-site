@@ -188,7 +188,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <div><span>K18</span><b>{yen(rates.k18)}</b><small>/g</small></div>
           <div><span>K14</span><b>{yen(rates.k14)}</b><small>/g</small></div>
         </div>
-        <p class="rate-updated">{rates.updatedAt}・出典：まねきや本日相場</p>
+        <p class="rate-updated">{rates.updatedAt}</p>
 
         <div class="rate-ex">
           <h3>品目別・参考買取額（K18の場合）</h3>
@@ -580,16 +580,16 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .camp2-cta{
       display:flex; align-items:center; justify-content:center; gap:8px;
       width:92%; margin:10px auto 0; padding:14px 0; border-radius:999px;
-      background:linear-gradient(180deg,#FFD24D,#F2A100); color:#7a2a00;
+      background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff;
       font-size:clamp(16px,4.6vw,20px); font-weight:900; text-decoration:none;
-      box-shadow:0 8px 0 #C97E00, 0 12px 18px rgba(201,126,0,.35);
-      border:2px solid #fff3cf; animation:pokopoko 1.1s ease-in-out infinite;
+      box-shadow:0 8px 0 #B0160F, 0 12px 18px rgba(224,31,31,.35);
+      border:2px solid #ffd9d4; animation:pokopoko 1.1s ease-in-out infinite;
     }
     .camp2-cta i{
       font-style:normal; display:inline-flex; align-items:center; justify-content:center;
-      width:30px; height:30px; border-radius:50%; background:#E0322C; color:#fff; font-size:16px;
+      width:30px; height:30px; border-radius:50%; background:#fff; color:#E0322C; font-size:16px;
     }
-    .camp2-cta:active{ transform:translateY(4px); box-shadow:0 4px 0 #C97E00, 0 6px 10px rgba(201,126,0,.3); }
+    .camp2-cta:active{ transform:translateY(4px); box-shadow:0 4px 0 #B0160F, 0 6px 10px rgba(224,31,31,.3); }
     @keyframes pokopoko{
       0%,100%{ transform:scale(1); }
       50%{ transform:scale(1.06); }
@@ -808,11 +808,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .sticky a{ text-decoration:none; font-weight:900; border-radius:999px; min-height:50px; display:flex; align-items:center; justify-content:center; gap:6px; font-size:14px; }
     .sticky i{ font-style:normal; }
     .sticky-phone{
-      background:linear-gradient(180deg,#FFD24D,#F2A100); color:#7a2a00;
-      box-shadow:0 5px 0 #C97E00, 0 8px 14px rgba(201,126,0,.3);
-      border:2px solid #fff3cf; animation:pokopoko 1.1s ease-in-out infinite;
+      background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff;
+      box-shadow:0 5px 0 #B0160F, 0 8px 14px rgba(224,31,31,.3);
+      border:2px solid #ffd9d4; animation:pokopoko 1.1s ease-in-out infinite;
     }
-    .sticky-phone i{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#E0322C; color:#fff; font-size:14px; }
+    .sticky-phone i{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#fff; color:#E0322C; font-size:14px; }
     .sticky-web{ background:var(--green-d); color:#fff; }
 
     @media (min-width:600px){
