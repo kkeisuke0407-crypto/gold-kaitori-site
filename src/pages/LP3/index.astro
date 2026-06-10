@@ -121,7 +121,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td class="fv-td fv-td1">
                   {campDays > 0 ? (
                     <>
-                      <span class="camp-badge">手数料10%無料</span><br />
+                      <span class="camp-badge">査定・出張・キャンセル料0円</span><br />
                       <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
                     </>
                   ) : (
@@ -183,7 +183,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <div class="sec-head"><h2>本日の金買取相場</h2><p>純度（K24・K18など刻印）によって1gあたりの金額が変わります。</p></div>
         <div class="rate-grid">
-          <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small></div>
+          <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small><span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span></div>
           <div><span>K22</span><b>{yen(rates.k22)}</b><small>/g</small></div>
           <div><span>K18</span><b>{yen(rates.k18)}</b><small>/g</small></div>
           <div><span>K14</span><b>{yen(rates.k14)}</b><small>/g</small></div>
@@ -249,7 +249,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <div class="rk-osusume">
             <div class="rk-osusume-h">💡 おすすめポイント</div>
             <ul>
-              <li><span class="chk">✓</span><span><mark>手数料10%無料</mark>で高額査定の確率UP</span></li>
+              <li><span class="chk">✓</span><span><mark>査定料・出張料・キャンセル料が0円</mark></span></li>
               <li><span class="chk">✓</span><span>電話申し込みで<mark>最大30%買取額UP</mark></span></li>
               <li><span class="chk">✓</span><span><mark>1,000万円以上</mark>でもその場で現金支払い</span></li>
               <li><span class="chk">✓</span><span>他店で断られた金・貴金属も<mark>買取可能</mark></span></li>
@@ -265,7 +265,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <!-- まねきや口コミ -->
         <!-- まねきや 金買取実績 -->
         <img class="rk-zisseki" src="/images/kin_zisseki.webp" alt="まねきやの金・貴金属 買取実績" width="1024" height="1536" loading="lazy" decoding="async" />
-        <p class="note rk-zisseki-note">※まねきや公式サイト掲載の買取実績の一例です。買取金額は品物の状態・重量・純度・その日の相場によって変わります。</p>
+        <div class="rk-zisseki-notes">
+          <p>※記載の金額は、当時の買取価格を現在の金相場の上昇率に応じて再計算した参考価格です。</p>
+          <p>※実際の買取価格は、お品物の状態や日々の相場変動により大きく異なります。正確な金額については「まねきや」に直接ご確認ください。</p>
+          <p>※掲載している金額はあくまで参考であり、実際の買取金額を保証するものではございません。</p>
+        </div>
 
         <div class="rk-voice-block">
           <div class="rk-voice-ttl">まねきやを利用したお客様の声</div>
@@ -305,18 +309,14 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </a>
           <p class="rk-for">大手のお店に、直接持っていって相談したい人に</p>
           <ul class="rk-reasons">
-            <li>世界<b>1,800店舗以上</b>・買取専門26年の大手で安心</li>
+            <li>世界<b>1,820店舗</b>・買取専門26年の大手で安心</li>
             <li>大手なので高めの金額が出ることも</li>
             <li>査定料・手数料・出張料が0円</li>
           </ul>
           <div class="rk-meta">
             <div><span>対応品目</span><b>金・貴金属・金貨・宝石付きもOK</b></div>
             <div><span>買取方法</span><b>店頭・出張</b></div>
-            <div><span>キャンペーン</span><b>期間限定キャンペーンあり</b></div>
-          </div>
-          <div class="rk-reviews">
-            <p>💬「近所に店舗があって、その場で現金にしてもらえました」<small>60代・女性</small></p>
-            <p>💬「古いネックレスや金貨も問題なく買い取ってもらえました」<small>30代・女性</small></p>
+            <div><span>キャンペーン</span><b>最大20%UP（上限10万円・対象外店舗あり／〜6/15）</b></div>
           </div>
           <a href="#" class="btn btn-ghost full" data-aff="otakaraya" data-track="rk_otakaraya" rel="nofollow sponsored">おたからやで無料査定する</a>
         </article>
@@ -338,10 +338,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <div><span>対応品目</span><b>金・宝石付き・ブランドジュエリー</b></div>
             <div><span>買取方法</span><b>店頭・出張・宅配</b></div>
             <div><span>キャンペーン</span><b>公式ページでご確認ください</b></div>
-          </div>
-          <div class="rk-reviews">
-            <p>💬「石が取れたK18の指輪も、問題なく買い取ってくれました」<small>40代・女性</small></p>
-            <p>💬「宅配キットに入れて送るだけで楽でした」<small>30代・女性</small></p>
           </div>
           <a href="#" class="btn btn-ghost full" data-aff="buraiba" data-track="rk_buraiba" rel="nofollow sponsored">ブラリバで無料査定する</a>
         </article>
@@ -457,7 +453,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <img src="/images/fv-camp30.webp" alt="まねきや お電話申込の方限定 買取金額最大30%UP・買取手数料完全無料 今すぐ無料査定" width="1536" height="1024" loading="lazy" decoding="async" />
         </a>
         <div class="cta-pair">
-          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="final_phone" rel="nofollow sponsored"><i>☎</i>電話で無料査定</a>
           <a href="#" class="btn btn-web" data-aff="manekiya" data-track="final_web" rel="nofollow sponsored">ネットで無料査定（最短30秒）</a>
         </div>
         <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
@@ -690,6 +685,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-grid span{ display:block; font-size:13px; color:var(--sub); font-weight:700; }
     .rate-grid b{ font-size:22px; color:var(--ink); }
     .rate-grid small{ color:var(--sub); font-size:12px; }
+    .rate-grid .rate-diff{ display:inline-block; margin-top:5px; font-size:11px; font-weight:900; padding:1px 8px; border-radius:999px; line-height:1.6; }
+    .rate-diff.up{ background:#FDE7E7; color:#C0271F; }
+    .rate-diff.down{ background:#E7EEFD; color:#2A5BD7; }
     .rate-hot{ border-color:var(--green) !important; background:#F2FBF8 !important; }
     .rate-hot b{ color:var(--green-d); }
     .rate-updated{ text-align:center; font-size:11px; color:var(--sub); margin:10px 0 0; }
@@ -709,7 +707,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
     /* まねきや口コミブロック（ランキング内） */
     .rk-voice-block{ background:var(--cream); border:1px solid var(--gold); border-radius:16px; padding:18px 16px 14px; margin-bottom:18px; }
-    .rk-zisseki-note{ margin:-10px 0 16px; text-align:center; }
+    .rk-zisseki-notes{ margin:-4px 0 16px; }
+    .rk-zisseki-notes p{ margin:3px 0 0; font-size:11px; line-height:1.55; color:var(--sub); }
     .rk-zisseki{ display:block; width:100%; height:auto; border-radius:14px; margin:0 0 18px; box-shadow:0 6px 18px rgba(20,60,50,.1); }
     .rk-voice-ttl{ font-weight:900; font-size:14px; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
     .rk-voice-list{ display:grid; gap:12px; }
