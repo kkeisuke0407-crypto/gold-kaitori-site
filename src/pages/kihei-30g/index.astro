@@ -1,13 +1,23 @@
 ---
-const PAGE_TITLE = "30gの喜平ネックレスはいくら？買取価格・査定相場を比較｜売る前にチェック";
-const PAGE_DESC = "30gの喜平ネックレスの買取価格はいくら？本日のK18・K24相場と重さ×単価の目安、手数料・キャンセル条件まで比較。18金・喜平・インゴットの査定を売る前にチェック。";
+const PAGE_TITLE = "18金喜平ネックレス30g・50gはいくらで売れる？｜重さ別買取価格表＆おすすめ3社比較";
+const PAGE_DESC = "18金（K18）喜平ネックレスの30g・50gはいくらで売れる？今日のK18相場をもとに、20g〜200gまでの重さ別・参考買取価格を一覧で確認。手数料・査定条件まで比較できる買取店ランキング付き。";
 const CANONICAL = "https://kaitori.hakobu-family.com/kihei-30g/";
-const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/og-gold.webp";
+const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-kin-kihei.webp";
 
 import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
 const rates = await getRates();
 // 重さ別の参考買取額（既定はK18基準）
 const goldEx = (w, karat = rates.k18) => `約${Math.round(karat * w * 0.9).toLocaleString("ja-JP")}〜${Math.round(karat * w).toLocaleString("ja-JP")}円`;
+// 重さ別の参考買取額（万円表示・既定はK18基準）
+const goldExMan = (w, karat = rates.k18) => {
+  const fmt = (v) => {
+    const man = v / 10000;
+    return man >= 10 ? Math.round(man) : Math.round(man * 10) / 10;
+  };
+  return `約${fmt(karat * w * 0.9)}〜${fmt(karat * w)}万円`;
+};
+// 喜平ネックレス重さ別の参考買取価格表（K18基準）
+const kiheiTable = [20, 30, 50, 100, 200].map((w) => ({ w, price: goldExMan(w), hot: w === 30 || w === 50 }));
 // キャンペーン残日数（まねきや 6/30まで）
 const campEnd = new Date('2026-06-30T23:59:59+09:00');
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
@@ -17,6 +27,8 @@ const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
 const faqJsonLd = {
   "@context": "https://schema.org", "@type": "FAQPage",
   "mainEntity": [
+    ["18金喜平ネックレス30gはいくらで売れますか？", "重さ×その日のグラム単価がおおよその目安です。本日のK18は約" + yen(rates.k18) + "/gで、30gの喜平ネックレスなら" + goldExMan(30) + "ほどが目安です（状態・デザインで変わります）。"],
+    ["18金喜平ネックレス50gはいくらで売れますか？", "30gと同様に重さ×グラム単価が目安です。本日のK18相場では、50gの喜平ネックレスはおおよそ" + goldExMan(50) + "ほどが目安になります。"],
     ["金は1点だけでも査定できますか？", "はい、1点からでも無料で査定してもらえます。ネックレス1本・指輪1個でも断られることはほとんどありません。"],
     ["K18のネックレスはいくらで売れますか？", "重さ×その日のグラム単価がおおよその目安です。本日のK18は約" + yen(rates.k18) + "/gで、例えば10gのネックレスなら" + goldEx(10) + "ほどが目安です（状態・デザインで変わります）。"],
     ["壊れた金・切れたネックレスでも売れますか？", "売れます。壊れていても曲がっていても、金としての価値は重さで変わりません。地金として査定されます。"],
@@ -67,7 +79,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     })(window, document, "clarity", "script", "wxnujpnscp");
   </script>
 </head>
-<body data-landing-intent="lp_kihei_30g"
+<body data-landing-intent="lp_kihei30g"
   data-aff-manekiya={AFF_MANEKIYA} data-aff-otakaraya={AFF_OTAKARAYA} data-aff-buraiba="https://brandrevalue.com/">
 
   <main>
@@ -76,7 +88,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <!-- ヒーロー画像 -->
         <h1 class="fv-hero-wrap">
-          <a href="#" class="fv-hero-link" data-aff="manekiya" data-track="fv_hero" rel="nofollow sponsored"><img src="/images/hero-kin-kihei.webp" alt="30gの喜平ネックレスを売る前に、査定条件を比較｜まねきや・おたからや・ブラリバ" width="1672" height="941" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" /></a>
+          <img src="/images/kihei-3050.png" alt="18金喜平ネックレス 30g・50gはいくらで売れる？｜今日の相場・重さ比較・手数料チェック・査定条件まとめ" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" />
         </h1>
 
         <div class="fv-datebadge">
@@ -86,10 +98,26 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </div>
 
 
+        <!-- 喜平ネックレス 重さ別・参考買取価格表（K18） -->
+        <div class="kihei-tbl-head"><span class="fv-tbl-ttl">K18喜平ネックレス 重さ別・参考買取価格</span></div>
+        <div class="kihei-tbl-wrap">
+          <table class="kihei-tbl">
+            <thead><tr><th>K18喜平ネックレス</th><th>参考買取価格</th></tr></thead>
+            <tbody>
+              {kiheiTable.map((row) => (
+                <tr class={row.hot ? "kihei-hot" : ""}>
+                  <td>{row.w}g{row.hot && <span class="kihei-badge">人気の重さ</span>}</td>
+                  <td>{row.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p class="rate-updated">{rates.updatedAt}（本日のK18 {yen(rates.k18)}/g）</p>
+          <p class="note">※上の金額はおおよその目安です。純度・デザイン・状態・お店によって実際の買取価格は変わります。</p>
+        </div>
 
-        <!-- 相場の考え方（FV内・比較表の上） -->
-        <div id="rate" class="fv-rate-block">
-        <div class="sec-head"><h2>30gの喜平ネックレスを売る前に見る相場の考え方</h2><p>純度（K24・K18など刻印）によって1gあたりの金額が変わります。</p></div>
+        <!-- 本日の金買取相場 -->
+        <div class="sec-head"><h2>本日の金買取相場</h2><p>純度（K24・K18など刻印）によって1gあたりの金額が変わります。</p></div>
         <div class="rate-grid">
           <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small>{rates.goldDiff !== 0 && (<span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span>)}</div>
           <div><span>K22</span><b>{yen(rates.k22)}</b><small>/g</small></div>
@@ -105,25 +133,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <p class="rate-updated">{rates.updatedAt}</p>
         <p class="rate-purity-note">※K18・K22・Pt900などの各純度は、純金・純プラチナの店頭買取単価をもとに純度比で算出した参考値です。手数料・状態・お店により実際の買取価格は異なります。正確な金額は店舗でご確認ください。</p>
 
-        <div class="rate-ex">
-          <h3>品目別・参考買取額（K18の場合）</h3>
-          <ul>
-            <li><span>喜平ネックレス（約30g・K18）</span><b>{goldEx(30)}</b></li>
-            <li><span>喜平ブレスレット（約20g・K18）</span><b>{goldEx(20)}</b></li>
-            <li><span>喜平リング（約10g・K18）</span><b>{goldEx(10)}</b></li>
-          </ul>
-          <p class="note">※ネックレス・指輪・ブレスレット・金貨・インゴット（地金）・金歯・壊れた金もOK。上の金額はおおよその目安で、純度・重量・デザイン・状態によって変わります。K24（純金）はK18より高くなります。</p>
-        </div>
-      
-        </div>
-
-        <!-- 相場→比較の間：検索意図CTA -->
-        <a href="#" class="rate-cta" data-aff="manekiya" data-track="rate_cta" rel="nofollow sponsored">
-          <span class="rate-cta-main">30gの喜平ネックレスが今いくらか、無料で確認する</span>
-          <span class="rate-cta-sub">無料・査定だけでOK／キャンセル無料</span>
-        </a>
-
-        <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ 喜平・18金買取おすすめ3社比較</span><i class="pr">PR</i></div>
+        <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ 金・貴金属買取おすすめ3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
             <thead>
@@ -176,7 +186,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               <tr class="fv-tr-cta">
                 <td class="fv-td fv-td1">
                   <small class="cta-sub">＼査定だけでもOK／</small>
-                  <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>30%UP条件を聞く</a>
+                  <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>無料で電話相談</a>
                   <a href="#" class="btn btn-web sm mt4" data-aff="manekiya" data-track="fv_tbl_web" rel="nofollow sponsored">WEBで査定</a>
                   {campDays > 0 && <p class="countdown">⏳ キャンペーン終了まで<br /><b>あと{campDays}日！</b></p>}
                 </td>
@@ -191,10 +201,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </table>
         </div>
 
-        <!-- FV直下の不安解消3点＋対象商品 -->
-        <div class="fv-q3"><span>Q. g数で査定は変わる？</span><span>Q. 手数料は？</span><span>Q. 査定だけでもいい？</span></div>
-        <p class="fv-target">対象：18金喜平 / K18ネックレス / 喜平ブレスレット / インゴット / 18金指輪 / 18金リング</p>
-
         <!-- ④ キャンペーンバナー（電話申込限定 最大30%UP・手数料完全無料）ポコポコ＋キラキラ -->
         <div class="fv-banner">
           {campDays > 0 ? (
@@ -203,7 +209,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </a>
           ) : (
             <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
-              <i>☎</i>電話で無料査定する
+              <i>☎</i>まずは無料電話で査定だけ聞く
             </a>
           )}
         </div>
@@ -211,7 +217,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
               </div>
     </section>
-
 
     <!-- 03 高く売るコツ -->
     <section class="sec" id="point">
@@ -221,7 +226,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <img src="/images/point-3diff-gold.webp" alt="金を売る前に知っておきたい3つの差｜売るタイミング・相見積もり・キャンペーン｜まねきや 電話申込で買取金額最大30%UP" width="1024" height="1536" loading="lazy" />
         </a>
         <a href="#" class="camp2-cta" data-aff="manekiya" data-track="point_phone" rel="nofollow sponsored">
-          <i>☎</i>電話で無料相談してみる
+          <i>☎</i>まずは無料電話で査定だけ聞く
         </a>
         <p class="point-cta-note">9時〜21時（年中無休）／査定だけ・相談だけでもOK</p>
       </div>
@@ -230,7 +235,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 05 ランキング -->
     <section class="sec" id="ranking">
       <div class="wrap">
-        <div class="sec-head"><h2>金・喜平・インゴットの査定相談先を比較</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
+        <div class="sec-head"><h2>金・貴金属 高額買取ランキング</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
 
         <!-- 1位 -->
         <article class="rk rk-1">
@@ -377,7 +382,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </div>
         </div>
         <div class="cta-pair">
-          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>今の査定額を電話で聞く</a>
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>まずは無料電話で査定だけ聞く</a>
           <a href="#" class="btn btn-web" data-aff="manekiya" data-track="deep_web" rel="nofollow sponsored">WEBで査定予約する</a>
         </div>
       </div>
@@ -484,13 +489,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       </div>
       <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。掲載の◎○△や順位・「高価買取」等の評価は当編集部の主観的な判断によるもので、買取価格の優劣を保証するものではありません。「最大30%UP」などのキャンペーンは各社公式の内容に基づく表記で、適用条件・上乗せ率の上限・対象品目・実施期間があり、予告なく変更・終了する場合があります。買取価格・手数料・キャンペーンの適用可否など最新かつ正確な情報は、必ず各社の公式ページでご確認ください。</p>
       <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
-      <small>金・喜平・インゴット 査定条件の比較</small>
+      <small>金・貴金属買取比較</small>
     </div>
   </footer>
 
   <!-- スマホ下部固定CTA -->
   <div class="sticky" data-sticky hidden>
-    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>今すぐ電話で聞く</a>
+    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>まずは無料で査定だけ聞く</a>
     <a href="#" class="sticky-web" data-aff="manekiya" data-track="sticky_web" rel="nofollow sponsored">WEB査定予約</a>
   </div>
 
@@ -546,10 +551,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     /* ① FV結論ボックス（最初の数秒で結論に答える・55歳以上も読める大きさ） */
     .fv-conc{ background:#fff; border:2px solid var(--green); border-radius:16px; padding:16px 16px 14px; margin:14px 0; box-shadow:0 8px 22px rgba(14,120,100,.12); }
     .fv-conc-ttl{ font-size:19px; font-weight:900; text-align:center; margin:0 0 12px; color:var(--ink); line-height:1.4; }
-    .fv-conc-sub{ font-size:13px; font-weight:700; color:var(--body); text-align:center; margin:-6px 0 12px; line-height:1.7; }
-    .fv-q3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:0 0 10px; }
-    .fv-q3 span{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 5px; font-size:11.5px; font-weight:700; color:var(--green-d); text-align:center; line-height:1.4; }
-    .fv-target{ font-size:11.5px; color:var(--sub); text-align:center; margin:0 0 14px; line-height:1.6; }
     .fv-conc ul{ list-style:none; margin:0 0 14px; padding:0; display:grid; gap:9px; }
     .fv-conc li{ font-size:16px; font-weight:700; padding-left:28px; position:relative; line-height:1.5; color:var(--ink); }
     .fv-conc li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--green); font-weight:900; font-size:18px; }
@@ -637,6 +638,20 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       .live-dot{ animation:none; }
       .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
     }
+    /* 喜平 重さ別・参考買取価格表 */
+    .kihei-tbl-head{ display:flex; align-items:center; gap:8px; margin:16px 0 6px; }
+    .kihei-tbl-wrap{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px; box-shadow:0 6px 18px rgba(20,60,50,.07); margin:0 0 8px; }
+    .kihei-tbl{ width:100%; border-collapse:collapse; font-size:14px; }
+    .kihei-tbl th{ text-align:left; font-size:12px; color:var(--sub); font-weight:700; padding:6px 4px; border-bottom:2px solid var(--line); }
+    .kihei-tbl th:last-child,.kihei-tbl td:last-child{ text-align:right; }
+    .kihei-tbl td{ padding:11px 4px; border-bottom:1px dashed var(--line); font-weight:900; color:var(--ink); }
+    .kihei-tbl td:last-child{ color:var(--green-d); font-size:16px; }
+    .kihei-tbl tr:last-child td{ border-bottom:none; }
+    .kihei-tbl tr.kihei-hot{ background:linear-gradient(90deg,#FFF8E0,transparent); }
+    .kihei-tbl tr.kihei-hot td{ color:#B7401C; }
+    .kihei-tbl tr.kihei-hot td:last-child{ color:#D81F1F; font-size:18px; }
+    .kihei-badge{ display:inline-block; margin-left:6px; vertical-align:middle; background:#E0322C; color:#fff; font-size:10px; font-weight:900; border-radius:999px; padding:2px 8px; }
+
     /* ヒーロー画像 */
     .fv-hero-wrap{ margin:0 0 14px; font-size:0; line-height:0; }
     .trust-strip{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:0 0 14px; padding:0; }
@@ -650,12 +665,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-chip small{ width:100%; color:var(--sub); font-size:11px; }
 
     /* FV 3社比較表 */
-    .fv-rate-block{ margin:6px 0 4px; }
-    .rate-cta{ display:flex; flex-direction:column; align-items:center; gap:3px; margin:2px 0 6px; padding:15px 16px; background:linear-gradient(180deg,#23a85f,#15833f); color:#fff; border-radius:14px; text-decoration:none; text-align:center; box-shadow:0 8px 20px rgba(18,120,60,.30); }
-    .rate-cta:active{ transform:translateY(1px); }
-    .rate-cta-main{ font-size:16.5px; font-weight:900; line-height:1.35; }
-    .rate-cta-main::before{ content:"▶ "; font-size:13px; }
-    .rate-cta-sub{ font-size:11px; font-weight:700; opacity:.92; }
     .fv-tbl-head{ display:flex; align-items:center; gap:8px; margin:16px 0 6px; }
     .fv-tbl-ttl{ font-weight:900; font-size:14px; color:var(--ink); }
     .fv-tbl-head .pr{ margin-left:auto; }
@@ -960,7 +969,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         if(!url || url === "#"){ e.preventDefault(); return; }
         var tn = el.getAttribute("data-track") || "";
         var isPhone = tn.indexOf("phone")>=0;
-        var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp_kin", link_url:url, transport_type:"beacon" };
+        var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp_kihei30g", link_url:url, transport_type:"beacon" };
         // 計測はbeaconでバックグラウンド送信し、遷移は止めない（即時にhrefへ）
         track(isPhone ? "phone_click" : "web_click", params);
         track("gold_kaitori_affiliate_click", params);
@@ -974,7 +983,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       new IntersectionObserver(function(es){ es.forEach(function(en){ sticky.hidden = en.isIntersecting; }); }, {threshold:0})
         .observe(fv);
     } else if(sticky){ sticky.hidden = false; }
-    track("lp_kin_open", { landing_intent:"lp_kin" });
+    track("kihei30g_open", { landing_intent:"lp_kihei30g" });
     // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
     window.addEventListener("load", function(){
       var search = window.location.search;

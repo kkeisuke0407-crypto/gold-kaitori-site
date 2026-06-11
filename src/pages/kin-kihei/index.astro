@@ -8,6 +8,14 @@ import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
 const rates = await getRates();
 // 重さ別の参考買取額（既定はK18基準）
 const goldEx = (w, karat = rates.k18) => `約${Math.round(karat * w * 0.9).toLocaleString("ja-JP")}〜${Math.round(karat * w).toLocaleString("ja-JP")}円`;
+// 重さ別の参考買取額（万円表示・既定はK18基準）
+const goldExMan = (w, karat = rates.k18) => {
+  const fmt = (v) => {
+    const man = v / 10000;
+    return man >= 10 ? Math.round(man) : Math.round(man * 10) / 10;
+  };
+  return `約${fmt(karat * w * 0.9)}〜${fmt(karat * w)}万円`;
+};
 // キャンペーン残日数（まねきや 6/30まで）
 const campEnd = new Date('2026-06-30T23:59:59+09:00');
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
@@ -108,9 +116,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <div class="rate-ex">
           <h3>品目別・参考買取額（K18の場合）</h3>
           <ul>
-            <li><span>指輪（約3g）</span><b>{goldEx(3)}</b></li>
-            <li><span>ネックレス（約10g）</span><b>{goldEx(10)}</b></li>
-            <li><span>メイプル金貨1oz（約31g・K24）</span><b>{goldEx(31, rates.k24)}</b></li>
+            <li><span>喜平ネックレス（約30g）</span><b>{goldExMan(30)}</b></li>
+            <li><span>喜平ネックレス（約50g）</span><b>{goldExMan(50)}</b></li>
+            <li><span>指輪（約3g）</span><b>{goldExMan(3)}</b></li>
+            <li><span>ネックレス（約10g）</span><b>{goldExMan(10)}</b></li>
+            <li><span>インゴット（約100g・K24）</span><b>{goldExMan(100, rates.k24)}</b></li>
           </ul>
           <p class="note">※ネックレス・指輪・ブレスレット・金貨・インゴット（地金）・金歯・壊れた金もOK。上の金額はおおよその目安で、純度・重量・デザイン・状態によって変わります。K24（純金）はK18より高くなります。</p>
         </div>
@@ -176,7 +186,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               <tr class="fv-tr-cta">
                 <td class="fv-td fv-td1">
                   <small class="cta-sub">＼査定だけでもOK／</small>
-                  <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>30%UP条件を聞く</a>
+                  <a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored"><i>☎</i>無料で電話相談</a>
                   <a href="#" class="btn btn-web sm mt4" data-aff="manekiya" data-track="fv_tbl_web" rel="nofollow sponsored">WEBで査定</a>
                   {campDays > 0 && <p class="countdown">⏳ キャンペーン終了まで<br /><b>あと{campDays}日！</b></p>}
                 </td>
@@ -203,7 +213,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </a>
           ) : (
             <a href="#" class="camp2-cta" data-aff="manekiya" data-track="camp_fv_cta" rel="nofollow sponsored">
-              <i>☎</i>電話で無料査定する
+              <i>☎</i>まずは無料電話で査定だけ聞く
             </a>
           )}
         </div>
@@ -221,7 +231,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <img src="/images/point-3diff-gold.webp" alt="金を売る前に知っておきたい3つの差｜売るタイミング・相見積もり・キャンペーン｜まねきや 電話申込で買取金額最大30%UP" width="1024" height="1536" loading="lazy" />
         </a>
         <a href="#" class="camp2-cta" data-aff="manekiya" data-track="point_phone" rel="nofollow sponsored">
-          <i>☎</i>電話で無料相談してみる
+          <i>☎</i>まずは無料電話で査定だけ聞く
         </a>
         <p class="point-cta-note">9時〜21時（年中無休）／査定だけ・相談だけでもOK</p>
       </div>
@@ -377,7 +387,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </div>
         </div>
         <div class="cta-pair">
-          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>今の査定額を電話で聞く</a>
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>まずは無料電話で査定だけ聞く</a>
           <a href="#" class="btn btn-web" data-aff="manekiya" data-track="deep_web" rel="nofollow sponsored">WEBで査定予約する</a>
         </div>
       </div>
@@ -490,7 +500,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
   <!-- スマホ下部固定CTA -->
   <div class="sticky" data-sticky hidden>
-    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>今すぐ電話で聞く</a>
+    <a href="#" class="sticky-phone" data-aff="manekiya" data-track="sticky_phone" rel="nofollow sponsored"><i>☎</i>まずは無料で査定だけ聞く</a>
     <a href="#" class="sticky-web" data-aff="manekiya" data-track="sticky_web" rel="nofollow sponsored">WEB査定予約</a>
   </div>
 
