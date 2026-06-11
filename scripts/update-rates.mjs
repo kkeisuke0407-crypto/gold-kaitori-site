@@ -123,7 +123,11 @@ async function main() {
   }
 
   const fetched =
-    (await fromSource("田中貴金属", ["https://gold.tanaka.co.jp/commodity/souba/"])) ||
+    (await fromSource("田中貴金属", [
+      "https://gold.tanaka.co.jp/commodity/souba/d-gold.php",
+      "https://gold.tanaka.co.jp/commodity/souba/d-platinum.php",
+      "https://gold.tanaka.co.jp/commodity/souba/",
+    ])) ||
     (await fromSource("三菱マテリアル", [
       "https://gold.mmc.co.jp/market/gold-price/",
       "https://gold.mmc.co.jp/market/platinum-price/",
@@ -151,6 +155,8 @@ async function main() {
     prevDay = { date: iso, gold, pt1000 };
   }
 
+  // 基準値（純金K24 / 純プラチナPt1000 の店頭買取単価）と前日比のみ保存する。
+  // 各純度は表示時に src/lib/rates.js が純度比で算出する（単一責務）。
   const next = {
     ok: true,
     source,
@@ -158,17 +164,13 @@ async function main() {
     fetchedAt: new Date().toISOString(),
     gold,
     goldDiff,
-    // K18 / Pt950 / Pt900 / Pt850 は純度比で派生（純度ベースの地金参考）
-    k18: Math.round(gold * 0.75),
     pt1000,
-    pt900: Math.round(pt1000 * 0.9),
-    pt850: Math.round(pt1000 * 0.85),
     ptDiff,
     prevDay,
   };
 
   writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
-  console.log(`[update-rates] 書き込み完了：${source} / ${label} / 金${gold} K18${next.k18} Pt1000${pt1000} Pt900${next.pt900} Pt850${next.pt850}（前日比 金${goldDiff}/Pt${ptDiff}）`);
+  console.log(`[update-rates] 書き込み完了：${source} / ${label} / 純金${gold} / 純Pt${pt1000}（前日比 金${goldDiff}/Pt${ptDiff}）`);
 }
 
 main().catch((e) => {
