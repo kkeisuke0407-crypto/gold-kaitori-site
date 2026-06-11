@@ -24,6 +24,7 @@ const GOLD_RANGE = [14001, 80000];
 const PT_RANGE = [2000, 14000];
 
 const DEBUG = process.env.DEBUG_RATES === "1";
+let lastDebug = null;
 
 async function fetchText(url) {
   const res = await fetch(url, {
@@ -85,6 +86,13 @@ async function fromSource(name, urls) {
     }
     const { gold, pt1000, _golds, _pts } = extractBuyPrices(joined);
     console.log(`[update-rates] ${name}: gold候補=${JSON.stringify(_golds.slice(0, 6))} pt候補=${JSON.stringify(_pts.slice(0, 6))}`);
+    lastDebug = {
+      source: name,
+      golds: _golds,
+      pts: _pts,
+      kaitori: [...joined.matchAll(/(.{8})(買取価格前日比[）)]?\s*[\d,]{4,})/g)].slice(0, 12).map((m) => m[1] + m[2]),
+      tentou: [...joined.matchAll(/(店頭買取価格[^0-9]{0,12}[\d,]{4,})/g)].slice(0, 12).map((m) => m[1]),
+    };
     if (gold == null || pt1000 == null) {
       throw new Error(`値が取れない gold=${gold} pt1000=${pt1000}`);
     }
@@ -167,6 +175,7 @@ async function main() {
     pt1000,
     ptDiff,
     prevDay,
+    _debug: lastDebug,
   };
 
   writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
