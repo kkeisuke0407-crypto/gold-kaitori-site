@@ -17,25 +17,27 @@ import ratesData from "../data/rates.json";
 // 相場の地金参照に使っている公的ソース（表示の出典リンク用）。
 export const MARKET_SOURCE_URL = "https://gold.tanaka.co.jp/commodity/souba/d-gold.php";
 
-// まねきや公開の純度別買取価格から算出した純度比（純金K24 / 純プラチナPt1000 を1とする）。
-// 単純な純度（18/24 等）ではなく実勢比に合わせてあるため、各店の表示に近づく。
-const GOLD_RATIO = {
-  k24: 1,
-  k22: 0.9194,
-  k216: 0.8972, // K21.6
-  k20: 0.8205,
-  k18: 0.7550,
-  k18wg: 0.7540,
-  k14: 0.5846,
-  k14wg: 0.5714,
-  k10: 0.4052,
-  k9: 0.3639,
+// まねきや公開値（2026/6/10・6/11 の純度別買取表）から測定した実測係数。
+// 田中の「純金/純プラチナ買取単価」＝まねきやの「地金(インゴット)」価格 に対して、
+// この係数を掛けると、まねきやの純度別「買取」相場をそのまま再現できる。
+//   係数 ＝ (まねきや 純度別買取_x) ÷ (まねきや 地金) を2日分で測定（両日ほぼ一致＝安定）。
+//   ＝ 純度比 だけでなく「地金→製品買取の店掛け率(金≈0.992 / Pt≈0.982)」も織り込み済み。
+// K24 / Pt1000 は地金(インゴット)値そのものを表示する（係数1.0扱い）。
+const GOLD_COEF = {
+  k22: 0.91199,
+  k216: 0.88999, // K21.6
+  k20: 0.81398,
+  k18: 0.74902,
+  k18wg: 0.74801,
+  k14: 0.57996,
+  k14wg: 0.56687,
+  k10: 0.40199,
+  k9: 0.36100,
 };
-const PT_RATIO = {
-  pt1000: 1,
-  pt950: 0.9491,
-  pt900: 0.9267,
-  pt850: 0.8707,
+const PT_COEF = {
+  pt950: 0.93205,
+  pt900: 0.91005,
+  pt850: 0.85495,
 };
 
 export function parseYen(value) {
@@ -47,28 +49,29 @@ export function yen(value) {
 }
 
 function withDerived(base) {
+  // K24 / Pt1000 ＝ 地金(インゴット)＝田中の純金/純プラチナ買取単価
   const k24 = base.gold;
   const pt1000 = base.pt1000;
-  const g = (ratio) => Math.round(k24 * ratio);
-  const p = (ratio) => Math.round(pt1000 * ratio);
+  const gk = (c) => Math.round(k24 * c);
+  const pk = (c) => Math.round(pt1000 * c);
   return {
     ...base,
-    // 金：純金(K24)から純度比で各カラットを算出
+    // 金：地金K24 に実測係数を掛けて純度別買取を算出
     k24,
-    k22: g(GOLD_RATIO.k22),
-    k216: g(GOLD_RATIO.k216),
-    k20: g(GOLD_RATIO.k20),
-    k18: g(GOLD_RATIO.k18),
-    k18wg: g(GOLD_RATIO.k18wg),
-    k14: g(GOLD_RATIO.k14),
-    k14wg: g(GOLD_RATIO.k14wg),
-    k10: g(GOLD_RATIO.k10),
-    k9: g(GOLD_RATIO.k9),
-    // プラチナ：純プラチナ(Pt1000)から純度比で算出
+    k22: gk(GOLD_COEF.k22),
+    k216: gk(GOLD_COEF.k216),
+    k20: gk(GOLD_COEF.k20),
+    k18: gk(GOLD_COEF.k18),
+    k18wg: gk(GOLD_COEF.k18wg),
+    k14: gk(GOLD_COEF.k14),
+    k14wg: gk(GOLD_COEF.k14wg),
+    k10: gk(GOLD_COEF.k10),
+    k9: gk(GOLD_COEF.k9),
+    // プラチナ：地金Pt1000 に実測係数を掛けて純度別買取を算出
     pt1000,
-    pt950: p(PT_RATIO.pt950),
-    pt900: p(PT_RATIO.pt900),
-    pt850: p(PT_RATIO.pt850),
+    pt950: pk(PT_COEF.pt950),
+    pt900: pk(PT_COEF.pt900),
+    pt850: pk(PT_COEF.pt850),
     sourceUrl: MARKET_SOURCE_URL,
   };
 }
