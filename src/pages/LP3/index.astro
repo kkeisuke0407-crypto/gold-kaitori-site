@@ -185,10 +185,17 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <div class="rate-grid">
           <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small>{rates.goldDiff !== 0 && (<span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span>)}</div>
           <div><span>K22</span><b>{yen(rates.k22)}</b><small>/g</small></div>
+          <div><span>K21.6</span><b>{yen(rates.k216)}</b><small>/g</small></div>
+          <div><span>K20</span><b>{yen(rates.k20)}</b><small>/g</small></div>
           <div><span>K18</span><b>{yen(rates.k18)}</b><small>/g</small></div>
+          <div><span>K18WG</span><b>{yen(rates.k18wg)}</b><small>/g</small></div>
           <div><span>K14</span><b>{yen(rates.k14)}</b><small>/g</small></div>
+          <div><span>K14WG</span><b>{yen(rates.k14wg)}</b><small>/g</small></div>
+          <div><span>K10</span><b>{yen(rates.k10)}</b><small>/g</small></div>
+          <div><span>K9</span><b>{yen(rates.k9)}</b><small>/g</small></div>
         </div>
         <p class="rate-updated">{rates.updatedAt}</p>
+        <p class="rate-purity-note">※K18・K22・Pt900などの各純度は、純金・純プラチナの店頭買取単価をもとに純度比で算出した参考値です。手数料・状態・お店により実際の買取価格は異なります。正確な金額は店舗でご確認ください。</p>
 
         <div class="rate-ex">
           <h3>品目別・参考買取額（K18の場合）</h3>
@@ -680,6 +687,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .note{ font-size:11px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
 
     /* 02 相場 */
+    .rate-purity-note{ font-size:11px; color:var(--sub); line-height:1.6; margin:6px 0 0; }
     .rate-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .rate-grid>div{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center; box-shadow:0 4px 14px rgba(20,60,50,.05); }
     .rate-grid span{ display:block; font-size:13px; color:var(--sub); font-weight:700; }
