@@ -109,7 +109,7 @@ const total = groups.reduce((n, g) => n + g.pages.length, 0);
   <main class="wrap">
     <div class="head">
       <h1>🗂️ サイトページ一覧（管理用）</h1>
-      <p class="meta">全{total}ページを系統別に整理。各カードをタップでページを開けます。横展開（LP複製）の起点はこのページから。</p>
+      <p class="meta">全{total}ページを系統別に整理。各カードをタップでページを開けます。横展開（LP複製）の起点はこのページから。／ <a href="/tools/" style="color:#1B7F4B;font-weight:800;">🛠️ PPC運用ツール（URLビルダー・計測辞書）</a></p>
       <div class="legend">
         {Object.values(TAGS).map((t) => (
           <span class="badge" style={`background:${t.bg};color:${t.fg}`}>{t.label}</span>
