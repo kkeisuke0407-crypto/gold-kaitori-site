@@ -116,6 +116,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </div>
 
         <!-- 3社比較表 -->
+        <!-- 相場→比較の間：検索意図CTA -->
+        <a href="#" class="rate-cta" data-aff="manekiya" data-track="rate_cta" rel="nofollow sponsored">
+          <span class="rate-cta-main">Pt950・Pt900の指輪の値段を、無料で確認する</span>
+          <span class="rate-cta-sub">無料・査定だけでOK／キャンセル無料</span>
+        </a>
+
         <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ プラチナ買取おすすめ3社比較</span><i class="pr">PR</i></div>
         <div class="fv-tbl-wrap">
           <table class="fv-tbl">
@@ -737,6 +743,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-chip small{ width:100%; color:var(--sub); font-size:12px; }
 
     /* FV 3社比較表 */
+    .rate-cta{ display:flex; flex-direction:column; align-items:center; gap:3px; margin:2px 0 6px; padding:15px 16px; background:linear-gradient(180deg,#23a85f,#15833f); color:#fff; border-radius:14px; text-decoration:none; text-align:center; box-shadow:0 8px 20px rgba(18,120,60,.30); }
+    .rate-cta:active{ transform:translateY(1px); }
+    .rate-cta-main{ font-size:16.5px; font-weight:900; line-height:1.35; }
+    .rate-cta-main::before{ content:"▶ "; font-size:13px; }
+    .rate-cta-sub{ font-size:11px; font-weight:700; opacity:.92; }
     .fv-tbl-head{ display:flex; align-items:center; gap:8px; margin:16px 0 6px; }
     .fv-tbl-ttl{ font-weight:900; font-size:14px; color:var(--ink); }
     .fv-tbl-head .pr{ margin-left:auto; }
