@@ -1,0 +1,197 @@
+---
+// ───────────────────────────────────────────────────────────────
+// PPC運用ツール（社内向け・noindex）
+//   ① 広告URLビルダー：LPを選ぶ→ Google Ads の最終ページURL＋サフィックスを生成・コピー
+//   ② 計測イベント辞書：data-track の意味一覧（GA4で見る時の対応表）
+//   ③ 分析レシピ：GA4でキーワード別CVを見る手順
+//   ④ 各LPの計測デバッグリンク（?debug_track=1）
+// ───────────────────────────────────────────────────────────────
+const PAGE_TITLE = "PPC運用ツール（管理用）｜金買取査定ナビ";
+const ORIGIN = "https://kaitori.hakobu-family.com";
+
+// LP一覧（/list/ と揃える。新LPを作ったらここにも1行）
+const LPS = [
+  { path: "/LP3/",            name: "金買取TOP3（金の基準形）" },
+  { path: "/kin-kihei/",      name: "18金・喜平・インゴット" },
+  { path: "/kihei-30g/",      name: "喜平30g・50g" },
+  { path: "/kaitori-hikaku/", name: "査定条件比較（競合系）" },
+  { path: "/LP2nd/",          name: "プラチナ指輪TOP3（Ptの基準形）" },
+  { path: "/pt-kaitori/",     name: "Pt900・Pt950比較" },
+  { path: "/pt-yubiwa/",      name: "プラチナ指輪TOP3（yubiwa）" },
+  { path: "/LP4/",            name: "結婚指輪は売れる？" },
+  { path: "/platinum/",       name: "プラチナいくら（独自）" },
+  { path: "/pt-shindan/",     name: "プラチナ診断" },
+  { path: "/pt-lab/",         name: "査定額検査ラボ" },
+];
+
+// Google Ads「最終ページURLサフィックス」推奨値（アカウント or キャンペーン単位で1回設定すればOK）
+const SUFFIX = "kw={keyword}&mt={matchtype}&cre={creative}&dev={device}&cmp={campaignid}&agp={adgroupid}";
+
+// 計測イベント辞書（app.js / 各LPの data-track と対応）
+const EVENTS = [
+  { ev: "cta_click",                    desc: "アフィリリンクのクリック全般（affiliate_key・track_name付き）", kpi: "★ 主要" },
+  { ev: "manekiya_click",               desc: "まねきや送客クリック（=送客CVの代理指標）", kpi: "★ 主要" },
+  { ev: "phone_click",                  desc: "電話CTAクリック（=通電CVの代理指標）", kpi: "★ 主要" },
+  { ev: "gold_kaitori_affiliate_click", desc: "アフィリ遷移確定（beacon送信後に遷移）", kpi: "主要" },
+  { ev: "gold_kaitori_engagement_click",desc: "非アフィリのリンククリック（回遊）", kpi: "補助" },
+  { ev: "fv_variant_assigned",          desc: "FV見出しABテストの割当（fv_variant=A/B/C）", kpi: "AB" },
+];
+
+// 主な data-track（場所の対応表）
+const TRACKS = [
+  ["fv_hero", "FVヒーロー画像"],
+  ["rate_cta", "相場↔比較の間の検索意図CTA（緑キラポコ）"],
+  ["fv_tbl_phone / fv_tbl_web", "3社比較表内の電話/WEB"],
+  ["fv_tbl_bn_*", "比較表ヘッダーの各社バナー"],
+  ["camp_fv / camp_fv_cta", "30%UPキャンペーンバナー"],
+  ["rk_head_bn / rk1_insert / rk_camp", "ランキング1位まわり"],
+  ["deep_phone / deep_web", "記事中CTA"],
+  ["final_web", "最終CTA（WEB）"],
+  ["sticky_phone / sticky_web", "追従フッター"],
+];
+
+// 全イベントに自動付与される広告パラメータ
+const AD_PARAMS = [
+  ["ad_keyword",     "kw={keyword}",    "検索キーワード"],
+  ["ad_matchtype",   "mt={matchtype}",  "マッチタイプ(e/p/b)"],
+  ["ad_creative",    "cre={creative}",  "広告ID"],
+  ["ad_device",      "dev={device}",    "デバイス(m/t/c)"],
+  ["ad_campaign_id", "cmp={campaignid}","キャンペーンID"],
+  ["ad_adgroup_id",  "agp={adgroupid}", "広告グループID"],
+  ["utm_campaign / utm_term", "utm_*",  "UTM（任意）"],
+  ["entry_page",     "（自動）",         "最初に着地したLP"],
+];
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{PAGE_TITLE}</title>
+  <style>
+    :root{ --ink:#23303a; --sub:#6a7782; --line:#e6ebef; --bg:#f6f8f9; --green:#1B7F4B; --blue:#2A5BD7; }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:"Noto Sans JP",system-ui,sans-serif; color:var(--ink); background:var(--bg); line-height:1.65; }
+    .wrap{ max-width:920px; margin:0 auto; padding:24px 16px 64px; }
+    h1{ font-size:20px; margin:0 0 4px; }
+    .lead{ font-size:13px; color:var(--sub); margin:0 0 18px; }
+    .card{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; margin-bottom:18px; }
+    .card h2{ font-size:16px; margin:0 0 10px; }
+    .card h3{ font-size:13.5px; margin:16px 0 6px; }
+    label{ font-size:12.5px; font-weight:700; display:block; margin:10px 0 4px; }
+    select,input[type=text]{ width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-size:14px; background:#fff; }
+    .row{ display:flex; gap:8px; align-items:center; }
+    .row input{ flex:1; }
+    button.copy{ flex-shrink:0; padding:10px 14px; border:none; border-radius:10px; background:var(--green); color:#fff; font-weight:800; font-size:13px; cursor:pointer; }
+    button.copy:active{ transform:translateY(1px); }
+    .out{ font-family:monospace; font-size:12px; background:#0f1720; color:#9fe8b8; border-radius:10px; padding:10px 12px; word-break:break-all; }
+    table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+    th,td{ border-top:1px solid var(--line); padding:8px 6px; text-align:left; vertical-align:top; }
+    th{ color:var(--sub); font-size:11.5px; }
+    code{ background:#eef3f6; border-radius:6px; padding:1px 6px; font-size:11.5px; }
+    .links a{ display:inline-block; margin:4px 10px 4px 0; color:var(--blue); font-weight:700; font-size:13px; }
+    ol{ padding-left:20px; font-size:13px; margin:6px 0; }
+    .note{ font-size:11.5px; color:var(--sub); }
+    .pill{ display:inline-block; font-size:10.5px; font-weight:900; background:#E7F6EC; color:var(--green); border-radius:999px; padding:1px 8px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>🛠️ PPC運用ツール</h1>
+    <p class="lead">広告の入稿用URL生成・計測の対応表・分析手順をここに集約。<a href="/list/">📂 ページ一覧へ</a></p>
+
+    <!-- ① URLビルダー -->
+    <div class="card">
+      <h2>① 広告URLビルダー</h2>
+      <label>LPを選ぶ</label>
+      <select id="lp">
+        {LPS.map((l) => <option value={l.path}>{l.name}（{l.path}）</option>)}
+      </select>
+      <label>キャンペーン名（utm_campaign・任意）</label>
+      <input type="text" id="cmp" placeholder="例: pt950_exact_0611" />
+
+      <h3>最終ページURL（広告に入れるURL）</h3>
+      <div class="row"><input type="text" id="finalUrl" readonly /><button class="copy" data-for="finalUrl">コピー</button></div>
+
+      <h3>最終ページURLサフィックス（アカウント設定に1回でOK）</h3>
+      <div class="row"><input type="text" id="suffix" readonly value={SUFFIX} /><button class="copy" data-for="suffix">コピー</button></div>
+      <p class="note">Google Ads「アカウント設定 → トラッキング → 最終ページURLサフィックス」に貼ると、全広告のクリックに kw/mt/cre/dev/cmp/agp が自動付与され、GA4の全イベントに同梱されます。</p>
+
+      <h3>発火テストURL（本番で計測を目視確認）</h3>
+      <div class="row"><input type="text" id="debugUrl" readonly /><button class="copy" data-for="debugUrl">コピー</button></div>
+      <p class="note">開くと画面左下に「📡 track debug」HUDが出て、クリックごとの送信イベントと広告パラメータが見えます。</p>
+    </div>
+
+    <!-- ② イベント辞書 -->
+    <div class="card">
+      <h2>② 計測イベント辞書（GA4対応表）</h2>
+      <table>
+        <tr><th>GA4イベント</th><th>意味</th><th>重要度</th></tr>
+        {EVENTS.map((e) => <tr><td><code>{e.ev}</code></td><td>{e.desc}</td><td>{e.kpi}</td></tr>)}
+      </table>
+      <h3>クリック位置（track_name）の対応</h3>
+      <table>
+        <tr><th>track_name</th><th>場所</th></tr>
+        {TRACKS.map(([t, d]) => <tr><td><code>{t}</code></td><td>{d}</td></tr>)}
+      </table>
+      <h3>全イベントに自動付与される広告パラメータ</h3>
+      <table>
+        <tr><th>GA4パラメータ</th><th>由来</th><th>意味</th></tr>
+        {AD_PARAMS.map(([p, s, d]) => <tr><td><code>{p}</code></td><td><code>{s}</code></td><td>{d}</td></tr>)}
+      </table>
+    </div>
+
+    <!-- ③ 分析レシピ -->
+    <div class="card">
+      <h2>③ 分析レシピ（GA4）</h2>
+      <h3>🔍 キーワード別の送客数を見る</h3>
+      <ol>
+        <li>GA4 →「探索」→ 空白</li>
+        <li>ディメンション：<code>ad_keyword</code>・<code>landing_intent</code>／指標：イベント数</li>
+        <li>フィルタ：イベント名 = <code>manekiya_click</code>（電話は <code>phone_click</code>）</li>
+      </ol>
+      <h3>🧪 LP×CTA位置の効き（どのボタンが押されてる？）</h3>
+      <ol>
+        <li>ディメンション：<code>landing_intent</code> × <code>track_name</code></li>
+        <li>フィルタ：イベント名 = <code>cta_click</code></li>
+      </ol>
+      <h3>⚠️ 初回設定（1回だけ）</h3>
+      <ol>
+        <li>GA4 → 管理 → カスタム定義 → カスタムディメンション作成：<code>ad_keyword</code> / <code>ad_matchtype</code> / <code>ad_device</code> / <code>ad_campaign_id</code> / <code>track_name</code> / <code>landing_intent</code> / <code>affiliate_key</code>（イベントスコープ）</li>
+        <li>Google Ads → アカウント設定 → 最終ページURLサフィックスに上記①を貼る</li>
+      </ol>
+      <div class="links">
+        <a href="https://analytics.google.com/" target="_blank" rel="noopener">GA4を開く</a>
+        <a href="https://ads.google.com/" target="_blank" rel="noopener">Google Adsを開く</a>
+        <a href="https://clarity.microsoft.com/" target="_blank" rel="noopener">Clarity（ヒートマップ）</a>
+      </div>
+    </div>
+
+    <p class="note">このページは noindex・社内用。新しいLPを作ったら src/pages/tools/index.astro の LPS に1行追加してください。</p>
+  </main>
+
+  <script is:inline define:vars={{ ORIGIN }}>
+    var lp = document.getElementById("lp");
+    var cmp = document.getElementById("cmp");
+    var finalUrl = document.getElementById("finalUrl");
+    var debugUrl = document.getElementById("debugUrl");
+    function build() {
+      var base = ORIGIN + lp.value;
+      var c = (cmp.value || "").trim();
+      finalUrl.value = c ? base + "?utm_source=google&utm_medium=cpc&utm_campaign=" + encodeURIComponent(c) : base;
+      debugUrl.value = base + "?debug_track=1&kw=test_kw&mt=e&dev=m";
+    }
+    lp.addEventListener("change", build);
+    cmp.addEventListener("input", build);
+    build();
+    document.querySelectorAll("button.copy").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var el = document.getElementById(b.getAttribute("data-for"));
+        el.select(); el.setSelectionRange(0, 99999);
+        try { navigator.clipboard.writeText(el.value); b.textContent = "✔ OK"; setTimeout(function(){ b.textContent = "コピー"; }, 1200); } catch (_) { document.execCommand("copy"); }
+      });
+    });
+  </script>
+</body>
+</html>

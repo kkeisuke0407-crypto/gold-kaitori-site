@@ -62,12 +62,89 @@ window.addEventListener("load", function () {
   });
 });
 
-function track(eventName, params) {
+// ───────────────────────────────────────────────────────────────
+// PPC分析基盤：着地時の広告パラメータを捕捉し、全計測イベントに自動付与する。
+//   Google Ads 最終ページURLサフィックス（/tools/ でコピー可）で
+//   kw={keyword}&mt={matchtype}&cre={creative}&dev={device}&cmp={campaignid}&agp={adgroupid}
+//   を付けておくと、GA4でキーワード単位のCTR/CV分析ができる。
+//   gclid / utm_* も自動捕捉。セッション中はLP内回遊しても保持される。
+// ───────────────────────────────────────────────────────────────
+var AD_PARAM_KEYS = ["kw", "mt", "cre", "dev", "cmp", "agp", "gclid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+var adContext = {};
+(function captureAdContext() {
   try {
-    if (window.dataLayer) window.dataLayer.push({ event: eventName, ...(params || {}) });
-    if (typeof gtag === "function") gtag("event", eventName, params || {});
+    var stored = sessionStorage.getItem("ad_ctx");
+    if (stored) adContext = JSON.parse(stored) || {};
   } catch (_) {}
+  try {
+    var sp = new URLSearchParams(window.location.search);
+    var found = false;
+    AD_PARAM_KEYS.forEach(function (k) {
+      var v = sp.get(k);
+      if (v) { adContext[k] = v; found = true; }
+    });
+    if (found) {
+      adContext.landed_at = adContext.landed_at || new Date().toISOString();
+      adContext.landing_page = adContext.landing_page || window.location.pathname;
+      try { sessionStorage.setItem("ad_ctx", JSON.stringify(adContext)); } catch (_) {}
+    }
+  } catch (_) {}
+})();
+
+// GA4イベント名はそのまま、パラメータに広告文脈を必ず同梱する
+function withAdContext(params) {
+  var out = Object.assign({}, params || {});
+  if (adContext.kw) out.ad_keyword = adContext.kw;
+  if (adContext.mt) out.ad_matchtype = adContext.mt;
+  if (adContext.cre) out.ad_creative = adContext.cre;
+  if (adContext.dev) out.ad_device = adContext.dev;
+  if (adContext.cmp) out.ad_campaign_id = adContext.cmp;
+  if (adContext.agp) out.ad_adgroup_id = adContext.agp;
+  if (adContext.gclid) out.has_gclid = "1";
+  if (adContext.utm_campaign) out.utm_campaign = adContext.utm_campaign;
+  if (adContext.utm_term) out.utm_term = adContext.utm_term;
+  if (adContext.landing_page) out.entry_page = adContext.landing_page;
+  return out;
 }
+
+function track(eventName, params) {
+  var p = withAdContext(params);
+  try {
+    if (window.dataLayer) window.dataLayer.push({ event: eventName, ...(p || {}) });
+    if (typeof gtag === "function") gtag("event", eventName, p || {});
+  } catch (_) {}
+  try { if (window.__trackDebug) window.__trackDebug(eventName, p); } catch (_) {}
+}
+
+// ───────────────────────────────────────────────────────────────
+// 計測デバッグHUD：URLに ?debug_track=1 を付けると、発火イベントを画面に表示。
+// 本番でタグの発火確認ができる（クリックしても遷移を止めない）。
+// ───────────────────────────────────────────────────────────────
+(function setupTrackDebug() {
+  try {
+    if (new URLSearchParams(window.location.search).get("debug_track") !== "1") return;
+  } catch (_) { return; }
+  var box = null;
+  function ensureBox() {
+    if (box || !document.body) return box;
+    box = document.createElement("div");
+    box.style.cssText = "position:fixed;left:8px;bottom:8px;z-index:99999;max-width:86vw;max-height:45vh;overflow:auto;background:rgba(17,24,32,.92);color:#9fe8b8;font:11px/1.5 monospace;padding:10px 12px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.4)";
+    box.innerHTML = "<b style='color:#fff'>📡 track debug</b> <span style='color:#8aa'>(?debug_track=1)</span><br>ad_ctx: " + JSON.stringify(adContext) + "<hr style='border-color:#345'>";
+    document.body.appendChild(box);
+    return box;
+  }
+  window.__trackDebug = function (name, params) {
+    var b = ensureBox();
+    if (!b) return;
+    var line = document.createElement("div");
+    line.textContent = "▶ " + name + " " + JSON.stringify(params);
+    b.appendChild(line);
+    b.scrollTop = b.scrollHeight;
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", ensureBox);
+  } else { ensureBox(); }
+})();
 
 // 適正額チェッカーのファネル計測（共通の付帯情報を載せる）
 function fireFunnel(name, extra) {
