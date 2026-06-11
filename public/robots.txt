@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /list/
 
 Sitemap: https://kaitori.hakobu-family.com/sitemap-index.xml

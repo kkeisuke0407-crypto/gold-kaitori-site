@@ -9,5 +9,6 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
-  integrations: [sitemap()],
+  // 管理用ページ /list/ はサイトマップから除外（検索に出さない）
+  integrations: [sitemap({ filter: (page) => !page.includes('/list/') })],
 });

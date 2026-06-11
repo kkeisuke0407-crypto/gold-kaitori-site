@@ -1,0 +1,146 @@
+---
+// ───────────────────────────────────────────────────────────────
+// サイト管理用ページ一覧（社内向け・noindex）
+//   全ページを「系統別」に一覧し、今後の横展開（LP複製）のハブにする。
+//   新しいLPを作ったら下の groups にも1行追記すれば、ここに自動で並ぶ。
+// ───────────────────────────────────────────────────────────────
+const PAGE_TITLE = "サイトページ一覧（管理用）｜金買取査定ナビ";
+
+const TAGS = {
+  base:   { label: "基準形",   bg: "#E7F6EC", fg: "#1B7F4B" }, // 横展開のコピー元
+  clone:  { label: "クローン", bg: "#FDEFE0", fg: "#C0671F" }, // ほぼ同一（要差別化）
+  derive: { label: "派生",     bg: "#E7EEFD", fg: "#2A5BD7" }, // 基準形から派生
+  uniq:   { label: "独自",     bg: "#F1E9FB", fg: "#7A3FBF" }, // 独自構成
+  top:    { label: "トップ",   bg: "#FFF4D6", fg: "#9A6B00" },
+  law:    { label: "法務",     bg: "#ECEFF2", fg: "#4A5560" },
+};
+
+const groups = [
+  {
+    key: "トップ",
+    note: "サイト全体の入口。",
+    pages: [
+      { path: "/", title: "トップ（無料査定予約）", role: "全体の入口・金相場推移グラフ・査定予約導線", theme: "金&Pt", tag: "top" },
+    ],
+  },
+  {
+    key: "金（ゴールド）系LP",
+    note: "横展開のコピー元は /LP3/。",
+    pages: [
+      { path: "/LP3/",            title: "金買取 高額おすすめTOP3", role: "ネックレス・指輪・金貨・K18 ／ 金LPの基準形", theme: "金", tag: "base" },
+      { path: "/kin-kihei/",      title: "18金・喜平・インゴット比較", role: "喜平・インゴット軸 ／ LP3から派生", theme: "金", tag: "derive" },
+      { path: "/kaitori-hikaku/", title: "金・プラチナ 査定条件比較", role: "比較訴求（30万円差）／ LP3から派生", theme: "金中心", tag: "derive" },
+    ],
+  },
+  {
+    key: "プラチナ系LP",
+    note: "横展開のコピー元は /LP2nd/。pt-kaitori・pt-yubiwa は LP2nd とほぼ同一なので差別化 or 統合を検討。",
+    pages: [
+      { path: "/LP2nd/",     title: "プラチナ指輪 高額買取TOP3", role: "結婚指輪・Pt900 ／ プラチナLPの基準形", theme: "Pt", tag: "base" },
+      { path: "/pt-kaitori/", title: "Pt900・Pt950 比較", role: "LP2ndとほぼ同一（差8行）", theme: "Pt", tag: "clone" },
+      { path: "/pt-yubiwa/",  title: "プラチナ指輪 買取TOP3", role: "LP2ndとほぼ同一（差6行）", theme: "Pt", tag: "clone" },
+      { path: "/LP4/",        title: "結婚指輪は売れる？", role: "名前入り・刻印・片方だけ訴求", theme: "Pt", tag: "uniq" },
+      { path: "/platinum/",   title: "プラチナ指輪はいくら？", role: "査定額の概算計算（独自デザイン）", theme: "Pt", tag: "uniq" },
+      { path: "/pt-shindan/", title: "プラチナ指輪は今いくら？", role: "売る前の目安チェック", theme: "Pt", tag: "uniq" },
+      { path: "/pt-lab/",     title: "プラチナ査定額検査", role: "提示額が正常／異常値かを判定", theme: "Pt", tag: "uniq" },
+    ],
+  },
+  {
+    key: "法務・運営（フッター用）",
+    note: "全ページのフッターからリンク。",
+    pages: [
+      { path: "/operator/",   title: "運営者情報",          role: "", theme: "—", tag: "law" },
+      { path: "/privacy/",    title: "プライバシーポリシー", role: "", theme: "—", tag: "law" },
+      { path: "/disclosure/", title: "広告掲載について",     role: "", theme: "—", tag: "law" },
+    ],
+  },
+];
+
+const total = groups.reduce((n, g) => n + g.pages.length, 0);
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{PAGE_TITLE}</title>
+  <style>
+    :root{ --ink:#23303a; --sub:#6a7782; --line:#e6ebef; --bg:#f6f8f9; --green:#1B7F4B; }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:"Noto Sans JP",system-ui,sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; }
+    .wrap{ max-width:920px; margin:0 auto; padding:24px 16px 64px; }
+    .head{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px 18px; margin-bottom:18px; }
+    .head h1{ font-size:20px; margin:0 0 6px; }
+    .head .meta{ font-size:13px; color:var(--sub); margin:0; }
+    .legend{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .badge{ display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:999px; }
+    .tip{ background:#FFF9E8; border:1px solid #F0DFA8; border-radius:12px; padding:12px 14px; font-size:13px; margin:14px 0 0; }
+    .tip b{ color:#9A6B00; }
+    .group{ margin-top:22px; }
+    .group-h{ display:flex; align-items:baseline; gap:10px; margin:0 0 4px; }
+    .group-h h2{ font-size:16px; margin:0; }
+    .group-h .cnt{ font-size:12px; color:var(--sub); }
+    .group-note{ font-size:12px; color:var(--sub); margin:0 0 10px; }
+    .cards{ display:grid; gap:10px; }
+    .card{ display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; text-decoration:none; color:inherit; box-shadow:0 3px 10px rgba(20,60,50,.04); transition:transform .12s, box-shadow .12s; }
+    .card:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(20,60,50,.10); }
+    .card .body{ flex:1; min-width:0; }
+    .card .title{ font-weight:800; font-size:15px; }
+    .card .role{ font-size:12px; color:var(--sub); margin-top:2px; }
+    .card .url{ font-size:12px; color:var(--green); font-weight:700; word-break:break-all; }
+    .card .right{ display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex-shrink:0; }
+    .theme{ font-size:11px; color:var(--sub); }
+    .arrow{ color:#c2ccd3; font-size:18px; flex-shrink:0; }
+    .shops{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-top:22px; font-size:13px; }
+    .shops h3{ font-size:14px; margin:0 0 8px; }
+    .shops .s{ display:inline-block; margin-right:14px; }
+    .foot{ font-size:12px; color:var(--sub); margin-top:20px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="head">
+      <h1>🗂️ サイトページ一覧（管理用）</h1>
+      <p class="meta">全{total}ページを系統別に整理。各カードをタップでページを開けます。横展開（LP複製）の起点はこのページから。</p>
+      <div class="legend">
+        {Object.values(TAGS).map((t) => (
+          <span class="badge" style={`background:${t.bg};color:${t.fg}`}>{t.label}</span>
+        ))}
+      </div>
+      <p class="tip"><b>横展開のしかた</b>：金は <b>/LP3/</b>、プラチナは <b>/LP2nd/</b> を複製ベースに。FV画像・H1・タイトル・canonical・対象商品・不安解消文だけ差し替えれば新LPになります（相場は共通モジュールで自動表示）。</p>
+    </div>
+
+    {groups.map((g) => (
+      <section class="group">
+        <div class="group-h"><h2>{g.key}</h2><span class="cnt">{g.pages.length}ページ</span></div>
+        {g.note && <p class="group-note">{g.note}</p>}
+        <div class="cards">
+          {g.pages.map((p) => (
+            <a class="card" href={p.path} target="_blank" rel="noopener">
+              <div class="body">
+                <div class="title">{p.title} <span class="badge" style={`background:${TAGS[p.tag].bg};color:${TAGS[p.tag].fg}`}>{TAGS[p.tag].label}</span></div>
+                {p.role && <div class="role">{p.role}</div>}
+                <div class="url">{p.path}</div>
+              </div>
+              <div class="right">
+                <span class="theme">{p.theme}</span>
+              </div>
+              <span class="arrow">›</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <div class="shops">
+      <h3>掲載店（アフィリエイト）</h3>
+      <span class="s">🥇 <b>まねきや</b>（1位・主力）</span>
+      <span class="s">おたからや</span>
+      <span class="s">ブラリバ</span>
+    </div>
+
+    <p class="foot">このページは noindex（検索非掲載）・社内管理用です。新規ページを追加したら src/pages/list/index.astro の groups に1行足してください。</p>
+  </main>
+</body>
+</html>
