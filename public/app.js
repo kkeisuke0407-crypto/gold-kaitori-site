@@ -183,9 +183,13 @@ function wireTrackedLink(el) {
 
     // ファネル計測：電話クリック / まねきや送客クリック
     const trackName = el.getAttribute("data-track") || "";
+    // ヒーロー画像タップは誤タップが多く、CV最適化を濁すので“送客CV”には数えない（エンゲージメント扱い）。
+    const isHero = trackName === "fv_hero";
+    // CVイベント名：ヒーローだけ別イベントにして、Adsのコンバージョン(gold_kaitori_affiliate_click)から除外。
+    const convEvent = isHero ? "gold_kaitori_hero_click" : "gold_kaitori_affiliate_click";
     if (trackName.indexOf("phone") >= 0) {
       fireFunnel("phone_click", { track_name: trackName });
-    } else if (affiliateKey === "manekiya") {
+    } else if (affiliateKey === "manekiya" && !isHero) {
       fireFunnel("manekiya_click", { track_name: trackName });
     }
     const params = {
@@ -215,7 +219,7 @@ function wireTrackedLink(el) {
         window.location.href = destination;
       };
 
-      track("gold_kaitori_affiliate_click", {
+      track(convEvent, {
         ...params,
         event_callback: navigate,
         event_timeout: 1800
@@ -224,7 +228,7 @@ function wireTrackedLink(el) {
       return;
     }
 
-    track("gold_kaitori_affiliate_click", params);
+    track(convEvent, params);
   });
 }
 
