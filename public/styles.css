@@ -4372,3 +4372,10 @@ h2 {
     padding-top: 6px;
   }
 }
+
+/* ▼ レイアウト安全ガード（正常時は無影響・はみ出しのみ防止） */
+img, svg, video, table { max-width: 100%; }
+.btn, .camp2-cta, .rate-cta, .camp-img, .final-banner, .rk-camp-img, .fv-banner-link { max-width: 100%; }
+.note, .rate-purity-note, .rate-note-ingot, .rate-cta-main, .rate-cta-sub, .fv-rate-ttl, .fv-tbl-ttl { overflow-wrap: break-word; }
+.rate-grid > div, .cta-pair { min-width: 0; }
+/* ▲ */
