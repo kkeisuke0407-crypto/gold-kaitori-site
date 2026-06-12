@@ -95,6 +95,7 @@ var adContext = {};
 function withAdContext(params) {
   var out = Object.assign({}, params || {});
   if (adContext.kw) out.ad_keyword = adContext.kw;
+  else if (adContext.utm_term) out.ad_keyword = adContext.utm_term;
   if (adContext.mt) out.ad_matchtype = adContext.mt;
   if (adContext.cre) out.ad_creative = adContext.cre;
   if (adContext.dev) out.ad_device = adContext.dev;

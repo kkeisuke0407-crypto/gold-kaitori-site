@@ -24,8 +24,10 @@ const LPS = [
   { path: "/pt-lab/",         name: "査定額検査ラボ" },
 ];
 
-// Google Ads「最終ページURLサフィックス」推奨値（アカウント or キャンペーン単位で1回設定すればOK）
-const SUFFIX = "kw={keyword}&mt={matchtype}&cre={creative}&dev={device}&cmp={campaignid}&agp={adgroupid}";
+// Google Ads「最終ページURLサフィックス」推奨値（アカウント or キャンペーン単位で1回設定すればOK）。
+// UTM形式（utm_term=キーワード等）にしてあるので、GA4はカスタムディメンション登録なしで
+// 「キーワード/キャンペーン/広告」を標準レポートに自動表示する。mt/dev/agp は詳細分析用の追加。
+const SUFFIX = "utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_term={keyword}&utm_content={creative}&mt={matchtype}&dev={device}&agp={adgroupid}";
 
 // 計測イベント辞書（app.js / 各LPの data-track と対応）
 const EVENTS = [
@@ -156,10 +158,11 @@ const AD_PARAMS = [
         <li>ディメンション：<code>landing_intent</code> × <code>track_name</code></li>
         <li>フィルタ：イベント名 = <code>cta_click</code></li>
       </ol>
-      <h3>⚠️ 初回設定（1回だけ）</h3>
+      <h3>⚠️ 初回設定</h3>
+      <p class="note">必須はGoogle Adsの1ステップだけ。GA4側はキーワード/キャンペーン分析なら<b>設定不要</b>（UTMをGA4が標準で読むため）。</p>
       <ol>
-        <li>GA4 → 管理 → カスタム定義 → カスタムディメンション作成：<code>ad_keyword</code> / <code>ad_matchtype</code> / <code>ad_device</code> / <code>ad_campaign_id</code> / <code>track_name</code> / <code>landing_intent</code> / <code>affiliate_key</code>（イベントスコープ）</li>
-        <li>Google Ads → アカウント設定 → 最終ページURLサフィックスに上記①を貼る</li>
+        <li><b>【必須・1回】</b>Google Ads → 設定 → アカウント設定 → トラッキング → <b>最終ページURLサフィックス</b>に上記①を貼る</li>
+        <li><b>【任意】</b>キーワード/キャンペーンは GA4標準の「セッションの手動キーワード（utm_term）/キャンペーン」で見られる。<code>manekiya_click</code> 等のイベント単位で深掘りしたい時だけ、GA4でカスタムディメンション（<code>ad_matchtype</code>/<code>ad_device</code>/<code>track_name</code>/<code>landing_intent</code>/<code>affiliate_key</code>）を登録</li>
       </ol>
       <div class="links">
         <a href="https://analytics.google.com/" target="_blank" rel="noopener">GA4を開く</a>
