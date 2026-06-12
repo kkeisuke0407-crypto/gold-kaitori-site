@@ -141,19 +141,24 @@ async function main() {
   const { gold, pt1000, source } = fetched;
   const { iso, label } = jstDateString();
 
-  // 前日比：日付が変わったときだけ前日スナップショットとの差で更新（同日内は据え置き）。
-  let goldDiff = prev.goldDiff ?? 0;
-  let ptDiff = prev.ptDiff ?? 0;
-  let prevDay = prev.prevDay && prev.prevDay.date ? prev.prevDay : { date: iso, gold, pt1000 };
-  if (prevDay.date !== iso) {
-    goldDiff = gold - prevDay.gold;
-    ptDiff = pt1000 - prevDay.pt1000;
-    // 1日であり得ない大きさの差（前回シード/取得元切替などの段差）は前日比として採用しない。
-    // 日次変動は通常数%以内。閾値(12%)超えは段差とみなし0扱いにして誤報を防ぐ。
-    if (Math.abs(goldDiff) > gold * 0.12) goldDiff = 0;
-    if (Math.abs(ptDiff) > pt1000 * 0.12) ptDiff = 0;
-    prevDay = { date: iso, gold, pt1000 };
+  // 前日比：基準は「前日の最終値（クローズ）」。日中の値動きにもライブで追従させる。
+  //  ・last      = 直近runの値（毎回更新）。日付が変わった瞬間、これが“前日クローズ”になる。
+  //  ・prevClose = 前日クローズ（前日比の基準）。同日内は据え置き。
+  //  旧フォーマット(prevDay)からの移行も吸収する。
+  const prevLast = prev.last || prev.prevDay || null;
+  let prevClose = prev.prevClose || prev.prevDay || null;
+  if (prevLast && prevLast.date && prevLast.date !== iso) {
+    prevClose = prevLast; // 新しい日：前日クローズ＝前日最後の値
   }
+  if (!prevClose || prevClose.gold == null) prevClose = { date: iso, gold, pt1000 };
+
+  let goldDiff = gold - prevClose.gold;
+  let ptDiff = pt1000 - prevClose.pt1000;
+  // 1日であり得ない大きさの差（取得元切替などの段差）は前日比として採用しない（閾値12%）。
+  if (Math.abs(goldDiff) > gold * 0.12) goldDiff = 0;
+  if (Math.abs(ptDiff) > pt1000 * 0.12) ptDiff = 0;
+
+  const last = { date: iso, gold, pt1000 };
 
   // 基準値（純金K24 / 純プラチナPt1000 の店頭買取単価）と前日比のみ保存する。
   // 各純度は表示時に src/lib/rates.js が純度比で算出する（単一責務）。
@@ -166,7 +171,8 @@ async function main() {
     goldDiff,
     pt1000,
     ptDiff,
-    prevDay,
+    prevClose,
+    last,
   };
 
   writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
