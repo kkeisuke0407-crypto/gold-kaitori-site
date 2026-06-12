@@ -1102,6 +1102,47 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tr-cta .btn i{ font-size:13px; }
     .fv-tr-cta .fv-td{ vertical-align:middle; text-align:center; }
     .fv-tr-cta .fv-td1{ vertical-align:top; }
+
+    /* ============================================================
+       PC最適化（≥768px）：モバイルは一切無影響。
+       520px固定だった本文を広げ、要素を中央＆適正幅に整える。
+       ============================================================ */
+    @media (min-width:768px){
+      .wrap{ max-width:820px; padding:0 24px; }
+      .hd-in{ max-width:1000px; }
+      .sec{ padding:54px 0; }
+
+      /* ヒーロー・日付バッジは巨大化させず中央に */
+      .fv-hero-wrap{ max-width:720px; margin:0 auto 16px; }
+      .fv-datebadge{ max-width:620px; margin-left:auto; margin-right:auto; }
+
+      /* 本日相場は4列でPCらしく並べる */
+      .rate-grid{ grid-template-columns:repeat(4,1fr); }
+      .rate-ex{ max-width:680px; margin-left:auto; margin-right:auto; }
+
+      /* CTA・ボタン・バナーは広げすぎず中央配置（横長で間延びさせない） */
+      .camp2-cta,.btn-phone,.rate-cta,.final-banner,.camp-img,.fv-banner-link,.cta-pair{
+        max-width:480px; margin-left:auto; margin-right:auto;
+      }
+
+      /* グリッド系は2列でゆとりを持たせる */
+      .worry-grid{ grid-template-columns:1fr 1fr; }
+      .rk-1 .rk-reasons{ grid-template-columns:1fr 1fr; }
+
+      /* 見出し・本文を少し大きく、行間にゆとり */
+      .sec-head h2{ font-size:26px; }
+      .sec-head p{ font-size:15px; }
+      body{ font-size:16px; }
+
+      /* ランキング1位カードを少し引き立てる */
+      .rk-1{ padding-left:22px; padding-right:22px; }
+    }
+
+    /* さらに広い画面：本文をもう少しだけ広げる */
+    @media (min-width:1100px){
+      .wrap{ max-width:900px; }
+      .fv-hero-wrap{ max-width:780px; }
+    }
   </style>
 
   <script>
