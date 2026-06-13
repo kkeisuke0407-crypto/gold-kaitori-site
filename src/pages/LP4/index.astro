@@ -956,8 +956,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         var tn = el.getAttribute("data-track") || "";
         var isPhone = tn.indexOf("phone")>=0;
         var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp4", link_url:url, transport_type:"beacon" };
-        // 計測：補助イベントは即送信
-        track(isPhone ? "phone_click" : "web_click", params);
+        // 計測：チャネル別イベント（web_affiliate_click / phone_affiliate_click）を即送信
         track(isPhone ? "phone_affiliate_click" : "web_affiliate_click", params);
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:"gold_kaitori_affiliate_click"}, params));
         // 修飾キー/中クリック（新規タブ等）は既定動作のまま、CVだけ送って終了
