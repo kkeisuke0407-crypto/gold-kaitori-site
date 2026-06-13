@@ -1015,7 +1015,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         if(!url || url === "#"){ e.preventDefault(); return; }
         var tn = el.getAttribute("data-track") || "";
         var isPhone = tn.indexOf("phone")>=0;
-        var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp_kihei30g", link_url:url, transport_type:"beacon" };
+        var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp_kihei30g", link_url:url };
         // 計測：チャネル別イベント（web_affiliate_click / phone_affiliate_click）を即送信
         track(isPhone ? "phone_affiliate_click" : "web_affiliate_click", params);
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:"gold_kaitori_affiliate_click"}, params));

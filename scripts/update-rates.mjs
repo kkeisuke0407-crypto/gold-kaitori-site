@@ -175,6 +175,18 @@ async function main() {
     last,
   };
 
+  // 値・日付・スナップショットが前回と同一なら書き込まない（fetchedAtだけの差分で
+  // 毎ビルド自動コミットが乱発するのを防ぐ）。日付が変わるか価格が動いた時だけ更新。
+  const sansTime = (o) => {
+    const c = { ...(o || {}) };
+    delete c.fetchedAt;
+    return JSON.stringify(c);
+  };
+  if (sansTime(prev) === sansTime(next)) {
+    console.log("[update-rates] 値・日付に変化なし → 書き込みスキップ（無駄なコミット抑制）");
+    return;
+  }
+
   writeFileSync(DATA_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
   console.log(`[update-rates] 書き込み完了：${source} / ${label} / 純金${gold} / 純Pt${pt1000}（前日比 金${goldDiff}/Pt${ptDiff}）`);
 }

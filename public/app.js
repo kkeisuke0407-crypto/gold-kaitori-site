@@ -196,8 +196,7 @@ function wireTrackedLink(el) {
       track_name: el.getAttribute("data-track") || "",
       affiliate_key: affiliateKey,
       landing_intent: document.body.getAttribute("data-landing-intent") || "general",
-      link_url: destination,
-      transport_type: "beacon"
+      link_url: destination
     };
 
     if (!affiliateKey) {
@@ -222,9 +221,9 @@ function wireTrackedLink(el) {
       track(convEvent, {
         ...params,
         event_callback: navigate,
-        event_timeout: 1800
+        event_timeout: 300
       });
-      window.setTimeout(navigate, 1800);
+      window.setTimeout(navigate, 300);
       return;
     }
 
