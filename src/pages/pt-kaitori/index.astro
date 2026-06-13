@@ -1174,10 +1174,21 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         var tn = el.getAttribute("data-track") || "";
         var isPhone = tn.indexOf("phone")>=0;
         var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp2nd", link_url:url, transport_type:"beacon" };
-        // 計測はbeaconでバックグラウンド送信し、遷移は止めない（即時にhrefへ）
+        // 計測：補助イベントは即送信
         track(isPhone ? "phone_click" : "web_click", params);
-        track("gold_kaitori_affiliate_click", params);
         track(isPhone ? "phone_affiliate_click" : "web_affiliate_click", params);
+        if(window.dataLayer) window.dataLayer.push(Object.assign({event:"gold_kaitori_affiliate_click"}, params));
+        // 修飾キー/中クリック（新規タブ等）は既定動作のまま、CVだけ送って終了
+        var __plain = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && (e.button===0 || e.button===undefined);
+        if(!__plain){ if(typeof gtag==="function") gtag("event","gold_kaitori_affiliate_click", params); return; }
+        // 通常クリック：本命CV(gold_kaitori_affiliate_click)の送信完了後に遷移（最大300ms・送れたら即）して取りこぼし防止
+        e.preventDefault();
+        var __navigated=false;
+        function __go(){ if(__navigated) return; __navigated=true; window.location.href = url; }
+        if(typeof gtag==="function"){
+          gtag("event","gold_kaitori_affiliate_click", Object.assign({}, params, { event_callback: __go, event_timeout: 300 }));
+        } else { __go(); }
+        setTimeout(__go, 300);
       });
     });
     // スマホ下部固定CTA：FVを過ぎたら表示
