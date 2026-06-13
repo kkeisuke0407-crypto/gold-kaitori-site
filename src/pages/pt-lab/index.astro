@@ -593,8 +593,8 @@ const pt950 = rates.pt950;
           e.preventDefault();
           let done = false;
           const go = function(){ if(done) return; done = true; window.location.href = dest; };
-          track("gold_kaitori_affiliate_click", { ...params, event_callback: go, event_timeout: 1500 });
-          window.setTimeout(go, 1500);
+          track("gold_kaitori_affiliate_click", { ...params, event_callback: go, event_timeout: 300 });
+          window.setTimeout(go, 300);
         } else {
           track("gold_kaitori_affiliate_click", params);
         }
