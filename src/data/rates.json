@@ -2,9 +2,9 @@
   "ok": true,
   "source": "田中貴金属",
   "updatedAt": "2026年6月15日 現在",
-  "fetchedAt": "2026-06-15T01:47:44.564Z",
-  "gold": 24169,
-  "goldDiff": 460,
+  "fetchedAt": "2026-06-15T06:43:44.883Z",
+  "gold": 24334,
+  "goldDiff": 625,
   "pt1000": 9805,
   "ptDiff": 263,
   "prevClose": {
@@ -14,7 +14,7 @@
   },
   "last": {
     "date": "2026-06-15",
-    "gold": 24169,
+    "gold": 24334,
     "pt1000": 9805
   }
 }
