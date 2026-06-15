@@ -192,7 +192,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <div><span>K9</span><b>{yen(rates.k9)}</b><small>/g</small></div>
         </div>
         <p class="rate-updated">{rates.updatedAt}</p>
-        <p class="rate-purity-note">※K18・K22・Pt900などの各純度は、純金・純プラチナの店頭買取単価をもとに純度比で算出した参考値です。手数料・状態・お店により実際の買取価格は異なります。正確な金額は店舗でご確認ください。</p>
+        <p class="rate-purity-note">※各純度は純金・純プラチナの買取単価から純度比で算出した参考値です。正確な金額は店舗でご確認ください。</p>
 
         <div class="rate-ex">
           <h3>品目別・参考買取額（K18の場合）</h3>
@@ -421,12 +421,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </ul>
         </div>
         <div class="worry-grid">
-          <div class="worry"><h3>切れた・壊れた金でも売れる？</h3><p>売れます。壊れていても曲がっていても、金は重さで査定されます。</p></div>
-          <div class="worry"><h3>刻印（K18・750）がなくても売れる？</h3><p>売れます。X線などで純度を調べてもらえるので、刻印がなくても査定できます。</p></div>
-          <div class="worry"><h3>金歯やメダルの金も売れる？</h3><p>売れます。金が含まれていれば、金歯・記念メダル・仏具なども査定対象です。</p></div>
-          <div class="worry"><h3>鑑定書・保証書がなくても売れる？</h3><p>なくても大丈夫です。あれば査定がスムーズになることもあります。</p></div>
-          <div class="worry"><h3>宝石・ダイヤ付きは別で評価される？</h3><p>石の種類や大きさによっては、金地金に上乗せされて高くなることがあります。</p></div>
-          <div class="worry"><h3>古いデザインでも売れる？</h3><p>売れます。デザインが古くても、金としての価値はしっかりあります。</p></div>
+          <div class="worry"><h3>切れた・壊れた金でも売れる？</h3><p><mark>売れます</mark>。壊れていても曲がっていても、金は重さで査定されます。</p></div>
+          <div class="worry"><h3>刻印（K18・750）がなくても売れる？</h3><p><mark>売れます</mark>。X線などで純度を調べてもらえるので、刻印がなくても査定できます。</p></div>
+          <div class="worry"><h3>金歯やメダルの金も売れる？</h3><p><mark>売れます</mark>。金が含まれていれば、金歯・記念メダル・仏具なども査定対象です。</p></div>
+          <div class="worry"><h3>鑑定書・保証書がなくても売れる？</h3><p><mark>なくても大丈夫</mark>です。あれば査定がスムーズになることもあります。</p></div>
+          <div class="worry"><h3>宝石・ダイヤ付きは別で評価される？</h3><p>石の種類や大きさによっては、金地金に<mark>上乗せされて高くなる</mark>ことがあります。</p></div>
+          <div class="worry"><h3>古いデザインでも売れる？</h3><p><mark>売れます</mark>。デザインが古くても、金としての価値はしっかりあります。</p></div>
         </div>
       </div>
     </section>
@@ -688,7 +688,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .sec-cream{ background:var(--cream); background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12 L12 0 L24 12 L12 24 Z' fill='none' stroke='%23c8a000' stroke-opacity='.07' stroke-width='1'/%3E%3C/svg%3E"); }
     .sec-head{ text-align:center; margin-bottom:22px; }
     .chip{ display:inline-block; background:#fff; border:1px solid var(--line); color:var(--green-d); font-weight:900; font-size:12px; border-radius:999px; padding:5px 14px; }
-    .sec-head h2{ font-size:23px; font-weight:900; margin:10px 0 6px; line-height:1.4; }
+    .sec-head h2{ font-size:24px; font-weight:900; margin:10px 0 6px; line-height:1.45; letter-spacing:.01em; }
     .sec-head p{ font-size:13px; color:var(--body); margin:0; }
     .note{ font-size:11px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
 
@@ -864,6 +864,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rk-1{ box-shadow:0 16px 36px rgba(217,150,42,.22); }
     /* ⑨ 薄色テキストのコントラスト改善（AA寄せ） */
     :root{ --sub:#6E7B85; }
+    mark{ background:#FFF1A6; color:inherit; font-weight:900; padding:0 3px; border-radius:3px; }
     /* ⑩ CLS保険：画像は縦横比維持 */
     .fv-hero-img,.point-img img,.camp-img img,.rk-zisseki,.fuan-img,.fv-banner-link img{ height:auto; }
     @media (prefers-reduced-motion:reduce){
