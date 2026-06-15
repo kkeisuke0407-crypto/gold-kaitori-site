@@ -97,33 +97,48 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
         <!-- 相場の考え方（FV内・比較表の上） -->
         <div id="rate" class="fv-rate-block">
-        <div class="sec-head"><h2>18金・喜平・インゴットを売る前に見る相場の考え方</h2><p>純度（K24・K18など刻印）によって1gあたりの金額が変わります。</p></div>
-        <div class="rate-grid">
-          <div class="rate-hot"><span>K24（純金）</span><b>{yen(rates.k24)}</b><small>/g</small>{rates.goldDiff !== 0 && (<span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span>)}</div>
-          <div><span>K22</span><b>{yen(rates.k22)}</b><small>/g</small></div>
-          <div><span>K21.6</span><b>{yen(rates.k216)}</b><small>/g</small></div>
-          <div><span>K20</span><b>{yen(rates.k20)}</b><small>/g</small></div>
-          <div><span>K18</span><b>{yen(rates.k18)}</b><small>/g</small></div>
-          <div><span>K18WG</span><b>{yen(rates.k18wg)}</b><small>/g</small></div>
-          <div><span>K14</span><b>{yen(rates.k14)}</b><small>/g</small></div>
-          <div><span>K14WG</span><b>{yen(rates.k14wg)}</b><small>/g</small></div>
-          <div><span>K10</span><b>{yen(rates.k10)}</b><small>/g</small></div>
-          <div><span>K9</span><b>{yen(rates.k9)}</b><small>/g</small></div>
+        <div class="rate-hero">
+          <p class="rate-hero-ttl"><i class="live-dot"></i>本日の金買取相場<span class="rate-hero-badge">📈 歴史的高値圏</span></p>
+          <div class="rate-hero-main">
+            <div class="rh-card rh-hot">
+              <span class="rh-label">K24（純金）</span>
+              <span class="rh-price"><span class="rh-num">{yen(rates.k24)}</span><small>/g</small></span>
+              {rates.goldDiff !== 0 && (<span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span>)}
+            </div>
+            <div class="rh-card">
+              <span class="rh-label">K18（18金）</span>
+              <span class="rh-price"><span class="rh-num">{yen(rates.k18)}</span><small>/g</small></span>
+              <span class="rh-note">喜平・ネックレスに多い</span>
+            </div>
+          </div>
+          <details class="rate-more">
+            <summary>K22・K20・K14・K10 など 他の純度も見る</summary>
+            <div class="rate-grid-mini">
+              <div><span>K22</span><b>{yen(rates.k22)}</b></div>
+              <div><span>K21.6</span><b>{yen(rates.k216)}</b></div>
+              <div><span>K20</span><b>{yen(rates.k20)}</b></div>
+              <div><span>K18WG</span><b>{yen(rates.k18wg)}</b></div>
+              <div><span>K14</span><b>{yen(rates.k14)}</b></div>
+              <div><span>K14WG</span><b>{yen(rates.k14wg)}</b></div>
+              <div><span>K10</span><b>{yen(rates.k10)}</b></div>
+              <div><span>K9</span><b>{yen(rates.k9)}</b></div>
+            </div>
+          </details>
+          <p class="rate-hero-date">{rates.updatedAt}・田中貴金属の店頭買取単価より</p>
+          <p class="rate-purity-note">※各純度は純金・純プラチナの買取単価から純度比で算出した参考値です。正確な金額は店舗でご確認ください。</p>
         </div>
-        <p class="rate-updated">{rates.updatedAt}</p>
-        <p class="rate-purity-note">※K18・K22・Pt900などの各純度は、純金・純プラチナの店頭買取単価をもとに純度比で算出した参考値です。手数料・状態・お店により実際の買取価格は異なります。正確な金額は店舗でご確認ください。</p>
 
-        <div class="rate-ex">
-          <h3>品目別・参考買取額（K18の場合）</h3>
-          <ul>
-            <li><span>喜平ネックレス（約30g）</span><b>{goldExMan(30)}</b></li>
-            <li><span>喜平ネックレス（約50g）</span><b>{goldExMan(50)}</b></li>
-            <li><span>喜平ブレスレット（約20g）</span><b>{goldExMan(20)}</b></li>
-            <li><span>指輪（約3g）</span><b>{goldExMan(3)}</b></li>
-            <li><span>ネックレス（約10g）</span><b>{goldExMan(10)}</b></li>
-            <li><span>インゴット（約100g・K24）</span><b>{goldExMan(100, rates.k24)}</b></li>
+        <div class="ref-price">
+          <h3 class="ref-ttl">あなたの金、今ならいくら？<span>K18の参考買取額（重さ別の目安）</span></h3>
+          <ul class="ref-list">
+            <li><span class="ref-item">喜平ネックレス<em>約30g</em></span><b>{goldExMan(30)}</b></li>
+            <li><span class="ref-item">喜平ネックレス<em>約50g</em></span><b>{goldExMan(50)}</b></li>
+            <li><span class="ref-item">喜平ブレスレット<em>約20g</em></span><b>{goldExMan(20)}</b></li>
+            <li><span class="ref-item">指輪<em>約3g</em></span><b>{goldExMan(3)}</b></li>
+            <li><span class="ref-item">ネックレス<em>約10g</em></span><b>{goldExMan(10)}</b></li>
+            <li><span class="ref-item">インゴット<em>約100g・K24</em></span><b>{goldExMan(100, rates.k24)}</b></li>
           </ul>
-          <p class="note">※ネックレス・指輪・ブレスレット・金貨・インゴット（地金）・金歯・壊れた金もOK。上の金額はおおよその目安で、純度・重量・デザイン・状態によって変わります。K24（純金）はK18より高くなります。</p>
+          <p class="note">※ネックレス・指輪・ブレスレット・金貨・インゴット・金歯・壊れた金もOK。重量・純度・状態で変わります。</p>
         </div>
       
         </div>
@@ -498,6 +513,40 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .btn,.camp2-cta,.rate-cta,.camp-img,.final-banner,.rk-camp-img,.fv-banner-link{ max-width:100%; }
     .note,.rate-purity-note,.rate-note-ingot,.rate-cta-main,.rate-cta-sub,.fv-rate-ttl,.fv-tbl-ttl{ overflow-wrap:break-word; }
     .rate-grid>div,.cta-pair{ min-width:0; }
+    /* ▼ 相場ヒーロー＆参考価格（見やすさ強化・共通） */
+    .rate-hero{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px 16px 16px; box-shadow:0 8px 24px rgba(20,60,50,.08); }
+    .rate-hero-ttl{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:16px; font-weight:900; color:var(--green-d); margin:0 0 12px; }
+    .rate-hero-badge{ font-size:11px; font-weight:900; background:#FFF1A6; color:#9A6B00; border-radius:999px; padding:2px 9px; }
+    .rate-hero-main{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .rh-card{ background:#F7FAF9; border:1.5px solid var(--line); border-radius:14px; padding:14px 8px; text-align:center; }
+    .rh-card.rh-hot{ background:linear-gradient(180deg,#FFF9E9,#FFF2CE); border-color:var(--gold); }
+    .rh-label{ display:block; font-size:13px; font-weight:800; color:var(--sub); }
+    .rh-price{ display:block; font-weight:900; color:var(--ink); line-height:1.1; margin:5px 0 2px; }
+    .rh-num{ font-size:30px; letter-spacing:-.01em; }
+    .rh-price small{ font-size:14px; font-weight:700; color:var(--sub); margin-left:1px; }
+    .rh-card.rh-hot .rh-price{ color:var(--gold-d); }
+    .rh-note{ display:block; font-size:11px; color:var(--sub); }
+    .rh-card .rate-diff{ display:inline-block; margin-top:6px; font-size:11px; font-weight:900; padding:1px 8px; border-radius:999px; line-height:1.6; }
+    .rate-diff.up{ background:#FDE7E7; color:#C0271F; } .rate-diff.down{ background:#E7EEFD; color:#2A5BD7; }
+    .rate-more{ margin-top:12px; }
+    .rate-more summary{ cursor:pointer; list-style:none; text-align:center; font-size:13px; font-weight:800; color:var(--green-d); background:#F2FBF8; border:1px solid var(--line); border-radius:10px; padding:9px; }
+    .rate-more summary::after{ content:" ▾"; } .rate-more[open] summary::after{ content:" ▴"; }
+    .rate-more summary::-webkit-details-marker{ display:none; }
+    .rate-grid-mini{ display:grid; grid-template-columns:repeat(auto-fit,minmax(72px,1fr)); gap:8px; margin-top:10px; }
+    .rate-grid-mini>div{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 3px; text-align:center; }
+    .rate-grid-mini span{ display:block; font-size:11px; color:var(--sub); font-weight:700; }
+    .rate-grid-mini b{ font-size:13.5px; color:var(--ink); }
+    .rate-hero-date{ text-align:center; font-size:11px; color:var(--sub); margin:12px 0 0; }
+    .ref-price{ margin-top:18px; background:#fff; border:2px solid var(--gold); border-radius:18px; padding:16px; box-shadow:0 8px 22px rgba(217,150,42,.14); }
+    .ref-ttl{ font-size:18px; font-weight:900; color:var(--ink); margin:0 0 12px; text-align:center; line-height:1.4; }
+    .ref-ttl span{ display:block; font-size:12px; font-weight:700; color:var(--sub); margin-top:3px; }
+    .ref-list{ list-style:none; margin:0; padding:0; }
+    .ref-list li{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px 4px; border-top:1px dashed var(--line); }
+    .ref-list li:first-child{ border-top:none; }
+    .ref-item{ font-size:14.5px; font-weight:800; color:var(--ink); }
+    .ref-item em{ font-style:normal; font-size:12px; font-weight:700; color:var(--sub); margin-left:6px; }
+    .ref-list li b{ font-size:19px; font-weight:900; color:var(--green-d); white-space:nowrap; }
+    /* ▲ */
     /* ▲ */
     :root{
       --bg:#fff; --mint:#EAF6F2; --cream:#FFF7EC; --green:#0E9E8E; --green-d:#0B8276; --green-dd:#0a6a60;
@@ -1061,7 +1110,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         requestAnimationFrame(step);
       }
       var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); } }); },{threshold:0.35});
-      document.querySelectorAll('.rate-grid b').forEach(function(el){ io.observe(el); });
+      document.querySelectorAll('.rate-grid b, .rh-num, .rate-grid-mini b').forEach(function(el){ io.observe(el); });
     })();
   </script>
 </body>
