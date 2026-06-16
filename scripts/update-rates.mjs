@@ -234,12 +234,8 @@ async function main() {
     ptDiff,
     prevClose,
     last,
-    // 検証用：田中公式の前日比と、価格直後の生コンテキスト（パース確認のため一時保存）
+    // 前日比の出所（田中公式値を採用できたか／自前計算へフォールバックしたか）。
     diffSource: (sane(goldDiffOfficial, gold) || sane(ptDiffOfficial, pt1000)) ? "田中公式" : "自前計算",
-    _goldDiffOfficial: goldDiffOfficial ?? null,
-    _ptDiffOfficial: ptDiffOfficial ?? null,
-    _goldCtx: goldCtx ?? "",
-    _ptCtx: ptCtx ?? "",
   };
 
   // 値・日付・スナップショットが前回と同一なら書き込まない（fetchedAtだけの差分で
