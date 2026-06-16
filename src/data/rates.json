@@ -2,9 +2,9 @@
   "ok": true,
   "source": "田中貴金属",
   "updatedAt": "2026年6月16日 現在",
-  "fetchedAt": "2026-06-16T04:34:58.728Z",
+  "fetchedAt": "2026-06-16T04:49:13.851Z",
   "gold": 24236,
-  "goldDiff": 40,
+  "goldDiff": 67,
   "pt1000": 9768,
   "ptDiff": -37,
   "prevClose": {
@@ -16,5 +16,10 @@
     "date": "2026-06-16",
     "gold": 24236,
     "pt1000": 9768
-  }
+  },
+  "diffSource": "田中公式",
+  "_goldDiffOfficial": 67,
+  "_ptDiffOfficial": -37,
+  "_goldCtx": " 円 (+67 円)",
+  "_ptCtx": " 円 (-37 円)"
 }
