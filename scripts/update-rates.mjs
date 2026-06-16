@@ -146,9 +146,26 @@ async function main() {
   //  ・prevClose = 前日クローズ（前日比の基準）。同日内は据え置き。
   //  旧フォーマット(prevDay)からの移行も吸収する。
   const prevLast = prev.last || prev.prevDay || null;
+
+  // ★重要：田中貴金属の当日価格は平日朝(≈9:30 JST)に公表される。
+  //   それ以前（早朝run）や土日祝は、取得しても値は「前営業日のまま」。
+  //   このとき暦日(iso)だけ翌日へ進めてしまうと、
+  //     ・日付ラベルは「今日」なのに数字は前日のまま（数字が合って見えない）
+  //     ・前日終値＝当日値となり goldDiff=0（前日比が消える）
+  //   という誤表示になる。そこで「暦日は変わったが値が前日最終値と同じ」＝
+  //   まだ当日価格が出ていない、と判断し、前回スナップショットを丸ごと据え置く
+  //   （日付ラベルも前営業日のまま）。値が実際に動いた＝当日価格が公表された
+  //   ときだけ日付・前日比を確定させる。これで前日比が0へ化けることはない。
+  const isNewDay = prevLast && prevLast.date && prevLast.date !== iso;
+  const sameValue = prevLast && prevLast.gold === gold && prevLast.pt1000 === pt1000;
+  if (isNewDay && sameValue) {
+    console.log("[update-rates] 暦日は変わったが田中はまだ当日価格未公表（前日と同値）→ 前回スナップショット据え置き");
+    return; // rates.json は変更しない（誤った日付前進・前日比0化を防ぐ）
+  }
+
   let prevClose = prev.prevClose || prev.prevDay || null;
-  if (prevLast && prevLast.date && prevLast.date !== iso) {
-    prevClose = prevLast; // 新しい日：前日クローズ＝前日最後の値
+  if (isNewDay) {
+    prevClose = prevLast; // 当日価格が公表された新しい営業日：前日クローズ＝前日最後の値
   }
   if (!prevClose || prevClose.gold == null) prevClose = { date: iso, gold, pt1000 };
 
