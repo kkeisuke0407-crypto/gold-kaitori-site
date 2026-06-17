@@ -112,7 +112,7 @@ function track(eventName, params) {
   var p = withAdContext(params);
   try {
     if (window.dataLayer) window.dataLayer.push({ event: eventName, ...(p || {}) });
-    if (typeof gtag === "function") gtag("event", eventName, p || {});
+    if (typeof gtag === "function") gtag("event", eventName, Object.assign({ transport_type: "beacon" }, p || {}));
   } catch (_) {}
   try { if (window.__trackDebug) window.__trackDebug(eventName, p); } catch (_) {}
 }
@@ -221,9 +221,9 @@ function wireTrackedLink(el) {
       track(convEvent, {
         ...params,
         event_callback: navigate,
-        event_timeout: 300
+        event_timeout: 1000
       });
-      window.setTimeout(navigate, 300);
+      window.setTimeout(navigate, 1000);
       return;
     }
 
