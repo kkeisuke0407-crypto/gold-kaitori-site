@@ -1028,7 +1028,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
     function track(name, params){
       try{ if(window.dataLayer) window.dataLayer.push({event:name, ...(params||{})});
-        if(typeof gtag==="function") gtag("event", name, params||{}); }catch(_){}
+        if(typeof gtag==="function") gtag("event", name, Object.assign({}, params||{}, { transport_type:"beacon" })); }catch(_){}
     }
     function affLink(raw){
       if(!raw || raw === "#") return "#";
@@ -1056,15 +1056,15 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
         // 修飾キー/中クリック（新規タブ等）は既定動作のまま、イベントだけ送って終了
         var __plain = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && (e.button===0 || e.button===undefined);
-        if(!__plain){ if(typeof gtag==="function") gtag("event", __cv, params); return; }
-        // 通常クリック：送信完了後に遷移（最大300ms・送れたら即）して取りこぼし防止
+        if(!__plain){ if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" })); return; }
+        // 通常クリック：beacon送信＋送信完了で遷移（最大1000ms保険）。遷移してもsendBeaconで届く
         e.preventDefault();
         var __navigated=false;
         function __go(){ if(__navigated) return; __navigated=true; window.location.href = url; }
         if(typeof gtag==="function"){
-          gtag("event", __cv, Object.assign({}, params, { event_callback: __go, event_timeout: 300 }));
+          gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon", event_callback: __go, event_timeout: 1000 }));
         } else { __go(); }
-        setTimeout(__go, 300);
+        setTimeout(__go, 1000);
       });
     });
     // スマホ下部固定CTA：FVを過ぎたら表示
