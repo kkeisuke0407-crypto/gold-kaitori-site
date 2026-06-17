@@ -1006,22 +1006,17 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         var tn = el.getAttribute("data-track") || "";
         var isPhone = tn.indexOf("phone")>=0;
         var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp4", link_url:url };
-        // 店別イベント：どの社の発火か一目で分かる（manekiya_click / otakaraya_click / buraiba_click。web/phoneは cta_type）
-        track(key + "_click", params);
-        // CVはまねきや・おたからやのみ。ブラリバは公式直リンク(報酬なし)のため gold_kaitori_affiliate_click から除外
+        // CVのみ送信（店別イベントは廃止。内訳は affiliate_key で分析）
+        // まねきや・おたからや＝成果CV／ブラリバ等＝非成果(参考)クリック
         var __cv = (key === "manekiya" || key === "otakaraya") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
-        // 修飾キー/中クリック（新規タブ等）は既定動作のまま、イベントだけ送って終了
+        if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
+        // 修飾キー/中クリック（新規タブ等）は既定動作のまま（beaconで送信済み）
         var __plain = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && (e.button===0 || e.button===undefined);
-        if(!__plain){ if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" })); return; }
-        // 通常クリック：beacon送信＋送信完了で遷移（最大1000ms保険）。遷移してもsendBeaconで届く
+        if(!__plain) return;
+        // 通常クリック：beaconで送信済み → 少し待ってから遷移
         e.preventDefault();
-        var __navigated=false;
-        function __go(){ if(__navigated) return; __navigated=true; window.location.href = url; }
-        if(typeof gtag==="function"){
-          gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon", event_callback: __go, event_timeout: 1000 }));
-        } else { __go(); }
-        setTimeout(__go, 1000);
+        setTimeout(function(){ window.location.href = url; }, 300);
       });
     });
     // スマホ下部固定CTA：FVを過ぎたら表示

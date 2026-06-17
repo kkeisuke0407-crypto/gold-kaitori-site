@@ -187,10 +187,9 @@ function wireTrackedLink(el) {
     const isHero = trackName === "fv_hero";
     // CVイベント名：ヒーローだけ別イベントにして、Adsのコンバージョン(gold_kaitori_affiliate_click)から除外。
     const convEvent = isHero ? "gold_kaitori_hero_click" : "gold_kaitori_affiliate_click";
+    // 電話/WEBのファネル指標のみ（店別イベントは廃止。内訳は affiliate_key で分析）
     if (trackName.indexOf("phone") >= 0) {
       fireFunnel("phone_click", { track_name: trackName });
-    } else if (affiliateKey === "manekiya" && !isHero) {
-      fireFunnel("manekiya_click", { track_name: trackName });
     }
     const params = {
       track_name: el.getAttribute("data-track") || "",
@@ -211,19 +210,9 @@ function wireTrackedLink(el) {
 
     if (isPrimaryClick && isOutboundLink) {
       event.preventDefault();
-      let didNavigate = false;
-      const navigate = function () {
-        if (didNavigate) return;
-        didNavigate = true;
-        window.location.href = destination;
-      };
-
-      track(convEvent, {
-        ...params,
-        event_callback: navigate,
-        event_timeout: 1000
-      });
-      window.setTimeout(navigate, 1000);
+      // CVは track() 経由で transport_type:"beacon" 送信済み → 少し待ってから遷移
+      track(convEvent, params);
+      window.setTimeout(function () { window.location.href = destination; }, 300);
       return;
     }
 
