@@ -1,0 +1,1106 @@
+---
+const PAGE_TITLE = "18金ネックレス30gはいくら？買取相場・今日の価格｜高額買取おすすめTOP3";
+const PAGE_DESC = "18金(K18)ネックレス30gが今いくらで売れるか、当日の金相場で自動計算。手数料0円・査定だけOKの高額買取店を、まねきや・おたからや・ブラリバで比較。切れた・古い・刻印が薄いネックレスもまずは無料査定。";
+const CANONICAL = "https://kaitori.hakobu-family.com/k18-necklace-30g/";
+const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/og-gold.webp";
+
+import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
+const rates = await getRates();
+// 重さ別の参考買取額（既定はK18基準）
+const goldEx = (w, karat = rates.k18) => `約${Math.round(karat * w * 0.9).toLocaleString("ja-JP")}〜${Math.round(karat * w).toLocaleString("ja-JP")}円`;
+// 重さ別の参考買取額（万円表示・既定はK18基準）
+const goldExMan = (w, karat = rates.k18) => {
+  const fmt = (v) => {
+    const man = v / 10000;
+    return man >= 10 ? Math.round(man) : Math.round(man * 10) / 10;
+  };
+  return `約${fmt(karat * w * 0.9)}〜${fmt(karat * w)}万円`;
+};
+// キャンペーン残日数（まねきや 6/30まで）
+const campEnd = new Date('2026-06-30T23:59:59+09:00');
+const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
+const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
+
+const faqJsonLd = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": [
+    ["金は1点だけでも査定できますか？", "はい、1点からでも無料で査定してもらえます。ネックレス1本・指輪1個でも断られることはほとんどありません。"],
+    ["K18のネックレスはいくらで売れますか？", "重さ×その日のグラム単価がおおよその目安です。本日のK18は約" + yen(rates.k18) + "/gで、例えば10gのネックレスなら" + goldEx(10) + "ほどが目安です（状態・デザインで変わります）。"],
+    ["壊れた金・切れたネックレスでも売れますか？", "売れます。壊れていても曲がっていても、金としての価値は重さで変わりません。地金として査定されます。"],
+    ["刻印（K18・750など）がない金でも買取できますか？", "X線などの成分分析で純度を調べてもらえるため、刻印がなくても査定・買取できます。"],
+    ["金貨・インゴット（地金）も売れますか？", "売れます。メイプルリーフやウィーン金貨などの金貨、インゴットも相場に応じて査定されます。"],
+    ["金歯やメダル、仏具の金も買取できますか？", "買取できます。金歯（差し歯）・記念メダル・仏具など、金が含まれていれば査定対象です。"],
+    ["鑑定書や保証書がなくても大丈夫ですか？", "なくても査定・買取できます。あれば査定がスムーズになることがありますが、必須ではありません。"],
+    ["査定後にキャンセルできますか？", "ほとんどのお店で、査定額に納得できなければ無料でキャンセルできます。売るかは金額を見てから決められます。"],
+    ["出張査定は無料ですか？", "今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各店の公式でご確認ください。"],
+    ["どのタイミングで売るのがよいですか？", "金相場は毎日動き、今は過去最高水準で推移しています。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。"]
+  ].map(([q, a]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } }))
+};
+
+// アフィリエイトリンク（manekiya / otakaraya は実リンク、buraibaは要設定）
+const AFF_MANEKIYA = "https://ad-fam.com/ad/p/r?_site=49248&_article=16522";
+const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{PAGE_TITLE}</title>
+  <meta name="description" content={PAGE_DESC} />
+  <link rel="canonical" href={CANONICAL} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={PAGE_TITLE} />
+  <meta property="og:description" content={PAGE_DESC} />
+  <meta property="og:url" content={CANONICAL} />
+  <meta property="og:image" content={OGP_IMAGE} />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" /></noscript>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+  <script is:inline defer src="/cta-hours.js"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+  </script>
+  <script is:inline>
+    (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+      t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wxnujpnscp");
+  </script>
+</head>
+<body data-landing-intent="lp3"
+  data-aff-manekiya={AFF_MANEKIYA} data-aff-otakaraya={AFF_OTAKARAYA} data-aff-buraiba="https://brandrevalue.com/">
+
+  <main>
+    <!-- 01 FV -->
+    <section class="fv">
+      <div class="wrap">
+        <!-- ヒーロー画像 -->
+        <h1 class="fv-hero-wrap">
+          <a href="#" class="fv-hero-link" data-aff="manekiya" data-track="fv_hero" rel="nofollow sponsored"><img src="/images/fv-hero-k18-30g.webp" alt="18金ネックレス30gはいくら？今日の買取相場と高額買取おすすめTOP3｜まねきや・おたからや・ブラリバ" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" /></a>
+        </h1>
+
+        <div class="fv-datebadge">
+          <span class="fv-db-tag"><i class="fv-db-dot"></i>最新版</span>
+          <span class="fv-db-date">{todayLabel}</span>
+          <span class="fv-db-txt">📍 全国買取強化中</span>
+        </div>
+
+
+        <!-- 金相場チップ -->
+        <div class="rate-chip">
+          <span><i class="live-dot"></i>本日の金買取相場</span>
+          <b>K24 {yen(rates.k24)}/g</b><b>K18 {yen(rates.k18)}/g</b>
+          <small>{rates.updatedAt}</small>
+        </div>
+
+        <div class="fv-tbl-head"><span class="fv-tbl-ttl">高く売れるのはどこ？ 金・貴金属買取おすすめ3社比較</span><i class="pr">PR</i></div>
+        <div class="fv-tbl-wrap">
+          <table class="fv-tbl">
+            <thead>
+              <tr>
+                <th class="fv-th fv-th1 fv-th-gold"><span class="fv-rk-badge">👑 1位</span>まねきや<br /><a href="#" data-aff="manekiya" data-track="fv_tbl_bn_manekiya" rel="nofollow sponsored" style="display:block;"><img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
+                <th class="fv-th"><span class="fv-rk-badge2">🥈 2位</span>おたからや<br /><a href="#" data-aff="otakaraya" data-track="fv_tbl_bn_otakaraya" rel="nofollow sponsored" style="display:block;"><img src="/images/300_250-2.jpg" alt="おたからや" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
+                <th class="fv-th"><span class="fv-rk-badge3">🥉 3位</span>ブラリバ<br /><a href="#" data-aff="buraiba" data-track="fv_tbl_bn_buraiba" rel="nofollow sponsored" style="display:block;"><img src="/images/300_250-3.jpg" alt="ブラリバ" style="width:100%;max-width:110px;height:auto;display:block;margin:4px auto 0;border-radius:4px;" loading="lazy" /></a></th>
+              </tr>
+            </thead>
+            <tbody>
+                            <tr class="cmp-band"><td colspan="3">買取価格</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>高価買取に強み<br />（編集部評価）</b></td>
+                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
+                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
+              </tr>
+                            <tr class="cmp-band"><td colspan="3">手数料</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>0円（完全無料）</b></td>
+                <td class="fv-td"><span class="mk ok">〇</span>0円</td>
+                <td class="fv-td"><span class="mk ok">〇</span>0円</td>
+              </tr>
+                            <tr class="cmp-band"><td colspan="3">当サイト限定キャンペーン</td></tr>
+              <tr class="fv-tr-camp">
+                <td class="fv-td fv-td1">
+                  {campDays > 0 ? (
+                    <>
+                      <span class="camp-badge">査定・出張・キャンセル料0円</span><br />
+                      <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
+                    </>
+                  ) : (
+                    <b>公式キャンペーン<br />要確認</b>
+                  )}
+                </td>
+                <td class="fv-td"><span class="mk ok">〇</span><b>買取価格<br />最大20%UP</b></td>
+                <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
+              </tr>
+                            <tr class="cmp-band"><td colspan="3">壊れた品でもOK</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>金歯・壊れた金<br />断られた物もOK</td>
+                <td class="fv-td"><span class="mk good">◎</span>他社で断られた<br />物でもOK</td>
+                <td class="fv-td"><span class="mk tri">△</span>要相談</td>
+              </tr>
+                            <tr class="cmp-band"><td colspan="3">査定方法</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>店舗・宅配<br />・出張</td>
+                <td class="fv-td"><span class="mk ok">〇</span>店舗・出張</td>
+                <td class="fv-td"><span class="mk good">◎</span>店舗・宅配<br />・出張</td>
+              </tr>
+              <tr class="fv-tr-cta">
+                <td class="fv-td fv-td1">
+                  <small class="cta-sub">＼査定だけでもOK／</small>
+                  <a href="#" class="btn btn-official sm" data-aff="manekiya" data-track="fv_tbl_official" rel="nofollow sponsored">公式サイト</a>
+                  {campDays > 0 && <p class="countdown">⏳ キャンペーン終了まで<br /><b>あと{campDays}日！</b></p>}
+                </td>
+                <td class="fv-td">
+                  <a href="#" class="btn btn-ghost sm" data-aff="otakaraya" data-track="fv_tbl_otakaraya" rel="nofollow sponsored">公式サイト</a>
+                </td>
+                <td class="fv-td">
+                  <a href="#" class="btn btn-ghost sm" data-aff="buraiba" data-track="fv_tbl_buraiba" rel="nofollow sponsored">公式サイト</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+              </div>
+    </section>
+
+    <!-- 02 相場 -->
+    <section class="sec sec-mint" id="rate">
+      <div class="wrap">
+        <!-- 相場ヒーロー -->
+        <div class="rate-hero">
+          <p class="rate-hero-ttl"><i class="live-dot"></i>本日の金買取相場<span class="rate-hero-badge">📈 歴史的高値圏</span></p>
+          <div class="rate-hero-main">
+            <div class="rh-card rh-hot">
+              <span class="rh-label">K24（純金）</span>
+              <span class="rh-price"><span class="rh-num">{yen(rates.k24)}</span><small>/g</small></span>
+              {rates.goldDiff !== 0 && (<span class={"rate-diff " + (rates.goldDiff>=0?"up":"down")}>前日比 {rates.goldDiff>=0?"+":"−"}{Math.abs(rates.goldDiff).toLocaleString("ja-JP")}円</span>)}
+            </div>
+            <div class="rh-card">
+              <span class="rh-label">K18（18金）</span>
+              <span class="rh-price"><span class="rh-num">{yen(rates.k18)}</span><small>/g</small></span>
+              <span class="rh-note">ネックレス・指輪に多い純度</span>
+            </div>
+          </div>
+          <details class="rate-more">
+            <summary>K22・K20・K14・K10 など 他の純度も見る</summary>
+            <div class="rate-grid-mini">
+              <div><span>K22</span><b>{yen(rates.k22)}</b></div>
+              <div><span>K21.6</span><b>{yen(rates.k216)}</b></div>
+              <div><span>K20</span><b>{yen(rates.k20)}</b></div>
+              <div><span>K18WG</span><b>{yen(rates.k18wg)}</b></div>
+              <div><span>K14</span><b>{yen(rates.k14)}</b></div>
+              <div><span>K14WG</span><b>{yen(rates.k14wg)}</b></div>
+              <div><span>K10</span><b>{yen(rates.k10)}</b></div>
+              <div><span>K9</span><b>{yen(rates.k9)}</b></div>
+            </div>
+          </details>
+          <p class="rate-hero-date">{rates.updatedAt}・田中貴金属の店頭買取単価より</p>
+          <p class="rate-purity-note">※各純度は純金・純プラチナの買取単価から純度比で算出した参考値です。正確な金額は店舗でご確認ください。</p>
+        </div>
+
+        <!-- 参考買取額 -->
+        <div class="ref-price">
+          <h3 class="ref-ttl">あなたの18金ネックレス、今ならいくら？<span>K18の参考買取額（重さ別の目安）</span></h3>
+          <ul class="ref-list">
+            <li><span class="ref-item">18金ネックレス<em>約30g・人気の重さ</em></span><b>{goldExMan(30)}</b></li>
+            <li><span class="ref-item">18金ネックレス<em>約50g</em></span><b>{goldExMan(50)}</b></li>
+            <li><span class="ref-item">18金ネックレス<em>約20g</em></span><b>{goldExMan(20)}</b></li>
+            <li><span class="ref-item">18金ネックレス<em>約10g</em></span><b>{goldExMan(10)}</b></li>
+            <li><span class="ref-item">18金ブレスレット<em>約20g</em></span><b>{goldExMan(20)}</b></li>
+            <li><span class="ref-item">18金リング<em>約3g</em></span><b>{goldExMan(3)}</b></li>
+          </ul>
+          <p class="note">※18金(K18)の本日単価×重量の概算。切れた・絡まった・刻印が薄いネックレスもOK。留め具や地金以外のパーツ、相場変動で前後します。正確な金額は店舗でご確認ください。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 高く売るコツ -->
+    <section class="sec" id="point">
+      <div class="wrap">
+        <div class="sec-head"><h2>高く売るための3つのポイント</h2><p>お店選びの前に、これだけ知っておきましょう。</p></div>
+        <a href="#" class="point-img" data-aff="manekiya" data-track="point_img" rel="nofollow sponsored">
+          <img src="/images/point-3diff-gold.webp" alt="金を売る前に知っておきたい3つの差｜売るタイミング・相見積もり・キャンペーン｜まねきや 電話申込で買取金額最大30%UP" width="1024" height="1536" loading="lazy" />
+        </a>
+        <a href="#" class="camp2-cta" data-aff="manekiya" data-track="point_official" rel="nofollow sponsored">
+          買取価格30％UPの条件を確認する
+        </a>
+        <p class="point-cta-note">9時〜21時（年中無休）／査定だけ・相談だけでもOK</p>
+      </div>
+    </section>
+
+    <!-- 05 ランキング -->
+    <section class="sec" id="ranking">
+      <div class="wrap">
+        <div class="sec-head"><h2>金・貴金属 高額買取ランキング</h2><p>編集部がおすすめする3社をくわしく紹介します。</p></div>
+
+        <!-- 1位 -->
+        <article class="rk rk-1">
+          <div class="rk-editor-pick">編集部イチオシ</div>
+          <div class="rk-ribbon"><i>👑</i>第1位</div>
+          <div class="rk-head"><h3>まねきや</h3><span class="rk-star">★4.8</span><i class="pr">PR</i></div>
+          <a href="#" data-aff="manekiya" data-track="rk_head_bn" rel="nofollow sponsored" style="display:block;margin:10px 0;">
+            <img src="/images/manekiya_bn.png" alt="まねきや" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
+          </a>
+          <p class="rk-for">30gクラスの18金ネックレスを、手取りを減らさずできるだけ高く売りたい人に</p>
+          <table class="rk-spec">
+            <tbody>
+              <tr class="rs-head"><th>買取価格</th><th>買取方法</th><th>状態不良<br />の品物</th><th>査定士</th></tr>
+              <tr class="rs-val">
+                <td><span class="rs-ic">◎</span>業界最高<br />水準＋α</td>
+                <td><span class="rs-ic">◎</span>店舗・出張<br />・宅配</td>
+                <td><span class="rs-ic">◎</span>査定可能</td>
+                <td><span class="rs-ic">◎</span>鑑定スペ<br />シャリスト</td>
+              </tr>
+              <tr class="rs-head"><th colspan="2">対応スピード</th><th colspan="2">キャンペーン</th></tr>
+              <tr class="rs-val">
+                <td colspan="2"><span class="rs-ic">◎</span>即日現金化</td>
+                <td colspan="2"><b class="rs-camp">買取金額<br />最大<em>30%</em>UP</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="rk-osusume">
+            <div class="rk-osusume-h">💡 おすすめポイント</div>
+            <ul>
+              <li><span class="chk">✓</span><span><mark>査定料・出張料・キャンセル料が0円</mark></span></li>
+              <li><span class="chk">✓</span><span>電話申し込みで<mark>最大30%買取額UP</mark></span></li>
+              <li><span class="chk">✓</span><span><mark>1,000万円以上</mark>でもその場で現金支払い</span></li>
+              <li><span class="chk">✓</span><span>他店で断られた金・貴金属も<mark>買取可能</mark></span></li>
+              <li><span class="chk">✓</span><span><mark>売るのは査定金額を聞いてからでOK</mark></span></li>
+            </ul>
+          </div>
+          <a href="#" class="btn btn-official full" data-aff="manekiya" data-track="rk_manekiya_official" rel="nofollow sponsored">買取価格30％UPの条件を確認する</a>
+        </article>
+
+        <!-- まねきや口コミ -->
+        <!-- まねきや 金買取実績 -->
+        <img class="rk-zisseki" src="/images/kin_zisseki.webp" alt="まねきやの金・貴金属 買取実績" width="1024" height="1536" loading="lazy" decoding="async" />
+        <div class="rk-zisseki-notes">
+          <p>※記載の金額は、当時の買取価格を現在の金相場の上昇率に応じて再計算した参考価格です。</p>
+          <p>※実際の買取価格は、お品物の状態や日々の相場変動により大きく異なります。正確な金額については「まねきや」に直接ご確認ください。</p>
+          <p>※掲載している金額はあくまで参考であり、実際の買取金額を保証するものではございません。</p>
+        </div>
+
+        <div class="rk-voice-block">
+          <div class="rk-voice-ttl">まねきやを利用したお客様の声</div>
+          <div class="rk-voice-list">
+            <div class="voice voice-lg">
+              <span class="stars">★★★★★</span>
+              <b class="voice-ttl">何でも相談できるスタッフさんで、安心！</b>
+              <p>友人の紹介でまねきやさんへ。初めは緊張しましたが、疑問にもとても詳しく親切に答えてくださり、安心して取引できました。無理な要望にも嫌な顔ひとつせず交渉してくださり、予想より高く買い取っていただいて大変満足しています。</p>
+              <small>ブランド品・貴金属</small>
+            </div>
+            <div class="voice voice-lg">
+              <span class="stars">★★★★★</span>
+              <b class="voice-ttl">やっと実家の片づけが進みました。</b>
+              <p>父が集めていた古銭や金貨・銀貨がそのままになっていましたが、相談の電話に丁寧に対応いただき来店。店内は清潔でおしゃれ、説明もしっかりしていて好印象でした。古い金貨でも思っていたより高い値段がつき、出張買取にも来ていただけて助かりました。</p>
+              <small>古銭・貴金属</small>
+            </div>
+            <div class="voice voice-lg">
+              <span class="stars">★★★★★</span>
+              <b class="voice-ttl">X線での詳しい検査。査定・買取額にも大満足！</b>
+              <p>X線を使って詳しく成分を検査してくれるため、刻印のないものでも正確に査定してもらえました。丁寧に説明してくれて、買取額にも大満足。また利用したいと思います。</p>
+              <small>指輪・貴金属</small>
+            </div>
+            <div class="voice"><span class="stars">★★★★★</span><p>「切れたネックレスを売りました。手数料0円で、思ったより高くて安心」</p><small>50代・女性／K18ネックレス</small></div>
+            <div class="voice"><span class="stars">★★★★★</span><p>「金相場が上がっているとのことで、良い金額で買ってもらえて満足です。」</p><small>30代・女性／K18リング2本</small></div>
+          </div>
+          <p class="note">※まねきや公式掲載のお客様の声を一部要約。個人の感想です。査定額・条件には個人差があります。</p>
+        </div>
+
+
+
+        <!-- 2位 -->
+        <article class="rk rk-2">
+          <div class="rk-ribbon"><i>🥈</i>第2位</div>
+          <div class="rk-head"><h3>おたからや</h3><span class="rk-star">★4.6</span><i class="pr">PR</i></div>
+          <a href="#" data-aff="otakaraya" data-track="rk_head_bn" rel="nofollow sponsored" style="display:block;margin:10px 0;">
+            <img src="/images/300_250-2.jpg" alt="おたからや" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
+          </a>
+          <p class="rk-for">大手のお店に、直接持っていって相談したい人に</p>
+          <ul class="rk-reasons">
+            <li>世界<b>1,820店舗</b>・買取専門26年の大手で安心</li>
+            <li>大手なので高めの金額が出ることも</li>
+            <li>査定料・手数料・出張料が0円</li>
+          </ul>
+          <div class="rk-meta">
+            <div><span>対応品目</span><b>金・貴金属・金貨・宝石付きもOK</b></div>
+            <div><span>買取方法</span><b>店頭・出張</b></div>
+            <div><span>キャンペーン</span><b>最大20%UP（上限10万円・対象外店舗あり／〜6/21）</b></div>
+          </div>
+          <a href="#" class="btn btn-ghost full" data-aff="otakaraya" data-track="rk_otakaraya" rel="nofollow sponsored">おたからやで無料査定する</a>
+        </article>
+
+        <!-- 3位 -->
+        <article class="rk rk-3">
+          <div class="rk-ribbon"><i>🥉</i>第3位</div>
+          <div class="rk-head"><h3>ブラリバ</h3><span class="rk-star">★4.4</span><i class="pr">PR</i></div>
+          <a href="#" data-aff="buraiba" data-track="rk_head_bn" rel="nofollow sponsored" style="display:block;margin:10px 0;">
+            <img src="/images/300_250-3.jpg" alt="ブラリバ" style="width:100%;max-width:320px;height:auto;display:block;margin:0 auto;border-radius:8px;" loading="lazy" />
+          </a>
+          <p class="rk-for">金にダイヤや宝石・ブランドが付いたものを、石ごと評価してほしい人に</p>
+          <ul class="rk-reasons">
+            <li>金地金＋デザインや宝石も合わせて見てくれる</li>
+            <li>買取手数料・査定料が0円</li>
+            <li>宅配キットで送るだけのらくらく査定</li>
+          </ul>
+          <div class="rk-meta">
+            <div><span>対応品目</span><b>金・宝石付き・ブランドジュエリー</b></div>
+            <div><span>買取方法</span><b>店頭・出張・宅配</b></div>
+            <div><span>キャンペーン</span><b>公式ページでご確認ください</b></div>
+          </div>
+          <a href="#" class="btn btn-ghost full" data-aff="buraiba" data-track="rk_buraiba" rel="nofollow sponsored">ブラリバで無料査定する</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 1位深掘り -->
+    <section class="sec sec-mint" id="deep">
+      <div class="wrap">
+        <div class="sec-head"><h2>なぜ「まねきや」が1位なの？</h2></div>
+        <div class="deep">
+          <ul class="deep-merit">
+            <li><b>手数料0円</b>で、提示された金額をそのまま受け取りやすい</li>
+            <li><b>X線の機械</b>で、刻印のない金・古い金製品も純度を正確に調べてくれる</li>
+            <li>海外にも売り先を持っていて、高めの金額が出やすい</li>
+            <li>ネックレス・指輪・金貨・地金・金歯・壊れた金もOK</li>
+          </ul>
+          <div class="flow">
+            <h3>査定のかんたんな流れ</h3>
+            <ol>
+              <li><b>申し込み</b><span>WEB（1分ほど）か電話で予約</span></li>
+              <li><b>査定</b><span>店頭・出張・宅配から選べる</span></li>
+              <li><b>金額を確認</b><span>納得したら、その場で現金</span></li>
+            </ol>
+            <p class="flow-fee">査定料・出張料・キャンセル料はすべて<b>0円</b>。売るかは金額を見てから決められます。</p>
+          </div>
+        </div>
+        <div class="cta-pair">
+          <a href="#" class="btn btn-phone" data-aff="manekiya" data-track="deep_phone" rel="nofollow sponsored"><i>☎</i>まずは無料で査定を聞く</a>
+          <a href="#" class="btn btn-web" data-aff="manekiya" data-track="deep_web" rel="nofollow sponsored">WEBで査定予約する</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 不安解消 -->
+    <section class="sec sec-cream" id="worry">
+      <div class="wrap">
+        <div class="sec-head"><h2>こんな18金ネックレスでも売れる？</h2></div>
+        <div class="fits">
+          <p class="fits-ttl">こんな18金ネックレスも査定対象です</p>
+          <ul>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 8 Q16 22 26 8" stroke="#c8a000" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="16" cy="20" r="2.4" fill="#c8a000"/></svg>
+              金のネックレス
+            </li>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12 Q11 18 14 13" stroke="#c8a000" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M18 13 Q21 18 27 12" stroke="#c8a000" stroke-width="2.5" stroke-linecap="round" fill="none"/><text x="16" y="24" text-anchor="middle" font-size="9" fill="#c00" font-family="sans-serif">!</text></svg>
+              切れた・壊れた金
+            </li>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="9" stroke="#c8a000" stroke-width="2.5"/><circle cx="16" cy="16" r="5" stroke="#c8a000" stroke-width="1.2"/><text x="16" y="19" text-anchor="middle" font-size="6" fill="#c8a000" font-family="sans-serif">¥</text></svg>
+              金貨・コイン
+            </li>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 13 L24 13 L26 21 L6 21 Z" fill="#c8a000" opacity=".85"/><text x="16" y="19" text-anchor="middle" font-size="5" fill="#fff" font-family="sans-serif">Au</text></svg>
+              インゴット（地金）
+            </li>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="16" r="6" stroke="#c8a000" stroke-width="2.5"/><circle cx="21" cy="16" r="6" stroke="#c8a000" stroke-width="2.5"/></svg>
+              喜平チェーン
+            </li>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 7 Q9 14 12 22 Q16 26 20 22 Q23 14 20 7 Z" fill="#c8a000" opacity=".85"/></svg>
+              金歯・差し歯
+            </li>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="8" stroke="#c8a000" stroke-width="2.5"/><text x="16" y="19" text-anchor="middle" font-size="6" fill="#999" font-family="sans-serif">刻印?</text></svg>
+              刻印が読めない金
+            </li>
+            <li>
+              <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="16,5 18.5,11 25,11 19.5,15 21.5,22 16,18 10.5,22 12.5,15 7,11 13.5,11" fill="#c8a000" opacity=".85"/></svg>
+              宝石・ダイヤ付きの金
+            </li>
+          </ul>
+        </div>
+        <div class="worry-grid">
+          <div class="worry"><h3>切れた・壊れた金でも売れる？</h3><p><mark>売れます</mark>。壊れていても曲がっていても、金は重さで査定されます。</p></div>
+          <div class="worry"><h3>刻印（K18・750）がなくても売れる？</h3><p><mark>売れます</mark>。X線などで純度を調べてもらえるので、刻印がなくても査定できます。</p></div>
+          <div class="worry"><h3>金歯やメダルの金も売れる？</h3><p><mark>売れます</mark>。金が含まれていれば、金歯・記念メダル・仏具なども査定対象です。</p></div>
+          <div class="worry"><h3>鑑定書・保証書がなくても売れる？</h3><p><mark>なくても大丈夫</mark>です。あれば査定がスムーズになることもあります。</p></div>
+          <div class="worry"><h3>宝石・ダイヤ付きは別で評価される？</h3><p>石の種類や大きさによっては、金地金に<mark>上乗せされて高くなる</mark>ことがあります。</p></div>
+          <div class="worry"><h3>古いデザインでも売れる？</h3><p><mark>売れます</mark>。デザインが古くても、金としての価値はしっかりあります。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 FAQ -->
+    <section class="sec" id="faq">
+      <div class="wrap">
+        <div class="sec-head"><h2>よくある質問</h2></div>
+        <div class="faq">
+          <details open><summary>18金ネックレス30gはいくらで売れますか？</summary><p>重さ×その日のグラム単価が目安です。本日のK18は約{yen(rates.k18)}/gなので、30gなら{goldEx(30)}ほどが目安です（相場は毎日変動・状態で前後します）。確定額は無料査定でご確認ください。</p></details>
+          <details><summary>刻印が薄くてK18か分かりません。査定できますか？</summary><p>できます。X線などの成分分析で純度を正確に測れるため、刻印が消えていてもK18かどうか調べてもらえます。</p></details>
+          <details><summary>ネックレスが切れていても値段は下がりますか？</summary><p>地金（金そのもの）の価値で買い取るため、切れていても大きくは下がりません。重さがあればしっかり値段がつきます。</p></details>
+          <details><summary>壊れた金・切れたネックレスも売れますか？</summary><p>売れます。壊れていても曲がっていても、金は重さで査定されるので価値は変わりません。</p></details>
+          <details><summary>刻印（K18・750）がない金でも買取できますか？</summary><p>X線などの成分分析で純度を調べてもらえるため、刻印がなくても問題なく買取できます。</p></details>
+          <details><summary>金貨やインゴット（地金）も売れますか？</summary><p>売れます。メイプルリーフなどの金貨やインゴットも、その日の相場に応じて査定されます。</p></details>
+          <details><summary>金歯やメダル、仏具の金も買取できますか？</summary><p>買取できます。金が含まれていれば、金歯・記念メダル・仏具なども査定対象です。</p></details>
+          <details><summary>鑑定書や保証書がなくても大丈夫ですか？</summary><p>なくても査定・買取できます。あれば査定がスムーズになることがあります。</p></details>
+          <details><summary>査定後にキャンセルできますか？</summary><p>多くのお店で、金額に納得できなければ無料でキャンセルできます。</p></details>
+          <details><summary>出張査定は無料ですか？</summary><p>今回紹介する店は出張料・査定料・キャンセル料が無料と案内されています。詳しくは各公式でご確認ください。</p></details>
+          <details><summary>どのタイミングで売るのがよいですか？</summary><p>金相場は毎日動き、今は過去最高水準で推移しています。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 最終CTA -->
+    <section class="sec sec-final" id="final">
+      <div class="wrap">
+        <h2>迷ったら、まずは1位の「まねきや」へ。</h2>
+        <p>金相場が過去最高水準の今のうちに、18金ネックレス30gが今いくらか、無料査定で金額だけでも確認しておきましょう。切れた・古いネックレスもOK。査定だけ・売らなくても大丈夫です。</p>
+        <!-- 締めバナー（まねきや・総合CTA） -->
+        <a href="#" class="final-banner" data-aff="manekiya" data-track="final_banner" rel="nofollow sponsored">
+          <img src="/images/fv-camp30.webp" alt="まねきや お電話申込の方限定 買取金額最大30%UP・買取手数料完全無料 今すぐ無料査定" width="1536" height="1024" loading="lazy" decoding="async" />
+        </a>
+        <p class="cta-note">無料・出張＆宅配OK・査定後に売らなくても大丈夫</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft-trust">
+        <p class="ft-trust-ttl">掲載1位「まねきや」運営会社情報</p>
+        <ul>
+          <li>運営：株式会社水野（2008年創業）</li>
+          <li>古物商許可番号：大阪府公安委員会 第621012100382号</li>
+          <li>AACD（日本流通自主管理協会）正会員 R-0100</li>
+          <li>プライバシーマーク・Pマーク取得</li>
+        </ul>
+      </div>
+      <p class="ft-note">当ページは広告（PR）を含む比較・紹介ページです。掲載の◎○△や順位・「高価買取」等の評価は当編集部の主観的な判断によるもので、買取価格の優劣を保証するものではありません。「最大30%UP」などのキャンペーンは各社公式の内容に基づく表記で、適用条件・上乗せ率の上限・対象品目・実施期間があり、予告なく変更・終了する場合があります。買取価格・手数料・キャンペーンの適用可否など最新かつ正確な情報は、必ず各社の公式ページでご確認ください。</p>
+      <nav><a href="/privacy/">プライバシーポリシー</a><a href="/disclosure/">広告掲載について</a><a href="/operator/">運営者情報</a></nav>
+      <small>金・貴金属買取比較</small>
+    </div>
+  </footer>
+
+  <!-- スマホ下部固定CTA -->
+  <div class="sticky" data-sticky hidden>
+    <a href="#" class="sticky-official" data-aff="manekiya" data-track="sticky_official" rel="nofollow sponsored">買取価格30％UPの条件を確認する</a>
+  </div>
+
+  <style>
+    /* ▼ レイアウト安全ガード（正常時は無影響・はみ出しのみ防止） */
+    img,svg,video,table{ max-width:100%; }
+    .btn,.camp2-cta,.rate-cta,.camp-img,.final-banner,.rk-camp-img,.fv-banner-link{ max-width:100%; }
+    .note,.rate-purity-note,.rate-note-ingot,.rate-cta-main,.rate-cta-sub,.fv-rate-ttl,.fv-tbl-ttl{ overflow-wrap:break-word; }
+    .rate-grid>div,.cta-pair{ min-width:0; }
+    /* ▲ */
+    :root{
+      --bg:#fff; --mint:#EAF6F2; --cream:#FFF7EC; --green:#0E9E8E; --green-d:#0B8276; --green-dd:#0a6a60;
+      --ink:#23303A; --body:#4A5862; --sub:#8B98A1; --line:#E5EDEA; --gold:#F2B33D; --gold-d:#D9962A;
+      --coral:#FF7A59; --coral-d:#F26442; --star:#FFB02E; --hot:#E8604C;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; }
+    body{ background:var(--bg); color:var(--ink); font-family:"Noto Sans JP",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; padding-bottom:64px; line-height:1.7; }
+    [hidden]{ display:none !important; }
+    .wrap{ max-width:520px; margin:0 auto; padding:0 16px; }
+    b{ font-weight:900; }
+    .pr{ font-style:normal; font-size:10px; font-weight:700; color:var(--sub); border:1px solid var(--line); border-radius:4px; padding:1px 5px; }
+
+    /* ヘッダー */
+    .hd{ position:sticky; top:0; z-index:50; background:rgba(255,255,255,.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+    .hd-in{ max-width:520px; margin:0 auto; padding:9px 16px; display:flex; align-items:center; gap:8px; }
+    .hd-brand{ display:flex; align-items:center; gap:6px; font-weight:900; font-size:14px; }
+    .hd-mark{ width:26px; height:26px; border-radius:8px; background:linear-gradient(150deg,var(--green),var(--green-d)); color:#fff; font-size:11px; display:grid; place-items:center; }
+    .hd-cta{ margin-left:auto; background:var(--green-d); color:#fff; font-weight:900; font-size:13px; text-decoration:none; padding:8px 16px; border-radius:999px; }
+
+    /* ボタン共通 */
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 14px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .12s,box-shadow .12s; white-space:nowrap; font-size:15px; line-height:1.2; }
+    .btn:active{ transform:scale(.97); }
+    .btn i{ font-style:normal; }
+    .btn-web{ background:var(--green-d); color:#fff; }
+    /* 電話ボタン＝赤・キラキラ＋ポコポコで強調 */
+    .btn-phone{
+      position:relative; overflow:hidden;
+      background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff;
+      box-shadow:0 8px 0 #B0160F, 0 12px 18px rgba(224,31,31,.36);
+      border:2px solid #ffd9d4;
+      animation:pokopoko 1.15s ease-in-out infinite;
+    }
+    .btn-phone::after{ content:""; position:absolute; top:-30%; left:-70%; width:45%; height:160%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    .btn-phone:hover{ transform:translateY(-2px); box-shadow:0 10px 0 #B0160F, 0 16px 22px rgba(224,31,31,.4); }
+    @media (prefers-reduced-motion:reduce){ .btn-phone{ animation:none; } .btn-phone::after{ animation:none; display:none; } }
+    .btn-ghost{ background:#fff; color:var(--green-d); border:2px solid var(--green-d); box-shadow:none; }
+    /* 公式サイトCTA＝オレンジゴールドで強調＋ポコポコ＋光 */
+    .btn-official{ position:relative; overflow:hidden; background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff; border:2px solid #ffd9d4; box-shadow:0 6px 0 #B0160F, 0 10px 16px rgba(224,31,31,.36); animation:pokopoko 1.15s ease-in-out infinite; }
+    .btn-official::after{ content:""; position:absolute; top:-30%; left:-70%; width:45%; height:160%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    .btn-official:hover{ transform:translateY(-2px); }
+    /* 数字・CTAテキストの改行バランス調整（1文字だけ落ちるのを防止） */
+    .rh-price{ white-space:nowrap; }
+    .rate-grid-mini b,.rate-grid-mini span{ white-space:nowrap; }
+    .camp2-cta,.btn-official,.sticky-official,.rate-cta-main{ text-wrap:balance; }
+    .rate-hero-ttl,.ref-ttl,.sec-head h2,.sec-head p{ text-wrap:pretty; }
+    .aff-disabled{ opacity:.5; pointer-events:none; cursor:default; }
+    .btn.full{ display:flex; width:100%; margin-top:10px; }
+    .btn.sm{ min-height:42px; font-size:13px; padding:0 12px; box-shadow:none; }
+    .cta-pair{ display:flex; flex-direction:column; gap:10px; margin-top:18px; }
+    .cta-pair .btn{ width:92%; margin:0 auto; padding:0 16px; font-size:clamp(14px,4vw,16px); white-space:nowrap; }
+    .cta-pair .btn i{ font-size:14px; }
+    .cta-note{ text-align:center; font-size:12px; color:var(--sub); margin:8px 0 0; }
+
+    /* 01 FV */
+    .fv{ background:linear-gradient(180deg,#EAF6F2, #fff); padding:24px 0 34px; }
+
+    /* ① FV結論ボックス（最初の数秒で結論に答える・55歳以上も読める大きさ） */
+    .fv-conc{ background:#fff; border:2px solid var(--green); border-radius:16px; padding:16px 16px 14px; margin:14px 0; box-shadow:0 8px 22px rgba(14,120,100,.12); }
+    .fv-conc-ttl{ font-size:19px; font-weight:900; text-align:center; margin:0 0 12px; color:var(--ink); line-height:1.4; }
+    .fv-conc ul{ list-style:none; margin:0 0 14px; padding:0; display:grid; gap:9px; }
+    .fv-conc li{ font-size:16px; font-weight:700; padding-left:28px; position:relative; line-height:1.5; color:var(--ink); }
+    .fv-conc li::before{ content:"✓"; position:absolute; left:0; top:0; color:var(--green); font-weight:900; font-size:18px; }
+    .fv-conc li b{ color:var(--green-d); }
+    .fv-conc .cta-pair{ margin-top:0; }
+    /* ④ キャンペーンバナー（ポコポコ＋キラキラ） */
+    .fv-banner{ margin:14px 0; }
+    .fv-banner-link{ display:block; position:relative; border-radius:14px; overflow:hidden; box-shadow:0 10px 24px rgba(201,126,0,.32); animation:pokopoko 1.15s ease-in-out infinite; }
+    .fv-banner-link img{ width:100%; height:auto; display:block; }
+    .fv-banner-link::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.65), transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    @keyframes bannerShine{ 0%{ left:-70%; } 55%{ left:130%; } 100%{ left:130%; } }
+    .camp-img{ display:block; margin:0 0 16px; border-radius:14px; overflow:hidden; box-shadow:0 8px 20px rgba(183,28,22,.28); text-decoration:none; }
+    .camp-img img{ width:100%; height:auto; display:block; }
+
+    /* 背景画像バナー＋文字オーバーレイ */
+    .camp2{ margin:0 0 16px; }
+    .camp2-banner{
+      position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+      aspect-ratio:995/295; width:100%; padding:2.5% 6%; box-sizing:border-box;
+      background:url("/images/camp-banner-bg.webp") center/100% 100% no-repeat;
+      text-decoration:none; color:#fff; text-align:center; filter:drop-shadow(0 6px 14px rgba(183,28,22,.28));
+    }
+    .camp2-term{
+      display:inline-block; background:linear-gradient(180deg,#FFE9A8,#F2C14A); color:#7a2a00;
+      font-weight:900; font-size:clamp(9px,2.6vw,13px); border-radius:999px; padding:2px 10px;
+      letter-spacing:.02em; box-shadow:0 1px 2px rgba(0,0,0,.25);
+    }
+    .camp2-cond{ display:block; font-size:clamp(10px,3.2vw,15px); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.45); white-space:nowrap; }
+    .camp2-note{ font-size:10px; color:var(--sub); line-height:1.55; margin:8px 4px 0; }
+    .camp2-main{ display:block; font-size:clamp(14px,4.6vw,22px); font-weight:900; line-height:1.05; text-shadow:0 1px 4px rgba(0,0,0,.4); }
+    .camp2-main em{ font-style:normal; }
+    .camp2-main b{
+      font-style:normal; font-size:clamp(28px,9vw,44px); vertical-align:-4px; padding:0 2px;
+      background:linear-gradient(180deg,#FFF4C2,#FFD24D 55%,#E8A317);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      text-shadow:0 2px 3px rgba(0,0,0,.25);
+    }
+    /* ポコポコ動くCTAボタン */
+    .camp2-cta{
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      width:92%; margin:10px auto 0; padding:14px 0; border-radius:999px;
+      background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff;
+      font-size:clamp(16px,4.6vw,20px); font-weight:900; text-decoration:none;
+      box-shadow:0 8px 0 #B0160F, 0 12px 18px rgba(224,31,31,.35);
+      border:2px solid #ffd9d4; animation:pokopoko 1.1s ease-in-out infinite;
+    }
+    .camp2-cta i{
+      font-style:normal; display:inline-flex; align-items:center; justify-content:center;
+      width:30px; height:30px; border-radius:50%; background:#fff; color:#E0322C; font-size:16px;
+    }
+    .camp2-cta:active{ transform:translateY(4px); box-shadow:0 4px 0 #B0160F, 0 6px 10px rgba(224,31,31,.3); }
+    @keyframes pokopoko{
+      0%,100%{ transform:scale(1); }
+      50%{ transform:scale(1.06); }
+    }
+    /* ライブドット（相場チップ） */
+    .live-dot{
+      display:inline-block; width:8px; height:8px; border-radius:50%;
+      background:#E0322C; margin-right:5px; vertical-align:middle;
+      animation:livepulse 1.4s ease-in-out infinite;
+    }
+    @keyframes livepulse{
+      0%,100%{ opacity:1; transform:scale(1); }
+      50%{ opacity:.35; transform:scale(.7); }
+    }
+    /* 編集部イチオシリボン */
+    .rk-editor-pick{
+      position:absolute; top:-14px; right:16px;
+      background:linear-gradient(135deg,#f6c64d,var(--gold-d)); color:#5a3d00;
+      font-weight:900; font-size:11px; border-radius:999px; padding:4px 13px;
+      box-shadow:0 2px 6px rgba(201,126,0,.35);
+    }
+    /* 比較表まねきや列ゴールドグラデ */
+    .fv-th-gold{
+      background:linear-gradient(180deg,#FFF4C2,#FFE08A) !important;
+      border-bottom:2px solid var(--gold);
+    }
+    /* スクロールフェードイン */
+    .fade-in{ opacity:0; transform:translateY(22px); transition:opacity .55s ease, transform .55s ease; }
+    .fade-in.visible{ opacity:1; transform:translateY(0); }
+    @media (prefers-reduced-motion:reduce){
+      .camp2-cta{ animation:none; }
+      .btn-official,.sticky-official{ animation:none; }
+      .btn-official::after{ animation:none; display:none; }
+      .fv-banner-link{ animation:none; }
+      .fv-banner-link::after{ animation:none; display:none; }
+      .live-dot{ animation:none; }
+      .fade-in,.fade-in.visible{ opacity:1; transform:none; transition:none; }
+    }
+    /* ヒーロー画像 */
+    .fv-hero-wrap{ margin:0 0 14px; font-size:0; line-height:0; }
+    .trust-strip{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:0 0 14px; padding:0; }
+    .trust-strip li{ background:var(--mint); border:1px solid #d6ece4; border-radius:10px; padding:8px 4px; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:2px; }
+    .trust-strip b{ color:var(--green-d); font-size:clamp(15px,4.6vw,19px); line-height:1.1; }
+    .trust-strip span{ color:var(--sub); font-size:9px; line-height:1.25; font-weight:700; }
+    .fv-hero-img{ width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.12); }
+    .rate-chip{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; box-shadow:0 6px 18px rgba(20,60,50,.06); }
+    .rate-chip>span{ font-size:12px; font-weight:900; color:var(--green-d); width:100%; }
+    .rate-chip b{ font-size:16px; }
+    .rate-chip small{ width:100%; color:var(--sub); font-size:11px; }
+
+    /* FV 3社比較表 */
+    .fv-tbl-head{ display:flex; align-items:center; gap:8px; margin:16px 0 6px; }
+    .fv-tbl-ttl{ font-weight:900; font-size:14px; color:var(--ink); }
+    .fv-tbl-head .pr{ margin-left:auto; }
+    .fv-tbl-wrap{ margin:0 0 8px; overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:16px; border:1px solid var(--line); box-shadow:0 6px 18px rgba(20,60,50,.07); }
+    .fv-tbl{ width:100%; min-width:340px; border-collapse:collapse; background:#fff; font-size:12px; }
+    .fv-tbl th,.fv-tbl td{ padding:10px 8px; text-align:center; border-bottom:1px solid var(--line); vertical-align:middle; line-height:1.35; }
+    .fv-th-item{ background:#F4F8F6; font-size:0; width:0; padding:0; }
+    .fv-th{ background:#F4F8F6; font-weight:900; font-size:13px; color:var(--ink); }
+    .fv-th1{ background:#FFFCF2; }
+    .fv-td-item{ text-align:left; font-size:11px; font-weight:700; color:var(--sub); background:#FAFCFB; padding:10px 8px; white-space:nowrap; position:sticky; left:0; z-index:1; }
+    .fv-td{ background:#fff; }
+    .fv-td1{ background:#FFFCF2; }
+    .fv-td .mk{ display:block; font-size:20px; font-weight:900; line-height:1; margin-bottom:3px; }
+    .mk.good{ color:#E8920A; }
+    .mk.ok{ color:#3AA17E; }
+    .mk.tri{ color:#C99A3A; }
+    .mk.bad{ color:#C0392B; }
+    .fv-td .mk.good,.mk.good{ color:#D81F1F; font-weight:900; }
+    .fv-td .mk.good{ font-size:22px; }
+    .fv-td1 b,.fv-td1 strong{ color:var(--green-d); }
+    .fv-td.gray{ color:var(--sub); }
+    .fv-rk-badge{ display:block; font-size:11px; color:var(--coral-d); font-weight:900; margin-bottom:3px; }
+    .fv-rk-badge2,.fv-rk-badge3{ display:block; font-size:11px; color:var(--sub); font-weight:700; margin-bottom:3px; }
+    .fv-tr-camp .fv-td{ background:#FFF8F0; }
+    .fv-tr-camp .fv-td1{ background:#FFF3E0; }
+    .camp-badge{ display:inline-block; background:#E0322C; color:#fff; font-size:10px; font-weight:900; border-radius:999px; padding:1px 8px; margin-bottom:4px; }
+    .up30{ font-size:13px; line-height:1.3; color:var(--coral-d); }
+    .up30 em{ font-style:normal; font-size:22px; font-weight:900; }
+    .fv-tr-cta .fv-td,.fv-tr-cta .fv-td1{ padding:10px 6px; vertical-align:top; }
+    .cta-sub{ display:block; font-size:10px; color:var(--sub); margin-bottom:5px; }
+    .mt4{ margin-top:4px; }
+    .countdown{ margin:6px 0 0; font-size:10px; color:var(--coral-d); line-height:1.4; }
+    .countdown b{ font-size:13px; }
+
+    /* セクション共通 */
+    .sec{ padding:38px 0; }
+    .sec-mint{ background:var(--mint); background-image:url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%230e7864' fill-opacity='.06'/%3E%3C/svg%3E"); }
+    .sec-cream{ background:var(--cream); background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12 L12 0 L24 12 L12 24 Z' fill='none' stroke='%23c8a000' stroke-opacity='.07' stroke-width='1'/%3E%3C/svg%3E"); }
+    .sec-head{ text-align:center; margin-bottom:22px; }
+    .chip{ display:inline-block; background:#fff; border:1px solid var(--line); color:var(--green-d); font-weight:900; font-size:12px; border-radius:999px; padding:5px 14px; }
+    .sec-head h2{ font-size:24px; font-weight:900; margin:10px 0 6px; line-height:1.45; letter-spacing:.01em; }
+    .sec-head p{ font-size:13px; color:var(--body); margin:0; }
+    .note{ font-size:11px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
+
+    /* 02 相場 */
+    .rate-purity-note{ font-size:11px; color:var(--sub); line-height:1.6; margin:6px 0 0; }
+    .rate-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .rate-grid>div{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .rate-grid span{ display:block; font-size:13px; color:var(--sub); font-weight:700; }
+    .rate-grid b{ font-size:22px; color:var(--ink); }
+    .rate-grid small{ color:var(--sub); font-size:12px; }
+    .rate-grid .rate-diff{ display:inline-block; margin-top:5px; font-size:11px; font-weight:900; padding:1px 8px; border-radius:999px; line-height:1.6; }
+    .rate-diff.up{ background:#FDE7E7; color:#C0271F; }
+    .rate-diff.down{ background:#E7EEFD; color:#2A5BD7; }
+    .rate-hot{ border-color:var(--green) !important; background:#F2FBF8 !important; }
+    .rate-hot b{ color:var(--green-d); }
+    .rate-updated{ text-align:center; font-size:11px; color:var(--sub); margin:10px 0 0; }
+    .rate-ex{ margin-top:20px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .rate-ex h3{ font-size:15px; margin:0 0 10px; }
+    .rate-ex ul{ list-style:none; margin:0; padding:0; }
+    .rate-ex li{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-top:1px dashed var(--line); font-size:14px; }
+    .rate-ex li span{ color:var(--body); }
+    .rate-ex li b{ color:var(--green-d); }
+    /* ▼ 相場ヒーロー＆参考価格（見やすさ強化） */
+    .rate-hero{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px 16px 16px; box-shadow:0 8px 24px rgba(20,60,50,.08); }
+    .rate-hero-ttl{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:16px; font-weight:900; color:var(--green-d); margin:0 0 12px; }
+    .rate-hero-badge{ font-size:11px; font-weight:900; background:#FFF1A6; color:#9A6B00; border-radius:999px; padding:2px 9px; }
+    .rate-hero-main{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .rh-card{ background:#F7FAF9; border:1.5px solid var(--line); border-radius:14px; padding:14px 8px; text-align:center; }
+    .rh-card.rh-hot{ background:linear-gradient(180deg,#FFF9E9,#FFF2CE); border-color:var(--gold); }
+    .rh-label{ display:block; font-size:13px; font-weight:800; color:var(--sub); }
+    .rh-price{ display:block; font-weight:900; color:var(--ink); line-height:1.1; margin:5px 0 2px; }
+    .rh-num{ font-size:30px; letter-spacing:-.01em; }
+    .rh-price small{ font-size:14px; font-weight:700; color:var(--sub); margin-left:1px; }
+    .rh-card.rh-hot .rh-price{ color:var(--gold-d); }
+    .rh-note{ display:block; font-size:11px; color:var(--sub); }
+    .rh-card .rate-diff{ display:inline-block; margin-top:6px; font-size:11px; font-weight:900; padding:1px 8px; border-radius:999px; line-height:1.6; }
+    .rate-more{ margin-top:12px; }
+    .rate-more summary{ cursor:pointer; list-style:none; text-align:center; font-size:13px; font-weight:800; color:var(--green-d); background:#F2FBF8; border:1px solid var(--line); border-radius:10px; padding:9px; }
+    .rate-more summary::after{ content:" ▾"; }
+    .rate-more[open] summary::after{ content:" ▴"; }
+    .rate-more summary::-webkit-details-marker{ display:none; }
+    .rate-grid-mini{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px; }
+    .rate-grid-mini>div{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 3px; text-align:center; }
+    .rate-grid-mini span{ display:block; font-size:11px; color:var(--sub); font-weight:700; }
+    .rate-grid-mini b{ font-size:13.5px; color:var(--ink); }
+    .rate-hero-date{ text-align:center; font-size:11px; color:var(--sub); margin:12px 0 0; }
+    .ref-price{ margin-top:18px; background:#fff; border:2px solid var(--gold); border-radius:18px; padding:16px; box-shadow:0 8px 22px rgba(217,150,42,.14); }
+    .ref-ttl{ font-size:18px; font-weight:900; color:var(--ink); margin:0 0 12px; text-align:center; line-height:1.4; }
+    .ref-ttl span{ display:block; font-size:12px; font-weight:700; color:var(--sub); margin-top:3px; }
+    .ref-list{ list-style:none; margin:0; padding:0; }
+    .ref-list li{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px 4px; border-top:1px dashed var(--line); }
+    .ref-list li:first-child{ border-top:none; }
+    .ref-item{ font-size:14.5px; font-weight:800; color:var(--ink); }
+    .ref-item em{ font-style:normal; font-size:12px; font-weight:700; color:var(--sub); margin-left:6px; }
+    .ref-list li b{ font-size:19px; font-weight:900; color:var(--green-d); white-space:nowrap; }
+    /* ▲ */
+
+    /* 03 高く売るポイント（画像） */
+    .point-img{ display:block; font-size:0; line-height:0; border-radius:14px; overflow:hidden; box-shadow:0 8px 22px rgba(20,60,50,.1); }
+    .point-img img{ width:100%; height:auto; display:block; }
+    .point-cta{ margin-top:16px; }
+    .point-cta-note{ text-align:center; font-size:12px; color:var(--sub); margin:8px 0 0; }
+
+
+    /* まねきや口コミブロック（ランキング内） */
+    .rk-voice-block{ background:var(--cream); border:1px solid var(--gold); border-radius:16px; padding:18px 16px 14px; margin-bottom:18px; }
+    .rk-zisseki-notes{ margin:-4px 0 16px; }
+    .rk-zisseki-notes p{ margin:3px 0 0; font-size:11px; line-height:1.55; color:var(--sub); }
+    .rk-zisseki{ display:block; width:100%; height:auto; border-radius:14px; margin:0 0 18px; box-shadow:0 6px 18px rgba(20,60,50,.1); }
+    .rk-voice-ttl{ font-weight:900; font-size:14px; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+    .rk-voice-list{ display:grid; gap:12px; }
+
+    /* 05 ランキング */
+    .rk{ background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px 16px 16px; margin-bottom:18px; box-shadow:0 10px 26px rgba(20,60,50,.08); position:relative; }
+    .rk-1{ border:2px solid var(--gold); box-shadow:0 14px 32px rgba(217,150,42,.18); }
+    .rk-ribbon{ position:absolute; top:-14px; left:16px; background:var(--sub); color:#fff; font-weight:900; font-size:13px; border-radius:999px; padding:5px 14px; display:flex; align-items:center; gap:4px; }
+    .rk-ribbon i{ font-style:normal; }
+    .rk-1 .rk-ribbon{ background:linear-gradient(135deg,#f6c64d,var(--gold-d)); color:#5a3d00; }
+    .rk-2 .rk-ribbon{ background:#9AA7B0; }
+    .rk-3 .rk-ribbon{ background:#C8A06A; }
+    .rk-camp-img{ display:block; border-radius:12px; overflow:hidden; margin:14px 0; box-shadow:0 6px 16px rgba(183,28,22,.25); text-decoration:none; }
+    .rk-camp-img img{ width:100%; height:auto; display:block; }
+    .rk-head{ display:flex; align-items:center; gap:8px; margin-top:6px; }
+    .rk-head h3{ font-size:22px; margin:0; }
+    .rk-star{ color:var(--star); font-weight:900; font-size:14px; }
+    .rk-head .pr{ margin-left:auto; }
+    .rk-for{ font-size:13px; color:var(--green-d); font-weight:700; background:var(--mint); border-radius:8px; padding:7px 10px; margin:10px 0; }
+    .rk-reasons{ list-style:none; margin:0 0 12px; padding:0; display:grid; gap:7px; }
+    .rk-reasons li{ font-size:13.5px; padding-left:24px; position:relative; }
+    .rk-reasons li::before{ content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
+    .rk-meta{ display:grid; gap:8px; background:#FAFCFB; border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; }
+    .rk-meta div{ display:grid; grid-template-columns:88px 1fr; gap:8px; font-size:12.5px; }
+    .rk-meta span{ color:var(--sub); }
+    .rk-reviews{ display:grid; gap:7px; margin-bottom:6px; }
+    .rk-reviews p{ font-size:12.5px; color:var(--body); background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin:0; }
+    .rk-reviews small{ display:block; color:var(--sub); margin-top:2px; }
+
+    /* 06 深掘り */
+    .deep{ display:grid; gap:14px; }
+    .deep-merit{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+    .deep-merit li{ background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:13.5px; }
+    .flow{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px; }
+    .flow h3{ font-size:15px; margin:0 0 12px; }
+    .flow ol{ margin:0; padding:0; list-style:none; display:grid; gap:10px; counter-reset:f; }
+    .flow li{ display:flex; align-items:baseline; gap:10px; font-size:13.5px; counter-increment:f; }
+    .flow li::before{ content:counter(f); flex:0 0 26px; width:26px; height:26px; background:var(--green-d); color:#fff; border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:13px; }
+    .flow li b{ margin-right:4px; }
+    .flow li span{ color:var(--body); }
+    .flow-fee{ font-size:13px; background:var(--mint); border-radius:10px; padding:10px 12px; margin:12px 0 0; }
+
+    /* 07 口コミ */
+    .voice-list{ display:grid; gap:12px; }
+    .voice-grid{ display:grid; gap:12px; }
+    .voice{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:14px 16px; box-shadow:0 4px 14px rgba(20,60,50,.05); }
+    .voice-lg{ border-left:4px solid var(--green); }
+    .voice-ttl{ display:block; font-size:14.5px; color:var(--green-d); font-weight:900; margin:6px 0 4px; }
+    .stars{ color:var(--star); font-size:14px; letter-spacing:1px; }
+    .voice p{ font-size:13.5px; margin:6px 0; line-height:1.7; }
+    .voice small{ color:var(--sub); font-weight:700; }
+
+    /* 08 不安解消 */
+    .fits{ background:#F2FBF8; border:1px solid var(--green); border-radius:16px; padding:16px; margin-bottom:14px; }
+    .fits-ttl{ font-size:15px; font-weight:900; color:var(--green-d); margin:0 0 12px; text-align:center; }
+    .fits ul{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+    .fits li{ font-size:13px; color:var(--ink); font-weight:700; display:flex; align-items:center; gap:8px; }
+    .fits li svg{ flex-shrink:0; }
+    .worry-grid{ display:grid; gap:10px; }
+    .worry{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+    .worry h3{ font-size:14px; margin:0 0 5px; color:var(--green-d); }
+    .worry h3::before{ content:"Q. "; }
+    .worry p{ font-size:13px; color:var(--body); margin:0; }
+    .worry p::before{ content:"A. "; font-weight:900; color:var(--ink); }
+
+    /* 09 FAQ */
+    .faq{ display:grid; gap:10px; }
+    .faq details{ background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    .faq summary{ list-style:none; cursor:pointer; padding:14px 40px 14px 16px; font-weight:700; font-size:14px; position:relative; }
+    .faq summary::-webkit-details-marker{ display:none; }
+    .faq summary::after{ content:"+"; position:absolute; right:16px; top:12px; font-size:20px; color:var(--green-d); }
+    .faq details[open] summary::after{ content:"−"; }
+    .faq p{ margin:0; padding:0 16px 14px; font-size:13px; color:var(--body); }
+
+    /* 10 最終CTA */
+    .final-banner{ display:block; position:relative; overflow:hidden; margin:14px 0 4px; border-radius:14px; box-shadow:0 8px 20px rgba(183,28,22,.28); text-decoration:none; animation:pokopoko 1.3s ease-in-out infinite; }
+    .final-banner img{ width:100%; height:auto; display:block; }
+    .final-banner::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 3s ease-in-out infinite; }
+    @media (prefers-reduced-motion:reduce){ .final-banner{ animation:none; } .final-banner::after{ animation:none; display:none; } }
+    .sec-final{ background:linear-gradient(180deg,#fff,var(--mint)); text-align:center; }
+    .sec-final h2{ font-size:22px; font-weight:900; margin:0 0 8px; line-height:1.45; }
+    .sec-final>.wrap>p{ font-size:14px; color:var(--body); margin:0 0 4px; }
+
+    /* フッター */
+    .ft{ background:#23303A; color:#cfd8de; padding:24px 0; }
+    .ft-trust{ background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:12px; padding:14px 16px; margin:0 0 14px; }
+    .ft-trust-ttl{ font-size:12px; font-weight:900; color:#e7eef2; margin:0 0 8px; }
+    .ft-trust ul{ list-style:none; margin:0; padding:0; }
+    .ft-trust li{ font-size:11.5px; line-height:1.7; color:#cfd8de; padding-left:14px; position:relative; }
+    .ft-trust li::before{ content:"・"; position:absolute; left:0; }
+    .ft-note{ font-size:11px; line-height:1.7; margin:0 0 12px; }
+    .ft nav{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:10px; }
+    .ft a{ color:#aeecdf; color:#a9d5cd; font-size:12px; }
+    .ft small{ color:#7d8a92; font-size:11px; }
+
+    /* スマホ下部固定 */
+    .sticky{ position:fixed; left:0; right:0; bottom:0; z-index:60; display:grid; grid-template-columns:1.4fr 1fr; gap:8px; padding:8px 10px; background:rgba(255,255,255,.97); backdrop-filter:blur(6px); border-top:1px solid var(--line); }
+    .sticky a{ text-decoration:none; font-weight:900; border-radius:999px; min-height:50px; display:flex; align-items:center; justify-content:center; gap:6px; font-size:14px; }
+    .sticky i{ font-style:normal; }
+    .sticky-phone{
+      background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff;
+      box-shadow:0 5px 0 #B0160F, 0 8px 14px rgba(224,31,31,.3);
+      border:2px solid #ffd9d4; animation:pokopoko 1.1s ease-in-out infinite;
+    }
+    .sticky-phone i{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#fff; color:#E0322C; font-size:14px; }
+    .sticky-web{ background:var(--green-d); color:#fff; }
+    .sticky-official{ grid-column:1 / -1; position:relative; overflow:hidden; background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff; border:2px solid #ffd9d4; box-shadow:0 5px 0 #B0160F, 0 8px 14px rgba(224,31,31,.3); animation:pokopoko 1.1s ease-in-out infinite; font-size:14.5px; }
+
+    @media (min-width:600px){
+      .voice-grid,.worry-grid{ grid-template-columns:1fr 1fr; }
+    }
+  
+    /* ===== ブラッシュアップ（構成不変・視覚/CWVのみ） ===== */
+    /* ① 電話CTAに光が流れる */
+    .btn-phone{ position:relative; overflow:hidden; }
+    .btn-phone::after{ content:""; position:absolute; top:-30%; left:-65%; width:35%; height:160%;
+      background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+      transform:skewX(-18deg); pointer-events:none; animation:bbCtaShine 3.2s ease-in-out infinite; }
+    @keyframes bbCtaShine{ 0%{ left:-65%; } 60%,100%{ left:145%; } }
+    /* ② trust-strip 可読性UP */
+    .trust-strip span{ font-size:11px; line-height:1.3; }
+    /* ③ 比較表 横スクロール示唆（モバイル） */
+    .fv-tbl-wrap{ position:relative; }
+    @media (max-width:600px){
+      .fv-tbl-wrap::after{ content:"→"; position:absolute; top:6px; right:6px; z-index:2;
+        font-weight:900; font-size:12px; color:var(--green-d); background:rgba(255,255,255,.92);
+        border:1px solid var(--line); border-radius:999px; padding:1px 7px;
+        animation:bbScrollHint 1.4s ease-in-out infinite; }
+    }
+    @keyframes bbScrollHint{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(4px); } }
+    /* ⑤ スティッキー：微脈動＋iPhoneセーフエリア */
+    .sticky{ padding-bottom:calc(8px + env(safe-area-inset-bottom)); }
+    .sticky-phone{ animation:bbStickyPulse 1.9s ease-in-out infinite; }
+    @keyframes bbStickyPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.03); } }
+    /* ⑦ 安心訴求（既存文言）をやわらかく強調 */
+    .cta-note{ background:#F2FBF8; border-radius:10px; padding:8px 10px; }
+    /* ⑧ ランキングカード ホバー浮上＋1位の影強調 */
+    .rk{ transition:transform .18s ease, box-shadow .18s ease; }
+    .rk:hover{ transform:translateY(-4px); }
+    .rk-1{ box-shadow:0 16px 36px rgba(217,150,42,.22); }
+    /* ⑨ 薄色テキストのコントラスト改善（AA寄せ） */
+    :root{ --sub:#6E7B85; }
+    mark{ background:#FFF1A6; color:inherit; font-weight:900; padding:0 3px; border-radius:3px; }
+    /* ⑩ CLS保険：画像は縦横比維持 */
+    .fv-hero-img,.point-img img,.camp-img img,.rk-zisseki,.fuan-img,.fv-banner-link img{ height:auto; }
+    @media (prefers-reduced-motion:reduce){
+      .btn-phone::after,.sticky-phone,.fv-tbl-wrap::after{ animation:none; }
+    }
+  
+    /* 見やすさ微調整：小注記の底上げ */
+    .note{ font-size:12px; }
+    .rate-updated{ font-size:12px; }
+      .fv-hero-link{ display:block; font-size:0; }
+  
+    /* ===== 共通改善（チップ撤去/CTA四角/縦帯比較表/日付バッジ） ===== */
+    .fv-datebadge{ display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; width:100%; margin:0 auto 14px; padding:9px 14px; background:#fff; border:1px solid #F0DBB0; border-radius:12px; box-shadow:0 4px 14px rgba(183,28,28,.13); font-weight:900; }
+    .fv-db-tag{ display:inline-flex; align-items:center; gap:6px; background:linear-gradient(180deg,#E0322C,#B71C1C); color:#fff; font-size:15px; padding:7px 14px; border-radius:999px; letter-spacing:.04em; }
+    .fv-db-dot{ width:9px; height:9px; border-radius:50%; background:#fff; animation:dbpulse 1.5s ease-out infinite; }
+    @keyframes dbpulse{ 0%{box-shadow:0 0 0 0 rgba(255,255,255,.85)} 70%{box-shadow:0 0 0 7px rgba(255,255,255,0)} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0)} }
+    .fv-db-date{ font-size:16.5px; color:var(--ink); letter-spacing:.01em; }
+    .fv-db-txt{ font-size:16.5px; color:#B71C1C; }
+    @media (max-width:360px){ .fv-db-tag{ font-size:13px; } .fv-db-date,.fv-db-txt{ font-size:14.5px; } }
+    .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:12.5px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
+    .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:12px; }
+    .fv-tbl th,.fv-tbl td{ padding:9px 5px; }
+    .fv-tbl-wrap{ overflow-x:hidden; }
+    .fv-tbl-wrap::after{ display:none; }
+    .btn{ border-radius:10px; }
+    .camp2-cta{ border-radius:12px; }
+    .sticky a{ border-radius:10px; }
+    .fv-tr-cta .btn{ display:flex; width:100%; max-width:160px; margin-left:auto; margin-right:auto; white-space:normal; min-height:38px; font-size:12px; padding:0 6px; line-height:1.2; border-radius:8px; }
+    .fv-tr-cta .btn-phone{ font-size:12.5px; }
+    .fv-tr-cta .btn i{ font-size:13px; }
+    .fv-tr-cta .fv-td{ vertical-align:middle; text-align:center; }
+    .fv-tr-cta .fv-td1{ vertical-align:top; }
+  
+    /* ===== ランキング1位 2nd化（スペックカード/おすすめ/挿入画像/口コミ横スクロール） ===== */
+    .camp-img{ position:relative; animation:pokopoko 1.15s ease-in-out infinite; }
+    .camp-img::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.8s ease-in-out infinite; }
+    @media (prefers-reduced-motion:reduce){ .camp-img{ animation:none; } .camp-img::after{ animation:none; display:none; } }
+    .rk-spec{ width:100%; table-layout:fixed; border-collapse:separate; border-spacing:0; margin:4px 0 12px; border:2px solid #C8102E; border-radius:6px; overflow:hidden; }
+    .rk-spec th{ background:#C8102E; color:#fff; font-weight:900; font-size:11.5px; text-align:center; padding:7px 3px; line-height:1.3; border-right:1px solid rgba(255,255,255,.45); border-bottom:1px solid #fff; }
+    .rk-spec .rs-head th:last-child{ border-right:none; }
+    .rk-spec td{ background:#fff; text-align:center; font-size:12px; font-weight:700; color:var(--ink); padding:11px 5px; line-height:1.45; vertical-align:middle; border-right:1px solid #F1CDD2; border-bottom:1px solid #F1CDD2; }
+    .rk-spec td:last-child{ border-right:none; }
+    .rk-spec .rs-val td{ border-bottom:none; }
+    .rk-spec .rs-ic{ display:block; font-size:22px; line-height:1; margin-bottom:7px; color:#D81F1F; font-weight:900; }
+    .rk-spec .rs-camp{ display:inline-block; color:var(--ink); font-weight:900; font-size:12px; line-height:1.35; }
+    .rk-spec .rs-camp em{ font-style:normal; color:#D81F1F; font-size:16px; }
+    .rk-osusume{ border:2px solid var(--gold); border-radius:8px; overflow:hidden; margin:0 0 16px; }
+    .rk-osusume-h{ background:linear-gradient(135deg,#F4A81F,#D9962A); color:#fff; font-weight:900; font-size:14px; padding:9px 13px; text-shadow:0 1px 2px rgba(0,0,0,.18); }
+    .rk-osusume ul{ list-style:none; margin:0; padding:12px 14px; display:grid; gap:10px; background:#FFFDF6; }
+    .rk-osusume li{ font-size:13px; line-height:1.55; font-weight:700; color:var(--ink); display:flex; gap:7px; align-items:flex-start; }
+    .rk-osusume .chk{ color:#1AA251; font-weight:900; flex:0 0 auto; font-size:15px; }
+    .rk-osusume mark{ background:#FFF1A6; color:inherit; font-weight:900; padding:0 3px; border-radius:3px; }
+    .rk-insert-img{ display:block; margin:0 0 18px; border-radius:14px; overflow:hidden; box-shadow:0 6px 18px rgba(20,60,50,.12); text-decoration:none; }
+    .rk-insert-img img{ width:100%; height:auto; display:block; }
+    .rk-voice-list{ display:flex; flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; gap:12px; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
+    .rk-voice-list > *{ flex:0 0 86%; scroll-snap-align:center; }
+    .rk-voice-block::after{ content:"← スワイプで他の口コミ →"; display:block; text-align:center; font-size:11px; color:var(--sub); margin-top:6px; }
+
+    /* ============================================================
+       PC最適化（≥768px）：モバイルは一切無影響。520px固定の本文を適正幅に。
+       ============================================================ */
+    @media (min-width:768px){
+      .wrap{ max-width:740px; padding:0 24px; }
+      .hd-in{ max-width:900px; }
+      .sec{ padding:50px 0; }
+      .fv-hero-wrap{ max-width:560px; margin:0 auto 16px; }
+      .fv-datebadge{ max-width:560px; margin-left:auto; margin-right:auto; }
+      .rate-grid{ grid-template-columns:repeat(4,1fr); }
+      .rate-hero,.ref-price{ max-width:660px; margin-left:auto; margin-right:auto; }
+      .camp2-cta,.btn-phone,.rate-cta,.final-banner,.camp-img,.fv-banner-link,.cta-pair{
+        max-width:480px; margin-left:auto; margin-right:auto;
+      }
+      .worry-grid{ grid-template-columns:1fr 1fr; }
+      .rk-1 .rk-reasons{ grid-template-columns:1fr 1fr; }
+      .sec-head h2{ font-size:26px; }
+      .sec-head p{ font-size:15px; }
+      body{ font-size:16px; }
+      .rk-1{ padding-left:22px; padding-right:22px; }
+    }
+    @media (min-width:1100px){
+      .wrap{ max-width:800px; }
+      .fv-hero-wrap{ max-width:600px; }
+    }
+  </style>
+
+  <script>
+    var AFF = {
+      manekiya: document.body.getAttribute("data-aff-manekiya"),
+      otakaraya: document.body.getAttribute("data-aff-otakaraya"),
+      buraiba: document.body.getAttribute("data-aff-buraiba")
+    };
+    var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+    function track(name, params){
+      try{ if(window.dataLayer) window.dataLayer.push({event:name, ...(params||{})});
+        if(typeof gtag==="function") gtag("event", name, Object.assign({}, params||{}, { transport_type:"beacon" })); }catch(_){}
+    }
+    function affLink(raw){
+      if(!raw || raw === "#") return "#";
+      try{ var u=new URL(raw);
+        new URLSearchParams(location.search).forEach(function(v,k){ if(KEEP.test(k)&&!u.searchParams.has(k)) u.searchParams.set(k,v); });
+        return u.toString();
+      }catch(_){ return raw; }
+    }
+    // アフィリンク注入＋計測
+    document.querySelectorAll("[data-aff]").forEach(function(el){
+      var key = el.getAttribute("data-aff");
+      var url = affLink(AFF[key]);
+      el.setAttribute("href", url);
+      // 未設定リンク（例：ブラリバ）は押せないようにして無反応クリックを防ぐ
+      if(!url || url === "#"){ el.classList.add("aff-disabled"); el.setAttribute("aria-disabled","true"); }
+      el.addEventListener("click", function(e){
+        if(!url || url === "#"){ e.preventDefault(); return; }
+        var tn = el.getAttribute("data-track") || "";
+        var isPhone = tn.indexOf("phone")>=0;
+        var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"k18_neck_30g", link_url:url };
+        // CVのみ送信（店別イベントは廃止。内訳は affiliate_key で分析）
+        // まねきや・おたからや＝成果CV／ブラリバ等＝非成果(参考)クリック
+        var __cv = (key === "manekiya" || key === "otakaraya") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
+        if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
+        if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
+        // 修飾キー/中クリック（新規タブ等）は既定動作のまま（beaconで送信済み）
+        var __plain = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && (e.button===0 || e.button===undefined);
+        if(!__plain) return;
+        // 通常クリック：beaconで送信済み → 少し待ってから遷移
+        e.preventDefault();
+        setTimeout(function(){ window.location.href = url; }, 300);
+      });
+    });
+    // スマホ下部固定CTA：FVを過ぎたら表示
+    var sticky = document.querySelector("[data-sticky]");
+    var fv = document.querySelector(".fv");
+    if(sticky && fv && "IntersectionObserver" in window){
+      new IntersectionObserver(function(es){ es.forEach(function(en){ sticky.hidden = en.isIntersecting; }); }, {threshold:0})
+        .observe(fv);
+    } else if(sticky){ sticky.hidden = false; }
+    track("k18_neck_30g_open", { landing_intent:"k18_neck_30g" });
+    // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
+    window.addEventListener("load", function(){
+      var search = window.location.search;
+      if(!search) return;
+      var incoming = new URLSearchParams(search);
+      document.querySelectorAll("a[href]").forEach(function(a){
+        var href = a.getAttribute("href");
+        if(!href) return;
+        var lower = href.toLowerCase();
+        if(lower.charAt(0)==="#"||lower.startsWith("javascript")||lower.startsWith("mailto")||lower.startsWith("tel")) return;
+        try{
+          var u=new URL(href, window.location.href);
+          incoming.forEach(function(v,k){ if(!u.searchParams.has(k)) u.searchParams.set(k,v); });
+          a.setAttribute("href", u.toString());
+        }catch(_){}
+      });
+    });
+  </script>
+  <script is:inline>
+    (function(){
+      var els = document.querySelectorAll('.sec, .rk, .voice, .fv-tbl-wrap, .point-img, .rk-voice-block');
+      els.forEach(function(el){ el.classList.add('fade-in'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.07 });
+      els.forEach(function(el){ io.observe(el); });
+    })();
+  </script>
+  <script is:inline>
+    (function(){
+      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if(!('IntersectionObserver' in window)) return;
+      function animate(el){
+        var raw=(el.textContent||'').replace(/[^\d]/g,''); if(!raw) return;
+        var end=+raw, suffix=(el.textContent||'').replace(/[\d,]/g,''), t0=null;
+        function step(t){ if(!t0)t0=t; var p=Math.min(1,(t-t0)/700);
+          el.textContent=Math.round(end*p).toLocaleString('ja-JP')+suffix;
+          if(p<1){ requestAnimationFrame(step); } else { el.textContent=end.toLocaleString('ja-JP')+suffix; } }
+        requestAnimationFrame(step);
+      }
+      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); } }); },{threshold:0.35});
+      document.querySelectorAll('.rate-grid b, .rh-num, .rate-grid-mini b').forEach(function(el){ io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
