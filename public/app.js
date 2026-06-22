@@ -210,9 +210,13 @@ function wireTrackedLink(el) {
 
     if (isPrimaryClick && isOutboundLink) {
       event.preventDefault();
+      // 連打防止：処理中なら以降のタップは無視（無反応感・CV二重送信を防ぐ）
+      if (el.__ctaBusy) return;
+      el.__ctaBusy = true;
+      el.classList.add("cta-busy");
       // CVは track() 経由で transport_type:"beacon" 送信済み → 少し待ってから遷移
       track(convEvent, params);
-      window.setTimeout(function () { window.location.href = destination; }, 300);
+      window.setTimeout(function () { window.location.href = destination; }, 160);
       return;
     }
 

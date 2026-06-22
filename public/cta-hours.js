@@ -4,6 +4,18 @@
  * 「まずは公式サイトを確認する」に自動変更する。
  * 端末のタイムゾーンに依存しないようJST(UTC+9)で判定。
  */
+// CTA連打対策の共通スタイル（押下フィードバック＋多重入力防止）。全ページで1回だけ注入。
+(function injectCtaBusyStyle() {
+  try {
+    var st = document.createElement("style");
+    st.textContent =
+      ".cta-busy{opacity:.55!important;pointer-events:none!important;filter:saturate(.85);transition:opacity .08s ease;position:relative;}" +
+      ".cta-busy::after{content:'';position:absolute;top:50%;right:14px;width:14px;height:14px;margin-top:-7px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:ctaSpin .6s linear infinite;}" +
+      "@keyframes ctaSpin{to{transform:rotate(360deg);}}";
+    (document.head || document.documentElement).appendChild(st);
+  } catch (_) {}
+})();
+
 (function () {
   var OPEN_HOUR = 9;   // 9:00 から受付
   var CLOSE_HOUR = 21; // 21:00 で受付終了（21:00以降は時間外）

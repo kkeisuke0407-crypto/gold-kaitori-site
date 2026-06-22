@@ -1007,17 +1007,19 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         var tn = el.getAttribute("data-track") || "";
         var isPhone = tn.indexOf("phone")>=0;
         var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp4", link_url:url };
-        // CVのみ送信（店別イベントは廃止。内訳は affiliate_key で分析）
-        // まねきや・おたからや＝成果CV／ブラリバ等＝非成果(参考)クリック
+        var __plain = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && (e.button===0 || e.button===undefined);
+        // 連打防止：通常クリックで処理中なら以降のタップは無視（無反応感・CV二重送信を防ぐ）
+        if(__plain && el.__ctaBusy){ e.preventDefault(); return; }
+        // CVのみ送信（店別イベントは廃止。内訳は affiliate_key で分析。まねきや・おたからや＝成果CV／ブラリバ等＝非成果）
         var __cv = (key === "manekiya" || key === "otakaraya") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
         if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
         // 修飾キー/中クリック（新規タブ等）は既定動作のまま（beaconで送信済み）
-        var __plain = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && (e.button===0 || e.button===undefined);
         if(!__plain) return;
-        // 通常クリック：beaconで送信済み → 少し待ってから遷移
+        // 通常クリック：即フィードバック（押した感）→ 少し待って遷移（beaconは送信済み）
         e.preventDefault();
-        setTimeout(function(){ window.location.href = url; }, 300);
+        el.__ctaBusy = true; el.classList.add("cta-busy");
+        setTimeout(function(){ window.location.href = url; }, 160);
       });
     });
     // スマホ下部固定CTA：FVを過ぎたら表示
