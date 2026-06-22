@@ -66,3 +66,30 @@
     init();
   }
 })();
+
+// おたからやのキャンペーン期限を自動更新：毎週日曜まで（1週間ごとに更新される）。
+// 「次の日曜（今日が日曜なら今日）」をJSTで算出して .otakara-cp-end に反映。
+(function () {
+  function jstNow() {
+    var now = new Date();
+    return new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 9 * 3600000);
+  }
+  function upcomingSundayMD() {
+    var d = jstNow();
+    var add = (7 - d.getDay()) % 7; // 日曜まであと何日（今日が日曜なら0）
+    var t = new Date(d.getFullYear(), d.getMonth(), d.getDate() + add);
+    return (t.getMonth() + 1) + "/" + t.getDate();
+  }
+  function apply() {
+    try {
+      var md = upcomingSundayMD();
+      var nodes = document.querySelectorAll(".otakara-cp-end");
+      Array.prototype.forEach.call(nodes, function (el) { el.textContent = md; });
+    } catch (_) {}
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", apply);
+  } else {
+    apply();
+  }
+})();
