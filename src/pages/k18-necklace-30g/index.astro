@@ -284,7 +284,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
         <!-- まねきや口コミ -->
         <!-- まねきや 金買取実績 -->
-        <img class="rk-zisseki" src="/images/kin_zisseki.webp" alt="まねきやの金・貴金属 買取実績" width="1024" height="1536" loading="lazy" decoding="async" />
+        <a href="#" class="rk-zisseki-link" data-aff="manekiya" data-track="rk_zisseki" rel="nofollow sponsored"><img class="rk-zisseki" src="/images/kin_zisseki.webp" alt="まねきやの金・貴金属 買取実績" width="1024" height="1536" loading="lazy" decoding="async" /></a>
         <div class="rk-zisseki-notes">
           <p>※記載の金額は、当時の買取価格を現在の金相場の上昇率に応じて再計算した参考価格です。</p>
           <p>※実際の買取価格は、お品物の状態や日々の相場変動により大きく異なります。正確な金額については「まねきや」に直接ご確認ください。</p>
@@ -810,6 +810,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rk-zisseki-notes{ margin:-4px 0 16px; }
     .rk-zisseki-notes p{ margin:3px 0 0; font-size:11px; line-height:1.55; color:var(--sub); }
     .rk-zisseki{ display:block; width:100%; height:auto; border-radius:14px; margin:0 0 18px; box-shadow:0 6px 18px rgba(20,60,50,.1); }
+    .rk-zisseki-link{ display:block; }
     .rk-voice-ttl{ font-weight:900; font-size:14px; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
     .rk-voice-list{ display:grid; gap:12px; }
 
@@ -1071,7 +1072,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         // 連打防止：通常クリックで処理中なら以降のタップは無視（無反応感・CV二重送信を防ぐ）
         if(__plain && el.__ctaBusy){ e.preventDefault(); return; }
         // CVのみ送信（店別イベントは廃止。内訳は affiliate_key で分析。まねきや・おたからや＝成果CV／ブラリバ等＝非成果）
-        var __cv = (key === "manekiya" || key === "otakaraya") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
+        var __cv = ((key === "manekiya" || key === "otakaraya") && tn !== "rk_zisseki") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
         if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
         // 修飾キー/中クリック（新規タブ等）は既定動作のまま（beaconで送信済み）
