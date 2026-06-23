@@ -156,7 +156,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td class="fv-td fv-td1">
                   <small class="cta-sub">＼手取りは査定で／</small>
                   <a href="#" class="btn btn-official sm" data-aff="manekiya" data-track="fv_tbl_official" rel="nofollow sponsored">無料査定</a>
-                  {campDays > 0 && <p class="countdown">⏳ キャンペーン終了まで<br /><b>あと{campDays}日！</b></p>}
+                  {campDays > 0 && <p class="countdown">⏳ 終了まで<b>あと{campDays}日！</b></p>}
                 </td>
                 <td class="fv-td">
                   <a href="#" class="btn btn-ghost sm" data-aff="otakaraya" data-track="fv_tbl_otakaraya" rel="nofollow sponsored">無料査定</a>
@@ -225,8 +225,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <p class="note">※ネックレス・指輪・ブレスレット・金貨・インゴット・金歯・壊れた金もOK。重量・純度・状態で変わります。</p>
           <!-- 目安→査定への橋渡し（相場確認だけで満足して離脱するのを防ぐ） -->
           <div class="ref-bridge">
-            <p class="ref-bridge-txt">ただし、これは地金相場ベースの<b>“目安”</b>です。<br />実際の受取額は手数料・査定基準・状態で変わり、<br /><b>同じ重さでも業者によって数万円の差</b>が出ることも。</p>
-            <a href="#" class="camp2-cta ref-cta" data-aff="manekiya" data-track="ref_official" rel="nofollow sponsored">手数料を引いた「本当の受取額」を<br />無料で確認する</a>
+            <p class="ref-bridge-txt">これは地金相場ベースの<b>“目安”</b>です。実際の受取額は手数料や状態で変わり、<b>同じ重さでも業者で数万円の差</b>が出ることもあります。</p>
+            <a href="#" class="camp2-cta ref-cta" data-aff="manekiya" data-track="ref_official" rel="nofollow sponsored">手数料後の「本当の受取額」を確認する</a>
             <p class="point-cta-note">無料査定／9時〜21時（年中無休）／売却は金額を見てから判断でOK</p>
           </div>
         </div>
@@ -634,11 +634,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .camp2-note{ font-size:10px; color:var(--sub); line-height:1.55; margin:8px 4px 0; }
     /* 目安→査定への橋渡しボックス */
     .ref-bridge{ margin-top:14px; background:#FFF7EC; border:1px solid #F2D9A8; border-radius:14px; padding:14px 14px 12px; }
-    .ref-bridge-txt{ font-size:13px; line-height:1.75; color:var(--ink); margin:0 0 12px; font-weight:700; text-wrap:pretty; }
+    .ref-bridge-txt{ font-size:13px; line-height:1.8; color:var(--ink); margin:0 0 12px; font-weight:700; text-align:center; text-wrap:balance; }
     .ref-bridge-txt b{ color:var(--hot); font-weight:900; }
     .ref-bridge .camp2-cta{ margin-top:0; }
-    /* 文字数が多いCTAは少し小さめ＋2行を許容 */
-    .camp2-cta.ref-cta{ font-size:clamp(15px,4.2vw,18px); line-height:1.4; padding:12px 8px; text-align:center; }
+    /* CTAは中央寄せ＋バランス改行 */
+    .camp2-cta.ref-cta{ font-size:clamp(15px,4.4vw,18px); line-height:1.4; padding:13px 10px; text-align:center; text-wrap:balance; }
     .camp2-main{ display:block; font-size:clamp(14px,4.6vw,22px); font-weight:900; line-height:1.05; text-shadow:0 1px 4px rgba(0,0,0,.4); }
     .camp2-main em{ font-style:normal; }
     .camp2-main b{
@@ -755,7 +755,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .sec-head h2{ font-size:24px; font-weight:900; margin:10px 0 6px; line-height:1.45; letter-spacing:.01em; }
     .sec-head p{ font-size:13px; color:var(--body); margin:0; }
     .note{ font-size:11px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
-    .note-basis{ font-size:8.5px; line-height:1.5; color:#9aa5ac; }
+    .note.note-basis{ font-size:9px; line-height:1.5; color:#9aa5ac; }
 
     /* 02 相場 */
     .rate-purity-note{ font-size:11px; color:var(--sub); line-height:1.6; margin:6px 0 0; }
