@@ -154,15 +154,15 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               </tr>
               <tr class="fv-tr-cta">
                 <td class="fv-td fv-td1">
-                  <small class="cta-sub">＼査定だけでもOK／</small>
-                  <a href="#" class="btn btn-official sm" data-aff="manekiya" data-track="fv_tbl_official" rel="nofollow sponsored">公式サイト</a>
+                  <small class="cta-sub">＼本当の手取りは査定で／</small>
+                  <a href="#" class="btn btn-official sm" data-aff="manekiya" data-track="fv_tbl_official" rel="nofollow sponsored">無料査定</a>
                   {campDays > 0 && <p class="countdown">⏳ キャンペーン終了まで<br /><b>あと{campDays}日！</b></p>}
                 </td>
                 <td class="fv-td">
-                  <a href="#" class="btn btn-ghost sm" data-aff="otakaraya" data-track="fv_tbl_otakaraya" rel="nofollow sponsored">公式サイト</a>
+                  <a href="#" class="btn btn-ghost sm" data-aff="otakaraya" data-track="fv_tbl_otakaraya" rel="nofollow sponsored">無料査定</a>
                 </td>
                 <td class="fv-td">
-                  <a href="#" class="btn btn-ghost sm" data-aff="buraiba" data-track="fv_tbl_buraiba" rel="nofollow sponsored">公式サイト</a>
+                  <a href="#" class="btn btn-ghost sm" data-aff="buraiba" data-track="fv_tbl_buraiba" rel="nofollow sponsored">無料査定</a>
                 </td>
               </tr>
             </tbody>
@@ -223,6 +223,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <li><span class="ref-item">インゴット<em>約100g・K24</em></span><b>{goldExMan(100, rates.k24)}</b></li>
           </ul>
           <p class="note">※ネックレス・指輪・ブレスレット・金貨・インゴット・金歯・壊れた金もOK。重量・純度・状態で変わります。</p>
+          <!-- 目安→査定への橋渡し（相場確認だけで満足して離脱するのを防ぐ） -->
+          <div class="ref-bridge">
+            <p class="ref-bridge-txt">ただし、これは地金相場ベースの<b>“目安”</b>です。実際の受取額は<b>手数料・査定基準・キャンペーン・品物の状態</b>で変わり、<b>同じ重さでも業者によって数万円の差</b>が出ることがあります。</p>
+            <a href="#" class="camp2-cta" data-aff="manekiya" data-track="ref_official" rel="nofollow sponsored">手数料を引いた「本当の受取額」を確認する</a>
+            <p class="point-cta-note">無料査定／9時〜21時（年中無休）／売却は金額を見てから判断でOK</p>
+          </div>
         </div>
       </div>
     </section>
@@ -484,7 +490,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <details><summary>どのタイミングで売るのがよいですか？</summary><p>金相場は毎日動き、今は過去最高水準で推移しています。相場が高いうちに、まず今の金額を確認しておくのがおすすめです。</p></details>
         </div>
         <div class="faq-cta">
-          <p class="faq-cta-lead">疑問が解けたら、まずは無料で「今いくらか」だけ確認しておきましょう。</p>
+          <p class="faq-cta-lead">疑問が解けたら、売る前に「手数料を引いた“本当の手取り”」を無料で確認しておきましょう。</p>
           <a href="#" class="camp2-cta" data-aff="manekiya" data-track="faq_official" rel="nofollow sponsored">買取価格30％UPの条件を確認する</a>
           <p class="point-cta-note">査定だけ・相談だけでもOK／無料</p>
         </div>
@@ -495,7 +501,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <section class="sec sec-final" id="final">
       <div class="wrap">
         <h2>迷ったら、まずは1位の「まねきや」へ。</h2>
-        <p>金相場が過去最高水準の今のうちに、無料査定で金額だけでも確認しておきましょう。査定だけ・売らなくてもOKです。</p>
+        <p>金相場が過去最高水準の今のうちに、無料査定で「手数料を引いた“本当の手取り”」を確認しておきましょう。売却は金額を見てから判断でOKです。</p>
         <!-- 締めバナー（まねきや・総合CTA） -->
         <a href="#" class="final-banner" data-aff="manekiya" data-track="final_banner" rel="nofollow sponsored">
           <img src="/images/fv-camp30.webp" alt="まねきや お電話申込の方限定 買取金額最大30%UP・買取手数料完全無料 今すぐ無料査定" width="1536" height="1024" loading="lazy" decoding="async" />
@@ -626,6 +632,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     }
     .camp2-cond{ display:block; font-size:clamp(10px,3.2vw,15px); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.45); white-space:nowrap; }
     .camp2-note{ font-size:10px; color:var(--sub); line-height:1.55; margin:8px 4px 0; }
+    /* 目安→査定への橋渡しボックス */
+    .ref-bridge{ margin-top:14px; background:#FFF7EC; border:1px solid #F2D9A8; border-radius:14px; padding:14px 14px 12px; }
+    .ref-bridge-txt{ font-size:14px; line-height:1.7; color:var(--ink); margin:0 0 12px; font-weight:700; }
+    .ref-bridge-txt b{ color:var(--hot); font-weight:900; }
+    .ref-bridge .camp2-cta{ margin-top:0; }
     .camp2-main{ display:block; font-size:clamp(14px,4.6vw,22px); font-weight:900; line-height:1.05; text-shadow:0 1px 4px rgba(0,0,0,.4); }
     .camp2-main em{ font-style:normal; }
     .camp2-main b{
