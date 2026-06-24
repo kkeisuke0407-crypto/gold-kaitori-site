@@ -747,9 +747,10 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-mk-link{ color:var(--gold-d); font-weight:900; text-decoration:underline; text-underline-offset:2px; }
     .rate-mk-cp{ color:#E0322C; font-weight:900; }
     /* 買取額30%UP＋手数料10%無料：ボタンではなくテキストで大きく強調＋アニメ */
-    .rate-mk-up{ display:inline-block; margin-top:2px; font-size:clamp(15px,4.7vw,19px); font-weight:900; line-height:1.55; color:#E0322C; background:linear-gradient(transparent 62%, #FFE08A 62%); padding:0 2px; animation:rateUpPulse 1.4s ease-in-out infinite; }
+    .rate-mk-up{ display:inline-block; position:relative; overflow:hidden; margin-top:2px; font-size:clamp(15px,4.7vw,19px); font-weight:900; line-height:1.55; color:#E0322C; background:linear-gradient(transparent 62%, #FFE08A 62%); padding:0 4px; }
+    .rate-mk-up::after{ content:""; position:absolute; top:-30%; left:-72%; width:40%; height:170%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.6s ease-in-out infinite; }
     @keyframes rateUpPulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.05); } }
-    @media (prefers-reduced-motion:reduce){ .rate-mk-up{ animation:none; } }
+    @media (prefers-reduced-motion:reduce){ .rate-mk-up::after{ animation:none; display:none; } }
     .rate-mk-offer .btn-phone{ width:100%; }
     .fv-tr-cta .fv-td,.fv-tr-cta .fv-td1{ padding:10px 6px; vertical-align:top; }
     .cta-sub{ display:block; font-size:10px; color:var(--sub); margin-bottom:5px; }
