@@ -818,6 +818,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .trust-strip b{ color:var(--green-d); font-size:clamp(15px,4.6vw,19px); line-height:1.1; }
     .trust-strip span{ color:var(--sub); font-size:9px; line-height:1.25; font-weight:700; }
     .fv-hero-img{ width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 6px 18px rgba(0,0,0,.12); }
+    /* スマホ：ヒーロー画像を枠なし・画面いっぱい（full-bleed）に */
+    @media (max-width:600px){
+      .fv{ padding-top:0; }
+      .fv-hero-wrap{ width:100vw; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); margin-bottom:14px; border-radius:0; box-shadow:none; }
+      .fv-hero-img{ border-radius:0; box-shadow:none; }
+    }
     /* ① FV直下の相場ブロック（価格を最速で見せる） */
     .fv-rate{ margin:14px 0; padding:14px; background:#F2FBF8; border:2px solid var(--green); border-radius:16px; box-shadow:0 8px 22px rgba(14,120,100,.10); }
     .fv-rate-ttl{ display:flex; align-items:center; gap:6px; font-size:15px; font-weight:900; color:var(--green-d); margin:0 0 10px; }
