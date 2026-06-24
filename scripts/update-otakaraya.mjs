@@ -57,19 +57,21 @@ async function fetchText(url) {
 }
 
 // 「○○店舗」の数字を抽出してレンジ内の最大値を返す（最大＝最新の総店舗数とみなす）。
-// 「1,850店舗」「1850 店舗」「店舗数 1,850」などの表記ゆれを吸収する。
+// ★コンマ区切り表記（例「1,850」）だけを採用する。これにより「2025年…店舗」のような
+//   コンマ無しの年号(2025等)を店舗数として誤検出するのを防ぐ。
+//   おたからやは店舗数を必ず「1,850」のようにコンマ付きで表記している。
 function extractStores(text) {
   const nums = new Set();
   const push = (raw) => {
     const n = Number(String(raw).replace(/[^\d]/g, ""));
     if (Number.isFinite(n) && n >= STORE_RANGE[0] && n <= STORE_RANGE[1]) nums.add(n);
   };
-  // 数字 + 店舗
-  for (const m of text.matchAll(/(\d{1,3}(?:,\d{3})|\d{4,5})\s*店舗/g)) push(m[1]);
-  // 店舗数 + 数字
-  for (const m of text.matchAll(/店舗数[^\d]{0,6}(\d{1,3}(?:,\d{3})|\d{4,5})/g)) push(m[1]);
+  // コンマ区切り数値 + 店舗（例「1,850 店舗」）
+  for (const m of text.matchAll(/(\d{1,3},\d{3})\s*店舗/g)) push(m[1]);
+  // 店舗数 + コンマ区切り数値（例「店舗数 1,850」）
+  for (const m of text.matchAll(/店舗数[^\d]{0,6}(\d{1,3},\d{3})/g)) push(m[1]);
   const list = [...nums];
-  if (DEBUG) console.log(`[debug] 店舗候補: ${JSON.stringify(list)}`);
+  if (DEBUG) console.log(`[debug] 店舗候補（コンマ表記のみ）: ${JSON.stringify(list)}`);
   if (!list.length) return null;
   return Math.max(...list);
 }
