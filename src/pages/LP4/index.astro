@@ -5,7 +5,9 @@ const CANONICAL = "https://kaitori.hakobu-family.com/LP4/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/item-platinum-ring.webp";
 
 import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
+import { getOtakaraya } from "../../lib/otakaraya.js";
 const rates = await getRates();
+const otakaraya = getOtakaraya();
 const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("ja-JP")}〜${Math.round(rates.pt900 * w).toLocaleString("ja-JP")}円`;
 // キャンペーン残日数（まねきや 6/30まで）
 const campEnd = new Date('2026-06-30T23:59:59+09:00');
@@ -273,7 +275,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </tbody>
           </table>
         </div>
-        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界1,840店舗以上の買取規模・買取専門26年・手数料0円（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
+        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
         <p class="note">※買取価格・キャンペーン内容は変更になる場合があります。最新情報は各社公式でご確認ください。</p>
       </div>
     </section>
