@@ -43,19 +43,22 @@ jobs:
       - name: Update rates (田中貴金属 → 三菱マテリアル → 前回成功データ維持)
         run: npm run update-rates
         continue-on-error: true
+      - name: Update おたからや店舗数 (公式 → 前回値維持・ベストエフォート)
+        run: npm run update-otakaraya
+        continue-on-error: true
       - name: Build
         run: npm run build
-      - name: Persist rates.json (last-good を保存し凍結を防止)
+      - name: Persist data (rates.json / otakaraya.json の last-good を保存し凍結を防止)
         if: github.ref == 'refs/heads/main'
         run: |
-          if ! git diff --quiet -- src/data/rates.json; then
+          if ! git diff --quiet -- src/data/rates.json src/data/otakaraya.json; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add src/data/rates.json
-            git commit -m "chore(rates): 相場データ自動更新 [skip ci]"
+            git add src/data/rates.json src/data/otakaraya.json
+            git commit -m "chore(data): 相場・店舗数 自動更新 [skip ci]"
             git push
           else
-            echo "rates.json に変更なし"
+            echo "rates.json / otakaraya.json に変更なし"
           fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

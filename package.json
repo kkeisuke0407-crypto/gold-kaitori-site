@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "update-rates": "node scripts/update-rates.mjs",
+    "update-otakaraya": "node scripts/update-otakaraya.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check"

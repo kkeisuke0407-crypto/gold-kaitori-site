@@ -5,7 +5,9 @@ const CANONICAL = "https://kaitori.hakobu-family.com/kin-kihei/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/og-gold.webp";
 
 import { getRates, yen, MARKET_SOURCE_URL } from "../../lib/rates.js";
+import { getOtakaraya } from "../../lib/otakaraya.js";
 const rates = await getRates();
+const otakaraya = getOtakaraya();
 // 重さ別の参考買取額（既定はK18基準）
 const goldEx = (w, karat = rates.k18) => `約${Math.round(karat * w * 0.9).toLocaleString("ja-JP")}〜${Math.round(karat * w).toLocaleString("ja-JP")}円`;
 // 重さ別の参考買取額（万円表示・既定はK18基準）
@@ -226,7 +228,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </tbody>
           </table>
         </div>
-        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界1,840店舗以上の買取規模・買取専門26年・手数料0円（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
+        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
 
         <!-- FV直下の不安解消3点＋対象商品 -->
 
@@ -339,7 +341,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </a>
           <p class="rk-for">大手のお店に、直接持っていって相談したい人に</p>
           <ul class="rk-reasons">
-            <li>世界<b>1,840店舗</b>※1・買取専門26年の大手で安心</li>
+            <li>世界<b>{otakaraya.storesComma}店舗</b>※1・買取専門26年の大手で安心</li>
             <li>大手なので高めの金額が出ることも</li>
             <li>査定料・手数料・出張料が0円</li>
           </ul>
@@ -349,7 +351,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <div><span>キャンペーン</span><b>最大20%UP（上限10万円・対象外店舗あり／〜<span class="otakara-cp-end">6/28</span>（日））</b></div>
           </div>
           <a href="#" class="btn btn-ghost full" data-aff="otakaraya" data-track="rk_otakaraya" rel="nofollow sponsored">おたからやで無料査定する</a>
-          <p class="note">※1 2026年6月時点の店舗数です（フランチャイズ・直営店を含む）。</p>
+          <p class="note">※1 {otakaraya.asOf}時点の店舗数です（フランチャイズ・直営店を含む）。</p>
         </article>
 
         <div class="rk-voice-block">
