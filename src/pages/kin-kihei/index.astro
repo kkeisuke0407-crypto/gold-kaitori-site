@@ -1128,14 +1128,23 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         if(__plain && el.__ctaBusy){ e.preventDefault(); return; }
         // CVのみ送信（店別イベントは廃止。内訳は affiliate_key で分析。まねきや・おたからや＝成果CV／ブラリバ等＝非成果）
         var __cv = ((key === "manekiya" || key === "otakaraya") && tn !== "rk_zisseki") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
+        // GTM併用時の保険としてdataLayerにも積む
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
-        if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
-        // 修飾キー/中クリック（新規タブ等）は既定動作のまま（beaconで送信済み）
-        if(!__plain) return;
-        // 通常クリック：即フィードバック（押した感）→ 少し待って遷移（beaconは送信済み）
+        // 修飾キー/中クリック（新規タブ等）は既定動作のまま：beaconで確実送信し、離脱を妨げない
+        if(!__plain){
+          if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
+          return;
+        }
+        // 通常クリック：CVを送ってから遷移。送信完了(event_callback)か保険タイムアウトの早い方で遷移する
+        // （beacon送信なのでcallback前に離脱しても計測は生きるが、callbackを待つことで取りこぼしをさらに減らす）
         e.preventDefault();
         el.__ctaBusy = true; el.classList.add("cta-busy");
-        setTimeout(function(){ window.location.href = url; }, 160);
+        var __go = function(){ if(el.__ctaGone) return; el.__ctaGone = true; window.location.href = url; };
+        if(typeof gtag==="function"){
+          gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon", event_callback: __go }));
+        }
+        // gtag未ロード/コールバック不発でも必ず遷移する保険（送信は上で済んでいる）
+        setTimeout(__go, 700);
       });
     });
     // スマホ下部固定CTA：FVを過ぎたら表示
@@ -1146,6 +1155,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         .observe(fv);
     } else if(sticky){ sticky.hidden = false; }
     track("lp_kin_open", { landing_intent:"lp_kin" });
+    track("gold_kaitori_landing_intent", { landing_intent:"lp_kin" }); // 全ページ共通の計測軸（トップ/LP横断で統一）
     // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
     window.addEventListener("load", function(){
       var search = window.location.search;
