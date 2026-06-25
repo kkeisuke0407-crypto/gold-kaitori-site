@@ -656,6 +656,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
     /* ボタン共通 */
     .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 14px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .12s,box-shadow .12s; white-space:nowrap; font-size:15px; line-height:1.2; }
+    /* B案：赤背景CTA（電話・公式）は文字を大きく＋影で背景から浮かせて視認性UP。小型(.sm)は据え置き */
+    .btn-phone, .btn-official{ font-size:18px; letter-spacing:.3px; text-shadow:0 2px 3px rgba(0,0,0,.35); }
     .btn:active{ transform:scale(.97); }
     .btn i{ font-style:normal; }
     .btn-web{ background:var(--green-d); color:#fff; }
