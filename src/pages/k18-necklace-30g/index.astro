@@ -225,7 +225,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <!-- 目安→査定への橋渡し（相場確認だけで満足して離脱するのを防ぐ） -->
           <div class="ref-bridge">
             <p class="ref-bridge-txt">これは地金相場ベースの<b>“目安”</b>です。実際の受取額は手数料や状態で変わり、<b>同じ重さでも業者で数万円の差</b>が出ることもあります。</p>
-            <a href="#" class="camp2-cta ref-cta" data-aff="manekiya" data-track="ref_official" rel="nofollow sponsored">「本当の受取額」を確認する</a>
+            <a href="#" class="camp2-cta ref-cta" data-aff="manekiya" data-track="ref_official" rel="nofollow sponsored">まねきやで「本当の受取額」を確認する</a>
             <p class="point-cta-note">無料査定／9時〜21時（年中無休）／売却は金額を見てから判断でOK</p>
           </div>
         </div>
@@ -528,10 +528,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     </div>
   </footer>
 
-  <!-- スマホ下部固定CTA -->
-  <div class="sticky" data-sticky hidden>
-    <a href="#" class="sticky-official" data-aff="manekiya" data-track="sticky_official" rel="nofollow sponsored"><small class="sticky-cp">🎉 6月限定キャンペーン</small><span class="sticky-main">買取価格30％UPの条件を確認する</span></a>
-  </div>
 
   <style>
     /* ▼ レイアウト安全ガード（正常時は無影響・はみ出しのみ防止） */
@@ -562,6 +558,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
     /* ボタン共通 */
     .btn{ display:inline-flex; align-items:center; justify-content:center; gap:6px; text-decoration:none; font-weight:900; border-radius:999px; min-height:54px; padding:0 14px; box-shadow:0 8px 18px rgba(14,120,100,.22); transition:transform .12s,box-shadow .12s; white-space:nowrap; font-size:15px; line-height:1.2; }
+    /* B案：赤背景CTA（電話・公式）は文字を大きく＋影で背景から浮かせて視認性UP。小型(.sm)は据え置き */
+    .btn-phone, .btn-official{ font-size:18px; letter-spacing:.3px; text-shadow:0 2px 3px rgba(0,0,0,.35); }
     .btn:active{ transform:scale(.97); }
     .btn i{ font-style:normal; }
     .btn-web{ background:var(--green-d); color:#fff; }
@@ -1111,14 +1109,23 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         if(__plain && el.__ctaBusy){ e.preventDefault(); return; }
         // CVのみ送信（店別イベントは廃止。内訳は affiliate_key で分析。まねきや・おたからや＝成果CV／ブラリバ等＝非成果）
         var __cv = ((key === "manekiya" || key === "otakaraya") && tn !== "rk_zisseki") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
+        // GTM併用時の保険としてdataLayerにも積む
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
-        if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
-        // 修飾キー/中クリック（新規タブ等）は既定動作のまま（beaconで送信済み）
-        if(!__plain) return;
-        // 通常クリック：即フィードバック（押した感）→ 少し待って遷移（beaconは送信済み）
+        // 修飾キー/中クリック（新規タブ等）は既定動作のまま：beaconで確実送信し、離脱を妨げない
+        if(!__plain){
+          if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
+          return;
+        }
+        // 通常クリック：CVを送ってから遷移。送信完了(event_callback)か保険タイムアウトの早い方で遷移する
+        // （beacon送信なのでcallback前に離脱しても計測は生きるが、callbackを待つことで取りこぼしをさらに減らす）
         e.preventDefault();
         el.__ctaBusy = true; el.classList.add("cta-busy");
-        setTimeout(function(){ window.location.href = url; }, 160);
+        var __go = function(){ if(el.__ctaGone) return; el.__ctaGone = true; window.location.href = url; };
+        if(typeof gtag==="function"){
+          gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon", event_callback: __go }));
+        }
+        // gtag未ロード/コールバック不発でも必ず遷移する保険（送信は上で済んでいる）
+        setTimeout(__go, 700);
       });
     });
     // スマホ下部固定CTA：FVを過ぎたら表示
@@ -1129,6 +1136,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         .observe(fv);
     } else if(sticky){ sticky.hidden = false; }
     track("k18_neck_30g_open", { landing_intent:"k18_neck_30g" });
+    track("gold_kaitori_landing_intent", { landing_intent:"k18_neck_30g" }); // 全ページ共通の計測軸（トップ/LP横断で統一）
     // 全リンクへ着地URLのクエリパラメーターを転送（タグ発火向上）
     window.addEventListener("load", function(){
       var search = window.location.search;
