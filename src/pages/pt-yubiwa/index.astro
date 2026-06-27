@@ -125,29 +125,37 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <p class="rate-purity-note">※各純度は純プラチナの買取単価から純度比で算出した参考値です。指輪などの製品は石・加工で変わります。正確な金額は店舗でご確認ください。</p>
           </div>
           <div class="ref-price satei-price">
-            <h3 class="ref-ttl">あなたのプラチナ指輪、今ならいくら？<span>査定額は「相場 × あなたの指輪」で決まります</span></h3>
+            <h3 class="ref-ttl">あなたのプラチナ指輪、今ならいくら？<span>査定額はシンプルな“かけ算”で決まります</span></h3>
 
-            <div class="satei-rate-card">
-              <span class="satei-rate-lbl">📊 本日のPt900買取相場</span>
-              <b class="satei-rate-num">{yen(rates.pt900)}<small>/g</small></b>
-              <span class="satei-rate-up">プラチナは歴史的な高値圏 ↑</span>
+            <!-- C案：相場 × あなたの指輪 ＝ ??? の数式レイアウト -->
+            <div class="satei-eq">
+              <div class="satei-eq-cell satei-eq-rate">
+                <span class="satei-eq-cap">📊 本日のPt900相場</span>
+                <b class="satei-eq-num">{yen(rates.pt900)}<small>/g</small></b>
+                <span class="satei-eq-up">歴史的な高値圏 ↑</span>
+              </div>
+              <span class="satei-eq-op">×</span>
+              <div class="satei-eq-cell satei-eq-item">
+                <span class="satei-eq-cap">💍 あなたの指輪</span>
+                <ul class="satei-mini">
+                  <li><i>💎</i>素材・純度<small>Pt900／950／コンビ</small></li>
+                  <li><i>⚖️</i>重量<small>g数が多いほどUP</small></li>
+                  <li><i>🔧</i>状態<small>傷・変形・壊れOK</small></li>
+                  <li><i>💰</i>手数料<small>まねきやは0円</small></li>
+                  <li><i>🎁</i>キャンペーン<small>適用でさらに上乗せ</small></li>
+                </ul>
+              </div>
+              <span class="satei-eq-op">＝</span>
+              <div class="satei-eq-cell satei-eq-result">
+                <span class="satei-eq-cap">💰 あなたの受取額</span>
+                <b class="satei-eq-mark">??? 円</b>
+                <span class="satei-eq-rsub">無料査定ではじめて確定</span>
+              </div>
             </div>
 
-            <div class="satei-flow">
-              <p class="satei-flow-ttl">この相場に、査定で<b>次の5つ</b>が反映されます</p>
-              <ul class="satei-list">
-                <li><i>💎</i><div><b>素材・純度</b><span>Pt900／Pt950／コンビ など</span></div></li>
-                <li><i>⚖️</i><div><b>重量</b><span>グラム数が多いほど金額アップ</span></div></li>
-                <li><i>🔧</i><div><b>状態</b><span>傷・変形・壊れていてもOK</span></div></li>
-                <li><i>💰</i><div><b>手数料</b><span>まねきやは0円（差し引きなし）</span></div></li>
-                <li><i>🎁</i><div><b>キャンペーン</b><span>適用でさらに上乗せのことも</span></div></li>
-              </ul>
-            </div>
-
-            <div class="satei-result">
-              <span class="satei-result-eq">＝ あなたの受取額は？</span>
-              <b class="satei-result-mark">??? 円</b>
-              <span class="satei-result-sub">実際の金額は<b>無料査定</b>ではじめてわかります</span>
+            <!-- D案：損失回避フック -->
+            <div class="satei-loss">
+              <i>⚠️</i><p>査定は<b>完全無料</b>。今の相場を知らずに眠らせている人ほど、<b>気づかないうちに損</b>をしています。</p>
             </div>
 
             <!-- 目安→査定への橋渡し（相場確認だけで満足して離脱するのを防ぐ） -->
@@ -1063,28 +1071,36 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .final-banner img{ width:100%; height:auto; display:block; }
     .final-banner::after{ content:""; position:absolute; top:-20%; left:-70%; width:45%; height:140%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 3s ease-in-out infinite; }
     @media (prefers-reduced-motion:reduce){ .final-banner{ animation:none; } .final-banner::after{ animation:none; display:none; } }
-    /* 査定シミュレーター（相場×指輪→？円） */
+    /* 査定シミュレーター（相場 × あなたの指輪 ＝ ??? の数式） */
     .satei-price{ background:linear-gradient(180deg,#FFFDF7,#fff); }
-    .satei-rate-card{ position:relative; text-align:center; background:linear-gradient(135deg,#2B2B2B,#454039); border-radius:16px; padding:16px 14px 14px; box-shadow:0 10px 26px rgba(40,30,10,.28); overflow:hidden; }
-    .satei-rate-card::after{ content:""; position:absolute; top:-40%; left:-20%; width:80%; height:180%; background:linear-gradient(115deg,transparent,rgba(255,225,150,.18),transparent); transform:rotate(8deg); }
-    .satei-rate-lbl{ position:relative; display:block; font-size:12px; font-weight:800; color:#F5E2B0; letter-spacing:.3px; margin-bottom:2px; }
-    .satei-rate-num{ position:relative; display:block; font-size:38px; font-weight:900; line-height:1.05; background:linear-gradient(180deg,#FFEDB0,#E0A53A); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 1px 0 rgba(0,0,0,.15); }
-    .satei-rate-num small{ font-size:15px; font-weight:800; -webkit-text-fill-color:#F0D89A; }
-    .satei-rate-up{ position:relative; display:inline-block; margin-top:6px; font-size:11px; font-weight:800; color:#3CC79A; background:rgba(60,199,154,.14); border-radius:999px; padding:2px 10px; }
-    .satei-flow{ margin-top:16px; }
-    .satei-flow-ttl{ font-size:13.5px; font-weight:800; color:var(--ink); text-align:center; margin:0 0 10px; }
-    .satei-flow-ttl b{ color:var(--hot); font-weight:900; }
-    .satei-list{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
-    .satei-list li{ display:flex; align-items:center; gap:11px; background:#fff; border:1px solid #F0E2C2; border-left:4px solid var(--gold); border-radius:12px; padding:10px 12px; box-shadow:0 3px 8px rgba(180,140,40,.07); }
-    .satei-list li i{ font-style:normal; font-size:20px; flex-shrink:0; line-height:1; }
-    .satei-list li div{ display:flex; flex-direction:column; gap:1px; }
-    .satei-list li b{ font-size:13.5px; font-weight:900; color:var(--ink); }
-    .satei-list li span{ font-size:12px; font-weight:600; color:var(--sub); }
-    .satei-result{ position:relative; margin-top:14px; text-align:center; background:#FFF7EC; border:2px dashed #E8C57E; border-radius:14px; padding:14px 12px 12px; }
-    .satei-result-eq{ display:block; font-size:13px; font-weight:800; color:var(--sub); margin-bottom:2px; }
-    .satei-result-mark{ display:block; font-size:30px; font-weight:900; letter-spacing:4px; color:#C98A12; line-height:1.1; }
-    .satei-result-sub{ display:block; font-size:12.5px; font-weight:700; color:var(--ink); margin-top:4px; }
-    .satei-result-sub b{ color:var(--hot); font-weight:900; }
+    .satei-eq{ display:flex; flex-direction:column; align-items:stretch; gap:0; }
+    .satei-eq-cell{ position:relative; border-radius:14px; padding:13px 14px; text-align:center; }
+    .satei-eq-cap{ display:block; font-size:12px; font-weight:800; letter-spacing:.2px; margin-bottom:4px; }
+    .satei-eq-op{ align-self:center; font-size:24px; font-weight:900; color:#C9A24A; line-height:1; margin:7px 0; }
+    /* 相場セル（黒×金） */
+    .satei-eq-rate{ background:linear-gradient(135deg,#2B2B2B,#454039); box-shadow:0 10px 26px rgba(40,30,10,.28); overflow:hidden; }
+    .satei-eq-rate::after{ content:""; position:absolute; top:-40%; left:-20%; width:80%; height:180%; background:linear-gradient(115deg,transparent,rgba(255,225,150,.18),transparent); transform:rotate(8deg); }
+    .satei-eq-rate .satei-eq-cap{ position:relative; color:#F5E2B0; }
+    .satei-eq-num{ position:relative; display:block; font-size:34px; font-weight:900; line-height:1.05; background:linear-gradient(180deg,#FFEDB0,#E0A53A); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-shadow:0 1px 0 rgba(0,0,0,.15); }
+    .satei-eq-num small{ font-size:15px; font-weight:800; -webkit-text-fill-color:#F0D89A; }
+    .satei-eq-up{ position:relative; display:inline-block; margin-top:6px; font-size:11px; font-weight:800; color:#3CC79A; background:rgba(60,199,154,.14); border-radius:999px; padding:2px 10px; }
+    /* あなたの指輪セル（5項目の内訳） */
+    .satei-eq-item{ background:#fff; border:1px solid #F0E2C2; box-shadow:0 4px 12px rgba(180,140,40,.08); }
+    .satei-eq-item .satei-eq-cap{ color:var(--ink); }
+    .satei-mini{ list-style:none; margin:0; padding:0; display:grid; gap:6px; }
+    .satei-mini li{ display:flex; align-items:center; gap:8px; font-size:13px; font-weight:900; color:var(--ink); background:#FFFCF4; border-radius:9px; padding:7px 11px; text-align:left; }
+    .satei-mini li i{ font-style:normal; font-size:17px; flex-shrink:0; line-height:1; }
+    .satei-mini li small{ margin-left:auto; font-size:11px; font-weight:600; color:var(--sub); }
+    /* 受取額セル（??? の焦らし） */
+    .satei-eq-result{ background:#FFF7EC; border:2px dashed #E8C57E; }
+    .satei-eq-result .satei-eq-cap{ color:var(--sub); }
+    .satei-eq-mark{ display:block; font-size:32px; font-weight:900; letter-spacing:4px; color:#C98A12; line-height:1.1; }
+    .satei-eq-rsub{ display:block; font-size:12px; font-weight:800; color:var(--hot); margin-top:3px; }
+    /* D案：損失回避フック */
+    .satei-loss{ display:flex; align-items:center; gap:10px; margin-top:14px; background:#FFF1EE; border:1px solid #F3C9C0; border-radius:12px; padding:11px 13px; }
+    .satei-loss i{ font-style:normal; font-size:20px; flex-shrink:0; }
+    .satei-loss p{ margin:0; font-size:12.5px; font-weight:700; line-height:1.6; color:var(--ink); text-align:left; }
+    .satei-loss p b{ color:var(--hot); font-weight:900; }
     .satei-price .ref-bridge{ margin-top:14px; }
     .sec-final{ background:linear-gradient(180deg,#fff,var(--mint)); text-align:center; }
     .sec-final h2{ font-size:22px; font-weight:900; margin:0 0 8px; line-height:1.45; }
