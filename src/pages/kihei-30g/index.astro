@@ -101,24 +101,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         </div>
 
 
-        <!-- 喜平ネックレス 重さ別・参考買取価格表（K18） -->
-        <div class="kihei-tbl-head"><span class="fv-tbl-ttl">K18喜平ネックレス 重さ別・参考買取価格</span></div>
-        <div class="kihei-tbl-wrap">
-          <table class="kihei-tbl">
-            <thead><tr><th>K18喜平ネックレス</th><th>参考買取価格</th></tr></thead>
-            <tbody>
-              {kiheiTable.map((row) => (
-                <tr class={row.hot ? "kihei-hot" : ""}>
-                  <td>{row.w}g{row.hot && <span class="kihei-badge">人気の重さ</span>}</td>
-                  <td>{row.price}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p class="rate-updated">{rates.updatedAt}（本日のK18 {yen(rates.k18)}/g）</p>
-          <p class="note">※上の金額はおおよその目安です。純度・デザイン・状態・お店によって実際の買取価格は変わります。</p>
-        </div>
-
         <!-- 本日の金買取相場 -->
         <div class="rate-hero">
           <p class="rate-hero-ttl"><i class="live-dot"></i>本日の金買取単価（1gあたり）<span class="rate-hero-badge">📈 歴史的高値圏</span></p>
