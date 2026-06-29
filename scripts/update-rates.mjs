@@ -106,6 +106,65 @@ function extractBuyPrices(text) {
   };
 }
 
+// 田中貴金属の「本日価格テーブル」専用パーサ。
+//   テーブルは1金属につき「<金属> <店頭小売価格> 円 <小売前日比> 円 <店頭買取価格> 円 <買取前日比> 円」
+//   の順に並ぶ（見出しは行より前にまとまって出る）。旧実装は見出し直後の数字を拾い、
+//   かつレンジ内の“最大値”を採用していたため、買取(安い方)ではなく小売(高い方)を誤採用していた。
+//   ここではラベル以降に現れる「レンジ内・カンマ区切り価格」を順に2つ拾い、
+//   1つ目＝小売／2つ目＝買取 とみなして“買取”を返す。前日比は買取価格直後から取る。
+function extractTanakaBuy(text, label, range) {
+  // 価格テーブル領域に入ってから探す（ナビ等の混入を避ける）
+  const tableAt = text.search(/店頭買取価格|買取価格/);
+  const scope = tableAt >= 0 ? text.slice(tableAt) : text;
+
+  // 「ラベル + レンジ内カンマ価格」が最初に現れる位置（=本日のデータ行）を特定
+  let start = -1;
+  const labelRe = new RegExp(label + "[^0-9]{0,6}(\\d{1,3}(?:,\\d{3})+)", "g");
+  for (let m; (m = labelRe.exec(scope)); ) {
+    if (inRange(toNum(m[1]), range)) { start = m.index; break; }
+  }
+  if (start < 0) return { retail: null, buy: null, buyDiff: null };
+
+  // そこからレンジ内のカンマ価格を順に最大2つ（小売→買取）拾う。
+  //   前日比(ctx)は価格直後を“非破壊で”読む（matchで消費すると次の価格を食うため）。
+  const after = scope.slice(start);
+  const priceRe = /\d{1,3}(?:,\d{3})+/g;
+  const picked = [];
+  for (let m; (m = priceRe.exec(after)) && picked.length < 2; ) {
+    const n = toNum(m[0]);
+    if (inRange(n, range)) {
+      const ctx = after.slice(priceRe.lastIndex, priceRe.lastIndex + 12);
+      picked.push({ n, ctx });
+    }
+  }
+  return {
+    retail: picked[0]?.n ?? null,
+    buy: picked[1]?.n ?? null,
+    buyDiff: picked[1] ? parseDiff(picked[1].ctx) : null,
+  };
+}
+
+async function fromTanakaDedicated() {
+  try {
+    const goldText = await fetchText("https://gold.tanaka.co.jp/commodity/souba/d-gold.php");
+    const ptText = await fetchText("https://gold.tanaka.co.jp/commodity/souba/d-platinum.php");
+    const g = extractTanakaBuy(goldText, "金", GOLD_RANGE);
+    const p = extractTanakaBuy(ptText, "プラチナ", PT_RANGE);
+    console.log(`[update-rates] 田中貴金属: 金 小売=${g.retail}/買取=${g.buy}(前日比${g.buyDiff}) ／ Pt 小売=${p.retail}/買取=${p.buy}(前日比${p.buyDiff})`);
+    if (g.buy == null || p.buy == null) {
+      throw new Error(`買取価格が取れない gold=${g.buy} pt1000=${p.buy}`);
+    }
+    return {
+      gold: g.buy, pt1000: p.buy,
+      goldDiffOfficial: g.buyDiff, ptDiffOfficial: p.buyDiff,
+      goldCtx: "", ptCtx: "", source: "田中貴金属",
+    };
+  } catch (e) {
+    console.warn(`[update-rates] 田中貴金属(専用ページ): 失敗 — ${e && e.message}`);
+    return null;
+  }
+}
+
 async function fromSource(name, urls) {
   try {
     const texts = [];
@@ -157,10 +216,14 @@ async function main() {
     console.warn("[update-rates] 既存 rates.json を読めず。空から開始。");
   }
 
+  // 田中貴金属（専用ページ）を本線に。金=d-gold.php / プラチナ=d-platinum.php の
+  //   本日価格テーブルから「店頭買取価格」を正しく取る（小売と取り違えない）。
+  //   ★以前は見出し直後の数字＝小売を、しかもレンジ内最大値で拾っており、買取より高い
+  //     小売価格を採用していた（例 6/26：正しい買取22,794ではなく小売22,818を採用→以後ズレ）。
+  //   専用ページが失敗した時だけ souba/ や三菱マテリアルへフォールバックする。
   const fetched =
-    (await fromSource("田中貴金属", [
-      "https://gold.tanaka.co.jp/commodity/souba/d-gold.php",
-      "https://gold.tanaka.co.jp/commodity/souba/d-platinum.php",
+    (await fromTanakaDedicated()) ||
+    (await fromSource("田中貴金属(souba予備)", [
       "https://gold.tanaka.co.jp/commodity/souba/",
     ])) ||
     (await fromSource("三菱マテリアル", [
