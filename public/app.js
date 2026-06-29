@@ -20,7 +20,7 @@ const FORWARDED_AD_PARAMS = new Set([
 ]);
 
 function isCampaignActive() {
-  // 「今月限定」キャンペーンは毎月継続実施のため常時ON（停止時のみ false）。
+  // 30%UP＋手数料無料キャンペーンは継続実施のため常時ON（停止時のみ false）。
   return true;
 }
 
