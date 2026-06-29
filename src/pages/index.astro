@@ -5,8 +5,8 @@ const CANONICAL = "https://kaitori.hakobu-family.com/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-appraisal-reservation.png";
 import { getRates } from "../lib/rates.js";
 const MARKET_YEARLY_SOURCE_URL = "https://gold.tanaka.co.jp/commodity/souba/y-gold.php";
-// まねきやの「今月限定 買取額30%UP＋手数料無料」は毎月継続実施のため常時表示。
-// 一時停止する場合のみ false にする。
+// まねきやの買取額30%UP＋手数料無料キャンペーンは継続実施のため常時表示。
+// 月名（「6月限定」等）は各LPのテキストを手動で更新する。一時停止する場合のみ false。
 const campaignActive = true;
 
 const fallbackMarket = {
@@ -243,7 +243,7 @@ const faqJsonLd = {
           </p>
           {campaignActive ? (
             <div class="hero-alert">
-              <span>今月限定キャンペーン</span>
+              <span>6月限定キャンペーン</span>
               <strong>買取金額 最大30%UP <small>電話申し込み限定</small></strong>
             </div>
           ) : (
