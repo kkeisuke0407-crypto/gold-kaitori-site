@@ -541,7 +541,7 @@ function setupCampaignExpiryPresentation() {
 
   const readyPoints = document.querySelectorAll(".ready-box li");
   if (readyPoints.length >= 2) {
-    readyPoints[1].textContent = "電話相談またはWEB査定予約で金額と条件を確認できる";
+    readyPoints[1].textContent = "電話予約・WEB予約で、査定の流れと条件を確認できる";
   }
 
   const campaignRow = document.querySelector(".comparison-board .comparison-row:nth-child(2)");
@@ -575,7 +575,7 @@ function setupCampaignExpiryPresentation() {
 
   const sellButton = document.querySelector('[data-track="sell_now_manekiya"]');
   const campaignNote = document.querySelector(".campaign-note");
-  if (sellButton) sellButton.textContent = "電話相談の条件を見る";
+  if (sellButton) sellButton.textContent = "電話で査定予約する";
   if (campaignNote) campaignNote.textContent = "※査定対象、費用、対応方法などの最新の内容はリンク先で確認してください。";
 }
 
@@ -586,7 +586,7 @@ function setupLandingIntent() {
       eyebrow: "金を売る前に、費用条件を確認したい方へ",
       title: "金の買取、<br />手数料まで<span class=\"no-break\">確認</span>。",
       lead: "高く見えても、手数料を差し引いたら受取額が変わることがあります。まねきやは公式に査定料・キャンセル料・手数料がかからないと案内しています。まず査定額を確認してから判断しましょう。",
-      primary: "手数料0円か電話で確認",
+      primary: "電話で査定予約する",
       stripKicker: "手取りで比較",
       stripTitle: "査定額から引かれる費用を、先に確認",
       stripLead: "買取価格だけを見て決める前に、費用条件まで確認しておくと安心です。まねきや公式では、査定料・キャンセル料・手数料は一切かからないと案内されています。",
@@ -604,7 +604,7 @@ function setupLandingIntent() {
       eyebrow: "刻印が見えない金製品をお持ちの方へ",
       title: "刻印がなくても、<br />査定で<span class=\"no-break\">確認</span>。",
       lead: "古い指輪やアクセサリーは、刻印が薄い・読めないことがあります。自分で価値を決めて処分せず、まずは査定方法と対象品の条件を確認しましょう。",
-      primary: "刻印なし品を電話で相談",
+      primary: "電話で査定予約する",
       stripKicker: "捨てる前に確認",
       stripTitle: "刻印が読めない品も、見た目だけで判断しない",
       stripLead: "刻印が薄い、見当たらない、素材が分からない品物は、品位を確認できる査定先へ相談することが第一歩です。",
@@ -621,14 +621,14 @@ function setupLandingIntent() {
     k18: {
       eyebrow: "K18ネックレスの査定を検討中の方へ",
       title: "K18なら、<br />まず無料<span class=\"no-break\">査定</span>。",
-      lead: "切れたネックレスや古い18金アクセサリーも、金として値段が付く場合があります。売却を決める前に、電話相談またはWEB査定予約で金額と条件を確認しましょう。",
-      primary: "K18を電話で査定相談"
+      lead: "切れたネックレスや古い18金アクセサリーも、金として値段が付く場合があります。売却を決める前に、まず電話またはWEBで査定予約しましょう。金額は査定で分かります。",
+      primary: "電話で査定予約する"
     },
     platinum: {
       eyebrow: "プラチナ指輪の査定を検討中の方へ",
       title: "プラチナなら、<br />まず無料<span class=\"no-break\">査定</span>。",
-      lead: "Pt900やPt850の指輪・ネックレスは、刻印や重さで査定額が変わります。古い品物でも、まず電話相談またはWEB査定予約で条件を確認しましょう。",
-      primary: "プラチナ指輪を電話相談"
+      lead: "Pt900やPt850の指輪・ネックレスは、刻印や重さで査定額が変わります。古い品物でも、まず電話またはWEBで査定予約しましょう。",
+      primary: "電話で査定予約する"
     }
   };
   const variant = variants[requestedIntent];
@@ -962,14 +962,14 @@ document.addEventListener("DOMContentLoaded", function () {
   sticky.className = "sticky-cta";
   const landingIntent = document.body.getAttribute("data-landing-intent") || "general";
   const stickyLabels = {
-    fee: "手数料を電話で確認",
-    unmarked: "刻印なし品を電話相談",
-    platinum: "プラチナを電話相談",
-    k18: "K18を電話相談"
+    fee: "手数料0円で査定予約する",
+    unmarked: "刻印なし品も査定予約する",
+    platinum: "プラチナを査定予約する",
+    k18: "K18を査定予約する"
   };
   sticky.innerHTML =
-    '<div class="sticky-copy"><span>電話相談へ</span><strong>公式で電話番号を確認</strong><small>' + (isCampaignActive() ? "電話申し込み限定 最大30%UP" : "査定額を見てから売却判断") + '</small></div>' +
-    '<a class="btn btn-primary btn-phone-primary" href="' + getAffiliateLink("manekiya") + '" data-affiliate="manekiya" data-track="sticky_phone" rel="nofollow sponsored">' + (stickyLabels[landingIntent] || "電話相談へ進む") + '</a>' +
+    '<div class="sticky-copy"><span>電話で予約</span><strong>公式へ電話で査定予約</strong><small>' + (isCampaignActive() ? "電話申し込み限定 最大30%UP" : "査定額を見てから売却判断") + '</small></div>' +
+    '<a class="btn btn-primary btn-phone-primary" href="' + getAffiliateLink("manekiya") + '" data-affiliate="manekiya" data-track="sticky_phone" rel="nofollow sponsored">' + (stickyLabels[landingIntent] || "電話で査定予約する") + '</a>' +
     '<button class="sticky-close" type="button" aria-label="閉じる">x</button>';
   document.body.appendChild(sticky);
 
