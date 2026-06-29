@@ -5,7 +5,6 @@ const AFFILIATE_LINKS = {
   otakaraya: "https://lp.otakaraya.jp/lp-gold-a/"
 };
 
-const MANEKIYA_CAMPAIGN_END = Date.parse("2026-05-31T23:59:59+09:00");
 const FORWARDED_AD_PARAMS = new Set([
   "gclid",
   "gbraid",
@@ -21,7 +20,8 @@ const FORWARDED_AD_PARAMS = new Set([
 ]);
 
 function isCampaignActive() {
-  return Date.now() <= MANEKIYA_CAMPAIGN_END;
+  // 「今月限定」キャンペーンは毎月継続実施のため常時ON（停止時のみ false）。
+  return true;
 }
 
 function shouldForwardParam(name) {

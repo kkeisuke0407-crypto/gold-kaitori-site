@@ -5,8 +5,9 @@ const CANONICAL = "https://kaitori.hakobu-family.com/";
 const OGP_IMAGE = "https://kaitori.hakobu-family.com/images/hero-appraisal-reservation.png";
 import { getRates } from "../lib/rates.js";
 const MARKET_YEARLY_SOURCE_URL = "https://gold.tanaka.co.jp/commodity/souba/y-gold.php";
-const CAMPAIGN_END = Date.parse("2026-05-31T23:59:59+09:00");
-const campaignActive = Date.now() <= CAMPAIGN_END;
+// まねきやの「今月限定 買取額30%UP＋手数料無料」は毎月継続実施のため常時表示。
+// 一時停止する場合のみ false にする。
+const campaignActive = true;
 
 const fallbackMarket = {
   updatedAt: "2026年5月29日 現在",
@@ -242,7 +243,7 @@ const faqJsonLd = {
           </p>
           {campaignActive ? (
             <div class="hero-alert">
-              <span>5月限定キャンペーン</span>
+              <span>今月限定キャンペーン</span>
               <strong>買取金額 最大30%UP <small>電話申し込み限定</small></strong>
             </div>
           ) : (
