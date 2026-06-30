@@ -34,8 +34,9 @@
 
   function apply() {
     var closed = isClosed();
-    // 電話CTA＝data-track に "phone" を含むリンク（inline版／app.js版どちらも対象）
-    var nodes = document.querySelectorAll('[data-track*="phone"]');
+    // 電話CTA＝data-track に "phone" を含むリンク（inline版／app.js版どちらも対象）。
+    // 加えて、文言が電話前提の point_official / faq_official も時間外は公式確認版へ切替。
+    var nodes = document.querySelectorAll('[data-track*="phone"], [data-track="point_official"], [data-track="faq_official"]');
     Array.prototype.forEach.call(nodes, function (el) {
       var swapped = el.getAttribute("data-cta-swapped") === "1";
       if (closed) {
