@@ -28,7 +28,7 @@ const SUFFIX = "utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_t
 // 計測イベント辞書（app.js / 各LPの data-track と対応）
 const EVENTS = [
   { ev: "gold_kaitori_landing_intent",  desc: "ページ閲覧（全ページ共通の母数。landing_intentでLP識別）", kpi: "★ 母数" },
-  { ev: "gold_kaitori_affiliate_click", desc: "成果CV＝まねきや/おたからや送客クリック（beacon＋event_callbackで遷移前に確実送信）", kpi: "★ 主CV" },
+  { ev: "gold_kaitori_affiliate_click", desc: "成果CV＝まねきや送客クリック（おたからや/ブラリバは other_click）（beacon＋event_callbackで遷移前に確実送信）", kpi: "★ 主CV" },
   { ev: "gold_kaitori_other_click",     desc: "非成果リンク（ブラリバ等）のクリック", kpi: "補助" },
   { ev: "cta_click",                    desc: "アフィリリンクのクリック全般（トップ/appjs系・affiliate_key・track_name付き）", kpi: "主要" },
   { ev: "phone_click",                  desc: "電話CTAクリック（=通電CVの代理指標）", kpi: "主要" },
