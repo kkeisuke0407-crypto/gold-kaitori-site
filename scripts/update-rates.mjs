@@ -25,7 +25,7 @@ const PT_RANGE = [2000, 14000];
 
 const DEBUG = process.env.DEBUG_RATES === "1";
 
-async function fetchText(url) {
+async function fetchOnce(url) {
   const res = await fetch(url, {
     headers: {
       "User-Agent": UA,
@@ -36,16 +36,30 @@ async function fetchText(url) {
   });
   if (DEBUG) console.log(`[debug] GET ${url} → status=${res.status}`);
   if (!res.ok) throw new Error(`status=${res.status}`);
-  const html = await res.text();
-  const text = html
-    .replace(/<script[\s\S]*?<\/script>/gi, " ")
-    .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;|&#160;/g, " ")
-    .replace(/&yen;|&#165;/g, "¥")
-    .replace(/\s+/g, " ")
-    .trim();
-  return text;
+  return res.text();
+}
+
+async function fetchText(url) {
+  // 一時的な失敗（403/5xx/ネットワーク/タイムアウト）に備えて指数バックオフで最大3回リトライ。
+  let lastErr;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const html = await fetchOnce(url);
+      return html
+        .replace(/<script[\s\S]*?<\/script>/gi, " ")
+        .replace(/<style[\s\S]*?<\/style>/gi, " ")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&nbsp;|&#160;/g, " ")
+        .replace(/&yen;|&#165;/g, "¥")
+        .replace(/\s+/g, " ")
+        .trim();
+    } catch (e) {
+      lastErr = e;
+      if (DEBUG) console.warn(`[debug] retry ${attempt}/3 失敗 ${url}: ${e && e.message}`);
+      if (attempt < 3) await new Promise((r) => setTimeout(r, attempt * 1500));
+    }
+  }
+  throw lastErr;
 }
 
 const toNum = (s) => Number(String(s).replace(/[^\d]/g, ""));
