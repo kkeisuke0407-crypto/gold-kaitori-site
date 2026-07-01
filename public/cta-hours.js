@@ -28,8 +28,11 @@
   }
 
   function isClosed() {
-    var h = jstHour();
-    return h < OPEN_HOUR || h >= CLOSE_HOUR;
+    // 【停止中】21時で広告配信を止める運用のため、時間外の電話CTA差し替え（→「公式サイト確認」）は無効化。
+    //   電話CTAは終日そのまま表示する。再開する場合は下の判定を有効化する。
+    return false;
+    // var h = jstHour();
+    // return h < OPEN_HOUR || h >= CLOSE_HOUR;
   }
 
   function apply() {
