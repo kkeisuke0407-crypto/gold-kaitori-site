@@ -19,7 +19,10 @@ const goldExMan = (w, karat = rates.k18) => {
   return `約${fmt(karat * w * 0.9)}〜${fmt(karat * w)}万円`;
 };
 // キャンペーン残日数（まねきや 7/31まで）
-const campEnd = (() => { const _j = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })); return new Date(_j.getFullYear(), _j.getMonth() + 1, 0, 23, 59, 59); })(); // 当月末を自動算出（毎日リビルドで月替わりに自動追従）
+const campMonth = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })).getMonth() + 1;
+  const campMonthLabel = campMonth + "月限定";
+  // キャンペーン終了＝次の日曜(JST)を自動算出（週次日曜更新の傾向に追従／毎日リビルドで自動更新）
+  const campEnd = (() => { const _j = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })); const _add = (7 - _j.getDay()) % 7; return new Date(_j.getFullYear(), _j.getMonth(), _j.getDate() + _add, 23, 59, 59); })();
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
 const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
 const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
@@ -93,7 +96,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <div class="fv-datebadge">
           <span class="fv-db-tag"><i class="fv-db-dot"></i>最新版</span>
           <span class="fv-db-date">{todayLabel}</span>
-          <span class="fv-db-txt">📍 7月限定キャンペーンあり</span>
+          <span class="fv-db-txt">📍 {campMonthLabel}キャンペーンあり</span>
         </div>
 
 
@@ -125,14 +128,23 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td class="fv-td fv-td1">
                   {campDays > 0 ? (
                     <>
-                      <span class="camp-badge camp-badge-sparkle">7月限定</span><br />
+                      <span class="camp-badge camp-badge-sparkle">{campMonthLabel}</span><br />
                       <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
                     </>
                   ) : (
                     <b>公式キャンペーン<br />要確認</b>
                   )}
                 </td>
-                <td class="fv-td"><span class="mk ok">〇</span><b>買取金額<br />最大30%UP</b></td>
+                <td class="fv-td">
+                  {campDays > 0 ? (
+                    <>
+                      <span class="camp-badge camp-badge-sparkle">{campMonthLabel}</span><br />
+                      <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
+                    </>
+                  ) : (
+                    <b>公式キャンペーン<br />要確認</b>
+                  )}
+                </td>
                 <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
               </tr>
                             <tr class="cmp-band"><td colspan="3">壊れた品でもOK</td></tr>
@@ -191,7 +203,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </div>
           </div>
           <div class="rate-mk-offer">
-            <p class="rate-mk-txt"><span class="rate-mk-cp">【7月限定】</span><a href="#" class="rate-mk-link" data-aff="manekiya" data-track="rate_text_manekiya" rel="nofollow sponsored">まねきや</a>なら、電話で査定予約をしていただくと<b class="rate-mk-up">買取額30％UP＋手数料10％無料</b></p>
+            <p class="rate-mk-txt"><span class="rate-mk-cp">【{campMonthLabel}】</span><a href="#" class="rate-mk-link" data-aff="manekiya" data-track="rate_text_manekiya" rel="nofollow sponsored">まねきや</a>なら、電話で査定予約をしていただくと<b class="rate-mk-up">買取額30％UP＋手数料10％無料</b></p>
             <p class="rate-soudan-flag" style="margin:10px 0 8px;padding:10px 12px;background:linear-gradient(180deg,#FFF6E9,#FFEAD0);border:1.5px solid #E9B970;border-radius:10px;color:#B45309;font-weight:800;text-align:center;font-size:14.5px;line-height:1.45;">🗣️ 売るか迷っている段階でも、<b>査定・相談だけでOK</b></p>
             <a href="#" class="btn btn-phone full" data-aff="manekiya" data-track="rate_phone" rel="nofollow sponsored"><i>☎</i>まずは電話で無料相談をする</a>
           </div>
@@ -290,7 +302,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 <td><span class="rs-ic">◎</span>査定可能</td>
                 <td><span class="rs-ic">◎</span>鑑定スペ<br />シャリスト</td>
               </tr>
-              <tr class="rs-head"><th colspan="2">対応スピード</th><th colspan="2">7月限定キャンペーン</th></tr>
+              <tr class="rs-head"><th colspan="2">対応スピード</th><th colspan="2">{campMonthLabel}キャンペーン</th></tr>
               <tr class="rs-val">
                 <td colspan="2"><span class="rs-ic">◎</span>即日現金化</td>
                 <td colspan="2"><b class="rs-camp rs-camp-big">買取金額最大<em>30%</em>UP<br />＋手数料<em>10%</em>無料</b></td>
