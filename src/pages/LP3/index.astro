@@ -125,11 +125,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               <tr class="fv-tr-camp">
                 <td class="fv-td fv-td1">
                   {mkCampDays > 0 ? (
-                    <>
-                      <span class="camp-badge camp-badge-sparkle">{campMonthLabel}</span><br />
-                      <small class="camp-fee">手数料10%無料</small>
-                      <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
-                    </>
+                    <b class="camp-combined">買取金額<br /><em>最大30%UP</em><br />+手数料10%無料<br />実質<em>40%</em></b>
                   ) : (
                     <b class="camp-tbd">公式キャンペーン<br />要確認</b>
                   )}
@@ -148,7 +144,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               </tr>
               <tr class="cmp-band"><td colspan="3">買取価格</td></tr>
               <tr>
-                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>業界トップ水準<br />＋特典上乗せ</b></td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span><b style="color:var(--ink)">業界トップ水準<br />＋特典上乗せ</b></td>
                 <td class="fv-td"><span class="mk ok">〇</span>相場に沿った<br />高価買取</td>
                 <td class="fv-td"><span class="mk ok">〇</span>相場に沿った<br />高価買取</td>
               </tr>
@@ -206,6 +202,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 </td>
                 <td class="fv-td">
                   <a href="#" class="btn btn-ghost sm" data-aff="buraiba" data-track="fv_tbl_buraiba" rel="nofollow sponsored">公式サイト</a>
+                  <p class="countdown" style="visibility:hidden">spacer</p>
                 </td>
               </tr>
             </tbody>
@@ -312,30 +309,17 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     <!-- 03 高く売るコツ -->
     <section class="sec" id="point">
       <div class="wrap">
-        <div class="sec-head"><h2>高く売るための3つのポイント</h2><p>お店選びの前に、これだけ知っておきましょう。</p></div>
         <img class="point-img" src="/images/point-takaku1.webp" alt="高く売るための3つのポイント（1）" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="point-note">
-          <span class="point-note-num">1</span>
-          <div class="point-note-body">
-            <b class="point-note-ttl">売るタイミング</b>
-            <p>2026年7月現在、金の買取相場は<b class="copy-hl">歴史的な高水準</b>を保っていますが、ここ最近は少しずつ値を下げる動きも出てきています。実際に直近では<b class="copy-hl">1gあたり約2,400円</b>ほど下落しており、50gの金であればタイミング次第で<b class="copy-hl">約12万円もの差</b>になる計算です。「もう少し待てば上がるかも」と様子を見ているうちに値が下がってしまうケースも少なくありません。まずは今の相場で手持ちの金がいくらになるか、一度確かめておきましょう。</p>
-          </div>
+          <p>2026年7月現在、金の買取相場は<b class="copy-hl">歴史的な高水準</b>を保っていますが、<br />ここ最近は少しずつ値を下げる動きも出てきています。<br /><br />実際に直近では<b class="copy-hl">1gあたり約2,400円</b>ほど下落しており、<br />50gの金であればタイミング次第で<b class="copy-hl">約12万円もの差</b>になる計算です。<br /><br />「もう少し待てば上がるかも」と様子を見ているうちに値が下がってしまうケースも。<br />まずは今の相場で手持ちの金がいくらになるか、一度確かめておきましょう。</p>
         </div>
         <img class="point-img" src="/images/point-takaku2.webp" alt="高く売るための3つのポイント（2）" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="point-note">
-          <span class="point-note-num">2</span>
-          <div class="point-note-body">
-            <b class="point-note-ttl">相見積もり（比較）</b>
-            <p>1社だけに持ち込んでも、出てきた金額が適正かどうかを判断する材料がありません。買取店ごとに査定士の経験・目利き力や、対応できる品物の幅が異なり、まったく同じ品でも<b class="copy-hl">数十万円の差</b>が出ることも珍しくありません。2社以上に金額を聞いておくことで「他のお店ではこの金額でした」という一言が生まれ、より高い金額に近づきやすくなります。</p>
-          </div>
+          <p>1社だけに持ち込んでも、出てきた金額が適正かどうかを<br />判断する材料がありません。<br /><br />買取店ごとに査定士の経験・目利き力や対応できる品目が異なり、<br />まったく同じ品でも<b class="copy-hl">数十万円の差</b>が出ることも珍しくありません。<br /><br />2社以上に金額を聞いておくことで<br />「他のお店ではこの金額でした」という一言が生まれ、<br />より高い金額に近づきやすくなります。</p>
         </div>
         <img class="point-img" src="/images/point-takaku3.webp" alt="高く売るための3つのポイント（3）" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="point-note">
-          <span class="point-note-num">3</span>
-          <div class="point-note-body">
-            <b class="point-note-ttl">キャンペーンを使う</b>
-            <p>電話申込限定の<b class="copy-hl">買取金額UP</b>など、特典を使えば同じ品でも受取額が上乗せされることがあります。期間や対象品の条件があるので、"今やっているか"を申込前に確認しておくと、もらえるはずの金額を逃しません。</p>
-          </div>
+          <p>電話申込限定の<b class="copy-hl">買取金額UP</b>など、特典を使えば<br />同じ品でも受取額が上乗せされることがあります。<br /><br />期間や対象品の条件があるので、"今やっているか"を<br />申込前に確認しておくと、もらえるはずの金額を逃しません。</p>
         </div>
         <a href="#" class="camp2-cta" data-aff="manekiya" data-track="point_official" rel="nofollow sponsored">
           まずは電話で無料相談をする
@@ -485,9 +469,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </div>
           </div>
           <p class="note">※おたからや公式サイトからの引用。個人の感想です。査定額・条件には個人差があります。</p>
-          <a href="#" data-aff="manekiya" data-track="rank_camp_banner" rel="nofollow sponsored" class="rank-camp-cta" style="display:block;max-width:680px;margin:16px auto 0;text-align:center;">
+          <a href="#" data-aff="otakaraya" data-track="rank_camp_banner" rel="nofollow sponsored" class="rank-camp-cta" style="display:block;max-width:680px;margin:16px auto 0;text-align:center;">
             <p class="rank-camp-flag">🔥 期間限定 キャンペーン実施中</p>
-            <p class="rank-camp-days">あと<span class="rank-camp-days-num">{mkCampDays}</span>日<small>（{mkCampRangeLabel}）</small></p>
+            <p class="rank-camp-days">あと<span class="rank-camp-days-num">{campDays}</span>日<small>（〜{campEndLabel}）</small></p>
             <img src="/images/20260701_30UP_新デザイン_タレント入_1300×700_松澤_PC-scaled.webp" alt="電話申込限定 買取金額最大30%UP キャンペーン" width="1300" height="700" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
           </a>
         </div>
@@ -1113,6 +1097,10 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     }
     .cta-phone-label{ display:block; font-size:10px; font-weight:800; color:#E0322C; margin-bottom:4px; text-align:center; letter-spacing:.01em; }
     .camp-fee{ display:block; font-size:10.5px; font-weight:800; color:#E0322C; margin:2px 0 1px; }
+    .camp-combined{ color:#E0322C; font-size:12.5px; line-height:1.6; font-weight:900; }
+    .camp-combined em{ font-style:normal; font-size:15px; font-weight:900; display:block; }
+    .point-note{ display:block !important; margin:10px 0 22px !important; padding:0 !important; background:none !important; border:none !important; border-radius:0 !important; }
+    .point-note > p{ margin:0; font-size:15px; line-height:1.9; color:#3a3a3a; }
   
     /* ===== ブラッシュアップ（構成不変・視覚/CWVのみ） ===== */
     /* ① 電話CTAに光が流れる */
