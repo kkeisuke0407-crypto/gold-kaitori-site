@@ -21,7 +21,7 @@ const goldExMan = (w, karat = rates.k18) => {
 // 喜平ネックレス重さ別の参考買取価格表（K18基準）
 const kiheiTable = [20, 30, 50, 100, 200].map((w) => ({ w, price: goldExMan(w), hot: w === 30 || w === 50 }));
 // キャンペーン残日数（まねきや 7/31まで）
-const campEnd = new Date('2026-07-31T23:59:59+09:00');
+const campEnd = (() => { const _j = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })); return new Date(_j.getFullYear(), _j.getMonth() + 1, 0, 23, 59, 59); })(); // 当月末を自動算出（毎日リビルドで月替わりに自動追従）
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
 const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
 const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));

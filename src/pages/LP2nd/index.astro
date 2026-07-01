@@ -10,7 +10,7 @@ const rates = await getRates();
 const otakaraya = getOtakaraya();
 const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("ja-JP")}〜${Math.round(rates.pt900 * w).toLocaleString("ja-JP")}円`;
 // キャンペーン残日数（まねきや 7/31まで）
-const campEnd = new Date('2026-07-31T23:59:59+09:00');
+const campEnd = (() => { const _j = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })); return new Date(_j.getFullYear(), _j.getMonth() + 1, 0, 23, 59, 59); })(); // 当月末を自動算出（毎日リビルドで月替わりに自動追従）
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
 const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
 const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
