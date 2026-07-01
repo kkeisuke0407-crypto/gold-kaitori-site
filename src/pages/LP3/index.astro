@@ -121,24 +121,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
               </tr>
             </thead>
             <tbody>
-                            <tr class="cmp-band"><td colspan="3">買取価格</td></tr>
-              <tr>
-                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>高価買取に強み<br />（編集部評価）</b></td>
-                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
-                <td class="fv-td"><span class="mk ok">〇</span>高め</td>
-              </tr>
-                            <tr class="cmp-band"><td colspan="3">手数料</td></tr>
-              <tr>
-                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>0円（完全無料）</b></td>
-                <td class="fv-td"><span class="mk ok">〇</span>0円</td>
-                <td class="fv-td"><span class="mk ok">〇</span>0円</td>
-              </tr>
-                            <tr class="cmp-band"><td colspan="3">当サイト限定キャンペーン</td></tr>
+              <tr class="cmp-band"><td colspan="3">当サイト限定キャンペーン</td></tr>
               <tr class="fv-tr-camp">
                 <td class="fv-td fv-td1">
                   {mkCampDays > 0 ? (
                     <>
                       <span class="camp-badge camp-badge-sparkle">{campMonthLabel}</span><br />
+                      <small class="camp-fee">手数料10%無料</small>
                       <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
                     </>
                   ) : (
@@ -157,21 +146,58 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 </td>
                 <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
               </tr>
-                            <tr class="cmp-band"><td colspan="3">壊れた品でもOK</td></tr>
+              <tr class="cmp-band"><td colspan="3">買取価格</td></tr>
               <tr>
-                <td class="fv-td fv-td1"><span class="mk good">◎</span>金歯・壊れた金<br />断られた物もOK</td>
-                <td class="fv-td"><span class="mk good">◎</span>他社で断られた<br />物でもOK</td>
-                <td class="fv-td"><span class="mk tri">△</span>要相談</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span><b>業界トップ水準<br />＋特典上乗せ</b></td>
+                <td class="fv-td"><span class="mk ok">〇</span>相場に沿った<br />高価買取</td>
+                <td class="fv-td"><span class="mk ok">〇</span>相場に沿った<br />高価買取</td>
               </tr>
-                            <tr class="cmp-band"><td colspan="3">査定方法</td></tr>
+              <tr class="cmp-band"><td colspan="3">査定士</td></tr>
               <tr>
-                <td class="fv-td fv-td1"><span class="mk good">◎</span>店舗・宅配・出張</td>
-                <td class="fv-td"><span class="mk ok">〇</span>店舗・出張</td>
-                <td class="fv-td"><span class="mk good">◎</span>店舗・宅配・出張</td>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>貴金属の<br />熟練スペシャリスト</td>
+                <td class="fv-td"><span class="mk ok">〇</span>豊富な経験の<br />プロ鑑定士</td>
+                <td class="fv-td"><span class="mk ok">〇</span>宝飾品に精通<br />した専門家</td>
+              </tr>
+              <tr class="cmp-band"><td colspan="3">買取方法</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>来店・出張・宅配</td>
+                <td class="fv-td"><span class="mk ok">〇</span>来店・出張</td>
+                <td class="fv-td"><span class="mk ok">〇</span>来店・出張・宅配</td>
+              </tr>
+              <tr class="cmp-band"><td colspan="3">店舗環境</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>高品質な<br />プライベートサロン</td>
+                <td class="fv-td"><span class="mk ok">〇</span>地域密着の<br />入りやすい雰囲気</td>
+                <td class="fv-td"><span class="mk ok">〇</span>落ち着いた<br />半個室スタイル</td>
+              </tr>
+              <tr class="cmp-band"><td colspan="3">宅配セキュリティ</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>GPS付き<br />専用ケース</td>
+                <td class="fv-td gray"><span class="mk bad">−</span>宅配対応なし</td>
+                <td class="fv-td"><span class="mk ok">〇</span>専用梱包キット<br />（衝撃材入り）</td>
+              </tr>
+              <tr class="cmp-band"><td colspan="3">出張買取</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>WEB・電話<br />どちらでもOK</td>
+                <td class="fv-td"><span class="mk ok">〇</span>電話で担当者<br />と日程調整</td>
+                <td class="fv-td"><span class="mk ok">〇</span>最短当日<br />訪問も可</td>
+              </tr>
+              <tr class="cmp-band"><td colspan="3">状態不良の品</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>他店お断りの品<br />も積極査定</td>
+                <td class="fv-td"><span class="mk good">◎</span>難しい品でも<br />しっかり対応</td>
+                <td class="fv-td"><span class="mk tri">△</span>内容確認後<br />に個別判断</td>
+              </tr>
+              <tr class="cmp-band"><td colspan="3">電話相談</td></tr>
+              <tr>
+                <td class="fv-td fv-td1"><span class="mk good">◎</span>迷っていても<br />気軽に相談OK</td>
+                <td class="fv-td"><span class="mk ok">〇</span>事前の問い合わせ<br />も受付中</td>
+                <td class="fv-td gray"><span class="mk bad">✕</span>WEB・来店のみ</td>
               </tr>
               <tr class="fv-tr-cta">
                 <td class="fv-td fv-td1">
-                  <span style="display:flex;flex-direction:column;gap:5px;"><a href="#" class="btn btn-web sm" data-aff="manekiya" data-track="fv_tbl_official" rel="nofollow sponsored">公式サイト</a><a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored">電話相談</a></span>
+                  <small class="cta-phone-label">＼電話で買取額最大30%UP／</small>
+                  <span style="display:flex;flex-direction:column;gap:5px;"><a href="#" class="btn btn-phone sm" data-aff="manekiya" data-track="fv_tbl_phone" rel="nofollow sponsored">電話相談</a><a href="#" class="btn btn-web sm" data-aff="manekiya" data-track="fv_tbl_official" rel="nofollow sponsored">公式サイト</a></span>
                   {mkCampDays > 0 && <p class="countdown">キャンペーン終了まで<b>あと{mkCampDays}日！</b></p>}
                 </td>
                 <td class="fv-td">
@@ -292,7 +318,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <span class="point-note-num">1</span>
           <div class="point-note-body">
             <b class="point-note-ttl">売るタイミング</b>
-            <p>金・プラチナは<b class="copy-hl">今が歴史的な高値圏</b>。相場は毎日動くので、"高いうちに動く"のがいちばんの差になります。値上がりを待って結局タイミングを逃す人も多いので、まずは今の金額を確認しておくのがおすすめです。</p>
+            <p>2026年7月現在、金の買取相場は<b class="copy-hl">歴史的な高水準</b>を保っていますが、ここ最近は少しずつ値を下げる動きも出てきています。実際に直近では<b class="copy-hl">1gあたり約2,400円</b>ほど下落しており、50gの金であればタイミング次第で<b class="copy-hl">約12万円もの差</b>になる計算です。「もう少し待てば上がるかも」と様子を見ているうちに値が下がってしまうケースも少なくありません。まずは今の相場で手持ちの金がいくらになるか、一度確かめておきましょう。</p>
           </div>
         </div>
         <img class="point-img" src="/images/point-takaku2.webp" alt="高く売るための3つのポイント（2）" width="1672" height="941" loading="lazy" decoding="async" />
@@ -300,7 +326,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <span class="point-note-num">2</span>
           <div class="point-note-body">
             <b class="point-note-ttl">相見積もり（比較）</b>
-            <p>同じ品でも、お店やその日の条件で手取りは<b class="copy-hl">数千〜数万円</b>変わることがあります。1社だけで即決せず、手数料・キャンペーン・査定方法を見比べるほど損しにくくなります。査定は無料なので、気軽に比べてみましょう。</p>
+            <p>1社だけに持ち込んでも、出てきた金額が適正かどうかを判断する材料がありません。買取店ごとに査定士の経験・目利き力や、対応できる品物の幅が異なり、まったく同じ品でも<b class="copy-hl">数十万円の差</b>が出ることも珍しくありません。2社以上に金額を聞いておくことで「他のお店ではこの金額でした」という一言が生まれ、より高い金額に近づきやすくなります。</p>
           </div>
         </div>
         <img class="point-img" src="/images/point-takaku3.webp" alt="高く売るための3つのポイント（3）" width="1672" height="941" loading="lazy" decoding="async" />
@@ -829,7 +855,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-td.gray{ color:var(--sub); }
     .fv-rk-badge{ display:block; font-size:11px; color:var(--coral-d); font-weight:900; margin-bottom:3px; }
     .fv-rk-badge2,.fv-rk-badge3{ display:block; font-size:11px; color:var(--sub); font-weight:700; margin-bottom:3px; }
-    .fv-tr-camp .fv-td{ background:#FFF8F0; }
+    .fv-tr-camp .fv-td{ background:#FFF3E0; }
     .fv-tr-camp .fv-td1{ background:#FFF3E0; }
     .camp-badge{ display:inline-block; background:#E0322C; color:#fff; font-size:10px; font-weight:900; border-radius:999px; padding:1px 8px; margin-bottom:4px; }
     .up30{ font-size:13px; line-height:1.3; color:#E0322C; }
@@ -890,8 +916,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tr-cta .fv-td,.fv-tr-cta .fv-td1{ padding:10px 6px; vertical-align:top; }
     .cta-sub{ display:block; font-size:10px; color:var(--sub); margin-bottom:5px; }
     .mt4{ margin-top:4px; }
-    .countdown{ margin:6px 0 0; font-size:10px; color:var(--coral-d); line-height:1.4; }
-    .countdown b{ font-size:13px; }
+    .countdown{ margin:6px 0 0; font-size:10px; color:var(--ink); line-height:1.4; }
+    .countdown b{ font-size:13px; color:#E0322C; }
 
     /* セクション共通 */
     .sec{ padding:46px 0; }
@@ -1085,6 +1111,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     @media (min-width:600px){
       .voice-grid,.worry-grid{ grid-template-columns:1fr 1fr; }
     }
+    .cta-phone-label{ display:block; font-size:10px; font-weight:800; color:#E0322C; margin-bottom:4px; text-align:center; letter-spacing:.01em; }
+    .camp-fee{ display:block; font-size:10.5px; font-weight:800; color:#E0322C; margin:2px 0 1px; }
   
     /* ===== ブラッシュアップ（構成不変・視覚/CWVのみ） ===== */
     /* ① 電話CTAに光が流れる */
@@ -1147,7 +1175,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tr-cta .btn{ display:flex; width:100%; max-width:160px; margin-left:auto; margin-right:auto; white-space:normal; min-height:38px; font-size:12px; padding:0 6px; line-height:1.2; border-radius:8px; }
     .fv-tr-cta .btn-phone{ font-size:12.5px; }
     .fv-tr-cta .btn i{ font-size:13px; }
-    .fv-tr-cta .fv-td{ vertical-align:top; text-align:center; }
+    .fv-tr-cta .fv-td{ vertical-align:bottom; text-align:center; }
     .fv-tr-cta .fv-td1{ vertical-align:top; }
   
     /* ===== ランキング1位 2nd化（スペックカード/おすすめ/挿入画像/口コミ横スクロール） ===== */
