@@ -10,7 +10,7 @@ const rates = await getRates();
 const otakaraya = getOtakaraya();
 const ringEx = (w) => `約${Math.round(rates.pt900 * w * 0.85).toLocaleString("ja-JP")}〜${Math.round(rates.pt900 * w).toLocaleString("ja-JP")}円`;
 // キャンペーン残日数（まねきや 7/31まで）
-const campEnd = new Date('2026-06-30T23:59:59+09:00');
+const campEnd = new Date('2026-07-31T23:59:59+09:00');
 const today   = new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
 const campDays = Math.max(0, Math.ceil((campEnd - today) / 86400000));
 const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
@@ -203,7 +203,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                     <b>公式キャンペーン<br />要確認</b>
                   )}
                 </td>
-                <td class="fv-td"><span class="mk ok">〇</span><b>買取価格<br />最大20%UP</b></td>
+                <td class="fv-td"><span class="mk ok">〇</span><b>買取金額<br />最大30%UP</b></td>
                 <td class="fv-td gray"><span class="mk bad">✕</span>なし</td>
               </tr>
               <tr class="cmp-band"><td colspan="3">結婚指輪・刻印対応</td></tr>
@@ -232,6 +232,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                 </td>
                 <td class="fv-td">
                   <a href="#" class="btn btn-ghost sm" data-aff="otakaraya" data-track="fv_tbl_otakaraya" rel="nofollow sponsored">公式サイト</a>
+                  {campDays > 0 && <p class="countdown">キャンペーン終了まで<b>あと{campDays}日！</b></p>}
                 </td>
                 <td class="fv-td">
                   <a href="#" class="btn btn-ghost sm" data-aff="buraiba" data-track="fv_tbl_buraiba" rel="nofollow sponsored">公式サイト</a>
@@ -240,7 +241,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </tbody>
           </table>
         </div>
-        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
+        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円・買取金額最大30%UP（当サイト限定）（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
 
 
       </div>
