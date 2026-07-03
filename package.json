@@ -9,7 +9,8 @@
     "update-otakaraya": "node scripts/update-otakaraya.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "new-lp": "node scripts/new-lp.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
