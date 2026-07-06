@@ -22,7 +22,7 @@ const goldExMan = (w, karat = rates.k18) => {
 const campMonth = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })).getMonth() + 1;
   const campMonthLabel = campMonth + "月限定";
   // キャンペーン終了＝次の日曜(JST)を自動算出（週次日曜更新の傾向に追従／毎日リビルドで自動更新）
-  const campEnd = (() => { const _j = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })); const _add = (7 - _j.getDay()) % 7; return new Date(_j.getFullYear(), _j.getMonth(), _j.getDate() + _add, 23, 59, 59); })();
+  const campEnd = new Date(2026, 6, 13, 23, 59, 59);
   const _campWd = ['日','月','火','水','木','金','土'][campEnd.getDay()];
   const campEndMd = (campEnd.getMonth() + 1) + "月" + campEnd.getDate() + "日";
   const campEndLabel = campEndMd + "（" + _campWd + "）";
@@ -137,7 +137,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                   {mkCampDays > 0 ? (
                     <>
                       <span class="camp-badge camp-badge-sparkle">{campMonthLabel}</span><br />
-                      <b class="up30">買取金額<br />最大<em>30%</em>UP</b>
+                      <b class="up30">買取金額<em>3倍</em><br />現金プレゼント<br /><span class="up30-sub">抽せんで10名様</span></b>
                     </>
                   ) : (
                     <b class="camp-tbd">公式キャンペーン<br />要確認</b>
@@ -211,7 +211,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </tbody>
           </table>
         </div>
-        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円・買取金額最大30%UP（当サイト限定）（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
+        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円・買取金額3倍 現金プレゼント（抽せんで10名様限定）（公式）　ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
 
 
 
@@ -458,7 +458,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <div class="rk-meta">
             <div><span>対応品目</span><b>金・貴金属・金貨・宝石付きもOK</b></div>
             <div><span>買取方法</span><b>店頭・出張</b></div>
-            <div><span>キャンペーン</span><b>最大30%UP（上限10万円・対象外店舗あり／〜{campEndLabel}）</b></div>
+            <div><span>キャンペーン</span><b>買取金額3倍 現金プレゼント（抽せんで10名様限定／〜{campEndLabel}）</b></div>
           </div>
           <a href="#" class="btn btn-ghost full" data-aff="otakaraya" data-track="rk_otakaraya" rel="nofollow sponsored">おたからやで無料査定する</a>
           <p class="note">※1 {otakaraya.asOf}時点の店舗数です（フランチャイズ・直営店を含む）。</p>
@@ -488,7 +488,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <a href="#" data-aff="otakaraya" data-track="rank_camp_banner" rel="nofollow sponsored" class="rank-camp-cta" style="display:block;max-width:680px;margin:16px auto 0;text-align:center;">
             <p class="rank-camp-flag">🔥 期間限定 キャンペーン実施中</p>
             <p class="rank-camp-days">あと<span class="rank-camp-days-num">{campDays}</span>日<small>（〜{campEndLabel}）</small></p>
-            <img src="/images/20260701_30UP_新デザイン_タレント入_1300×700_松澤_PC-scaled.webp" alt="電話申込限定 買取金額最大30%UP キャンペーン" width="1300" height="700" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
+            <img src="/images/3bai_cp_bnr_pc-1-scaled.webp" alt="買取金額3倍 現金プレゼント（抽せんで10名様限定）キャンペーン" width="2560" height="1378" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
           </a>
         </div>
 
@@ -625,7 +625,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     }
     *{ box-sizing:border-box; }
     html,body{ margin:0; padding:0; }
-    body{ background:var(--bg); color:var(--ink); font-family:"Noto Sans JP",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; padding-bottom:64px; line-height:1.7; }
+    body{ background:var(--bg); color:var(--ink); font-family:"Noto Sans JP",-apple-system,sans-serif; -webkit-font-smoothing:antialiased; padding-bottom:64px; line-height:1.75; font-size:18px; }
     [hidden]{ display:none !important; }
     .wrap{ max-width:560px; margin:0 auto; padding:0 11px; }
     b{ font-weight:900; }
@@ -843,13 +843,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tbl-ttl{ font-weight:900; font-size:clamp(11px,3.5vw,14px); color:var(--ink); white-space:nowrap; }
     .fv-tbl-head .pr{ margin-left:auto; }
     .fv-tbl-wrap{ margin:0 0 8px; overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:16px; border:1px solid var(--line); box-shadow:0 6px 18px rgba(20,60,50,.07); }
-    .fv-tbl{ width:100%; min-width:340px; border-collapse:collapse; background:#fff; font-size:13px; }
-    .fv-tbl th,.fv-tbl td{ padding:10px 8px; text-align:center; border-bottom:1px solid var(--line); vertical-align:middle; line-height:1.35; }
+    .fv-tbl{ width:100%; min-width:340px; border-collapse:collapse; background:#fff; font-size:15px; }
+    .fv-tbl th,.fv-tbl td{ padding:10px 7px; text-align:center; border-bottom:1px solid var(--line); vertical-align:middle; line-height:1.42; }
     .fv-th-item{ background:#F4F8F6; font-size:0; width:0; padding:0; }
     .fv-th{ background:#F4F8F6; font-weight:900; font-size:13px; color:var(--ink); }
     .fv-th-name{ display:block; text-align:center; font-size:.85em; font-weight:700; margin-top:4px; color:var(--ink); text-decoration:underline; }
     .fv-th1{ background:#FFFCF2; }
-    .fv-td-item{ text-align:left; font-size:11px; font-weight:700; color:var(--sub); background:#FAFCFB; padding:10px 8px; white-space:nowrap; position:sticky; left:0; z-index:1; }
+    .fv-td-item{ text-align:left; font-size:13px; font-weight:700; color:var(--sub); background:#FAFCFB; padding:10px 8px; white-space:nowrap; position:sticky; left:0; z-index:1; }
     .fv-td{ background:#fff; }
     .fv-td1{ background:#FFFCF2; }
     .fv-td .mk{ display:block; font-size:20px; font-weight:900; line-height:1; margin-bottom:3px; }
@@ -866,10 +866,11 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tr-camp .fv-td{ background:#FFF3E0; }
     .fv-tr-camp .fv-td1{ background:#FFF3E0; }
     .camp-badge{ display:inline-block; background:#E0322C; color:#fff; font-size:10px; font-weight:900; border-radius:999px; padding:1px 8px; margin-bottom:4px; }
-    .up30{ font-size:13px; line-height:1.3; color:#E0322C; }
+    .up30{ font-size:14px; line-height:1.3; color:#E0322C; }
     .up30 em{ color:#E0322C; }
     .camp-tbd{ font-size:13px; line-height:1.4; color:#222; font-weight:800; }
     .up30 em{ font-style:normal; font-size:22px; font-weight:900; }
+    .up30-sub{ display:inline-block; font-size:12px; font-weight:800; color:#E0322C; margin-top:2px; }
     /* {campMonthLabel}キャンペーンバッジ（キラキラ） */
     .camp-badge-sparkle{ position:relative; overflow:hidden; background:linear-gradient(180deg,#FF6B5C,#E0322C); box-shadow:0 2px 6px rgba(224,50,44,.35); }
     .camp-badge-sparkle::after{ content:""; position:absolute; top:-30%; left:-70%; width:45%; height:160%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.4s ease-in-out infinite; }
@@ -912,7 +913,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rank-camp-flag{ margin:0 0 6px; font-weight:900; color:#fff; background:linear-gradient(180deg,#FF6B5C,#E0322C); display:inline-block; padding:4px 14px; border-radius:999px; font-size:14px; letter-spacing:.02em; }
     .rank-camp-days{ margin:0; font-weight:900; color:#B71C1C; font-size:16px; line-height:1.5; }
     .rank-camp-days-num{ font-size:1.7em; margin:0 1px; }
-    .rank-camp-days small{ display:block; font-weight:700; color:#555; font-size:12.5px; margin-top:2px; }
+    .rank-camp-days small{ display:block; font-weight:700; color:#555; font-size:13.5px; margin-top:2px; }
     @media (max-width:480px){
       .rank-camp-cta{ padding:18px 14px; }
       .rank-camp-flag{ font-size:15.5px; padding:5px 16px; }
@@ -935,8 +936,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tr-cta .fv-td,.fv-tr-cta .fv-td1{ padding:10px 6px; vertical-align:top; }
     .cta-sub{ display:block; font-size:10px; color:var(--sub); margin-bottom:5px; }
     .mt4{ margin-top:4px; }
-    .countdown{ margin:6px 0 0; font-size:10px; color:var(--ink); line-height:1.4; }
-    .countdown b{ font-size:13px; color:#E0322C; }
+    .countdown{ margin:6px 0 0; font-size:12px; color:var(--ink); line-height:1.4; }
+    .countdown b{ font-size:15px; color:#E0322C; }
 
     /* セクション共通 */
     .sec{ padding:46px 0; }
@@ -945,9 +946,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .sec-head{ text-align:center; margin-bottom:22px; }
     .chip{ display:inline-block; background:#fff; border:1px solid var(--line); color:var(--green-d); font-weight:900; font-size:12px; border-radius:999px; padding:5px 14px; }
     .sec-head h2{ font-size:24px; font-weight:900; margin:10px 0 6px; line-height:1.45; letter-spacing:.01em; }
-    .sec-head p{ font-size:13px; color:var(--body); margin:0; }
-    .note{ font-size:11px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
-    .note.note-basis{ font-size:11px; line-height:1.5; color:#9aa5ac; }
+    .sec-head p{ font-size:15px; color:var(--body); margin:0; }
+    .note{ font-size:13px; color:var(--sub); line-height:1.6; margin:12px 0 0; }
+    .note.note-basis{ font-size:12.5px; line-height:1.5; color:#9aa5ac; }
 
     /* 02 相場 */
     .rate-purity-note{ font-size:11px; color:var(--sub); line-height:1.6; margin:6px 0 0; }
@@ -970,7 +971,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-ex li b{ color:var(--green-d); }
     /* ▼ 相場ヒーロー＆参考価格（見やすさ強化） */
     .rate-hero{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:18px 16px 16px; box-shadow:0 8px 24px rgba(20,60,50,.08); }
-    .rate-hero-ttl{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:16px; font-weight:900; color:var(--green-d); margin:0 0 12px; }
+    .rate-hero-ttl{ display:flex; align-items:center; flex-wrap:wrap; gap:8px; font-size:18px; font-weight:900; color:var(--green-d); margin:0 0 12px; }
     .rate-hero-badge{ font-size:11px; font-weight:900; background:#FFF1A6; color:#9A6B00; border-radius:999px; padding:2px 9px; }
     .rate-hero-main{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     .rh-card{ background:#F7FAF9; border:1.5px solid var(--line); border-radius:14px; padding:14px 8px; text-align:center; }
@@ -991,7 +992,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-grid-mini>div{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 3px; text-align:center; }
     .rate-grid-mini span{ display:block; font-size:11px; color:var(--sub); font-weight:700; }
     .rate-grid-mini b{ font-size:13.5px; color:var(--ink); }
-    .rate-hero-date{ text-align:center; font-size:11px; color:var(--sub); margin:12px 0 0; }
+    .rate-hero-date{ text-align:center; font-size:12.5px; color:var(--sub); margin:12px 0 0; }
     .ref-price{ margin-top:18px; background:#fff; border:2px solid var(--gold); border-radius:18px; padding:16px; box-shadow:0 8px 22px rgba(217,150,42,.14); }
     .ref-ttl{ font-size:18px; font-weight:900; color:var(--ink); margin:0 0 12px; text-align:center; line-height:1.4; }
     .ref-ttl span{ display:block; font-size:12px; font-weight:700; color:var(--sub); margin-top:3px; }
@@ -1034,12 +1035,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rk-head h3{ font-size:22px; margin:0; }
     .rk-star{ color:var(--star); font-weight:900; font-size:14px; }
     .rk-head .pr{ margin-left:auto; }
-    .rk-for{ font-size:14px; color:var(--green-d); font-weight:700; background:var(--mint); border-radius:8px; padding:7px 10px; margin:10px 0; }
+    .rk-for{ font-size:16px; color:var(--green-d); font-weight:700; background:var(--mint); border-radius:8px; padding:7px 10px; margin:10px 0; }
     .rk-reasons{ list-style:none; margin:0 0 12px; padding:0; display:grid; gap:7px; }
-    .rk-reasons li{ font-size:14.5px; padding-left:24px; position:relative; }
+    .rk-reasons li{ font-size:16.5px; padding-left:24px; position:relative; }
     .rk-reasons li::before{ content:"✓"; position:absolute; left:0; color:var(--green); font-weight:900; }
     .rk-meta{ display:grid; gap:8px; background:#F7FAF9; border-radius:12px; padding:14px; margin-bottom:14px; }
-    .rk-meta div{ display:grid; grid-template-columns:88px 1fr; gap:8px; font-size:13.5px; }
+    .rk-meta div{ display:grid; grid-template-columns:92px 1fr; gap:8px; font-size:15px; }
     .rk-meta span{ color:var(--sub); }
     .rk-reviews{ display:grid; gap:7px; margin-bottom:6px; }
     .rk-reviews p{ font-size:12.5px; color:var(--body); background:#fff; border:1px solid var(--line); border-radius:10px; padding:8px 10px; margin:0; }
@@ -1063,9 +1064,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .voice-grid{ display:grid; gap:12px; }
     .voice{ background:#F7FAF9; border-radius:16px; padding:16px 18px; }
     .voice-lg{ border-left:4px solid var(--green); }
-    .voice-ttl{ display:block; font-size:14.5px; color:var(--green-d); font-weight:900; margin:6px 0 4px; }
+    .voice-ttl{ display:block; font-size:16px; color:var(--green-d); font-weight:900; margin:6px 0 4px; }
     .stars{ color:var(--star); font-size:14px; letter-spacing:1px; }
-    .voice p{ font-size:14.5px; margin:6px 0; line-height:1.7; }
+    .voice p{ font-size:16px; margin:6px 0; line-height:1.7; }
     .voice small{ color:var(--sub); font-weight:700; }
 
     /* 08 不安解消 */
@@ -1182,7 +1183,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     }
   
     /* 見やすさ微調整：小注記の底上げ */
-    .note{ font-size:12px; }
+    .note{ font-size:13.5px; }
     .rate-updated{ font-size:12px; }
       .fv-hero-link{ display:block; font-size:0; }
   
@@ -1194,9 +1195,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-db-date{ font-size:clamp(11px,3.3vw,16.5px); color:var(--ink); letter-spacing:.01em; white-space:nowrap; }
     .fv-db-txt{ font-size:clamp(11px,3.3vw,16.5px); color:#B71C1C; white-space:nowrap; }
     @media (max-width:360px){ .fv-datebadge{ gap:4px; padding:7px 8px; } }
-    .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:12.5px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
-    .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:13px; }
-    .fv-tbl th,.fv-tbl td{ padding:9px 5px; }
+    .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:14px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
+    .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:15px; }
+    .fv-tbl th,.fv-tbl td{ padding:9px 4px; }
     .fv-tbl-wrap{ overflow-x:hidden; }
     .fv-tbl-wrap::after{ display:none; }
     .btn{ border-radius:10px; }
@@ -1235,7 +1236,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rk-insert-img img{ width:100%; height:auto; display:block; }
     .rk-voice-list{ display:flex; flex-wrap:nowrap; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; gap:12px; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
     .rk-voice-list > *{ flex:0 0 86%; scroll-snap-align:center; }
-    .voice-swipe{ display:block; margin:8px 0 2px; text-align:center; font-size:12.5px; font-weight:700; color:#0e7864; }
+    .voice-swipe{ display:block; margin:8px 0 2px; text-align:center; font-size:13.5px; font-weight:700; color:#0e7864; }
 
     /* ============================================================
        PC最適化（≥768px）：モバイルは一切無影響。520px固定の本文を適正幅に。
@@ -1254,7 +1255,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       .worry-grid{ grid-template-columns:1fr 1fr; }
       .rk-1 .rk-reasons{ grid-template-columns:1fr 1fr; }
       .sec-head h2{ font-size:26px; }
-      .sec-head p{ font-size:15px; }
+      .sec-head p{ font-size:16px; }
       body{ font-size:16px; }
       .rk-1{ padding-left:22px; padding-right:22px; }
     }
