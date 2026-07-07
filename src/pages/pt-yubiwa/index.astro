@@ -1262,7 +1262,10 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:15px; }
     .fv-tbl th,.fv-tbl td{ padding:9px 4px; }
     .fv-th-item,.fv-td-item{ white-space:normal; position:static; font-size:13px; }
-    .fv-tbl-wrap{ overflow-x:hidden; }
+    /* 比較表の見出し（各社バナー）行をスクロール追従。表を過ぎたら自動で解除される */
+    /* transformを持つ祖先があるとstickyがビューポート基準にならないため、この枠だけfade-inのtransformを無効化 */
+    .fv-tbl-wrap{ overflow:visible; transform:none !important; opacity:1 !important; }
+    .fv-tbl thead th{ position:sticky; top:0; z-index:6; box-shadow:0 4px 8px -4px rgba(20,60,50,.22); }
     .fv-tbl-wrap::after{ display:none; }
     .fv-td .mk.good,.mk.good{ color:#D81F1F; font-weight:900; }
     .fv-td .mk.good{ font-size:22px; }
@@ -1310,7 +1313,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:14px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
     .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:15px; }
     .fv-tbl th,.fv-tbl td{ padding:9px 5px; }
-    .fv-tbl-wrap{ overflow-x:hidden; }
+    .fv-tbl-wrap{ overflow:visible; transform:none !important; opacity:1 !important; }
     /* CTAを四角に統一 */
     .btn{ border-radius:10px; }
     .camp2-cta{ border-radius:12px; }
