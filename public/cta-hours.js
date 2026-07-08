@@ -97,3 +97,51 @@
     apply();
   }
 })();
+
+// 電話受付ステータスバッジ：受付時間内(9〜21時 JST)は「ただいま電話受付中」を
+// 大きめの電話CTA直後に表示して、電話行動を後押しする（50-60代向けの安心表示）。
+// 表内の小ボタン(.sm)と下部固定バー(.sticky)内はレイアウト都合で対象外。
+(function () {
+  var OPEN_HOUR = 9, CLOSE_HOUR = 21;
+  function jstHour() {
+    var now = new Date();
+    return new Date(now.getTime() + now.getTimezoneOffset() * 60000 + 9 * 3600000).getHours();
+  }
+  function ensureStyle() {
+    if (document.getElementById("call-open-style")) return;
+    var st = document.createElement("style");
+    st.id = "call-open-style";
+    st.textContent =
+      ".call-open-badge{display:block;margin:7px auto 0;text-align:center;font-size:13.5px;font-weight:800;line-height:1.4;}" +
+      ".call-open-badge.is-open{color:#0B8276;}" +
+      ".call-open-badge.is-open .cob-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#12B886;margin-right:6px;box-shadow:0 0 0 0 rgba(18,184,134,.7);animation:cobPulse 1.6s ease-out infinite;}" +
+      ".call-open-badge.is-closed{color:#8B98A1;}" +
+      "@keyframes cobPulse{70%{box-shadow:0 0 0 8px rgba(18,184,134,0);}100%{box-shadow:0 0 0 0 rgba(18,184,134,0);}}" +
+      "@media (prefers-reduced-motion:reduce){.call-open-badge.is-open .cob-dot{animation:none;}}";
+    (document.head || document.documentElement).appendChild(st);
+  }
+  function apply() {
+    ensureStyle();
+    var h = jstHour();
+    var open = h >= OPEN_HOUR && h < CLOSE_HOUR;
+    var ctas = document.querySelectorAll("a.btn-phone:not(.sm)");
+    Array.prototype.forEach.call(ctas, function (a) {
+      if (a.closest && a.closest(".sticky")) return;
+      // ボタンが .cta-pair(電話/WEB横並び)内ならペアの直後に置いてグリッド崩れを防ぐ
+      var anchor = (a.closest && a.closest(".cta-pair")) || a;
+      var b = anchor.nextElementSibling;
+      if (!(b && b.classList && b.classList.contains("call-open-badge"))) {
+        b = document.createElement("span");
+        b.className = "call-open-badge";
+        anchor.insertAdjacentElement("afterend", b);
+      }
+      b.classList.toggle("is-open", open);
+      b.classList.toggle("is-closed", !open);
+      b.innerHTML = open
+        ? '<i class="cob-dot"></i>ただいま電話受付中（9時〜21時・年中無休）'
+        : '電話受付は毎日9時〜21時です（朝9時からつながります）';
+    });
+  }
+  function init(){ apply(); setInterval(apply, 60000); }
+  if (document.readyState === "loading") { document.addEventListener("DOMContentLoaded", init); } else { init(); }
+})();
