@@ -102,13 +102,13 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       <div class="wrap">
         <!-- ヒーロー画像 -->
         <h1 class="fv-hero-wrap">
-          <img src="/images/kihei-3050.png" alt="18金喜平ネックレス 30g・50gはいくらで売れる？｜今日の相場・重さ比較・手数料チェック・査定条件まとめ" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" />
+          <a href="#rank-manekiya" class="fv-hero-link" aria-label="ランキング1位のまねきやを見る"><img src="/images/kihei-3050.png" alt="18金喜平ネックレス 30g・50gはいくらで売れる？｜今日の相場・重さ比較・手数料チェック・査定条件まとめ" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async" class="fv-hero-img" /></a>
         </h1>
 
         <div class="fv-datebadge">
           <span class="fv-db-tag"><i class="fv-db-dot"></i>最新版</span>
           <span class="fv-db-date">{todayLabel}</span>
-          <span class="fv-db-txt">📍 {campMonthLabel}キャンペーンあり</span>
+          <a href="#camp30-detail" class="fv-db-txt fv-db-link">📍 {campMonthLabel}キャンペーンあり</a>
         </div>
 
 
@@ -340,7 +340,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         <div class="sec-head"><h2>金・貴金属 高額買取ランキング</h2></div>
 
         <!-- 1位 -->
-        <article class="rk rk-1">
+        <article class="rk rk-1" id="rank-manekiya">
           <div class="rk-editor-pick">編集部イチオシ</div>
           <div class="rk-ribbon"><i>👑</i>第1位</div>
           <div class="rk-head"><h3>まねきや</h3><i class="pr">PR</i></div>
@@ -425,7 +425,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           </div>
           <p class="voice-swipe">👉 スワイプで他の口コミも見る</p>
           <p class="note">※まねきや公式掲載のお客様の声を一部要約。個人の感想です。査定額・条件には個人差があります。</p>
-          <a href="#" data-aff="manekiya" data-track="voice_camp_banner" rel="nofollow sponsored" style="display:block;position:relative;max-width:640px;margin:14px auto 4px;">
+          <a href="#" id="camp30-detail" data-aff="manekiya" data-track="voice_camp_banner" rel="nofollow sponsored" style="display:block;position:relative;max-width:640px;margin:14px auto 4px;">
             <img src="/images/info_img2.webp" alt="電話申込限定 買取金額最大30%UP" width="3125" height="1218" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
             <span style="position:absolute;left:54%;top:26.5%;transform:translate(-50%,-50%);color:#fff;font-weight:900;white-space:nowrap;font-size:clamp(12px,3.4vw,26px);text-shadow:0 1px 3px rgba(0,0,0,.5);letter-spacing:.03em;">{mkCampRangeLabel}｜あと{mkCampDays}日</span>
           </a>
@@ -1196,6 +1196,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     @keyframes dbpulse{ 0%{box-shadow:0 0 0 0 rgba(255,255,255,.85)} 70%{box-shadow:0 0 0 7px rgba(255,255,255,0)} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0)} }
     .fv-db-date{ font-size:clamp(11px,3.3vw,16.5px); color:var(--ink); letter-spacing:.01em; white-space:nowrap; }
     .fv-db-txt{ font-size:clamp(11px,3.3vw,16.5px); color:#B71C1C; white-space:nowrap; }
+    .fv-db-link{ text-decoration:underline; text-underline-offset:2px; cursor:pointer; }
+    #camp30-detail{ scroll-margin-top:16px; }
+    #rank-manekiya{ scroll-margin-top:22px; }
     @media (max-width:360px){ .fv-datebadge{ gap:4px; padding:7px 8px; } }
     .cmp-band td{ background:var(--green); color:#fff; font-weight:900; font-size:14px; text-align:center; padding:6px 6px; letter-spacing:.04em; }
     .fv-tbl{ min-width:0; width:100%; table-layout:fixed; font-size:15px; }
