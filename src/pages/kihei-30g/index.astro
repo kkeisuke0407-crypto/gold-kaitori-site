@@ -873,6 +873,12 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .camp-tbd{ font-size:13px; line-height:1.4; color:#222; font-weight:800; }
     .up30 em{ font-style:normal; font-size:22px; font-weight:900; }
     .up30-sub{ display:inline-block; font-size:12px; font-weight:800; color:#E0322C; margin-top:2px; }
+    /* 比較表：おたからや列(2列目)のキャンペーン表記は控えめ表示（視線と誘導は1位まねきやへ） */
+    .fv-tr-camp .fv-td:nth-child(2) .camp-badge{ background:#ECEEF0; color:#8A959C; box-shadow:none; font-weight:700; }
+    .fv-tr-camp .fv-td:nth-child(2) .camp-badge-sparkle::after{ display:none; }
+    .fv-tr-camp .fv-td:nth-child(2) .up30{ color:#6E7B85; font-size:12px; font-weight:700; }
+    .fv-tr-camp .fv-td:nth-child(2) .up30 em{ color:#6E7B85; font-size:14px; }
+    .fv-tr-camp .fv-td:nth-child(2) .up30-sub{ color:#9AA5AC; font-weight:600; }
     /* {campMonthLabel}キャンペーンバッジ（キラキラ） */
     .camp-badge-sparkle{ position:relative; overflow:hidden; background:linear-gradient(180deg,#FF6B5C,#E0322C); box-shadow:0 2px 6px rgba(224,50,44,.35); }
     .camp-badge-sparkle::after{ content:""; position:absolute; top:-30%; left:-70%; width:45%; height:160%; background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent); transform:skewX(-18deg); pointer-events:none; animation:bannerShine 2.4s ease-in-out infinite; }
