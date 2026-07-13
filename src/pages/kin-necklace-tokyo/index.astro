@@ -114,7 +114,6 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
 
         <div class="area-lead">
           <h2 class="area-lead-ttl"><span class="nb">{REGION}で金ネックレスを売るなら</span><span class="nb">「まねきや」がおすすめ</span></h2>
-          <p class="area-lead-sub">査定は無料・売るかは金額を見てから決められます。まずは今の金額だけ確認しておきましょう。</p>
         </div>
       </div>
     </section>
@@ -1399,7 +1398,10 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     /* 日本語見出しの改行を語句単位で制御（語中で折り返さない） */
     .nb{ white-space:nowrap; }
     /* 地域リード見出し */
-    .area-lead{ text-align:center; margin:16px 0 4px; }
+    .area-lead{ text-align:center; margin:14px 0 0; }
+    /* FV→まねきやカードの余白を詰める（サブ文削除に合わせて） */
+    .fv{ padding-bottom:10px; }
+    #ranking{ padding-top:14px; }
     .area-lead-ttl{
       font-size:clamp(20px,6vw,26px); font-weight:900; line-height:1.5; margin:0 0 8px; color:var(--ink);
       text-wrap:balance;
