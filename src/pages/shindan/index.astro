@@ -1,0 +1,476 @@
+---
+// 金買取店診断（まねきや誘導・電話予約主役）— たたき台
+const PAGE_TITLE = "あなたに合う買取店は？｜30秒でわかる 金買取店診断";
+const PAGE_DESC = "金・プラチナの売り方を30秒で診断。あなたの不安に合わせて、失敗しない売り方と伝え方をご案内します。";
+const AFF_MANEKIYA = "https://ad-fam.com/ad/p/r?_site=49248&_article=16522";
+const FOCUS_AREAS = ["東京都","大阪府","神奈川県","千葉県","埼玉県","京都府","茨城県","愛知県","静岡県","兵庫県"];
+const today = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+const todayLabel = today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日";
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{PAGE_TITLE}</title>
+    <meta name="description" content={PAGE_DESC} />
+    <link rel="canonical" href="https://kaitori.hakobu-family.com/shindan/" />
+  </head>
+  <body data-aff-manekiya={AFF_MANEKIYA}>
+    <main class="wrap">
+
+      <!-- ===== FV ===== -->
+      <section class="screen" id="screen-fv" data-active>
+        <p class="pr-tag">PR</p>
+        <h1 class="fv-h1">あなたに合う買取店は<br /><span class="hl">どこ？</span></h1>
+        <p class="fv-sub">30秒・かんたんタップでわかる<br /><b>金・プラチナ買取店診断</b></p>
+
+        <div class="logo-strip" aria-hidden="true">
+          <div class="logo-track">
+            <span>まねきや</span><span>おたからや</span><span>なんぼや</span><span>バイセル</span><span>大黒屋</span><span>ゴールドプラザ</span><span>コメ兵</span><span>ジュエルカフェ</span><span>ザ・ゴールド</span><span>買取プレミアム</span><span>高山質店</span><span>銀座パリス</span><span>エコリング</span><span>福ちゃん</span>
+            <span>まねきや</span><span>おたからや</span><span>なんぼや</span><span>バイセル</span><span>大黒屋</span><span>ゴールドプラザ</span><span>コメ兵</span><span>ジュエルカフェ</span><span>ザ・ゴールド</span><span>買取プレミアム</span><span>高山質店</span><span>銀座パリス</span><span>エコリング</span><span>福ちゃん</span>
+          </div>
+        </div>
+        <p class="logo-note">主要な買取店を比較したうえで、あなたに合う1店をご案内</p>
+
+        <button class="btn btn-start" data-start>診断スタート ▶</button>
+        <p class="fv-mini">※所要30秒／登録・入力不要</p>
+      </section>
+
+      <!-- ===== 設問（JSで生成） ===== -->
+      <section class="screen" id="screen-quiz">
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        <p class="q-count" id="qCount"></p>
+        <h2 class="q-title" id="qTitle"></h2>
+        <p class="q-hint" id="qHint"></p>
+        <div class="options" id="options"></div>
+        <div class="q-nav">
+          <button class="btn-back" id="btnBack">← 戻る</button>
+          <button class="btn btn-next" id="btnNext" hidden>次へ ▶</button>
+        </div>
+      </section>
+
+      <!-- ===== 診断中 ===== -->
+      <section class="screen" id="screen-loading">
+        <div class="spinner"></div>
+        <p class="loading-txt">あなたの回答を診断中…</p>
+      </section>
+
+      <!-- ===== 結果（JSで組み立て） ===== -->
+      <section class="screen" id="screen-result">
+        <div id="resultBody"></div>
+        <footer class="ft">
+          <p>当ページは広告（PR）を含む診断・紹介ページです。診断結果は当編集部の基準による目安であり、買取価格や適合を保証するものではありません。「最大30%UP」等のキャンペーンは各社公式の内容に基づく表記で、適用条件・上限・対象・期間があり予告なく変更・終了する場合があります。最新かつ正確な情報は必ずまねきや公式でご確認ください。</p>
+        </footer>
+      </section>
+    </main>
+
+    <script is:inline define:vars={{ AFF_MANEKIYA, FOCUS_AREAS, todayLabel }}>
+      // ===== 設問データ =====
+      var QUIZ = [
+        { id:"metal", q:"今日、売りたいのは？", options:[
+          { t:"金（ゴールド）", tags:["metal_gold"] },
+          { t:"プラチナ", tags:["metal_pt"] },
+          { t:"いろいろ混ざってる／わからない", tags:["metal_mix","mix"] }
+        ]},
+        { id:"item", q:"品物はどれに近い？", optionsFor:function(t){
+          var pt = !!t.metal_pt;  // 直前で「プラチナ」を選んでいたら、地金の選択肢を金貨→プラチナ地金に
+          return [
+            { t:"指輪・ネックレスなどアクセサリー", tags:["item_acc"] },
+            { t: pt ? "プラチナ地金・インゴット" : "金貨・インゴット・地金", tags:["item_bar","high_value"] },
+            { t:"宝石・ブランド品も一緒にある", tags:["item_brand","mix"] },
+            { t:"壊れた・刻印なし・片方だけ等ワケあり", tags:["item_junk","wakeari"] }
+          ];
+        }},
+        { id:"urgency", q:"いつ売りたい？", options:[
+          { t:"できるだけ早く売りたい", tags:["urg_now"] },
+          { t:"じっくり比較してから", tags:["urg_slow"] },
+          { t:"まだ迷っている", tags:["urg_maybe"] }
+        ]},
+        { id:"meet", q:"お店の人と会うのは？", options:[
+          { t:"できれば会いたくない", tags:["meet_no"] },
+          { t:"会って相談したい", tags:["meet_yes"] },
+          { t:"どちらでもよい", tags:["meet_any"] }
+        ]},
+        { id:"delivery", q:"宅配で送るのは抵抗ある？", showIf:"meet_no", options:[
+          { t:"抵抗はない（送ってOK）", tags:["ch_takuhai"] },
+          { t:"できれば送りたくない", tags:["ch_shucchou"] }
+        ]},
+        { id:"worry", q:"あてはまる不安を全部選んで", multi:true, hint:"複数えらべます", options:[
+          { t:"情報が多すぎて選べない", tags:["w_choose"] },
+          { t:"買い叩かれないか心配", tags:["w_lowball"] },
+          { t:"今売っていいタイミングか分からない", tags:["w_timing"] },
+          { t:"押し売り・しつこい営業がイヤ", tags:["w_push"] },
+          { t:"手続きが面倒くさそう", tags:["w_hassle"] }
+        ]},
+        { id:"area", q:"お住まいのエリアは？", area:true, options:[] }
+      ];
+
+      var state = { step:0, tags:{}, single:{}, multi:{}, pref:"" };
+      var order = []; // 実際に表示する設問idの順（分岐を反映）
+
+      function $(id){ return document.getElementById(id); }
+      function show(scr){ document.querySelectorAll(".screen").forEach(function(s){ s.removeAttribute("data-active"); }); $("screen-"+scr).setAttribute("data-active","1"); window.scrollTo(0,0); }
+
+      // エリア設問の選択肢を生成
+      (function(){
+        var q = QUIZ.filter(function(x){return x.id==="area";})[0];
+        FOCUS_AREAS.forEach(function(p){ q.options.push({ t:p, tags:["area_focus"], pref:p }); });
+        q.options.push({ t:"上記以外の地域", tags:["area_other"], pref:"お住まいの地域" });
+      })();
+
+      function buildOrder(){
+        // meet_no を選んでいる時だけ delivery を差し込む
+        order = QUIZ.filter(function(q){
+          if(q.showIf) return !!state.tags[q.showIf];
+          return true;
+        }).map(function(q){return q.id;});
+      }
+
+      function currentQ(){ return QUIZ.filter(function(q){return q.id===order[state.step];})[0]; }
+      // 設問の選択肢（前の回答で動的に変わるものは optionsFor を使う）
+      function qOptions(q){ return q.optionsFor ? q.optionsFor(state.tags) : q.options; }
+
+      function renderQ(){
+        buildOrder();
+        var q = currentQ();
+        $("qCount").textContent = "Q" + (state.step+1) + " / " + order.length;
+        $("progressBar").style.width = Math.round((state.step)/(order.length)*100) + "%";
+        $("qTitle").textContent = q.q;
+        $("qHint").textContent = q.hint || "";
+        $("qHint").style.display = q.hint ? "block" : "none";
+        var box = $("options"); box.innerHTML = "";
+        box.className = "options" + (q.area ? " options-grid" : "");
+        qOptions(q).forEach(function(op, i){
+          var b = document.createElement("button");
+          b.className = "opt";
+          b.textContent = q.multi ? op.t : op.t;
+          var picked = q.multi ? !!(state.multi[q.id]&&state.multi[q.id][i]) : (state.single[q.id]===i);
+          if(picked) b.classList.add("sel");
+          b.onclick = function(){ choose(q, i, op, b); };
+          box.appendChild(b);
+        });
+        $("btnNext").hidden = !q.multi; // 複数選択のときだけ「次へ」を出す
+        $("btnBack").style.visibility = state.step===0 ? "hidden" : "visible";
+      }
+
+      function applyTags(){
+        // タグを total 再計算（戻る対応のため毎回作り直し）
+        state.tags = {}; state.pref = "";
+        order.forEach(function(id){
+          var q = QUIZ.filter(function(x){return x.id===id;})[0];
+          var opts = qOptions(q);
+          if(q.multi){
+            var sel = state.multi[id]||{};
+            opts.forEach(function(op,i){ if(sel[i]) op.tags.forEach(function(t){ state.tags[t]=1; }); });
+          } else {
+            var idx = state.single[id];
+            if(idx!=null && opts[idx]){ opts[idx].tags.forEach(function(t){ state.tags[t]=1; }); if(opts[idx].pref) state.pref=opts[idx].pref; }
+          }
+        });
+      }
+
+      function choose(q, i, op, btn){
+        if(q.multi){
+          state.multi[q.id] = state.multi[q.id] || {};
+          state.multi[q.id][i] = !state.multi[q.id][i];
+          btn.classList.toggle("sel");
+          applyTags();
+        } else {
+          state.single[q.id] = i;
+          applyTags();
+          setTimeout(next, 180); // 単一選択は自動で次へ
+        }
+      }
+
+      function next(){
+        applyTags();
+        if(state.step < order.length-1){ state.step++; renderQ(); }
+        else { finish(); }
+      }
+      function back(){ if(state.step>0){ state.step--; renderQ(); } }
+
+      function finish(){
+        show("loading");
+        setTimeout(function(){ show("result"); renderResult(); }, 1500);
+      }
+
+      // ===== 結果組み立て =====
+      function has(t){ return !!state.tags[t]; }
+      function renderResult(){
+        var parts = [];
+        var worries = ["w_choose","w_lowball","w_timing","w_push","w_hassle"].filter(has).length;
+        var score = Math.min(99, 95 + worries);
+
+        // 金属ワード／キャンペーン対象（最大30%UPは金のアクセ等が対象。地金・インゴット・金貨とプラチナは対象外）
+        var mw = has("metal_pt")?"プラチナ":has("metal_gold")?"金":"貴金属";
+        var campOK = (has("metal_gold")||has("metal_mix")) && !has("item_bar");
+        // あなたの回答プロフィール
+        var metal = has("metal_gold")?"金":has("metal_pt")?"プラチナ":"金・プラチナ等（混在）";
+        var item = has("item_acc")?"アクセサリー":has("item_bar")?(has("metal_pt")?"プラチナ地金・インゴット":"金貨・インゴット・地金"):has("item_brand")?"ブランド・宝石も一緒":has("item_junk")?"ワケあり品":"いろいろ";
+        var meet = has("meet_no")?(has("ch_takuhai")?"会わず宅配で":"会わず出張で"):has("meet_yes")?"対面で相談":"方法おまかせ";
+        var wlab=[]; if(has("w_choose"))wlab.push("選べない"); if(has("w_lowball"))wlab.push("買い叩き"); if(has("w_timing"))wlab.push("タイミング"); if(has("w_push"))wlab.push("押し売り"); if(has("w_hassle"))wlab.push("手続き");
+        var area = has("area_focus")?esc(state.pref):"全国対応";
+        var prof = metal+"／"+item+"／"+meet+(wlab.length?("／不安："+wlab.join("・")):"")+"／"+area;
+
+        // ヘッダー＆推薦
+        parts.push('<p class="dz-pr">PR</p>');
+        parts.push('<div class="dz-h"><div class="dz-k">M A N E K I Y A 診断</div><div class="dz-ttl">診断結果書</div></div>');
+        parts.push('<div class="dz-prof"><span>ご回答</span>'+prof+'</div>');
+        var recBnr = campOK
+          ? '<a class="dz-recbnr" href="'+AFF_MANEKIYA+'" rel="nofollow sponsored" data-track="shindan_banner"><img src="/images/info_img2.webp" alt="まねきや 電話申込限定 買取金額最大30%UP" width="3125" height="1218" loading="lazy" decoding="async" /></a>'
+          : '<a class="dz-recbnr dz-recbnr-sm" href="'+AFF_MANEKIYA+'" rel="nofollow sponsored" data-track="shindan_banner"><img src="/images/manekiya_bn.png" alt="まねきや 金・貴金属 高価買取" width="300" height="250" loading="lazy" decoding="async" /></a>';
+        parts.push('<div class="dz-rec"><div class="dz-seal"><span>適合</span><b>'+score+'</b><small>%</small></div><div class="dz-lab">あなたに最適な買取店</div><div class="dz-nm">まねきや</div><div class="dz-star">★★★★★</div>'+recBnr+'</div>');
+        parts.push('<div class="dz-rule"></div>');
+
+        // スペック表
+        var chspec = (has("meet_no")&&has("ch_takuhai"))?"電話予約 → 宅配（会わず完結）"
+                   : (has("meet_no")&&has("ch_shucchou"))?"電話予約 → 出張（玄関先で完結）"
+                   : has("meet_yes")?"電話予約 → 来店・出張（対面）"
+                   : "電話予約 → 最短で査定";
+        parts.push('<div class="dz-spec">'+
+          specrow("売り方", chspec)+
+          specrow("買取価格", "独自の国内外販路＋業者価格で取引。専門バイヤーが相場を見極め、無駄なコストを削り買取価格に還元（公式）")+
+          specrow("手数料", "査定・送料・出張・キャンセル すべて0円")+
+          specrow("エリア", has("area_focus")?(esc(state.pref)+" は注力エリア・高額買取の可能性あり"):"出張・宅配で全国対応")+
+        '</div>');
+
+        // 処方箋（売り方＋台本）
+        var rx = "電話ではその場で金額は出ません。無料査定を<b>予約</b>し、<b>査定額を見てから売るか決められます</b>（キャンセル無料）。";
+        if(has("urg_maybe")) rx += " まだ売らなくてOK、見るだけでも大丈夫。";
+        else if(has("urg_slow")) rx += " 他社を見た上で、査定時に「他店ではこの金額」と伝えれば踏まえて査定。";
+        else if(has("urg_now")) rx += " 今日つながります（受付9〜21時）。";
+        var rxScript = (has("w_push")||has("meet_no")) ? '<div class="dz-quote">「まずは査定だけお願いします。売るのは金額を見てから決めます」</div><p class="dz-rxp">最初にこの一言で、その通り進みます。キャンセル無料だから断ってOK。</p>' : '';
+        parts.push('<div class="dz-rx"><div class="dz-rxh">💊 あなたの売り方（処方箋）</div><p class="dz-rxp">'+rx+'</p>'+rxScript+'</div>');
+
+        // 解消できる不安
+        var solv=[];
+        if(has("w_choose")) solv.push("金・プラチナ・宝石まで<b>まとめて1回査定</b>。仕分け不要");
+        if(has("w_lowball")) solv.push("一般客ではなく<b>業者価格＋独自の国内外販路</b>で査定→中間マージンが薄く高値が出やすい（公式）。<b>簡易査定を鵜呑みにせず正式査定で確認</b>し、他店額を伝えれば再査定。1社で決めないのが防御");
+        if(has("w_timing")) solv.push(mw+"の相場は<b>高い水準で推移中</b>。まず「今いくら」を無料査定で押さえるだけでも損しない");
+        if(has("w_hassle")) solv.push("<b>電話予約だけ</b>。用意は本人確認書類、出張／宅配で持ち運びゼロ");
+        if(has("high_value")) solv.push("高額品は<b>出張が安心</b>。即決せず相見積もりを");
+        if(has("wakeari")) solv.push("<b>壊れ・刻印なし・片方だけでもOK</b>（X線で正確に）");
+        if(solv.length){ var sh=solv.map(function(x){return '<li>'+x+'</li>';}).join(""); parts.push('<div class="dz-solve"><div class="dz-rxh">✓ あなたの不安、解消できます</div><ul>'+sh+'</ul></div>'); }
+
+        // 利用者の声（1件・カルテ調）
+        var VOICES = [
+          { m:["w_lowball","high_value","item_bar","metal_gold"], t:"相場が上がっており、購入時より高値で売れました。毎回高く買い取ってもらえます", tag:"金インゴット" },
+          { m:["w_lowball","wakeari","metal_pt"], t:"X線で含有量を細かく測定し正確な金額を提示。前の店より随分高く買い取ってもらえました", tag:"プラチナ" },
+          { m:["w_push","meet_yes","w_choose","w_hassle"], t:"詳しく親切に疑問にも答えてくれて、安心して取引できました", tag:"接客" },
+          { m:["meet_no","ch_shucchou","high_value","item_bar"], t:"出張買取に来てもらえて非常に助かりました。実家の片づけも進みました", tag:"出張・整理" }
+        ];
+        var pv = VOICES.filter(function(v){ return v.m.some(has); })[0] || VOICES[2];
+        parts.push('<div class="dz-voice"><span class="dz-vstar">★★★★★</span>「'+pv.t+'」<span class="dz-vsrc">— まねきや公式「お客様の声」（'+pv.tag+'／個人の感想）</span></div>');
+
+        // 地金・インゴット等は相場連動の説明（30%UP対象外）
+        if(has("item_bar")){
+          var bw = mw+"の地金・インゴット"+(has("metal_gold")?"・金貨":"");
+          parts.push('<div class="dz-spot">💡 <b>'+bw+'</b>は、発送日の<b>相場（1gあたり単価）連動</b>の透明な価格。「最大30%UP」の対象外ですが、その分ごまかしが効かず、<b>相場が高い今は高く売りやすい</b>タイミング。専門バイヤーが相場を見極め、業者価格で査定します（まねきや公式）。</div>');
+        }
+        parts.push('<p class="dz-badge" id="callBadge"></p>');
+
+        // CTA（電話主役）
+        var ctaSub = campOK ? "（最大30%UP対象）" : (has("item_bar") ? "（無料査定・相場連動で高価買取）" : "（無料査定・高価買取）");
+        parts.push('<a class="dz-cta" href="'+AFF_MANEKIYA+'" rel="nofollow sponsored" data-track="shindan_phone">📞 電話で無料査定を予約する<span>'+ctaSub+'</span></a>');
+        parts.push('<a class="dz-cta-web" href="'+AFF_MANEKIYA+'" rel="nofollow sponsored" data-track="shindan_web">WEBで査定予約する</a>');
+        parts.push('<button class="dz-retry" onclick="location.reload()">もう一度診断する</button>');
+
+        $("resultBody").innerHTML = parts.join("");
+        setBadge();
+      }
+      function specrow(k,v){ return '<div class="dz-row"><span>'+k+'</span><b>'+v+'</b></div>'; }
+      function buildBars(){
+        var b=[{label:"買取価格の高さ",val:96},{label:"手数料の安さ",val:100},{label:"安心・対応の丁寧さ",val:95}];
+        if(has("w_push")||has("meet_no")) b.push({label:"押し売りのなさ",val:94});
+        if(has("high_value")||has("mix")||has("w_choose")) b.push({label:"対応の幅広さ",val:97});
+        if(has("urg_now")) b.push({label:"スピード対応",val:93});
+        if(b.length<5) b.push({label:"全国の対応力",val:92});
+        return b.slice(0,5);
+      }
+      function animateResult(){
+        var C=2*Math.PI*52;
+        var fg=document.querySelector(".g-fg");
+        if(fg){ var s=Number(fg.getAttribute("data-score"))||0; fg.style.strokeDasharray=C; fg.style.strokeDashoffset=C;
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ fg.style.strokeDashoffset=C*(1-s/100); }); }); }
+        Array.prototype.forEach.call(document.querySelectorAll(".bar i"), function(el){
+          var w=el.getAttribute("data-w"); el.style.width="0%";
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.style.width=w+"%"; }); });
+        });
+      }
+      function block(h, p){ return '<div class="res-block"><h3>'+h+'</h3><p>'+p+'</p></div>'; }
+      function esc(s){ return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+
+      function jstHour(){ var n=new Date(); return new Date(n.getTime()+n.getTimezoneOffset()*60000+9*3600000).getHours(); }
+      function setBadge(){
+        var el=$("callBadge"); if(!el) return; var h=jstHour(); var open=h>=9&&h<21;
+        el.innerHTML = open ? '<span class="dot"></span>ただいま電話受付中（9〜21時）' : '電話受付は毎日9〜21時（朝9時からつながります）';
+        el.className = "dz-badge " + (open?"is-open":"is-closed");
+      }
+
+      // ===== 起動 =====
+      document.querySelector("[data-start]").onclick = function(){ state.step=0; show("quiz"); renderQ(); };
+      $("btnNext").onclick = next;
+      $("btnBack").onclick = back;
+    </script>
+
+    <style is:inline>
+      :root{ --ink:#23303A; --sub:#6E7B85; --line:#E5EDEA; --green:#0B8276; --gold:#D9962A; --red:#E0322C; --cream:#FFF9F0; }
+      *{ box-sizing:border-box; }
+      html,body{ margin:0; padding:0; }
+      body{ font-family:"Noto Sans JP",-apple-system,sans-serif; color:var(--ink); background:#fff; line-height:1.7; font-size:18px; -webkit-font-smoothing:antialiased; }
+      .wrap{ max-width:560px; margin:0 auto; padding:16px 16px 60px; min-height:100vh; }
+      .screen{ display:none; }
+      .screen[data-active]{ display:block; animation:fade .3s ease; }
+      @keyframes fade{ from{ opacity:0; transform:translateY(8px);} to{ opacity:1; transform:none; } }
+      .pr-tag{ display:inline-block; font-size:11px; font-weight:700; color:var(--sub); border:1px solid var(--line); border-radius:4px; padding:1px 7px; margin:0; }
+
+      /* FV */
+      .fv-h1{ font-size:32px; font-weight:900; line-height:1.35; margin:14px 0 8px; }
+      .fv-h1 .hl{ color:var(--gold); }
+      .fv-sub{ font-size:18px; margin:0 0 16px; }
+      .logo-strip{ overflow:hidden; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:10px 0; margin:8px 0 4px; -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent); }
+      .logo-track{ display:inline-flex; gap:12px; white-space:nowrap; animation:flow 26s linear infinite; align-items:center; }
+      .logo-track span{ flex:none; font-size:16px; font-weight:900; color:#5b6770; letter-spacing:.02em; background:#fff; border:1.5px solid #dfe6e4; border-radius:10px; padding:10px 18px; box-shadow:0 2px 6px rgba(20,60,50,.05); font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif; }
+      .logo-track span::before{ content:"◆"; color:#c9a24a; font-size:10px; margin-right:6px; vertical-align:1px; }
+      @keyframes flow{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+      .logo-note{ font-size:13px; color:var(--sub); text-align:center; margin:6px 0 20px; }
+      .fv-mini{ text-align:center; font-size:13px; color:var(--sub); margin-top:10px; }
+
+      /* ボタン */
+      .btn{ display:block; width:100%; text-align:center; text-decoration:none; border:none; cursor:pointer; font-family:inherit; }
+      .btn-start{ background:linear-gradient(180deg,#12b886,#0B8276); color:#fff; font-size:22px; font-weight:900; padding:20px; border-radius:14px; box-shadow:0 8px 20px rgba(11,130,118,.3); animation:pulse 1.8s ease-in-out infinite; }
+      @keyframes pulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.03);} }
+
+      /* 設問 */
+      .progress{ height:8px; background:var(--line); border-radius:99px; overflow:hidden; margin:6px 0 14px; }
+      .progress-bar{ height:100%; background:var(--green); width:0; transition:width .3s; }
+      .q-count{ font-size:14px; color:var(--sub); font-weight:700; margin:0 0 4px; }
+      .q-title{ font-size:24px; font-weight:900; margin:0 0 6px; line-height:1.4; }
+      .q-hint{ font-size:14px; color:var(--green); font-weight:700; margin:0 0 12px; }
+      .options{ display:flex; flex-direction:column; gap:12px; }
+      .options-grid{ display:grid; grid-template-columns:1fr 1fr; }
+      .opt{ text-align:left; background:#fff; border:2px solid var(--line); border-radius:12px; padding:16px 18px; font-size:18px; font-weight:700; color:var(--ink); cursor:pointer; font-family:inherit; transition:border-color .12s, background .12s; }
+      .options-grid .opt{ text-align:center; padding:14px 8px; font-size:16px; }
+      .opt:hover{ border-color:var(--green); }
+      .opt.sel{ border-color:var(--green); background:#EAF6F2; box-shadow:0 0 0 3px rgba(11,130,118,.12); }
+      .q-nav{ display:flex; align-items:center; justify-content:space-between; margin-top:18px; }
+      .btn-back{ background:none; border:none; color:var(--sub); font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; }
+      .btn-next{ width:auto; background:var(--green); color:#fff; font-weight:900; font-size:18px; padding:14px 28px; border-radius:12px; }
+
+      /* 診断中 */
+      #screen-loading{ text-align:center; padding-top:80px; }
+      .spinner{ width:56px; height:56px; border:6px solid var(--line); border-top-color:var(--green); border-radius:50%; margin:0 auto 20px; animation:spin .8s linear infinite; }
+      @keyframes spin{ to{ transform:rotate(360deg);} }
+      .loading-txt{ font-size:20px; font-weight:800; color:var(--green); }
+
+      /* 結果 */
+      /* HERO：適合度リング */
+      .rz-hero{ text-align:center; background:linear-gradient(180deg,#FFFDF7,#FFF1D9); border:2px solid var(--gold); border-radius:18px; padding:20px 16px 22px; margin:8px 0 14px; }
+      .rz-lead{ font-size:15px; margin:0; font-weight:700; color:var(--sub); }
+      .rz-name{ font-size:38px; font-weight:900; color:var(--gold); margin:2px 0 12px; letter-spacing:.02em; text-shadow:0 1px 0 rgba(0,0,0,.06); }
+      .gauge{ position:relative; width:150px; height:150px; margin:0 auto; }
+      .gauge svg{ width:150px; height:150px; transform:rotate(-90deg); }
+      .g-bg{ fill:none; stroke:#EFE4C8; stroke-width:12; }
+      .g-fg{ fill:none; stroke:var(--gold); stroke-width:12; stroke-linecap:round; transition:stroke-dashoffset 1.1s cubic-bezier(.2,.8,.2,1); }
+      .gauge-c{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+      .gauge-l{ font-size:12px; font-weight:800; color:var(--sub); letter-spacing:.08em; }
+      .gauge-n{ font-size:46px; font-weight:900; color:var(--ink); line-height:1; }
+      .gauge-n small{ font-size:18px; font-weight:900; }
+      .rz-rank{ margin:12px 0 0; font-size:15px; font-weight:800; color:var(--ink); }
+      .rz-rank b{ color:var(--red); font-size:20px; }
+      /* 適合度バー */
+      .rz-bars h3{ margin:0 0 12px; }
+      .bar{ display:flex; align-items:center; gap:8px; margin:0 0 9px; }
+      .bar-l{ flex:none; width:118px; font-size:13px; font-weight:800; color:var(--ink); text-align:right; line-height:1.3; }
+      .bar-t{ flex:1; height:14px; background:#EDF1F0; border-radius:99px; overflow:hidden; }
+      .bar-t i{ display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,#12b886,#0B8276); transition:width 1s cubic-bezier(.2,.8,.2,1); }
+      .bar-v{ flex:none; width:26px; font-size:14px; font-weight:900; color:var(--green); }
+      .bars-note{ font-size:11.5px !important; color:var(--sub); margin:8px 0 0 !important; }
+      /* カード共通・メリハリ */
+      .res-block{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:15px 16px; margin:0 0 12px; box-shadow:0 2px 8px rgba(20,60,50,.04); }
+      .res-block h3{ font-size:18px; margin:0 0 8px; color:var(--green); font-weight:900; letter-spacing:.01em; }
+      .res-block p{ margin:0; font-size:16.5px; line-height:1.75; }
+      .res-block p b{ background:linear-gradient(transparent 55%, #FFE99A 55%); font-weight:900; padding:0 1px; }
+      .res-camp b, .res-script .script-line{ background:none; }
+      .res-way{ border-color:var(--green); background:#F3FBF8; }
+      .res-note{ font-size:14px !important; color:var(--sub); margin-top:8px !important; }
+      .res-script{ border:2px solid var(--red); background:#FFF6F5; }
+      .res-script h3{ color:var(--red); }
+      .script-line{ font-size:20px !important; font-weight:900; color:var(--red); text-align:center; background:#fff; border-radius:10px; padding:12px; margin:6px 0 10px !important; line-height:1.5; }
+      .res-area{ border-color:var(--gold); background:var(--cream); }
+      .res-area h3{ color:var(--gold); }
+      .res-voice .voice{ background:#F7FAF9; border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin:8px 0 0; }
+      .res-voice .stars{ color:#FFB02E; font-size:14px; letter-spacing:1px; }
+      .res-voice .voice p{ font-size:15.5px; margin:3px 0; line-height:1.6; }
+      .res-voice .voice small{ font-size:12px; color:var(--sub); font-weight:700; }
+      .voice-note{ font-size:12px !important; color:var(--sub); margin-top:8px !important; }
+      .res-camp{ text-align:center; border:2px solid var(--red); background:linear-gradient(180deg,#FFF7EC,#FFE9CC); }
+      .camp-head{ font-size:15px; font-weight:800; color:var(--red); margin:0; }
+      .camp-main{ font-size:26px; font-weight:900; color:var(--red); margin:2px 0; }
+      .camp-main b{ font-size:34px; }
+      .camp-badge{ font-size:14.5px; font-weight:800; margin:4px 0 0; }
+      .camp-badge.is-open{ color:var(--green); }
+      .camp-badge.is-open .dot{ display:inline-block; width:9px; height:9px; border-radius:50%; background:#12b886; margin-right:6px; }
+      .camp-badge.is-closed{ color:var(--sub); }
+
+      /* ===== 型A：診断書・カルテ型 ===== */
+      .dz-pr{ font-size:10px; color:#9aa; border:1px solid #e3e8e6; border-radius:4px; padding:1px 6px; display:inline-block; }
+      .dz-h{ text-align:center; border-bottom:2px solid #c9a24a; padding-bottom:12px; margin-top:6px; }
+      .dz-k{ font-size:12px; letter-spacing:.28em; color:#b08a2e; font-weight:800; }
+      .dz-ttl{ font-family:"Hiragino Mincho ProN","Yu Mincho",serif; font-size:27px; font-weight:900; margin-top:4px; letter-spacing:.08em; }
+      .dz-prof{ font-size:13px; color:#5c6b74; background:#f7f2e7; border-radius:9px; padding:11px 13px; margin:14px 0; line-height:1.75; }
+      .dz-prof span{ display:inline-block; font-size:11px; font-weight:800; color:#b08a2e; margin-right:6px; background:#fff; border-radius:4px; padding:1px 6px; }
+      .dz-rec{ text-align:center; position:relative; padding:8px 0 4px; }
+      .dz-rec .dz-lab{ font-size:13px; color:var(--sub); }
+      .dz-rec .dz-nm{ font-family:"Hiragino Mincho ProN","Yu Mincho",serif; font-size:42px; font-weight:900; letter-spacing:.04em; margin:2px 0; color:var(--ink); }
+      .dz-rec .dz-star{ color:#e0a72e; font-size:16px; letter-spacing:2px; }
+      .dz-recbnr{ display:block; margin:14px 0 2px; border-radius:10px; overflow:hidden; box-shadow:0 4px 12px rgba(20,40,50,.14); }
+      .dz-recbnr img{ width:100%; height:auto; display:block; }
+      .dz-recbnr-sm{ max-width:260px; margin:14px auto 2px; }
+      .dz-seal{ position:absolute; right:2px; top:0; width:66px; height:66px; border:2.5px solid #c0392b; color:#c0392b; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(-11deg); line-height:1; }
+      .dz-seal span{ font-size:11px; font-weight:900; } .dz-seal b{ font-size:24px; font-weight:900; } .dz-seal small{ font-size:11px; font-weight:900; }
+      .dz-rule{ height:1px; background:#e7ddc5; margin:14px 0; }
+      .dz-row{ display:grid; grid-template-columns:82px 1fr; gap:10px; padding:10px 2px; border-bottom:1px dashed #ead9b8; align-items:start; }
+      .dz-row span{ color:#8a7a55; font-weight:800; font-size:13px; }
+      .dz-row b{ font-weight:700; font-size:15px; line-height:1.55; }
+      .dz-rx{ margin-top:16px; background:#eef7f4; border-left:4px solid var(--green); border-radius:0 10px 10px 0; padding:13px 15px; }
+      .dz-rxh{ font-size:14px; font-weight:900; color:var(--green); margin-bottom:5px; }
+      .dz-rxp{ font-size:15px; line-height:1.7; margin:0; }
+      .dz-rxp b{ font-weight:900; }
+      .dz-quote{ font-family:"Hiragino Mincho ProN","Yu Mincho",serif; font-size:19px; font-weight:800; color:#c0392b; text-align:center; background:#fff; border-radius:10px; padding:14px 10px; margin:10px 0 8px; line-height:1.5; }
+      .dz-solve{ margin-top:14px; }
+      .dz-solve ul{ list-style:none; margin:6px 0 0; padding:0; }
+      .dz-solve li{ position:relative; padding:9px 0 9px 26px; border-top:1px solid #eef2f1; font-size:14.5px; line-height:1.6; }
+      .dz-solve li::before{ content:"✓"; position:absolute; left:2px; top:9px; color:#12b886; font-weight:900; }
+      .dz-solve li b{ font-weight:900; }
+      .dz-voice{ margin-top:16px; background:#faf8f2; border:1px solid #ece3cf; border-radius:10px; padding:12px 14px; font-size:15px; line-height:1.7; }
+      .dz-vstar{ display:block; color:#e0a72e; font-size:13px; letter-spacing:1px; }
+      .dz-vsrc{ display:block; font-size:11.5px; color:#8a8578; margin-top:5px; }
+      .dz-banner{ display:block; margin:18px 0 10px; border-radius:12px; overflow:hidden; box-shadow:0 6px 16px rgba(20,40,50,.12); }
+      .dz-banner img{ width:100%; height:auto; display:block; }
+      .dz-banner-sm{ max-width:300px; margin:12px auto 10px; }
+      .dz-spot{ margin:16px 0 10px; background:#fffaf0; border:1px solid #f0dcae; border-radius:10px; padding:12px 14px; font-size:14px; line-height:1.75; }
+      .dz-spot b{ font-weight:900; color:#b06a1a; }
+      .dz-badge{ text-align:center; font-size:14.5px; font-weight:800; margin:0 0 10px; }
+      .dz-badge.is-open{ color:var(--green); }
+      .dz-badge.is-open .dot{ display:inline-block; width:9px; height:9px; border-radius:50%; background:#12b886; margin-right:6px; }
+      .dz-badge.is-closed{ color:var(--sub); }
+      .dz-cta{ display:block; text-align:center; text-decoration:none; background:linear-gradient(180deg,#ff5a4d,#e01f1f); color:#fff; font-size:21px; font-weight:900; padding:18px; border-radius:14px; box-shadow:0 8px 20px rgba(224,31,31,.3); animation:pulse 1.8s ease-in-out infinite; }
+      .dz-cta span{ display:block; font-size:13px; font-weight:700; margin-top:2px; }
+      .dz-cta-web{ display:block; text-align:center; text-decoration:none; margin-top:10px; background:#fff; color:var(--green); border:2px solid var(--green); font-size:16px; font-weight:800; padding:13px; border-radius:12px; }
+      .dz-retry{ display:block; margin:14px auto 0; background:none; border:none; color:var(--sub); font-size:14px; text-decoration:underline; cursor:pointer; font-family:inherit; }
+
+      .cta-wrap{ margin-top:18px; }
+      .btn-cta{ background:linear-gradient(180deg,#FF5A4D,#E01F1F); color:#fff; font-size:21px; font-weight:900; padding:18px; border-radius:14px; box-shadow:0 8px 20px rgba(224,31,31,.32); animation:pulse 1.8s ease-in-out infinite; }
+      .btn-cta .cta-sub{ display:block; font-size:13px; font-weight:700; margin-top:2px; }
+      .btn-cta-web{ margin-top:10px; background:#fff; color:var(--green); border:2px solid var(--green); font-size:16px; font-weight:800; padding:13px; border-radius:12px; }
+      .btn-retry{ margin:14px auto 0; background:none; border:none; color:var(--sub); font-size:14px; text-decoration:underline; cursor:pointer; font-family:inherit; display:block; }
+
+      .ft{ margin-top:26px; padding-top:14px; border-top:1px solid var(--line); }
+      .ft p{ font-size:12px; color:var(--sub); line-height:1.6; margin:0; }
+
+      @media (prefers-reduced-motion:reduce){ .btn-start,.btn-cta,.logo-track{ animation:none; } }
+    </style>
+  </body>
+</html>
