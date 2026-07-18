@@ -1155,7 +1155,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
       el.addEventListener("click", function(e){
         if(!url || url === "#"){ e.preventDefault(); return; }
         var tn = el.getAttribute("data-track") || "";
-        var isPhone = tn.indexOf("phone")>=0;
+        var isPhone = el.classList.contains("btn-phone") || tn.indexOf("phone")>=0 || tn.indexOf("official")>=0;
         var params = { affiliate_key:key, track_name:tn, cta_type:(isPhone?"phone":"web"), landing_intent:"lp_hikaku", link_url:url };
         var __plain = !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && (e.button===0 || e.button===undefined);
         // 連打防止：通常クリックで処理中なら以降のタップは無視（無反応感・CV二重送信を防ぐ）
@@ -1164,6 +1164,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
         var __cv = (key === "manekiya" && tn !== "rk_zisseki") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
         // GTM併用時の保険としてdataLayerにも積む
         if(window.dataLayer) window.dataLayer.push(Object.assign({event:__cv}, params));
+        // GA4限定：電話/WEB別の「質」イベント（Google広告の主要CVには送らない＝send_toでGA4のみ）
+        if(typeof gtag==="function") gtag("event", "gold_kaitori_" + params.cta_type + "_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
         // 修飾キー/中クリック（新規タブ等）は既定動作のまま：beaconで確実送信し、離脱を妨げない
         if(!__plain){
           if(typeof gtag==="function") gtag("event", __cv, Object.assign({}, params, { transport_type:"beacon" }));
