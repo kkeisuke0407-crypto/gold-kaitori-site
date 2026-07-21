@@ -241,6 +241,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </div>
           </details>
           <p class="rate-hero-date">{rates.updatedAt}・田中貴金属の店頭買取単価より</p>
+          {rates.isStale && (
+            <p class="rate-stale-note">⚠️ 相場の自動更新が遅延している可能性があります。正確な最新価格は<a href={MARKET_SOURCE_URL} target="_blank" rel="noopener">田中貴金属の公式サイト</a>でご確認ください。</p>
+          )}
           <p class="rate-purity-note">※各純度は純金・純プラチナの買取単価から純度比で算出した参考値です。製品は石・加工・ブランドで変わります。正確な金額は店舗でご確認ください。</p>
         </div>
 

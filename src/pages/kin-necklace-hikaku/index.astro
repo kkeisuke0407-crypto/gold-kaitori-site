@@ -329,6 +329,9 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </div>
           </details>
           <p class="rate-hero-date">{rates.updatedAt}・田中貴金属の店頭買取単価より</p>
+          {rates.isStale && (
+            <p class="rate-stale-note">⚠️ 相場の自動更新が遅延している可能性があります。正確な最新価格は<a href={MARKET_SOURCE_URL} target="_blank" rel="noopener">田中貴金属の公式サイト</a>でご確認ください。</p>
+          )}
           <p class="rate-purity-note">※各純度は純金・純プラチナの買取単価から純度比で算出した参考値です。正確な金額は店舗でご確認ください。</p>
         </div>
 
@@ -1050,6 +1053,8 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
     .rate-grid-mini span{ display:block; font-size:11px; color:var(--sub); font-weight:700; }
     .rate-grid-mini b{ font-size:13.5px; color:var(--ink); }
     .rate-hero-date{ text-align:center; font-size:12.5px; color:var(--sub); margin:12px 0 0; }
+    .rate-stale-note{ text-align:center; font-size:12px; font-weight:800; color:#B45309; background:#FFF7E4; border:1px solid #F0DFA8; border-radius:8px; padding:8px 10px; margin:8px 0 0; line-height:1.6; }
+    .rate-stale-note a{ color:#B45309; text-decoration:underline; }
     .ref-price{ margin-top:18px; background:#fff; border:2px solid var(--gold); border-radius:18px; padding:16px; box-shadow:0 8px 22px rgba(217,150,42,.14); }
     .ref-ttl{ font-size:18px; font-weight:900; color:var(--ink); margin:0 0 12px; text-align:center; line-height:1.4; }
     .ref-ttl span{ display:block; font-size:12px; font-weight:700; color:var(--sub); margin-top:3px; }

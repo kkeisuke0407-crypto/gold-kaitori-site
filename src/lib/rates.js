@@ -79,5 +79,17 @@ function withDerived(base) {
 
 // 全ページで同じ結果を共有する（ページ間のズレを防ぐ）。
 export function getRates() {
-  return withDerived(ratesData);
+  const rates = withDerived(ratesData);
+  // 鮮度チェック：自動更新(GitHub Actionsのcron)が遅延・スキップされ、
+  // 古い価格がそのまま表示され続ける事故を防ぐための保険。
+  // ビルド時点(JST)と最終更新日の差が2日以上あれば isStale=true にし、
+  // 表示側で「相場は公式サイトでご確認ください」の注記を出す。
+  const lastDateStr = ratesData?.last?.date;
+  let staleDays = 0;
+  if (lastDateStr) {
+    const buildJst = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+    const lastD = new Date(lastDateStr + "T00:00:00+09:00");
+    staleDays = Math.floor((buildJst - lastD) / 86400000);
+  }
+  return { ...rates, staleDays, isStale: staleDays >= 2 };
 }
