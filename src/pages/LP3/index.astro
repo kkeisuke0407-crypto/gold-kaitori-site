@@ -21,8 +21,8 @@ const goldExMan = (w, karat = rates.k18) => {
 // キャンペーン残日数（まねきや 7/31まで）
 const campMonth = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })).getMonth() + 1;
   const campMonthLabel = campMonth + "月限定";
-  // キャンペーン終了＝おたからや「買取金額35%UP」の締切（2026/7/19 日・23:59 JST）。
-  const campEnd = new Date(2026, 6, 19, 23, 59, 59);
+  // キャンペーン終了＝おたからや「現金10万円プレゼント」の締切（2026/7/26 日・23:59 JST）。
+  const campEnd = new Date(2026, 6, 26, 23, 59, 59);
   const _campWd = ['日','月','火','水','木','金','土'][campEnd.getDay()];
   const campEndMd = (campEnd.getMonth() + 1) + "月" + campEnd.getDate() + "日";
   const campEndLabel = campEndMd + "（" + _campWd + "）";
@@ -137,7 +137,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
                   {campDays > 0 ? (
                     <>
                       <span class="camp-badge camp-badge-sparkle">期間限定</span><br />
-                      <b class="up30">買取金額<br /><em>35%</em>UP</b>
+                      <b class="up30">現金<em>10万円</em><br />プレゼント</b>
                     </>
                   ) : (
                     <b class="camp-tbd">公式キャンペーン<br />要確認</b>
@@ -211,7 +211,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             </tbody>
           </table>
         </div>
-        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円・買取金額35%UP（公式キャンペーン）ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
+        <p class="note note-basis">※比較表の「買取価格」評価（◎/〇）は、各社公式サイトの記載・キャンペーン・買取実績にもとづく当編集部の主観的な比較評価であり、買取価格の優劣を保証するものではありません。〔評価の根拠〕まねきや：買取手数料0円／電話申込で買取金額最大30%UP／即日現金化（公式キャンペーン・実績）　おたからや：世界{otakaraya.storesComma}店舗以上の買取規模・買取専門26年・手数料0円・現金10万円プレゼント（抽選10名様・5,000円以上ご成約／公式キャンペーン）ブランドリバリュー：宝石・ブランド品を含めた再販ルートによる評価（公式）</p>
 
 
 
@@ -463,7 +463,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <div class="rk-meta">
             <div><span>対応品目</span><b>金・貴金属・金貨・宝石付きもOK</b></div>
             <div><span>買取方法</span><b>店頭・出張</b></div>
-            <div><span>キャンペーン</span><b>買取金額35%UP（〜{campEndLabel}）</b></div>
+            <div><span>キャンペーン</span><b>現金10万円プレゼント（抽選10名様／〜{campEndLabel}）</b></div>
           </div>
           <a href="#" class="btn btn-ghost full" data-aff="otakaraya" data-track="rk_otakaraya" rel="nofollow sponsored">おたからやで無料査定する</a>
           <p class="note">※1 {otakaraya.asOf}時点の店舗数です（フランチャイズ・直営店を含む）。</p>
@@ -493,7 +493,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <a href="#" data-aff="otakaraya" data-track="rank_camp_banner" rel="nofollow sponsored" class="rank-camp-cta" style="display:block;max-width:680px;margin:16px auto 0;text-align:center;">
             <p class="rank-camp-flag">🔥 期間限定 キャンペーン実施中</p>
             <p class="rank-camp-days">あと<span class="rank-camp-days-num">{campDays}</span>日<small>（〜{campEndLabel}）</small></p>
-            <img src="/images/otakaraya-35up.webp" alt="おたからや 買取金額35%UP キャンペーン" width="2560" height="1378" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
+            <img src="/images/otakaraya-10man.webp" alt="おたからや 今なら5,000円以上ご成約で現金10万円プレゼント（抽選で10名様）" width="2560" height="1378" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
           </a>
         </div>
 

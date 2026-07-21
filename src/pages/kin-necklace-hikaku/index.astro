@@ -22,8 +22,8 @@ const goldExMan = (w, karat = rates.k18) => {
 // キャンペーン残日数（まねきや 7/31まで）
 const campMonth = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' })).getMonth() + 1;
   const campMonthLabel = campMonth + "月限定";
-  // キャンペーン終了＝おたからや「買取金額35%UP」の締切（2026/7/19 日・23:59 JST）。
-  const campEnd = new Date(2026, 6, 19, 23, 59, 59);
+  // キャンペーン終了＝おたからや「現金10万円プレゼント」の締切（2026/7/26 日・23:59 JST）。
+  const campEnd = new Date(2026, 6, 26, 23, 59, 59);
   const _campWd = ['日','月','火','水','木','金','土'][campEnd.getDay()];
   const campEndMd = (campEnd.getMonth() + 1) + "月" + campEnd.getDate() + "日";
   const campEndLabel = campEndMd + "（" + _campWd + "）";
@@ -229,7 +229,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
             <thead><tr><th class="cmp9-sh">店名</th><th>金ネックレス適性</th><th>主な向き先</th><th>キャンペーン・特典</th><th>手数料・費用</th><th>買取方法</th><th>状態不良品</th><th>強い品目</th><th>注意点</th></tr></thead>
             <tbody>
               <tr class="cmp9-row cmp9-win"><th class="cmp9-sh"><span class="cmp9-rank">1位</span><a href="#" data-aff="manekiya" data-track="cmp9_1" rel="nofollow sponsored">まねきや</a></th><td class="cmp9-tek"><span class="tekisei-a">◎</span></td><td>金ネックレスを手取り重視で売りたい人</td><td class="cmp9-cp">7月限定、電話査定予約で買取金額<b>最大30%UP</b>＋金買取手数料10%<b>無料</b></td><td>査定料・出張料・キャンセル料0円</td><td>店頭・出張・宅配</td><td>◎ 切れた金・刻印不明・金歯・古い金も相談候補</td><td>金・貴金属・宝石・時計・ブランド・古銭</td><td class="cmp9-note">キャンペーンは金ネックレス向け。金貨・インゴット・地金・プラチナは対象外</td></tr>
-              <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-rank">2位</span><a href="https://www.otakaraya.jp/" target="_blank" rel="nofollow noopener">おたからや</a></th><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td>大手店舗網で直接相談したい人</td><td class="cmp9-cp">買取金額<b>35%UP</b>（電話申込限定）</td><td>査定料・出張料・手数料0円</td><td>店頭・出張</td><td>◎ 他社で難しい品も相談候補</td><td>金・貴金属・宝石・ブランド・切手・古銭・骨董</td><td class="cmp9-note">FC/直営混在で店舗差に注意。宅配は主軸にしない</td></tr>
+              <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-rank">2位</span><a href="https://www.otakaraya.jp/" target="_blank" rel="nofollow noopener">おたからや</a></th><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td>大手店舗網で直接相談したい人</td><td class="cmp9-cp">現金<b>10万円</b>プレゼント（抽選10名様・5,000円以上ご成約）</td><td>査定料・出張料・手数料0円</td><td>店頭・出張</td><td>◎ 他社で難しい品も相談候補</td><td>金・貴金属・宝石・ブランド・切手・古銭・骨董</td><td class="cmp9-note">FC/直営混在で店舗差に注意。宅配は主軸にしない</td></tr>
               <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-rank">3位</span><a href="https://brandrevalue.com/" target="_blank" rel="nofollow noopener">ブラリバ</a></th><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td>金に宝石やブランド価値が付く品を売りたい人</td><td class="cmp9-cp">初回限定 査定金額20%UP系</td><td>査定無料。詳細条件は公式確認</td><td>店頭・宅配・出張・LINE/WEB</td><td>○ 個別判断</td><td>ブランド・時計・バッグ・宝石・金・ジュエリー</td><td class="cmp9-note">純粋な地金より宝石・ブランド込みの品に強い</td></tr>
               <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-rank">4位</span><a href="https://nanboya.com/" target="_blank" rel="nofollow noopener">なんぼや</a></th><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td>ブランドジュエリー・時計も一緒に売りたい人</td><td class="cmp9-cp">新規限定5,000円上乗せ。月次キャンペーン実績</td><td>宅配送料・返送料・査定料・キャンセル料0円</td><td>店頭・宅配・出張・オンライン</td><td>○</td><td>ブランド・時計・バッグ・金・宝石・ジュエリー</td><td class="cmp9-note">金ネックレス単体よりブランド/石付き/時計とのまとめ売りで強い</td></tr>
               <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-rank">5位</span><a href="https://kaitori.e-daikoku.com/" target="_blank" rel="nofollow noopener">大黒屋</a></th><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td>時計・ブランド・酒・金券もまとめたい人</td><td class="cmp9-cp">ブランドジュエリー10%UP など</td><td>宅配送料・返送料・振込手数料0円</td><td>店頭・宅配・出張・LINE</td><td>○</td><td>時計・ブランド・金・宝石・酒・金券・スマホ</td><td class="cmp9-note">金専門というより総合買取・質・金券の利便性が強み</td></tr>
@@ -509,7 +509,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <div class="rk-meta">
             <div><span>対応品目</span><b>金・貴金属・金貨・宝石付きもOK</b></div>
             <div><span>買取方法</span><b>店頭・出張</b></div>
-            <div><span>キャンペーン</span><b>買取金額35%UP（〜{campEndLabel}）</b></div>
+            <div><span>キャンペーン</span><b>現金10万円プレゼント（抽選10名様／〜{campEndLabel}）</b></div>
           </div>
           <a href="https://www.otakaraya.jp/" class="btn btn-ghost full" data-track="rk_otakaraya" rel="nofollow noopener" target="_blank">おたからやで無料査定する</a>
           <p class="note">※1 {otakaraya.asOf}時点の店舗数です（フランチャイズ・直営店を含む）。</p>
@@ -539,7 +539,7 @@ const AFF_OTAKARAYA = "https://lp.otakaraya.jp/lp-gold-a/";
           <a href="https://www.otakaraya.jp/" data-track="rank_camp_banner" rel="nofollow noopener" target="_blank" class="rank-camp-cta" style="display:block;max-width:680px;margin:16px auto 0;text-align:center;">
             <p class="rank-camp-flag">🔥 期間限定 キャンペーン実施中</p>
             <p class="rank-camp-days">あと<span class="rank-camp-days-num">{campDays}</span>日<small>（〜{campEndLabel}）</small></p>
-            <img src="/images/otakaraya-35up.webp" alt="おたからや 買取金額35%UP キャンペーン" width="2560" height="1378" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
+            <img src="/images/otakaraya-10man.webp" alt="おたからや 今なら5,000円以上ご成約で現金10万円プレゼント（抽選で10名様）" width="2560" height="1378" style="width:100%;height:auto;display:block;border-radius:10px;" loading="lazy" decoding="async" />
           </a>
         </div>
 
