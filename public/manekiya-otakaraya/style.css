@@ -1650,6 +1650,7 @@ a { color: #1b4f86; text-underline-offset: .25em; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: .7em;
   margin: 0;
   color: var(--sumi);
@@ -1831,6 +1832,18 @@ p.kin-verdict__why { font-size: .95em; line-height: 1.85; margin: 0; color: var(
   animation: kinCtaShine 3.2s ease-in-out infinite;
 }
 @keyframes kinCtaShine { 0% { left: -65%; } 60%, 100% { left: 145%; } }
+
+/* 見出し・タイトルの日本語折り返しを語句単位に（対応ブラウザのみ／非対応は無視され従来どおり） */
+h2, h3,
+.kin-conclusion-title, .kin-box__title, .kin-why__ttl,
+.kin-verdict__head, .kin-verdict__question, .kin-verdict__answer,
+.kin-valuation__title, .kin-step__title, .kin-cta-block__head,
+.kin-faq__q { word-break: auto-phrase; }
+
+/* スマホ：verdictの「対応エリアを確認」を質問文の下段へ回して読みやすく */
+@media screen and (max-width: 600px) {
+  .kin-verdict__item--main .kin-verdict__question span { margin-top: .5em; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
