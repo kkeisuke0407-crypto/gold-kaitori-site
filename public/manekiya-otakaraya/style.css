@@ -65,6 +65,22 @@ body {
   font-weight: 700;
   background: linear-gradient(transparent 88%, rgba(194,167,94,.55) 88%);
 }
+/* 重要度で強調を段階化（メリハリ）。既定strong=金の細線／以下は用途別に強める */
+/* 黄マーカー：各セクションの結論・パンチライン（最も目立たせる） */
+.entry-content strong.em-mark {
+  background: linear-gradient(transparent 50%, #ffdf6e 50%);
+  padding: 0 .05em;
+}
+/* 緑：メリット・無料・得（プラスの情報） */
+.entry-content strong.em-green {
+  color: var(--win);
+  background: linear-gradient(transparent 87%, rgba(31,107,70,.24) 87%);
+}
+/* 赤：注意・条件・危険信号（気をつける情報） */
+.entry-content strong.em-red {
+  color: var(--alert);
+  background: linear-gradient(transparent 87%, rgba(168,50,31,.26) 87%);
+}
 
 a { color: #1b4f86; text-underline-offset: .25em; }
 
