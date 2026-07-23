@@ -1,0 +1,1816 @@
+@charset "UTF-8";
+/*
+Theme Name: Cocoon Child - 金買取
+Template: cocoon-master
+Version: 4.0.0
+
+設計方針
+  装飾を足さない。明朝体・余白・罫線で「格」を出す。
+  参照するトーンは、量販店のチラシではなく、老舗宝飾店のパンフレット。
+  ・見出しは明朝（日本語で信頼感を出す最大のレバー）
+  ・金は「差し色」。面で使わず、髪の毛のような罫線で使う
+  ・アニメーション・絵文字・グラデーションは使わない
+  ・本文18px / 行間2.0（40〜60代の可読性）
+*/
+
+/* =========================================================
+   0. トークン
+   ========================================================= */
+:root {
+  --sumi:      #1a2130;  /* 墨紺 */
+  --sumi-2:    #2c3547;
+  --ink:       #23272f;  /* 本文 */
+  --ink-sub:   #5c6472;
+  --gold:      #8f7228;  /* 白地でAA。輝かせない */
+  --gold-line: #c2a75e;  /* 罫線用 */
+  --gold-bg:   #faf6ea;
+  --paper:     #ffffff;
+  --bg:        #f4f1ea;  /* 生成り */
+  --rule:      #ddd8cc;
+  --rule-2:    #eceaE3;
+  --win:       #1f6b46;
+  --alert:     #a8321f;
+
+  --mincho: "Yu Mincho", YuMincho, "Hiragino Mincho ProN", "Hiragino Mincho Pro",
+            "Noto Serif JP", "Source Han Serif JP", "MS PMincho", serif;
+  --gothic: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+            "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
+
+  --fz: 18px;
+  --lh: 2.0;
+  --tap: 60px;
+  --pad: clamp(18px, 5vw, 40px);
+}
+
+/* =========================================================
+   1. ベース
+   ========================================================= */
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--gothic);
+  font-size: var(--fz);
+  line-height: var(--lh);
+  letter-spacing: .04em;
+  -webkit-text-size-adjust: 100%;
+}
+
+.entry-content, .article { font-size: var(--fz); line-height: var(--lh); }
+.entry-content p { margin: 0 0 1.8em; }
+
+/* 強調は蛍光マーカーではなく、下に細い金の罫 */
+.entry-content strong {
+  font-weight: 700;
+  background: linear-gradient(transparent 88%, rgba(194,167,94,.55) 88%);
+}
+
+a { color: #1b4f86; text-underline-offset: .25em; }
+
+/* =========================================================
+   2. PR表記
+   ========================================================= */
+.kin-pr {
+  background: #e9e5db;
+  color: #6b7280;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-align: center;
+  padding: .6em 1em;
+  margin: 0;
+}
+
+/* =========================================================
+   3. ファーストビュー
+   ========================================================= */
+.kin-fv {
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(2em, 7vw, 3em) var(--pad) clamp(1.8em, 5vw, 2.4em);
+  border-top: 3px solid var(--gold-line);
+  border-bottom: 1px solid var(--rule);
+  text-align: center;
+}
+
+/* 画像のみのFVは、結論への余白・罫線を持たせない */
+.kin-fv--visual {
+  padding: 0;
+  border: none;
+}
+.kin-fv__visual { margin: 0; line-height: 0; }
+.kin-fv__visual img { display: block; width: 100%; height: auto; }
+
+/* 白背景FVでの文字色 */
+.kin-fv .kin-fv__title { color: var(--sumi); }
+.kin-fv .kin-fv__title em { color: var(--gold); border-bottom-color: var(--gold-line); }
+.kin-fv .kin-fv__eyebrow { color: var(--gold); }
+.kin-fv .kin-fv__eyebrow::before,
+.kin-fv .kin-fv__eyebrow::after { background: var(--gold-line); }
+.kin-fv .kin-fv__lead { color: var(--ink); }
+.kin-fv .kin-cta-block__head { color: var(--sumi); }
+.kin-fv .kin-cta__note { color: var(--ink-sub); }
+.kin-fv .kin-tel { background: var(--paper); border-color: var(--rule); }
+.kin-fv .kin-tel__label { color: var(--ink-sub); }
+.kin-fv .kin-tel__num { color: var(--sumi); }
+
+/* =========================================================
+   3.5 相場グラフ
+   ========================================================= */
+.kin-chart {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.3em 0 1em;
+  margin: 1.6em 0;
+}
+
+.kin-chart__title {
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: var(--ink-sub);
+  margin: 0 0 1em;
+}
+
+.kin-chart svg { width: 100%; height: auto; display: block; }
+
+.kin-chart__legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink-sub);
+  margin-top: .7em;
+  letter-spacing: .04em;
+}
+
+.kin-chart__delta {
+  font-family: var(--mincho);
+  font-size: clamp(17px, 4.6vw, 21px);
+  color: var(--sumi);
+  text-align: center;
+  margin: .9em 0 0;
+}
+.kin-chart__delta b { color: var(--gold); font-size: 1.3em; }
+
+.kin-fv__eyebrow {
+  font-family: var(--gothic);
+  font-size: 12px;
+  letter-spacing: .28em;
+  color: var(--gold-line);
+  margin: 0 0 1.5em;
+  text-indent: .28em;   /* letter-spacing分の右寄りを補正 */
+}
+
+/* 上下の細い金罫でeyebrowを挟む */
+.kin-fv__eyebrow::before,
+.kin-fv__eyebrow::after {
+  content: "";
+  display: block;
+  width: 26px; height: 1px;
+  background: var(--gold-line);
+  margin: 0 auto .9em;
+}
+.kin-fv__eyebrow::after { margin: .9em auto 0; }
+
+.kin-fv__title {
+  font-family: var(--mincho);
+  font-weight: 600;
+  /* 1行に収まる字送り。溢れると「か。」だけが次行に落ちて組版が崩れる */
+  font-size: clamp(22px, 6.3vw, 38px);
+  line-height: 1.8;
+  letter-spacing: .02em;
+  margin: 0 0 1.2em;
+  color: #fff;
+  text-wrap: balance;
+  line-break: strict;      /* 句読点・promoted禁則を守る */
+  word-break: normal;
+}
+
+.kin-fv__title em {
+  font-style: normal;
+  border-bottom: 1px solid var(--gold-line);
+  padding-bottom: .1em;
+  color: #f0e2b8;
+}
+
+/* --- 相場の対比 --- */
+.kin-figure {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  border-top: 1px solid rgba(194,167,94,.35);
+  border-bottom: 1px solid rgba(194,167,94,.35);
+  padding: 1.4em 0;
+  margin: 0 0 1.8em;
+}
+
+.kin-figure__col { flex: 1 1 0; min-width: 0; padding: 0 .4em; }
+
+.kin-figure__label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: #94a0b5;
+  margin-bottom: .7em;
+}
+
+.kin-figure__val {
+  display: block;
+  font-family: var(--mincho);
+  font-size: clamp(24px, 8vw, 40px);
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .01em;
+}
+
+.kin-figure__unit { font-size: .42em; margin-left: .15em; letter-spacing: .05em; }
+
+.kin-figure__col--now .kin-figure__val { color: #e6cd84; }
+
+.kin-figure__sep {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 1px;
+  height: 3.2em;
+  background: rgba(194,167,94,.35);
+  margin: 0 .2em;
+}
+
+.kin-figure__note {
+  font-size: 12px;
+  color: #94a0b5;
+  letter-spacing: .08em;
+  margin: -1.2em 0 1.8em;
+}
+
+.kin-fv__lead {
+  font-family: var(--mincho);
+  font-size: clamp(15px, 4vw, 17px);
+  line-height: 2.1;
+  color: #ccd3e0;
+  text-align: left;
+  margin: 0 0 2em;
+}
+
+/* 信頼要素は「バッジ」をやめ、罫線で区切った一列に */
+.kin-terms {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2em;
+  border: 1px solid rgba(255,255,255,.16);
+}
+
+.kin-terms li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: .9em .2em;
+  font-size: clamp(11px, 3vw, 13px);
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: #dfe4ec;
+  border-left: 1px solid rgba(255,255,255,.16);
+}
+.kin-terms li:first-child { border-left: none; }
+.kin-terms strong {
+  display: block;
+  font-family: var(--mincho);
+  font-size: 1.35em;
+  color: #e6cd84;
+  background: none;
+  margin-top: .2em;
+}
+
+/* =========================================================
+   4. 見出し
+   ========================================================= */
+.entry-content h2 {
+  font-family: var(--mincho);
+  font-weight: 600;
+  font-size: clamp(21px, 5.6vw, 29px);
+  line-height: 1.75;
+  letter-spacing: .04em;
+  color: var(--sumi);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--sumi);
+  padding: 0 0 .55em;
+  margin: 2.6em 0 1.5em;
+  position: relative;
+}
+
+/* 見出し下線の左端だけ金にする */
+.entry-content h2::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -1px;
+  width: 3.5em; height: 3px;
+  background: var(--gold-line);
+}
+
+.entry-content h3 {
+  font-family: var(--mincho);
+  font-weight: 600;
+  font-size: clamp(18px, 4.8vw, 23px);
+  line-height: 1.8;
+  letter-spacing: .03em;
+  color: var(--sumi);
+  background: none;
+  border: none;
+  border-left: 3px solid var(--gold-line);
+  padding: .1em 0 .1em .8em;
+  margin: 3em 0 1.2em;
+  border-radius: 0;
+}
+
+.entry-content h4 {
+  font-family: var(--gothic);
+  font-weight: 700;
+  font-size: 1.02em;
+  color: var(--sumi);
+  background: none;
+  border: none;
+  border-bottom: 1px dotted var(--rule);
+  padding: 0 0 .5em;
+  margin: 2.4em 0 1em;
+  border-radius: 0;
+}
+
+/* =========================================================
+   5. CTA — 跳ねない。面で見せる
+   ========================================================= */
+.kin-cta-block {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: clamp(1.4em, 5vw, 2em) var(--pad);
+  margin: 2.6em 0;
+  text-align: center;
+}
+
+.kin-fv .kin-cta-block {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.kin-cta-block__head {
+  font-family: var(--mincho);
+  font-size: clamp(17px, 4.6vw, 21px);
+  line-height: 1.8;
+  color: var(--sumi);
+  margin: 0 0 1.2em;
+}
+.kin-fv .kin-cta-block__head { color: #fff; }
+
+.kin-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto .9em;
+  padding: .9em 1.2em;
+  background: #06b04c;
+  color: #fff !important;
+  font-family: var(--gothic);
+  font-weight: 700;
+  font-size: clamp(16px, 4.4vw, 19px);
+  line-height: 1.5;
+  letter-spacing: .04em;
+  text-decoration: none !important;
+  border-bottom: 3px solid #03793a;
+  transition: background .15s ease;
+}
+
+.kin-cta:hover, .kin-cta:focus { background: #05a044; color: #fff !important; }
+
+.kin-cta--gold {
+  background: var(--gold);
+  border-bottom-color: #5f4b16;
+}
+.kin-cta--gold:hover, .kin-cta--gold:focus { background: #7d6423; }
+
+.kin-cta__note {
+  display: block;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--ink-sub);
+  letter-spacing: .03em;
+}
+.kin-fv .kin-cta__note { color: #9aa6ba; }
+
+/* 電話 */
+.kin-tel {
+  display: block;
+  max-width: 420px;
+  margin: 1.4em auto 0;
+  padding: .8em 1em;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  text-align: center;
+  text-decoration: none !important;
+}
+.kin-fv .kin-tel { background: none; border-color: rgba(255,255,255,.2); }
+
+.kin-tel__label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: .1em;
+  color: var(--ink-sub);
+}
+.kin-fv .kin-tel__label { color: #9aa6ba; }
+
+.kin-tel__num {
+  display: block;
+  font-family: var(--mincho);
+  font-size: clamp(26px, 7vw, 34px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--sumi);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+.kin-fv .kin-tel__num { color: #fff; }
+
+/* =========================================================
+   6. 比較表 — 消費者レポートの体裁。塗りつぶさない
+   ========================================================= */
+.kin-compare {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 2em 0 .8em;
+  font-size: clamp(14px, 3.7vw, 16px);
+  line-height: 1.7;
+}
+
+.kin-compare th, .kin-compare td {
+  padding: .85em .7em;
+  border-bottom: 1px solid var(--rule-2);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.kin-compare thead th {
+  font-family: var(--mincho);
+  font-size: 1.08em;
+  font-weight: 600;
+  background: var(--sumi);
+  color: #fff;
+  padding: 1em .7em;
+  border-bottom: none;
+  letter-spacing: .04em;
+}
+
+/* 推し列は「金の面」ではなく、上辺の金罫と淡い生成りで示す */
+.kin-compare thead th.is-pick {
+  background: var(--sumi);
+  color: #f0e2b8;
+  box-shadow: inset 0 3px 0 var(--gold-line);
+}
+
+.kin-compare tbody th {
+  font-family: var(--gothic);
+  font-size: .92em;
+  font-weight: 500;
+  text-align: left;
+  color: var(--ink-sub);
+  background: #fbfaf7;
+  width: 30%;
+  letter-spacing: .02em;
+}
+
+.kin-compare td.is-pick {
+  background: var(--gold-bg);
+  color: var(--sumi);
+  font-weight: 700;
+}
+
+.kin-compare tbody tr:last-child th,
+.kin-compare tbody tr:last-child td { border-bottom: none; }
+
+/* 判定は塗り丸をやめ、文字そのもので */
+.kin-mk { font-family: var(--mincho); font-size: 1.15em; margin-right: .2em; }
+.kin-mk--o { color: var(--win); }
+.kin-mk--t { color: #9aa0ab; }
+.kin-mk--x { color: var(--alert); }
+
+/* スマホ: 縦積み */
+@media screen and (max-width: 600px) {
+  .kin-compare, .kin-compare thead, .kin-compare tbody,
+  .kin-compare tr, .kin-compare th, .kin-compare td { display: block; width: 100%; }
+
+  .kin-compare thead { display: none; }
+  .kin-compare { border: none; background: none; }
+
+  .kin-compare tbody tr {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    margin-bottom: .9em;
+  }
+
+  .kin-compare tbody th {
+    width: 100%;
+    background: #f7f5f0;
+    border-bottom: 1px solid var(--rule);
+    font-weight: 700;
+    color: var(--sumi);
+    padding: .6em .9em;
+  }
+
+  .kin-compare tbody td {
+    text-align: left;
+    border-bottom: 1px dotted var(--rule);
+    padding: .65em .9em .65em 6.6em;
+    position: relative;
+  }
+  .kin-compare tbody td:last-child { border-bottom: none; }
+
+  .kin-compare tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: .9em; top: .65em;
+    width: 5.4em;
+    font-size: .84em;
+    color: var(--ink-sub);
+    font-weight: 400;
+  }
+
+  .kin-compare td.is-pick::before { color: var(--gold); font-weight: 700; }
+}
+
+.kin-note {
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--ink-sub);
+  margin: 0 0 2.4em;
+}
+
+/* 本文中の一般表（直営vsFC、保有期間、買取方法など） */
+.kin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 1.8em 0 2.2em;
+  font-size: clamp(14px, 3.7vw, 16px);
+  line-height: 1.8;
+}
+
+.kin-table th, .kin-table td {
+  padding: .8em .9em;
+  border: 1px solid var(--rule-2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.kin-table thead th {
+  background: #f4f2ec;
+  font-family: var(--gothic);
+  font-weight: 700;
+  color: var(--sumi);
+  text-align: center;
+}
+
+.kin-table tbody th {
+  background: #fbfaf7;
+  font-weight: 700;
+  color: var(--sumi);
+  width: 34%;
+}
+
+.kin-table td.is-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+  .kin-table thead th:first-child { width: 30%; }
+
+  /* 3列表はスマホだと1列あたり110px程度しか取れず、
+     「加盟オーナー」のような語が途中で分断される。カード状に積む */
+  .kin-table--stack,
+  .kin-table--stack thead,
+  .kin-table--stack tbody,
+  .kin-table--stack tr,
+  .kin-table--stack th,
+  .kin-table--stack td { display: block; width: 100%; }
+
+  .kin-table--stack { border: none; background: none; }
+  .kin-table--stack thead { display: none; }
+
+  .kin-table--stack tbody tr {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    margin-bottom: .9em;
+  }
+
+  .kin-table--stack tbody th {
+    width: 100%;
+    background: #f4f2ec;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    padding: .6em .9em;
+  }
+
+  .kin-table--stack tbody td {
+    border: none;
+    border-bottom: 1px dotted var(--rule);
+    padding: .6em .9em .6em 6.4em;
+    position: relative;
+  }
+  .kin-table--stack tbody td:last-child { border-bottom: none; }
+
+  .kin-table--stack tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: .9em; top: .6em;
+    width: 5.2em;
+    font-size: .84em;
+    color: var(--ink-sub);
+  }
+}
+
+/* 章の導入文 */
+.kin-lead {
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.3vw, 19px);
+  line-height: 2.0;
+  color: var(--sumi);
+  border-left: 3px solid var(--rule);
+  padding-left: 1em;
+  margin: 0 0 2em;
+}
+
+/* 結論の一文 */
+.kin-punch {
+  font-family: var(--mincho);
+  font-size: clamp(18px, 4.9vw, 23px);
+  line-height: 1.9;
+  color: var(--sumi);
+  text-align: center;
+  border-top: 1px solid var(--gold-line);
+  border-bottom: 1px solid var(--gold-line);
+  padding: 1.1em .5em;
+  margin: 2.2em 0;
+}
+
+/* =========================================================
+   7. 引用
+   ========================================================= */
+.kin-quote {
+  font-family: var(--mincho);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--gold-line);
+  padding: 1.3em 1.4em;
+  margin: 1.6em 0;
+}
+
+.kin-quote p {
+  margin: 0 0 .7em;
+  font-size: clamp(15px, 4vw, 17px);
+  line-height: 2.0;
+  color: var(--ink);
+}
+
+.kin-quote cite {
+  display: block;
+  font-family: var(--gothic);
+  font-size: 12px;
+  font-style: normal;
+  letter-spacing: .04em;
+  color: var(--ink-sub);
+}
+
+.kin-quote--bad { border-left-color: #b9a08f; }
+
+/* =========================================================
+   8. ボックス
+   ========================================================= */
+.kin-box {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1.5em var(--pad);
+  margin: 2.4em 0;
+}
+.kin-box > *:last-child { margin-bottom: 0; }
+
+.kin-box--point { background: var(--gold-bg); border-color: #e8ddba; }
+
+.kin-box__title {
+  font-family: var(--mincho);
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--sumi);
+  letter-spacing: .04em;
+  margin: 0 0 .8em;
+  padding: 0 0 .5em;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* 箇条書き */
+.kin-list { list-style: none; padding: 0; margin: 1.4em 0; }
+
+.kin-list li {
+  position: relative;
+  padding: .7em 0 .7em 1.7em;
+  border-bottom: 1px dotted var(--rule);
+  line-height: 1.85;
+}
+.kin-list li::before {
+  content: "";
+  position: absolute;
+  left: .2em; top: 1.25em;
+  width: 7px; height: 7px;
+  background: var(--gold-line);
+  transform: rotate(45deg);
+}
+
+/* 危険信号リスト（✕マーク） */
+.kin-list--x li { padding-left: 2em; }
+.kin-list--x li::before {
+  content: "✕";
+  width: auto; height: auto;
+  background: none;
+  transform: none;
+  left: 0; top: .7em;
+  color: var(--alert);
+  font-weight: 700;
+  font-size: .95em;
+}
+
+/* =========================================================
+   9. 評価スコア
+   ========================================================= */
+.kin-score { border-top: 1px solid var(--rule); margin: 1.6em 0 2.4em; }
+
+.kin-score__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  padding: .75em .2em;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.kin-score__label { font-size: .95em; color: var(--ink); }
+
+.kin-score__val {
+  font-family: var(--mincho);
+  font-size: 1.25em;
+  font-weight: 600;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.kin-score__row--total {
+  background: var(--sumi);
+  border-bottom: none;
+  padding: 1em 1.1em;
+}
+.kin-score__row--total .kin-score__label { color: #fff; font-family: var(--mincho); font-size: 1.1em; }
+.kin-score__row--total .kin-score__val { color: #e6cd84; font-size: 1.9em; }
+
+/* =========================================================
+   10. ステップ
+   ========================================================= */
+.kin-step { counter-reset: s; list-style: none; padding: 0; margin: 2em 0; }
+
+.kin-step > li {
+  position: relative;
+  padding: 0 0 2em 3.4em;
+}
+
+.kin-step > li::before {
+  counter-increment: s;
+  content: counter(s);
+  position: absolute;
+  left: 0; top: 0;
+  width: 2.2em; height: 2.2em;
+  border: 1px solid var(--gold-line);
+  color: var(--gold);
+  font-family: var(--mincho);
+  font-size: .95em;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  z-index: 1;
+}
+
+/* 縦の連結線 */
+.kin-step > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 1.1em; top: 2.2em; bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+.kin-step__title {
+  font-family: var(--mincho);
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--sumi);
+  margin: .2em 0 .5em;
+  line-height: 1.6;
+}
+.kin-step > li p:last-child { margin-bottom: 0; }
+
+/* =========================================================
+   11. FAQ
+   ========================================================= */
+.kin-faq { border-top: 1px solid var(--rule); margin: 2em 0; }
+
+.kin-faq__q {
+  font-family: var(--mincho);
+  font-size: 1.08em;
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.8;
+  padding: 1.1em 0 .6em 2.2em;
+  margin: 0;
+  position: relative;
+  border-top: 1px solid var(--rule);
+}
+.kin-faq:first-child .kin-faq__q { border-top: none; }
+
+.kin-faq__q::before {
+  content: "Q";
+  position: absolute; left: 0; top: 1.1em;
+  color: var(--gold);
+  font-size: 1.1em;
+}
+
+.kin-faq__a {
+  padding: 0 0 1.4em 2.2em;
+  margin: 0;
+  position: relative;
+  line-height: 1.95;
+  font-size: .97em;
+  color: var(--ink);
+}
+
+.kin-faq__a::before {
+  content: "A";
+  position: absolute; left: 0; top: 0;
+  font-family: var(--mincho);
+  color: var(--ink-sub);
+  font-size: 1.1em;
+}
+
+/* =========================================================
+   12. スマホ固定CTA
+   ========================================================= */
+.kin-fixed-cta { display: none; }
+
+@media screen and (max-width: 834px) {
+  .kin-fixed-cta {
+    display: flex;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 9999;
+    background: var(--sumi);
+    border-top: 2px solid var(--gold-line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .kin-fixed-cta a {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: var(--tap);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .5em .3em;
+    color: #fff !important;
+    font-weight: 700;
+    font-size: clamp(13px, 3.6vw, 15px);
+    line-height: 1.4;
+    letter-spacing: .02em;
+    text-decoration: none !important;
+    border-left: 1px solid rgba(255,255,255,.14);
+  }
+  .kin-fixed-cta a:first-child { border-left: none; }
+
+  .kin-fixed-cta a small {
+    font-size: .74em;
+    font-weight: 400;
+    color: #9aa6ba;
+    margin-top: .15em;
+  }
+
+  /* 電話が成果の主役。面積を広く取り、金で目立たせる */
+  .kin-fixed-cta .kin-fixed-tel {
+    flex: 1.6 1 0;
+    background: linear-gradient(180deg, #a8811a 0%, #8a6a14 100%);
+  }
+  .kin-fixed-cta .kin-fixed-tel small { color: #f6ecd0; }
+  .kin-fixed-cta .kin-fixed-web { background: var(--sumi); }
+
+  body { padding-bottom: calc(var(--tap) + 24px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* =========================================================
+   12.5 画像
+   ========================================================= */
+.kin-fig { margin: 1.8em 0 2.2em; }
+.kin-fig img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--rule);
+}
+.kin-fig figcaption {
+  font-size: 12.5px; color: var(--ink-sub);
+  line-height: 1.8; margin-top: .6em;
+}
+.kin-fig--plain img { border: none; }
+
+/* 店舗写真グリッド */
+.kin-shops {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: .7em;
+  margin: 1.4em 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.kin-shops li { margin: 0; }
+.kin-shops img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-shops figcaption,
+.kin-shops span {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink-sub);
+  margin-top: .35em;
+  line-height: 1.5;
+}
+
+/* 都府県ラベル */
+.kin-shops small {
+  display: inline-block;
+  font-size: 10.5px;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-line);
+  color: var(--gold);
+  padding: 0 .5em;
+  margin-left: .35em;
+  vertical-align: 1px;
+}
+
+/* 導入の大きめリード（金買取の店は多すぎる） */
+.kin-intro {
+  font-family: var(--mincho);
+  font-size: clamp(17px, 4.6vw, 21px);
+  line-height: 1.95;
+  color: var(--sumi);
+  text-align: center;
+  margin: 1.4em 0 1.8em;
+}
+.kin-intro strong { background: linear-gradient(transparent 60%, #ffe8a3 60%); font-weight: 700; }
+
+/* 2社バナー並列（「対」の代わり） */
+.kin-banners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8em;
+  margin: 1.6em 0;
+}
+.kin-banners a { display: block; }
+.kin-banners img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-banners__cap {
+  display: block;
+  text-align: center;
+  font-family: var(--mincho);
+  font-size: 13px;
+  color: var(--sumi);
+  margin-top: .5em;
+}
+
+/* verdict内のバナー */
+.kin-verdict__banner {
+  display: block;
+  margin: .25em 0 .9em;
+}
+.kin-verdict__banner img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+
+/* 結論：2社の役割を、順位ではなく選び方で見せる */
+.entry-content .kin-conclusion-title {
+  margin-top: clamp(1.05em, 4vw, 1.45em);
+  margin-bottom: .95em;
+  padding-bottom: .7em;
+  font-size: clamp(24px, 6.2vw, 33px);
+  line-height: 1.55;
+}
+.kin-conclusion-title > span {
+  display: inline-block;
+  margin-right: .48em;
+  padding: .2em .5em;
+  vertical-align: .18em;
+  font-family: var(--gothic);
+  font-size: .43em;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: #fff;
+  background: var(--sumi);
+}
+.kin-conclusion-title strong {
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.kin-pick2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 260px));
+  justify-content: center;
+  gap: .85em;
+  margin: 1.05em 0 1.35em;
+}
+.kin-choice {
+  position: relative;
+  display: block;
+  overflow: visible;
+  background: none;
+  text-decoration: none !important;
+}
+.kin-choice__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  transition: transform .25s ease;
+}
+.kin-choice:hover .kin-choice__image,
+.kin-choice:focus-visible .kin-choice__image { transform: scale(1.035); }
+.kin-choice:focus-visible { outline: 3px solid var(--gold-line); outline-offset: 3px; }
+
+/* バナーの広告主を、画像の直前で明確に示す */
+.kin-banner-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  margin: 0 0 .45em;
+  color: var(--sumi);
+  font-family: var(--gothic);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.kin-banner-label small {
+  display: inline-block;
+  padding: .2em .45em;
+  color: #fff;
+  background: var(--sumi);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1;
+}
+.kin-banner-label--campaign {
+  display: flex;
+  max-width: 640px;
+  margin: 1.6em auto .45em;
+}
+.kin-banner-label--campaign + .kin-camp { margin-top: 0; }
+
+@media screen and (max-width: 620px) {
+  .kin-pick2 { grid-template-columns: minmax(0, 320px); gap: .8em; }
+}
+
+/* 旧カード用の装飾は、結論の順位づけを避けるため使用しない */
+.kin-pick2__card {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.kin-pick2__card--1 {
+  position: relative;
+}
+.kin-pick2__crown {
+  position: absolute;
+  top: -1px; left: 50%; transform: translate(-50%, -50%);
+  background: var(--gold);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: .25em 1em;
+  white-space: nowrap;
+}
+.kin-pick2__logo {
+  height: 30px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: .3em 0 .7em;
+}
+.kin-pick2__logo--mk { filter: brightness(0); }
+.kin-pick2__name {
+  font-family: var(--mincho);
+  font-size: clamp(17px, 4.6vw, 21px);
+  font-weight: 600;
+  color: var(--sumi);
+  margin: 0 0 .3em;
+}
+.kin-pick2__tag {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink-sub);
+  margin: 0;
+}
+.kin-pick2__card--1 .kin-pick2__tag { color: var(--gold); font-weight: 700; }
+
+/* 結論直下：先に公式の確認先を明示する */
+.kin-official-cta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7em;
+  margin: 1.2em 0 1.5em;
+}
+.kin-official-cta a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: .75em .8em;
+  font-family: var(--gothic);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none !important;
+  border: 1px solid var(--rule);
+  color: var(--sumi);
+  background: var(--paper);
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.kin-official-cta__manekiya {
+  border-color: var(--gold-line) !important;
+  background: var(--gold-bg) !important;
+}
+.kin-official-cta a:hover,
+.kin-official-cta a:focus-visible {
+  background: var(--sumi) !important;
+  border-color: var(--sumi) !important;
+  color: #fff !important;
+}
+
+/* 公式情報で確認できた比較根拠 */
+.kin-proof {
+  margin: 1.5em 0 2em;
+  padding: clamp(1em, 4vw, 1.4em);
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.kin-proof__title {
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 19px);
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.65;
+  margin: 0 0 .9em;
+  padding-bottom: .65em;
+  border-bottom: 1px solid var(--rule);
+}
+.kin-proof__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.kin-proof__list li {
+  position: relative;
+  margin: 0;
+  padding: .85em 0 .85em 1.35em;
+  border-top: 1px dotted var(--rule);
+  line-height: 1.85;
+  font-size: .95em;
+}
+.kin-proof__list li:first-child { border-top: none; padding-top: 0; }
+.kin-proof__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.55em;
+  width: .55em;
+  height: .55em;
+  border: 1px solid var(--gold-line);
+  background: var(--gold-bg);
+}
+.kin-proof__list li:first-child::before { top: .7em; }
+.kin-proof__list strong { color: var(--sumi); }
+.kin-proof__note {
+  margin: 1em 0 0;
+  padding-top: .9em;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-sub);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.kin-proof__note a { color: inherit; text-decoration: underline; text-underline-offset: .16em; }
+
+@media screen and (max-width: 480px) {
+  .kin-official-cta { grid-template-columns: 1fr; }
+}
+
+/* 金額の仕組み：単価だけで決まらないことを先に示す */
+.kin-valuation {
+  margin: 1.5em 0 1.7em;
+  padding: clamp(1em, 4vw, 1.45em);
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-line);
+}
+.kin-valuation__title {
+  margin: 0 0 .8em;
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 19px);
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.6;
+}
+.kin-valuation__formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .35em .55em;
+  margin: 0;
+  padding: .8em;
+  background: rgba(255,255,255,.55);
+  border-top: 1px solid rgba(180,145,50,.45);
+  border-bottom: 1px solid rgba(180,145,50,.45);
+  font-size: clamp(12.5px, 3.3vw, 15px);
+  line-height: 1.75;
+  text-align: center;
+}
+.kin-valuation__formula strong { color: var(--sumi); }
+.kin-valuation__formula span {
+  font-family: var(--mincho);
+  font-size: 1.35em;
+  color: var(--gold);
+}
+.kin-valuation__text {
+  margin: .9em 0 0;
+  font-size: .95em;
+  line-height: 1.85;
+}
+
+/* 査定額を比較するための明細チェック */
+.kin-quote-check {
+  margin: 1.8em 0 2.2em;
+  padding: clamp(1em, 4vw, 1.4em);
+  border: 1px solid var(--sumi);
+  background: var(--paper);
+}
+.kin-quote-check__title {
+  margin: 0 0 .8em;
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 19px);
+  font-weight: 600;
+  color: var(--sumi);
+}
+.kin-quote-check ol {
+  counter-reset: quote-check;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.kin-quote-check li {
+  counter-increment: quote-check;
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: .75em .7em .75em 2.35em;
+  background: #f8f6f0;
+  font-size: .9em;
+  line-height: 1.7;
+}
+.kin-quote-check li::before {
+  content: counter(quote-check, decimal-leading-zero);
+  position: absolute;
+  left: .7em;
+  top: .75em;
+  font-family: var(--mincho);
+  font-weight: 600;
+  color: var(--gold);
+}
+.kin-quote-check__note {
+  margin: 1em 0 0;
+  padding-top: .9em;
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--ink-sub);
+}
+.kin-quote-check__sources {
+  margin: .8em 0 0;
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: var(--ink-sub);
+}
+.kin-quote-check__sources a { color: inherit; text-decoration: underline; text-underline-offset: .16em; }
+
+@media screen and (max-width: 600px) {
+  .kin-quote-check ol { grid-template-columns: 1fr; }
+}
+
+/* なぜこの2社なのか：5つの軸 */
+.kin-why {
+  list-style: none;
+  counter-reset: why;
+  padding: 0;
+  margin: 1.6em 0 2em;
+  border-top: 1px solid var(--rule);
+}
+.kin-why > li {
+  counter-increment: why;
+  position: relative;
+  padding: 1.2em 0 1.2em 3.4em;
+  border-bottom: 1px solid var(--rule);
+}
+.kin-why > li::before {
+  content: counter(why, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: 1.15em;
+  font-family: var(--mincho);
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+}
+.kin-why__ttl {
+  font-family: var(--mincho);
+  font-size: 1.14em;
+  font-weight: 600;
+  color: var(--sumi);
+  margin: 0 0 .4em;
+  line-height: 1.5;
+}
+.kin-why__ttl small {
+  display: inline-block;
+  font-family: var(--gothic);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--gold);
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-line);
+  padding: .1em .6em;
+  margin-left: .5em;
+  vertical-align: 2px;
+}
+.kin-why > li p { margin: 0; line-height: 1.85; font-size: .97em; }
+.kin-why > li p + p { margin-top: .6em; }
+
+/* キャンペーン画像（赤リボンに日付を自動で重ねる） */
+.kin-camp {
+  position: relative;
+  display: block;
+  max-width: 640px;
+  margin: 1.6em auto;
+}
+.kin-camp img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+/* info_img2.webp の赤リボン中央に日付を配置 */
+.kin-camp__date {
+  position: absolute;
+  left: 54%;
+  top: 26.5%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: clamp(12px, 3.4vw, 24px);
+  letter-spacing: .04em;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* キャンペーン紹介カード（両社並列） */
+.kin-camps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2em;
+  margin: 1.6em 0 2em;
+}
+@media screen and (min-width: 560px) {
+  .kin-camps { grid-template-columns: 1fr 1fr; }
+}
+.kin-camp-card {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  overflow: hidden;
+}
+.kin-camp-card img { width: 100%; height: auto; display: block; }
+.kin-camp-card__body { padding: .9em 1.1em 1.1em; }
+.kin-camp-card__name {
+  font-family: var(--mincho);
+  font-weight: 600;
+  color: var(--sumi);
+  font-size: 1.05em;
+  margin: 0 0 .3em;
+}
+.kin-camp-card__txt { font-size: 13.5px; line-height: 1.8; color: var(--ink); margin: 0; }
+.kin-camp-card__cond { font-size: 12px; color: var(--ink-sub); margin: .5em 0 0; line-height: 1.7; }
+
+/* 横並び：写真＋説明文（左右交互） */
+.kin-media {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  margin: 1.6em 0 2em;
+}
+.kin-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-media__body > *:last-child { margin-bottom: 0; }
+.kin-media__cap {
+  font-family: var(--mincho);
+  font-size: 1.08em;
+  font-weight: 600;
+  color: var(--sumi);
+  margin: 0 0 .5em;
+}
+@media screen and (min-width: 600px) {
+  .kin-media { grid-template-columns: 1fr 1fr; align-items: center; gap: 1.6em; }
+  .kin-media--rev .kin-media__fig { order: 2; }
+}
+
+/* 幅いっぱいの単写真 */
+.kin-photo {
+  margin: 1.6em 0 2em;
+}
+.kin-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-photo figcaption {
+  font-size: 12.5px;
+  color: var(--ink-sub);
+  line-height: 1.8;
+  margin-top: .6em;
+}
+
+/* 純度別 価格表 */
+.kin-rate {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 1.6em 0 .8em;
+  font-size: clamp(14px, 3.7vw, 16px);
+}
+.kin-rate th, .kin-rate td {
+  padding: .7em .9em;
+  border-bottom: 1px solid var(--rule-2);
+}
+.kin-rate thead th {
+  background: var(--sumi);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+.kin-rate tbody th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--sumi);
+  background: #fbfaf7;
+  width: 40%;
+}
+.kin-rate tbody td {
+  text-align: right;
+  font-family: var(--mincho);
+  font-weight: 600;
+  color: var(--sumi);
+  font-variant-numeric: tabular-nums;
+}
+.kin-rate tbody tr:last-child th,
+.kin-rate tbody tr:last-child td { border-bottom: none; }
+.kin-rate .kin-rate__g { font-size: .8em; font-weight: 400; color: var(--ink-sub); margin-left: .2em; }
+
+/* 買取対象カテゴリ */
+.kin-cats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: .7em;
+  margin: 1.3em 0 1.6em;
+  padding: 0;
+  list-style: none;
+}
+.kin-cats li { margin: 0; text-align: center; }
+.kin-cats img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-cats span {
+  display: block;
+  font-family: var(--mincho);
+  font-size: 14px;
+  color: var(--sumi);
+  margin-top: .4em;
+}
+
+/* 店舗マップ */
+.kin-map {
+  max-width: 300px;
+  margin: 0 auto 1em;
+}
+.kin-map img { width: 100%; height: auto; display: block; }
+
+/* ロゴ */
+.kin-logo {
+  display: block;
+  max-width: 190px;
+  height: auto;
+  margin: 0 auto 1.2em;
+}
+
+/* 対決ヘッダー（表の上。スマホでもPCでも出る） */
+.kin-vs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: .8em;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--gold-line);
+  background: var(--paper);
+  padding: 1.2em .9em;
+  margin: 2em 0 0;
+}
+
+.kin-vs__side { text-align: center; min-width: 0; }
+
+.kin-vs__logo {
+  width: 100%;
+  max-width: 116px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto .5em;
+}
+
+/* まねきや公式ロゴは fill:#fff の白抜き版のため、
+   白背景では見えない。黒に反転させて使う */
+.kin-vs__logo[src$=".svg"] { filter: brightness(0); }
+
+.kin-vs__name {
+  display: block;
+  font-family: var(--mincho);
+  font-size: clamp(15px, 4vw, 18px);
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.4;
+}
+
+.kin-vs__sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink-sub);
+  margin-top: .2em;
+  line-height: 1.5;
+}
+
+.kin-vs__mark {
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 20px);
+  color: var(--gold);
+  letter-spacing: .04em;
+}
+
+/* 対決ヘッダーに続く表は上の余白を詰める */
+.kin-vs + .kin-compare { margin-top: 0; border-top: none; }
+
+/* =========================================================
+   12.6 結論ボックス（先に答えを出す）
+   ========================================================= */
+.kin-verdict {
+  border: 2px solid var(--sumi);
+  background: var(--paper);
+  margin: 2em 0;
+}
+
+.kin-verdict__head {
+  background: var(--sumi);
+  color: #fff;
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 20px);
+  text-align: center;
+  padding: .8em 1em;
+  margin: 0;
+}
+
+.kin-verdict__body { padding: 1em var(--pad) 1.1em; }
+
+.kin-verdict__item { padding: 1em; }
+.kin-verdict__item--main { background: var(--gold-bg); border: 1px solid var(--gold-line); }
+.kin-verdict__item--sub { background: #f7f8fa; border: 1px solid #d9dfe7; }
+
+.kin-verdict__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7em;
+  margin: 0;
+  color: var(--sumi);
+  font-family: var(--gothic);
+  font-size: clamp(14px, 3.8vw, 16px);
+  font-weight: 700;
+  line-height: 1.55;
+}
+p.kin-verdict__question { margin: 0; }
+a.kin-verdict__question {
+  color: var(--sumi);
+  text-decoration: none !important;
+}
+a.kin-verdict__question:hover,
+a.kin-verdict__question:focus-visible { text-decoration: underline !important; text-underline-offset: .18em; }
+a.kin-verdict__question:focus-visible { outline: 3px solid var(--sumi); outline-offset: 3px; }
+.kin-verdict__question span {
+  flex: 0 0 auto;
+  padding: .3em .55em;
+  color: var(--gold);
+  background: #fff;
+  border: 1px solid var(--gold-line);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+p.kin-verdict__answer {
+  display: flex;
+  align-items: baseline;
+  gap: .45em;
+  margin: .4em 0 .5em;
+  font-family: var(--mincho);
+  font-size: clamp(23px, 6vw, 29px);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--sumi);
+}
+.kin-verdict__answer span {
+  display: inline-block;
+  padding: .23em .48em;
+  color: #fff;
+  background: var(--sumi);
+  font-family: var(--gothic);
+  font-size: .42em;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .08em;
+}
+.kin-verdict__item--sub .kin-verdict__answer span { background: #5e6775; }
+
+.kin-verdict__divider {
+  display: flex;
+  align-items: center;
+  gap: .75em;
+  margin: .85em 0;
+  color: var(--ink-sub);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-align: center;
+}
+.kin-verdict__divider::before,
+.kin-verdict__divider::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+p.kin-verdict__why { font-size: .95em; line-height: 1.85; margin: 0; color: var(--ink); }
+
+/* 店名はPRラベルへ集約し、答えの直後にバナーを置く */
+.kin-verdict__banner {
+  margin: 0 0 .85em;
+}
+.kin-verdict__banner .kin-banner-label {
+  margin-bottom: .3em;
+  font-size: 12px;
+}
+
+/* =========================================================
+   12.7 対応エリア
+   ========================================================= */
+.kin-area { scroll-margin-top: 1.2em; }
+.kin-area {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1.2em var(--pad) 1.4em;
+  margin: 1.8em 0 2.2em;
+}
+.kin-area__title {
+  font-family: var(--mincho);
+  font-size: 1.1em; font-weight: 600; color: var(--sumi);
+  margin: 0 0 .8em; padding-bottom: .5em;
+  border-bottom: 1px solid var(--rule);
+}
+.kin-area__list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: .5em;
+}
+.kin-area__list li {
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-line);
+  color: var(--sumi);
+  font-size: clamp(13px, 3.5vw, 15px);
+  font-weight: 700;
+  padding: .4em .9em;
+}
+.kin-area__note { font-size: 13px; color: var(--ink-sub); line-height: 1.8; margin: .9em 0 0; }
+
+/* =========================================================
+   12.8 電話CTA（成果の主役）
+   ========================================================= */
+.kin-phone {
+  display: block;
+  max-width: 460px;
+  margin: 0 auto .8em;
+  padding: 1em 1.1em;
+  background: linear-gradient(180deg, #a8811a 0%, #8a6a14 100%);
+  border-bottom: 4px solid #5c4610;
+  text-align: center;
+  text-decoration: none !important;
+  color: #fff !important;
+}
+.kin-phone:hover, .kin-phone:focus { background: #7d6116; color: #fff !important; }
+
+.kin-phone__badge {
+  display: inline-block;
+  background: #fff; color: #8a6a14;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: .06em;
+  padding: .25em .9em;
+  margin-bottom: .5em;
+}
+.kin-phone__num {
+  display: block;
+  font-family: var(--sans);
+  font-size: clamp(22px, 5.8vw, 30px);
+  font-weight: 700; line-height: 1.25;
+  letter-spacing: .02em;
+}
+.kin-phone__sub { display: block; font-size: 13px; margin-top: .35em; color: #f2e7c8; }
+
+/* WEB予約は副次CTA */
+.kin-cta--web {
+  background: var(--paper);
+  color: var(--sumi) !important;
+  border: 2px solid var(--sumi);
+  border-bottom-width: 3px;
+}
+.kin-cta--web:hover, .kin-cta--web:focus { background: #f4f2ec; color: var(--sumi) !important; }
+
+/* =========================================================
+   13. 免責・フッター
+   ========================================================= */
+.kin-disclaimer {
+  font-size: 12.5px;
+  line-height: 1.95;
+  color: var(--ink-sub);
+  border-top: 1px solid var(--rule);
+  padding: 1.6em 0 0;
+  margin: 3em 0 0;
+}
+.kin-disclaimer ul { margin: 0; padding-left: 1.2em; }
+.kin-disclaimer li { margin-bottom: .3em; }
+
+/* =========================================================
+   14. アクセシビリティ
+   ========================================================= */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
