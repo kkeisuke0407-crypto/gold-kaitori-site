@@ -33,6 +33,13 @@
     .kin-pick2__tag { font-size: 10.5px; line-height: 1.6; white-space: nowrap; }
   }
 </style>
+<!-- Google tag (gtag.js)：LP3系と同一のGA4 + Google広告CV計測 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+</script>
 </head>
 <body>
 
@@ -788,6 +795,54 @@
     today.textContent = y + '年' + (jst.getMonth() + 1) + '月' + jst.getDate() + '日';
   }
 }());
+</script>
+
+<!-- CV計測：LP3系と同一のイベント体系（gold_kaitori_affiliate_click ほか） -->
+<script>
+(function(){
+  var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+  var LANDING = "manekiya_otakaraya";
+  function track(name, params){
+    try{
+      if(window.dataLayer) window.dataLayer.push(Object.assign({event:name}, params||{}));
+      if(typeof gtag==="function") gtag("event", name, Object.assign({}, params||{}, { transport_type:"beacon" }));
+    }catch(_){}
+  }
+  // 着地URLのクエリ（utm_/gclid 等）をCTAへ転送し、タグ発火の取りこぼしを減らす
+  function fwd(raw){
+    if(!raw || raw.charAt(0)==="#") return raw;
+    try{
+      var u=new URL(raw, location.href);
+      new URLSearchParams(location.search).forEach(function(v,k){ if(KEEP.test(k)&&!u.searchParams.has(k)) u.searchParams.set(k,v); });
+      return u.toString();
+    }catch(_){ return raw; }
+  }
+  var SEL = ".kin-phone, .kin-cta--web, .kin-fixed-tel, .kin-fixed-web, .kin-official-cta__manekiya, .kin-official-cta__otakaraya";
+  Array.prototype.forEach.call(document.querySelectorAll(SEL), function(el){
+    var cls = el.className || "", href = el.getAttribute("href") || "";
+    // おたからや公式のみ非成果。それ以外（まねきやアフィリンク）は成果CV
+    var isOtakaraya = /official-cta__otakaraya/.test(cls) || /otakaraya\.jp/.test(href);
+    var key = isOtakaraya ? "otakaraya" : "manekiya";
+    var ctaType = /kin-phone|kin-fixed-tel/.test(cls) ? "phone" : "web";
+    var url = fwd(href);
+    if(url) el.setAttribute("href", url);
+    el.addEventListener("click", function(){
+      if(el.__ctaBusy) return;            // 連打による二重CVを防止（遷移は既定動作に委ねる）
+      el.__ctaBusy = true; setTimeout(function(){ el.__ctaBusy = false; }, 1200);
+      var params = { affiliate_key:key, cta_type:ctaType, landing_intent:LANDING, link_url:url };
+      var cv = (key === "manekiya") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
+      // GTM併用時の保険としてdataLayerにも積む
+      if(window.dataLayer) window.dataLayer.push(Object.assign({event:cv}, params));
+      // 主CV（まねきや＝成果／おたからや＝非成果）
+      if(typeof gtag==="function") gtag("event", cv, Object.assign({}, params, { transport_type:"beacon" }));
+      // GA4限定：電話/WEB別の質イベント（Google広告の主要CVには送らず send_to でGA4のみ）
+      if(typeof gtag==="function") gtag("event", "gold_kaitori_"+ctaType+"_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
+      // CTAは target=_blank（新規タブ）。既定遷移はそのまま活かし、送信は beacon で確実化
+    });
+  });
+  track("gold_kaitori_landing_intent", { landing_intent:LANDING }); // 全ページ共通の計測軸
+  track(LANDING + "_open", { landing_intent:LANDING });
+})();
 </script>
 
 </body>
