@@ -907,13 +907,14 @@ a { color: #1b4f86; text-underline-offset: .25em; }
     margin-top: .15em;
   }
 
-  /* 電話が成果の主役。面積を広く取り、金で目立たせる */
+  /* 電話が成果の主役。面積を広く取り、赤で目立たせる。WEBは緑で差別化 */
   .kin-fixed-cta .kin-fixed-tel {
     flex: 1.6 1 0;
-    background: linear-gradient(180deg, #a8811a 0%, #8a6a14 100%);
+    background: linear-gradient(180deg, #e8342f 0%, #d1221d 100%);
   }
-  .kin-fixed-cta .kin-fixed-tel small { color: #f6ecd0; }
-  .kin-fixed-cta .kin-fixed-web { background: var(--sumi); }
+  .kin-fixed-cta .kin-fixed-tel small { color: #ffe0dd; }
+  .kin-fixed-cta .kin-fixed-web { background: linear-gradient(180deg, #08b451 0%, #06a044 100%); }
+  .kin-fixed-cta .kin-fixed-web small { color: #d7f2e1; }
 
   body { padding-bottom: calc(var(--tap) + 24px + env(safe-area-inset-bottom, 0px)); }
 }
@@ -1758,17 +1759,17 @@ p.kin-verdict__why { font-size: .95em; line-height: 1.85; margin: 0; color: var(
   max-width: 460px;
   margin: 0 auto .8em;
   padding: 1em 1.1em;
-  background: linear-gradient(180deg, #a8811a 0%, #8a6a14 100%);
-  border-bottom: 4px solid #5c4610;
+  background: linear-gradient(180deg, #e8342f 0%, #d1221d 100%);
+  border-bottom: 4px solid #a3140f;
   text-align: center;
   text-decoration: none !important;
   color: #fff !important;
 }
-.kin-phone:hover, .kin-phone:focus { background: #7d6116; color: #fff !important; }
+.kin-phone:hover, .kin-phone:focus { background: #c71f1a; color: #fff !important; }
 
 .kin-phone__badge {
   display: inline-block;
-  background: #fff; color: #8a6a14;
+  background: #fff; color: #c4231d;
   font-size: 12px; font-weight: 700;
   letter-spacing: .06em;
   padding: .25em .9em;
@@ -1781,16 +1782,16 @@ p.kin-verdict__why { font-size: .95em; line-height: 1.85; margin: 0; color: var(
   font-weight: 700; line-height: 1.25;
   letter-spacing: .02em;
 }
-.kin-phone__sub { display: block; font-size: 13px; margin-top: .35em; color: #f2e7c8; }
+.kin-phone__sub { display: block; font-size: 13px; margin-top: .35em; color: #ffe0dd; }
 
 /* WEB予約は副次CTA */
 .kin-cta--web {
-  background: var(--paper);
-  color: var(--sumi) !important;
-  border: 2px solid var(--sumi);
-  border-bottom-width: 3px;
+  background: #06b04c;
+  color: #fff !important;
+  border: none;
+  border-bottom: 3px solid #03793a;
 }
-.kin-cta--web:hover, .kin-cta--web:focus { background: #f4f2ec; color: var(--sumi) !important; }
+.kin-cta--web:hover, .kin-cta--web:focus { background: #05a044; color: #fff !important; }
 
 /* =========================================================
    13. 免責・フッター
