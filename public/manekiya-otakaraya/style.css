@@ -526,7 +526,7 @@ a { color: #1b4f86; text-underline-offset: .25em; }
   .kin-compare tbody td {
     text-align: left;
     border-bottom: 1px dotted var(--rule);
-    padding: .65em .9em .65em 6.6em;
+    padding: .65em .9em .65em 7.2em;
     position: relative;
   }
   .kin-compare tbody td:last-child { border-bottom: none; }
@@ -535,7 +535,8 @@ a { color: #1b4f86; text-underline-offset: .25em; }
     content: attr(data-label);
     position: absolute;
     left: .9em; top: .65em;
-    width: 5.4em;
+    width: 6em;
+    white-space: nowrap;
     font-size: .84em;
     color: var(--ink-sub);
     font-weight: 400;
@@ -1099,7 +1100,10 @@ a { color: #1b4f86; text-underline-offset: .25em; }
 .kin-banner-label--campaign + .kin-camp { margin-top: 0; }
 
 @media screen and (max-width: 620px) {
-  .kin-pick2 { grid-template-columns: minmax(0, 320px); gap: .8em; }
+  /* スマホでは2社バナーを小さく横並びに */
+  .kin-pick2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55em; }
+  .kin-banner-label { font-size: 11px; gap: .3em; margin-bottom: .3em; }
+  .kin-banner-label small { font-size: 8.5px; padding: .15em .35em; }
 }
 
 /* 旧カード用の装飾は、結論の順位づけを避けるため使用しない */
@@ -1811,6 +1815,22 @@ p.kin-verdict__why { font-size: .95em; line-height: 1.85; margin: 0; color: var(
    14. アクセシビリティ
    ========================================================= */
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* CTAがキラッと光るシャイン演出（LP3系 bbCtaShine に準拠） */
+.kin-phone, .kin-cta, .kin-fixed-cta a { position: relative; overflow: hidden; }
+.kin-phone::after, .kin-cta::after, .kin-fixed-cta a::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  left: -65%;
+  width: 35%;
+  height: 160%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .5), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+  animation: kinCtaShine 3.2s ease-in-out infinite;
+}
+@keyframes kinCtaShine { 0% { left: -65%; } 60%, 100% { left: 145%; } }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
