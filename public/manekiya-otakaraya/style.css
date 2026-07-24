@@ -60,26 +60,27 @@ body {
 .entry-content, .article { font-size: var(--fz); line-height: var(--lh); }
 .entry-content p { margin: 0 0 1.8em; }
 
-/* 強調は蛍光マーカーではなく、下に細い金の罫 */
+/* 流し見でも判断材料を拾える、はっきりした強調 */
 .entry-content strong {
-  font-weight: 700;
-  background: linear-gradient(transparent 88%, rgba(194,167,94,.55) 88%);
+  font-weight: 800;
+  padding: 0 .08em .02em;
+  background: linear-gradient(transparent 58%, #ffe58a 58%);
 }
 /* 重要度で強調を段階化（メリハリ）。既定strong=金の細線／以下は用途別に強める */
 /* 黄マーカー：各セクションの結論・パンチライン（最も目立たせる） */
 .entry-content strong.em-mark {
-  background: linear-gradient(transparent 50%, #ffdf6e 50%);
-  padding: 0 .05em;
+  background: linear-gradient(transparent 46%, #ffd94f 46%);
+  padding: 0 .1em .03em;
 }
 /* 緑：メリット・無料・得（プラスの情報） */
 .entry-content strong.em-green {
   color: var(--win);
-  background: linear-gradient(transparent 87%, rgba(31,107,70,.24) 87%);
+  background: linear-gradient(transparent 58%, #cbe9d5 58%);
 }
 /* 赤：注意・条件・危険信号（気をつける情報） */
 .entry-content strong.em-red {
   color: var(--alert);
-  background: linear-gradient(transparent 87%, rgba(168,50,31,.26) 87%);
+  background: linear-gradient(transparent 58%, #ffd5ce 58%);
 }
 
 a { color: #1b4f86; text-underline-offset: .25em; }
@@ -311,11 +312,11 @@ a { color: #1b4f86; text-underline-offset: .25em; }
 .entry-content h2::after { content: none; }
 
 .entry-content h3 {
-  font-family: var(--mincho);
-  font-weight: 600;
-  font-size: clamp(18px, 4.8vw, 23px);
-  line-height: 1.8;
-  letter-spacing: .03em;
+  font-family: var(--gothic);
+  font-weight: 800;
+  font-size: clamp(20px, 5.2vw, 26px);
+  line-height: 1.55;
+  letter-spacing: .02em;
   color: var(--sumi);
   background: none;
   border: none;
@@ -651,15 +652,56 @@ a { color: #1b4f86; text-underline-offset: .25em; }
 
 /* 結論の一文 */
 .kin-punch {
-  font-family: var(--mincho);
-  font-size: clamp(18px, 4.9vw, 23px);
-  line-height: 1.9;
+  font-family: var(--gothic);
+  font-size: clamp(21px, 5.7vw, 28px);
+  font-weight: 800;
+  line-height: 1.55;
   color: var(--sumi);
-  text-align: center;
-  border-top: 1px solid var(--gold-line);
-  border-bottom: 1px solid var(--gold-line);
-  padding: 1.1em .5em;
+  text-align: left;
+  border: 0;
+  border-left: 5px solid var(--gold-line);
+  background: #fff8d8;
+  padding: .82em .9em;
   margin: 2.2em 0;
+}
+
+/* 長い本文の途中に、判断点を短く再提示するリスト */
+.kin-scan-list {
+  list-style: none;
+  display: grid;
+  gap: .55em;
+  padding: 0;
+  margin: 1.45em 0 2.3em;
+}
+.kin-scan-list li {
+  position: relative;
+  padding: .72em .8em .72em 2.25em;
+  color: var(--sumi);
+  font-size: clamp(16px, 4.2vw, 19px);
+  font-weight: 700;
+  line-height: 1.55;
+  background: #fffdf4;
+  border-left: 4px solid var(--gold-line);
+}
+.kin-scan-list li::before {
+  content: "✓";
+  position: absolute;
+  top: .7em;
+  left: .75em;
+  color: var(--gold);
+  font-weight: 900;
+}
+.kin-scan-list strong { padding-left: 0; padding-right: 0; }
+.kin-scan-list--decision li:nth-child(2) { background: #fff7f5; border-left-color: var(--alert); }
+.kin-scan-list--decision li:nth-child(2)::before { color: var(--alert); }
+.kin-scan-list--tips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.kin-scan-list--tips li:last-child { grid-column: 1 / -1; }
+@media screen and (max-width: 520px) {
+  .kin-scan-list { gap: .45em; margin: 1.2em 0 2em; }
+  .kin-scan-list li { padding: .7em .7em .7em 2.1em; font-size: 16px; }
+  .kin-scan-list li::before { left: .68em; }
+  .kin-scan-list--tips { grid-template-columns: 1fr; }
+  .kin-scan-list--tips li:last-child { grid-column: auto; }
 }
 
 /* =========================================================
@@ -972,16 +1014,19 @@ a { color: #1b4f86; text-underline-offset: .25em; }
   vertical-align: 1px;
 }
 
-/* 導入の大きめリード（金買取の店は多すぎる） */
+/* 導入の大きめリード */
 .kin-intro {
-  font-family: var(--mincho);
-  font-size: clamp(17px, 4.6vw, 21px);
-  line-height: 1.95;
+  font-family: var(--gothic);
+  font-size: clamp(20px, 5.2vw, 25px);
+  font-weight: 800;
+  line-height: 1.62;
   color: var(--sumi);
-  text-align: center;
+  text-align: left;
+  border-left: 5px solid var(--gold-line);
+  padding-left: .8em;
   margin: 1.4em 0 1.8em;
 }
-.kin-intro strong { background: linear-gradient(transparent 60%, #ffe8a3 60%); font-weight: 700; }
+.kin-intro strong { background: linear-gradient(transparent 54%, #ffd94f 54%); font-weight: 800; }
 
 /* 2社バナー並列（「対」の代わり） */
 .kin-banners {
@@ -1974,19 +2019,19 @@ h2, h3,
 }
 
 /* 導入：枠や画像ではなく、左揃えの改行リズムで読ませる */
-.kin-intro { margin: clamp(1.8em, 5vw, 2.7em) 0 clamp(2.4em, 5vw, 3.6em); color: var(--sumi); font-family: var(--gothic); text-align: left; }
-.kin-intro p { max-width: 42em; margin: 0; font-family: inherit; }
-.kin-intro__opener { color: var(--sumi); font-size: 1em; font-weight: 700; line-height: 1.65; }
-.kin-intro__problem { margin-top: 1em; }
-.kin-intro__problem p { color: var(--sumi); font-size: clamp(19px, 4.7vw, 23px); font-weight: 700; line-height: 1.62; }
-.kin-intro__question { margin: clamp(1.45em, 5vw, 1.9em) 0; }
-.kin-intro__question-label { color: var(--ink-sub); font-size: 14px; font-weight: 700; line-height: 1.5; }
-.kin-intro__question-value { margin-top: .12em !important; color: var(--sumi); font-size: clamp(24px, 6.7vw, 32px); font-weight: 800; letter-spacing: .01em; line-height: 1.42; }
-.kin-intro__question-tail { margin-top: .08em !important; color: var(--sumi-2); font-size: 18px; font-weight: 700; line-height: 1.45; }
-.kin-intro__research { color: var(--sumi-2); font-size: 1em; line-height: 1.95; }
-.kin-intro__research p + p { margin-top: 1em; }
-.kin-intro__research .kin-intro__conclusion { margin-top: 1.2em; color: var(--sumi); font-weight: 700; }
-@media screen and (max-width: 520px) { .kin-intro { margin-top: 1.5em; margin-bottom: 2.7em; } .kin-intro__opener { font-size: 16px; } .kin-intro__question-value { font-size: 25px; } .kin-intro__question-tail { font-size: 17px; } }
+.kin-opening { margin: clamp(1.8em, 5vw, 2.7em) 0 clamp(2.4em, 5vw, 3.6em); color: var(--sumi); font-family: var(--gothic); text-align: left; }
+.kin-opening p { max-width: 42em; margin: 0; font-family: inherit; }
+.kin-opening__opener { color: var(--sumi); font-size: 1em; font-weight: 700; line-height: 1.65; }
+.kin-opening__problem { margin-top: 1em; }
+.kin-opening__problem p { color: var(--sumi); font-size: clamp(19px, 4.7vw, 23px); font-weight: 700; line-height: 1.62; }
+.kin-opening__question { margin: clamp(1.45em, 5vw, 1.9em) 0; }
+.kin-opening__question-label { color: var(--ink-sub); font-size: 14px; font-weight: 700; line-height: 1.5; }
+.kin-opening__question-value { margin-top: .12em !important; color: var(--sumi); font-size: clamp(24px, 6.7vw, 32px); font-weight: 800; letter-spacing: .01em; line-height: 1.42; }
+.kin-opening__question-tail { margin-top: .08em !important; color: var(--sumi-2); font-size: 18px; font-weight: 700; line-height: 1.45; }
+.kin-opening__research { color: var(--sumi-2); font-size: 1em; line-height: 1.95; }
+.kin-opening__research p + p { margin-top: 1em; }
+.kin-opening__research .kin-opening__conclusion { margin-top: 1.2em; color: var(--sumi); font-weight: 700; }
+@media screen and (max-width: 520px) { .kin-opening { margin-top: 1.5em; margin-bottom: 2.7em; } .kin-opening__opener { font-size: 16px; } .kin-opening__question-value { font-size: 25px; } .kin-opening__question-tail { font-size: 17px; } }
 
 /* まとめ表：ラベルと店名を語中で折り返さない（狭い端末対策） */
 .kin-table--stack tbody td::before { white-space: nowrap; }
