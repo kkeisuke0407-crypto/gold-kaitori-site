@@ -1954,3 +1954,18 @@ h2, h3,
 }
 .kin-pv-col--1 .kin-pv-cta { background: var(--sumi); color: #fff; border-bottom: 3px solid #05101f; }
 .kin-pv-col--2 .kin-pv-cta { background: #fff; color: var(--sumi); border: 1px solid var(--sumi); }
+
+/* 品目別表：店名を語中で折り返さない＋スマホはカード積みに（3列つぶれ対策） */
+.kin-sell a { white-space: nowrap; }
+@media (max-width: 560px) {
+  .kin-sell-wrap { overflow: visible; }
+  .kin-sell, .kin-sell thead, .kin-sell tbody, .kin-sell tr, .kin-sell th, .kin-sell td { display: block; width: 100%; }
+  .kin-sell thead { display: none; }
+  .kin-sell tbody tr { border: 1px solid var(--rule); border-radius: 8px; margin-bottom: .8em; background: #fff; overflow: hidden; }
+  .kin-sell .sell-situ { background: #f4f2ec; font-weight: 800; padding: .6em .85em; border-bottom: 1px solid var(--rule); }
+  .kin-sell .sell-pick { padding: .7em .85em .35em; border: none; }
+  .kin-sell .sell-first { display: inline-block; font-size: 16px; margin-bottom: .1em; }
+  .kin-sell .sell-comp { display: block; font-size: 11.5px; margin-top: .2em; }
+  .kin-sell .sell-why { padding: .1em .85em .7em; border: none; font-size: 12.5px; color: #3a3f4a; }
+  .kin-sell .sell-why::before { content: "理由："; color: var(--ink-sub); font-weight: 700; }
+}
