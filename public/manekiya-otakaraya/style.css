@@ -1934,10 +1934,10 @@ h2, h3,
 .kin-fit__col--yes li::before { content: "◎"; position: absolute; left: 0; color: var(--win); font-weight: 800; }
 .kin-fit__col--no li::before { content: "×"; position: absolute; left: 0; color: var(--alert); font-weight: 800; }
 @media (max-width: 560px) {
-  .kin-fit { gap: .5em; }
-  .kin-fit__col { padding: .75em .6em .85em; }
-  .kin-fit__h { font-size: 12.5px; margin-bottom: .5em; }
-  .kin-fit li { font-size: 12px; line-height: 1.5; padding-left: 1.15em; }
+  .kin-fit { gap: .55em; margin-left: 10px; margin-right: 10px; }
+  .kin-fit__col { padding: 1em .85em 1.05em; }
+  .kin-fit__h { font-size: 13px; margin-bottom: .6em; }
+  .kin-fit li { font-size: 12.5px; line-height: 1.55; padding-left: 1.25em; }
 }
 
 /* 筆者の立ち位置（パーソナルな導入） */
