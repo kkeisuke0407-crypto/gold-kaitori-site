@@ -1959,13 +1959,19 @@ h2, h3,
   font-weight: 800;
   letter-spacing: .08em;
 }
-.kin-fv-conclusion__lead { margin: 0 0 .2em; font-size: 15px; font-weight: 800; }
+.kin-fv-conclusion__lead { margin: 0 0 .2em; font-size: 15px; font-weight: 800; color: var(--gold); }
 .kin-fv-conclusion__main {
   margin: 0;
   font-size: clamp(23px, 6.3vw, 28px);
   font-weight: 900;
   line-height: 1.45;
   letter-spacing: -.025em;
+}
+.kin-fv-conclusion__main mark {
+  background: linear-gradient(transparent 56%, #ffdf6e 56%);
+  color: inherit;
+  padding: 0 .06em;
+  white-space: nowrap;
 }
 .kin-fv-conclusion__main br { display: none; }
 @media screen and (max-width: 390px) {
