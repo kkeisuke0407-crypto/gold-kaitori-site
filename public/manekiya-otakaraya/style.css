@@ -1933,7 +1933,12 @@ h2, h3,
 .kin-fit li { font-size: 13.5px; line-height: 1.55; padding-left: 1.4em; position: relative; color: #2a2f39; }
 .kin-fit__col--yes li::before { content: "◎"; position: absolute; left: 0; color: var(--win); font-weight: 800; }
 .kin-fit__col--no li::before { content: "×"; position: absolute; left: 0; color: var(--alert); font-weight: 800; }
-@media (max-width: 560px) { .kin-fit { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .kin-fit { gap: .5em; }
+  .kin-fit__col { padding: .75em .6em .85em; }
+  .kin-fit__h { font-size: 12.5px; margin-bottom: .5em; }
+  .kin-fit li { font-size: 12px; line-height: 1.5; padding-left: 1.15em; }
+}
 
 /* 筆者の立ち位置（パーソナルな導入） */
 .kin-author { margin: 1.3em var(--pad); padding: 1.15em 1.2em 1.2em; background: #fff; border: 1px solid var(--gold-line); border-left: 5px solid var(--gold-line); border-radius: 12px; box-shadow: 0 6px 18px rgba(20,20,20,.06); }
