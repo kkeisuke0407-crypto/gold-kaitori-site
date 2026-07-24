@@ -1976,18 +1976,12 @@ h2, h3,
 /* 筆者の調査メモ */
 .kin-author { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 1em; margin: 1.3em var(--pad); padding: 1em; background: #fff; border: 1px solid var(--gold-line); border-left: 5px solid var(--gold); border-radius: 10px; box-shadow: 0 6px 18px rgba(20,20,20,.06); }
 .kin-author__portrait { margin: 0; align-self: start; overflow: hidden; border-radius: 8px; background: var(--gold-bg); }
-.kin-author__portrait img { display: block; width: 112px; aspect-ratio: 4 / 5; object-fit: cover; object-position: 72% center; }
+.kin-author__portrait img { display: block; width: 112px; height: 140px !important; object-fit: cover; object-position: 72% center; }
 .kin-author__portrait figcaption { padding: .35em; background: var(--sumi); color: #fff; font-size: 9px; text-align: center; }
 .kin-author__body { min-width: 0; }
-.kin-author p { margin: 0 0 .65em; line-height: 1.8; }
-.kin-author__label { display: inline-block; margin-bottom: .45em !important; color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: .08em; }
-.kin-author__lead { margin-bottom: .7em !important; padding-bottom: .65em; border-bottom: 1px solid var(--rule); font-family: var(--mincho); font-size: clamp(17px, 4.6vw, 21px); font-weight: 600; line-height: 1.55 !important; color: var(--sumi); }
-.kin-author__lead strong { color: #a66e12; }
-.kin-author__checks { display: flex; flex-wrap: wrap; gap: .35em; margin: .7em 0; padding: 0; list-style: none; }
-.kin-author__checks li { padding: .28em .55em; border: 1px solid var(--rule); border-radius: 999px; background: #faf8f3; color: var(--ink-sub); font-size: 10.5px; }
-.kin-author__checks li::before { content: "✓ "; color: var(--gold); font-weight: 800; }
-.kin-author__conclusion { margin-bottom: 0 !important; padding-top: .65em; border-top: 1px solid var(--rule); font-weight: 700; }
-@media screen and (max-width: 520px) { .kin-author { grid-template-columns: 78px minmax(0, 1fr); gap: .75em; padding: .8em; } .kin-author__portrait img { width: 78px; } .kin-author__portrait figcaption { font-size: 8px; } .kin-author__lead { font-size: 16px; } }
+.kin-author p { margin: 0 0 .7em; line-height: 1.8; }
+.kin-author p:last-child { margin-bottom: 0; }
+@media screen and (max-width: 520px) { .kin-author { grid-template-columns: 78px minmax(0, 1fr); gap: .75em; padding: .8em; } .kin-author__portrait img { width: 78px; height: 98px !important; } .kin-author__portrait figcaption { font-size: 8px; } }
 
 /* まとめ表：ラベルと店名を語中で折り返さない（狭い端末対策） */
 .kin-table--stack tbody td::before { white-space: nowrap; }
