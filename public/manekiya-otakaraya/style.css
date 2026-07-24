@@ -1973,15 +1973,20 @@ h2, h3,
   .kin-fit li { font-size: 13px; line-height: 1.5; padding-left: 1.25em; }
 }
 
-/* 導入：枠や画像ではなく、余白と文字組で読ませる */
-.kin-intro { position: relative; margin: clamp(1.7em, 5vw, 2.5em) 0 clamp(2.2em, 5vw, 3.4em); padding-top: 1.25em; color: var(--sumi); font-family: var(--mincho); letter-spacing: 0; }
-.kin-intro::before { content: ""; position: absolute; top: 0; left: 0; width: 42px; height: 2px; background: var(--gold-line); }
-.kin-intro p { max-width: 42em; font-family: inherit; letter-spacing: inherit; }
-.kin-intro__lead { margin: 0 0 1.1em !important; color: var(--sumi); font-size: clamp(21px, 5.2vw, 25px); font-weight: 600; line-height: 1.68; }
-.kin-intro__hook { display: block; margin-top: .68em; }
-.kin-intro__hook .em-mark { padding: 0 .06em .07em; color: var(--sumi); background: linear-gradient(transparent 69%, rgba(194,167,94,.64) 69%); font-weight: 700; }
-.kin-intro p:not(.kin-intro__lead) { margin: 0; color: var(--sumi-2); font-size: 1em; line-height: 1.95; }
-@media screen and (max-width: 520px) { .kin-intro { margin-top: 1.5em; margin-bottom: 2.5em; padding-top: 1.1em; } .kin-intro__lead { font-size: 21px; line-height: 1.7; } .kin-intro__hook { margin-top: .72em; } }
+/* 導入：枠や画像ではなく、左揃えの改行リズムで読ませる */
+.kin-intro { margin: clamp(1.8em, 5vw, 2.7em) 0 clamp(2.4em, 5vw, 3.6em); color: var(--sumi); font-family: var(--gothic); text-align: left; }
+.kin-intro p { max-width: 42em; margin: 0; font-family: inherit; }
+.kin-intro__opener { color: var(--sumi); font-size: 1em; font-weight: 700; line-height: 1.65; }
+.kin-intro__problem { margin-top: 1em; }
+.kin-intro__problem p { color: var(--sumi); font-size: clamp(19px, 4.7vw, 23px); font-weight: 700; line-height: 1.62; }
+.kin-intro__question { margin: clamp(1.45em, 5vw, 1.9em) 0; }
+.kin-intro__question-label { color: var(--ink-sub); font-size: 14px; font-weight: 700; line-height: 1.5; }
+.kin-intro__question-value { margin-top: .12em !important; color: var(--sumi); font-size: clamp(24px, 6.7vw, 32px); font-weight: 800; letter-spacing: .01em; line-height: 1.42; }
+.kin-intro__question-tail { margin-top: .08em !important; color: var(--sumi-2); font-size: 18px; font-weight: 700; line-height: 1.45; }
+.kin-intro__research { color: var(--sumi-2); font-size: 1em; line-height: 1.95; }
+.kin-intro__research p + p { margin-top: 1em; }
+.kin-intro__research .kin-intro__conclusion { margin-top: 1.2em; color: var(--sumi); font-weight: 700; }
+@media screen and (max-width: 520px) { .kin-intro { margin-top: 1.5em; margin-bottom: 2.7em; } .kin-intro__opener { font-size: 16px; } .kin-intro__question-value { font-size: 25px; } .kin-intro__question-tail { font-size: 17px; } }
 
 /* まとめ表：ラベルと店名を語中で折り返さない（狭い端末対策） */
 .kin-table--stack tbody td::before { white-space: nowrap; }
