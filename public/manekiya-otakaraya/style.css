@@ -1391,6 +1391,22 @@ a { color: #1b4f86; text-underline-offset: .25em; }
 }
 .kin-why > li p { margin: 0; line-height: 1.85; font-size: .97em; }
 .kin-why > li p + p { margin-top: .6em; }
+.kin-specialist-proof {
+  margin-top: .9em;
+  padding: .9em 1em;
+  border-left: 3px solid var(--gold);
+  background: linear-gradient(100deg, #fffaf0, #fffdf8);
+}
+.kin-specialist-proof__lead {
+  margin: 0 0 .35em !important;
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.2vw, 19px) !important;
+  line-height: 1.55 !important;
+  color: var(--sumi);
+}
+.kin-specialist-proof__lead strong { color: #a66e12; }
+.kin-specialist-proof > p:not(.kin-specialist-proof__lead) { font-size: .9em !important; line-height: 1.75 !important; }
+.kin-specialist-proof a { display: inline-block; margin-top: .55em; color: var(--sumi); font-size: .87em; font-weight: 700; text-decoration: underline; text-underline-offset: .18em; }
 
 /* キャンペーン画像（赤リボンに日付を自動で重ねる） */
 .kin-camp {
