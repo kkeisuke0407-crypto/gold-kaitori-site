@@ -1959,19 +1959,13 @@ h2, h3,
   font-weight: 800;
   letter-spacing: .08em;
 }
-.kin-fv-conclusion__lead { margin: 0 0 .2em; font-size: 15px; font-weight: 800; color: var(--gold); }
+.kin-fv-conclusion__lead { margin: 0 0 .2em; font-size: 15px; font-weight: 800; }
 .kin-fv-conclusion__main {
   margin: 0;
   font-size: clamp(23px, 6.3vw, 28px);
   font-weight: 900;
   line-height: 1.45;
   letter-spacing: -.025em;
-}
-.kin-fv-conclusion__main mark {
-  background: linear-gradient(transparent 56%, #ffdf6e 56%);
-  color: inherit;
-  padding: 0 .06em;
-  white-space: nowrap;
 }
 .kin-fv-conclusion__main br { display: none; }
 @media screen and (max-width: 390px) {
@@ -2057,27 +2051,6 @@ h2, h3,
 .kin-sell .sell-comp { display: block; font-size: 11px; color: var(--ink-sub); }
 .kin-sell a { color: var(--sumi); font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
 .kin-sell .sell-why { color: #3a3f4a; }
-
-/* 合う人・合わない人 */
-.kin-fit { display: grid; grid-template-columns: 1fr 1fr; gap: .7em; margin: 1.1em var(--pad); }
-.kin-fit__col { border: 1px solid var(--rule); border-radius: 12px; padding: .9em .9em 1em; background: #fff; }
-.kin-fit__col--yes { border-color: #bcd9c6; background: #f4faf6; }
-.kin-fit__col--no { border-color: #e6cfcb; background: #fbf5f4; }
-.kin-fit__h { font-family: var(--gothic); font-weight: 800; font-size: 15px; margin: 0 0 .55em; }
-.kin-fit__col--yes .kin-fit__h { color: var(--win); }
-.kin-fit__col--no .kin-fit__h { color: var(--alert); }
-.kin-fit ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .5em; }
-.kin-fit li { font-size: 13.5px; line-height: 1.55; padding-left: 1.4em; position: relative; color: #2a2f39; }
-.kin-fit__col--yes li::before { content: "◎"; position: absolute; left: 0; color: var(--win); font-weight: 800; }
-.kin-fit__col--no li::before { content: "×"; position: absolute; left: 0; color: var(--alert); font-weight: 800; }
-@media (max-width: 560px) {
-  /* 箱を横いっぱいに（entry-contentのpaddingを打ち消して左右ほぼゼロ） */
-  .kin-fit { gap: .5em; margin-left: calc(6px - var(--pad)); margin-right: calc(6px - var(--pad)); }
-  .kin-fit__col { padding: .95em .9em 1em; }
-  .kin-fit__h { font-size: 13.5px; margin-bottom: .55em; }
-  .kin-fit ul { gap: .5em; }
-  .kin-fit li { font-size: 13px; line-height: 1.5; padding-left: 1.25em; }
-}
 
 /* FVの筆者導入：問いと結論だけを主役にする、余白で読ませる編集レイアウト */
 .kin-opening {
@@ -2172,48 +2145,68 @@ h2, h3,
   text-align: center;
 }
 .kin-opening__next strong { color: var(--sumi); }
-.kin-opening__research strong { font-weight: 800; }
 .kin-opening__research .kin-opening__conclusion {
-  margin-top: 1.35em;
-  padding: .9em 1.05em 1em;
-  background: linear-gradient(180deg, #fffceb, #fff6d9);
-  border: 2px solid var(--gold-line);
-  border-radius: 13px;
-  box-shadow: 0 5px 16px rgba(160, 120, 20, .13);
-}
-.kin-opening__conclusion-tag {
-  display: inline-block;
-  margin-bottom: .5em;
-  padding: .18em .9em;
-  font-size: 12px; font-weight: 800; letter-spacing: .09em;
-  color: #fff; background: var(--gold); border-radius: 999px;
-}
-.kin-opening__conclusion p {
-  margin: 0 !important;
-  max-width: none;
+  margin-top: 1.3em;
   color: var(--sumi);
-  font-size: clamp(20px, 5.4vw, 26px);
-  font-weight: 900;
-  letter-spacing: -.01em;
-  line-height: 1.55;
+  letter-spacing: 0;
+  line-height: 1.5;
 }
-.kin-opening__conclusion b {
-  background: linear-gradient(transparent 52%, #ffd94f 52%);
-  padding: 0 .1em;
-  white-space: nowrap;
+.kin-opening__conclusion-lead {
+  display: block;
+  margin-bottom: .25em;
+  color: var(--sumi-2);
+  font-size: 15px;
+  font-weight: 800;
+}
+.kin-opening__conclusion-main {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  color: var(--sumi);
+  font-size: clamp(22px, 5.6vw, 24px);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  line-height: 1.55;
+  background: linear-gradient(transparent 56%, #ffd94f 56%);
+  padding: 0 .07em .04em;
+}
+@media screen and (min-width: 600px) {
+  .kin-opening__conclusion-main { white-space: nowrap; }
 }
 @media screen and (max-width: 520px) {
   .kin-opening { margin-top: 1.35em; margin-bottom: .75em; }
   .kin-opening__question { margin: 1.15em 0 1.35em; }
   .kin-opening__question-value { font-size: 30px; }
+  .kin-opening__conclusion-main { display: block; }
+  .kin-opening__conclusion-choice,
+  .kin-opening__conclusion-result { display: block; }
 }
 @media screen and (max-width: 350px) {
   .kin-opening__research { font-size: 13.5px; letter-spacing: 0; }
 }
 
 /* まとめ表：ラベルと店名を語中で折り返さない（狭い端末対策） */
-.kin-table--stack tbody td::before { white-space: nowrap; }
-.kin-table--stack tbody td strong { white-space: nowrap; }
+.kin-table--summary tbody td::before { white-space: nowrap; }
+.kin-table--summary tbody td strong { white-space: nowrap; }
+
+/* 「手数料無料」の表は、長い見出しを上段に逃がして重なりを防ぐ */
+@media screen and (max-width: 600px) {
+  .kin-table--fee tbody td { padding: 1.85em .9em .7em; }
+  .kin-table--fee tbody td::before {
+    top: .45em;
+    width: auto;
+    white-space: normal;
+    font-size: .78em;
+    font-weight: 800;
+  }
+}
+
+.kin-ota-sources {
+  margin: 1.2em 0 2.2em;
+  color: var(--ink-sub);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.kin-ota-sources a { color: inherit; text-decoration: underline; text-underline-offset: .16em; }
 
 /* 結論エリア：バナー横並び＋各バナー下に公式CTA（改修） */
 .kin-pick-verdict { grid-template-columns: 1fr 1fr; align-items: start; }
