@@ -1934,3 +1934,18 @@ h2, h3,
 .kin-author { margin: 1.2em var(--pad); padding: 1em 1.1em; background: var(--bg); border: 1px solid var(--rule); border-left: 4px solid var(--gold-line); border-radius: 10px; }
 .kin-author p { margin: 0 0 .7em; }
 .kin-author p:last-child { margin-bottom: 0; }
+
+/* 結論エリア：バナー横並び＋各バナー下に公式CTA（改修） */
+.kin-pick-verdict { grid-template-columns: 1fr 1fr; align-items: start; }
+.kin-pv-col { display: flex; flex-direction: column; }
+.kin-pv-col .kin-pv__label { align-self: flex-start; margin-bottom: .45em; }
+.kin-pv-banner { display: block; line-height: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.kin-pv-banner img { width: 100%; height: auto; display: block; }
+.kin-pv-pr { display: inline-block; font-size: 9px; letter-spacing: .1em; color: #9aa0ab; margin: .35em 0 0; }
+.kin-pv-cta {
+  display: block; margin-top: .55em; text-align: center;
+  font-family: var(--gothic); font-weight: 800; font-size: clamp(12px,3.4vw,14px);
+  padding: .68em .4em; border-radius: 8px; text-decoration: none !important; line-height: 1.35;
+}
+.kin-pv-col--1 .kin-pv-cta { background: var(--sumi); color: #fff; border-bottom: 3px solid #05101f; }
+.kin-pv-col--2 .kin-pv-cta { background: #fff; color: var(--sumi); border: 1px solid var(--sumi); }
