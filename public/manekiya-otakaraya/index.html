@@ -803,7 +803,7 @@
       return u.toString();
     }catch(_){ return raw; }
   }
-  var SEL = ".kin-phone, .kin-cta--web, .kin-fixed-tel, .kin-fixed-web, .kin-official-cta__manekiya, .kin-official-cta__otakaraya, .kin-aff, .kin-pv";
+  var SEL = ".kin-phone, .kin-cta--web, .kin-fixed-tel, .kin-fixed-web, .kin-official-cta__manekiya, .kin-official-cta__otakaraya, .kin-aff, .kin-camp, .kin-pv-banner, .kin-pv-cta, .kin-verdict__banner";
   Array.prototype.forEach.call(document.querySelectorAll(SEL), function(el){
     var cls = el.className || "", href = el.getAttribute("href") || "";
     // おたからや公式のみ非成果。それ以外（まねきやアフィリンク）は成果CV
