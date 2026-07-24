@@ -1391,34 +1391,32 @@ a { color: #1b4f86; text-underline-offset: .25em; }
 }
 .kin-why > li p { margin: 0; line-height: 1.85; font-size: .97em; }
 .kin-why > li p + p { margin-top: .6em; }
-.kin-official-evidence { margin: 1.6em 0 2.2em; padding: clamp(1em, 4vw, 1.5em); border: 1px solid #dec58c; background: linear-gradient(135deg, #fffdf8 0%, #f8f0dd 100%); }
-.kin-official-evidence__head { position: relative; margin-bottom: 1em; padding-bottom: .8em; border-bottom: 1px solid #dcc590; }
-.kin-official-evidence__head > p { margin: 0 0 .25em; color: #9a6b17; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
-.kin-official-evidence__head h3 { margin: 0; font-family: var(--mincho); font-size: clamp(20px, 5.5vw, 27px); line-height: 1.35; color: var(--sumi); }
-.kin-official-evidence__head > span { position: absolute; right: 0; top: 0; padding: .25em .55em; background: var(--sumi); color: #fff; font-size: 10px; font-weight: 700; }
-.kin-official-evidence__head small { color: #f4d58e; font-size: inherit; }
-.kin-official-evidence__main { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); align-items: center; gap: clamp(.9em, 3vw, 1.5em); }
-.kin-official-evidence__main figure { margin: 0; padding: .45em; background: #fff; border: 1px solid #e4d7bd; }
-.kin-official-evidence__main figure img { display: block; width: 100%; height: auto; }
-.kin-official-evidence__main figcaption { margin-top: .6em; text-align: center; font-size: 10px; color: var(--ink-sub); }
-.kin-official-evidence__copy h4 { margin: 0 0 .55em; font-family: var(--mincho); font-size: clamp(17px, 4.6vw, 22px); line-height: 1.55; color: var(--sumi); }
-.kin-official-evidence__copy p { margin: .55em 0 0; font-size: .93em; line-height: 1.85; }
-.kin-official-evidence__copy ul { display: grid; gap: .35em; margin: .8em 0 0; padding: 0; list-style: none; font-size: .87em; font-weight: 700; }
-.kin-official-evidence__copy li { padding: .45em .65em .45em 1.75em; background: rgba(255,255,255,.72); position: relative; }
-.kin-official-evidence__copy li::before { content: "✓"; position: absolute; left: .65em; color: #9b6a0d; }
-.kin-official-evidence__proofs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65em; margin-top: 1em; }
-.kin-official-evidence__proofs article { display: grid; grid-template-columns: 62px minmax(0, 1fr); align-items: center; gap: .55em; padding: .65em; background: rgba(255,255,255,.8); border: 1px solid #e4d7bd; }
-.kin-official-evidence__proofs article > img { width: 62px; height: 62px; object-fit: contain; }
-.kin-official-evidence__proofs b, .kin-official-evidence__proofs span { display: block; }
-.kin-official-evidence__proofs b { color: var(--sumi); font-size: .82em; line-height: 1.45; }
-.kin-official-evidence__proofs span { margin-top: .25em; color: var(--ink-sub); font-size: 10px; line-height: 1.45; }
-.kin-official-evidence__proofs .kin-official-evidence__jewels { display: block; }
-.kin-official-evidence__jewels > div { display: flex; height: 62px; align-items: center; justify-content: center; }
-.kin-official-evidence__jewels img { width: 33.33%; height: 62px; object-fit: contain; }
-.kin-official-evidence__jewels p { margin: .45em 0 0; }
-.kin-official-evidence__source { margin: .9em 0 0; padding-top: .8em; border-top: 1px solid #e0d1b0; color: var(--ink-sub); font-size: 10.5px; line-height: 1.7; }
-.kin-official-evidence__source a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
-@media screen and (max-width: 720px) { .kin-official-evidence__main { grid-template-columns: 1fr; } .kin-official-evidence__proofs { grid-template-columns: 1fr; } }
+.kin-manekiya-appraisal { margin: 1.1em 0 2em; padding: 1.2em 0 0; border-top: 3px solid #b8202a; }
+.kin-manekiya-appraisal__intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(220px, .9fr); align-items: center; gap: clamp(1em, 4vw, 2em); }
+.kin-manekiya-appraisal__eyebrow { margin: 0 0 .35em; color: #b8202a; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+.kin-manekiya-appraisal h4 { margin: 0 0 .6em; font-family: var(--mincho); font-size: clamp(20px, 5vw, 26px); line-height: 1.45; color: var(--sumi); }
+.kin-manekiya-appraisal__intro p:not(.kin-manekiya-appraisal__eyebrow) { margin: .55em 0 0; font-size: .95em; line-height: 1.9; }
+.kin-manekiya-appraisal__intro figure { margin: 0; padding: .5em; background: #f7f4ed; }
+.kin-manekiya-appraisal__intro figure img { display: block; width: 100%; height: auto; }
+.kin-manekiya-appraisal__intro figcaption { margin-top: .5em; color: var(--ink-sub); font-size: 10px; text-align: center; }
+.kin-manekiya-appraisal__tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65em; margin-top: 1em; }
+.kin-manekiya-appraisal__tools article { display: grid; grid-template-columns: 78px minmax(0, 1fr); align-items: center; gap: .7em; padding: .7em; border: 1px solid var(--rule); background: #fff; }
+.kin-manekiya-appraisal__tools img { width: 78px; height: 78px; object-fit: contain; }
+.kin-manekiya-appraisal__tools p { margin: 0; }
+.kin-manekiya-appraisal__tools b, .kin-manekiya-appraisal__tools span { display: block; }
+.kin-manekiya-appraisal__tools b { color: var(--sumi); font-size: .9em; }
+.kin-manekiya-appraisal__tools span { margin-top: .3em; color: var(--ink-sub); font-size: 11px; line-height: 1.55; }
+.kin-manekiya-appraisal__results { margin-top: 1.1em; padding-top: 1em; border-top: 1px solid var(--rule); }
+.kin-manekiya-appraisal__results-head { margin: 0 0 .7em; font-family: var(--mincho); font-size: 1.05em; font-weight: 700; color: var(--sumi); }
+.kin-manekiya-appraisal__results-head small { margin-left: .35em; color: var(--ink-sub); font-family: var(--gothic); font-size: 11px; font-weight: 400; }
+.kin-manekiya-appraisal__results > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5em; }
+.kin-manekiya-appraisal__results figure { margin: 0; padding: .5em; border: 1px solid var(--rule); background: #fff; text-align: center; }
+.kin-manekiya-appraisal__results img { display: block; width: 100%; height: 98px; object-fit: contain; }
+.kin-manekiya-appraisal__results figcaption { margin-top: .4em; color: var(--ink-sub); font-size: 10px; line-height: 1.45; }
+.kin-manekiya-appraisal__results strong { display: block; margin-top: .15em; color: #b8202a; font-size: 1.2em; }
+.kin-manekiya-appraisal__source { margin: .7em 0 0; color: var(--ink-sub); font-size: 10px; line-height: 1.7; }
+.kin-manekiya-appraisal__source a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
+@media screen and (max-width: 720px) { .kin-manekiya-appraisal__intro { grid-template-columns: 1fr; } .kin-manekiya-appraisal__tools { grid-template-columns: 1fr; } .kin-manekiya-appraisal__results > div { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* キャンペーン画像（赤リボンに日付を自動で重ねる） */
 .kin-camp {
