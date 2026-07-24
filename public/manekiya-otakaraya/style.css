@@ -745,7 +745,956 @@ a { color: #1b4f86; text-underline-offset: .25em; }
 }
 .kin-box > *:last-child { margin-bottom: 0; }
 
-.ki…6543 tokens truncated…================================================== */
+.kin-box--point { background: var(--gold-bg); border-color: #e8ddba; }
+
+.kin-box__title {
+  font-family: var(--mincho);
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--sumi);
+  letter-spacing: .04em;
+  margin: 0 0 .8em;
+  padding: 0 0 .5em;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* 箇条書き */
+.kin-list { list-style: none; padding: 0; margin: 1.4em 0; }
+
+.kin-list li {
+  position: relative;
+  padding: .7em 0 .7em 1.7em;
+  border-bottom: 1px dotted var(--rule);
+  line-height: 1.85;
+}
+.kin-list li::before {
+  content: "";
+  position: absolute;
+  left: .2em; top: 1.25em;
+  width: 7px; height: 7px;
+  background: var(--gold-line);
+  transform: rotate(45deg);
+}
+
+/* 危険信号リスト（✕マーク） */
+.kin-list--x li { padding-left: 2em; }
+.kin-list--x li::before {
+  content: "✕";
+  width: auto; height: auto;
+  background: none;
+  transform: none;
+  left: 0; top: .7em;
+  color: var(--alert);
+  font-weight: 700;
+  font-size: .95em;
+}
+
+/* =========================================================
+   9. 評価スコア
+   ========================================================= */
+.kin-score { border-top: 1px solid var(--rule); margin: 1.6em 0 2.4em; }
+
+.kin-score__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1em;
+  padding: .75em .2em;
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.kin-score__label { font-size: .95em; color: var(--ink); }
+
+.kin-score__val {
+  font-family: var(--mincho);
+  font-size: 1.25em;
+  font-weight: 600;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.kin-score__row--total {
+  background: var(--sumi);
+  border-bottom: none;
+  padding: 1em 1.1em;
+}
+.kin-score__row--total .kin-score__label { color: #fff; font-family: var(--mincho); font-size: 1.1em; }
+.kin-score__row--total .kin-score__val { color: #e6cd84; font-size: 1.9em; }
+
+/* =========================================================
+   10. ステップ
+   ========================================================= */
+.kin-step { counter-reset: s; list-style: none; padding: 0; margin: 2em 0; }
+
+.kin-step > li {
+  position: relative;
+  padding: 0 0 2em 3.4em;
+}
+
+.kin-step > li::before {
+  counter-increment: s;
+  content: counter(s);
+  position: absolute;
+  left: 0; top: 0;
+  width: 2.2em; height: 2.2em;
+  border: 1px solid var(--gold-line);
+  color: var(--gold);
+  font-family: var(--mincho);
+  font-size: .95em;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  z-index: 1;
+}
+
+/* 縦の連結線 */
+.kin-step > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 1.1em; top: 2.2em; bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+.kin-step__title {
+  font-family: var(--mincho);
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--sumi);
+  margin: .2em 0 .5em;
+  line-height: 1.6;
+}
+.kin-step > li p:last-child { margin-bottom: 0; }
+
+/* =========================================================
+   11. FAQ
+   ========================================================= */
+.kin-faq { border-top: 1px solid var(--rule); margin: 2em 0; }
+
+.kin-faq__q {
+  font-family: var(--mincho);
+  font-size: 1.08em;
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.8;
+  padding: 1.1em 0 .6em 2.2em;
+  margin: 0;
+  position: relative;
+  border-top: 1px solid var(--rule);
+}
+.kin-faq:first-child .kin-faq__q { border-top: none; }
+
+.kin-faq__q::before {
+  content: "Q";
+  position: absolute; left: 0; top: 1.1em;
+  color: var(--gold);
+  font-size: 1.1em;
+}
+
+.kin-faq__a {
+  padding: 0 0 1.4em 2.2em;
+  margin: 0;
+  position: relative;
+  line-height: 1.95;
+  font-size: .97em;
+  color: var(--ink);
+}
+
+.kin-faq__a::before {
+  content: "A";
+  position: absolute; left: 0; top: 0;
+  font-family: var(--mincho);
+  color: var(--ink-sub);
+  font-size: 1.1em;
+}
+
+/* =========================================================
+   12. スマホ固定CTA
+   ========================================================= */
+.kin-fixed-cta { display: none; }
+
+@media screen and (max-width: 834px) {
+  .kin-fixed-cta {
+    display: flex;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 9999;
+    background: var(--sumi);
+    border-top: 2px solid var(--gold-line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .kin-fixed-cta a {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: var(--tap);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .5em .3em;
+    color: #fff !important;
+    font-weight: 700;
+    font-size: clamp(13px, 3.6vw, 15px);
+    line-height: 1.4;
+    letter-spacing: .02em;
+    text-decoration: none !important;
+    border-left: 1px solid rgba(255,255,255,.14);
+  }
+  .kin-fixed-cta a:first-child { border-left: none; }
+
+  .kin-fixed-cta a small {
+    font-size: .74em;
+    font-weight: 400;
+    color: #9aa6ba;
+    margin-top: .15em;
+  }
+
+  /* 電話が成果の主役。面積を広く取り、赤で目立たせる。WEBは緑で差別化 */
+  .kin-fixed-cta .kin-fixed-tel {
+    flex: 1.6 1 0;
+    background: linear-gradient(180deg, #e8342f 0%, #d1221d 100%);
+  }
+  .kin-fixed-cta .kin-fixed-tel small { color: #ffe0dd; }
+  .kin-fixed-cta .kin-fixed-web { background: linear-gradient(180deg, #08b451 0%, #06a044 100%); }
+  .kin-fixed-cta .kin-fixed-web small { color: #d7f2e1; }
+
+  body { padding-bottom: calc(var(--tap) + 24px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* =========================================================
+   12.5 画像
+   ========================================================= */
+.kin-fig { margin: 1.8em 0 2.2em; }
+.kin-fig img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--rule);
+}
+.kin-fig figcaption {
+  font-size: 12.5px; color: var(--ink-sub);
+  line-height: 1.8; margin-top: .6em;
+}
+.kin-fig--plain img { border: none; }
+
+/* 店舗写真グリッド */
+.kin-shops {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: .7em;
+  margin: 1.4em 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.kin-shops li { margin: 0; }
+.kin-shops img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-shops figcaption,
+.kin-shops span {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink-sub);
+  margin-top: .35em;
+  line-height: 1.5;
+}
+
+/* 都府県ラベル */
+.kin-shops small {
+  display: inline-block;
+  font-size: 10.5px;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-line);
+  color: var(--gold);
+  padding: 0 .5em;
+  margin-left: .35em;
+  vertical-align: 1px;
+}
+
+/* 導入の大きめリード */
+.kin-intro {
+  font-family: var(--gothic);
+  font-size: clamp(20px, 5.2vw, 25px);
+  font-weight: 800;
+  line-height: 1.62;
+  color: var(--sumi);
+  text-align: left;
+  border-left: 5px solid var(--gold-line);
+  padding-left: .8em;
+  margin: 1.4em 0 1.8em;
+}
+.kin-intro strong { background: linear-gradient(transparent 54%, #ffd94f 54%); font-weight: 800; }
+
+/* 2社バナー並列（「対」の代わり） */
+.kin-banners {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8em;
+  margin: 1.6em 0;
+}
+.kin-banners a { display: block; }
+.kin-banners img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-banners__cap {
+  display: block;
+  text-align: center;
+  font-family: var(--mincho);
+  font-size: 13px;
+  color: var(--sumi);
+  margin-top: .5em;
+}
+
+/* verdict内のバナー */
+.kin-verdict__banner {
+  display: block;
+  margin: .25em 0 .9em;
+}
+.kin-verdict__banner img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+
+/* 結論：2社の役割を、順位ではなく選び方で見せる */
+.entry-content .kin-conclusion-title {
+  margin-top: clamp(1.05em, 4vw, 1.45em);
+  margin-bottom: .95em;
+  padding-bottom: .7em;
+  font-size: clamp(24px, 6.2vw, 33px);
+  line-height: 1.55;
+}
+.kin-conclusion-title > span {
+  display: inline-block;
+  margin-right: .48em;
+  padding: .2em .5em;
+  vertical-align: .18em;
+  font-family: var(--gothic);
+  font-size: .43em;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: #fff;
+  background: var(--sumi);
+}
+.kin-conclusion-title strong {
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.kin-pick2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 260px));
+  justify-content: center;
+  gap: .85em;
+  margin: 1.05em 0 1.35em;
+}
+.kin-choice {
+  position: relative;
+  display: block;
+  overflow: visible;
+  background: none;
+  text-decoration: none !important;
+}
+.kin-choice__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  transition: transform .25s ease;
+}
+.kin-choice:hover .kin-choice__image,
+.kin-choice:focus-visible .kin-choice__image { transform: scale(1.035); }
+.kin-choice:focus-visible { outline: 3px solid var(--gold-line); outline-offset: 3px; }
+
+/* バナーの広告主を、画像の直前で明確に示す */
+.kin-banner-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  margin: 0 0 .45em;
+  color: var(--sumi);
+  font-family: var(--gothic);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.kin-banner-label small {
+  display: inline-block;
+  padding: .2em .45em;
+  color: #fff;
+  background: var(--sumi);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1;
+}
+.kin-banner-label--campaign {
+  display: flex;
+  max-width: 640px;
+  margin: 1.6em auto .45em;
+}
+.kin-banner-label--campaign + .kin-camp { margin-top: 0; }
+
+@media screen and (max-width: 620px) {
+  /* スマホでは2社バナーを小さく横並びに */
+  .kin-pick2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55em; }
+  .kin-banner-label { font-size: 11px; gap: .3em; margin-bottom: .3em; }
+  .kin-banner-label small { font-size: 8.5px; padding: .15em .35em; }
+}
+
+/* 旧カード用の装飾は、結論の順位づけを避けるため使用しない */
+.kin-pick2__card {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.kin-pick2__card--1 {
+  position: relative;
+}
+.kin-pick2__crown {
+  position: absolute;
+  top: -1px; left: 50%; transform: translate(-50%, -50%);
+  background: var(--gold);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: .25em 1em;
+  white-space: nowrap;
+}
+.kin-pick2__logo {
+  height: 30px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: .3em 0 .7em;
+}
+.kin-pick2__logo--mk { filter: brightness(0); }
+.kin-pick2__name {
+  font-family: var(--mincho);
+  font-size: clamp(17px, 4.6vw, 21px);
+  font-weight: 600;
+  color: var(--sumi);
+  margin: 0 0 .3em;
+}
+.kin-pick2__tag {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink-sub);
+  margin: 0;
+}
+.kin-pick2__card--1 .kin-pick2__tag { color: var(--gold); font-weight: 700; }
+
+/* 結論直下：先に公式の確認先を明示する */
+.kin-official-cta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7em;
+  margin: 1.2em 0 1.5em;
+}
+.kin-official-cta a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: .75em .8em;
+  font-family: var(--gothic);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none !important;
+  border: 1px solid var(--rule);
+  color: var(--sumi);
+  background: var(--paper);
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.kin-official-cta__manekiya {
+  border-color: var(--gold-line) !important;
+  background: var(--gold-bg) !important;
+}
+.kin-official-cta a:hover,
+.kin-official-cta a:focus-visible {
+  background: var(--sumi) !important;
+  border-color: var(--sumi) !important;
+  color: #fff !important;
+}
+
+/* 公式情報で確認できた比較根拠 */
+.kin-proof {
+  margin: 1.5em 0 2em;
+  padding: clamp(1em, 4vw, 1.4em);
+  border: 1px solid var(--rule);
+  background: var(--paper);
+}
+.kin-proof__title {
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 19px);
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.65;
+  margin: 0 0 .9em;
+  padding-bottom: .65em;
+  border-bottom: 1px solid var(--rule);
+}
+.kin-proof__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.kin-proof__list li {
+  position: relative;
+  margin: 0;
+  padding: .85em 0 .85em 1.35em;
+  border-top: 1px dotted var(--rule);
+  line-height: 1.85;
+  font-size: .95em;
+}
+.kin-proof__list li:first-child { border-top: none; padding-top: 0; }
+.kin-proof__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.55em;
+  width: .55em;
+  height: .55em;
+  border: 1px solid var(--gold-line);
+  background: var(--gold-bg);
+}
+.kin-proof__list li:first-child::before { top: .7em; }
+.kin-proof__list strong { color: var(--sumi); }
+.kin-proof__note {
+  margin: 1em 0 0;
+  padding-top: .9em;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-sub);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.kin-proof__note a { color: inherit; text-decoration: underline; text-underline-offset: .16em; }
+
+@media screen and (max-width: 480px) {
+  .kin-official-cta { grid-template-columns: 1fr; }
+}
+
+/* 金額の仕組み：単価だけで決まらないことを先に示す */
+.kin-valuation {
+  margin: 1.5em 0 1.7em;
+  padding: clamp(1em, 4vw, 1.45em);
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-line);
+}
+.kin-valuation__title {
+  margin: 0 0 .8em;
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 19px);
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.6;
+}
+.kin-valuation__formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .35em .55em;
+  margin: 0;
+  padding: .8em;
+  background: rgba(255,255,255,.55);
+  border-top: 1px solid rgba(180,145,50,.45);
+  border-bottom: 1px solid rgba(180,145,50,.45);
+  font-size: clamp(12.5px, 3.3vw, 15px);
+  line-height: 1.75;
+  text-align: center;
+}
+.kin-valuation__formula strong { color: var(--sumi); }
+.kin-valuation__formula span {
+  font-family: var(--mincho);
+  font-size: 1.35em;
+  color: var(--gold);
+}
+.kin-valuation__text {
+  margin: .9em 0 0;
+  font-size: .95em;
+  line-height: 1.85;
+}
+
+/* 査定額を比較するための明細チェック */
+.kin-quote-check {
+  margin: 1.8em 0 2.2em;
+  padding: clamp(1em, 4vw, 1.4em);
+  border: 1px solid var(--sumi);
+  background: var(--paper);
+}
+.kin-quote-check__title {
+  margin: 0 0 .8em;
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 19px);
+  font-weight: 600;
+  color: var(--sumi);
+}
+.kin-quote-check ol {
+  counter-reset: quote-check;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.kin-quote-check li {
+  counter-increment: quote-check;
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: .75em .7em .75em 2.35em;
+  background: #f8f6f0;
+  font-size: .9em;
+  line-height: 1.7;
+}
+.kin-quote-check li::before {
+  content: counter(quote-check, decimal-leading-zero);
+  position: absolute;
+  left: .7em;
+  top: .75em;
+  font-family: var(--mincho);
+  font-weight: 600;
+  color: var(--gold);
+}
+.kin-quote-check__note {
+  margin: 1em 0 0;
+  padding-top: .9em;
+  border-top: 1px solid var(--rule);
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--ink-sub);
+}
+.kin-quote-check__sources {
+  margin: .8em 0 0;
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: var(--ink-sub);
+}
+.kin-quote-check__sources a { color: inherit; text-decoration: underline; text-underline-offset: .16em; }
+
+@media screen and (max-width: 600px) {
+  .kin-quote-check ol { grid-template-columns: 1fr; }
+}
+
+/* なぜこの2社なのか：5つの軸 */
+.kin-why {
+  list-style: none;
+  counter-reset: why;
+  padding: 0;
+  margin: 1.6em 0 2em;
+  border-top: 1px solid var(--rule);
+}
+.kin-why > li {
+  counter-increment: why;
+  position: relative;
+  padding: 1.2em 0 1.2em 3.4em;
+  border-bottom: 1px solid var(--rule);
+}
+.kin-why > li::before {
+  content: counter(why, decimal-leading-zero);
+  position: absolute;
+  left: 0; top: 1.15em;
+  font-family: var(--mincho);
+  font-size: 1.4em;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+}
+.kin-why__ttl {
+  font-family: var(--mincho);
+  font-size: 1.14em;
+  font-weight: 600;
+  color: var(--sumi);
+  margin: 0 0 .4em;
+  line-height: 1.5;
+}
+.kin-why__ttl small {
+  display: inline-block;
+  font-family: var(--gothic);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--gold);
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-line);
+  padding: .1em .6em;
+  margin-left: .5em;
+  vertical-align: 2px;
+}
+.kin-why > li p { margin: 0; line-height: 1.85; font-size: .97em; }
+.kin-why > li p + p { margin-top: .6em; }
+.kin-manekiya-appraisal { margin: 1.1em 0 2em; padding: 1.2em 0 0; border-top: 3px solid #b8202a; }
+.kin-manekiya-appraisal__intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(220px, .9fr); align-items: center; gap: clamp(1em, 4vw, 2em); }
+.kin-manekiya-appraisal__eyebrow { margin: 0 0 .35em; color: #b8202a; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+.kin-manekiya-appraisal h4 { margin: 0 0 .6em; font-family: var(--mincho); font-size: clamp(20px, 5vw, 26px); line-height: 1.45; color: var(--sumi); }
+.kin-manekiya-appraisal__intro p:not(.kin-manekiya-appraisal__eyebrow) { margin: .55em 0 0; font-size: .95em; line-height: 1.9; }
+.kin-manekiya-appraisal__intro figure { margin: 0; padding: .5em; background: #f7f4ed; }
+.kin-manekiya-appraisal__intro figure img { display: block; width: 100%; height: auto; }
+.kin-manekiya-appraisal__intro figcaption { margin-top: .5em; color: var(--ink-sub); font-size: 10px; text-align: center; }
+.kin-manekiya-appraisal__tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65em; margin-top: 1em; }
+.kin-manekiya-appraisal__tools article { display: grid; grid-template-columns: 78px minmax(0, 1fr); align-items: center; gap: .7em; padding: .7em; border: 1px solid var(--rule); background: #fff; }
+.kin-manekiya-appraisal__tools img { width: 78px; height: 78px; object-fit: contain; }
+.kin-manekiya-appraisal__tools p { margin: 0; }
+.kin-manekiya-appraisal__tools b, .kin-manekiya-appraisal__tools span { display: block; }
+.kin-manekiya-appraisal__tools b { color: var(--sumi); font-size: .9em; }
+.kin-manekiya-appraisal__tools span { margin-top: .3em; color: var(--ink-sub); font-size: 11px; line-height: 1.55; }
+.kin-manekiya-appraisal__results { margin-top: 1.1em; padding-top: 1em; border-top: 1px solid var(--rule); }
+.kin-manekiya-appraisal__results-head { margin: 0 0 .7em; font-family: var(--mincho); font-size: 1.05em; font-weight: 700; color: var(--sumi); }
+.kin-manekiya-appraisal__results-head small { margin-left: .35em; color: var(--ink-sub); font-family: var(--gothic); font-size: 11px; font-weight: 400; }
+.kin-manekiya-appraisal__results > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5em; }
+.kin-manekiya-appraisal__results figure { margin: 0; padding: .5em; border: 1px solid var(--rule); background: #fff; text-align: center; }
+.kin-manekiya-appraisal__results img { display: block; width: 100%; height: 98px; object-fit: contain; }
+.kin-manekiya-appraisal__results figcaption { margin-top: .4em; color: var(--ink-sub); font-size: 10px; line-height: 1.45; }
+.kin-manekiya-appraisal__results strong { display: block; margin-top: .15em; color: #b8202a; font-size: 1.2em; }
+.kin-manekiya-appraisal__source { margin: .7em 0 0; color: var(--ink-sub); font-size: 10px; line-height: 1.7; }
+.kin-manekiya-appraisal__source a { color: inherit; text-decoration: underline; text-underline-offset: .15em; }
+@media screen and (max-width: 720px) { .kin-manekiya-appraisal__intro { grid-template-columns: 1fr; } .kin-manekiya-appraisal__tools { grid-template-columns: 1fr; } .kin-manekiya-appraisal__results > div { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* キャンペーン画像（赤リボンに日付を自動で重ねる） */
+.kin-camp {
+  position: relative;
+  display: block;
+  max-width: 640px;
+  margin: 1.6em auto;
+}
+.kin-camp img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+/* info_img2.webp の赤リボン中央に日付を配置 */
+.kin-camp__date {
+  position: absolute;
+  left: 54%;
+  top: 26.5%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: clamp(12px, 3.4vw, 24px);
+  letter-spacing: .04em;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* キャンペーン紹介カード（両社並列） */
+.kin-camps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2em;
+  margin: 1.6em 0 2em;
+}
+@media screen and (min-width: 560px) {
+  .kin-camps { grid-template-columns: 1fr 1fr; }
+}
+.kin-camp-card {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  overflow: hidden;
+}
+.kin-camp-card img { width: 100%; height: auto; display: block; }
+.kin-camp-card__body { padding: .9em 1.1em 1.1em; }
+.kin-camp-card__name {
+  font-family: var(--mincho);
+  font-weight: 600;
+  color: var(--sumi);
+  font-size: 1.05em;
+  margin: 0 0 .3em;
+}
+.kin-camp-card__txt { font-size: 13.5px; line-height: 1.8; color: var(--ink); margin: 0; }
+.kin-camp-card__cond { font-size: 12px; color: var(--ink-sub); margin: .5em 0 0; line-height: 1.7; }
+
+/* 横並び：写真＋説明文（左右交互） */
+.kin-media {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  margin: 1.6em 0 2em;
+}
+.kin-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-media__body > *:last-child { margin-bottom: 0; }
+.kin-media__cap {
+  font-family: var(--mincho);
+  font-size: 1.08em;
+  font-weight: 600;
+  color: var(--sumi);
+  margin: 0 0 .5em;
+}
+@media screen and (min-width: 600px) {
+  .kin-media { grid-template-columns: 1fr 1fr; align-items: center; gap: 1.6em; }
+  .kin-media--rev .kin-media__fig { order: 2; }
+}
+
+/* 幅いっぱいの単写真 */
+.kin-photo {
+  margin: 1.6em 0 2em;
+}
+.kin-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-photo figcaption {
+  font-size: 12.5px;
+  color: var(--ink-sub);
+  line-height: 1.8;
+  margin-top: .6em;
+}
+
+/* 純度別 価格表 */
+.kin-rate {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  margin: 1.6em 0 .8em;
+  font-size: clamp(14px, 3.7vw, 16px);
+}
+.kin-rate th, .kin-rate td {
+  padding: .7em .9em;
+  border-bottom: 1px solid var(--rule-2);
+}
+.kin-rate thead th {
+  background: var(--sumi);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+.kin-rate tbody th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--sumi);
+  background: #fbfaf7;
+  width: 40%;
+}
+.kin-rate tbody td {
+  text-align: right;
+  font-family: var(--mincho);
+  font-weight: 600;
+  color: var(--sumi);
+  font-variant-numeric: tabular-nums;
+}
+.kin-rate tbody tr:last-child th,
+.kin-rate tbody tr:last-child td { border-bottom: none; }
+.kin-rate .kin-rate__g { font-size: .8em; font-weight: 400; color: var(--ink-sub); margin-left: .2em; }
+
+/* 買取対象カテゴリ */
+.kin-cats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: .7em;
+  margin: 1.3em 0 1.6em;
+  padding: 0;
+  list-style: none;
+}
+.kin-cats li { margin: 0; text-align: center; }
+.kin-cats img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.kin-cats span {
+  display: block;
+  font-family: var(--mincho);
+  font-size: 14px;
+  color: var(--sumi);
+  margin-top: .4em;
+}
+
+/* 店舗マップ */
+.kin-map {
+  max-width: 300px;
+  margin: 0 auto 1em;
+}
+.kin-map img { width: 100%; height: auto; display: block; }
+
+/* ロゴ */
+.kin-logo {
+  display: block;
+  max-width: 190px;
+  height: auto;
+  margin: 0 auto 1.2em;
+}
+
+/* 対決ヘッダー（表の上。スマホでもPCでも出る） */
+.kin-vs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: .8em;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--gold-line);
+  background: var(--paper);
+  padding: 1.2em .9em;
+  margin: 2em 0 0;
+}
+
+.kin-vs__side { text-align: center; min-width: 0; }
+
+.kin-vs__logo {
+  width: 100%;
+  max-width: 116px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto .5em;
+}
+
+/* まねきや公式ロゴは fill:#fff の白抜き版のため、
+   白背景では見えない。黒に反転させて使う */
+.kin-vs__logo[src$=".svg"] { filter: brightness(0); }
+
+.kin-vs__name {
+  display: block;
+  font-family: var(--mincho);
+  font-size: clamp(15px, 4vw, 18px);
+  font-weight: 600;
+  color: var(--sumi);
+  line-height: 1.4;
+}
+
+.kin-vs__sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink-sub);
+  margin-top: .2em;
+  line-height: 1.5;
+}
+
+.kin-vs__mark {
+  font-family: var(--mincho);
+  font-size: clamp(16px, 4.4vw, 20px);
+  color: var(--gold);
+  letter-spacing: .04em;
+}
+
+/* 対決ヘッダーに続く表は上の余白を詰める */
+.kin-vs + .kin-compare { margin-top: 0; border-top: none; }
+
+/* =========================================================
+   12.6 結論ボックス（先に答えを出す）
+   ========================================================= */
 .kin-verdict {
   border: 2px solid var(--sumi);
   background: var(--paper);
@@ -1214,4 +2163,3 @@ h2, h3,
   .kin-sell .sell-why { padding: .1em .85em .7em; border: none; font-size: 12.5px; color: #3a3f4a; }
   .kin-sell .sell-why::before { content: "理由："; color: var(--ink-sub); font-weight: 700; }
 }
-
