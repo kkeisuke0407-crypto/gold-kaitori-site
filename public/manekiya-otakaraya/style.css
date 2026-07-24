@@ -1936,9 +1936,14 @@ h2, h3,
 @media (max-width: 560px) { .kin-fit { grid-template-columns: 1fr; } }
 
 /* 筆者の立ち位置（パーソナルな導入） */
-.kin-author { margin: 1.2em var(--pad); padding: 1em 1.1em; background: var(--bg); border: 1px solid var(--rule); border-left: 4px solid var(--gold-line); border-radius: 10px; }
+.kin-author { margin: 1.3em var(--pad); padding: 1.15em 1.2em 1.2em; background: #fff; border: 1px solid var(--gold-line); border-left: 5px solid var(--gold-line); border-radius: 12px; box-shadow: 0 6px 18px rgba(20,20,20,.06); }
+.kin-author::before { content: "筆者より"; display: inline-block; font-family: var(--gothic); font-weight: 800; font-size: 12px; letter-spacing: .04em; color: var(--gold); background: var(--gold-bg); border: 1px solid var(--gold-line); border-radius: 999px; padding: .18em .85em; margin-bottom: .7em; }
 .kin-author p { margin: 0 0 .7em; }
 .kin-author p:last-child { margin-bottom: 0; }
+
+/* まとめ表：ラベルと店名を語中で折り返さない（狭い端末対策） */
+.kin-table--stack tbody td::before { white-space: nowrap; }
+.kin-table--stack tbody td strong { white-space: nowrap; }
 
 /* 結論エリア：バナー横並び＋各バナー下に公式CTA（改修） */
 .kin-pick-verdict { grid-template-columns: 1fr 1fr; align-items: start; }
