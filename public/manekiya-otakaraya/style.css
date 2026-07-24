@@ -1959,12 +1959,12 @@ h2, h3,
 .kin-cmp9 thead th { background: var(--sumi); color: #fff; font-weight: 800; white-space: nowrap; text-align: center; position: sticky; top: 0; }
 .kin-cmp9 .cmp9-sh { min-width: 132px; white-space: nowrap; position: sticky; left: 0; z-index: 2; background: #f7f5f0; }
 .kin-cmp9 thead .cmp9-sh { background: var(--sumi); z-index: 3; }
-.kin-cmp9 .cmp9-win .cmp9-sh { background: var(--gold-bg) !important; }
-.kin-cmp9 .cmp9-win td { background: #fffdf6; }
+.kin-cmp9 .cmp9-candidate .cmp9-sh { background: var(--gold-bg) !important; }
+.kin-cmp9 .cmp9-candidate td { background: #fffdf6; }
 .kin-cmp9 .cmp9-rank { display: inline-block; font-size: 10px; font-weight: 800; color: #fff; background: var(--gold); border-radius: 5px; padding: 1px 5px; margin-right: 4px; }
-.kin-cmp9 .cmp9-win .cmp9-rank { background: var(--alert); }
+.kin-cmp9 .cmp9-candidate .cmp9-rank { background: var(--alert); }
 .kin-cmp9 a { color: var(--sumi); font-weight: 800; }
-.kin-cmp9 .cmp9-win a { color: var(--alert); }
+.kin-cmp9 .cmp9-candidate a { color: var(--alert); }
 .kin-cmp9 .cmp9-company { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; width: 100%; }
 .kin-cmp9 .cmp9-company > a { display: flex; flex-direction: column; align-items: center; width: 94px; min-width: 0; text-align: center; text-decoration: none; }
 .kin-cmp9 .cmp9-company .cmp9-rank { align-self: flex-start; margin: 0; }
@@ -2135,31 +2135,4 @@ h2, h3,
 .kin-table--stack tbody td strong { white-space: nowrap; }
 
 /* 結論エリア：バナー横並び＋各バナー下に公式CTA（改修） */
-.kin-pick-verdict { grid-template-columns: 1fr 1fr; align-items: start; }
-.kin-pv-col { display: flex; flex-direction: column; }
-.kin-pv-col .kin-pv__label { align-self: flex-start; margin-bottom: .45em; }
-.kin-pv-banner { display: block; line-height: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
-.kin-pv-banner img { width: 100%; height: auto; display: block; }
-.kin-pv-pr { display: inline-block; font-size: 9px; letter-spacing: .1em; color: #9aa0ab; margin: .35em 0 0; }
-.kin-pv-cta {
-  display: block; margin-top: .55em; text-align: center;
-  font-family: var(--gothic); font-weight: 800; font-size: clamp(12px,3.4vw,14px);
-  padding: .68em .4em; border-radius: 8px; text-decoration: none !important; line-height: 1.35;
-}
-.kin-pv-col--1 .kin-pv-cta { background: var(--sumi); color: #fff; border-bottom: 3px solid #05101f; }
-.kin-pv-col--2 .kin-pv-cta { background: #fff; color: var(--sumi); border: 1px solid var(--sumi); }
-
-/* 品目別表：店名を語中で折り返さない＋スマホはカード積みに（3列つぶれ対策） */
-.kin-sell a { white-space: nowrap; }
-@media (max-width: 560px) {
-  .kin-sell-wrap { overflow: visible; }
-  .kin-sell, .kin-sell thead, .kin-sell tbody, .kin-sell tr, .kin-sell th, .kin-sell td { display: block; width: 100%; }
-  .kin-sell thead { display: none; }
-  .kin-sell tbody tr { border: 1px solid var(--rule); border-radius: 8px; margin-bottom: .8em; background: #fff; overflow: hidden; }
-  .kin-sell .sell-situ { background: #f4f2ec; font-weight: 800; padding: .6em .85em; border-bottom: 1px solid var(--rule); }
-  .kin-sell .sell-pick { padding: .7em .85em .35em; border: none; }
-  .kin-sell .sell-first { display: inline-block; font-size: 16px; margin-bottom: .1em; }
-  .kin-sell .sell-comp { display: block; font-size: 11.5px; margin-top: .2em; }
-  .kin-sell .sell-why { padding: .1em .85em .7em; border: none; font-size: 12.5px; color: #3a3f4a; }
-  .kin-sell .sell-why::before { content: "理由："; color: var(--ink-sub); font-weight: 700; }
-}
+.kin-pick-verdict { gr
