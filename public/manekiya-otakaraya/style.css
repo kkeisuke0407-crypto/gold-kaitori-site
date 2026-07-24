@@ -929,10 +929,11 @@ a { color: #1b4f86; text-underline-offset: .25em; }
     min-width: 0;
     min-height: var(--tap);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: .5em .3em;
+    gap: .42em;
+    padding: .42em .3em;
     color: #fff !important;
     font-weight: 700;
     font-size: clamp(13px, 3.6vw, 15px);
@@ -944,19 +945,28 @@ a { color: #1b4f86; text-underline-offset: .25em; }
   .kin-fixed-cta a:first-child { border-left: none; }
 
   .kin-fixed-cta a small {
+    display: block;
     font-size: .74em;
     font-weight: 400;
     color: #9aa6ba;
     margin-top: .15em;
   }
+  .kin-fixed-cta a > img {
+    width: 48px;
+    max-height: 21px;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+  .kin-fixed-cta a > span { min-width: 0; text-align: center; }
 
   /* 電話が成果の主役。面積を広く取り、赤で目立たせる。WEBは緑で差別化 */
   .kin-fixed-cta .kin-fixed-tel {
-    flex: 1.6 1 0;
+    flex: 1 1 0;
     background: linear-gradient(180deg, #e8342f 0%, #d1221d 100%);
   }
   .kin-fixed-cta .kin-fixed-tel small { color: #ffe0dd; }
   .kin-fixed-cta .kin-fixed-web { background: linear-gradient(180deg, #08b451 0%, #06a044 100%); }
+  .kin-fixed-cta .kin-fixed-web > img { background: #fff; border-radius: 3px; padding: 2px; }
   .kin-fixed-cta .kin-fixed-web small { color: #d7f2e1; }
 
   body { padding-bottom: calc(var(--tap) + 24px + env(safe-area-inset-bottom, 0px)); }
@@ -1842,6 +1852,14 @@ p.kin-verdict__why { font-size: .95em; line-height: 1.85; margin: 0; color: var(
   color: #fff !important;
 }
 .kin-phone:hover, .kin-phone:focus { background: #c71f1a; color: #fff !important; }
+.kin-phone .kin-cta-brand {
+  display: block;
+  margin-bottom: .22em;
+  color: #ffe0dd;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
 
 .kin-phone__badge {
   display: inline-block;
@@ -1924,8 +1942,37 @@ h2, h3,
    追加コンポーネント（改修：パッと優劣／9社表／品目別／合う人）
    ============================================================ */
 
-/* FV直下の特大「結論」＝ひと目で優劣（老眼配慮で大きく） */
-.kin-pick-verdict { margin: 1.1em var(--pad) .3em; display: grid; gap: .6em; }
+/* FV直下の結論と公式CTA */
+.kin-fv-conclusion {
+  margin: 1.25em 0 .85em;
+  text-align: center;
+  color: var(--sumi);
+  font-family: var(--gothic);
+}
+.kin-cta--web .kin-cta-brand {
+  display: inline-block;
+  margin-right: .55em;
+  padding: .13em .45em;
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.kin-fv-conclusion__lead { margin: 0 0 .2em; font-size: 15px; font-weight: 800; }
+.kin-fv-conclusion__main {
+  margin: 0;
+  font-size: clamp(23px, 6.3vw, 28px);
+  font-weight: 900;
+  line-height: 1.45;
+  letter-spacing: -.025em;
+}
+.kin-fv-conclusion__main br { display: none; }
+@media screen and (max-width: 390px) {
+  .kin-fv-conclusion__main { font-size: clamp(20px, 5.5vw, 23px); line-height: 1.4; }
+  .kin-fv-conclusion__main br { display: block; }
+}
+.kin-pick-verdict { margin: 0 0 2.1em; display: grid; gap: .7em; }
 .kin-pv {
   display: block; padding: .9em 1em; border: 2px solid var(--rule);
   border-radius: 13px; background: #fff; text-decoration: none !important;
@@ -1946,7 +1993,7 @@ h2, h3,
 .kin-pv__sub { display: block; font-size: clamp(13.5px,3.8vw,16px); color: #3a3f4a; margin-top: .35em; line-height: 1.55; }
 .kin-pv__sub b { color: var(--sumi); }
 
-/* 9社比較表（横スクロール・まねきや1位） */
+/* 9社比較表（横スクロール） */
 .kin-cmp9-note { font-size: 12px; color: var(--gold); font-weight: 700; margin: 0 var(--pad) .35em; }
 .kin-cmp9-wrap { overflow-x: auto; margin: 0 var(--pad); -webkit-overflow-scrolling: touch; border: 1px solid var(--rule); border-radius: 6px; }
 @media (max-width: 560px) {
@@ -1954,9 +2001,9 @@ h2, h3,
   .kin-cmp9-wrap { margin-left: calc(6px - var(--pad)); margin-right: calc(6px - var(--pad)); }
   .kin-cmp9-note { margin-left: calc(6px - var(--pad)); }
 }
-.kin-cmp9 { border-collapse: collapse; background: #fff; min-width: 800px; font-family: var(--gothic); }
-.kin-cmp9 th, .kin-cmp9 td { padding: 8px; font-size: 11px; line-height: 1.5; border-bottom: 1px solid var(--rule); border-right: 1px solid #eef0f3; text-align: left; vertical-align: top; min-width: 100px; }
-.kin-cmp9 thead th { background: var(--sumi); color: #fff; font-weight: 800; white-space: nowrap; text-align: center; position: sticky; top: 0; }
+.kin-cmp9 { border-collapse: collapse; background: #fff; min-width: 960px; font-family: var(--gothic); }
+.kin-cmp9 th, .kin-cmp9 td { padding: 12px 10px; font-size: 13px; line-height: 1.55; border-bottom: 1px solid var(--rule); border-right: 1px solid #eef0f3; text-align: left; vertical-align: top; min-width: 100px; }
+.kin-cmp9 thead th { background: var(--sumi); color: #fff; font-size: 12px; font-weight: 800; white-space: nowrap; text-align: center; position: sticky; top: 0; }
 .kin-cmp9 .cmp9-sh { min-width: 132px; white-space: nowrap; position: sticky; left: 0; z-index: 2; background: #f7f5f0; }
 .kin-cmp9 thead .cmp9-sh { background: var(--sumi); z-index: 3; }
 .kin-cmp9 .cmp9-candidate .cmp9-sh { background: var(--gold-bg) !important; }
@@ -1980,10 +2027,14 @@ h2, h3,
 .kin-cmp9 .cmp9-logo--buysell { background-image: url("images/logos/logo-buysell.svg"); background-size: 94px auto; }
 .kin-cmp9 .cmp9-logo--jewelcafe { background-image: url("images/logos/logo-jewelcafe.png"); background-size: 88px auto; }
 .kin-cmp9 .cmp9-cp b { color: var(--alert); }
-.kin-cmp9 .cmp9-note { color: var(--ink-sub); font-size: 10.5px; }
-.tekisei-a { color: var(--win); font-size: 16px; font-weight: 800; }
-.tekisei-b { color: #3b7fbf; font-size: 15px; }
-.tekisei-c { color: #9aa5ac; font-size: 14px; }
+.kin-cmp9 .cmp9-note { color: var(--ink-sub); font-size: 12px; }
+.kin-cmp9 .cmp9-item { min-width: 88px; text-align: center; vertical-align: middle; }
+.kin-cmp9 .cmp9-item strong { display: block; color: var(--sumi); font-size: 21px; font-weight: 900; line-height: 1.1; white-space: nowrap; }
+.kin-cmp9 .cmp9-tek { min-width: 72px; text-align: center; vertical-align: middle; }
+.kin-cmp9 .cmp9-tek span { display: inline-block; font-family: var(--sans); font-size: 27px; font-weight: 900; line-height: 1; }
+.tekisei-a { color: var(--win); }
+.tekisei-b { color: #3b7fbf; }
+.tekisei-c { color: #9aa5ac; }
 
 /* 品目別・状況別で選ぶ表 */
 .kin-sell-wrap {
@@ -2024,7 +2075,7 @@ h2, h3,
 
 /* FVの筆者導入：問いと結論だけを主役にする、余白で読ませる編集レイアウト */
 .kin-opening {
-  margin: clamp(1.5em, 4.5vw, 2.2em) 0 clamp(2.4em, 5.5vw, 3.6em);
+  margin: clamp(1.5em, 4.5vw, 2.2em) 0 .8em;
   color: var(--sumi);
   font-family: var(--gothic);
   letter-spacing: 0;
@@ -2106,6 +2157,15 @@ h2, h3,
   padding: 0 .08em .04em;
 }
 .kin-opening__research-target { white-space: nowrap; }
+.kin-opening__next {
+  margin: 0 0 clamp(2.2em, 5vw, 3em);
+  color: var(--sumi);
+  font-family: var(--gothic);
+  font-size: clamp(15px, 4vw, 17px);
+  line-height: 1.75;
+  text-align: center;
+}
+.kin-opening__next strong { color: var(--sumi); }
 .kin-opening__research .kin-opening__conclusion {
   margin-top: 1.3em;
   color: var(--sumi);
@@ -2134,7 +2194,7 @@ h2, h3,
   .kin-opening__conclusion-main { white-space: nowrap; }
 }
 @media screen and (max-width: 520px) {
-  .kin-opening { margin-top: 1.35em; margin-bottom: 2.55em; }
+  .kin-opening { margin-top: 1.35em; margin-bottom: .75em; }
   .kin-opening__question { margin: 1.15em 0 1.35em; }
   .kin-opening__question-value { font-size: 30px; }
   .kin-opening__conclusion-main { display: block; }
@@ -2152,7 +2212,15 @@ h2, h3,
 /* 結論エリア：バナー横並び＋各バナー下に公式CTA（改修） */
 .kin-pick-verdict { grid-template-columns: 1fr 1fr; align-items: start; }
 .kin-pv-col { display: flex; flex-direction: column; }
-.kin-pv-col .kin-pv__label { align-self: flex-start; margin-bottom: .45em; }
+.kin-pv-col .kin-pv__label { align-self: stretch; margin-bottom: .45em; text-align: center; }
+.kin-pv__label small,
+.kin-pv-cta small {
+  display: block;
+  margin-bottom: .12em;
+  font-size: .72em;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
 .kin-pv-banner { display: block; line-height: 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
 .kin-pv-banner img { width: 100%; height: auto; display: block; }
 .kin-pv-pr { display: inline-block; font-size: 9px; letter-spacing: .1em; color: #9aa0ab; margin: .35em 0 0; }
