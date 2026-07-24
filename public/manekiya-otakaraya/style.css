@@ -1878,6 +1878,11 @@ h2, h3,
 /* 9社比較表（横スクロール・まねきや1位） */
 .kin-cmp9-note { font-size: 12px; color: var(--gold); font-weight: 700; margin: 0 var(--pad) .35em; }
 .kin-cmp9-wrap { overflow-x: auto; margin: 0 var(--pad); -webkit-overflow-scrolling: touch; border: 1px solid var(--rule); border-radius: 6px; }
+@media (max-width: 560px) {
+  /* 9社表を画面幅いっぱいに（entry-contentのpaddingを打ち消し） */
+  .kin-cmp9-wrap { margin-left: calc(6px - var(--pad)); margin-right: calc(6px - var(--pad)); }
+  .kin-cmp9-note { margin-left: calc(6px - var(--pad)); }
+}
 .kin-cmp9 { border-collapse: collapse; background: #fff; min-width: 800px; font-family: var(--gothic); }
 .kin-cmp9 th, .kin-cmp9 td { padding: 8px; font-size: 11px; line-height: 1.5; border-bottom: 1px solid var(--rule); border-right: 1px solid #eef0f3; text-align: left; vertical-align: top; min-width: 100px; }
 .kin-cmp9 thead th { background: var(--sumi); color: #fff; font-weight: 800; white-space: nowrap; text-align: center; position: sticky; top: 0; }
