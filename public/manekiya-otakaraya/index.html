@@ -624,6 +624,49 @@
 
     <p>まねきやの公式サイトには<strong>本日の貴金属相場</strong>が掲載され、純度別の目安を確認できます。</p>
 
+    <div class="kin-calc" id="kin-calc">
+      <div class="kin-calc__head"><span>あなたの金、今いくら？</span><span class="kin-calc__date" id="kin-calc-date">相場読み込み中</span></div>
+      <div class="kin-calc__body">
+        <p class="kin-calc__now">
+          <span class="kin-calc__now-label">純金(K24)</span>
+          <span class="kin-calc__now-val" id="kin-calc-gold">—</span>
+          <span class="kin-calc__now-unit">円/g</span>
+          <span class="kin-calc__diff" id="kin-calc-diff"></span>
+        </p>
+        <p class="kin-calc__src">出典：<a href="https://gold.tanaka.co.jp/commodity/souba/d-gold.php" target="_blank" rel="noopener noreferrer">田中貴金属 公表の店頭小売価格</a>（毎営業日更新）</p>
+
+        <div class="kin-calc__form">
+          <label class="kin-calc__field">
+            <span>純度（刻印）</span>
+            <select id="kin-calc-karat">
+              <option value="k18" selected>K18（750）</option>
+              <option value="k24">K24（純金・999）</option>
+              <option value="k22">K22（916）</option>
+              <option value="k14">K14（585）</option>
+              <option value="k10">K10（417）</option>
+              <option value="pt1000">Pt1000（プラチナ）</option>
+            </select>
+          </label>
+          <label class="kin-calc__field">
+            <span>重さ（g）</span>
+            <input id="kin-calc-gram" type="number" inputmode="decimal" min="0" step="0.1" value="10">
+          </label>
+        </div>
+
+        <div class="kin-calc__result">
+          <span class="kin-calc__result-label">ざっくり目安</span>
+          <span class="kin-calc__result-val" id="kin-calc-out">—</span>
+          <span class="kin-calc__result-note">地金相場ベースの概算です。石・デザイン・ブランドの価値、手数料や特典は含みません。<strong>実際の手取りは査定で変わります。</strong></span>
+        </div>
+
+        <div class="kin-calc__cta">
+          <a class="kin-cta kin-cta--web kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">この金額より高くなるか、無料で聞いてみる</a>
+        </div>
+
+        <p class="kin-calc__foot">※ 純度別の係数は実測値をもとにした概算です。ネックレスの金具やチェーンの一部に別素材が使われている場合など、実際の評価は変わります。まずは「あなたの品でいくらか」を無料査定で確認してください。</p>
+      </div>
+    </div>
+
     <p>もちろん、サイトの表示価格＝あなたの手取りではありません。形状・重量・石の評価・手数料で変わります。だから<strong>「私のコレだと、いくら？」</strong>まで踏み込んで聞いてください。</p>
 
     <p class="kin-punch">相場を見て、<br>明細を聞く。</p>
@@ -1040,6 +1083,48 @@
   if (today) {
     today.textContent = y + '年' + (jst.getMonth() + 1) + '月' + jst.getDate() + '日';
   }
+}());
+</script>
+
+<script>
+/* 本日の相場を読み込んで、かんたん概算を出す（相場は /rates.json = 田中貴金属ベースで毎日自動更新） */
+(function () {
+  var el = function (id) { return document.getElementById(id); };
+  var box = el('kin-calc');
+  if (!box) return;
+  var out = el('kin-calc-out'), karat = el('kin-calc-karat'), gram = el('kin-calc-gram');
+  var rates = null;
+
+  function yen(n) { return n.toLocaleString('ja-JP'); }
+
+  function calc() {
+    if (!rates) return;
+    var unit = rates[karat.value];
+    var g = parseFloat(gram.value);
+    if (!unit || !isFinite(g) || g <= 0) { out.textContent = '—'; return; }
+    out.textContent = '約 ' + yen(Math.round(unit * g)) + ' 円';
+  }
+
+  fetch('/rates.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      rates = d;
+      el('kin-calc-gold').textContent = yen(d.k24);
+      el('kin-calc-date').textContent = d.updatedAt || '';
+      var diff = el('kin-calc-diff');
+      if (typeof d.goldDiff === 'number' && d.goldDiff !== 0) {
+        var up = d.goldDiff > 0;
+        diff.textContent = (up ? '▲+' : '▼') + yen(Math.abs(d.goldDiff)) + '円';
+        diff.className = 'kin-calc__diff ' + (up ? 'kin-calc__diff--up' : 'kin-calc__diff--down');
+      }
+      calc();
+    })
+    .catch(function () {
+      el('kin-calc-date').textContent = '公式サイトでご確認ください';
+    });
+
+  karat.addEventListener('change', calc);
+  gram.addEventListener('input', calc);
 }());
 </script>
 

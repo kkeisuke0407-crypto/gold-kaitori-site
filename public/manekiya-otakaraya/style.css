@@ -2250,3 +2250,55 @@ h2, h3,
   .kin-sell .sell-why { padding: .1em .85em .7em; border: none; font-size: 12.5px; color: #3a3f4a; }
   .kin-sell .sell-why::before { content: "理由："; color: var(--ink-sub); font-weight: 700; }
 }
+
+/* ============================================================
+   本日の相場＋かんたん計算機（CVRの決定打）
+   ============================================================ */
+.kin-calc {
+  margin: 1.4em 0 1.6em;
+  border: 2px solid var(--gold-line);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fffdf6, #fff8e8);
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(160,120,20,.13);
+}
+.kin-calc__head {
+  background: var(--sumi);
+  color: #fff;
+  padding: .75em 1em;
+  font-family: var(--gothic);
+  font-weight: 800;
+  font-size: clamp(15px,4.1vw,17px);
+  display: flex; align-items: baseline; justify-content: space-between; gap: .6em;
+}
+.kin-calc__date { font-size: 11px; font-weight: 600; color: #cfd6e4; white-space: nowrap; }
+.kin-calc__body { padding: 1em; }
+.kin-calc__now {
+  display: flex; align-items: baseline; justify-content: center; gap: .5em;
+  font-family: var(--gothic); margin: 0 0 .2em;
+}
+.kin-calc__now-label { font-size: 12px; font-weight: 700; color: var(--ink-sub); }
+.kin-calc__now-val { font-size: clamp(26px,7.6vw,34px); font-weight: 900; color: var(--sumi); letter-spacing: -.02em; }
+.kin-calc__now-unit { font-size: 14px; font-weight: 800; color: var(--ink-sub); }
+.kin-calc__diff { font-size: 12px; font-weight: 800; }
+.kin-calc__diff--up { color: var(--alert); }
+.kin-calc__diff--down { color: #2a63b8; }
+.kin-calc__src { text-align: center; font-size: 10.5px; color: var(--ink-sub); margin: 0 0 .9em; }
+.kin-calc__src a { color: inherit; }
+.kin-calc__form { display: grid; grid-template-columns: 1fr 1fr; gap: .55em; margin-bottom: .9em; }
+.kin-calc__field { display: flex; flex-direction: column; gap: .25em; }
+.kin-calc__field span { font-size: 11.5px; font-weight: 800; color: var(--ink-sub); }
+.kin-calc__field select,
+.kin-calc__field input {
+  width: 100%; padding: .6em .55em; font-size: 16px; font-family: var(--gothic); font-weight: 700;
+  border: 1px solid var(--rule); border-radius: 8px; background: #fff; color: var(--sumi);
+}
+.kin-calc__result {
+  text-align: center; padding: .85em .6em; border-radius: 10px;
+  background: #fff; border: 1px dashed var(--gold-line);
+}
+.kin-calc__result-label { display: block; font-size: 12px; font-weight: 800; color: var(--ink-sub); margin-bottom: .15em; }
+.kin-calc__result-val { display: block; font-size: clamp(28px,8.6vw,40px); font-weight: 900; color: var(--alert); letter-spacing: -.03em; line-height: 1.15; }
+.kin-calc__result-note { display: block; font-size: 11px; color: var(--ink-sub); margin-top: .4em; line-height: 1.5; }
+.kin-calc__cta { margin: .9em 0 0; }
+.kin-calc__foot { font-size: 10.5px; color: var(--ink-sub); line-height: 1.6; margin: .8em 0 0; }
