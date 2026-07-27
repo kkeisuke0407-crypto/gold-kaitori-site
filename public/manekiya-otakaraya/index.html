@@ -32,6 +32,35 @@
     .kin-pick2__name { font-size: 16px; white-space: nowrap; }
     .kin-pick2__tag { font-size: 10.5px; line-height: 1.6; white-space: nowrap; }
   }
+  /* 9社比較の調査根拠を表内に集約 */
+  .kin-cmp9 .cmp9-ref { display: inline-block; margin-top: .5em; font-size: 11px; font-weight: 700; color: #6b5424; text-decoration: underline; }
+  .kin-cmp9 .cmp9-strong { color: #a11919; font-weight: 900; }
+  .kin-cmp9 .cmp9-verdict { min-width: 165px; }
+  .kin-cmp9 .cmp9-verdict b { display: block; margin-bottom: .22em; color: #a11919; font-size: 14px; }
+  .kin-cmp9 .cmp9-specialty { min-width: 118px; text-align: center; vertical-align: middle; }
+  .kin-cmp9 .cmp9-specialty strong { display: block; color: #5f4310; font-size: 14px; line-height: 1.45; }
+  .kin-cmp9 .cmp9-business { min-width: 205px; }
+  .kin-cmp9 .cmp9-business strong { color: #3d2d16; }
+  .kin-cmp9 .cmp9-business small { display: block; margin-top: .25em; color: #6b6254; font-size: 11px; line-height: 1.45; }
+  .kin-cmp9 .cmp9-delivery { min-width: 205px; }
+  .kin-cmp9 .cmp9-delivery strong { color: #3d2d16; }
+  .kin-cmp9 .cmp9-delivery small { display: block; margin-top: .25em; color: #6b6254; font-size: 11px; line-height: 1.45; }
+  .kin-cmp9-scale-title { margin: 28px 0 8px; font-size: 18px; font-weight: 900; color: #3d2d16; }
+  .kin-cmp9-scale-lead { margin: 0 0 12px; font-size: 14px; line-height: 1.75; }
+  .kin-cmp9-scale { width: 100%; min-width: 880px; border-collapse: collapse; background: #fff; }
+  .kin-cmp9-scale th, .kin-cmp9-scale td { padding: 13px 12px; border: 1px solid #decfae; vertical-align: top; font-size: 13px; line-height: 1.6; }
+  .kin-cmp9-scale thead th { background: #5f4310; color: #fff; text-align: center; }
+  .kin-cmp9-scale tbody th { min-width: 115px; background: #fcf8ee; color: #3d2d16; }
+  .kin-cmp9-scale .cmp9-scale-company { min-width: 215px; }
+  .kin-cmp9-scale .cmp9-scale-network { min-width: 230px; }
+  .kin-cmp9-scale .cmp9-scale-read { min-width: 250px; }
+  .kin-cmp9-scale .cmp9-scale-manekiya th, .kin-cmp9-scale .cmp9-scale-manekiya td { background: #fff5dd; }
+  .kin-cmp9-scale .cmp9-scale-manekiya th { color: #a11919; }
+  /* 運営規模・店舗網は、分離表ではなく上の9社比較表の3列目に統合 */
+  .kin-cmp9-scale-title, .kin-cmp9-scale-title + .kin-cmp9-scale-lead, .kin-cmp9-scale-title + .kin-cmp9-scale-lead + .kin-cmp9-wrap { display: none; }
+  .kin-cmp9 .cmp9-scope { min-width: 150px; }
+  .kin-cmp9 .cmp9-contact { min-width: 155px; }
+  .kin-cmp9 .cmp9-logo--daikichi { display: flex; align-items: center; justify-content: center; border-radius: 3px; background: #c21920; color: #fff; font-size: 14px; font-weight: 900; letter-spacing: .04em; }
 </style>
 <!-- Google tag (gtag.js)：LP3系と同一のGA4 + Google広告CV計測 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
@@ -149,28 +178,140 @@
 
     <!-- ============ 9社比較 ============ -->
     <h2>まず、金の買取9社を比較しました</h2>
-    <p>「おすすめランキング」は、サイトごとに1位が違い、<strong>なぜ上位なのかまで説明されていない</strong>ことも少なくありません。そこで、公式の買取条件・手数料・実績・口コミと、実際の査定結果を同じ視点で確認しました。</p>
-    <p>結果として分かったのは、<strong>売りたい品目によって、向いている店は変わる</strong>ということです。時計やブランドバッグなら専門店の方が有利なこともあります。</p>
-    <p>そのうえで<strong class="em-mark">「金・貴金属」にしぼると、候補はまねきやとおたからやの2社に絞られました。</strong></p>
+    <p>「おすすめランキング」は、サイトごとに1位が違い、<strong>なぜ上位なのかまで説明されていない</strong>ことも少なくありません。そこで今回は、まず<strong>各店が何を得意としているか</strong>を整理し、そのうえで金を売る場合の選び方を確認しました。</p>
+    <p>時計・ブランド品に強い店、出張や整理品に強い店、金・貴金属の条件を細かく出している店では、見るべきポイントが違います。<strong>あなたが売るものに合う得意分野</strong>を、左から順に見てください。</p>
+    <p>そのうえで、最後の列だけは<strong class="em-mark">「金だけを売るなら、どこから査定するか」</strong>を結論にしています。単なる知名度ではなく、手数料と特典を反映した最終手取りで判断します。</p>
+    <p class="kin-cmp9-note">調査基準日：2026年7月24日。金相場・キャンペーンは変動するため、申込直前に公式条件を再確認してください。</p>
     <div class="kin-cmp9-note">👉 横にスクロールして全社見られます</div>
     <div class="kin-cmp9-wrap">
       <table class="kin-cmp9">
-        <thead><tr><th class="cmp9-sh">店名</th><th>強い品目</th><th>金適性</th><th>特典</th><th>手数料</th><th>方法</th><th>状態不良品</th><th>注意点</th></tr></thead>
+        <thead><tr><th class="cmp9-sh">店名</th><th class="cmp9-specialty">得意分野</th><th class="cmp9-scope">対応できる金</th><th>金レートの公開状況</th><th>手数料の扱い</th><th>品位・重量の確認</th><th>金向けの上乗せ条件</th><th>査定方法</th><th class="cmp9-contact">相談・受取の目安</th><th>金だけを売るなら</th></tr></thead>
         <tbody>
-          <tr class="cmp9-row cmp9-candidate"><th class="cmp9-sh"><span class="cmp9-company"><a class="kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer"><span class="cmp9-company__name">まねきや</span><span class="cmp9-logo cmp9-logo--manekiya" role="img" aria-label="まねきや"></span></a></span></th><td class="cmp9-item"><strong>金</strong></td><td class="cmp9-tek"><span class="tekisei-a">◎</span></td><td class="cmp9-cp"><b>最大30%UP</b><br>金手数料10%無料</td><td>無料</td><td>店頭・出張・宅配</td><td>刻印なし等も相談</td><td class="cmp9-note">金貨・インゴットは特典対象外</td></tr>
-          <tr class="cmp9-row cmp9-candidate"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://www.otakaraya.jp/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">おたからや</span><span class="cmp9-logo cmp9-logo--otakaraya" role="img" aria-label="おたからや"></span></a></span></th><td class="cmp9-item"><strong>金</strong></td><td class="cmp9-tek"><span class="tekisei-a">◎</span></td><td class="cmp9-cp">抽選で<b>10万円</b></td><td>無料</td><td>店頭・出張</td><td>状態不良も相談</td><td class="cmp9-note">店舗ごとの条件差に注意</td></tr>
-          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://brandrevalue.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">ブラリバ</span><span class="cmp9-logo cmp9-logo--brariba" role="img" aria-label="ブラリバ"></span></a></span></th><td class="cmp9-item"><strong>宝石</strong></td><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td class="cmp9-cp">初回20%UP系</td><td>無料</td><td>店頭・宅配・出張</td><td>個別判断</td><td class="cmp9-note">石・ブランド込み向き</td></tr>
-          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://nanboya.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">なんぼや</span><span class="cmp9-logo cmp9-logo--nanboya" role="img" aria-label="なんぼや"></span></a></span></th><td class="cmp9-item"><strong>時計</strong></td><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td class="cmp9-cp">新規5,000円UP</td><td>無料</td><td>店頭・宅配・出張</td><td>相談</td><td class="cmp9-note">ブランド品とまとめ向き</td></tr>
-          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://kaitori.e-daikoku.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">大黒屋</span><span class="cmp9-logo cmp9-logo--daikokuya" role="img" aria-label="大黒屋"></span></a></span></th><td class="cmp9-item"><strong>時計</strong></td><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td class="cmp9-cp">ジュエリー10%UP等</td><td>無料</td><td>店頭・宅配・出張</td><td>相談</td><td class="cmp9-note">総合買取・金券にも対応</td></tr>
-          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://komehyo.jp/kaitori/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">コメ兵</span><span class="cmp9-logo cmp9-logo--komehyo" role="img" aria-label="コメ兵"></span></a></span></th><td class="cmp9-item"><strong>ブランド</strong></td><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td class="cmp9-cp">最大10%UP</td><td>無料</td><td>店頭・宅配・出張</td><td>相談</td><td class="cmp9-note">地金単体は相見積もりを</td></tr>
-          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://goldplaza.jp/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">ゴールドプラザ</span><span class="cmp9-logo cmp9-logo--goldplaza" role="img" aria-label="ゴールドプラザ"></span></a></span></th><td class="cmp9-item"><strong>金</strong></td><td class="cmp9-tek"><span class="tekisei-b">○</span></td><td class="cmp9-cp">喜平・金貨等の特典</td><td>無料</td><td>店頭・宅配・出張</td><td>要確認</td><td class="cmp9-note">対象・地域の条件が細かい</td></tr>
-          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://buysell-kaitori.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">バイセル</span><span class="cmp9-logo cmp9-logo--buysell" role="img" aria-label="バイセル"></span></a></span></th><td class="cmp9-item"><strong>整理品</strong></td><td class="cmp9-tek"><span class="tekisei-c">△</span></td><td>抽選で5倍</td><td>無料</td><td>出張・店頭・宅配</td><td>相談</td><td class="cmp9-note">金単体よりまとめ売り向き</td></tr>
-          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://jewel-cafe.jp/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">ジュエルカフェ</span><span class="cmp9-logo cmp9-logo--jewelcafe" role="img" aria-label="ジュエルカフェ"></span></a></span></th><td class="cmp9-item"><strong>金</strong></td><td class="cmp9-tek"><span class="tekisei-c">△〜○</span></td><td class="cmp9-cp">20%UP系</td><td>無料</td><td>店頭・宅配・出張</td><td>相談</td><td class="cmp9-note">高額品は相見積もりを</td></tr>
+          <tr class="cmp9-row cmp9-candidate"><th class="cmp9-sh"><span class="cmp9-company"><a class="kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer"><span class="cmp9-company__name">まねきや</span><span class="cmp9-logo cmp9-logo--manekiya" role="img" aria-label="まねきや"></span></a></span></th><td class="cmp9-specialty"><strong>金・貴金属</strong></td><td class="cmp9-scope"><strong>K24〜K5</strong><br>金・貴金属。詳細不明の品も無料相談</td><td><strong>K24〜K5まで品位別に公開</strong><br>当日レートとシミュレーターあり<br><a class="cmp9-ref" href="https://manekiya.shop/rate" target="_blank" rel="noopener noreferrer">公式レートを見る</a></td><td><strong>手数料「今だけ無料」表示</strong><br>分析料は店頭で確認</td><td><strong>素材を正しく判定する案内</strong><br>X線分析機器を案内<br><a class="cmp9-ref" href="https://manekiya.shop/2302" target="_blank" rel="noopener noreferrer">公式の査定根拠を見る</a></td><td class="cmp9-cp"><b>電話予約で最大30%UP</b><br>対象の金製品は、表示単価からさらに最終手取りを狙える</td><td>店頭・出張・宅配</td><td class="cmp9-contact"><strong>電話 9:00〜21:00</strong><br>LINEは24時間受付。店頭は即日支払いの案内</td><td class="cmp9-verdict"><b>◎ 最初の査定先</b>レート・査定根拠・電話予約特典を一度に確認できる。<span class="cmp9-strong">金なら、まずここで特典後の総額を取る。</span></td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://www.otakaraya.jp/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">おたからや</span><span class="cmp9-logo cmp9-logo--otakaraya" role="img" aria-label="おたからや"></span></a></span></th><td class="cmp9-specialty"><strong>金・貴金属</strong></td><td class="cmp9-scope"><strong>K24〜K5・インゴット</strong><br>刻印なし・低純度・変形品も相談可</td><td><strong>K24〜K5の参考相場を公開</strong><br>2026/7/24時点は9:30更新<br><a class="cmp9-ref" href="https://www.otakaraya.jp/gold/d-gold/" target="_blank" rel="noopener noreferrer">公式レートを見る</a></td><td><strong>査定・出張・見積り無料</strong><br>公式FAQで明記</td><td>X線分析による品位判定を案内<br>刻印なしも相談可</td><td>金向けの一律上乗せは、申込時に個別確認</td><td>店頭・出張</td><td class="cmp9-contact"><strong>電話 9:00〜19:00</strong><br>フォームは24時間受付。約1,920店舗を公表</td><td class="cmp9-verdict"><b>○ 比較査定の候補</b>レート・無料条件は確認しやすい。まねきやの<strong>特典後総額</strong>と同じ条件で比べる。</td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://brandrevalue.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">ブラリバ</span><span class="cmp9-logo cmp9-logo--brariba" role="img" aria-label="ブラリバ"></span></a></span></th><td class="cmp9-specialty"><strong>ブランド・時計</strong></td><td class="cmp9-scope"><strong>K24〜K9</strong><br>インゴット・金貨なども案内</td><td><strong>K24〜K9の相場を公開</strong><br>2026/7/24 9:56更新<br><a class="cmp9-ref" href="https://brandrevalue.com/cat/gold" target="_blank" rel="noopener noreferrer">公式レートを見る</a></td><td><strong>公開相場に手数料は含まれない</strong><br>最終額は査定で確認</td><td>公式ページで金の測定方法の詳細は確認できず</td><td>金だけの固定上乗せ条件は、調査時点で確認できず</td><td>店頭・出張・宅配</td><td class="cmp9-contact"><strong>電話 10:00〜20:00</strong><br>LINEは24時間受付。店頭・出張はその場で支払いの案内</td><td class="cmp9-verdict"><b>△ 単価だけで決めない</b>表示相場と最終額が一致しない前提。まねきやの総額を基準に見る。</td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://nanboya.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">なんぼや</span><span class="cmp9-logo cmp9-logo--nanboya" role="img" aria-label="なんぼや"></span></a></span></th><td class="cmp9-specialty"><strong>ブランド・時計</strong></td><td class="cmp9-scope"><strong>刻印なし・壊れ品</strong><br>片方のピアス・金歯・K14金具なども案内</td><td><strong>品位別の参考価格を公開</strong><br>更新日を明記<br><a class="cmp9-ref" href="https://nanboya.com/gold-kaitori/" target="_blank" rel="noopener noreferrer">公式レートを見る</a></td><td><strong>参考価格に手数料は含まれない</strong><br>実物確認時に案内</td><td>公式ページで金の測定方法の詳細は確認できず</td><td>金だけの固定上乗せ条件は、調査時点で確認できず</td><td>店頭・出張・宅配・オンライン</td><td class="cmp9-contact"><strong>電話 10:00〜21:00</strong><br>全国140店舗以上。宅配は最短当日査定・振込を案内</td><td class="cmp9-verdict"><b>△ 最終額の確認が必須</b>表示価格では比較できない。費用を引いた後の額で、まねきやと比べる。</td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://kaitori.e-daikoku.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">大黒屋</span><span class="cmp9-logo cmp9-logo--daikokuya" role="img" aria-label="大黒屋"></span></a></span></th><td class="cmp9-specialty"><strong>時計・金券</strong></td><td class="cmp9-scope"><strong>金歯・金貨・金杯</strong><br>壊れ品・古い金製品など幅広く案内</td><td><strong>店頭・宅配・出張の参考価格を案内</strong><br>価格は日々変動<br><a class="cmp9-ref" href="https://kaitori.e-daikoku.com/brand/genre/gold.html" target="_blank" rel="noopener noreferrer">公式レートを見る</a></td><td><strong>成約時も手数料なし</strong><br>公式ページで明記</td><td>公式ページで金の測定方法の詳細は確認できず</td><td>金だけの固定上乗せ条件は、調査時点で確認できず</td><td>店頭・出張・宅配</td><td class="cmp9-contact"><strong>LINEで写真査定</strong><br>店頭・宅配・出張の参考価格を同一ページで案内</td><td class="cmp9-verdict"><b>○ 手数料比較の候補</b>費用なしは明確。とはいえ、まねきやの電話特典後の額を先に確認したい。</td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://komehyo.jp/kaitori/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">コメ兵</span><span class="cmp9-logo cmp9-logo--komehyo" role="img" aria-label="コメ兵"></span></a></span></th><td class="cmp9-specialty"><strong>ブランド・時計</strong></td><td class="cmp9-scope"><strong>金・貴金属</strong><br>取扱い可否を専任鑑定士が判断</td><td>当日の地金価格・純度・重量で算定する説明<br><a class="cmp9-ref" href="https://komehyo.jp/kaitori/gold/knowledge/article-0008/" target="_blank" rel="noopener noreferrer">公式の算定説明を見る</a></td><td><strong>店頭・宅配とも手数料なし</strong><br>費用は価格に内包する説明あり</td><td>公式ページで金の測定方法の詳細は確認できず</td><td>金だけの固定上乗せ条件は、調査時点で確認できず</td><td>店頭・出張・宅配</td><td class="cmp9-contact"><strong>電話 10:30〜18:00</strong><br>全国205ヶ所。合意後は現金または振込</td><td class="cmp9-verdict"><b>○ 見積り比較の候補</b>費用の扱いは明確。ただし、電話特典を含むまねきやの総額を先に取る。</td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://goldplaza.jp/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">ゴールドプラザ</span><span class="cmp9-logo cmp9-logo--goldplaza" role="img" aria-label="ゴールドプラザ"></span></a></span></th><td class="cmp9-specialty"><strong>金・貴金属</strong></td><td class="cmp9-scope"><strong>刻印なし・海外製</strong><br>壊れ品・金歯・金縁メガネも案内</td><td><strong>品位別の相場・推移を公開</strong><br><a class="cmp9-ref" href="https://goldplaza.jp/gold/rate" target="_blank" rel="noopener noreferrer">公式レートを見る</a></td><td>店頭案内は各種無料。<br><strong>宅配相場は手数料表示を要確認</strong></td><td>X線分析機による分析を案内</td><td>複数キャンペーンあり。金への適用条件を確認</td><td>店頭・出張・宅配</td><td class="cmp9-contact"><strong>電話 11:00〜20:00</strong><br>店頭・宅配は同額案内。出張にも対応</td><td class="cmp9-verdict"><b>△ 方法で条件が変わる</b>店頭・宅配を混ぜず、同じ売り方の総額でまねきやと比較する。</td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://buysell-kaitori.com/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">バイセル</span><span class="cmp9-logo cmp9-logo--buysell" role="img" aria-label="バイセル"></span></a></span></th><td class="cmp9-specialty"><strong>出張・整理品</strong></td><td class="cmp9-scope"><strong>インゴット・K10/K9</strong><br>刻印なし・壊れ品・金歯なども案内</td><td>金の買取実績は公開。<br>調査時点で品位別の固定1gレートは確認できず<br><a class="cmp9-ref" href="https://buysell-kaitori.com/gold/" target="_blank" rel="noopener noreferrer">公式の金買取案内を見る</a></td><td><strong>査定料・出張料など無料</strong></td><td>査定士と鑑定担当者による二重チェックを案内</td><td>金だけの固定上乗せ条件は、調査時点で確認できず</td><td>店頭・出張・宅配</td><td class="cmp9-contact"><strong>24時間365日受付</strong><br>出張は離島を除く全国。成約時はその場で現金化</td><td class="cmp9-verdict"><b>△ 出張の便利さ重視</b>金単体の価格比較では、単価と総額を先に出せるまねきやが起点。</td></tr>
+          <tr class="cmp9-row"><th class="cmp9-sh"><span class="cmp9-company"><a href="https://www.kaitori-daikichi.jp/" target="_blank" rel="nofollow noopener"><span class="cmp9-company__name">買取大吉</span><span class="cmp9-logo cmp9-logo--daikichi" aria-hidden="true">買取大吉</span></a></span></th><td class="cmp9-specialty"><strong>ブランド・時計</strong></td><td class="cmp9-scope"><strong>K24〜K9</strong><br>刻印なし・壊れ品・金歯・コインも案内</td><td><strong>K24〜K9の買取相場を公開</strong><br>更新日を明記<br><a class="cmp9-ref" href="https://daikichi-kaitori.jp/gold/" target="_blank" rel="noopener noreferrer">公式レートを見る</a></td><td><strong>査定・出張・買取手数料・キャンセル料無料</strong></td><td>刻印なしも純度測定する案内あり</td><td>金だけの固定上乗せ条件は、調査時点で確認できず</td><td>店頭・出張・宅配</td><td class="cmp9-contact"><strong>メールは24時間受付</strong><br>店頭は即時査定・支払いを案内</td><td class="cmp9-verdict"><b>○ ブランド時計なども一緒なら候補</b>強化ブランド・時計の幅は広い。<span class="cmp9-strong">金だけなら、まねきやの特典後総額を先に確認。</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <p class="kin-cmp9-lead">では、なぜこの2社なのか。<strong>金の「最終手取り」がどう決まるか</strong>という視点で、順に説明します。</p>
+    <script>
+      /* 9社比較表の「店名」「得意分野」の次に、運営基盤・店舗網を統合する */
+      (() => {
+        const table = document.querySelector('.kin-cmp9');
+        if (!table) return;
+        const header = table.querySelector('thead tr');
+        const specialtyHead = header.querySelector('.cmp9-specialty');
+        const businessHead = document.createElement('th');
+        businessHead.className = 'cmp9-business';
+        businessHead.textContent = '運営基盤・店舗網';
+        specialtyHead.insertAdjacentElement('afterend', businessHead);
+
+        const details = [
+          '<strong>株式会社水野／創業2008年</strong><br>2025年売上<strong>50.07億円</strong>／全国<strong>28店舗</strong><small>開店予定を除く公式店舗一覧を数え上げ</small><a class="cmp9-ref" href="https://manekiya.shop/company" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>株式会社いーふらん／設立2000年</strong><br>従業員<strong>1,863名</strong>／世界<strong>1,900店舗以上</strong><small>店舗数は待機店舗を含む公式表記</small><a class="cmp9-ref" href="https://www.otakaraya.jp/first/" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>株式会社STAYGOLD／設立2014年</strong><br>総員<strong>625名</strong>／全国主要都市に店舗<small>店頭・出張・宅配を案内</small><a class="cmp9-ref" href="https://brandrevalue.com/company" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>バリュエンスHDグループ</strong><br>東証グロース上場／連結売上<strong>848億円</strong><small>買取店舗188店・14カ国展開（2025年8月期）</small><a class="cmp9-ref" href="https://www.valuence.inc/ir/investor/numbers/" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>株式会社大黒屋／設立1979年</strong><br>従業員<strong>384名</strong>／全国<strong>280店舗</strong><small>直営・FCを含む店舗網を案内</small><a class="cmp9-ref" href="https://shop.e-daikoku.com/info/spot/list" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>コメ兵HDグループ</strong><br>東証スタンダード上場グループ／海外にも展開<small>店頭・出張・宅配、全国の買取センター</small><a class="cmp9-ref" href="https://www.ch.komehyo.co.jp/company/about.html" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>株式会社Clarisse</strong><br>ゴールドプラザは<strong>2005年開始</strong><small>関東・関西の実店舗とオンライン店舗を運営</small><a class="cmp9-ref" href="https://goldplaza.jp/company" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>BuySell Technologies</strong><br>東証グロース上場／連結<strong>2,471名</strong><small>全国167店舗（2026年6月発表）＋全国出張</small><a class="cmp9-ref" href="https://buysell-technologies.com/corporate/overview/" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>',
+          '<strong>株式会社エンパワー／設立2010年</strong><br>従業員<strong>987名</strong>／全国<strong>1,400店舗以上</strong><small>FCを含む。2025年7月の公式発表</small><a class="cmp9-ref" href="https://prtimes.jp/main/html/rd/p/000000181.000087220.html" target="_blank" rel="noopener noreferrer">会社・店舗の根拠</a>'
+        ];
+        table.querySelectorAll('tbody tr').forEach((row, index) => {
+          const scope = row.querySelector('.cmp9-scope');
+          const cell = document.createElement('td');
+          cell.className = 'cmp9-business';
+          cell.innerHTML = details[index];
+          scope.parentNode.insertBefore(cell, scope);
+        });
+      })();
+    </script>
+
+    <script>
+      /* 売らない選択ができるかを比べる：宅配査定後の返送条件も9社で明示 */
+      (() => {
+        const table = document.querySelector('.kin-cmp9');
+        if (!table) return;
+        const header = table.querySelector('thead tr');
+        const feeHead = header.children[5];
+        const deliveryHead = document.createElement('th');
+        deliveryHead.className = 'cmp9-delivery';
+        deliveryHead.textContent = '宅配で断る場合';
+        feeHead.insertAdjacentElement('afterend', deliveryHead);
+
+        const details = [
+          '<strong>査定後の返送は店側負担</strong><small>宅配は原則無料。ただし品物内容によって送料負担の例外あり</small><a class="cmp9-ref" href="https://manekiya.shop/faq" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>',
+          '<strong>店頭・出張での無料キャンセルを案内</strong><small>公式の主な査定方法は店頭・出張・LINE・メール。宅配返送条件は個別確認</small><a class="cmp9-ref" href="https://www.otakaraya.jp/visiting/" target="_blank" rel="noopener noreferrer">出張条件を見る</a>',
+          '<strong>査定後の返送料は店側負担</strong><small>宅配保険も案内。基準外品・成約後の取消は例外あり</small><a class="cmp9-ref" href="https://brandrevalue.com/faq" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>',
+          '<strong>査定額に非承諾なら返送料は店側負担</strong><small>宅配マイページで結果確認。最短1日で結果確認の案内</small><a class="cmp9-ref" href="https://nanboya.com/takuhai-kaitori/" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>',
+          '<strong>返送料・運送保険も店側負担</strong><small>無料宅配キットの運送保険は30万円まで。任意追加保険も案内</small><a class="cmp9-ref" href="https://kaitori.e-daikoku.com/line/faq/" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>',
+          '<strong>査定結果後の非承諾は返送料0円</strong><small>査定結果の提示前に返送を求める場合は着払い</small><a class="cmp9-ref" href="https://komehyo.jp/kaitori/faq/takuhai/" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>',
+          '<strong>査定後のキャンセル・返送料は0円</strong><small>宅配キットを使わずに送る場合の送料など、一部規約条件あり</small><a class="cmp9-ref" href="https://goldplaza.jp/howto/send/gold" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>',
+          '<strong>査定後に返送を希望する場合は着払い</strong><small>送料・査定料・振込手数料は無料だが、返送だけは自己負担</small><a class="cmp9-ref" href="https://buysell-kaitori.com/first/faq/" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>',
+          '<strong>宅配のキャンセル・返送料は無料と案内</strong><small>店頭・出張も査定後のキャンセル料なし</small><a class="cmp9-ref" href="https://daikichi-kaitori.jp/brand/brand_tiffany/tiffany-ring-popularity-50s/" target="_blank" rel="noopener noreferrer">宅配条件を見る</a>'
+        ];
+        table.querySelectorAll('tbody tr').forEach((row, index) => {
+          const fee = row.children[5];
+          const cell = document.createElement('td');
+          cell.className = 'cmp9-delivery';
+          cell.innerHTML = details[index];
+          fee.insertAdjacentElement('afterend', cell);
+        });
+      })();
+    </script>
+
+    <script>
+      /* 「受付時間」だけで終わらせず、現金化までの目安も比較表に記載する */
+      (() => {
+        const table = document.querySelector('.kin-cmp9');
+        if (!table) return;
+        const header = table.querySelector('thead tr');
+        const contactHead = header.querySelector('.cmp9-contact');
+        contactHead.textContent = '受付・現金化の目安';
+        const details = [
+          '<strong>電話 9:00〜21:00／LINE 24時間受付</strong><br>店頭は即日支払いを案内。宅配の金は<strong>発送日の相場</strong>を基準に査定。',
+          '<strong>電話 9:00〜19:00</strong><br>出張は提示額に納得すれば<strong>その場で現金</strong>。店頭・出張の相談が中心。',
+          '<strong>電話 10:00〜20:00／LINE受付</strong><br>宅配は到着から<strong>3日以内</strong>に結果連絡、成約後は翌銀行営業日に振込の案内。',
+          '<strong>電話 10:00〜21:00</strong><br>店頭・出張・宅配・オンライン。宅配は最短当日査定・振込を案内。',
+          '<strong>LINE・電話・メールで事前査定</strong><br>宅配は到着<strong>当日〜翌日</strong>に結果連絡、成約で原則翌営業日に送金の案内。',
+          '<strong>電話 10:30〜18:00</strong><br>店頭はその場で現金。宅配は手続き完了後、翌金融機関営業日に振込。',
+          '<strong>電話 11:00〜20:00</strong><br>宅配は査定結果を原則3営業日以内に連絡、成約後は最短24時間で振込の案内。',
+          '<strong>24時間365日受付</strong><br>店頭・出張はその場で現金（内容により振込）。宅配は契約後、原則3営業日以内に振込。',
+          '<strong>メールは24時間受付</strong><br>店頭は即時査定・現金支払い。出張・宅配にも対応。'
+        ];
+        table.querySelectorAll('tbody tr').forEach((row, index) => {
+          row.querySelector('.cmp9-contact').innerHTML = details[index];
+        });
+      })();
+    </script>
+
+    <h3 class="kin-cmp9-scale-title">さらに深掘り｜運営会社・店舗網も9社で比較</h3>
+    <p class="kin-cmp9-scale-lead">「近くで査定したい」「出張を頼みたい」という安心材料として、各社が公式に公開している運営規模と店舗網も確認しました。<strong>ただし、店舗数が多いことは金の高価買取を保証しません。</strong>規模は相談しやすさ、金額は<strong>レート・品位・手数料・特典を反映した総額</strong>で判断します。</p>
+    <div class="kin-cmp9-wrap">
+      <table class="kin-cmp9-scale">
+        <thead><tr><th>店名</th><th class="cmp9-scale-company">運営体制・公表規模</th><th class="cmp9-scale-network">店舗網・対応範囲</th><th class="cmp9-scale-read">金を売る人が読むべきこと</th></tr></thead>
+        <tbody>
+          <tr class="cmp9-scale-manekiya"><th>まねきや</th><td><strong>株式会社水野</strong><br>創業2008年。2025年実績の売上高は<strong>50.07億円</strong>と公式開示。<br><a class="cmp9-ref" href="https://manekiya.shop/company" target="_blank" rel="noopener noreferrer">運営会社概要</a></td><td><strong>全国28店舗</strong><br>公式店舗一覧の営業中店舗を数え上げ（開店予定を除く、2026/7/27確認）。店頭・出張・宅配に対応。<br><a class="cmp9-ref" href="https://manekiya.shop/shop" target="_blank" rel="noopener noreferrer">店舗一覧</a></td><td><strong>全国最大の店舗数ではない。</strong><br>だからこそ「大手だから」では選ばず、公開レート・X線分析の根拠・電話予約30%UPを反映した<strong>最終総額</strong>で確認する価値がある。</td></tr>
+          <tr><th>おたからや</th><td><strong>株式会社いーふらん</strong><br>設立2000年、従業員<strong>1,863名</strong>（2026/4/1時点）を公式開示。<br><a class="cmp9-ref" href="https://www.otakaraya.jp/contact/" target="_blank" rel="noopener noreferrer">運営会社概要</a></td><td><strong>世界1,900店舗以上</strong><br>待機店舗を含む公式表記。店頭・出張での相談口が広い。<br><a class="cmp9-ref" href="https://www.otakaraya.jp/first/" target="_blank" rel="noopener noreferrer">店舗網の公式説明</a></td><td><strong>近さ・持ち込みやすさが強み。</strong><br>近所で比較見積りを取りやすい。一方で金単体なら、まねきやの<strong>特典後総額</strong>と同条件で比べる。</td></tr>
+          <tr><th>ブラリバ</th><td><strong>株式会社STAYGOLD</strong><br>設立2014年、総員<strong>625名</strong>（2026年2月末時点）を公式開示。<br><a class="cmp9-ref" href="https://brandrevalue.com/company" target="_blank" rel="noopener noreferrer">運営会社概要</a></td><td>全国主要都市に店舗。店頭・出張・宅配を案内。<br><a class="cmp9-ref" href="https://brandrevalue.com/shop" target="_blank" rel="noopener noreferrer">店舗一覧</a></td><td><strong>ブランド・時計の同時売却向き。</strong><br>金だけで比較するなら、公開相場に手数料が含まれない点を含め、最終額を確認する。</td></tr>
+          <tr><th>なんぼや</th><td><strong>バリュエンスHDグループ</strong><br>東証グロース上場。連結売上<strong>848億円</strong>、従業員<strong>1,124名</strong>（2025年8月期）。<br><a class="cmp9-ref" href="https://www.valuence.inc/ir/investor/numbers/" target="_blank" rel="noopener noreferrer">数字で見るバリュエンス</a></td><td><strong>国内なんぼや131店</strong><br>グループの買取店舗は188店、14カ国で展開（2025年8月期）。<br><a class="cmp9-ref" href="https://www.valuence.inc/company/" target="_blank" rel="noopener noreferrer">グループ概要</a></td><td><strong>上場グループ・店舗網は大きい。</strong><br>それでも金の参考価格は手数料を含まない表示。金額比較は最終提示額で行う。</td></tr>
+          <tr><th>大黒屋</th><td><strong>株式会社大黒屋</strong><br>設立1979年、従業員<strong>384名</strong>（2025年3月時点）を公表。<br><a class="cmp9-ref" href="https://www.e-daikoku.com/recruit/corporate-information/" target="_blank" rel="noopener noreferrer">運営会社概要</a></td><td><strong>全国280店舗</strong><br>直営・FCを含む全国の店舗網を案内。<br><a class="cmp9-ref" href="https://shop.e-daikoku.com/info/spot/list" target="_blank" rel="noopener noreferrer">店舗一覧</a></td><td><strong>時計・金券も一緒なら見積り候補。</strong><br>金単体は、まねきやの電話予約特典を含めた総額と同じ条件で確認する。</td></tr>
+          <tr><th>コメ兵</th><td><strong>コメ兵HDグループ</strong><br>東証スタンダード上場グループ。海外にもKOMEHYOブランドのグループ会社を展開。<br><a class="cmp9-ref" href="https://www.ch.komehyo.co.jp/company/about.html" target="_blank" rel="noopener noreferrer">グループ情報</a></td><td>全国の買取センターに加え、店頭・出張・宅配に対応。<br><a class="cmp9-ref" href="https://komehyo.jp/kaitori/" target="_blank" rel="noopener noreferrer">買取サービスを見る</a></td><td><strong>ブランド・時計との同時査定に強い。</strong><br>金だけなら、提示額に費用がどう織り込まれるかを聞き、総額で比べる。</td></tr>
+          <tr><th>ゴールドプラザ</th><td><strong>株式会社Clarisse</strong><br>ゴールドプラザは2005年開始。現在はマーキュリーグループの子会社として運営。<br><a class="cmp9-ref" href="https://goldplaza.jp/company" target="_blank" rel="noopener noreferrer">会社概要</a></td><td>関東・関西の実店舗とオンライン店舗を運営。店頭・出張・宅配に対応。<br><a class="cmp9-ref" href="https://goldplaza.jp/shop" target="_blank" rel="noopener noreferrer">店舗一覧</a></td><td><strong>金・貴金属を扱う専門店。</strong><br>店舗数より、店頭・宅配など売り方ごとの手数料・キャンペーン条件を揃えて比較する。</td></tr>
+          <tr><th>バイセル</th><td><strong>BuySell Technologies</strong><br>東証グロース上場。連結従業員<strong>2,471名</strong>（2026年1月末時点）。<br><a class="cmp9-ref" href="https://buysell-technologies.com/corporate/overview/" target="_blank" rel="noopener noreferrer">運営会社概要</a></td><td><strong>全国167店舗</strong>（2026年6月公式発表）。出張は離島を除く全国に対応。<br><a class="cmp9-ref" href="https://buysell-technologies.com/" target="_blank" rel="noopener noreferrer">店舗網の公式発表</a></td><td><strong>出張・整理品をまとめて売る人向き。</strong><br>金だけは固定の品位別1gレートを確認しづらいため、総額を先に聞く。</td></tr>
+          <tr><th>買取大吉</th><td><strong>株式会社エンパワー</strong><br>設立2010年、従業員<strong>987名</strong>（2024年4月末時点）を開示。<br><a class="cmp9-ref" href="https://www.en-power.jp/company/" target="_blank" rel="noopener noreferrer">運営会社概要</a></td><td><strong>全国1,400店舗以上</strong><br>FCを含み、2025年7月に1,400店突破を公式発表。<br><a class="cmp9-ref" href="https://prtimes.jp/main/html/rd/p/000000181.000087220.html" target="_blank" rel="noopener noreferrer">店舗数の公式発表</a></td><td><strong>近所で持ち込みやすく、ブランド・時計も同時査定しやすい。</strong><br>金だけなら、まねきやの特典後総額を基準に比較する。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="kin-cmp9-lead"><strong>比較して分かるのは、まねきやは「高いかもしれない」という宣伝だけでなく、金のレート・査定根拠・電話予約特典を確認してから動けることです。</strong>対象の金製品なら、まずまねきやで特典反映後の総額を出し、その金額を基準にする。この順番が、いちばん迷いなく売り先を決められます。</p>
+    <p class="kin-note">※ まねきやの電話予約による最大30%UPは、地金・金貨・インゴット・金券を除くなどの条件があります。対象品・上限は申込時に確認してください。</p>
 
     <!-- ============ なぜこの2社なのか ============ -->
     <h2>では本題です｜なぜ、この2社なのか</h2>
