@@ -2052,6 +2052,67 @@ h2, h3,
 .kin-sell a { color: var(--sumi); font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
 .kin-sell .sell-why { color: #3a3f4a; }
 
+/* ============ 導入：2人の会話（対話型） ============ */
+.kin-talk {
+  margin: clamp(1.5em, 4.5vw, 2.2em) auto .9em;
+  max-width: 42em;
+  font-family: var(--gothic);
+  color: var(--sumi);
+  letter-spacing: 0;
+  display: grid;
+  gap: 12px;
+}
+.kin-talk__row { display: flex; align-items: flex-start; gap: 9px; }
+.kin-talk__row--r { flex-direction: row-reverse; }
+.kin-talk__ico {
+  flex: 0 0 auto;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-size: 21px; line-height: 1;
+  background: #FFF3D6;
+  border: 1.5px solid #E7CE95;
+}
+.kin-talk__ico--b { background: #E4F0F6; border-color: #A9CBDD; }
+.kin-talk__bubble {
+  position: relative;
+  max-width: calc(100% - 58px);
+  margin: 0;
+  padding: 11px 14px;
+  background: #FFF9EC;
+  border: 1.5px solid #E7CE95;
+  border-radius: 14px;
+  font-size: 14.5px;
+  line-height: 1.75;
+  text-align: left;
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+.kin-talk__bubble--b { background: #F1F8FB; border-color: #A9CBDD; }
+.kin-talk__bubble strong { font-weight: 900; color: #A8410F; }
+.kin-talk__bubble--b strong { color: #14607F; }
+.kin-talk__bubble::before,
+.kin-talk__bubble::after {
+  content: ""; position: absolute; top: 14px;
+  width: 0; height: 0; border-style: solid;
+}
+.kin-talk__row--l .kin-talk__bubble::before {
+  left: -9px; border-width: 6px 9px 6px 0; border-color: transparent #E7CE95 transparent transparent;
+}
+.kin-talk__row--l .kin-talk__bubble::after {
+  left: -7px; border-width: 6px 9px 6px 0; border-color: transparent #FFF9EC transparent transparent;
+}
+.kin-talk__row--r .kin-talk__bubble::before {
+  right: -9px; border-width: 6px 0 6px 9px; border-color: transparent transparent transparent #A9CBDD;
+}
+.kin-talk__row--r .kin-talk__bubble::after {
+  right: -7px; border-width: 6px 0 6px 9px; border-color: transparent transparent transparent #F1F8FB;
+}
+@media (max-width: 480px) {
+  .kin-talk__ico { width: 34px; height: 34px; font-size: 18px; }
+  .kin-talk__bubble { font-size: 13.5px; padding: 10px 12px; max-width: calc(100% - 50px); }
+}
+
 /* FVの筆者導入：問いと結論だけを主役にする、余白で読ませる編集レイアウト */
 .kin-opening {
   margin: clamp(1.5em, 4.5vw, 2.2em) 0 .8em;
