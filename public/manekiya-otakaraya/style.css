@@ -2055,33 +2055,6 @@ h2, h3,
 .kin-sell .sell-why { color: #3a3f4a; }
 
 
-/* ============ スマホの改行バランス ============ */
-/* 日本語を語句（文節）単位で折り返し、強調の途中や末尾1〜2文字だけが
-   次行に落ちるのを防ぐ。Chrome/Safari は auto-phrase、非対応環境は
-   text-wrap:pretty が孤立行を減らすため、両方を指定する。 */
-.entry-content p,
-.entry-content li,
-.kin-talk__bubble,
-.kin-fv-conclusion__lead,
-.kin-fv-conclusion__main,
-.kin-scan-list li,
-.kin-box p,
-.kin-box li,
-.kin-cta-block__head {
-  word-break: auto-phrase;
-  text-wrap: pretty;
-}
-/* 強調はそれ自体を1つの塊として扱い、語の途中で割れないようにする */
-.entry-content strong,
-.entry-content b,
-.entry-content mark,
-.kin-talk__bubble strong,
-.kin-fv-conclusion__lead strong,
-.kin-fv-conclusion__main strong {
-  word-break: keep-all;
-  overflow-wrap: anywhere;   /* 長すぎて1行に入らない場合だけ折る（はみ出し防止） */
-}
-
 /* ============ 導入：2人の会話（対話型） ============ */
 .kin-talk {
   margin: clamp(1.5em, 4.5vw, 2.2em) auto .9em;
