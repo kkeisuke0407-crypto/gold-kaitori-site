@@ -1959,19 +1959,19 @@ h2, h3,
   font-weight: 800;
   letter-spacing: .08em;
 }
-.kin-fv-conclusion__lead { margin: 0 0 .5em; font-size: 15px; font-weight: 800; line-height: 1.7; }
+.kin-fv-conclusion__lead { margin: 0 0 .6em; font-size: 19px; font-weight: 900; line-height: 1.65; }
 .kin-fv-conclusion__lead strong,
 .kin-fv-conclusion__main strong { font-weight: 900; color: var(--alert); }
 .kin-fv-conclusion__main {
   margin: 0;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 800;
-  line-height: 1.7;
+  line-height: 1.75;
   letter-spacing: 0;
 }
 .kin-fv-conclusion__main br { display: none; }
 @media screen and (max-width: 390px) {
-  .kin-fv-conclusion__main { font-size: 15px; line-height: 1.7; }
+  .kin-fv-conclusion__main { font-size: 17px; line-height: 1.7; }
   .kin-fv-conclusion__main br { display: block; }
 }
 .kin-pick-verdict { margin: 0 0 2.1em; display: grid; gap: .7em; }
