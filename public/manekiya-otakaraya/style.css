@@ -1959,19 +1959,19 @@ h2, h3,
   font-weight: 800;
   letter-spacing: .08em;
 }
-.kin-fv-conclusion__lead { margin: 0 0 .6em; font-size: 19px; font-weight: 900; line-height: 1.65; }
+.kin-fv-conclusion__lead { margin: 0 0 .6em; font-size: 21px; font-weight: 900; line-height: 1.6; }
 .kin-fv-conclusion__lead strong,
 .kin-fv-conclusion__main strong { font-weight: 900; color: var(--alert); }
 .kin-fv-conclusion__main {
   margin: 0;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 800;
-  line-height: 1.75;
+  line-height: 1.7;
   letter-spacing: 0;
 }
 .kin-fv-conclusion__main br { display: none; }
 @media screen and (max-width: 390px) {
-  .kin-fv-conclusion__main { font-size: 17px; line-height: 1.7; }
+  .kin-fv-conclusion__main { font-size: 18px; line-height: 1.7; }
   .kin-fv-conclusion__main br { display: block; }
 }
 .kin-pick-verdict { margin: 0 0 2.1em; display: grid; gap: .7em; }
@@ -2053,6 +2053,34 @@ h2, h3,
 .kin-sell .sell-comp { display: block; font-size: 11px; color: var(--ink-sub); }
 .kin-sell a { color: var(--sumi); font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
 .kin-sell .sell-why { color: #3a3f4a; }
+
+
+/* ============ スマホの改行バランス ============ */
+/* 日本語を語句（文節）単位で折り返し、強調の途中や末尾1〜2文字だけが
+   次行に落ちるのを防ぐ。Chrome/Safari は auto-phrase、非対応環境は
+   text-wrap:pretty が孤立行を減らすため、両方を指定する。 */
+.entry-content p,
+.entry-content li,
+.kin-talk__bubble,
+.kin-fv-conclusion__lead,
+.kin-fv-conclusion__main,
+.kin-scan-list li,
+.kin-box p,
+.kin-box li,
+.kin-cta-block__head {
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+/* 強調はそれ自体を1つの塊として扱い、語の途中で割れないようにする */
+.entry-content strong,
+.entry-content b,
+.entry-content mark,
+.kin-talk__bubble strong,
+.kin-fv-conclusion__lead strong,
+.kin-fv-conclusion__main strong {
+  word-break: keep-all;
+  overflow-wrap: anywhere;   /* 長すぎて1行に入らない場合だけ折る（はみ出し防止） */
+}
 
 /* ============ 導入：2人の会話（対話型） ============ */
 .kin-talk {
