@@ -2068,7 +2068,7 @@ h2, h3,
 .kin-talk__row--r { flex-direction: row-reverse; }
 .kin-talk__ico {
   flex: 0 0 auto;
-  width: 40px; height: 40px;
+  width: 48px; height: 48px;
   display: block;
   overflow: hidden;
   border-radius: 50%;
@@ -2083,7 +2083,7 @@ h2, h3,
 }
 .kin-talk__bubble {
   position: relative;
-  max-width: calc(100% - 58px);
+  max-width: calc(100% - 66px);
   margin: 0;
   padding: 11px 14px;
   background: #FFF9EC;
@@ -2116,8 +2116,8 @@ h2, h3,
   right: -7px; border-width: 6px 0 6px 9px; border-color: transparent transparent transparent #F1F8FB;
 }
 @media (max-width: 480px) {
-  .kin-talk__ico { width: 34px; height: 34px; }
-  .kin-talk__bubble { font-size: 13.5px; padding: 10px 12px; max-width: calc(100% - 50px); }
+  .kin-talk__ico { width: 40px; height: 40px; }
+  .kin-talk__bubble { font-size: 13.5px; padding: 10px 12px; max-width: calc(100% - 56px); }
 }
 
 /* FVの筆者導入：問いと結論だけを主役にする、余白で読ませる編集レイアウト */
