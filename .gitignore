@@ -7,3 +7,6 @@ dist/
 
 # 比較記事LPひな形の動作確認で生成されるサンプル（公開しない）
 public/sample-hikaku/
+
+# 目視確認用に作る1ファイル版プレビュー（CSS埋め込み・使い捨て）
+preview-*.html
