@@ -2093,8 +2093,6 @@ h2, h3,
   font-size: 14.5px;
   line-height: 1.75;
   text-align: left;
-  text-wrap: pretty;
-  word-break: auto-phrase;
 }
 .kin-talk__bubble--b { background: #F1F8FB; border-color: #A9CBDD; }
 .kin-talk__bubble strong { font-weight: 900; color: #A8410F; }
