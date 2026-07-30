@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "new-lp": "node scripts/new-lp.mjs"
+    "new-lp": "node scripts/new-lp.mjs",
+    "new-hikaku": "node scripts/new-hikaku.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

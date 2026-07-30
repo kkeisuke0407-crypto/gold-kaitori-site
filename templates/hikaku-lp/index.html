@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  比較記事型LP ひな形（templates/hikaku-lp/index.html）
+  ============================================================================
+  完成見本：public/manekiya-otakaraya/index.html
+  作り方  ：docs/比較記事LPの雛形.md
+  生成    ：npm run new-hikaku -- scripts/hikaku-configs/<slug>.config.mjs
+
+  このファイルを直接編集して公開ページにしないこと。
+  生成後の public/<slug>/index.html を編集する。
+
+  {{ }} は生成スクリプトが置換するトークン。
+  <!-- ▼書き換え --> は「案件ごとにAIが書き直す文章」の印。
+  生成直後のページはビルドが通り表示もされるが、▼の文章は雛形の骨のままなので
+  必ず案件に合わせて書き直す（残っていると別商材の記述が混ざる）。
+  ============================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESC}}">
+<link rel="canonical" href="{{CANONICAL}}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:image" content="{{OG_IMAGE}}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css?v={{ASSET_VER}}">
+<!-- Google tag (gtag.js)：LP3系と同一のGA4 + Google広告CV計測 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{GA4_ID}}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date()); gtag('config', '{{GA4_ID}}'); gtag('config', '{{ADS_ID}}');
+</script>
+<script type="application/ld+json">{{FAQ_JSONLD}}</script>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ============ FV ============
+       画像に文字を焼き込まない。結論はこの下のHTMLで出す（差し替え・修正が効くため）。 -->
+  <div class="kin-fv kin-fv--visual">
+    <p class="visually-hidden">{{ITEM}} 買取ガイド</p>
+    <h1 class="visually-hidden">{{H1}}</h1>
+
+    <figure class="kin-fv__visual">
+      <img src="{{HERO_SRC}}" alt="{{HERO_ALT}}" width="{{HERO_W}}" height="{{HERO_H}}">
+    </figure>
+
+  </div>
+
+  <div class="entry-content">
+
+    <!-- ============ ①結論（FV直下） ============
+         スクロールゼロで結論を渡す。ここで離脱しても成果につながる位置。 -->
+    <div class="kin-fv-conclusion">
+      <p class="kin-fv-conclusion__lead">結論から言うと、</p>
+      <p class="kin-fv-conclusion__main">最初に見るべき候補は、<br>この2社で大丈夫でした。</p>
+    </div>
+
+    <!-- ============ ②2社バナー＋公式CTA ============
+         順位は付けない（1位/イチオシ禁止）。「役割の違い」でラベルを付ける。
+         PRラベルは画像の直前に置く（広告主が誰か画像を見る前に分かる形）。 -->
+    <div class="kin-pick-verdict" aria-label="最初に査定を検討したい2社">
+      <div class="kin-pv-col kin-pv-col--1">
+        <span class="kin-pv__label">{{P_LABEL}}</span>
+        <a class="kin-pv-banner kin-aff" href="{{P_URL}}" target="_blank" rel="{{P_REL}}" aria-label="{{P_NAME}}公式サイト">
+          <img src="{{P_BANNER}}" alt="{{P_BANNER_ALT}}" width="300" height="300" loading="eager">
+        </a>
+        <span class="kin-pv-pr">PR</span>
+        <a class="kin-pv-cta kin-aff" href="{{P_URL}}" target="_blank" rel="{{P_REL}}"><small>{{P_NAME}}</small>公式サイトを見る →</a>
+      </div>
+      <div class="kin-pv-col kin-pv-col--2">
+        <span class="kin-pv__label">{{S_LABEL}}</span>
+        <a class="kin-pv-banner" href="{{S_URL}}" target="_blank" rel="{{S_REL}}" aria-label="{{S_NAME}}公式サイト">
+          <img src="{{S_BANNER}}" alt="{{S_BANNER_ALT}}" width="300" height="300" loading="eager">
+        </a>
+        <span class="kin-pv-pr">PR</span>
+        <a class="kin-pv-cta" href="{{S_URL}}" target="_blank" rel="{{S_REL}}"><small>{{S_NAME}}</small>公式サイトを見る →</a>
+      </div>
+    </div>
+
+    <!-- ============ ③筆者の立ち位置 ============
+         「なぜこの人の話を聞くのか」を先に立てる。調べた量を具体的な数で言う。
+         ▼書き換え：実際に調べた社数・調べた項目・査定に出したかどうかを事実で書く。 -->
+    <div class="kin-opening">
+      <p class="kin-opening__opener">この記事、正直に書きますね。</p>
+      <div class="kin-opening__problem">
+        <p>{{ITEM}}の買取店って、どこも「業界最高値！」ばっかりで、</p>
+        <p>正直どこが違うのか分からないですよね。</p>
+      </div>
+      <div class="kin-opening__question">
+        <p class="kin-opening__question-label">いちばん知りたいのは</p>
+        <p class="kin-opening__question-value"><span>「結局、いくらで売れるの？」</span></p>
+        <p class="kin-opening__question-tail">なのに。</p>
+      </div>
+      <div class="kin-opening__research">
+        <p>なので、<strong class="kin-opening__research-target">{{ITEM}}を扱う主要{{CMP_COUNT}}社を1社ずつ</strong>、公式の買取条件・手数料・実績・口コミまで<strong>ぜんぶ調べて</strong>、気になる店には<strong>実際に査定にも出して</strong>、</p>
+        <p>「最終的な手取りが高くなる可能性があるか」という視点で、かなり細かく比較しました。</p>
+      </div>
+    </div>
+
+    <p class="kin-opening__next">ここからさき、<strong>「なぜ、最初の候補をこの2社にしたのか」</strong>を説明します。</p>
+
+    <!-- ============ ④導入｜迷いの言語化とランキング否定 ============
+         読者の「どこも同じに見える」を代弁 → 検索順位・ランキングを無効化 →
+         判断軸を「最終手取り」1本に置き換える。この記事の土台になる論法。
+         ▼書き換え：商材ジャンルの検索結果の実態に合わせる。 -->
+    <h2>ここで一度、売る前の迷いを整理します</h2>
+
+    <p class="kin-intro">「売るなら今かもしれない。<br>でも、どこへ持ち込めばいいの？」</p>
+
+    <p>大手チェーン、街の質屋、リサイクルショップ、ネットの宅配専門店……。「{{ITEM}}を売ろう」と検索すると、山ほど出てきます。どこも判で押したように<strong>「業界最高値」「高価買取」</strong>を掲げていて、正直、違いが分かりません。</p>
+
+    <p>先に言っておくと、<strong class="em-red">検索の上に出てる店＝高く売れる店、ではありません。</strong>あそこは広告枠。お金を払えば上に出ます。それだけの話です。</p>
+
+    <p>さらに迷うのが、比較サイトです。「おすすめランキング」を見ても、サイトごとに1位がバラバラ。どこも「おすすめNo.1」。……で、結局どれを信じればいいの？って話ですよね。</p>
+
+    <p>なのでこの記事では、順位とか誰が1位とかは全部やめました。見たのは<strong class="em-mark">「で、あなたの手元にいくら残るのか」</strong>だけです。</p>
+
+    <ul class="kin-scan-list" aria-label="比較で見るべき3つのポイント">
+      <li><strong class="em-red">「上に表示されている＝高く売れる店」ではない</strong></li>
+      <li><strong class="em-mark">ランキングではなく、最終的な手取りで比べる</strong></li>
+      <li><strong class="em-green">査定の根拠まで確認して決める</strong></li>
+    </ul>
+
+    <!-- ============ ⑤相場・売り時 ============
+         「今動く理由」を作るブロック。断言はしない（相場予測は書かない）。
+         着地は必ず「査定＝無料で数字が分かる」＝行動のハードルを下げる形にする。
+         ▼書き換え：商材の価格推移がある場合のみ図を入れる。無い商材ならこのh2を
+                    「今売るべきか」ではなく「相場のない商材をどう比べるか」に変える。 -->
+    <h2>今、{{ITEM}}を売るべきか？</h2>
+
+    <figure class="kin-fig kin-fig--plain">
+      <img src="{{TREND_IMG}}" alt="{{TREND_ALT}}" width="1672" height="941" loading="lazy">
+    </figure>
+
+    <p>{{ITEM}}の価格は、長期で見れば<strong>歴史的な高値圏</strong>で推移しています。だからこそ「今、売るべきか」で迷う人が増えています。</p>
+
+    <p>ただし、これからの価格は世界情勢・為替・金利などで動きます。<strong>上がるとも下がるとも、誰にも断言できません。</strong></p>
+
+    <p>べつに今すぐ売らなくていいんです。ただ、<strong>相場が高いうちに「今いくらか」だけ知っておく</strong>のはやっておいて損はない。タダですし。</p>
+
+    <p>金額を聞いてから決めればいいだけ。査定＝売る約束ではありません。</p>
+
+    <ul class="kin-scan-list kin-scan-list--decision" aria-label="売却判断の要点">
+      <li><strong class="em-mark">相場は歴史的な高値圏</strong></li>
+      <li><strong class="em-red">これからの価格は、誰にも断言できない</strong></li>
+      <li><strong class="em-green">まずは査定で、いまの手取りを確認</strong></li>
+    </ul>
+
+    <!-- ============ ⑥{{CMP_COUNT}}社比較表 ============
+         この記事の「調べた量」を可視化する中核ブロック。横スクロール前提。
+         ルール：
+           - 順位バッジは付けない。最終列を「結論」列にして推薦社に ◎ を置く
+           - 各社セルに公式ソースへの cmp9-ref リンクを必ず1本入れる（検証可能性）
+           - 「◯◯が最も高い」と書かない。書くのは「確認できること」だけ（景表法）
+           - 列はHTMLに直書きする（後付けJSで列を挿すと1列足すだけで壊れる）
+         行の中身は config の companies から生成される。 -->
+    <h2>まず、{{ITEM}}の買取{{CMP_COUNT}}社を比較しました</h2>
+
+    <p>「おすすめランキング」は、サイトごとに1位が違うだけでなく、<strong>なぜ上位なのかまで説明されていない</strong>ことも少なくありません。そこで今回は、まず<strong>各店が何を得意としているか</strong>を整理しました。</p>
+
+    <p>そのうえで、最後の列だけは<strong class="em-mark">「{{ITEM}}だけを売るなら、どこから査定するか」</strong>を結論にしています。単なる知名度ではなく、手取りに関わる条件を確認できるかで見ています。</p>
+
+    <p class="kin-cmp9-note">調査基準日：{{RESEARCH_DATE}}。相場・キャンペーンは変動するため、申込直前に公式条件を再確認してください。</p>
+    <div class="kin-cmp9-note">👉 横にスクロールして全社見られます</div>
+    <div class="kin-cmp9-wrap">
+      <table class="kin-cmp9">
+        <thead><tr>{{CMP_HEAD}}</tr></thead>
+        <tbody>
+{{CMP_ROWS}}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="kin-cmp9-lead"><strong>比較して分かるのは、{{P_NAME}}は「高いかもしれない」という宣伝だけでなく、条件と査定根拠を確認してから動けることです。</strong>まず{{P_NAME}}で特典反映後の総額を出し、その金額を基準にする。この順番が、いちばん迷いなく売り先を決められます。</p>
+    <p class="kin-note">{{P_CAMP_NOTE}}</p>
+
+    <!-- ============ ⑦なぜこの2社なのか ============
+         「順位ではなく仕組みで選んだ」と示す論拠パート。3点構成：
+           kin-valuation … 査定額の計算式を先に見せる（＝単価比較は無意味だと分かる）
+           kin-why       … 選定理由を4つの見出し付きで（各項目に必ず公式ソース）
+           kin-quote-check … 読者がその場で使える「聞くべき4項目」＝行動可能な武器
+         ▼書き換え：kin-why の4項目は案件ごとの事実に置き換える。ここが弱いと
+                    記事全体が「よくあるアフィリ記事」に落ちる。最重要ブロック。 -->
+    <h2>では本題です｜なぜ、この2社なのか</h2>
+
+    <p>理由は、ランキング順位ではありません。<strong>{{ITEM}}の「最終手取り」がどう作られるか</strong>を、公式情報で具体的に確認できたのがこの2社だったからです。</p>
+
+    <div class="kin-valuation">
+      <p class="kin-valuation__title">{{ITEM}}の査定額は、{{UNIT_LABEL}}だけでは決まりません</p>
+      <p class="kin-valuation__formula"><strong>{{FORMULA_1}}</strong><span aria-hidden="true">＋</span><strong>{{FORMULA_2}}</strong><span aria-hidden="true">−</span><strong>{{FORMULA_3}}</strong></p>
+      <p class="kin-valuation__text">同じ品でも、この式のどこを丁寧に見るかで最終額は変わります。見るべきは<strong>この計算の根拠を説明できる査定か</strong>です。</p>
+    </div>
+
+    <p>調べていくと、この2社には<strong>「値段の根拠を数字で出せる」</strong>という共通点がありました。ただし役割は違います。<strong class="em-mark">{{P_NAME}}＝手取りを伸ばしたいとき／{{S_NAME}}＝近くで受けたいとき。</strong>ここさえ間違えなければ、大きく外しません。</p>
+
+    <ol class="kin-why">
+      <!-- ▼書き換え：4項目。①両社の共通点＝比較の土台 ②主推薦の固有の強み
+                      ③主推薦が使えない場合に副推薦が要る理由 ④状況別の選び方 -->
+      <li>
+        <p class="kin-why__ttl">両社とも、価格と品質の根拠を出せる<small>比較の土台</small></p>
+        <p>2社とも「なんでこの金額？」に数字で答えられる、ということ。これができない店は、そもそも比較の対象になりません。</p>
+      </li>
+      <li>
+        <p class="kin-why__ttl">{{P_NAME}}は、素材以外の価値も確認する</p>
+        <p>ふつうの店だと切り捨てられがちな部分まで見る方針が、公式に書かれています。</p>
+      </li>
+      <li>
+        <p class="kin-why__ttl">{{P_NAME}}が遠い地域は、じつは選択肢が狭い</p>
+        <p>ここ、あまり言われないんですが——<strong class="em-red">地方だと「宅配で送るしかない店」ばかりになります。</strong>断ったときの<strong class="em-red">返送料は自己負担</strong>のところも多い。その点{{S_NAME}}は<strong class="em-green">出張が全国対応で費用ゼロ</strong>。<strong class="em-mark">その場で金額を聞いて、納得したら現金。</strong></p>
+      </li>
+      <li>
+        <p class="kin-why__ttl">選び方を、状況ごとに決めやすい</p>
+        <p>{{P_NAME}}が使える地域なら、まず{{P_NAME}}。使えないなら{{S_NAME}}。これで<strong class="em-mark">「言い値で売る」から抜け出せます。</strong></p>
+      </li>
+    </ol>
+
+    <div class="kin-quote-check">
+      <p class="kin-quote-check__title">査定で、必ず確認する4項目</p>
+      <ol>
+        <li>{{CHECK_1}}</li>
+        <li>{{CHECK_2}}</li>
+        <li>{{CHECK_3}}</li>
+        <li><strong>手数料・キャンペーン</strong>を反映した最終手取りはいくらか</li>
+      </ol>
+      <p class="kin-quote-check__note">この4つを聞くだけで、店の態度は変わります。答えられない店なら<strong class="em-red">その場は帰っていい</strong>。</p>
+      <p class="kin-quote-check__sources">根拠：{{WHY_SOURCES}}</p>
+    </div>
+
+    <!-- ============ ⑧キャンペーン ============
+         日付は下部スクリプトが自動計算（#kin-camp-range）。
+         まねきや＝月次（当月1日〜末日）／おたからや＝週次（次の日曜）。取り違えない。
+         注記（対象外品・上限）は必ず画像の直後に置く。 -->
+    <p class="kin-banner-label kin-banner-label--campaign">{{P_NAME}} <small>PR</small></p>
+    <a class="kin-camp" href="{{P_URL}}" target="_blank" rel="{{P_REL}}" aria-label="{{P_CAMP_ALT}}">
+      <img src="{{P_CAMP_IMG}}" alt="{{P_CAMP_ALT}}" width="3125" height="1218" loading="lazy" decoding="async">
+      <span class="kin-camp__date" id="kin-camp-range">今月末まで</span>
+    </a>
+    <p class="kin-note">{{P_CAMP_NOTE}}</p>
+
+    <!-- ============ ⑨会社比較 ============
+         「店舗数の多さ＝高く売れる」ではないと明示するのがこのブロックの役目。
+         最後の kin-box で必ずそれを言い切る（規模の話に読者を流されないため）。 -->
+    <h2>まず、2社がどういう会社なのか</h2>
+
+    <p>比較サイトの多くは「店舗数」と「創業年」しか並べません。ここでは<strong>会社の規模・体制まで</strong>並べます。</p>
+
+    <div class="kin-banners" aria-label="2社の公式バナー">
+      <div>
+        <a class="kin-aff" href="{{P_URL}}" target="_blank" rel="{{P_REL}}" aria-label="{{P_NAME}}で無料査定">
+          <span class="kin-banner-label">{{P_NAME}} <small>PR</small></span>
+          <img src="{{P_BANNER}}" alt="{{P_BANNER_ALT}}" width="300" height="300" loading="lazy">
+        </a>
+        <span class="kin-banners__cap">{{P_CAP}}</span>
+      </div>
+      <div>
+        <a href="{{S_URL}}" target="_blank" rel="{{S_REL}}" aria-label="{{S_NAME}}で無料査定">
+          <span class="kin-banner-label">{{S_NAME}} <small>PR</small></span>
+          <img src="{{S_BANNER}}" alt="{{S_BANNER_ALT}}" width="300" height="300" loading="lazy">
+        </a>
+        <span class="kin-banners__cap">{{S_CAP}}</span>
+      </div>
+    </div>
+
+    <table class="kin-compare">
+      <thead>
+        <tr><th>項目</th><th class="is-pick">{{P_NAME}}</th><th>{{S_NAME}}</th></tr>
+      </thead>
+      <tbody>
+{{COMPANY_ROWS}}
+      </tbody>
+    </table>
+    <p class="kin-note">※ 各社公式の公表値（{{RESEARCH_DATE}}時点）。</p>
+
+    <div class="kin-box">
+      <p class="kin-box__title">店舗網の広さと、買取額の根拠は別の話です</p>
+      <p style="margin-bottom:0">{{S_NAME}}は近くで相談しやすい規模を持っています。ただ<strong class="em-mark">あなたの買取額を決めるのは、品質の判定と手数料と特典です。</strong>次に見るべきなのは、会社の大きさではなく、そこです。</p>
+    </div>
+
+    <!-- ============ ⑩選び方の分岐 ============
+         記事の結論を「順位」ではなく「はい/いいえ」で渡す。
+         読者は自分の状況を当てるだけで答えが出る＝納得のコスト最小。
+         kin-verdict__question からエリア表（#partner-area）へアンカーで飛ばす。 -->
+    <h2>ここまでを踏まえて｜あなたはどちらから査定すべきか</h2>
+
+    <p>答えはシンプルです。<strong class="em-mark">住んでる場所で決めてください。</strong></p>
+
+    <div class="kin-verdict">
+      <p class="kin-verdict__head">結論｜店頭・出張で動きやすい地域かどうかで決まります</p>
+      <div class="kin-verdict__body">
+        <div class="kin-verdict__item kin-verdict__item--main">
+          <a class="kin-verdict__question" href="#partner-area">最寄りで、{{P_NAME}}の店頭・出張査定を受けられますか？<span>対応エリアを確認 ↓</span></a>
+          <p class="kin-verdict__answer"><span>はい</span>まず、{{P_NAME}}</p>
+          <a class="kin-verdict__banner kin-aff" href="{{P_URL}}" target="_blank" rel="{{P_REL}}" aria-label="{{P_NAME}}で無料査定">
+            <span class="kin-banner-label">{{P_NAME}} <small>PR</small></span>
+            <img src="{{P_BANNER}}" alt="{{P_BANNER_ALT}}" width="300" height="300" loading="lazy">
+          </a>
+          <p class="kin-verdict__why">{{P_WHY}}</p>
+        </div>
+        <div class="kin-verdict__divider"><span>それ以外</span></div>
+        <div class="kin-verdict__item kin-verdict__item--sub">
+          <p class="kin-verdict__question">近くで査定を受けにくい、またはもう1社ぶつけたい</p>
+          <p class="kin-verdict__answer"><span>いいえ</span>{{S_NAME}}</p>
+          <a class="kin-verdict__banner" href="{{S_URL}}" target="_blank" rel="{{S_REL}}" aria-label="{{S_NAME}}で無料査定">
+            <span class="kin-banner-label">{{S_NAME}} <small>PR</small></span>
+            <img src="{{S_BANNER}}" alt="{{S_BANNER_ALT}}" width="300" height="300" loading="lazy">
+          </a>
+          <p class="kin-verdict__why">{{S_WHY}}</p>
+        </div>
+      </div>
+    </div>
+
+    <p><strong class="em-mark">どっちに転んでも、タダで数字が1つ手に入ります。</strong>売る・売らないは、それを見てから決めればいい話です。</p>
+
+    <!-- ============ ⑪エリア・店舗 ============
+         ⑩の「はい/いいえ」を読者が自分で判定できるようにする裏付け。
+         これが無いと分岐が機能しない（＝⑩とセットで必須）。 -->
+    <div class="kin-area" id="partner-area">
+      <p class="kin-area__title">{{P_NAME}}の主な出店エリア</p>
+
+      <figure class="kin-map">
+        <img src="{{MAP_IMG}}" alt="{{P_NAME}}の主な出店エリアを示した日本地図" loading="lazy">
+      </figure>
+
+      <ul class="kin-area__list">
+{{AREA_ITEMS}}
+      </ul>
+      <p class="kin-area__note">※ 店頭・出張の対応可否は、品物や時期によって変わります。<a href="{{P_SHOP_URL}}" target="_blank" rel="noopener noreferrer">最新の店舗一覧はこちら</a>。</p>
+    </div>
+
+    <ul class="kin-shops">
+{{SHOP_ITEMS}}
+    </ul>
+    <p class="kin-note">上記は店舗例です。出店・営業時間は変わるため、最新の店舗案内をご確認ください。</p>
+
+    {{CTA_BLOCK_1}}
+
+    <!-- ============ ⑫なぜ差が出るのか ============
+         「相場は同じなのに店で額が違う」を仕組みで説明する。
+         kin-punch は1セクションに1つだけ。短い断言で読者の記憶に残す。 -->
+    <h2>なぜ、店によって最終手取りが変わるのか</h2>
+
+    <p><strong>公表されている相場は、どの店でもほぼ同じです。</strong>ただし、店頭であなたの品に付く最終額は違います。</p>
+
+    <p>違いが出るのは、<strong>{{DIFF_FACTORS}}</strong>です。</p>
+
+    <p class="kin-punch">{{PUNCH_1}}</p>
+
+    <h3>「手数料無料」の、ほんとの話</h3>
+    <!-- ▼書き換え：「無料」表示のからくりを説明。表示単価に手数料が織り込まれている
+                    ケースがあるため、比べるのは常に「手数料込みの最終手取り」だと結ぶ -->
+    <p>「手数料無料」は、必ずしも「その分あなたの手取りが増える」とは限りません。表示単価のほうを調整している場合があります。<strong class="em-mark">比べるのは、いつでも手数料込みの最終手取りです。</strong></p>
+
+    <!-- ============ ⑬副推薦社の実力 ============
+         強みを h3 で並べる（3〜5本）。最後に必ず「利用前に確認したいこと」を置く。
+         弱みを書かないと記事全体の信頼が落ちる。ソース行 kin-ota-sources で締める。 -->
+    <h2>{{S_NAME}}の実力</h2>
+
+    <h3>強み①｜全国に広がる店舗網で、近い場所から始めやすい</h3>
+    <p>{{S_STRENGTH_1}}</p>
+
+    <h3>強み②｜査定・出張・見積もりの費用は無料と案内</h3>
+    <p>{{S_STRENGTH_2}}</p>
+
+    <h3>強み③｜キャンペーンは「条件まで」確認して使う</h3>
+    <p>{{S_STRENGTH_3}}</p>
+
+    <h3>利用前に確認したいこと</h3>
+    <ul class="kin-list kin-list--x">
+{{S_CAUTIONS}}
+    </ul>
+
+    <p class="kin-ota-sources">根拠：{{S_SOURCES}}</p>
+
+    {{CTA_BLOCK_2}}
+
+    <!-- ============ ⑭主推薦社の実力 ============
+         最長のブロック。強み h3 を6〜8本＋「弱み｜正直に3つ書きます」で締める。
+         弱みは必ず本物を書く（読者の信頼＝CVRの土台。ここを飾ると全部崩れる）。
+         途中に相場計算機・第三者検証・口コミを挟んで、読み物の密度を保つ。 -->
+    <h2>{{P_NAME}}の実力</h2>
+
+    <figure class="kin-photo">
+      <img src="{{P_PHOTO}}" alt="{{P_NAME}}の店舗" width="1672" height="941" loading="lazy">
+    </figure>
+
+    <h3>強み①｜「重さ」だけで終わらせない査定</h3>
+    <p>{{P_STRENGTH_1}}</p>
+
+    <h3>強み②｜査定の根拠を質問しやすい</h3>
+    <p>{{P_STRENGTH_2}}</p>
+
+    <h3>強み③｜当日の相場を事前に確認できる</h3>
+    <p>{{P_STRENGTH_3}}</p>
+
+{{CALC_HTML}}
+
+    <p class="kin-punch">{{PUNCH_2}}</p>
+
+    <h3>強み④｜第三者が「相場と並べて」検証している</h3>
+    <!-- 他メディアの検証データは強い。消さずに残す（過去に削除して弱くなった経緯あり）。
+         引用元は必ずリンクし、「特定の取引例」注記を添える。 -->
+    <div class="kin-media">
+      <figure class="kin-media__fig">
+        <img src="{{MEDIA_IMG}}" alt="{{MEDIA_ALT}}" width="1200" height="800" loading="lazy">
+      </figure>
+      <div class="kin-media__body">
+        <p>{{MEDIA_BODY}}</p>
+        <p class="kin-media__cap">出典：{{MEDIA_SOURCE}}</p>
+      </div>
+    </div>
+    <p class="kin-note">※ 第三者メディアの調査による比較例です。特定の取引例であり、同等の金額を保証するものではありません。</p>
+
+    <h3>強み⑤｜利用者の声</h3>
+    <!-- 良い口コミだけ並べない。kin-quote--bad を必ず1本混ぜる。 -->
+{{REVIEWS}}
+
+    <h3>強み⑥｜買取実績を公開している</h3>
+    <ul class="kin-cats">
+{{P_CATEGORIES}}
+    </ul>
+    <p class="kin-note">※ 公式サイト掲載の買取実績より。特定の取引例であり、同等の金額を保証するものではありません。</p>
+
+    <h3>強み⑦｜第三者認証を取得している</h3>
+    <ul class="kin-list">
+{{P_CERTS}}
+    </ul>
+
+    <h3>弱み｜正直に3つ書きます</h3>
+    <ul class="kin-list kin-list--x">
+{{P_WEAKNESSES}}
+    </ul>
+
+    {{CTA_BLOCK_3}}
+
+    <!-- ============ ⑮キャンペーンの条件 ============
+         特典を「使える形」で説明する。適用条件・上限・対象外を必ず書く（景表法）。 -->
+    <h2>{{P_CAMP_TITLE}}</h2>
+    <p>{{P_CAMP_BODY}}</p>
+    <p class="kin-note">{{P_CAMP_NOTE}}</p>
+
+    <!-- ============ ⑯損しないコツ ============
+         推薦社に依存しない一般ノウハウ。ここがあると記事が「広告」から「情報」になる。
+         5本。各 h3 の直後に1〜2段落。 -->
+    <h2>どの店を選んでも、損をしない5つのコツ</h2>
+
+    <ul class="kin-scan-list kin-scan-list--tips" aria-label="損をしないコツ">
+{{TIPS_SCAN}}
+    </ul>
+
+{{TIPS_BODY}}
+
+    {{CTA_BLOCK_4}}
+
+    <!-- ============ ⑰悪徳業者の見分け方 ============
+         「帰っていい」と許可を出すブロック。読者の恐怖を下げ、査定申込のハードルを下げる。 -->
+    <h2>こんな業者は、その場で帰ってOKです</h2>
+
+    <ul class="kin-list kin-list--x">
+{{BAD_SIGNS}}
+    </ul>
+
+    {{CTA_BLOCK_5}}
+
+{{TAX_HTML}}
+
+    <!-- ============ ⑲申込から現金化までの流れ ============
+         「何をされるか分からない」不安を消す。ステップは4〜5。 -->
+    <h2>申込から現金化までの流れ</h2>
+
+    <ol class="kin-step">
+{{STEPS}}
+    </ol>
+
+    <figure class="kin-photo">
+      <img src="{{FLOW_IMG}}" alt="{{FLOW_ALT}}" width="1672" height="941" loading="lazy">
+    </figure>
+
+    {{CTA_BLOCK_6}}
+
+    <!-- ============ ⑳FAQ ============
+         head の FAQPage schema と同じ内容を出す（生成スクリプトが両方に入れる）。
+         最低10問。商材固有の疑問（刻印・メッキ・遺品・未成年など）を必ず含める。 -->
+    <h2>よくある質問</h2>
+
+    <div class="kin-faq">
+{{FAQ_HTML}}
+    </div>
+
+    <!-- ============ ㉑まとめ ============
+         状況→おすすめ→理由の3列。「他社」と書く行を1つは入れる（万能に見せない）。 -->
+    <h2>まとめ｜結局どっちを選ぶ？</h2>
+
+    <table class="kin-table kin-table--stack kin-table--summary">
+      <thead>
+        <tr><th>状況</th><th>おすすめ</th><th>理由</th></tr>
+      </thead>
+      <tbody>
+{{SUMMARY_ROWS}}
+      </tbody>
+    </table>
+
+    <p><strong>いま売らなくて、いいんです。</strong>でも<strong class="em-mark">「いくらか」は今日タダで分かります。</strong></p>
+
+    {{CTA_BLOCK_7}}
+
+    <!-- ============ 免責 ============
+         削らない。ここに景表法・ステマ規制の対応を集約している。 -->
+    <div class="kin-disclaimer">
+      <ul>
+{{DISCLAIMER_ITEMS}}
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ 固定CTA ============
+     電話（成果）を赤・面積広め／WEBを緑。左右を入れ替えないこと。 -->
+<div class="kin-fixed-cta">
+  <a class="kin-fixed-tel" href="{{P_URL}}" target="_blank" rel="{{P_REL}}" aria-label="{{P_NAME}}で電話査定を予約する">
+    <img src="{{P_LOGO}}" alt="{{P_NAME}}"><span>電話で査定予約<small>{{P_NAME}}｜{{P_CAMP_SHORT}}</small></span>
+  </a>
+  <a class="kin-fixed-web" href="{{S_URL}}" target="_blank" rel="{{S_REL}}" aria-label="{{S_NAME}}公式サイトを見る">
+    <img src="{{S_LOGO}}" alt="{{S_NAME}}"><span>公式サイトを見る<small>{{S_NAME}}</small></span>
+  </a>
+</div>
+
+<script>
+{{CAMPAIGN_SCRIPT}}
+</script>
+
+{{CALC_SCRIPT}}
+
+<!-- CV計測：LP3系と同一のイベント体系 -->
+<script>
+(function(){
+  var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+  var LANDING = "{{LANDING_INTENT}}";
+  function track(name, params){
+    try{
+      if(window.dataLayer) window.dataLayer.push(Object.assign({event:name}, params||{}));
+      if(typeof gtag==="function") gtag("event", name, Object.assign({}, params||{}, { transport_type:"beacon" }));
+    }catch(_){}
+  }
+  // 着地URLのクエリ（utm_/gclid 等）をCTAへ転送し、タグ発火の取りこぼしを減らす
+  function fwd(raw){
+    if(!raw || raw.charAt(0)==="#") return raw;
+    try{
+      var u=new URL(raw, location.href);
+      new URLSearchParams(location.search).forEach(function(v,k){ if(KEEP.test(k)&&!u.searchParams.has(k)) u.searchParams.set(k,v); });
+      return u.toString();
+    }catch(_){ return raw; }
+  }
+  // ★CTAクラスを増やしたら、必ずこのSELにも足す（足し忘れ＝CV計測漏れ）
+  var SEL = ".kin-phone, .kin-cta--web, .kin-fixed-tel, .kin-fixed-web, .kin-aff, .kin-camp, .kin-pv-banner, .kin-pv-cta, .kin-verdict__banner";
+  Array.prototype.forEach.call(document.querySelectorAll(SEL), function(el){
+    var cls = el.className || "", href = el.getAttribute("href") || "";
+    // 副推薦社（非成果）だけを href のホスト名で判定。それ以外は成果CV扱い
+    var isSecondary = /{{S_HOST_RE}}/.test(href);
+    var key = isSecondary ? "{{S_KEY}}" : "{{P_KEY}}";
+    var ctaType = /kin-phone|kin-fixed-tel/.test(cls) ? "phone" : "web";
+    var url = fwd(href);
+    if(url) el.setAttribute("href", url);
+    el.addEventListener("click", function(){
+      if(el.__ctaBusy) return;            // 連打による二重CVを防止（遷移は既定動作に委ねる）
+      el.__ctaBusy = true; setTimeout(function(){ el.__ctaBusy = false; }, 1200);
+      var params = { affiliate_key:key, cta_type:ctaType, landing_intent:LANDING, link_url:url };
+      var cv = isSecondary ? "{{CV_SECONDARY}}" : "{{CV_PRIMARY}}";
+      // GTM併用時の保険としてdataLayerにも積む
+      if(window.dataLayer) window.dataLayer.push(Object.assign({event:cv}, params));
+      // 主CV（主推薦＝成果／副推薦＝非成果）
+      if(typeof gtag==="function") gtag("event", cv, Object.assign({}, params, { transport_type:"beacon" }));
+      // GA4限定：電話/WEB別の質イベント（Google広告の主要CVには送らず send_to でGA4のみ）
+      if(typeof gtag==="function") gtag("event", "{{EV_PREFIX}}_"+ctaType+"_click", Object.assign({}, params, { send_to:"{{GA4_ID}}", transport_type:"beacon" }));
+      // CTAは target=_blank（新規タブ）。既定遷移はそのまま活かし、送信は beacon で確実化
+    });
+  });
+  track("{{EV_PREFIX}}_landing_intent", { landing_intent:LANDING }); // 全ページ共通の計測軸
+  track(LANDING + "_open", { landing_intent:LANDING });
+})();
+</script>
+
+</body>
+</html>
