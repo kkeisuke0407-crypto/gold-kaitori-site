@@ -32,50 +32,45 @@
 
 <div class="wrap">
 
-  <!-- ============ FV｜ドカンと結論だけ ============
-       画像に文字を焼き込まない。数字1つと「知ってる？」だけで殴る。 -->
-  <div class="kin-fv kin-fv--visual">
-    <p class="visually-hidden">退職給付金ガイド</p>
-    <h1 class="visually-hidden">退職後にもらえるお金は、失業保険だけじゃありません</h1>
-
-    <figure class="kin-fv__visual">
-      <img src="images/fv-taishoku-kyufukin.webp" alt="退職後にもらえるお金は失業保険だけではありません" width="1823" height="863">
-    </figure>
+  <!-- ============ FV ============
+       設計ルール（実測にもとづく。崩さないこと）:
+       1. 1行目は「制度」ではなく「読者の状態」を名指しする。潜在層は自分が名指しされたときだけ止まる
+       2. 「退職後」で始めない。在職中・休職中の人を弾く（このLPの本題は退職日の設計）
+       3. CTAボタンの上端を画面上から400px以内に置く。390×844の実効可視は約638px
+       4. FVに赤（em-red）を使わない。療養中の読者に対して煽りは離脱要因になる
+       5. 免責はCTAより下。CTA前に3行置くと期待を自分で削ぐ
+       ※FV画像は未配置。届くまでテキストFVで運用する（壊れた画像枠を出さないため） -->
+  <div class="kin-fv kin-fv--text">
+    <p class="fvk-eyebrow">休職中の方・退職を考えている方へ</p>
+    <h1 class="fvk-h1">働けない間のお金、<br>失業保険だけだと<br>思っていませんか。</h1>
   </div>
 
   <div class="entry-content">
 
-    <!-- ============ ①結論（FV直下）============ -->
-    <div class="kin-fv-conclusion">
-      <p class="kin-fv-conclusion__lead">知っていますか？</p>
-      <p class="kin-fv-conclusion__main">退職後にもらえるお金は、<br>失業保険だけじゃありません。</p>
+    <!-- 金額。ここは競合（最大28ヶ月／最大250万円／200〜400万円）と同じ土俵に乗せる。
+         個別の金額はあえて出さず、LINEの中に置く＝登録する理由を残す。 -->
+    <div class="fvk-amount">
+      <span class="fvk-amount-cap">条件を満たせば、最長</span>
+      <span class="fvk-amount-main"><em>28</em>か月</span>
+      <span class="fvk-amount-sub">月収30万円の方なら、傷病手当金だけでも <b>約365万円</b></span>
     </div>
+    <p class="fvk-amount-note">※ 制度上の上限です。金額・期間は人により異なります。</p>
 
-    <!-- 金額。ひな形の kin-figure（数値表示）を使う -->
-    <div class="kin-figure">
-      <div class="kin-figure__col">
-        <span class="kin-figure__label">月収30万円の人なら</span>
-        <span class="kin-figure__val">1日 6,667<span class="kin-figure__unit">円</span></span>
-      </div>
-      <div class="kin-figure__sep"></div>
-      <div class="kin-figure__col kin-figure__col--now">
-        <span class="kin-figure__label">通算1年6か月で最大</span>
-        <span class="kin-figure__val">365<span class="kin-figure__unit">万円</span></span>
-      </div>
-    </div>
-    <p class="kin-figure__note">※ 条件を満たした場合の、制度上の目安です。実際の金額は標準報酬月額により異なり、支給は保険者の審査によって決まります。</p>
-
-    <p>病気やケガで働けずに退職する場合、<strong class="em-green">失業保険とは別のお金</strong>を受け取れる制度があります。<strong class="em-red">申請した人だけ</strong>が受け取れる仕組みで、会社から案内されることはほとんどありません。</p>
-
-    <div class="kin-cta-block">
-      <p class="kin-cta-block__head">まずは、対象に当てはまるかだけ。</p>
+    <div class="kin-cta-block kin-cta-block--fv">
+      <p class="kin-cta-block__head">あなたの場合は、いくらか。</p>
       <a class="kin-phone kin-aff" href="#" data-aff="relief" data-track="fv_line" target="_blank" rel="sponsored nofollow noopener noreferrer">
-        <span class="kin-cta-brand">退職リリーフ</span>
-        <span class="kin-phone__badge">受け取れる可能性を無料で診断</span>
-        <span class="kin-phone__num">LINEで無料診断を受ける</span>
-        <span class="kin-phone__sub">受付 9:00〜21:00／年中無休／相談は無料</span>
+        <span class="kin-phone__num">LINEで金額の目安を見る</span>
+        <span class="kin-phone__sub">友だち追加だけ・無料／電話番号は不要</span>
       </a>
-      <span class="kin-cta__note">診断は1分ほどで終わります。相談した時点で契約になることはありません。</span>
+      <span class="kin-cta__note">運営：労働組合 新宿ユニオン（社労士・弁護士監修）／いつでもブロックできます</span>
+    </div>
+
+    <p>病気やケガで働けない状態にある場合、<strong class="em-green">失業保険とは別のお金</strong>を受け取れる制度があります。在職中から始められる制度で、<strong>申請した人だけ</strong>が受け取れます。会社から案内されることは、ほとんどありません。</p>
+
+    <div class="fvk-stat">
+      <p class="fvk-stat-main">傷病手当金を受け取った人の<br><b>3人に1人以上</b>が、<b>心の不調</b>です。</p>
+      <p class="fvk-stat-sub">精神及び行動の障害が <b>35.20%</b> で最も多く、がん（13.57%）の約2.6倍。<br>平均の支給期間は <b>158日（約5か月）</b>。</p>
+      <p class="fvk-stat-src">出典：<a href="https://www.kyoukaikenpo.or.jp/disclosure/statistics/statistical_survey/beneficiary_status_survey/r05/" target="_blank" rel="noopener noreferrer">全国健康保険協会「現金給付受給者状況調査」令和5年度</a></p>
     </div>
 
     <!-- ============ ②LINEの手順（スクショ3枚）============
@@ -440,7 +435,7 @@
 
 <!-- ============ 固定CTA ============
      成果地点はLINE追加の1本のみ。ひな形の2枠構成ではなく1枠に潰している（型からの逸脱・意図的）。 -->
-<div class="kin-fixed-cta kin-fixed-cta--single">
+<div class="kin-fixed-cta kin-fixed-cta--single" data-sticky hidden>
   <a class="kin-fixed-tel kin-aff" href="#" data-aff="relief" data-track="sticky_line" target="_blank" rel="sponsored nofollow noopener noreferrer" aria-label="退職リリーフにLINEで無料診断を申し込む">
     <span>LINEで無料診断<small>退職リリーフ｜相談無料・1分</small></span>
   </a>
@@ -448,13 +443,36 @@
 
 <style>
 /* ================= このページ固有の追記 ================= */
-/* 金額表示。ひな形の kin-figure は暗背景前提の配色（#e6cd84 / #94a0b5）なので、
-   白地で沈まないようトークン（--gold は「白地でAA」と定義済み）に寄せる。 */
-.kin-figure__label{ color:#6b7280; font-weight:600; }
-.kin-figure__col--now .kin-figure__val{ color:var(--gold); }
-.kin-figure__col--now .kin-figure__label{ color:var(--gold); }
-.kin-figure__col--now .kin-figure__val{ font-size:clamp(30px,10vw,50px); }
-.kin-figure__note{ margin:-1.2em 0 1.8em; font-size:11.5px; line-height:1.8; color:#8a8a8a; }
+/* ---------- FV ----------
+   高さ予算：390×844の実効可視は約638px。CTAボタン上端を400px以内に収める。 */
+.kin-fv--text{ padding:.6em 0 .1em; }
+.fvk-eyebrow{ margin:0 0 .6em; font-size:12.5px; font-weight:700; letter-spacing:.04em;
+  color:var(--gold); }
+.fvk-h1{ margin:0; font-family:var(--mincho); font-size:clamp(25px,7.4vw,36px); font-weight:600;
+  line-height:1.42; letter-spacing:.005em; color:var(--sumi); text-wrap:balance; }
+
+.fvk-amount{ display:flex; flex-direction:column; align-items:center; gap:.15em;
+  margin:.75em 0 .3em; padding:.7em .7em .65em;
+  background:var(--gold-bg); border-top:2px solid var(--gold-line); border-bottom:2px solid var(--gold-line); }
+.fvk-amount-cap{ font-size:12.5px; font-weight:700; color:var(--gold); letter-spacing:.06em; }
+.fvk-amount-main{ font-family:var(--mincho); font-size:clamp(38px,13vw,64px); font-weight:600;
+  line-height:1.05; color:var(--sumi); font-variant-numeric:tabular-nums; }
+.fvk-amount-main em{ font-style:normal; font-size:1.35em; color:var(--gold); letter-spacing:-.01em; }
+.fvk-amount-sub{ margin-top:.35em; font-size:13.5px; line-height:1.6; color:#4a4a4a; text-align:center; }
+.fvk-amount-sub b{ font-weight:700; color:var(--sumi); font-size:1.12em; }
+/* 注記は1行・AA準拠（#5f5f5f = 6.4:1）。CTAより上に長い免責を置かない */
+.fvk-amount-note{ margin:0 0 .7em; font-size:11.5px; line-height:1.6; color:#5f5f5f; text-align:center; }
+
+.kin-cta-block--fv{ margin-top:0; }
+/* 1行に収める。折り返して「見／る」になると視認性が落ちる */
+.kin-cta-block--fv .kin-phone__num{ font-size:clamp(19px,5.6vw,24px); white-space:nowrap; }
+.fvk-stat{ margin:1.6em 0; padding:1em 1.1em; background:#f7f5ef; border-left:4px solid var(--gold-line); }
+.fvk-stat-main{ margin:0 0 .5em; font-size:16px; line-height:1.8; font-weight:600; color:var(--sumi); }
+.fvk-stat-main b{ font-weight:800; color:var(--gold); }
+.fvk-stat-sub{ margin:0 0 .5em; font-size:13px; line-height:1.85; color:#4a4a4a; }
+.fvk-stat-sub b{ color:var(--sumi); }
+.fvk-stat-src{ margin:0; font-size:11px; line-height:1.6; color:#5f5f5f; }
+.fvk-stat-src a{ color:var(--gold); }
 /* LINE手順（ひな形の kin-step にスクショを足す） */
 .lstep li{ }
 .lstep-img{ display:block; width:100%; max-width:220px; height:auto; margin:.8em auto .7em;
@@ -463,6 +481,7 @@
   .lstep li{ padding-left:0; } }
 /* 固定CTAを1枠に潰す（成果地点がLINE追加のみのため） */
 .kin-fixed-cta--single{ grid-template-columns:1fr!important; }
+.kin-fixed-cta[hidden]{ display:none!important; }
 .kin-fixed-cta--single .kin-fixed-tel{ justify-content:center; }
 </style>
 
@@ -501,6 +520,16 @@
       if(typeof gtag==="function") gtag("event", "taishoku_relief_cta_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
     });
   });
+  // 固定CTAは、FVのCTAが画面から出てから表示する。
+  // 出しっぱなしにするとFV内のCTAボタンに被り、1画面目の主CTAが隠れる。
+  var sticky = document.querySelector("[data-sticky]");
+  var fvCta  = document.querySelector(".kin-cta-block--fv");
+  if (sticky && fvCta && "IntersectionObserver" in window) {
+    new IntersectionObserver(function(es){
+      es.forEach(function(en){ sticky.hidden = en.isIntersecting; });
+    }, { threshold: 0 }).observe(fvCta);
+  } else if (sticky) { sticky.hidden = false; }
+
   // 免責の日付
   var jst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
   var t = document.getElementById('kin-today');
