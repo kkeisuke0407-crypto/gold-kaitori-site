@@ -10,3 +10,6 @@ public/sample-hikaku/
 
 # 目視確認用に作る1ファイル版プレビュー（CSS埋め込み・使い捨て）
 preview-*.html
+
+# プレビュー用の一時ファイル（確認用の使い捨て）
+preview-*.html
