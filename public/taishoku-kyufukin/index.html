@@ -34,48 +34,36 @@
 
   <!-- ============ FV ============
        設計ルール（実測にもとづく。崩さないこと）:
-       1. 1行目は「制度」ではなく「読者の状態」を名指しする。潜在層は自分が名指しされたときだけ止まる
-       2. 「退職後」で始めない。在職中・休職中の人を弾く（このLPの本題は退職日の設計）
-       3. CTAボタンの上端を画面上から400px以内に置く。390×844の実効可視は約638px
-       4. FVに赤（em-red）を使わない。療養中の読者に対して煽りは離脱要因になる
-       5. 免責はCTAより下。CTA前に3行置くと期待を自分で削ぐ
-       ※FV画像は未配置。届くまでテキストFVで運用する（壊れた画像枠を出さないため） -->
+       1. 見出しと金額を1つのかたまりにする。要素を増やすとCTAが1画面目から落ちる
+       2. 「退職予定の方」で受ける。在職中・休職中の人を弾かない
+       3. CTAボタンの上端は画面上から400px以内。390×844の実効可視は約638px
+       4. FVに赤（em-red）を使わない。療養中の読者に煽りは離脱要因になる
+       5. 注記はCTAより上に1行だけ。3行置くと期待を自分で削ぐ
+       ※FV画像は未配置。届くまでテキストFVで運用する -->
   <div class="kin-fv kin-fv--text">
-    <p class="fvk-eyebrow">休職中の方・退職を考えている方へ</p>
-    <h1 class="fvk-h1">働けない間のお金、<br>失業保険だけだと<br>思っていませんか。</h1>
+    <p class="fvk-eyebrow">退職予定の方へ</p>
+    <h1 class="fvk-h1">
+      <span class="fvk-h1-amount">最大<em>365</em>万円</span>
+      <span class="fvk-h1-tail">受け取れる制度を<br>ご存じですか？</span>
+    </h1>
   </div>
 
   <div class="entry-content">
 
-    <!-- 金額。ここは競合（最大28ヶ月／最大250万円／200〜400万円）と同じ土俵に乗せる。
-         個別の金額はあえて出さず、LINEの中に置く＝登録する理由を残す。 -->
-    <div class="fvk-amount">
-      <span class="fvk-amount-cap">条件を満たせば、最長</span>
-      <span class="fvk-amount-main"><em>28</em>か月</span>
-      <span class="fvk-amount-sub">月収30万円の方なら、傷病手当金だけでも <b>約365万円</b></span>
-    </div>
-    <p class="fvk-amount-note">※ 制度上の上限です。金額・期間は人により異なります。</p>
+    <p class="fvk-amount-note">※ 月収30万円の方の場合。条件を満たしたときの制度上の上限です。</p>
 
     <div class="kin-cta-block kin-cta-block--fv">
-      <p class="kin-cta-block__head">あなたの場合は、いくらか。</p>
       <a class="kin-phone kin-aff" href="#" data-aff="relief" data-track="fv_line" target="_blank" rel="sponsored nofollow noopener noreferrer">
-        <span class="kin-phone__num">LINEで金額の目安を見る</span>
+        <span class="kin-phone__badge">まずは、受け取れるかどうか</span>
+        <span class="kin-phone__num">LINEで無料診断</span>
         <span class="kin-phone__sub">友だち追加だけ・無料／電話番号は不要</span>
       </a>
       <span class="kin-cta__note">運営：労働組合 新宿ユニオン（社労士・弁護士監修）／いつでもブロックできます</span>
     </div>
 
-    <p>病気やケガで働けない状態にある場合、<strong class="em-green">失業保険とは別のお金</strong>を受け取れる制度があります。在職中から始められる制度で、<strong>申請した人だけ</strong>が受け取れます。会社から案内されることは、ほとんどありません。</p>
-
-    <div class="fvk-stat">
-      <p class="fvk-stat-main">傷病手当金を受け取った人の<br><b>3人に1人以上</b>が、<b>心の不調</b>です。</p>
-      <p class="fvk-stat-sub">精神及び行動の障害が <b>35.20%</b> で最も多く、がん（13.57%）の約2.6倍。<br>平均の支給期間は <b>158日（約5か月）</b>。</p>
-      <p class="fvk-stat-src">出典：<a href="https://www.kyoukaikenpo.or.jp/disclosure/statistics/statistical_survey/beneficiary_status_survey/r05/" target="_blank" rel="noopener noreferrer">全国健康保険協会「現金給付受給者状況調査」令和5年度</a></p>
-    </div>
-
     <!-- ============ ②LINEの手順（スクショ3枚）============
          「難しそう」を先に潰す。行動のコストが低いことを見せてからCTAを重ねる。 -->
-    <h2>申し込みは、LINEで3ステップ</h2>
+    <h2>無料診断は、LINEで3ステップ</h2>
 
     <p>入力するのは、かんたんな質問への回答だけです。<strong>ここまでは無料</strong>で、途中でやめても構いません。</p>
 
@@ -111,6 +99,14 @@
 
     <!-- ============ ③そもそも何のお金か ============ -->
     <h2>退職後に受け取れるお金は、1つじゃない</h2>
+
+    <p>病気やケガで働けない状態にある場合、<strong class="em-green">失業保険とは別のお金</strong>を受け取れる制度があります。在職中から始められる制度で、<strong>申請した人だけ</strong>が受け取れます。会社から案内されることは、ほとんどありません。</p>
+
+    <div class="fvk-stat">
+      <p class="fvk-stat-main">傷病手当金を受け取った人の<br><b>3人に1人以上</b>が、<b>心の不調</b>です。</p>
+      <p class="fvk-stat-sub">精神及び行動の障害が <b>35.20%</b> で最も多く、がん（13.57%）の約2.6倍。<br>平均の支給期間は <b>158日（約5か月）</b>。</p>
+      <p class="fvk-stat-src">出典：<a href="https://www.kyoukaikenpo.or.jp/disclosure/statistics/statistical_survey/beneficiary_status_survey/r05/" target="_blank" rel="noopener noreferrer">全国健康保険協会「現金給付受給者状況調査」令和5年度</a></p>
+    </div>
 
     <p>「退職したら失業保険」——そう思っている人がほとんどです。ただ、<strong>受け取れる可能性のあるお金は3つあります。</strong></p>
 
@@ -448,24 +444,18 @@
 .kin-fv--text{ padding:.6em 0 .1em; }
 .fvk-eyebrow{ margin:0 0 .6em; font-size:12.5px; font-weight:700; letter-spacing:.04em;
   color:var(--gold); }
-.fvk-h1{ margin:0; font-family:var(--mincho); font-size:clamp(25px,7.4vw,36px); font-weight:600;
-  line-height:1.42; letter-spacing:.005em; color:var(--sumi); text-wrap:balance; }
+.fvk-h1{ margin:0; display:flex; flex-direction:column; align-items:center; gap:.12em;
+  font-family:var(--mincho); font-weight:600; color:var(--sumi); text-align:center; }
+.fvk-h1-amount{ display:block; font-size:clamp(30px,9vw,46px); line-height:1.15;
+  font-variant-numeric:tabular-nums; letter-spacing:.01em; }
+.fvk-h1-amount em{ font-style:normal; font-size:1.7em; color:var(--gold); letter-spacing:-.02em; }
+.fvk-h1-tail{ display:block; font-size:clamp(21px,6.2vw,30px); line-height:1.45; letter-spacing:.005em; }
 
-.fvk-amount{ display:flex; flex-direction:column; align-items:center; gap:.15em;
-  margin:.75em 0 .3em; padding:.7em .7em .65em;
-  background:var(--gold-bg); border-top:2px solid var(--gold-line); border-bottom:2px solid var(--gold-line); }
-.fvk-amount-cap{ font-size:12.5px; font-weight:700; color:var(--gold); letter-spacing:.06em; }
-.fvk-amount-main{ font-family:var(--mincho); font-size:clamp(38px,13vw,64px); font-weight:600;
-  line-height:1.05; color:var(--sumi); font-variant-numeric:tabular-nums; }
-.fvk-amount-main em{ font-style:normal; font-size:1.35em; color:var(--gold); letter-spacing:-.01em; }
-.fvk-amount-sub{ margin-top:.35em; font-size:13.5px; line-height:1.6; color:#4a4a4a; text-align:center; }
-.fvk-amount-sub b{ font-weight:700; color:var(--sumi); font-size:1.12em; }
-/* 注記は1行・AA準拠（#5f5f5f = 6.4:1）。CTAより上に長い免責を置かない */
 .fvk-amount-note{ margin:0 0 .7em; font-size:11.5px; line-height:1.6; color:#5f5f5f; text-align:center; }
 
-.kin-cta-block--fv{ margin-top:0; }
+.kin-cta-block--fv{ margin-top:.2em; }
 /* 1行に収める。折り返して「見／る」になると視認性が落ちる */
-.kin-cta-block--fv .kin-phone__num{ font-size:clamp(19px,5.6vw,24px); white-space:nowrap; }
+.kin-cta-block--fv .kin-phone__num{ font-size:clamp(22px,6.4vw,28px); white-space:nowrap; }
 .fvk-stat{ margin:1.6em 0; padding:1em 1.1em; background:#f7f5ef; border-left:4px solid var(--gold-line); }
 .fvk-stat-main{ margin:0 0 .5em; font-size:16px; line-height:1.8; font-weight:600; color:var(--sumi); }
 .fvk-stat-main b{ font-weight:800; color:var(--gold); }
