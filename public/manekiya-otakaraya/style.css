@@ -2020,11 +2020,35 @@ h2, h3,
 .kin-cmp9 .cmp9-company__name { line-height: 1.3; }
 /* 9社比較表：各社名の下の公式サイトCTA（緑） */
 .kin-cmp9 .cmp9-official {
+  position: relative;
+  overflow: hidden;
   display: block; margin: 6px auto 0; max-width: 106px; padding: 5px 8px;
-  background: #17803d; color: #fff; border-radius: 6px;
+  background: #17803d; border-radius: 6px;
   font-size: 11.5px; font-weight: 800; line-height: 1.3;
   text-align: center; text-decoration: none; white-space: nowrap;
   box-shadow: 0 2px 0 #0f5c2c;
+}
+/* まねきや(kin-aff)はリンクの既定色を継承して文字が赤茶になるため、全社を白に統一 */
+.kin-cmp9 .cmp9-official,
+.kin-cmp9 .cmp9-official:link,
+.kin-cmp9 .cmp9-official:visited { color: #fff; }
+/* キラッと光るハイライト（左から右へ通過） */
+.kin-cmp9 .cmp9-official::after {
+  content: "";
+  position: absolute; top: -50%; left: -70%;
+  width: 45%; height: 200%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.7), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+  animation: cmp9Shine 2.8s ease-in-out infinite;
+}
+@keyframes cmp9Shine {
+  0%   { left: -70%; }
+  55%  { left: 130%; }
+  100% { left: 130%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kin-cmp9 .cmp9-official::after { animation: none; display: none; }
 }
 .kin-cmp9 .cmp9-official:hover { background: #1a9349; }
 .kin-cmp9 .cmp9-official:active { transform: translateY(1px); box-shadow: 0 1px 0 #0f5c2c; }
