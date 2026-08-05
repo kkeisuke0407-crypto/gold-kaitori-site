@@ -1226,7 +1226,9 @@
       // 主CV（まねきや＝成果／おたからや＝非成果）
       if(typeof gtag==="function") gtag("event", cv, Object.assign({}, params, { transport_type:"beacon" }));
       // GA4限定：電話/WEB別の質イベント（Google広告の主要CVには送らず send_to でGA4のみ）
-      if(typeof gtag==="function") gtag("event", "gold_kaitori_"+ctaType+"_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
+      //   ★まねきやのクリック時のみ発火させる。他社(公式サイト)への遷移まで含めると
+      //     「電話 vs WEB」の比率が競合クリックで薄まり、質の指標として使えなくなるため。
+      if(isManekiya && typeof gtag==="function") gtag("event", "gold_kaitori_"+ctaType+"_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
       // CTAは target=_blank（新規タブ）。既定遷移はそのまま活かし、送信は beacon で確実化
     });
   });
