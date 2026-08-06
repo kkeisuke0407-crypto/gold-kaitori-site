@@ -1188,7 +1188,15 @@
 <script>
 (function(){
   var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
-  var LANDING = "manekiya_otakaraya";
+  var PAGE = "manekiya_otakaraya";                     // ページ固有ID（イベント名に使う＝固定）
+  // 広告側の ?intent= を計測軸に採用する。語句別に「電話まで行ったか」を分離するため。
+  // 不正値・未指定時は PAGE にフォールバックし、GA4 のディメンションが汚れないようにする。
+  var LANDING = (function(){
+    try{
+      var v = new URLSearchParams(location.search).get("intent");
+      return (v && /^[A-Za-z0-9_-]{1,64}$/.test(v)) ? v : PAGE;
+    }catch(_){ return PAGE; }
+  })();
   function track(name, params){
     try{
       if(window.dataLayer) window.dataLayer.push(Object.assign({event:name}, params||{}));
@@ -1233,7 +1241,7 @@
     });
   });
   track("gold_kaitori_landing_intent", { landing_intent:LANDING }); // 全ページ共通の計測軸
-  track(LANDING + "_open", { landing_intent:LANDING });
+  track(PAGE + "_open", { landing_intent:LANDING });
 })();
 </script>
 
