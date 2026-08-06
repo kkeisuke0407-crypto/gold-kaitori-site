@@ -6,7 +6,12 @@
 
 ユーザーは**このチャットで新LPを依頼**する。その際は次の方針で作る：
 
-- **構造の土台はひな形を使う**：金系 = `src/pages/LP3/index.astro` ／ プラチナ系 = `src/pages/LP2nd/index.astro`。
+- ⚠️ **プラチナは案件対象外（2026-08-06）**。プラチナ系LPを新規に作らない。既存の `LP2nd` / `pt-yubiwa` /
+  `pt-kaitori` に**広告費を向けない**（全期間で41,974円＝総支出の17.4%が回収不能だった）。
+  詳細は `docs/controlled-test-runbook-2026-07-20.md` の「2026-08-06 改訂」。
+- **構造の土台はひな形を使う**：金系 = `src/pages/LP3/index.astro` ／ ~~プラチナ系 = `src/pages/LP2nd/index.astro`~~（対象外）。
+  比較・強化版の金LP = `public/manekiya-otakaraya/index.html`（素のHTML。ネックレス版 `public/kin-necklace/` はこれを複製し、
+  画像とCSSは `/manekiya-otakaraya/` を参照して重複を避けている）。
   比較表・キャンペーン日付の自動計算・CTA計測・相見積もり漫画・CSS 等はひな形からそのまま継承し、**構造・デザインをひな形と一致**させる。
 - **中身は“丸コピー”ではなく、AIが判断して臨機応変に作り込む**。検索意図に合わせて次を案件ごとに最適化する：
   `title` / `desc`（SEO）、`landingIntent`、FVヒーロー画像の `alt`、`refTtl`（あなたの◯◯、今ならいくら？）、
