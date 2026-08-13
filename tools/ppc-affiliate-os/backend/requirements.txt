@@ -1,0 +1,19 @@
+# --- 必須 ---------------------------------------------------------
+# domain/ （数式・統計・判定）は標準ライブラリだけで動く。
+# ここに並ぶのはAPIサーバを動かすための依存。
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.8
+python-multipart>=0.0.9   # CSVアップロード（multipart/form-data）
+python-dotenv>=1.0
+
+# --- 任意 ---------------------------------------------------------
+# AI連携。未インストール・未設定でも採算計算と撤退判定は動く。
+# anthropic>=0.40
+# openai>=1.100
+
+# Google Ads API連携。未設定でも管理画面CSVの取り込みで運用できる。
+# google-ads>=25.0
+
+# PostgreSQLへ移行する場合（既定はSQLiteで外部依存なし）。
+# psycopg[binary]>=3.2

@@ -1,0 +1,369 @@
+{
+  "version": "0.2.0",
+  "note": "Python実装(backend/app/domain)とJS実装(public/tools/ppc/engine.js)の両方がこの期待値を満たすこと。数式のズレを検知するための単一の正解表。",
+  "tolerance": 1e-6,
+  "preflight": [
+    {
+      "name": "SPEC受入基準1: 時計一括査定",
+      "input": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5,
+        "market_cpc": 180,
+        "estimated_lp_ctr": 0.5
+      },
+      "expect": {
+        "affiliate_click_epc": 680.0,
+        "ad_click_epc": 340.0,
+        "break_even_cpc": 340.0,
+        "target_cpc": 226.666667,
+        "required_lp_ctr": 0.397059,
+        "cpc_headroom": 1.259259,
+        "decision": "GO"
+      }
+    },
+    {
+      "name": "SPEC受入基準2: 必要LP CTRが100%超",
+      "input": {
+        "payout": 4000,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.02,
+        "target_roas": 2.0,
+        "market_cpc": 100,
+        "estimated_lp_ctr": 0.5
+      },
+      "expect": {
+        "affiliate_click_epc": 80.0,
+        "ad_click_epc": 40.0,
+        "target_cpc": 20.0,
+        "required_lp_ctr": 2.5,
+        "cpc_headroom": 0.2,
+        "decision": "STOP"
+      }
+    },
+    {
+      "name": "構造的CPCギャップ",
+      "input": {
+        "payout": 3000,
+        "approval_rate": 0.8,
+        "advertiser_cvr": 0.03,
+        "target_roas": 1.5,
+        "market_cpc": 40,
+        "estimated_lp_ctr": 0.4
+      },
+      "expect": {
+        "affiliate_click_epc": 72.0,
+        "ad_click_epc": 28.8,
+        "target_cpc": 19.2,
+        "required_lp_ctr": 0.833333,
+        "cpc_headroom": 0.48,
+        "decision": "STOP"
+      }
+    },
+    {
+      "name": "改善前提ならテスト価値あり",
+      "input": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5,
+        "market_cpc": 252,
+        "estimated_lp_ctr": 0.5
+      },
+      "expect": {
+        "affiliate_click_epc": 680.0,
+        "target_cpc": 226.666667,
+        "required_lp_ctr": 0.555882,
+        "cpc_headroom": 0.899471,
+        "decision": "TEST"
+      }
+    },
+    {
+      "name": "広告主CVRが推定値なので弱気ケースで赤字",
+      "input": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5,
+        "market_cpc": 210,
+        "estimated_lp_ctr": 0.5,
+        "advertiser_cvr_confidence": 0.2
+      },
+      "expect": {
+        "affiliate_click_epc": 680.0,
+        "target_cpc": 226.666667,
+        "cpc_headroom": 1.079365,
+        "decision": "TEST"
+      }
+    },
+    {
+      "name": "月間利益ポテンシャル",
+      "input": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5,
+        "market_cpc": 180,
+        "estimated_lp_ctr": 0.5,
+        "expected_monthly_clicks": 500
+      },
+      "expect": {
+        "monthly_profit_potential": 80000.0,
+        "decision": "GO"
+      }
+    }
+  ],
+  "runtime": [
+    {
+      "name": "SPEC受入基準8: 黒字かつCV十分ならSCALE",
+      "input": {
+        "impressions": 2000,
+        "clicks": 100,
+        "cost": 15000,
+        "affiliate_clicks": 55,
+        "conversions": 5,
+        "conversion_value": 42500,
+        "approval_rate": 0.95,
+        "target_roas": 1.5,
+        "max_test_budget": 50000,
+        "min_test_clicks": 50,
+        "stop_after_zero_cv_clicks": 200
+      },
+      "expect": {
+        "ad_ctr": 0.05,
+        "actual_cpc": 150.0,
+        "lp_to_affiliate_ctr": 0.55,
+        "affiliate_cvr": 0.090909,
+        "ad_to_final_cvr": 0.05,
+        "actual_roas": 2.833333,
+        "expected_approved_revenue": 40375.0,
+        "expected_approved_roas": 2.691667,
+        "profit": 25375.0,
+        "value_per_conversion": 8500.0,
+        "decision": "SCALE"
+      }
+    },
+    {
+      "name": "SPEC受入基準7: テスト予算超過かつCV0ならSTOP",
+      "input": {
+        "impressions": 3000,
+        "clicks": 220,
+        "cost": 50000,
+        "affiliate_clicks": 80,
+        "conversions": 0,
+        "conversion_value": 0,
+        "approval_rate": 0.9,
+        "target_roas": 1.5,
+        "max_test_budget": 50000,
+        "min_test_clicks": 100,
+        "stop_after_zero_cv_clicks": 200
+      },
+      "expect": {
+        "actual_roas": 0.0,
+        "expected_approved_roas": 0.0,
+        "lp_to_affiliate_ctr": 0.363636,
+        "decision": "STOP"
+      }
+    },
+    {
+      "name": "統計的にCV0が有意ならSTOP",
+      "input": {
+        "impressions": 8000,
+        "clicks": 400,
+        "cost": 40000,
+        "affiliate_clicks": 300,
+        "conversions": 0,
+        "conversion_value": 0,
+        "approval_rate": 1.0,
+        "target_roas": 1.5,
+        "max_test_budget": 0,
+        "min_test_clicks": 50,
+        "stop_after_zero_cv_clicks": 0,
+        "payout": 8500
+      },
+      "expect": {
+        "decision": "STOP",
+        "zero_cv_required_affiliate_cvr": 0.023529
+      }
+    },
+    {
+      "name": "同じCV0でもサンプルが小さければ撤退しない",
+      "input": {
+        "impressions": 1200,
+        "clicks": 60,
+        "cost": 6000,
+        "affiliate_clicks": 20,
+        "conversions": 0,
+        "conversion_value": 0,
+        "approval_rate": 1.0,
+        "target_roas": 1.5,
+        "max_test_budget": 0,
+        "min_test_clicks": 50,
+        "stop_after_zero_cv_clicks": 0,
+        "payout": 8500
+      },
+      "expect": {
+        "decision": "TEST",
+        "zero_cv_required_affiliate_cvr": 0.052941
+      }
+    },
+    {
+      "name": "クリック数不足はTEST",
+      "input": {
+        "impressions": 500,
+        "clicks": 20,
+        "cost": 3000,
+        "affiliate_clicks": 8,
+        "conversions": 1,
+        "conversion_value": 8500,
+        "approval_rate": 0.9,
+        "target_roas": 1.5,
+        "max_test_budget": 50000,
+        "min_test_clicks": 100,
+        "stop_after_zero_cv_clicks": 200
+      },
+      "expect": {
+        "decision": "TEST"
+      }
+    },
+    {
+      "name": "小さめのギャップはIMPROVE",
+      "input": {
+        "impressions": 2000,
+        "clicks": 100,
+        "cost": 30000,
+        "affiliate_clicks": 55,
+        "conversions": 5,
+        "conversion_value": 42500,
+        "approval_rate": 0.95,
+        "target_roas": 1.5,
+        "max_test_budget": 50000,
+        "min_test_clicks": 50,
+        "stop_after_zero_cv_clicks": 200
+      },
+      "expect": {
+        "expected_approved_roas": 1.345833,
+        "decision": "IMPROVE",
+        "improvement_required_gap": 1.1146
+      }
+    },
+    {
+      "name": "ギャップが絶望的ならSTOP",
+      "input": {
+        "impressions": 2000,
+        "clicks": 100,
+        "cost": 300000,
+        "affiliate_clicks": 55,
+        "conversions": 5,
+        "conversion_value": 42500,
+        "approval_rate": 0.95,
+        "target_roas": 1.5,
+        "max_test_budget": 500000,
+        "min_test_clicks": 10,
+        "stop_after_zero_cv_clicks": 0
+      },
+      "expect": {
+        "expected_approved_roas": 0.134583,
+        "decision": "STOP"
+      }
+    }
+  ],
+  "keyword": [
+    {
+      "name": "CORE: 商用意図が高くCPC余裕あり",
+      "offer": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5
+      },
+      "input": {
+        "keyword": "ロレックス 買取 相場",
+        "avg_monthly_searches": 2400,
+        "forecast_cpc": 180,
+        "commercial_intent": 85,
+        "conversion_distance": 80,
+        "noise_risk": 10,
+        "estimated_lp_ctr": 0.5,
+        "ai_confidence": 0.8,
+        "cluster": "ロレックス査定"
+      },
+      "expect": {
+        "required_lp_ctr": 0.397059,
+        "cpc_headroom": 1.2593,
+        "bucket": "CORE"
+      }
+    },
+    {
+      "name": "EXCLUDE: 必要LP CTRが100%超",
+      "offer": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5
+      },
+      "input": {
+        "keyword": "腕時計",
+        "avg_monthly_searches": 90000,
+        "forecast_cpc": 500,
+        "commercial_intent": 20,
+        "noise_risk": 70,
+        "estimated_lp_ctr": 0.2,
+        "ai_confidence": 0.4,
+        "cluster": "一般語"
+      },
+      "expect": {
+        "required_lp_ctr": 1.102941,
+        "bucket": "EXCLUDE"
+      }
+    },
+    {
+      "name": "EXCLUDE: 案件ルールで禁止",
+      "offer": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5
+      },
+      "input": {
+        "keyword": "競合ブランド 買取",
+        "avg_monthly_searches": 1000,
+        "forecast_cpc": 120,
+        "commercial_intent": 90,
+        "estimated_lp_ctr": 0.5,
+        "ai_confidence": 0.9,
+        "blocked_by_rule": true,
+        "blocked_reason": "競合KW不可"
+      },
+      "expect": {
+        "bucket": "EXCLUDE",
+        "priority_score": 0.0
+      }
+    },
+    {
+      "name": "DISCOVERY: 確信度が低い",
+      "offer": {
+        "payout": 8500,
+        "approval_rate": 1.0,
+        "advertiser_cvr": 0.08,
+        "target_roas": 1.5
+      },
+      "input": {
+        "keyword": "時計 処分 方法",
+        "avg_monthly_searches": 260,
+        "forecast_cpc": 280,
+        "commercial_intent": 45,
+        "noise_risk": 35,
+        "estimated_lp_ctr": 0.45,
+        "ai_confidence": 0.3,
+        "cluster": "処分・整理"
+      },
+      "expect": {
+        "required_lp_ctr": 0.617647,
+        "cpc_headroom": 0.7286,
+        "bucket": "DISCOVERY"
+      }
+    }
+  ]
+}
