@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>PPC Affiliate OS</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f6feb'/%3E%3Cpath d='M8 22V10h6a4 4 0 0 1 0 8h-3v4z' fill='%23fff'/%3E%3Ccircle cx='23' cy='21' r='2.6' fill='%234bc99b'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">PPC Affiliate OS <small>v0.2</small></div>
+  <nav class="nav" id="nav">
+    <a href="#/dashboard">ダッシュボード</a>
+    <a href="#/offers">案件</a>
+    <a href="#/preflight">出稿前判定</a>
+    <a href="#/keywords">KWエクスプローラ</a>
+    <a href="#/diagnosis">運用診断</a>
+    <a href="#/setup">計測セットアップ</a>
+  </nav>
+  <button class="mode-chip" id="modeChip" title="サーバ接続を切り替える">
+    <span class="dot"></span><span id="modeLabel">ローカル</span>
+  </button>
+</header>
+
+<main>
+
+<!-- =============================================== ダッシュボード -->
+<section class="view" id="view-dashboard">
+  <div class="page-head">
+    <h1>ダッシュボード</h1>
+    <p>登録した案件の実績を集計し、SCALE / KEEP / IMPROVE / TEST / STOP に自動で振り分けます。</p>
+  </div>
+
+  <div class="card">
+    <h2>サマリ</h2>
+    <div class="grid stats" id="dashStats"></div>
+  </div>
+
+  <div class="card">
+    <h2>Stop / Scale ボード <span class="hint">クリックで運用診断へ</span></h2>
+    <div class="board" id="dashBoard"></div>
+  </div>
+
+  <div class="card">
+    <h2>案件一覧</h2>
+    <div class="table-wrap"><table id="dashTable"></table></div>
+  </div>
+</section>
+
+<!-- =============================================== 案件 -->
+<section class="view" id="view-offers">
+  <div class="page-head">
+    <h1>案件マスター</h1>
+    <p>成果単価・承認率・広告主CVR・撤退条件を登録します。ここが全判定の前提になります。</p>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <h2 id="offerFormTitle">案件を登録</h2>
+      <form id="offerForm">
+        <input type="hidden" id="offerId" />
+        <div class="field">
+          <label>案件名 <span class="sub">必須</span></label>
+          <input id="offerName" required placeholder="例: 時計一括査定" />
+        </div>
+        <div class="inline">
+          <div class="field"><label>ASP名</label><input id="offerAsp" placeholder="SLVRbullet" /></div>
+          <div class="field"><label>成果地点</label><input id="offerPoint" placeholder="無料査定申込" /></div>
+        </div>
+        <div class="inline" style="margin-top:12px">
+          <div class="field"><label>成果単価（円）</label><input id="offerPayout" type="number" min="0" step="1" value="8500" /></div>
+          <div class="field"><label>承認率 <span class="sub">0〜1</span></label><input id="offerApproval" type="number" min="0" max="1" step="0.01" value="0.95" /></div>
+        </div>
+        <div class="inline" style="margin-top:12px">
+          <div class="field"><label>広告主CVR <span class="sub">0〜1</span></label><input id="offerCvr" type="number" min="0" max="1" step="0.005" value="0.08" /></div>
+          <div class="field">
+            <label>CVRの確信度 <span class="sub">1=実績値</span></label>
+            <input id="offerCvrConf" type="number" min="0" max="1" step="0.1" value="1" />
+          </div>
+        </div>
+        <div class="inline" style="margin-top:12px">
+          <div class="field"><label>目標ROAS <span class="sub">1.5=150%</span></label><input id="offerRoas" type="number" min="0.1" step="0.1" value="1.5" /></div>
+          <div class="field"><label>最大テスト予算（円）</label><input id="offerBudget" type="number" min="0" step="1000" value="50000" /></div>
+        </div>
+        <div class="inline" style="margin-top:12px">
+          <div class="field"><label>判定に必要なクリック数</label><input id="offerMinClicks" type="number" min="0" step="10" value="100" /></div>
+          <div class="field"><label>CV0で止めるクリック数</label><input id="offerZeroStop" type="number" min="0" step="10" value="200" /></div>
+        </div>
+        <div class="field" style="margin-top:12px">
+          <label>NGキーワード / NG表現 <span class="sub">カンマ区切り</span></label>
+          <input id="offerNegatives" placeholder="求人, 無料, 口コミ" />
+        </div>
+        <div class="inline" style="margin-top:12px">
+          <div class="field">
+            <label>商標KW</label>
+            <select id="offerTrademark"><option value="0">不可</option><option value="1">可</option></select>
+          </div>
+          <div class="field">
+            <label>競合KW</label>
+            <select id="offerCompetitor"><option value="0">不可</option><option value="1">可</option></select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="submit">保存</button>
+          <button type="button" class="ghost" id="offerReset">新規に切り替え</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>登録済みの案件</h2>
+      <div id="offerList"></div>
+      <div class="btn-row">
+        <button class="ghost small" id="exportBtn">全データをJSONで書き出し</button>
+        <button class="ghost small" id="importBtn">JSONを読み込み</button>
+        <input type="file" id="importFile" accept="application/json" hidden />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================== 出稿前判定 -->
+<section class="view" id="view-preflight">
+  <div class="page-head">
+    <h1>出稿前判定</h1>
+    <p>成果条件と市場CPCから、払える上限CPCと必要なLP→アフィCTRを逆算します。</p>
+  </div>
+
+  <details class="help">
+    <summary>この画面の読み方</summary>
+    <ul>
+      <li><b>損益分岐CPC</b>：これ以上払うと赤字になるクリック単価。</li>
+      <li><b>上限CPC</b>：目標ROASを満たしたまま払える上限。損益分岐CPC ÷ 目標ROAS。</li>
+      <li><b>必要LP→アフィCTR</b>：市場CPCで戦うために、LP来訪者の何%がアフィリンクを踏む必要があるか。<b>100%を超えたら構造的に不可能</b>なので出稿しない。</li>
+      <li><b>CPC余裕率</b>：上限CPC ÷ 市場CPC。1.0未満は改善前提、0.8未満は原則見送り。</li>
+      <li><b>確信度</b>を1未満にすると、広告主CVRが下振れした「弱気シナリオ」でも黒字かを見ます。GO判定は弱気シナリオ基準です。</li>
+    </ul>
+  </details>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>入力</h2>
+      <div class="field">
+        <label>案件から読み込む</label>
+        <select id="pfOfferPicker"><option value="">（手入力）</option></select>
+      </div>
+      <div class="inline">
+        <div class="field"><label>成果単価（円）</label><input id="pfPayout" type="number" value="8500" /></div>
+        <div class="field"><label>承認率</label><input id="pfApproval" type="number" step="0.01" value="1" /></div>
+      </div>
+      <div class="inline" style="margin-top:12px">
+        <div class="field"><label>広告主CVR</label><input id="pfCvr" type="number" step="0.005" value="0.08" /></div>
+        <div class="field"><label>CVR確信度</label><input id="pfCvrConf" type="number" step="0.1" min="0" max="1" value="1" /></div>
+      </div>
+      <div class="inline" style="margin-top:12px">
+        <div class="field"><label>目標ROAS</label><input id="pfRoas" type="number" step="0.1" value="1.5" /></div>
+        <div class="field"><label>想定CPC（円）</label><input id="pfCpc" type="number" value="180" /></div>
+      </div>
+      <div class="inline" style="margin-top:12px">
+        <div class="field"><label>想定LP→アフィCTR</label><input id="pfLpCtr" type="number" step="0.01" min="0" max="1" value="0.5" /></div>
+        <div class="field"><label>月間見込クリック</label><input id="pfClicks" type="number" value="500" /></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>判定</h2>
+      <div id="pfResult"><div class="empty">数値を入れると自動で判定します。</div></div>
+    </div>
+  </div>
+
+  <div class="card" id="pfScenarioCard" hidden>
+    <h2>シナリオ比較 <span class="hint">広告主CVRの確信度に応じた振れ幅</span></h2>
+    <div class="table-wrap"><table id="pfScenarios"></table></div>
+  </div>
+</section>
+
+<!-- =============================================== KWエクスプローラ -->
+<section class="view" id="view-keywords">
+  <div class="page-head">
+    <h1>キーワードエクスプローラ</h1>
+    <p>KWごとに必要CTRを逆算し、CORE / OPPORTUNITY / DISCOVERY / EXCLUDE に仕分けます。</p>
+  </div>
+
+  <details class="help">
+    <summary>データの入れ方</summary>
+    <ol>
+      <li>Google広告 → ツール → <b>キーワードプランナー</b> でKW候補を取得し、CSVでダウンロード。</li>
+      <li>下のファイル選択でそのCSVを読み込む（列は自動判定します）。</li>
+      <li>または、テキスト欄に <code>キーワード, 月間検索数, CPC</code> をタブ/カンマ区切りで貼り付け。</li>
+    </ol>
+    <p>バケット判定は数式で行います。AIの意図スコアがあれば <code>商用意図</code> <code>想定LP CTR</code> 列を足すと精度が上がります。</p>
+  </details>
+
+  <div class="card">
+    <h2>案件条件</h2>
+    <div class="field">
+      <label>案件から読み込む</label>
+      <select id="kwOfferPicker"><option value="">（手入力）</option></select>
+    </div>
+    <div class="inline">
+      <div class="field"><label>成果単価</label><input id="kwPayout" type="number" value="8500" /></div>
+      <div class="field"><label>承認率</label><input id="kwApproval" type="number" step="0.01" value="1" /></div>
+      <div class="field"><label>広告主CVR</label><input id="kwCvr" type="number" step="0.005" value="0.08" /></div>
+      <div class="field"><label>目標ROAS</label><input id="kwRoas" type="number" step="0.1" value="1.5" /></div>
+      <div class="field"><label>既定の想定LP CTR</label><input id="kwDefaultCtr" type="number" step="0.05" min="0" max="1" value="0.4" /></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>キーワード入力</h2>
+    <div class="inline">
+      <div class="field">
+        <label>Google広告CSVを読み込む</label>
+        <input type="file" id="kwFile" accept=".csv,.tsv,text/csv" />
+      </div>
+    </div>
+    <div class="field" style="margin-top:12px">
+      <label>または貼り付け <span class="sub">1行1KW。タブ/カンマ区切りで「KW, 月間検索数, CPC, 商用意図, 想定LP CTR, クラスタ」</span></label>
+      <textarea id="kwPaste" placeholder="ロレックス 買取 相場	2400	180	85	0.5	ロレックス査定&#10;オメガ 買取	1300	150	80	0.45	オメガ査定&#10;腕時計	90000	500	20	0.2	一般語"></textarea>
+    </div>
+    <div class="btn-row">
+      <button id="kwRun">判定する</button>
+      <button class="ghost" id="kwSample">サンプルを入れる</button>
+      <button class="ghost" id="kwCsvOut">結果をCSVで書き出し</button>
+    </div>
+  </div>
+
+  <div id="kwResults"></div>
+</section>
+
+<!-- =============================================== 運用診断 -->
+<section class="view" id="view-diagnosis">
+  <div class="page-head">
+    <h1>運用診断</h1>
+    <p>実績からボトルネックを特定し、損益分岐までの最小改善経路と撤退可否を出します。</p>
+  </div>
+
+  <details class="help">
+    <summary>この判定のロジック</summary>
+    <ul>
+      <li><b>SCALE</b> は「実績ROASが目標を超えている」だけでは出しません。成果件数から求めたベイズ信用区間の<b>下限</b>でも目標を超えている場合のみです。CV数件の偶然でスケールする事故を防ぎます。</li>
+      <li><b>CV0の撤退</b>は固定クリック数だけでなく、「損益分岐に必要なCVRが本当なら、この連続ゼロが起きる確率」で判断します。サンプルが小さいうちは撤退しません。</li>
+      <li><b>IMPROVE / STOP</b> は、各レバー（CPC・LP CTR・CVR）を損益分岐まで動かすのに必要な改善幅から実現性スコアを出して分けます。</li>
+    </ul>
+  </details>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>実績を入力</h2>
+      <div class="field">
+        <label>案件</label>
+        <select id="dgOfferPicker"><option value="">（手入力）</option></select>
+      </div>
+      <div class="inline">
+        <div class="field"><label>表示回数</label><input id="dgImpr" type="number" value="2000" /></div>
+        <div class="field"><label>クリック数</label><input id="dgClicks" type="number" value="100" /></div>
+        <div class="field"><label>費用（円）</label><input id="dgCost" type="number" value="15000" /></div>
+      </div>
+      <div class="inline" style="margin-top:12px">
+        <div class="field"><label>アフィクリック数</label><input id="dgAff" type="number" value="55" /></div>
+        <div class="field"><label>発生成果数</label><input id="dgConv" type="number" step="0.01" value="5" /></div>
+        <div class="field"><label>発生売上（円）</label><input id="dgValue" type="number" value="42500" /></div>
+      </div>
+      <div class="inline" style="margin-top:12px">
+        <div class="field"><label>承認率</label><input id="dgApproval" type="number" step="0.01" value="0.95" /></div>
+        <div class="field"><label>目標ROAS</label><input id="dgRoas" type="number" step="0.1" value="1.5" /></div>
+        <div class="field"><label>成果単価</label><input id="dgPayout" type="number" value="8500" /></div>
+      </div>
+      <div class="inline" style="margin-top:12px">
+        <div class="field"><label>最大テスト予算</label><input id="dgBudget" type="number" value="50000" /></div>
+        <div class="field"><label>必要クリック数</label><input id="dgMinClicks" type="number" value="50" /></div>
+        <div class="field"><label>CV0上限クリック</label><input id="dgZeroStop" type="number" value="200" /></div>
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label>Google広告CSVから実績を読み込む <span class="sub">キーワードレポート</span></label>
+        <input type="file" id="dgFile" accept=".csv,.tsv,text/csv" />
+      </div>
+      <div class="btn-row">
+        <button id="dgRun">診断する</button>
+        <button class="ghost" id="dgSaveSnapshot">この実績を案件に保存</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>判定</h2>
+      <div id="dgVerdict"><div class="empty">実績を入れて「診断する」を押してください。</div></div>
+    </div>
+  </div>
+
+  <div id="dgDetails"></div>
+</section>
+
+<!-- =============================================== 計測セットアップ -->
+<section class="view" id="view-setup">
+  <div class="page-head">
+    <h1>計測セットアップ</h1>
+    <p>LP→アフィリエイトクリックを自前で数えるためのタグ一式。案件を選ぶとIDが差し込まれます。</p>
+  </div>
+
+  <div class="card">
+    <h2>案件を選ぶ</h2>
+    <div class="inline">
+      <div class="field">
+        <label>案件</label>
+        <select id="setupOfferPicker"><option value="">（案件を選択）</option></select>
+      </div>
+      <div class="field">
+        <label>計測エンドポイント <span class="sub">バックエンドのURL</span></label>
+        <input id="setupEndpoint" placeholder="https://your-tool.example/api/v1/tracking/affiliate-click" />
+      </div>
+    </div>
+  </div>
+
+  <div id="setupSteps"></div>
+</section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>
