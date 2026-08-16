@@ -1,0 +1,28 @@
+:root {
+  --hwc-ink: oklch(18% 0.055 262);
+  --hwc-ink-soft: oklch(29% 0.045 260);
+  --hwc-navy: oklch(23% 0.078 263);
+  --hwc-navy-bright: oklch(32% 0.095 258);
+  --hwc-ivory: oklch(98% 0.012 86);
+  --hwc-paper: oklch(100% 0 0);
+  --hwc-cream: oklch(95% 0.025 85);
+  --hwc-gold: oklch(73% 0.14 80);
+  --hwc-gold-dark: oklch(56% 0.12 73);
+  --hwc-gold-pale: oklch(93% 0.045 84);
+  --hwc-red: oklch(54% 0.21 27);
+  --hwc-red-dark: oklch(42% 0.16 25);
+  --hwc-red-pale: oklch(96% 0.03 24);
+  --hwc-blue-pale: oklch(94% 0.025 245);
+  --hwc-green-pale: oklch(95% 0.03 145);
+  --hwc-line: oklch(77% 0.028 85);
+  --hwc-line-dark: oklch(58% 0.045 256);
+  --hwc-muted: oklch(46% 0.02 257);
+  --hwc-shadow: oklch(20% 0.04 260 / 16%);
+  --hwc-shadow-deep: oklch(20% 0.045 260 / 28%);
+  --hwc-clear: transparent;
+  --hwc-font-sans: "Noto Sans JP", system-ui, sans-serif;
+  --hwc-font-serif: "Noto Serif JP", "Yu Mincho", serif;
+  --hwc-radius: 12px;
+  --hwc-radius-small: 7px;
+  --hwc-max: 640px;
+}
