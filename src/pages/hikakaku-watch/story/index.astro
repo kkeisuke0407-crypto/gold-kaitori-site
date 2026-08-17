@@ -105,17 +105,10 @@ const faqItems = [
         <h2 class="section-heading" id="entry-title">実際に入力したもの</h2>
         <p class="section-heading section-heading--small">僕が入力した内容はこちら</p>
         <div class="form-visual">
-          <div class="phone-mock" aria-label="入力内容のイメージ">
-            <div class="phone-mock__top"></div><p class="phone-mock__brand">ヒカカク！</p>
-            <dl>
-              <div><dt>ブランド</dt><dd>OMEGA</dd></div>
-              <div><dt>モデル</dt><dd>スピードマスター</dd></div>
-              <div><dt>型番</dt><dd>3511.50</dd></div>
-              <div><dt>状態</dt><dd>使用感あり<br />ベルトに細かい傷あり</dd></div>
-              <div><dt>動作</dt><dd>正常に動作</dd></div>
-              <div><dt>付属品</dt><dd>箱あり<br />保証書あり<br />余りコマあり</dd></div>
-            </dl>
-          </div>
+          <figure class="form-visual__generated">
+            <img src="/hikakaku-watch-story/assets/entry-form-with-copy-v3.webp" width="1024" height="1536" alt="入力画面のイメージ。ヒカカク！で、ブランド OMEGA、モデル スピードマスター、型番 3511.50、状態 使用感あり、ベルトに細かい傷あり、動作 正常に動作、付属品 箱あり・保証書あり・余りコマありと入力した様子。" />
+            <figcaption class="sr-only">ヒカカク！。ブランド OMEGA。モデル スピードマスター。型番 3511.50。状態 使用感あり、ベルトに細かい傷あり。動作 正常に動作。付属品 箱あり、保証書あり、余りコマあり。</figcaption>
+          </figure>
           <div class="story-copy">
             <p>型番なんて覚えていなかったので、時計本体と保証書を見ながら確認しました。</p>
             <p>状態についても、できるだけ正直に入力。ベルトやケースには細かい使用傷があります。ガラス面には大きな傷はありません。オーバーホールについても、最近はしていません。</p>
@@ -127,7 +120,7 @@ const faqItems = [
 
       <section class="story-section" aria-labelledby="first-appraisal-title">
         <h2 class="section-heading" id="first-appraisal-title">最初の査定「155,000円」</h2>
-        <div class="with-visual">
+        <div class="with-visual with-visual--appraisal">
           <div class="story-copy">
             <p>申し込みをしてしばらくすると、最初の査定が届きました。</p>
             <p class="section-heading section-heading--small">A社の査定額</p>
@@ -179,10 +172,10 @@ const faqItems = [
       <section class="story-section story-section--tint" aria-labelledby="message-title">
         <h2 class="section-heading" id="message-title">実際に業者とやり取りしてみた</h2>
         <div class="story-copy"><p>最終的に、査定額が一番高かったD社に、時計の状態についてもう少し詳しく伝えてみました。</p></div>
-        <div class="conversation">
-          <div class="bubble">「ベルトに細かい傷があります。」「箱・保証書・余りコマはあります。」「オーバーホールは数年前からしていません。」</div>
-          <div class="bubble bubble--dealer">「詳しい情報ありがとうございます。」「現物を確認後、正式な査定額をご案内させていただきます。」</div>
-        </div>
+        <figure class="conversation-visual">
+          <img src="/hikakaku-watch-story/assets/dealer-conversation-with-copy-v3.webp" width="1536" height="1024" alt="自分と業者とのやり取りのイメージ。自分はベルトの傷、箱・保証書・余りコマ、オーバーホールの状況を伝え、業者は現物確認後に正式な査定額を案内すると回答している。" />
+          <figcaption class="sr-only">自分：ベルトに細かい傷があります。箱・保証書・余りコマはあります。オーバーホールは数年前からしていません。業者：詳しい情報ありがとうございます。現物を確認後、正式な査定額をご案内させていただきます。</figcaption>
+        </figure>
         <div class="story-copy">
           <p>やり取りも丁寧で、説明も分かりやすかったです。この段階でも、<strong class="neutral-strong">「安かったら売らなくていい」</strong>と思っていました。だから、無理に決める必要はありませんでした。</p>
         </div>
