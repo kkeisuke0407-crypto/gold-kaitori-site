@@ -199,6 +199,7 @@ const recordTable = (rows: string[][]) => rows;
       </div>
       <footer class="footer"><div class="content"><p class="footer__name">時計査定ナビ <b>PR</b></p><p>当サイトはアフィリエイトプログラムを利用した第三者メディアです。掲載内容は株式会社じげん（ZIGExN Co., Ltd.）の公式サイト掲載情報をもとに作成しています。実際の条件は各社公式サイトでご確認ください。</p></div></footer>
     </main>
-    <script src="https://js.slvrbullet.com/pt.min.js"></script>
+    <!-- is:inline 必須。外すと Astro が type="module" でバンドルし、CORSヘッダの無い外部スクリプトの読み込みに失敗する。 -->
+    <script is:inline src="https://js.slvrbullet.com/pt.min.js"></script>
   </body>
 </html>
