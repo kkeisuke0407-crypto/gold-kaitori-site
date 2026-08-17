@@ -1,0 +1,48 @@
+:root {
+  --story-paper: oklch(99% 0.008 84);
+  --story-paper-deep: oklch(96% 0.016 82);
+  --story-surface: oklch(100% 0 0);
+  --story-ink: oklch(18% 0.05 262);
+  --story-ink-soft: oklch(32% 0.04 260);
+  --story-navy: oklch(25% 0.09 258);
+  --story-navy-strong: oklch(19% 0.072 260);
+  --story-navy-pale: oklch(94% 0.026 249);
+  --story-blue-pale: oklch(91% 0.038 238);
+  --story-red: oklch(55% 0.218 29);
+  --story-red-deep: oklch(47% 0.19 28);
+  --story-red-pale: oklch(96% 0.028 28);
+  --story-orange: oklch(69% 0.19 51);
+  --story-orange-deep: oklch(57% 0.2 45);
+  --story-gold: oklch(75% 0.14 78);
+  --story-gold-pale: oklch(94% 0.038 82);
+  --story-green: oklch(59% 0.15 145);
+  --story-green-pale: oklch(94% 0.037 146);
+  --story-line: oklch(78% 0.025 84);
+  --story-line-dark: oklch(58% 0.04 260);
+  --story-muted: oklch(47% 0.022 258);
+  --story-shadow: oklch(19% 0.03 260 / 14%);
+  --story-focus: oklch(63% 0.17 55);
+
+  --story-font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  --story-font-display: "Noto Serif JP", "Yu Mincho", serif;
+
+  --story-space-2xs: 4px;
+  --story-space-xs: 8px;
+  --story-space-sm: 12px;
+  --story-space-md: 16px;
+  --story-space-lg: 24px;
+  --story-space-xl: 32px;
+  --story-space-2xl: 48px;
+  --story-space-3xl: 64px;
+
+  --story-radius-sm: 8px;
+  --story-radius-md: 12px;
+  --story-radius-lg: 18px;
+  --story-radius-pill: 999px;
+  --story-rule: 1px;
+  --story-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --story-ease-in: cubic-bezier(0.7, 0, 0.84, 1);
+  --story-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --story-dur-fast: 140ms;
+  --story-dur-base: 220ms;
+}
