@@ -39,7 +39,6 @@ summary:active { color: var(--hwc-red-dark); }
 .section-lead, .reason-lead { margin-top: 9px; font-size: 13px; line-height: 1.75; }
 .notice, .source-note { margin-top: 11px; color: var(--hwc-muted); font-size: 10px; line-height: 1.55; }
 .notice a, .source-note a { color: var(--hwc-navy); text-decoration: underline; word-break: break-all; }
-.source-note--top { margin-top: 12px; padding: 8px 10px; border-left: 3px solid var(--hwc-gold); background: var(--hwc-ivory); }
 .image-note { margin-top: 9px; color: var(--hwc-muted); font-size: 10px; line-height: 1.55; }
 .closing-text { margin-top: 15px; padding-left: 11px; border-left: 3px solid var(--hwc-red); color: var(--hwc-red-dark); font-size: 13px; font-weight: 800; line-height: 1.72; }
 
