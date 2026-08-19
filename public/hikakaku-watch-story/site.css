@@ -778,3 +778,12 @@ h3 { font-style: normal; }
 
 /* 入力画面の画像：上下の余白が大きいので少しトリミングして間延びを防ぐ */
 .form-visual__generated img { aspect-ratio: 1024 / 1320; object-fit: cover; object-position: 50% 50%; }
+
+/* 本文横のビジュアルを大きく（赤枠指示に合わせて幅・高さを拡大） */
+@media (min-width: 600px) {
+  .with-visual { grid-template-columns: minmax(0, 1fr) 250px; gap: 20px; align-items: end; }
+  .visual-card--person { height: 302px; }
+  .visual-card--person img { object-position: 55% 30%; }
+  .visual-card--flat { height: 302px; }
+  .with-visual--appraisal { align-items: center; }
+}
