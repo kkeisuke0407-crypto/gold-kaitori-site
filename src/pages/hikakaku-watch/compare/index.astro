@@ -116,7 +116,6 @@ const recordTable = (rows: string[][]) => rows;
         <div class="content">
           <h2 id="reason-title">同じ時計でも、査定額はここまで違います</h2>
           <p class="section-lead">時計の買取価格は、どこに出すかで大きく変わります。下は、同じモデルを複数の業者が査定した場合の金額差です。</p>
-          <p class="source-note source-note--top">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の買取事例（2018年7月3日時点の情報）<br /><a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※{disclaimerText}※掲載の時計画像はイメージです。</p>
           <div class="case-grid">
             {comparisonCases.map((item) => (
               <article class:list={['case-card', `case-card--${item.tone}`]}>
@@ -126,7 +125,7 @@ const recordTable = (rows: string[][]) => rows;
               </article>
             ))}
           </div>
-          <p class="notice">※ヒカカク！公式サイト掲載の買取事例（2018年7月3日時点の情報）をもとに作成しています。時計の相場は為替や海外需要で変動するため、現在の査定額とは異なります。実際の査定額は、時計の状態・そのときの相場・時期によって異なります。</p>
+          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※{disclaimerText}時計の相場は為替や海外需要で変動するため、現在の査定額とは異なります。実際の査定額は、時計の状態・そのときの相場・時期によって異なります。※掲載の時計画像はイメージです。</p>
           <div class="subsection-head"><span>理由</span><h3>査定額に差が生まれる4つの理由</h3></div>
           <p class="reason-lead">同じ時計なのに、なぜこれだけ差が出るのか。理由は業者側の事情にあります。</p>
           <div class="reason-list">
@@ -145,9 +144,8 @@ const recordTable = (rows: string[][]) => rows;
           <aside class="prepare-box"><h3>売る前にやっておくと差が出ること</h3><ul><li><b>箱、保証書、余りコマを探しておく</b><br />引き出しや購入時の紙袋に入っていることがあります。</li><li><b>使える状態なら電池を入れておく</b><br />動作を確認できる状態の方が評価されやすくなります。</li><li><b>自分で研磨や洗浄をしない</b><br />素人研磨はケースの形状を崩し、かえって査定額を下げることがあります。</li></ul></aside>
           <div class="quote-heading"><h3 class="quote-title">実際の査定コメントから</h3></div>
           <p class="quote-lead">付属品や状態が査定額をどう動かしたか、買取業者が残したコメントの実例です。</p>
-          <p class="source-note source-note--top">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」掲載の査定コメントより引用<br /><a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a><br />※個人の感想・各業者のコメントであり、実際の査定・売却額を保証するものではありません。※掲載の時計画像はイメージです。</p>
           <div class="comment-list"><blockquote>「付属品完品＋ノベルティをお持ちいただき、お時計はほぼ新品に近い状態のため最大金額にてお買取り成立となりました」<cite>── ブライトリング A23310／中古美品／450,000円（2024年4月25日・オルロージュ東京）</cite></blockquote><blockquote>「とても綺麗で状態も良かったのですが、保証書が欠品していたため減額となってしまいました」<cite>── ハミルトン ジャズマスター ビューマチック H32565735／中古品・使用感あり／25,000円（2024年4月22日・オルロージュ東京）</cite></blockquote><blockquote>「全体的に使用傷はあるものの目立った傷はありませんでしたが、保証書が欠品していたためこちらの査定金額となりました」<cite>── ロレックス デイデイト 118206 アイスブルー／中古美品／3,200,000円（2024年3月25日・オルロージュ東京）</cite></blockquote><blockquote>「付属品完品ではありましたが、外装使用傷が多数ありましたので最低額でのご案内となりました」<cite>── ロンジン L4.774.4.726／中古品・使用感あり／50,000円（2024年4月29日・オルロージュ東京）</cite></blockquote></div>
-          <p class="source-note">※ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」（<a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a>）掲載の査定コメントより引用。個人の感想・各業者のコメントであり、実際の査定・売却額を保証するものではありません。掲載の時計画像はイメージです。</p>
+          <p class="source-note">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」 <a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a> 掲載の査定コメントより引用。<br />※個人の感想・各業者のコメントであり、実際の査定・売却額を保証するものではありません。※掲載の時計画像はイメージです。</p>
         </div>
       </section>
 
@@ -165,12 +163,11 @@ const recordTable = (rows: string[][]) => rows;
         <div class="content">
           <h2 id="model-title">型番別の査定実績</h2>
           <p class="section-lead">実際にいくらで査定されたのか、型番・状態・査定日つきの実績です。同じモデルでも状態や付属品の有無で金額が変わります。</p>
-          <p class="source-note source-note--top">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」（2026年8月13日確認）<br /><a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a><br />※{disclaimerText}</p>
           <details class="record-details" open><summary>ロレックス <small>（2025年の実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2025).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
           <details class="record-details"><summary>ロレックス <small>（2024年の実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2024).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
           <details class="record-details"><summary>オメガ <small>（査定実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(omegaRecords).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
           <details class="record-details"><summary>その他ブランド <small>（査定実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(otherRecords).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
-          <p class="notice">※ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」（<a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a>）掲載の実績より抜粋（2026年8月13日確認）。掲載の金額は各査定日時点のものであり、その後の相場変動・買取業者の在庫状況・実際の品物の状態により変動します。現在の査定額を保証するものではありません。</p>
+          <p class="notice">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」 <a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a> 掲載の実績より抜粋（2026年8月13日確認）。<br />※掲載の金額は各査定日時点のものであり、その後の相場変動・買取業者の在庫状況・実際の品物の状態により変動します。現在の査定額を保証するものではありません。</p>
           <p class="closing-text">お探しのモデルが一覧にない場合も査定できます。国産・海外ブランドを問わず、型番が分かれば具体的な査定額が出ます。ヒカカク！には累計22万件以上の腕時計査定実績が掲載されています。</p>
           <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">型番から査定を依頼する <span aria-hidden="true">›</span></a>
         </div>

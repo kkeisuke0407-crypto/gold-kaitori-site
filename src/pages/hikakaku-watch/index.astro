@@ -109,7 +109,6 @@ const testimonials = [
       <section class="section price-examples" aria-labelledby="price-title">
         <h2 id="price-title">業者によって大きく買取価格が違うことを知っていますか？</h2>
         <p class="sub-note">複数の業者に買取価格を査定してもらい、比較した上で最高値のお店で売ろう！</p>
-        <p class="source-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の買取事例（2018年7月3日時点の情報）<br /><a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※掲載の金額は引用時点のものであり、実際の査定・買取額を保証するものではありません。※掲載の時計画像はイメージです。</p>
         <div class="price-card-grid">
           {comparisonCards.map((card, index) => (
             <article class:list={['price-card', `watch-${card.kind}`]}>
@@ -120,7 +119,7 @@ const testimonials = [
             </article>
           ))}
         </div>
-        <p class="under-note">※掲載情報は参考例です。実際の査定額は状態・相場・時期により異なります。</p>
+        <p class="source-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※掲載の金額は引用時点のものであり、実際の査定・買取額を保証するものではありません。実際の査定額は状態・相場・時期により異なります。※掲載の時計画像はイメージです。</p>
       </section>
 
       <section class="section reason-section" aria-labelledby="reason-title">
@@ -141,7 +140,6 @@ const testimonials = [
 
       <section class="section testimonial-section" aria-labelledby="testimonial-title">
         <h2 id="testimonial-title">利用者の声</h2>
-        <p class="source-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の利用者の声<br /><a href={sourceReviewUrl} target="_blank" rel="nofollow noreferrer">{sourceReviewUrl}</a><br />※個人の感想であり、実際の査定・売却額を保証するものではありません。</p>
         <div class="testimonial-grid">
           {testimonials.map((testimonial) => (
             <article class="testimonial-card">
@@ -152,6 +150,7 @@ const testimonials = [
             </article>
           ))}
         </div>
+        <p class="source-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の利用者の声 <a href={sourceReviewUrl} target="_blank" rel="nofollow noreferrer">{sourceReviewUrl}</a><br />※個人の感想であり、実際の査定・売却額を保証するものではありません。</p>
       </section>
 
       <section class="section method-section" id="photo-ai" aria-labelledby="method-title">
