@@ -653,3 +653,128 @@ h3 { font-style: normal; }
   .steps { gap: 12px 10px; margin-top: 24px; }
   .step { padding: 20px 8px 12px; }
 }
+
+/* ===============================================================
+   スマホの可読性と数字の見せ方（2026-08 追補）
+   =============================================================== */
+
+/* 本文：行長と段落間を広げる */
+.story-copy { font-size: 15px; line-height: 2; }
+.story-copy p { margin-bottom: 15px; }
+.story-copy p:last-child { margin-bottom: 0; }
+
+@media (max-width: 599px) {
+  /* 写真の横に本文を回り込ませると1行が短くなりすぎるため、縦積みにする */
+  .with-visual { grid-template-columns: minmax(0, 1fr); gap: var(--story-space-md); }
+  .with-visual .visual-card { order: -1; height: 176px; }
+  .visual-card--person { align-self: stretch; }
+  .visual-card--person img { object-position: 50% 22%; }
+  .visual-card--flat img { object-position: 50% 50%; }
+  .story-section { padding: var(--story-space-lg) var(--story-space-md); }
+  .story-copy { font-size: 15px; line-height: 2.02; }
+  .story-copy p { margin-bottom: 16px; }
+  .ship-panel__copy { font-size: 14px; line-height: 1.9; }
+  .ship-panel__copy p { margin-bottom: var(--story-space-sm); }
+  .closing__copy p { font-size: 15px; line-height: 2; margin-bottom: 15px; }
+  .quote-panel p { font-size: 14.5px; line-height: 1.9; }
+  .faq summary { font-size: 13.5px; }
+  .faq p { font-size: 13.5px; line-height: 1.9; }
+  .check-list { grid-template-columns: minmax(0, 1fr); gap: var(--story-space-xs); }
+  .check-list li { padding-left: 24px; font-size: 13.5px; }
+}
+
+/* 冒頭の査定額比較：金額をカードとして強調 */
+.price-strip { gap: var(--story-space-xs); padding: var(--story-space-md) var(--story-space-sm); }
+.price-cell {
+  padding: 10px 6px 12px;
+  border-width: 2px;
+  border-radius: var(--story-radius-md);
+  box-shadow: 0 2px 6px var(--story-shadow);
+}
+.price-cell small { margin-bottom: 4px; color: var(--story-muted); font-size: 10px; }
+.price-cell strong { color: var(--story-navy); font-size: clamp(17px, 4.6vw, 24px); font-weight: 900; letter-spacing: -0.03em; }
+.price-cell--best {
+  border-color: var(--story-red);
+  background: linear-gradient(180deg, var(--story-red-pale), var(--story-surface));
+}
+.price-cell--best small { color: var(--story-red); font-weight: 900; }
+.price-cell--best strong { color: var(--story-red); }
+.price-cell--best::before {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  padding: 2px 8px;
+  border-radius: var(--story-radius-pill);
+  background: var(--story-red);
+  color: var(--story-surface);
+  content: '最高額';
+  font-size: 9px;
+  font-weight: 900;
+  line-height: 1.5;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+.price-strip__label { background: linear-gradient(180deg, var(--story-navy), var(--story-navy-strong)); font-size: 11px; }
+
+/* 査定額の一覧表：金額を大きく、最高額を強調 */
+.result-table dd { color: var(--story-navy); font-size: 15px; font-weight: 900; letter-spacing: -0.02em; }
+.result-table div:last-child { background: var(--story-red-pale); }
+.result-table div:last-child dt { background: var(--story-red); color: var(--story-surface); }
+.result-table div:last-child dd { color: var(--story-red); font-size: 16px; }
+
+/* 差額・金額ブロックの見せ方 */
+.difference { border: 2px solid var(--story-red); }
+.difference strong { text-shadow: 0 2px 0 oklch(100% 0 0 / 60%); }
+.appraisal-card { background: linear-gradient(180deg, var(--story-navy), var(--story-navy-strong)); }
+.appraisal-card strong { font-size: 26px; font-weight: 900; }
+.final-price__box strong,
+.compare-price__box strong { font-weight: 900; letter-spacing: -0.03em; }
+.final-price__box--confirmed { background: linear-gradient(180deg, var(--story-navy), var(--story-navy-strong)); box-shadow: 0 3px 10px var(--story-shadow); }
+.compare-price__box { border: 2px solid transparent; }
+.compare-price__box--red { border-color: var(--story-red); }
+.compare-difference { padding: var(--story-space-sm) var(--story-space-md); border-radius: var(--story-radius-md); background: var(--story-red-pale); }
+
+/* 本文中の金額 */
+.amount {
+  padding: 0 3px;
+  background: linear-gradient(transparent 62%, oklch(93% 0.06 28) 62%);
+  font-size: 1.08em;
+}
+
+@media (max-width: 599px) {
+  .price-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 10px; }
+  .price-cell { min-height: 72px; }
+  .price-cell strong { font-size: 21px; }
+  .appraisal-card strong { font-size: 34px; }
+}
+
+@media (max-width: 599px) {
+  /* 人物イラストは全体が見えるように収める */
+  .visual-card--person { height: 200px; background: var(--story-paper-deep); }
+  .visual-card--person img { object-fit: contain; object-position: 50% 50%; }
+}
+
+/* 冒頭の比較ストリップ：縦長ラベルをやめて上部の見出しバーに統一 */
+.price-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 10px; padding: var(--story-space-md) var(--story-space-md) var(--story-space-lg); }
+.price-strip__label { grid-column: 1 / -1; min-height: 32px; padding: 6px var(--story-space-sm); font-size: 12px; letter-spacing: 0.06em; }
+.price-strip__label br { display: none; }
+.price-cell::after { right: -8px; border-left-color: var(--story-line-dark); }
+
+@media (max-width: 599px) {
+  .price-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .price-cell::after { display: none; }
+}
+
+@media (max-width: 599px) {
+  /* ヒーロー：時計が端で切れて見えるのを避け、タグラインを1行に収める */
+  .hero { min-height: 392px; }
+  .hero__image { width: 48%; object-position: 64% 44%; }
+  .hero::after { background: linear-gradient(90deg, var(--story-paper) 0%, var(--story-paper) 54%, oklch(99% 0.008 84 / 82%) 70%, transparent 96%); }
+  .hero__content { width: 84%; padding-top: 26px; }
+  .hero h1 { font-size: 26px; }
+  .hero__lead { max-width: none; margin-bottom: var(--story-space-md); font-size: 13px; }
+  .hero__tagline { padding: 6px 10px; font-size: 10.5px; letter-spacing: -0.01em; }
+}
+
+/* 入力画面の画像：上下の余白が大きいので少しトリミングして間延びを防ぐ */
+.form-visual__generated img { aspect-ratio: 1024 / 1320; object-fit: cover; object-position: 50% 50%; }
