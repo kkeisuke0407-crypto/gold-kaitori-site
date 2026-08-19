@@ -1,8 +1,20 @@
 ---
+// 引用元（ヒカカク！公式サイト）
+const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
+const sourceReviewUrl = 'https://hikakaku.com/hikakaku_reviews/';
+
 const brands = [
   'ロレックス', 'オメガ', 'IWC', 'タグ・ホイヤー', 'ブライトリング', 'パネライ', 'ウブロ', 'セイコー',
   'オーデマ・ピゲ', 'G-SHOCK', 'パテック フィリップ', 'チュードル', 'ブレゲ', 'ジャガー・ルクルト',
   'フランク ミュラー', 'A. ランゲ＆ゾーネ', 'シチズン', 'ハミルトン', 'ボーム＆メルシエ', 'ロンジン'
+];
+
+const steps = [
+  { title: '写真を撮って査定を開始', body: '腕時計の写真を撮影・アップロード', image: '/hikakaku-watch/ai-step-1-v1.png', alt: 'スマートフォンで腕時計を撮影している画面のイメージ' },
+  { title: 'AIがブランドを確認', body: '検出されたブランドが正しいか確認', image: '/hikakaku-watch/ai-step-2-v1.png', alt: '撮影した腕時計のブランドを確認する画面のイメージ' },
+  { title: '状態と買取方法を選択', body: '状態を選び、宅配・来店・出張から選ぶ', image: '/hikakaku-watch/ai-step-3-v1.png', alt: '時計の状態と買取方法を選択する画面のイメージ' },
+  { title: '概算金額を表示', body: 'AIがかんたんな概算金額の目安を表示', image: '/hikakaku-watch/ai-step-4-v1.png', alt: '概算金額の目安が表示された画面のイメージ' },
+  { title: '最大20社で相見積もり', body: '最大20社の一括査定で買取金額を比較', image: '/hikakaku-watch/ai-step-5-v1.png', alt: '最大20社の査定額を比較する画面のイメージ' }
 ];
 
 const comparisonCards = [
@@ -22,7 +34,7 @@ const testimonials = [
   {
     title: '買取業者の対応が早い！',
     age: '40代 女性',
-    quote: '他のサービスよりも買取業者さんからの回答が早く驚いたし、買取ができない場合でもきちんと返答があったので助かった。',
+    quote: '複数の買取業者さんから回答が届くのが早く驚いたし、買取ができない場合でもきちんと返答があったので助かった。',
     avatar: '/hikakaku-watch/testimonial-avatar-woman40.png'
   },
   {
@@ -39,8 +51,8 @@ const testimonials = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ブランド腕時計の写真AI査定 | ヒカカク！</title>
-    <meta name="description" content="ブランド腕時計を写真でAI査定。概算価格を確認してから、最大20社の査定を比較できます。" />
+    <title>ブランド腕時計は最大20社の査定額を一括比較 | ヒカカク！</title>
+    <meta name="description" content="ブランド腕時計の買取査定。写真を撮るだけで入力はAIにおまかせ。かんたんな概算金額を確認して、最大20社の査定額を一括比較できます。" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Serif+JP:wght@500;600;700;900&display=swap" rel="stylesheet" />
@@ -52,45 +64,58 @@ const testimonials = [
         <div class="hero-ribbon">当サイトは提携広告を含む比較・案内メディアです</div>
         <p class="hero-pr">※当サイトは提携メディアです</p>
         <div class="hero-copy">
-          <h1 id="page-title">ブランド腕時計は、<br /><span>写真</span>でかんたん<span>AI査定</span>。<br />最大20社の査定額を一括比較</h1>
-          <p class="hero-lead">写真を撮る → ブランドと状態を確認 → 査定方法を選ぶ → 概算価格を確認 → 最大20社を比較</p>
-          <div class="hero-steps" aria-label="写真AI査定のポイント">
-            <div><img src="/hikakaku-watch/ai-hero-feature-1-v2.png" alt="" class="hero-feature-icon" /><b>写真で<br />AI査定</b></div>
+          <h1 id="page-title">「入力」はAIにおまかせ。<br />あなたは<span>撮るだけ</span>。<br />最大20社の査定額を一括比較</h1>
+          <p class="hero-lead">面倒なやり取りは一切なし。<br />写真を撮る → ブランドと状態を確認 → 査定方法を選ぶ → 概算金額を確認 → 最大20社を比較</p>
+          <div class="hero-steps" aria-label="申込のポイント">
+            <div><img src="/hikakaku-watch/ai-hero-feature-1-v2.png" alt="" class="hero-feature-icon" /><b>写真を<br />撮るだけ</b></div>
             <div><img src="/hikakaku-watch/ai-hero-feature-2-v2.png" alt="" class="hero-feature-icon" /><b>ブランド<br />確認</b></div>
-            <div><img src="/hikakaku-watch/ai-hero-feature-3-v2.png" alt="" class="hero-feature-icon" /><b>概算価格が<br />わかる</b></div>
+            <div><img src="/hikakaku-watch/ai-hero-feature-3-v2.png" alt="" class="hero-feature-icon" /><b>概算金額が<br />わかる</b></div>
             <div><img src="/hikakaku-watch/ai-hero-feature-4-v2.png" alt="" class="hero-feature-icon" /><b>最大20社<br />比較</b></div>
           </div>
-          <a href="#photo-ai" class="primary-cta js-cta">ヒカカク！の写真AI査定へ進む <em>›</em></a>
+          <a href="#photo-ai" class="primary-cta js-cta">写真を撮って査定する <em>›</em></a>
           <p class="free-note"><span>▣</span> 無料で利用できます</p>
+          <p class="hero-image-note">※掲載の時計画像はイメージです。</p>
         </div>
       </section>
 
       <section class="section process-section" aria-labelledby="process-title">
-        <figure class="process-visual">
-          <img src="/hikakaku-watch/ai-process-five-steps-typed-v3.png" alt="写真AI査定から最大20社比較までの5ステップ。写真撮影、ブランド確認、状態と買取方法の選択、概算価格表示、20社比較の流れ" />
-        </figure>
+        <h2 id="process-title">写真を撮ってから最大20社比較までの5ステップ</h2>
+        <p class="process-lead">スマホでかんたん。まずはAIでかんたんに概算金額をチェックして、最大20社で相見積もり。</p>
+        <div class="step-flow">
+          {steps.map((step, index) => (
+            <article class="step-item">
+              <span class="step-badge">STEP<b>{index + 1}</b></span>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+              <img src={step.image} alt={step.alt} />
+            </article>
+          ))}
+        </div>
+        <p class="under-note">※手順イメージです。実際の画面とは一部異なる場合があります。</p>
       </section>
 
       <section class="section start-section" aria-labelledby="start-title">
         <div class="boxed">
-          <h2 id="start-title">いきなり売らなくてOK。まずはAIで相場感をチェック</h2>
+          <h2 id="start-title">いきなり売らなくてOK。まずはAIでかんたんに概算金額をチェック</h2>
           <div class="benefit-row">
             <article><img src="/hikakaku-watch/ai-benefit-photo-v1.png" alt="" class="generated-icon benefit-icon" /><div><h3>写真だけで始めやすい</h3><p>スマホで撮るだけ。<br />ブランド確認や状態入力も<br />シンプルで簡単です。</p></div></article>
-            <article><img src="/hikakaku-watch/ai-benefit-market-v1.png" alt="" class="generated-icon benefit-icon" /><div><h3>相場感がわかるから<br />比較しやすい</h3><p>概算価格を確認してから<br />売るかどうかを判断できます。</p></div></article>
-            <article><img src="/hikakaku-watch/ai-benefit-assurance-v1.png" alt="" class="generated-icon benefit-icon" /><div><h3>納得した時だけ<br />20社査定へ進める</h3><p>無理に売る必要はありません。<br />納得した時だけ比較できます。</p></div></article>
+            <article><img src="/hikakaku-watch/ai-benefit-market-v1.png" alt="" class="generated-icon benefit-icon" /><div><h3>概算金額がわかるから<br />比較しやすい</h3><p>かんたんな概算金額を<br />確認してから、査定額を<br />見比べられます。</p></div></article>
+            <article><img src="/hikakaku-watch/ai-benefit-assurance-v1.png" alt="" class="generated-icon benefit-icon" /><div><h3>最大20社で実際の<br />買取金額を相見積もり</h3><p>概算金額の確認と合わせて、<br />最大20社へ査定を依頼。<br />売却するかは後から決められます。</p></div></article>
           </div>
+          <p class="under-note under-note--left">※AIが表示するのは、かんたんな概算金額の目安です。実際の相場・査定額は、提携買取業者の回答でご確認ください。</p>
         </div>
       </section>
 
       <section class="section price-examples" aria-labelledby="price-title">
         <h2 id="price-title">業者によって大きく買取価格が違うことを知っていますか？</h2>
         <p class="sub-note">複数の業者に買取価格を査定してもらい、比較した上で最高値のお店で売ろう！</p>
+        <p class="source-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の買取事例（2018年7月3日時点の情報）<br /><a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※掲載の金額は引用時点のものであり、実際の査定・買取額を保証するものではありません。※掲載の時計画像はイメージです。</p>
         <div class="price-card-grid">
           {comparisonCards.map((card, index) => (
             <article class:list={['price-card', `watch-${card.kind}`]}>
               <span class="case-ribbon">CASE<br /><b>{index + 1}</b></span>
               <h3>{card.brand}</h3><p class="model-name">{card.name.split('\n').map((line) => <>{line}<br /></>)}</p>
-              <div class="comparison-card-body"><dl><div><dt>A社：</dt><dd class="highest">{card.prices[0]}</dd></div><div><dt>B社：</dt><dd>{card.prices[1]}</dd></div><div><dt>C社：</dt><dd>{card.prices[2]}</dd></div></dl><img src={card.image} alt={`${card.brand}の腕時計`} /></div>
+              <div class="comparison-card-body"><dl><div><dt>A社：</dt><dd class="highest">{card.prices[0]}</dd></div><div><dt>B社：</dt><dd>{card.prices[1]}</dd></div><div><dt>C社：</dt><dd>{card.prices[2]}</dd></div></dl><img src={card.image} alt={`${card.brand}の腕時計のイメージ`} /></div>
               <p class="comparison-difference">{index === 3 ? '26万円' : card.gap}<span>お得！</span></p>
             </article>
           ))}
@@ -100,11 +125,11 @@ const testimonials = [
 
       <section class="section reason-section" aria-labelledby="reason-title">
         <div class="boxed">
-          <h2 id="reason-title">当サイトが写真AI査定をおすすめする理由</h2>
+          <h2 id="reason-title">当サイトが写真からの一括査定をおすすめする理由</h2>
           <div class="reason-row">
             <article><img src="/hikakaku-watch/ai-reason-camera-v1.png" alt="" class="generated-icon reason-icon" /><div><h3>写真だけで始めやすい</h3><p>スマホで撮るだけで<br />AIがブランドを検出。<br />簡単に始められます。</p></div></article>
             <article><img src="/hikakaku-watch/ai-reason-verified-v1.png" alt="" class="generated-icon reason-icon" /><div><h3>ブランド確認と<br />状態入力で進めやすい</h3><p>AIが検出したブランドを確認し、<br />状態と買取方法を選ぶだけで<br />スムーズに進みます。</p></div></article>
-            <article><img src="/hikakaku-watch/ai-reason-compare-v1.png" alt="" class="generated-icon reason-icon" /><div><h3>概算確認後に<br />20社比較へ進める</h3><p>概算価格を確認してから<br />最大20社の査定比較に<br />進めるので安心です。</p></div></article>
+            <article><img src="/hikakaku-watch/ai-reason-compare-v1.png" alt="" class="generated-icon reason-icon" /><div><h3>最大20社で実際の<br />買取金額を相見積もり</h3><p>概算金額を確認しながら、<br />最大20社の査定額を<br />見比べられます。</p></div></article>
           </div>
         </div>
       </section>
@@ -116,6 +141,7 @@ const testimonials = [
 
       <section class="section testimonial-section" aria-labelledby="testimonial-title">
         <h2 id="testimonial-title">利用者の声</h2>
+        <p class="source-note">出典：ヒカカク！公式サイト「ヒカカク！のクチコミ・評判」掲載の利用者の声<br /><a href={sourceReviewUrl} target="_blank" rel="nofollow noreferrer">{sourceReviewUrl}</a><br />※個人の感想であり、実際の査定・売却額を保証するものではありません。</p>
         <div class="testimonial-grid">
           {testimonials.map((testimonial) => (
             <article class="testimonial-card">
@@ -129,17 +155,31 @@ const testimonials = [
       </section>
 
       <section class="section method-section" id="photo-ai" aria-labelledby="method-title">
-        <figure class="method-visual">
-          <img src="/hikakaku-watch/ai-method-choice-option-1.png" alt="目的に合わせて選べる2つの査定方法。おすすめの写真でAI査定と、入力して査定を比較する図" />
-          <a href="#photo-ai" class="method-choice-cta method-choice-photo js-cta" aria-label="写真でAI査定を始める"></a>
-          <a href="#photo-ai" class="method-choice-cta method-choice-input js-cta" aria-label="入力から査定を始める"></a>
-        </figure>
+        <h2 id="method-title">目的に合わせて選べる<span>2</span>つの査定方法</h2>
+        <div class="method-grid">
+          <article class="method-card photo-method">
+            <span class="recommend">おすすめ</span>
+            <h3>写真から査定</h3>
+            <p class="method-sub">写真を撮るだけで、ブランド候補とかんたんな概算金額を確認</p>
+            <img class="method-art" src="/hikakaku-watch/ai-method-photo-v2.png" alt="カメラとスマートフォンで腕時計を撮影するイメージ" />
+            <ul><li>写真をアップロード</li><li>ブランドを確認</li><li>状態・買取方法を選択</li><li>概算金額をチェック</li></ul>
+            <a href="#photo-ai" class="primary-cta js-cta">写真を撮って査定する <em>›</em></a>
+          </article>
+          <article class="method-card input-method">
+            <h3>入力して査定</h3>
+            <p class="method-sub">商品情報を入力して、最大20社へ一括査定</p>
+            <img class="method-art" src="/hikakaku-watch/ai-method-input-v2.png" alt="パソコンでカテゴリ・商品名・状態を入力するイメージ" />
+            <ul><li>カテゴリと商品名を入力</li><li>商品の状態を選択</li><li>自分のペースで進められる</li></ul>
+            <a href="#photo-ai" class="secondary-cta js-cta">入力して査定を始める <em>›</em></a>
+          </article>
+        </div>
+        <p class="under-note">※画面・画像はイメージです。実際の画面とは一部異なる場合があります。</p>
       </section>
 
       <section class="media-disclosure">
         <h2>ヒカカク！の提携メディアとしてご紹介しています</h2>
         <p>当サイトは提携広告を含む比較・案内メディアです。リンクからサービスを利用すると、<br />当サイトに広告収益が発生する場合があります。</p>
-        <div><span>✓ 利用は無料で安心</span><span>♟ AIで概算価格をチェック</span><span>▯ 最大20社を比較</span></div>
+        <div><span>✓ 利用は無料で安心</span><span>♟ AIで概算金額をチェック</span><span>▯ 最大20社を比較</span></div>
       </section>
 
       <footer class="site-footer">
@@ -150,7 +190,7 @@ const testimonials = [
         </div>
       </footer>
     </main>
-    <div class="toast" role="status" aria-live="polite">写真AI査定を始める準備ができました</div>
+    <div class="toast" role="status" aria-live="polite">写真から査定を始める準備ができました</div>
     <script>
       document.querySelectorAll('.js-cta').forEach((cta) => {
         cta.addEventListener('click', () => {

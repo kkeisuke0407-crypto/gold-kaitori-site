@@ -38,6 +38,9 @@ summary:active { color: var(--hwc-red-dark); }
 .section h2 { color: var(--hwc-navy); font-family: var(--hwc-font-serif); font-size: clamp(23px, 6.1vw, 32px); line-height: 1.36; letter-spacing: .015em; }
 .section-lead, .reason-lead { margin-top: 9px; font-size: 13px; line-height: 1.75; }
 .notice, .source-note { margin-top: 11px; color: var(--hwc-muted); font-size: 10px; line-height: 1.55; }
+.notice a, .source-note a { color: var(--hwc-navy); text-decoration: underline; word-break: break-all; }
+.source-note--top { margin-top: 12px; padding: 8px 10px; border-left: 3px solid var(--hwc-gold); background: var(--hwc-ivory); }
+.image-note { margin-top: 9px; color: var(--hwc-muted); font-size: 10px; line-height: 1.55; }
 .closing-text { margin-top: 15px; padding-left: 11px; border-left: 3px solid var(--hwc-red); color: var(--hwc-red-dark); font-size: 13px; font-weight: 800; line-height: 1.72; }
 
 .case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-top: 15px; }
@@ -796,3 +799,7 @@ table { width: 100%; border-collapse: collapse; }
   .entrance-grid h3 b { font-size: 21px; }
   .entrance-grid p { font-size: 12px; line-height: 1.7; }
 }
+
+/* 広告審査対応（2026-08）：状態別カードの「故障」を想起させる赤アクセントを解消。 */
+.condition-grid article:nth-child(3) { border-color: var(--hwc-gold-dark); }
+.condition-grid article:nth-child(3) .condition-icon { border-color: var(--hwc-gold-dark); color: var(--hwc-gold-dark); }
