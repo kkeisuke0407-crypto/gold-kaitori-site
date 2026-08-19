@@ -787,3 +787,29 @@ h3 { font-style: normal; }
   .visual-card--flat { height: 302px; }
   .with-visual--appraisal { align-items: center; }
 }
+
+/* 本文の途中から画像に回り込ませるレイアウト */
+.with-visual--wrap::after { display: block; clear: both; content: ''; }
+.with-visual--wrap .visual-card {
+  float: right;
+  width: 250px;
+  height: 302px;
+  margin: 4px 0 14px 22px;
+  shape-margin: 16px;
+}
+.with-visual--wrap .visual-card--person img { object-position: 55% 30%; }
+
+@media (max-width: 599px) {
+  .with-visual--wrap .visual-card {
+    float: none;
+    width: 100%;
+    height: 200px;
+    margin: 4px 0 18px;
+  }
+  .with-visual--wrap .visual-card--flat { height: 190px; }
+}
+
+@media (max-width: 599px) {
+  /* イラストの地色と余白の色を合わせて継ぎ目を消す */
+  .with-visual--wrap .visual-card--person { background: var(--story-surface); }
+}
