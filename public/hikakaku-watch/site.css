@@ -265,3 +265,47 @@ body { margin:0; color:#111; font-family:"Noto Sans JP",sans-serif; background:#
   .pr-label { margin:6px 0 5px; font-size:9px; }
   .site-pr > p:last-child { font-size:10px; line-height:1.7; }
 }
+
+/* ---------------------------------------------------------------
+   広告審査対応（2026-08）：画像に焼き込まれていた文言をHTML化。
+   5ステップ／2つの査定方法をテキストで組み、出典・免責を追加。
+   --------------------------------------------------------------- */
+.process-section { padding:13px 14px 0; overflow-x:auto; overscroll-behavior-x:contain; }
+.process-section::-webkit-scrollbar { height:5px; }
+.process-section::-webkit-scrollbar-thumb { background:#8090ac; border-radius:99px; }
+.step-flow { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:7px; margin-top:22px; }
+.step-item { position:relative; display:flex; flex-direction:column; min-width:0; padding:26px 7px 9px; border:1px solid #e0e0e0; border-radius:8px; background:linear-gradient(180deg,#fff,#fcfcfd); text-align:center; }
+.step-badge { position:absolute; top:-19px; left:50%; display:grid; place-items:center; align-content:center; width:39px; height:39px; border:2px solid #d3a94a; border-radius:50%; color:#ffd34c; background:#052554; font-size:7px; font-weight:700; line-height:1.05; transform:translateX(-50%); }
+.step-badge b { display:block; font-size:18px; }
+.step-item h3 { display:flex; align-items:center; justify-content:center; min-height:37px; margin:0; color:#0a2050; font-family:"Noto Serif JP",serif; font-size:12px; font-weight:700; line-height:1.4; }
+.step-item p { min-height:38px; margin:6px 0 8px; color:#3a4658; font-size:9px; line-height:1.5; }
+.step-item img { display:block; width:100%; max-width:112px; height:auto; margin:auto auto 0; }
+.under-note--left { text-align:left; }
+.source-note { margin:8px 0 0; color:#4a5566; font-size:9px; line-height:1.6; }
+.source-note a { color:#0a3a86; word-break:break-all; }
+.hero-image-note { margin:6px 0 0; font-size:9px; font-weight:600; opacity:.85; }
+
+.method-section { padding:12px 14px 0; overflow:visible; }
+.method-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:9px 0 0; }
+.method-card { display:flex; flex-direction:column; min-height:0; padding:16px 12px 12px; }
+.method-card h3 { margin:0; color:#031e4c; font-family:"Noto Serif JP",serif; font-size:20px; line-height:1.25; text-align:center; }
+.method-sub { margin:6px 0 0; color:#33405a; font-size:10px; font-weight:700; line-height:1.5; text-align:center; }
+.method-card .method-art { width:100%; height:auto; max-height:112px; margin:8px 0 0; object-fit:contain; border-radius:6px; background:transparent; }
+.method-card ul { margin:9px 0 0; padding:0; list-style:none; font-size:11px; font-weight:700; line-height:1.7; }
+.method-card .primary-cta, .method-card .secondary-cta { width:100%; min-height:42px; margin-top:auto; font-size:14px; }
+.method-card .primary-cta { margin-top:12px; }
+.method-card .secondary-cta { margin-top:12px; }
+.method-card em { margin-left:8px; font-size:20px; font-style:normal; line-height:0; }
+
+@media (max-width:560px) {
+  .step-flow { min-width:590px; }
+  .step-item { padding:28px 5px 8px; }
+  .step-item h3 { font-size:11px; }
+  .step-item p { font-size:8px; }
+  .method-section { padding-right:14px; padding-left:14px; overflow:visible; }
+  .method-grid { grid-template-columns:1fr; gap:9px; }
+  .method-card { padding:15px 13px 12px; }
+  .method-card h3 { font-size:19px; }
+  .method-card .method-art { max-height:150px; }
+  .method-card ul { font-size:11px; }
+}

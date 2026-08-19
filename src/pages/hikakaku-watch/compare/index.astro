@@ -1,6 +1,10 @@
 ---
 const affiliateUrl = 'https://hikakaku.com/estimate_form/watch?ref_code=affiliate9&utm_source=blog&utm_medium=affiliate9';
 const privacyUrl = 'https://hikakaku.com/privacypolicy';
+// 引用元（ヒカカク！公式サイト）
+const sourceRecordsUrl = 'https://hikakaku.com/category/all-category/watch/assessment_achievements/';
+const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
+const disclaimerText = '掲載内容は引用時点の情報であり、実際の査定・売却額を保証するものではありません。';
 
 const comparisonCases = [
   { brand: 'ROLEX', model: 'デイトナ 116520 ブラック', prices: ['240万円', '185万円', '128万円'], gap: '112万円', tone: 'silver' },
@@ -18,7 +22,7 @@ const priceFactors = [
 
 const appraisalFactors = [
   { no: '01', title: '型番・モデル', body: '同じブランドでも、モデルによって評価は大きく変わります。生産が終了したモデルや、海外で人気の高いモデルは相場が上がりやすい傾向があります。型番が分かっていれば、より具体的な査定額が出ます。' },
-  { no: '02', title: '状態', body: '動作の有無、文字盤やケースの傷、研磨の履歴などが見られます。動かない時計でも、部品やケース素材に価値があるため買取の対象になることがあります。' },
+  { no: '02', title: '状態', body: '動作の状況、文字盤やケースの傷、研磨の履歴などが見られます。長く使っていない時計でも、部品やケース素材に価値があるため査定の対象になることがあります。査定の可否・査定額は提携買取業者が判断します。' },
   { no: '03', title: '付属品', body: '箱、保証書（ギャランティカード）、余りのコマ、購入時の明細。これらが揃っているかどうかで査定額は変わります。特に保証書は、本物であることの裏付けとして重視されます。' },
   { no: '04', title: '相場のタイミング', body: '高級時計の相場は、為替や海外需要で動きます。「去年見た買取価格」と今の価格が同じとは限りません。' },
 ];
@@ -73,7 +77,7 @@ const faqs = [
   { q: '査定だけの利用はできますか', a: 'できます。ヒカカク！公式サイトにも「査定価格に納得しない場合は買取依頼しなくてもOK」と明記されています。査定額を確認したうえで、売らないという選択ができます。' },
   { q: '手数料はかかりますか', a: 'かかりません。公式サイトには「『ヒカカク！』のサービス利用手数料は一切ありません。何社に査定してもらっても、途中から手数料や成約後別途料金をいただきません」と記載されています。フリマアプリのような売却時の販売手数料も発生しません。' },
   { q: '何社から査定が届きますか', a: '最大20社です。ヒカカク！には全国600社以上の買取業者が登録しており、その中からブランド腕時計の査定に対応する業者が査定します。申込は入力から1分程度で完了します。' },
-  { q: '査定はどのくらいで届きますか', a: '申込後、各社から順次届きます。公式サイトの利用者の声では「他のサービスよりも買取業者さんからの回答が早く驚いた」「買取ができない場合でもきちんと返答があった」という声が掲載されています。' },
+  { q: '査定はどのくらいで届きますか', a: '申込後、各社から順次届きます。ヒカカク！公式サイトの利用者の声には「買取業者さんからの回答が早く驚いた」「買取ができない場合でもきちんと返答があった」という声が掲載されています（個人の感想であり、回答時期を保証するものではありません）。' },
   { q: '個人情報はどのように扱われますか', a: '公式サイトに「入力情報は、SSL通信により暗号化されて送信されます。お客様の入力情報は第三者から閲覧されません」と記載されています。詳細はヒカカク！プライバシーポリシーをご確認ください。' },
   { q: '査定額に納得できなかった場合はどうなりますか', a: '売却は義務ではありません。提示された金額に納得できなければ、売らずに終えることができます。' },
   { q: '運営しているのはどこの会社ですか', a: '株式会社じげん（ZIGExN Co., Ltd.／東証プライム上場）が運営する買取価格比較サイト「ヒカカク！」のサービスです。所在地：東京都港区虎ノ門3-4-8' },
@@ -104,6 +108,7 @@ const recordTable = (rows: string[][]) => rows;
           <p class="hero__lead">同じモデルでも、買取業者によって査定額に差が出ます。<br />ヒカカク！なら最大20社にまとめて査定を依頼して、比較したうえで売却先を決められます。</p>
           <a class="cta cta--hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">無料で査定額を比べる <span aria-hidden="true">›</span></a>
           <ul class="trust-list"><li>利用無料</li><li>査定だけでもOK</li><li>最大20社に一括依頼</li></ul>
+          <p class="image-note">※掲載の時計画像はイメージです。</p>
         </div>
       </section>
 
@@ -111,6 +116,7 @@ const recordTable = (rows: string[][]) => rows;
         <div class="content">
           <h2 id="reason-title">同じ時計でも、査定額はここまで違います</h2>
           <p class="section-lead">時計の買取価格は、どこに出すかで大きく変わります。下は、同じモデルを複数の業者が査定した場合の金額差です。</p>
+          <p class="source-note source-note--top">出典：ヒカカク！公式サイト 腕時計の一括査定ページ 掲載の買取事例（2018年7月3日時点の情報）<br /><a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※{disclaimerText}※掲載の時計画像はイメージです。</p>
           <div class="case-grid">
             {comparisonCases.map((item) => (
               <article class:list={['case-card', `case-card--${item.tone}`]}>
@@ -136,11 +142,12 @@ const recordTable = (rows: string[][]) => rows;
           <div class="factor-list">
             {appraisalFactors.map((item) => <article><span class="factor-icon" aria-hidden="true"></span><div><h3><small>{item.no}</small>{item.title}</h3><p>{item.body}</p></div></article>)}
           </div>
-          <aside class="prepare-box"><h3>売る前にやっておくと差が出ること</h3><ul><li><b>箱、保証書、余りコマを探しておく</b><br />引き出しや購入時の紙袋に入っていることがあります。</li><li><b>動く場合は電池を入れておく</b><br />動作確認ができる状態の方が評価されやすくなります。</li><li><b>自分で研磨や洗浄をしない</b><br />素人研磨はケースの形状を崩し、かえって査定額を下げることがあります。</li></ul></aside>
+          <aside class="prepare-box"><h3>売る前にやっておくと差が出ること</h3><ul><li><b>箱、保証書、余りコマを探しておく</b><br />引き出しや購入時の紙袋に入っていることがあります。</li><li><b>使える状態なら電池を入れておく</b><br />動作を確認できる状態の方が評価されやすくなります。</li><li><b>自分で研磨や洗浄をしない</b><br />素人研磨はケースの形状を崩し、かえって査定額を下げることがあります。</li></ul></aside>
           <div class="quote-heading"><h3 class="quote-title">実際の査定コメントから</h3></div>
           <p class="quote-lead">付属品や状態が査定額をどう動かしたか、買取業者が残したコメントの実例です。</p>
+          <p class="source-note source-note--top">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」掲載の査定コメントより引用<br /><a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a><br />※個人の感想・各業者のコメントであり、実際の査定・売却額を保証するものではありません。※掲載の時計画像はイメージです。</p>
           <div class="comment-list"><blockquote>「付属品完品＋ノベルティをお持ちいただき、お時計はほぼ新品に近い状態のため最大金額にてお買取り成立となりました」<cite>── ブライトリング A23310／中古美品／450,000円（2024年4月25日・オルロージュ東京）</cite></blockquote><blockquote>「とても綺麗で状態も良かったのですが、保証書が欠品していたため減額となってしまいました」<cite>── ハミルトン ジャズマスター ビューマチック H32565735／中古品・使用感あり／25,000円（2024年4月22日・オルロージュ東京）</cite></blockquote><blockquote>「全体的に使用傷はあるものの目立った傷はありませんでしたが、保証書が欠品していたためこちらの査定金額となりました」<cite>── ロレックス デイデイト 118206 アイスブルー／中古美品／3,200,000円（2024年3月25日・オルロージュ東京）</cite></blockquote><blockquote>「付属品完品ではありましたが、外装使用傷が多数ありましたので最低額でのご案内となりました」<cite>── ロンジン L4.774.4.726／中古品・使用感あり／50,000円（2024年4月29日・オルロージュ東京）</cite></blockquote></div>
-          <p class="source-note">※ヒカカク！公式サイト「腕時計の査定実績・事例」掲載の査定コメントより引用。</p>
+          <p class="source-note">※ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」（<a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a>）掲載の査定コメントより引用。個人の感想・各業者のコメントであり、実際の査定・売却額を保証するものではありません。掲載の時計画像はイメージです。</p>
         </div>
       </section>
 
@@ -148,7 +155,7 @@ const recordTable = (rows: string[][]) => rows;
         <div class="content">
           <h2 id="compare-title">時計を売る4つの方法を比べる</h2>
           <p class="section-lead">時計を売る手段は一括査定だけではありません。それぞれに向き不向きがあるので、自分の状況に合うものを選んでください。</p>
-          <div class="table-scroll"><table class="method-table"><thead><tr><th></th><th class="method-table__bulk"><span class="method-icon" aria-hidden="true"></span>一括査定</th><th><span class="method-icon" aria-hidden="true"></span>買取専門店に持込</th><th><span class="method-icon" aria-hidden="true"></span>フリマアプリ</th><th><span class="method-icon" aria-hidden="true"></span>質屋</th></tr></thead><tbody><tr><th>手間</th><td>入力のみ</td><td>来店が必要</td><td>撮影・梱包・発送</td><td>来店が必要</td></tr><tr><th>スピード</th><td>数日</td><td>即日</td><td>売れるまで不定</td><td>即日</td></tr><tr><th>価格</th><td>複数社を比較して判断できる</td><td>1社の提示のみ</td><td>高くなる可能性／手数料あり</td><td>低めになりやすい</td></tr><tr><th>リスク</th><td>低い</td><td>相場が分からない</td><td>返品・トラブル</td><td>期限管理が必要</td></tr><tr><th>向いている人</th><td>損を避けたい／急いでいない</td><td>今日中に現金化したい</td><td>手間をかけられる</td><td>一時的に借りたい</td></tr></tbody></table></div>
+          <div class="table-scroll"><table class="method-table"><thead><tr><th></th><th class="method-table__bulk"><span class="method-icon" aria-hidden="true"></span>一括査定</th><th><span class="method-icon" aria-hidden="true"></span>買取専門店に持込</th><th><span class="method-icon" aria-hidden="true"></span>フリマアプリ</th><th><span class="method-icon" aria-hidden="true"></span>質屋</th></tr></thead><tbody><tr><th>手間</th><td>入力のみ</td><td>来店が必要</td><td>撮影・梱包・発送</td><td>来店が必要</td></tr><tr><th>スピード</th><td>数日</td><td>即日</td><td>売れるまで不定</td><td>即日</td></tr><tr><th>価格</th><td>複数社を比較して判断できる</td><td>1社の提示のみ</td><td>高くなる可能性／手数料あり</td><td>低めになりやすい</td></tr><tr><th>リスク</th><td>複数社の金額を比べて判断できる</td><td>他社の金額が分からない場合があります</td><td>返品・トラブルが生じる場合があります</td><td>期限管理が必要になる場合があります</td></tr><tr><th>向いている人</th><td>損を避けたい／急いでいない</td><td>今日中に現金化したい</td><td>手間をかけられる</td><td>一時的に借りたい</td></tr></tbody></table></div>
           <div class="compare-guides"><article class="fit-box"><h3>一括査定が向いている人</h3><ul><li>今日中でなくてよく、なるべく高く売りたい</li><li>複数の店を回る時間がない</li><li>自分の時計の相場が分からない</li></ul></article><article class="unfit-box"><h3>こんな方には向きません</h3><ul><li><b>今日中に現金化したい</b><br />→ 店頭買取の方が早く済みます。</li><li><b>査定の連絡を一切受けたくない</b><br />→ 複数の業者から連絡が来る仕組みです。</li><li><b>時計の現物が手元にない</b><br />→ 状態を確認できないため、正確な査定が出せません。</li></ul></article></div>
           <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分に合うか確かめる（無料・査定だけOK） <span aria-hidden="true">›</span></a>
         </div>
@@ -158,11 +165,12 @@ const recordTable = (rows: string[][]) => rows;
         <div class="content">
           <h2 id="model-title">型番別の査定実績</h2>
           <p class="section-lead">実際にいくらで査定されたのか、型番・状態・査定日つきの実績です。同じモデルでも状態や付属品の有無で金額が変わります。</p>
+          <p class="source-note source-note--top">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」（2026年8月13日確認）<br /><a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a><br />※{disclaimerText}</p>
           <details class="record-details" open><summary>ロレックス <small>（2025年の実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2025).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
           <details class="record-details"><summary>ロレックス <small>（2024年の実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2024).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
           <details class="record-details"><summary>オメガ <small>（査定実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(omegaRecords).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
           <details class="record-details"><summary>その他ブランド <small>（査定実績）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(otherRecords).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
-          <p class="notice">※ヒカカク！公式サイト「腕時計の査定実績・事例」掲載の実績より抜粋（2026年8月13日確認）。掲載の金額は各査定日時点のものであり、その後の相場変動・買取業者の在庫状況・実際の品物の状態により変動します。現在の査定額を保証するものではありません。</p>
+          <p class="notice">※ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」（<a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a>）掲載の実績より抜粋（2026年8月13日確認）。掲載の金額は各査定日時点のものであり、その後の相場変動・買取業者の在庫状況・実際の品物の状態により変動します。現在の査定額を保証するものではありません。</p>
           <p class="closing-text">お探しのモデルが一覧にない場合も査定できます。国産・海外ブランドを問わず、型番が分かれば具体的な査定額が出ます。ヒカカク！には累計22万件以上の腕時計査定実績が掲載されています。</p>
           <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">型番から査定を依頼する <span aria-hidden="true">›</span></a>
         </div>
@@ -170,10 +178,11 @@ const recordTable = (rows: string[][]) => rows;
 
       <section class="section section--condition" id="condition" aria-labelledby="condition-title">
         <div class="content">
-          <h2 id="condition-title">動かない・付属品がない時計も査定できます</h2>
-          <p class="section-lead">「壊れているから売れない」と思って、引き出しにしまったままの時計はありませんか。状態が悪くても、買取の対象になることがあります。</p>
-          <div class="condition-grid"><article><h3>動作品・美品</h3><span class="condition-icon" aria-hidden="true"></span><p>きちんと動く時計は、状態を確認しながら査定できます。</p></article><article><h3>キズ・使用感あり</h3><span class="condition-icon" aria-hidden="true"></span><p>キズや使用感があっても、買取可能です。</p></article><article><h3>不動・故障</h3><span class="condition-icon" aria-hidden="true"></span><p>動かない時計でも、買取対象です。</p></article><article><h3>付属品なし</h3><span class="condition-icon" aria-hidden="true"></span><p>箱や保証書がなくても、査定できます。</p></article></div>
-          <p class="closing-text">処分してしまう前に、一度査定に出して価値を確認することをおすすめします。</p>
+          <h2 id="condition-title">付属品がない・状態が気になる時計も査定できます</h2>
+          <p class="section-lead">「古いものだから」と思って、引き出しにしまったままの時計はありませんか。状態が気になる時計でも、査定を受けられます。</p>
+          <div class="condition-grid"><article><h3>使用中・美品</h3><span class="condition-icon" aria-hidden="true"></span><p>ふだん使っている時計は、状態を確認しながら査定できます。</p></article><article><h3>キズ・使用感あり</h3><span class="condition-icon" aria-hidden="true"></span><p>キズや使用感がある時計も、そのまま査定に出せます。</p></article><article><h3>長く使っていない</h3><span class="condition-icon" aria-hidden="true"></span><p>しばらく動かしていない古い時計も、査定に出せます。</p></article><article><h3>付属品なし</h3><span class="condition-icon" aria-hidden="true"></span><p>箱や保証書がなくても、査定できます。</p></article></div>
+          <p class="source-note">※掲載の時計画像はイメージです。査定の可否・査定額は、提携買取業者が現物を確認したうえで判断します。</p>
+          <p class="closing-text">手放す前に、一度査定に出して価値を確認することをおすすめします。</p>
           <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">状態を入力して査定を依頼する <span aria-hidden="true">›</span></a>
         </div>
       </section>
@@ -181,7 +190,7 @@ const recordTable = (rows: string[][]) => rows;
       <section class="section section--howto" id="howto" aria-labelledby="howto-title">
         <div class="content">
           <h2 id="howto-title">2つの入口から査定を依頼できます</h2>
-          <div class="entrance-grid"><article><span class="entrance-visual entrance-visual--form" aria-hidden="true"></span><h3>型番が分かっている方<br /><b>入力して査定</b></h3><p>型番・ブランド・状態を入力するだけで、査定を依頼できます。型番は時計の裏蓋や保証書に記載されています。</p></article><article><span class="entrance-visual entrance-visual--photo" aria-hidden="true"></span><h3>モデルが分からない方<br /><b>写真でAI査定</b></h3><p>スマートフォンで写真を撮ると、AIがブランドを検出します。「もらったものでブランドが分からない」「遺品で詳細が不明」という場合はこちらから。</p></article></div>
+          <div class="entrance-grid"><article><span class="entrance-visual entrance-visual--form" aria-hidden="true"></span><h3>型番が分かっている方<br /><b>入力して査定</b></h3><p>型番・ブランド・状態を入力するだけで、査定を依頼できます。型番は時計の裏蓋や保証書に記載されています。</p></article><article><span class="entrance-visual entrance-visual--photo" aria-hidden="true"></span><h3>モデルが分からない方<br /><b>写真から査定</b></h3><p>スマートフォンで写真を撮ると、AIがブランドを検出します。「もらったものでブランドが分からない」「遺品で詳細が不明」という場合はこちらから。</p></article></div>
           <h3 class="flow-title">申込〜査定の流れ（4ステップ）</h3>
           <ol class="flow-list"><li><i class="flow-icon" aria-hidden="true"></i><b>1</b><span>時計の情報を入力</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>2</b><span>査定を依頼</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>3</b><span>各社から査定額が届く</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>4</b><span>比較して売却先を決める</span></li></ol>
           <p class="closing-text">査定額を見てから、売るかどうかを判断できます。</p>
