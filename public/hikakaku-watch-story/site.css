@@ -813,3 +813,15 @@ h3 { font-style: normal; }
   /* イラストの地色と余白の色を合わせて継ぎ目を消す */
   .with-visual--wrap .visual-card--person { background: var(--story-surface); }
 }
+
+@media (max-width: 599px) {
+  /* スマホでもPCと同じく本文が画像に回り込む */
+  .with-visual--wrap .visual-card {
+    float: right;
+    width: 42%;
+    height: 172px;
+    margin: 3px 0 12px 13px;
+  }
+  .with-visual--wrap .visual-card--flat { height: 158px; }
+  .with-visual--wrap .visual-card--person { background: var(--story-surface); }
+}
