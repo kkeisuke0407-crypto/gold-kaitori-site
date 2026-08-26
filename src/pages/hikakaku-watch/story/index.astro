@@ -1,5 +1,7 @@
 ---
-const affiliateUrl = 'https://hikakaku.com/estimate_form/watch?ref_code=affiliate9&utm_source=blog&utm_medium=affiliate9';
+// SLVRbullet の広告リンク（計測URL）。ページ末尾の引き継ぎタグが gclid 等を引き継ぐ対象がこのURL。
+// ヒカカクの直リンクに戻すと成果が Google 広告へ連携されなくなる。
+const affiliateUrl = 'https://tr.slvrbullet.com/cl/w0000678724/47671/39865/6';
 
 const faqItems = [
   {
@@ -37,6 +39,40 @@ const faqItems = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/hikakaku-watch-story/site.css" />
+    <!-- 計測タグ（貴金属LP19ページと同じプロパティに相乗り）。GA4 → Clarity の順。 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+    </script>
+    <script is:inline>
+      (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+        t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wxnujpnscp");
+    </script>
+    <!-- 中間CV（MCV）＝CTAクリックの計測。GA4イベントとして送る。 -->
+    <script is:inline>
+      (function(){
+        var INTENT = "hikakaku_watch_story";
+        document.addEventListener("click", function(e){
+          var a = e.target && e.target.closest ? e.target.closest('a[href^="https://tr.slvrbullet.com/"]') : null;
+          if(!a) return;
+          var params = {
+            landing_intent: INTENT,
+            cta_label: (a.getAttribute("aria-label") || a.textContent || "").trim().slice(0, 60),
+            link_url: a.getAttribute("href"),
+            transport_type: "beacon"
+          };
+          if(window.dataLayer) window.dataLayer.push(Object.assign({ event: "hikakaku_watch_mcv" }, params));
+          if(typeof gtag === "function") gtag("event", "hikakaku_watch_mcv", params);
+          // ★Google広告のイベントスニペット（CV-B）が届いたらここに追加：
+          // if(typeof gtag === "function") gtag("event", "conversion", { send_to: "AW-18129603657/XXXXXXXX" });
+        }, true);
+      })();
+    </script>
+
   </head>
   <body>
     <main class="watch-story">
@@ -288,5 +324,8 @@ const faqItems = [
 
       <p class="disclaimer">※本記事の内容は個人の体験をもとにしたモデルストーリーです。査定額は商品・状態・時期・買取業者等により異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
     </main>
+    <!-- SLVRbullet パラメータ引き継ぎタグ。gclid/wbraid/gbraid を計測URLへ引き継ぐ。 -->
+    <!-- is:inline 必須。外すと Astro が type="module" でバンドルし、CORSヘッダの無い外部スクリプトの読み込みに失敗する。 -->
+    <script is:inline src="https://js.slvrbullet.com/pt.min.js"></script>
   </body>
 </html>

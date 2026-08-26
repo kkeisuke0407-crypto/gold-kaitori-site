@@ -3,6 +3,10 @@
 const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
 const sourceReviewUrl = 'https://hikakaku.com/estimate_form/watch';
 
+// SLVRbullet の広告リンク（計測URL）。ページ末尾の引き継ぎタグが gclid 等を引き継ぐ対象がこのURL。
+// ヒカカクの直リンクに戻すと成果が Google 広告へ連携されなくなる。
+const affiliateUrl = 'https://tr.slvrbullet.com/cl/w0000678724/47671/39865/6';
+
 const brands = [
   'ロレックス', 'オメガ', 'IWC', 'タグ・ホイヤー', 'ブライトリング', 'パネライ', 'ウブロ', 'セイコー',
   'オーデマ・ピゲ', 'G-SHOCK', 'パテック フィリップ', 'チュードル', 'ブレゲ', 'ジャガー・ルクルト',
@@ -57,6 +61,40 @@ const testimonials = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Serif+JP:wght@500;600;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/hikakaku-watch/site.css" />
+    <!-- 計測タグ（貴金属LP19ページと同じプロパティに相乗り）。GA4 → Clarity の順。 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+    </script>
+    <script is:inline>
+      (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+        t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wxnujpnscp");
+    </script>
+    <!-- 中間CV（MCV）＝CTAクリックの計測。GA4イベントとして送る。 -->
+    <script is:inline>
+      (function(){
+        var INTENT = "hikakaku_watch_top";
+        document.addEventListener("click", function(e){
+          var a = e.target && e.target.closest ? e.target.closest('a[href^="https://tr.slvrbullet.com/"]') : null;
+          if(!a) return;
+          var params = {
+            landing_intent: INTENT,
+            cta_label: (a.getAttribute("aria-label") || a.textContent || "").trim().slice(0, 60),
+            link_url: a.getAttribute("href"),
+            transport_type: "beacon"
+          };
+          if(window.dataLayer) window.dataLayer.push(Object.assign({ event: "hikakaku_watch_mcv" }, params));
+          if(typeof gtag === "function") gtag("event", "hikakaku_watch_mcv", params);
+          // ★Google広告のイベントスニペット（CV-B）が届いたらここに追加：
+          // if(typeof gtag === "function") gtag("event", "conversion", { send_to: "AW-18129603657/XXXXXXXX" });
+        }, true);
+      })();
+    </script>
+
   </head>
   <body>
     <main class="watch-lp">
@@ -72,7 +110,7 @@ const testimonials = [
             <div><img src="/hikakaku-watch/ai-hero-feature-3-v2.png" alt="" class="hero-feature-icon" /><b>概算金額が<br />わかる</b></div>
             <div><img src="/hikakaku-watch/ai-hero-feature-4-v2.png" alt="" class="hero-feature-icon" /><b>最大20社<br />比較</b></div>
           </div>
-          <a href="#photo-ai" class="primary-cta js-cta">写真を撮って査定する <em>›</em></a>
+          <a href={affiliateUrl} target="_blank" rel="sponsored noreferrer" class="primary-cta">写真を撮って査定する <em>›</em></a>
           <p class="free-note"><span>▣</span> 無料で利用できます</p>
           <p class="hero-image-note">※掲載の時計画像はイメージです。</p>
         </div>
@@ -162,14 +200,14 @@ const testimonials = [
             <p class="method-sub">写真を撮るだけで、ブランド候補とかんたんな概算金額を確認</p>
             <img class="method-art" src="/hikakaku-watch/ai-method-photo-v2.png" alt="カメラとスマートフォンで腕時計を撮影するイメージ" />
             <ul><li>写真をアップロード</li><li>ブランドを確認</li><li>状態・買取方法を選択</li><li>概算金額をチェック</li></ul>
-            <a href="#photo-ai" class="primary-cta js-cta">写真を撮って査定する <em>›</em></a>
+            <a href={affiliateUrl} target="_blank" rel="sponsored noreferrer" class="primary-cta">写真を撮って査定する <em>›</em></a>
           </article>
           <article class="method-card input-method">
             <h3>入力して査定</h3>
             <p class="method-sub">商品情報を入力して、最大20社へ一括査定</p>
             <img class="method-art" src="/hikakaku-watch/ai-method-input-v2.png" alt="パソコンでカテゴリ・商品名・状態を入力するイメージ" />
             <ul><li>カテゴリと商品名を入力</li><li>商品の状態を選択</li><li>自分のペースで進められる</li></ul>
-            <a href="#photo-ai" class="secondary-cta js-cta">入力して査定を始める <em>›</em></a>
+            <a href={affiliateUrl} target="_blank" rel="sponsored noreferrer" class="secondary-cta">入力して査定を始める <em>›</em></a>
           </article>
         </div>
         <p class="under-note">※画面・画像はイメージです。実際の画面とは一部異なる場合があります。</p>
@@ -199,5 +237,8 @@ const testimonials = [
         });
       });
     </script>
+    <!-- SLVRbullet パラメータ引き継ぎタグ。gclid/wbraid/gbraid を計測URLへ引き継ぐ。 -->
+    <!-- is:inline 必須。外すと Astro が type="module" でバンドルし、CORSヘッダの無い外部スクリプトの読み込みに失敗する。 -->
+    <script is:inline src="https://js.slvrbullet.com/pt.min.js"></script>
   </body>
 </html>
