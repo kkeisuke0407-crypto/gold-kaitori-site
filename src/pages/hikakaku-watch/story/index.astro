@@ -3,6 +3,10 @@
 // ヒカカクの直リンクに戻すと成果が Google 広告へ連携されなくなる。
 const affiliateUrl = 'https://tr.slvrbullet.com/cl/w0000678724/47671/39865/6';
 
+// 参考元（ヒカカク！公式サイト）。本記事で扱う型番の買取価格比較ページ。
+// ストーリー内の査定額はモデルストーリーであり、この参考元からの引用ではない。
+const sourceModelUrl = 'https://hikakaku.com/category/all-category/watch/items/3311449/';
+
 const faqItems = [
   {
     q: '査定したら必ず売らないとダメ？',
@@ -96,7 +100,7 @@ const faqItems = [
           <div class="price-cell"><small>C社</small><strong>205,000円</strong></div>
           <div class="price-cell price-cell--best"><small>D社</small><strong>228,000円</strong></div>
         </div>
-        <p class="story-note">※本ページは実体験をもとにしたモデルストーリーです。査定額は商品・状態・時期・買取業者によって異なり、実際の査定・売却額を保証するものではありません。※掲載の画像はイメージです。</p>
+        <p class="story-note">※本ページは実体験をもとにしたモデルストーリーです。査定額は商品・状態・時期・買取業者によって異なり、実際の査定・売却額を保証するものではありません。※掲載の画像はイメージです。<br />参考：ヒカカク！公式サイト「OMEGA スピードマスター デイト 3511.50 の買取価格を比較」 <a href={sourceModelUrl} target="_blank" rel="nofollow noreferrer">{sourceModelUrl}</a></p>
       </section>
 
       <section class="story-section" aria-labelledby="sell-intent-title">
