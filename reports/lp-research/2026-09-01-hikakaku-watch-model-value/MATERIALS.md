@@ -36,14 +36,15 @@
 | モデル | 代表型番 | 確認した公開例 | LPのモデルケース | 出典 |
 |---|---|---:|---:|---|
 | サブマリーナ | 14060M | 中古品・使用感あり 1,200,000円 / 1,400,000円（2026-04-24） | 1,200,000〜1,400,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/submariner-men/assessment_achievements/ |
-| デイトジャスト | 116234 ホワイト ローマ | 中古美品 950,000〜1,000,000円の掲載例を確認 | 850,000〜1,000,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/datejust-mens/assessment_achievements/ |
-| デイトナ | 116500LN ブラック | 中古品・使用感あり 3,700,000円（2026-04-04）/ 5,150,000円（2026-04-03） | 3,700,000〜5,150,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/daytona-men/assessment_achievements/ |
-| GMTマスターII | 116710LN | 中古品・使用感あり 1,600,000 / 1,950,000 / 2,100,000円（2026-04-12〜13） | 1,600,000〜2,100,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/ |
+| デイトジャスト | 116234 ホワイト ローマ | ヒカカク！公開査定例に加え、ブラリバの2026年8月公開参考相場（ホワイト文字盤 1,043,000円）を確認 | 960,000〜1,050,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/datejust-mens/assessment_achievements/ ／ https://brandrevalue.com/cat/watch/rolex/rolex-datejust/116234 |
+| デイトナ | 116500LN ブラック | ヒカカク！公開査定例に加え、2026年8月の黒文字盤公開参考相場（なんぼや 4,254,000円 / ブラリバ 4,380,000円）を確認。白文字盤の高値は採用しない | 4,050,000〜4,380,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/daytona-men/assessment_achievements/ ／ https://nanboya.com/tokei-kaitori/price-list/rolex/daytona/ref-116500ln/ ／ https://brandrevalue.com/cat/watch/rolex/rolex-daytona/116500ln |
+| GMTマスターII | 116710LN | ヒカカク！公開査定例に加え、なんぼやの2026年8月公開参考相場（1,757,000円）と中古買取実績（1,482,388〜1,820,000円）を確認 | 1,600,000〜1,820,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/ ／ https://nanboya.com/tokei-kaitori/price-list/rolex/gmt-master/ref-116710ln/ |
 | エクスプローラーI | 214270 | 中古美品 950,000〜1,200,000円の掲載例を確認 | 950,000〜1,200,000円 | https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/explorer-i-men/assessment_achievements/ |
 
 ## 数値の扱い
 
-- 公開ページには状態・時期の違いに加え、桁違いに見える外れ値もあるため、外れ値は採用しない。
+- デイトジャスト・デイトナ・GMTマスターIIは、ヒカカク！の公開査定例に加え、2026年8月時点の同型番・文字盤を確認できる公開買取相場を併用する。LP内の「参考」表記にもすべての根拠URLを掲載する。
+- 公開ページには状態・時期の違いに加え、桁違いに見える外れ値もあるため、外れ値は採用しない。特にデイトナ116500LNはブラック文字盤とホワイト文字盤を混在させない。
 - LPのA〜D社は実際の一括査定結果ではなく、公開査定例の範囲を参考に再構成したモデルケース。
 - 各ページのFV直下、価格表下、最終査定、フッターで「非保証」「変動要因」「モデルケース」を明示する。
 - 実際の市場相場を断定せず、訪問者自身の時計で比較査定する必要性へつなげる。

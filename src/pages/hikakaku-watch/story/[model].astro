@@ -89,7 +89,7 @@ const faqItems = [
           <p class="story-kicker">使わなくなった{story.shortName}。</p>
           <h1 id="story-title">その買取価格、<br /><span>1社だけで</span>決めていませんか。</h1>
           <p class="hero__lead">同じ型番でも、<br />査定額に<span>{formatMan(quoteGap)}の差</span>が出ることも。</p>
-          <p class="hero__tagline">{story.shortName} {story.reference}の公開査定例を参考にしたモデルストーリー</p>
+          <p class="hero__tagline">{story.shortName} {story.reference}の{story.referenceLabel}を参考にしたモデルストーリー</p>
         </div>
       </section>
 
@@ -103,12 +103,12 @@ const faqItems = [
             </div>
           ))}
         </div>
-        <p class="story-note">※本ページは複数の公開査定例を参考に再構成したモデルストーリーです。掲載額は実際の申込結果ではなく、査定・売却額を保証するものではありません。価格は状態・付属品・時期・業者によって変動します。<br />参考：<a href={story.sourceUrl} target="_blank" rel="nofollow noreferrer">{story.sourceLabel}</a>（2026年9月1日確認）</p>
+        <p class="story-note">※本ページは複数の{story.referenceLabel}を参考に再構成したモデルストーリーです。掲載額は実際の申込結果ではなく、査定・売却額を保証するものではありません。価格は状態・付属品・時期・業者によって変動します。<br />参考：{story.sourceReferences.map((source, index) => <><a href={source.url} target="_blank" rel="nofollow noreferrer">{source.label}</a>{index < story.sourceReferences.length - 1 ? ' ／ ' : ''}</>)}（2026年9月1日確認）</p>
       </section>
 
-      <aside class="model-answer" aria-label={`${story.shortName}の公開査定例`}>
+      <aside class="model-answer" aria-label={`${story.shortName}の${story.referenceLabel}`}>
         <p class="model-answer__eyebrow">まず知っておきたい参考情報</p>
-        <h2>{story.shortName} {story.reference}の公開査定例</h2>
+        <h2>{story.shortName} {story.reference}の{story.referenceLabel}</h2>
         <p class="model-answer__range">{story.observedRange}</p>
         <p>ただし、この範囲がそのままあなたの時計に当てはまるとは限りません。だからこそ、<strong>自分の時計の状態で複数社へ確認する</strong>ことが判断材料になります。</p>
         <a class="story-cta story-cta--compact" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分の{story.shortName}の査定額を比べる <span aria-hidden="true">›</span></a>
@@ -184,7 +184,7 @@ const faqItems = [
           </dl>
           <div class="difference"><span>最初と最高額の差</span><strong>{formatYen(quoteGap)}</strong></div>
         </div>
-        <p class="under-price">※公開査定例を参考にしたモデルケースであり、実際の査定・売却額を保証するものではありません。</p>
+        <p class="under-price">※{story.referenceLabel}を参考にしたモデルケースであり、実際の査定・売却額を保証するものではありません。</p>
       </section>
 
       <section class="story-section" aria-labelledby="reviews-title">

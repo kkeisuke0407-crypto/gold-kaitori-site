@@ -6,8 +6,8 @@ export type WatchModelStory = {
   searchLabel: string;
   heroImage: string;
   entryImage: string;
-  sourceUrl: string;
-  sourceLabel: string;
+  referenceLabel: string;
+  sourceReferences: Array<{ label: string; url: string }>;
   observedRange: string;
   quotes: [number, number, number, number];
   finalPrice: number;
@@ -26,8 +26,10 @@ export const watchModelStories: WatchModelStory[] = [
     searchLabel: 'サブマリーナの買取価格・買取相場',
     heroImage: '/hikakaku-watch-story/models/submariner/hero-v1.webp',
     entryImage: '/hikakaku-watch-story/models/submariner/entry-form-v1.webp',
-    sourceUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/submariner-men/assessment_achievements/',
-    sourceLabel: 'ヒカカク！「サブマリーナの査定実績・事例」',
+    referenceLabel: '公開査定例',
+    sourceReferences: [
+      { label: 'ヒカカク！「サブマリーナの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/submariner-men/assessment_achievements/' },
+    ],
     observedRange: '同一型番・中古品（使用感あり）の公開査定例 1,200,000〜1,400,000円',
     quotes: [1200000, 1280000, 1350000, 1400000],
     finalPrice: 1360000,
@@ -44,11 +46,14 @@ export const watchModelStories: WatchModelStory[] = [
     searchLabel: 'デイトジャストの買取価格・買取相場',
     heroImage: '/hikakaku-watch-story/models/datejust/hero-v1.webp',
     entryImage: '/hikakaku-watch-story/models/datejust/entry-form-v1.webp',
-    sourceUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/datejust-mens/assessment_achievements/',
-    sourceLabel: 'ヒカカク！「デイトジャストの査定実績・事例」',
-    observedRange: '同一型番・中古美品の公開査定例 950,000〜1,000,000円を確認',
-    quotes: [850000, 900000, 960000, 1000000],
-    finalPrice: 970000,
+    referenceLabel: '公開査定例・公開買取相場',
+    sourceReferences: [
+      { label: 'ヒカカク！「デイトジャストの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/datejust-mens/assessment_achievements/' },
+      { label: 'ブラリバ「デイトジャスト Ref.116234 買取価格相場」', url: 'https://brandrevalue.com/cat/watch/rolex/rolex-datejust/116234' },
+    ],
+    observedRange: '同一型番の公開査定例と、2026年8月の公開買取相場を参考にした 960,000〜1,050,000円のモデルケース',
+    quotes: [960000, 990000, 1020000, 1050000],
+    finalPrice: 1020000,
     conditionDetail: 'ベゼルとベルトに細かい傷あり',
     origin: '就職した頃に買い、仕事の日によく着けていた一本',
     unusedReason: '服装が変わってから着ける機会が少なくなっていました',
@@ -62,11 +67,15 @@ export const watchModelStories: WatchModelStory[] = [
     searchLabel: 'デイトナの買取価格・買取相場',
     heroImage: '/hikakaku-watch-story/models/daytona/hero-v1.webp',
     entryImage: '/hikakaku-watch-story/models/daytona/entry-form-v1.webp',
-    sourceUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/daytona-men/assessment_achievements/',
-    sourceLabel: 'ヒカカク！「デイトナの査定実績・事例」',
-    observedRange: '同一型番・中古品（使用感あり）の公開査定例 3,700,000〜5,150,000円',
-    quotes: [3700000, 4050000, 4500000, 5150000],
-    finalPrice: 5020000,
+    referenceLabel: '公開査定例・公開買取相場',
+    sourceReferences: [
+      { label: 'ヒカカク！「デイトナの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/daytona-men/assessment_achievements/' },
+      { label: 'なんぼや「デイトナ Ref.116500LN ブラック買取価格相場」', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/daytona/ref-116500ln/' },
+      { label: 'ブラリバ「デイトナ Ref.116500LN 買取価格相場」', url: 'https://brandrevalue.com/cat/watch/rolex/rolex-daytona/116500ln' },
+    ],
+    observedRange: '黒文字盤・中古品の公開査定例と、2026年8月の公開買取相場を参考にした 4,050,000〜4,380,000円のモデルケース',
+    quotes: [4050000, 4180000, 4260000, 4380000],
+    finalPrice: 4280000,
     conditionDetail: 'ベゼルとケースに細かい傷あり',
     origin: '何年も探して手に入れ、特別な日に着けていた一本',
     unusedReason: '傷を増やしたくない気持ちもあり、しまったままの時間が長くなっていました',
@@ -80,11 +89,14 @@ export const watchModelStories: WatchModelStory[] = [
     searchLabel: 'GMTマスターIIの買取価格・買取相場',
     heroImage: '/hikakaku-watch-story/models/gmt-master-ii/hero-v1.webp',
     entryImage: '/hikakaku-watch-story/models/gmt-master-ii/entry-form-v1.webp',
-    sourceUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/',
-    sourceLabel: 'ヒカカク！「GMTマスター IIの査定実績・事例」',
-    observedRange: '同一型番・中古品（使用感あり）の公開査定例 1,600,000〜2,100,000円',
-    quotes: [1600000, 1780000, 1950000, 2100000],
-    finalPrice: 2020000,
+    referenceLabel: '公開査定例・公開買取相場',
+    sourceReferences: [
+      { label: 'ヒカカク！「GMTマスター IIの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/' },
+      { label: 'なんぼや「GMTマスター Ref.116710LN 買取価格相場」', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/gmt-master/ref-116710ln/' },
+    ],
+    observedRange: '同一型番・中古品の公開査定例と、2026年8月の公開買取相場を参考にした 1,600,000〜1,820,000円のモデルケース',
+    quotes: [1600000, 1680000, 1750000, 1820000],
+    finalPrice: 1780000,
     conditionDetail: 'ベルトに細かい傷あり',
     origin: '出張が多かった頃に買い、旅先でも使っていた一本',
     unusedReason: '海外へ行く機会が減り、時計ケースに入れたままになっていました',
@@ -98,8 +110,10 @@ export const watchModelStories: WatchModelStory[] = [
     searchLabel: 'エクスプローラーIの買取価格・買取相場',
     heroImage: '/hikakaku-watch-story/models/explorer/hero-v1.webp',
     entryImage: '/hikakaku-watch-story/models/explorer/entry-form-v1.webp',
-    sourceUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/explorer-i-men/assessment_achievements/',
-    sourceLabel: 'ヒカカク！「エクスプローラー Iの査定実績・事例」',
+    referenceLabel: '公開査定例',
+    sourceReferences: [
+      { label: 'ヒカカク！「エクスプローラー Iの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/explorer-i-men/assessment_achievements/' },
+    ],
     observedRange: '同一型番・中古美品の公開査定例 950,000〜1,200,000円を確認',
     quotes: [950000, 1020000, 1120000, 1200000],
     finalPrice: 1160000,

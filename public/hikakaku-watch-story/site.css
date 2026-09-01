@@ -751,7 +751,7 @@ h3 { font-style: normal; }
 @media (max-width: 599px) {
   /* 人物イラストは全体が見えるように収める */
   .visual-card--person { height: 200px; background: var(--story-paper-deep); }
-  .visual-card--person img { object-fit: contain; object-position: 50% 50%; }
+  .visual-card--person img { object-fit: cover; object-position: 50% 30%; }
 }
 
 /* 冒頭の比較ストリップ：縦長ラベルをやめて上部の見出しバーに統一 */
