@@ -58,13 +58,9 @@ const faqItems = [
       </section>
 
       <section aria-label="査定額の比較">
-        <div class="price-strip">
-          <div class="price-strip__label">実際の<br />査定額<br />比較</div>
-          <div class="price-cell"><small>A社（最初の査定）</small><strong>155,000円</strong></div>
-          <div class="price-cell"><small>B社</small><strong>180,000円</strong></div>
-          <div class="price-cell"><small>C社</small><strong>205,000円</strong></div>
-          <div class="price-cell price-cell--best"><small>D社</small><strong>228,000円</strong></div>
-        </div>
+        <figure class="generated-story-visual generated-story-visual--wide">
+          <img src="/hikakaku-watch-story/visual-test/estimate-comparison-b.png" width="2048" height="896" alt="実際の査定額比較。A社155,000円、B社180,000円、C社205,000円、最高額のD社228,000円前後。" />
+        </figure>
         <p class="story-note">※本ページは既存の体験型LPに図解を追加した確認用ページです。査定額は個人の体験をもとにした例であり、実際の査定・売却額を保証するものではありません。</p>
       </section>
 
@@ -108,6 +104,17 @@ const faqItems = [
         </div>
       </section>
 
+      <section class="story-section" aria-labelledby="first-appraisal-title">
+        <h2 class="section-heading" id="first-appraisal-title">最初の査定「155,000円」</h2>
+        <div class="story-copy">
+          <p>申し込みをしてしばらくすると、最初の査定が届きました。最初に見たときは、「まあ、こんなものなのかな」という感じでした。</p>
+          <p>ただ、せっかく複数社へ査定をお願いしているので、ほかの結果も見てから決めることにしました。</p>
+        </div>
+        <figure class="generated-story-visual">
+          <img src="/hikakaku-watch-story/visual-test/first-appraisal-b.png" width="2048" height="1024" alt="最初の査定155,000円。A社の査定額155,000円と通知されたイメージ。" />
+        </figure>
+      </section>
+
       <section class="story-section" aria-labelledby="points-title">
         <h2 class="section-heading" id="points-title">査定時に見られやすいポイント</h2>
         <div class="story-copy"><p>モデル名だけではなく、時計の状態や付属品も見られます。自分の時計のどこを確認されるか、先に知っておくと入力しやすくなります。</p></div>
@@ -121,19 +128,17 @@ const faqItems = [
       <section class="story-section story-section--tint" aria-labelledby="change-title">
         <h2 class="section-heading" id="change-title">査定額がどんどん変わった</h2>
         <div class="story-copy"><p>少しすると、次の査定が届きました。B社は<span class="amount">180,000円</span>前後。C社は<span class="amount">205,000円</span>前後。そして、D社は<span class="amount">228,000円</span>前後。</p><p>同じ時計、同じ入力内容でも、<span class="mark mark--red">査定額にこれだけの差が出ました。</span></p></div>
-        <div class="result-reveal"><dl class="result-table" aria-label="届いた査定額"><div><dt>A社（最初の査定）</dt><dd>155,000円</dd></div><div><dt>B社</dt><dd>180,000円</dd></div><div><dt>C社</dt><dd>205,000円</dd></div><div><dt>D社（最高額）</dt><dd>最大 228,000円前後</dd></div></dl><div class="difference"><span>最大と最小の差額</span><strong>73,000円以上</strong></div></div>
+        <figure class="generated-story-visual">
+          <img src="/hikakaku-watch-story/visual-test/estimate-difference-b.png" width="2048" height="1024" alt="A社155,000円、B社180,000円、C社205,000円、D社最大228,000円前後。最大と最小の差額は73,000円以上。" />
+        </figure>
       </section>
 
       <section class="story-section" aria-labelledby="reviews-title">
         <h2 class="section-heading" id="reviews-title">「一番高い店に売ればいい」ではなかった</h2>
         <div class="story-copy"><p>ただし、最高額だけで即決するのではなく、<span class="mark">査定額だけではなく「売る相手」も</span>確認しました。</p></div>
-        <figure class="editorial-visual editorial-visual--seller" aria-labelledby="seller-caption">
-          <div class="seller-card"><b>A社</b><strong>査定額</strong><span class="seller-meter seller-meter--mid"></span><small>専門性・条件・対応</small></div>
-          <div class="seller-card seller-card--selected"><b>比較して選ぶ</b><strong>納得できる相手</strong><span class="seller-balance" aria-hidden="true">⚖</span><small>金額 + 口コミ + 条件</small></div>
-          <div class="seller-card"><b>D社</b><strong>最高額</strong><span class="seller-meter seller-meter--high"></span><small>専門性・条件・対応</small></div>
-          <figcaption id="seller-caption">最高額だけではなく、時計の買取実績、口コミ、手数料、入金スピード、キャンセル条件も見て判断するイメージです。</figcaption>
+        <figure class="generated-story-visual">
+          <img src="/hikakaku-watch-story/visual-test/seller-checkpoints-b.png" width="2048" height="1024" alt="売る相手を選ぶ際に確認する、口コミ・評判、時計の買取実績、査定後の対応、買取方法・手数料の4項目。" />
         </figure>
-        <div class="editorial-icon-row" aria-label="売却先を選ぶ基準"><span><i class="editorial-icon editorial-icon--balance">⚖</i>比較</span><span><i class="editorial-icon editorial-icon--shield">✓</i>安心感</span><span><i class="editorial-icon editorial-icon--check">✓</i>納得して選ぶ</span></div>
         <div class="story-copy"><p>金額が高くても、対応に不安があるところへ大事な時計を送るのはちょっと怖い。<strong class="neutral-strong">「価格だけではなく、売る相手も比較する」</strong>という使い方ができました。</p></div>
       </section>
 
@@ -144,12 +149,44 @@ const faqItems = [
         <div class="story-copy"><p>この段階でも、<strong class="neutral-strong">「安かったら売らなくていい」</strong>と思っていました。だから、無理に決める必要はありませんでした。</p></div>
       </section>
 
+      <section class="story-section" aria-labelledby="final-title">
+        <h2 class="section-heading" id="final-title">最終査定の結果</h2>
+        <div class="story-copy"><p>数日後、最終的な査定額の連絡が来ました。事前に出ていた一番高い査定額は、228,000円前後です。</p></div>
+        <figure class="generated-story-visual">
+          <img src="/hikakaku-watch-story/visual-test/final-appraisal-b.png" width="2048" height="1024" alt="事前査定は最大228,000円前後、現物確認後の査定額は218,000円。" />
+        </figure>
+        <div class="story-copy"><p>使用傷などを確認したため、事前査定より1万円下がりました。ただ、自分としては比較したうえで納得できる金額でした。</p></div>
+      </section>
+
+      <section class="story-section story-section--tint" aria-labelledby="what-if-title">
+        <h2 class="section-heading" id="what-if-title">もし最初の査定で売っていたら？</h2>
+        <div class="story-copy"><p>最初に届いた査定額は155,000円。今回実際に売却した金額は218,000円でした。</p></div>
+        <figure class="generated-story-visual">
+          <img src="/hikakaku-watch-story/visual-test/sale-difference-b.png" width="2048" height="1024" alt="最初の査定額155,000円と実際の売却額218,000円の差額は63,000円。" />
+        </figure>
+        <p class="under-price">※個人の体験にもとづく例であり、実際の査定・売却額を保証するものではありません。</p>
+      </section>
+
+      <section class="story-section" aria-labelledby="learned-title">
+        <h2 class="section-heading" id="learned-title">ヒカカク！を使って分かった3つのこと</h2>
+        <figure class="generated-story-visual generated-story-visual--portrait">
+          <img src="/hikakaku-watch-story/visual-test/three-learnings-b.png" width="1024" height="1536" alt="一店舗だけでは相場が分からない。同じ時計でも査定額は違う。売らなくても自分の時計の基準価格が分かる。" />
+        </figure>
+      </section>
+
+      <section class="story-section story-section--tint" aria-labelledby="for-you-title">
+        <h2 class="section-heading" id="for-you-title">こんな人なら、一度査定してみてもいいかもしれない</h2>
+        <figure class="generated-story-visual generated-story-visual--portrait">
+          <img src="/hikakaku-watch-story/visual-test/checklist-b.png" width="1024" height="1536" alt="使っていないブランド時計がある人や、売るかどうかを値段を見て決めたい人向けのチェックリスト。" />
+        </figure>
+      </section>
+
       <section class="story-section" aria-labelledby="flow-title">
         <h2 class="section-heading" id="flow-title">査定から判断までの流れ</h2>
         <div class="story-copy"><p>申し込んだ時点で売却が決まるわけではありません。複数社の結果と条件を確認してから、売るかどうかを決められます。</p></div>
-        <ol class="editorial-flow" aria-label="査定から売却判断までの4ステップ">
-          <li><span>1</span><b>情報を入力</b><small>型番・状態・付属品</small></li><li><span>2</span><b>査定額を確認</b><small>複数社の結果を見る</small></li><li><span>3</span><b>相手を確認</b><small>口コミ・条件も比較</small></li><li class="editorial-flow__decision"><span>4</span><b>売るか判断</b><small>売らない選択もできる</small></li>
-        </ol>
+        <figure class="generated-story-visual generated-story-visual--wide">
+          <img src="/hikakaku-watch-story/visual-test/appraisal-flow-b.png" width="2048" height="1024" alt="時計の情報を入力、査定額を比較、業者を選ぶ、納得できれば売却の4ステップ。売らない選択もできる。" />
+        </figure>
       </section>
 
       <section class="story-section story-section--dense story-section--tint" aria-labelledby="faq-title">

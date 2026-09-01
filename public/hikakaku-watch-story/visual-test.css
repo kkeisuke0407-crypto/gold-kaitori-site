@@ -1,5 +1,27 @@
 .watch-story--visual-test .story-disclosure span { color: var(--story-gold); }
 
+.generated-story-visual {
+  width: 100%;
+  margin: var(--story-space-lg) 0 0;
+  overflow: hidden;
+  border: 1px solid oklch(78% .03 80 / 60%);
+  border-radius: var(--story-radius-md);
+  background: var(--story-paper);
+  box-shadow: 0 7px 22px oklch(20% 0.04 250 / 10%);
+}
+
+.generated-story-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.generated-story-visual--portrait {
+  max-width: 550px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .editorial-visual {
   margin: var(--story-space-lg) 0 0;
   padding: var(--story-space-md);
