@@ -70,3 +70,124 @@
 @media (min-width: 600px) {
   .editorial-visual--market { grid-template-columns: minmax(0, 1fr) 86px minmax(0, 1fr); padding: var(--story-space-lg); }.market-card { min-height: 190px; }.market-bridge::before { right: -8px; left: -8px; }.point-watch { width: 200px; height: 268px; }.editorial-visual--points { min-height: 412px; }.point-label { width: 145px; }.point-label::after { width: 72px; }.point-label--reference::after,.point-label--dial::after,.point-label--bezel::after { right: -72px; }.point-label--bracelet::after,.point-label--movement::after,.point-label--accessory::after { left: -72px; }.point-label--reference { left: 28px; }.point-label--dial { left: 12px; }.point-label--bezel { left: 28px; }.point-label--bracelet { right: 24px; }.point-label--movement { right: 12px; }.point-label--accessory { right: 24px; }.seller-card { min-height: 180px; padding: 14px; }.editorial-flow li { min-height: 130px; padding: 14px 10px; }
 }
+
+/* ============================================================
+   図解の実体化にともなう追加（このテストページ専用）
+   site.css は本番 /story/ と共有しているため、上書きはすべて
+   .watch-story--visual-test 配下に閉じ込める。
+   ============================================================ */
+.watch-story--visual-test {
+  --story-marker: oklch(90% 0.135 96);
+  --icon-fill: var(--story-surface);
+  counter-reset: chapter;
+}
+
+/* 章番号：実際に時系列の体験談なので番号を振る根拠がある */
+.watch-story--visual-test .story-section:not(.story-section--dense) > .section-heading::before {
+  counter-increment: chapter;
+  content: counter(chapter, decimal-leading-zero);
+  display: block;
+  margin-bottom: 5px;
+  color: var(--story-gold);
+  font-family: var(--story-font-sans);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+/* 本文の可読性 */
+.watch-story--visual-test .story-copy { font-size: 16px; line-height: 1.9; }
+.watch-story--visual-test .story-copy p { margin-bottom: var(--story-space-md); }
+.watch-story--visual-test .story-copy strong { color: var(--story-red); font-weight: 900; }
+/* 赤字＝心情・主張、マーカー＝事実・固有名詞。役割を分けて拾い読みできるようにする */
+.watch-story--visual-test .story-copy .neutral-strong,
+.watch-story--visual-test .story-copy .mark {
+  color: var(--story-ink);
+  font-weight: 900;
+  background: linear-gradient(transparent 56%, var(--story-marker) 56%, var(--story-marker) 93%, transparent 93%);
+}
+.watch-story--visual-test .story-copy .amount { color: var(--story-red); font-weight: 900; font-variant-numeric: tabular-nums; }
+.watch-story--visual-test .faq summary { font-size: 15px; line-height: 1.55; }
+.watch-story--visual-test .faq p { font-size: 15px; line-height: 1.8; }
+.watch-story--visual-test .check-list li { padding-left: 22px; font-size: 14px; line-height: 1.6; }
+.watch-story--visual-test .steps-note { font-size: 13px; line-height: 1.7; }
+.watch-story--visual-test .story-note { font-size: 12px; line-height: 1.65; }
+.watch-story--visual-test .under-price { font-size: 13px; }
+.watch-story--visual-test .disclaimer { font-size: 12px; line-height: 1.75; }
+.watch-story--visual-test .closing__copy p { font-size: 16px; }
+.watch-story--visual-test .hero__lead { font-size: 15px; }
+
+/* 写真は元比率を維持（固定高だと最大4割トリミングされる） */
+.watch-story--visual-test .visual-card--flat { height: auto; aspect-ratio: 1 / 1; }
+.watch-story--visual-test .visual-card--person { height: auto; aspect-ratio: 2 / 3; }
+
+/* 4項目チェック（旧 seller-checkpoints-b.png / 1.8MB を置換） */
+.check-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: var(--story-space-lg) 0 0; }
+.check-grid article { display: grid; justify-items: center; gap: 8px; padding: 16px 8px; border: 1px solid var(--story-line); border-radius: var(--story-radius-sm); background: var(--story-surface); }
+.check-grid svg { width: 44px; height: 44px; color: var(--story-navy); }
+.check-grid p { margin: 0; color: var(--story-ink); font-size: 13px; font-weight: 800; line-height: 1.45; text-align: center; }
+@media (min-width: 600px) {
+  .check-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .check-grid svg { width: 52px; height: 52px; }
+  .check-grid p { font-size: 14px; }
+}
+
+/* 査定額グラフ（旧 estimate-comparison-b.png / 1.0MB を置換） */
+.quote-chart { margin: var(--story-space-md); padding: 20px 18px; border: 1px solid var(--story-line); border-radius: var(--story-radius-md); background: var(--story-surface); }
+.quote-chart__title { margin: 0 0 14px; color: var(--story-navy); font-family: var(--story-font-display); font-size: 16px; font-weight: 700; }
+.quote-chart__rows { display: grid; gap: 10px; }
+.qrow { display: grid; grid-template-columns: 42px minmax(0, 1fr); align-items: center; gap: 10px; }
+.qrow__k { color: var(--story-muted); font-size: 13px; font-weight: 800; }
+.qrow__bar { display: flex; align-items: center; justify-content: flex-end; width: var(--w); min-width: 124px; height: 34px; padding-right: 10px; border-radius: 5px; background: var(--story-blue-pale); }
+.qrow__bar b { color: var(--story-navy); font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.qrow__bar i { font-size: 11px; font-style: normal; font-weight: 700; }
+.qrow--best .qrow__bar { background: var(--story-gold); }
+.qrow--best .qrow__bar b { color: var(--story-surface); }
+.quote-chart__gap { display: flex; align-items: baseline; justify-content: center; gap: 8px; margin: 16px 0 0; padding: 10px; border-radius: var(--story-radius-sm); background: var(--story-red-pale); }
+.quote-chart__gap span { color: var(--story-red); font-size: 12px; font-weight: 800; }
+.quote-chart__gap strong { color: var(--story-red); font-size: 24px; font-weight: 900; font-variant-numeric: tabular-nums; }
+
+/* 3つのこと・ステップの番号 */
+.watch-story--visual-test .three-points p { grid-template-columns: 40px minmax(0, 1fr); align-items: center; }
+.tp-num { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--story-navy); color: var(--story-surface); font-family: var(--story-font-display); font-size: 15px; font-weight: 900; }
+.step__n { display: grid; place-items: center; width: 28px; height: 28px; margin: 0 auto 6px; border-radius: 50%; background: var(--story-navy); color: var(--story-surface); font-size: 13px; font-weight: 900; }
+@media (max-width: 599px) {
+  .watch-story--visual-test .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .watch-story--visual-test .step:not(:last-child)::after { display: none; }
+  .watch-story--visual-test .step b { font-size: 13px; }
+  .watch-story--visual-test .step span:last-child { font-size: 11.5px; }
+}
+
+/* 中間CTA */
+.watch-story--visual-test .story-section > .story-cta { margin-top: var(--story-space-lg); }
+
+/* 運営者フッター（他2ページと統一） */
+.site-footer { width: min(100%, 760px); margin: 0 auto; padding: var(--story-space-lg) var(--story-space-md); background: var(--story-navy-strong); color: var(--story-surface); font-size: 12px; line-height: 1.8; }
+.site-footer p { margin: 0; }
+.site-footer__name { margin-bottom: var(--story-space-xs); font-family: var(--story-font-display); font-size: 16px; font-weight: 900; }
+.site-footer__name b { display: inline-block; margin-left: var(--story-space-xs); padding: 1px 7px; border-radius: var(--story-radius-sm); background: var(--story-gold); color: var(--story-navy-strong); font-size: 11px; font-weight: 900; vertical-align: 2px; }
+
+/* 回り込みはPCのみ。375pxだと本文が186px＝1行10文字まで潰れる */
+@media (max-width: 599px) {
+  .watch-story--visual-test .with-visual--wrap .visual-card {
+    float: none;
+    width: min(100%, 264px);
+    margin: var(--story-space-md) auto;
+  }
+}
+
+/* 極小フォントの底上げ（10px前後が多数あった） */
+.watch-story--visual-test .story-disclosure { font-size: 12px; }
+.watch-story--visual-test .hero__tagline { font-size: 12px; }
+.watch-story--visual-test .visual-chip { font-size: 11.5px; }
+.watch-story--visual-test .market-card small,
+.watch-story--visual-test .market-card b { font-size: 12px; }
+.watch-story--visual-test .market-bridge { font-size: 10.5px; }
+.watch-story--visual-test .point-label { font-size: 11px; }
+.watch-story--visual-test figcaption { font-size: 12.5px; line-height: 1.65; }
+.watch-story--visual-test .step__n { font-size: 12px; }
+.watch-story--visual-test .qrow__bar i { font-size: 12px; }
+@media (max-width: 599px) {
+  .watch-story--visual-test .step span:last-child { font-size: 12px; }
+}
+.watch-story--visual-test .step .step__n { font-size: 13px; }

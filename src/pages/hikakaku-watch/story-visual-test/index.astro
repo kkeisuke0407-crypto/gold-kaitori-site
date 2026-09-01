@@ -45,6 +45,44 @@ const faqItems = [
   </head>
   <body>
     <main class="watch-story watch-story--visual-test">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+          <symbol id="ic-review" viewBox="0 0 48 48">
+            <path d="M27 11h11a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-1v4l-4.5-4H31" fill="none" stroke="currentColor" stroke-width="1.7" opacity=".4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9 12h20a4 4 0 0 1 4 4v11a4 4 0 0 1-4 4H19l-7 6v-6H9a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z" fill="var(--icon-fill)" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            <path d="M19 15.6l2.6 5.3 5.8.9-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.9z" fill="var(--story-gold)" stroke="var(--story-gold)" stroke-width="1.2" stroke-linejoin="round" />
+          </symbol>
+          <symbol id="ic-record" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.5 15.5V10a1.5 1.5 0 0 1 1.5-1.5h6A1.5 1.5 0 0 1 21.5 10v5.5" />
+              <path d="M12.5 32.5V38a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5v-5.5" />
+              <circle cx="17" cy="24" r="9.5" />
+              <path d="M17 24v-4.6M17 24l3.6 2.1" />
+            </g>
+            <path d="M29 40h16" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".38" stroke-linecap="round" />
+            <g stroke="var(--story-gold)" stroke-width="2.6" stroke-linecap="round" fill="none">
+              <path d="M31.5 36.5v-5" /><path d="M37.5 36.5v-10" /><path d="M43.5 36.5v-15" />
+            </g>
+          </symbol>
+          <symbol id="ic-support" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="16.5" cy="17.5" r="6" />
+              <path d="M6 40c0-5.8 4.7-10.5 10.5-10.5S27 34.2 27 40" />
+            </g>
+            <path d="M30 8h11a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3h-4.5L32 27v-4.5h-2a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" fill="var(--icon-fill)" stroke="var(--story-gold)" stroke-width="2" stroke-linejoin="round" />
+            <path d="M31.5 13.5h8M31.5 17.5h5" fill="none" stroke="var(--story-gold)" stroke-width="1.8" stroke-linecap="round" />
+          </symbol>
+          <symbol id="ic-fee" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="16" width="26" height="22" rx="2.5" />
+              <path d="M5 23.5h26" /><path d="M18 16v7.5" />
+            </g>
+            <circle cx="36" cy="31" r="9.5" fill="var(--icon-fill)" stroke="var(--story-gold)" stroke-width="2" />
+            <path d="M32.4 26.2l3.6 4.1 3.6-4.1M32.4 31.8h7.2M32.4 34.6h7.2M36 30.3V37" fill="none" stroke="var(--story-gold)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+          </symbol>
+        </defs>
+      </svg>
+
       <div class="story-disclosure">当サイトは提携広告を含む比較・案内メディアです <span>｜ 図解追加テスト</span></div>
 
       <section class="hero" aria-labelledby="story-title">
@@ -58,9 +96,16 @@ const faqItems = [
       </section>
 
       <section aria-label="査定額の比較">
-        <figure class="generated-story-visual generated-story-visual--wide">
-          <img src="/hikakaku-watch-story/visual-test/estimate-comparison-b.png" width="2048" height="896" alt="実際の査定額比較。A社155,000円、B社180,000円、C社205,000円、最高額のD社228,000円前後。" />
-        </figure>
+        <div class="quote-chart" aria-label="実際の査定額比較">
+          <p class="quote-chart__title">実際の査定額比較</p>
+          <div class="quote-chart__rows">
+            <div class="qrow"><span class="qrow__k">A社</span><div class="qrow__bar" style="--w:68%"><b>155,000円</b></div></div>
+            <div class="qrow"><span class="qrow__k">B社</span><div class="qrow__bar" style="--w:79%"><b>180,000<i>円前後</i></b></div></div>
+            <div class="qrow"><span class="qrow__k">C社</span><div class="qrow__bar" style="--w:90%"><b>205,000<i>円前後</i></b></div></div>
+            <div class="qrow qrow--best"><span class="qrow__k">D社</span><div class="qrow__bar" style="--w:100%"><b>228,000<i>円前後</i></b></div></div>
+          </div>
+          <p class="quote-chart__gap"><span>最大と最小の差</span><strong>73,000円</strong></p>
+        </div>
         <p class="story-note">※本ページは既存の体験型LPに図解を追加した確認用ページです。査定額は個人の体験をもとにした例であり、実際の査定・売却額を保証するものではありません。</p>
       </section>
 
@@ -69,7 +114,7 @@ const faqItems = [
         <div class="story-copy with-visual--wrap">
           <p>きっかけは、クローゼットの整理でした。</p>
           <p>奥から出てきたのは、昔買ったオメガの腕時計。<strong class="neutral-strong">OMEGA スピードマスター デイト 3511.50。</strong>20代の頃によく使っていた時計です。</p>
-          <figure class="visual-card visual-card--flat"><img src="/hikakaku-watch-story/assets/watch-accessories.webp" width="960" height="960" alt="腕時計と箱、付属品のイメージ" /></figure>
+          <figure class="visual-card visual-card--flat"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/watch-accessories.webp" width="960" height="960" alt="腕時計と箱、付属品のイメージ" /></figure>
           <p>最近はスマートウォッチばかり。気づけば、<span class="mark">ほとんど出番がなくなっていました</span>。</p>
           <p>ただ、<strong>「これ、今いくらくらいになるんだろう？」</strong>と、ふと思いました。</p>
         </div>
@@ -79,7 +124,7 @@ const faqItems = [
         <h2 class="section-heading" id="nearby-title">最初は近所の買取店へ行こうとした</h2>
         <div class="story-copy with-visual--wrap">
           <p>スマホで、<strong class="neutral-strong">「オメガ 買取」</strong>と検索しました。すると、近所にも買取店がたくさん出てきます。</p>
-          <figure class="visual-card visual-card--person"><img src="/hikakaku-watch-story/assets/story-person.webp" width="640" height="960" alt="時計を売る店を考える男性のイラスト" /></figure>
+          <figure class="visual-card visual-card--person"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/story-person.webp" width="640" height="960" alt="時計を売る店を考える男性のイラスト" /></figure>
           <p>仮に近所の店へ持っていって、「15万円ですね」と言われたとしても、<strong>その15万円が高いのか、安いのか、自分には判断できない。</strong></p>
         </div>
       </section>
@@ -90,7 +135,7 @@ const faqItems = [
         <figure class="editorial-visual editorial-visual--market" aria-labelledby="market-visual-caption">
           <div class="market-card market-card--search"><span class="visual-chip">ネット上の相場</span><div class="market-line" aria-hidden="true"></div><small>同一モデルの参考レンジ</small></div>
           <div class="market-bridge" aria-hidden="true"><span>型番</span><span>状態</span><span>付属品</span><span>業者</span></div>
-          <div class="market-card market-card--watch"><img src="/hikakaku-watch-story/assets/hero-chronograph.webp" width="1080" height="1620" alt="" /><span class="visual-chip">自分の時計</span><b>実物を見て<br />査定額を確認</b></div>
+          <div class="market-card market-card--watch"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/hero-chronograph.webp" width="1080" height="1620" alt="" /><span class="visual-chip">自分の時計</span><b>実物を見て<br />査定額を確認</b></div>
           <figcaption id="market-visual-caption">相場情報は入口。自分の時計の金額は、条件を伝えて初めて比較できます。</figcaption>
         </figure>
       </section>
@@ -99,7 +144,7 @@ const faqItems = [
         <h2 class="section-heading" id="entry-title">実際に入力したもの</h2>
         <p class="section-lead">僕が入力した内容はこちらです。</p>
         <div class="form-visual">
-          <figure class="form-visual__generated"><img src="/hikakaku-watch-story/assets/entry-form-with-copy-v3.webp" width="1024" height="1536" alt="ブランド、モデル、型番、状態、動作、付属品を入力した画面のイメージ" /></figure>
+          <figure class="form-visual__generated"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/entry-form-with-copy-v3.webp" width="1024" height="1536" alt="ブランド、モデル、型番、状態、動作、付属品を入力した画面のイメージ" /></figure>
           <div class="story-copy"><p>型番は時計本体と保証書を見ながら確認。状態や付属品も、分かる範囲で正直に入力しました。</p><p>写真は正面、裏側、ベルト、箱、保証書、余りコマをスマホで撮影しました。</p></div>
         </div>
       </section>
@@ -110,9 +155,7 @@ const faqItems = [
           <p>申し込みをしてしばらくすると、最初の査定が届きました。最初に見たときは、「まあ、こんなものなのかな」という感じでした。</p>
           <p>ただ、せっかく複数社へ査定をお願いしているので、ほかの結果も見てから決めることにしました。</p>
         </div>
-        <figure class="generated-story-visual">
-          <img src="/hikakaku-watch-story/visual-test/first-appraisal-b.png" width="2048" height="1024" alt="最初の査定155,000円。A社の査定額155,000円と通知されたイメージ。" />
-        </figure>
+        <div class="appraisal-card"><span>A社の査定額</span><strong>155,000円</strong></div>
       </section>
 
       <section class="story-section" aria-labelledby="points-title">
@@ -120,7 +163,7 @@ const faqItems = [
         <div class="story-copy"><p>モデル名だけではなく、時計の状態や付属品も見られます。自分の時計のどこを確認されるか、先に知っておくと入力しやすくなります。</p></div>
         <figure class="editorial-visual editorial-visual--points" aria-labelledby="points-caption">
           <div class="point-label point-label--reference">型番</div><div class="point-label point-label--dial">文字盤</div><div class="point-label point-label--bezel">ベゼル</div><div class="point-label point-label--bracelet">ケース・ブレス</div><div class="point-label point-label--movement">動作</div><div class="point-label point-label--accessory">箱・保証書・余りコマ</div>
-          <div class="point-watch"><img src="/hikakaku-watch-story/assets/hero-chronograph.webp" width="1080" height="1620" alt="査定時に確認する箇所を示したクロノグラフ腕時計のイメージ" /></div>
+          <div class="point-watch"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/hero-chronograph.webp" width="1080" height="1620" alt="査定時に確認する箇所を示したクロノグラフ腕時計のイメージ" /></div>
           <figcaption id="points-caption">モデル別LPでは、型番・文字盤などの確認項目を差し替えられる構造です。</figcaption>
         </figure>
       </section>
@@ -128,65 +171,92 @@ const faqItems = [
       <section class="story-section story-section--tint" aria-labelledby="change-title">
         <h2 class="section-heading" id="change-title">査定額がどんどん変わった</h2>
         <div class="story-copy"><p>少しすると、次の査定が届きました。B社は<span class="amount">180,000円</span>前後。C社は<span class="amount">205,000円</span>前後。そして、D社は<span class="amount">228,000円</span>前後。</p><p>同じ時計、同じ入力内容でも、<span class="mark mark--red">査定額にこれだけの差が出ました。</span></p></div>
-        <figure class="generated-story-visual">
-          <img src="/hikakaku-watch-story/visual-test/estimate-difference-b.png" width="2048" height="1024" alt="A社155,000円、B社180,000円、C社205,000円、D社最大228,000円前後。最大と最小の差額は73,000円以上。" />
-        </figure>
+        <div class="result-reveal">
+          <dl class="result-table" aria-label="届いた査定額">
+            <div><dt>A社（最初の査定）</dt><dd>155,000円</dd></div>
+            <div><dt>B社</dt><dd>180,000円前後</dd></div>
+            <div><dt>C社</dt><dd>205,000円前後</dd></div>
+            <div><dt>D社（最高額）</dt><dd>228,000円前後</dd></div>
+          </dl>
+          <div class="difference"><span>最大と最小の差額</span><strong>73,000円</strong></div>
+        </div>
+        <a class="story-cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分の時計はいくらか調べてみる <span aria-hidden="true">›</span></a>
       </section>
 
       <section class="story-section" aria-labelledby="reviews-title">
         <h2 class="section-heading" id="reviews-title">「一番高い店に売ればいい」ではなかった</h2>
         <div class="story-copy"><p>ただし、最高額だけで即決するのではなく、<span class="mark">査定額だけではなく「売る相手」も</span>確認しました。</p></div>
-        <figure class="generated-story-visual">
-          <img src="/hikakaku-watch-story/visual-test/seller-checkpoints-b.png" width="2048" height="1024" alt="売る相手を選ぶ際に確認する、口コミ・評判、時計の買取実績、査定後の対応、買取方法・手数料の4項目。" />
-        </figure>
+        <div class="check-grid" aria-label="売る相手を選ぶときに確認したこと">
+          <article><svg aria-hidden="true"><use href="#ic-review" /></svg><p>口コミ・評判</p></article>
+          <article><svg aria-hidden="true"><use href="#ic-record" /></svg><p>時計の買取実績</p></article>
+          <article><svg aria-hidden="true"><use href="#ic-support" /></svg><p>査定後の対応</p></article>
+          <article><svg aria-hidden="true"><use href="#ic-fee" /></svg><p>買取方法・手数料</p></article>
+        </div>
         <div class="story-copy"><p>金額が高くても、対応に不安があるところへ大事な時計を送るのはちょっと怖い。<strong class="neutral-strong">「価格だけではなく、売る相手も比較する」</strong>という使い方ができました。</p></div>
       </section>
 
       <section class="story-section story-section--tint" aria-labelledby="message-title">
         <h2 class="section-heading" id="message-title">実際に業者とやり取りしてみた</h2>
         <div class="story-copy"><p>最終的に、査定額が一番高かったD社に、時計の状態についてもう少し詳しく伝えてみました。</p></div>
-        <figure class="conversation-visual"><img src="/hikakaku-watch-story/assets/dealer-conversation-with-copy-v3.webp" width="1536" height="1024" alt="時計の傷、箱・保証書・余りコマ、オーバーホール状況を伝え、現物確認後の正式査定を確認するやり取りのイメージ" /></figure>
+        <figure class="conversation-visual"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/dealer-conversation-with-copy-v3.webp" width="1536" height="1024" alt="時計の傷、箱・保証書・余りコマ、オーバーホール状況を伝え、現物確認後の正式査定を確認するやり取りのイメージ" /></figure>
         <div class="story-copy"><p>この段階でも、<strong class="neutral-strong">「安かったら売らなくていい」</strong>と思っていました。だから、無理に決める必要はありませんでした。</p></div>
       </section>
 
       <section class="story-section" aria-labelledby="final-title">
         <h2 class="section-heading" id="final-title">最終査定の結果</h2>
         <div class="story-copy"><p>数日後、最終的な査定額の連絡が来ました。事前に出ていた一番高い査定額は、228,000円前後です。</p></div>
-        <figure class="generated-story-visual">
-          <img src="/hikakaku-watch-story/visual-test/final-appraisal-b.png" width="2048" height="1024" alt="事前査定は最大228,000円前後、現物確認後の査定額は218,000円。" />
-        </figure>
+        <div class="final-price" aria-label="事前査定と現物確認後の査定額">
+          <div class="final-price__box"><b>事前査定</b><strong>228,000円前後</strong></div>
+          <div class="price-arrow" aria-hidden="true">›</div>
+          <div class="final-price__box final-price__box--confirmed"><b>現物確認後</b><strong>218,000円</strong></div>
+        </div>
         <div class="story-copy"><p>使用傷などを確認したため、事前査定より1万円下がりました。ただ、自分としては比較したうえで納得できる金額でした。</p></div>
       </section>
 
       <section class="story-section story-section--tint" aria-labelledby="what-if-title">
         <h2 class="section-heading" id="what-if-title">もし最初の査定で売っていたら？</h2>
         <div class="story-copy"><p>最初に届いた査定額は155,000円。今回実際に売却した金額は218,000円でした。</p></div>
-        <figure class="generated-story-visual">
-          <img src="/hikakaku-watch-story/visual-test/sale-difference-b.png" width="2048" height="1024" alt="最初の査定額155,000円と実際の売却額218,000円の差額は63,000円。" />
-        </figure>
+        <div class="compare-price">
+          <div class="compare-price__box"><span>最初の査定額</span><strong>155,000円</strong></div>
+          <div class="compare-price__arrow" aria-hidden="true">vs</div>
+          <div class="compare-price__box compare-price__box--red"><span>実際の売却額</span><strong>218,000円</strong></div>
+        </div>
+        <p class="compare-difference"><small>差額</small> 63,000円</p>
+        <a class="story-cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">売る前に査定額を比べてみる <span aria-hidden="true">›</span></a>
         <p class="under-price">※個人の体験にもとづく例であり、実際の査定・売却額を保証するものではありません。</p>
       </section>
 
       <section class="story-section" aria-labelledby="learned-title">
         <h2 class="section-heading" id="learned-title">ヒカカク！を使って分かった3つのこと</h2>
-        <figure class="generated-story-visual generated-story-visual--portrait">
-          <img src="/hikakaku-watch-story/visual-test/three-learnings-b.png" width="1024" height="1536" alt="一店舗だけでは相場が分からない。同じ時計でも査定額は違う。売らなくても自分の時計の基準価格が分かる。" />
-        </figure>
+        <div class="three-points">
+          <p><span class="tp-num">1</span><span>一店舗だけでは相場が分からない</span></p>
+          <p><span class="tp-num">2</span><span>同じ時計でも査定額は違う</span></p>
+          <p><span class="tp-num">3</span><span>売らなくても「自分の時計の基準価格」が分かる</span></p>
+        </div>
       </section>
 
       <section class="story-section story-section--tint" aria-labelledby="for-you-title">
         <h2 class="section-heading" id="for-you-title">こんな人なら、一度査定してみてもいいかもしれない</h2>
-        <figure class="generated-story-visual generated-story-visual--portrait">
-          <img src="/hikakaku-watch-story/visual-test/checklist-b.png" width="1024" height="1536" alt="使っていないブランド時計がある人や、売るかどうかを値段を見て決めたい人向けのチェックリスト。" />
-        </figure>
+        <ul class="check-list">
+          <li>昔買ったけど最近ほとんど使っていない</li>
+          <li>売るかどうかは値段を見て決めたい</li>
+          <li>スマートウォッチに変えてから出番がない</li>
+          <li>一店舗ずつ買取店を回るのは面倒</li>
+          <li>ロレックス・オメガなどのブランド時計を持っている</li>
+          <li>今の査定額だけ一度知りたい</li>
+        </ul>
       </section>
 
       <section class="story-section" aria-labelledby="flow-title">
         <h2 class="section-heading" id="flow-title">査定から判断までの流れ</h2>
         <div class="story-copy"><p>申し込んだ時点で売却が決まるわけではありません。複数社の結果と条件を確認してから、売るかどうかを決められます。</p></div>
-        <figure class="generated-story-visual generated-story-visual--wide">
-          <img src="/hikakaku-watch-story/visual-test/appraisal-flow-b.png" width="2048" height="1024" alt="時計の情報を入力、査定額を比較、業者を選ぶ、納得できれば売却の4ステップ。売らない選択もできる。" />
-        </figure>
+        <div class="steps" aria-label="査定から売却までの流れ">
+          <div class="step"><span class="step__n">1</span><b>時計の情報を入力</b><span>まずは今の状態を伝える</span></div>
+          <div class="step"><span class="step__n">2</span><b>査定額を比べる</b><span>最大20社からの結果を確認</span></div>
+          <div class="step"><span class="step__n">3</span><b>業者を選ぶ</b><span>口コミ・条件も見て判断</span></div>
+          <div class="step"><span class="step__n">4</span><b>納得できれば売却</b><span>売らない選択もできる</span></div>
+        </div>
+        <p class="steps-note">最初から売ると決めなくても大丈夫。まずは、自分の時計はいくらになるのかを確認するところから始められます。</p>
       </section>
 
       <section class="story-section story-section--dense story-section--tint" aria-labelledby="faq-title">
@@ -200,6 +270,11 @@ const faqItems = [
       </section>
       <p class="disclaimer">※本ページは、既存ストーリーLPへ図解を追加した確認用ページです。査定額は商品・状態・時期・買取業者等により異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
     </main>
+
+    <footer class="site-footer">
+      <p class="site-footer__name">時計査定ナビ <b>PR</b></p>
+      <p>当サイトはアフィリエイトプログラムを利用した第三者メディアです。掲載内容は株式会社じげん（ZIGExN Co., Ltd.）の公式サイト掲載情報をもとに作成しています。実際の条件は各社公式サイトでご確認ください。</p>
+    </footer>
     <script is:inline src="https://js.slvrbullet.com/pt.min.js"></script>
   </body>
 </html>
