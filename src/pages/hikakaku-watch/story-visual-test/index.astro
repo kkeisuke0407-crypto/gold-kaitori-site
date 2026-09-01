@@ -128,19 +128,17 @@ const faqItems = [
           <h1 id="story-title">近所の店にそのまま<br />売らなくて、<span>本当によかった。</span></h1>
           <p class="hero__lead">同じ時計なのに、<br />査定額に<span>7万円以上の差</span>が出ました。</p>
           <p class="hero__tagline">35歳の僕が「ヒカカク！」を実際に使ってみた話</p>
+          <a class="story-cta story-cta--hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">まずは査定額だけ調べてみる <span aria-hidden="true">›</span></a>
         </div>
       </section>
 
       <section aria-label="査定額の比較">
-        <div class="quote-chart" aria-label="実際の査定額比較">
-          <p class="quote-chart__title">実際の査定額比較</p>
-          <div class="quote-chart__rows">
-            <div class="qrow"><span class="qrow__k">A社</span><div class="qrow__bar" style="--w:68%"><b>155,000円</b></div></div>
-            <div class="qrow"><span class="qrow__k">B社</span><div class="qrow__bar" style="--w:79%"><b>180,000<i>円前後</i></b></div></div>
-            <div class="qrow"><span class="qrow__k">C社</span><div class="qrow__bar" style="--w:90%"><b>205,000<i>円前後</i></b></div></div>
-            <div class="qrow qrow--best"><span class="qrow__k">D社</span><div class="qrow__bar" style="--w:100%"><b>228,000<i>円前後</i></b></div></div>
-          </div>
-          <p class="quote-chart__gap"><span>最大と最小の差</span><strong>73,000円</strong></p>
+        <div class="price-strip">
+          <div class="price-strip__label">実際の<br />査定額<br />比較</div>
+          <div class="price-cell"><small>A社（最初の査定）</small><strong>155,000円</strong></div>
+          <div class="price-cell"><small>B社</small><strong>180,000円</strong></div>
+          <div class="price-cell"><small>C社</small><strong>205,000円</strong></div>
+          <div class="price-cell price-cell--best"><small>D社</small><strong>228,000円</strong></div>
         </div>
         <p class="story-note">※本ページは筆者の実体験をもとにしています。査定額は商品・状態・時期・買取業者によって異なり、実際の査定・売却額を保証するものではありません。※掲載の画像はイメージです。<br />参考：ヒカカク！公式サイト「OMEGA スピードマスター デイト 3511.50 の買取価格を比較」 <a href={sourceModelUrl} target="_blank" rel="nofollow noreferrer">{sourceModelUrl}</a></p>
       </section>

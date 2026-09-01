@@ -74,56 +74,47 @@
 }
 .watch-story--visual-test .process-proof p { font-size: 13px; line-height: 1.45; }
 
-/* --- 査定額グラフ -------------------------------------------
-   同じ数字が本文・ストリップ・表の3箇所に散っていて差が
-   伝わらなかったため、1枚の図に集約する。 */
-.quote-chart {
-  margin: var(--story-space-md);
-  padding: 20px 18px;
-  border: 1px solid var(--story-line);
-  border-radius: var(--story-radius-md);
-  background: var(--story-surface);
-}
-.quote-chart__title {
-  margin: 0 0 14px;
-  color: var(--story-navy);
-  font-family: var(--story-font-display);
-  font-size: 16px;
-  font-weight: 700;
-}
-.quote-chart__rows { display: grid; gap: 10px; }
-.qrow { display: grid; grid-template-columns: 42px minmax(0, 1fr); align-items: center; gap: 10px; }
-.qrow__k { color: var(--story-muted); font-size: 13px; font-weight: 800; }
-.qrow__bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: var(--w);
-  min-width: 128px;
-  height: 34px;
-  padding-right: 10px;
-  border-radius: 5px;
-  background: var(--story-blue-pale);
-}
-.qrow__bar b { color: var(--story-navy); font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
-.qrow__bar i { font-size: 12px; font-style: normal; font-weight: 700; }
-.qrow--best .qrow__bar { background: var(--story-gold); }
-.qrow--best .qrow__bar b { color: var(--story-surface); }
-.quote-chart__gap {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 8px;
-  margin: 16px 0 0;
-  padding: 10px;
-  border-radius: var(--story-radius-sm);
-  background: var(--story-red-pale);
-}
-.quote-chart__gap span { color: var(--story-red); font-size: 12px; font-weight: 800; }
-.quote-chart__gap strong { color: var(--story-red); font-size: 24px; font-weight: 900; font-variant-numeric: tabular-nums; }
 
-/* --- 中間CTA ------------------------------------------------ */
+/* --- CTA ----------------------------------------------------- */
 .watch-story--visual-test .story-section > .story-cta { margin-top: var(--story-space-lg); }
+
+/* FV内のCTAはヒーローの余白を圧迫しないよう一回り小さく */
+.watch-story--visual-test .story-cta--hero {
+  width: min(100%, 320px);
+  min-height: 48px;
+  margin-top: var(--story-space-md);
+  font-size: 14px;
+}
+.watch-story--visual-test .story-cta--hero span { font-size: 19px; }
+
+/* 光沢が横切るアニメーション。擬似要素は site.css で未使用なので衝突しない */
+.watch-story--visual-test .story-cta { position: relative; overflow: hidden; }
+.watch-story--visual-test .story-cta::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -85%;
+  width: 46%;
+  height: 200%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgb(255 255 255 / 14%) 34%,
+    rgb(255 255 255 / 58%) 50%,
+    rgb(255 255 255 / 14%) 66%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: cta-shine 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes cta-shine {
+  0%, 58% { left: -85%; }
+  100% { left: 160%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .watch-story--visual-test .story-cta::after { animation: none; opacity: 0; }
+}
 
 /* --- 運営者フッター（他2ページと統一） ---------------------- */
 .site-footer {
