@@ -1,0 +1,68 @@
+:root {
+  --doc-color-paper: oklch(98% 0.012 82);
+  --doc-color-paper-deep: oklch(94% 0.021 78);
+  --doc-color-surface: oklch(99% 0.007 82);
+  --doc-color-surface-cool: oklch(96% 0.018 255);
+  --doc-color-ink: oklch(19% 0.054 258);
+  --doc-color-ink-soft: oklch(35% 0.035 258);
+  --doc-color-navy: oklch(24% 0.086 258);
+  --doc-color-navy-deep: oklch(17% 0.064 260);
+  --doc-color-navy-light: oklch(43% 0.09 255);
+  --doc-color-red: oklch(54% 0.215 29);
+  --doc-color-red-deep: oklch(45% 0.19 28);
+  --doc-color-red-pale: oklch(95% 0.03 27);
+  --doc-color-gold: oklch(72% 0.13 76);
+  --doc-color-gold-deep: oklch(56% 0.12 73);
+  --doc-color-gold-pale: oklch(94% 0.036 82);
+  --doc-color-rule: oklch(81% 0.026 80);
+  --doc-color-rule-strong: oklch(63% 0.035 258);
+  --doc-color-muted: oklch(48% 0.024 258);
+  --doc-color-focus: oklch(61% 0.18 52);
+  --doc-color-accent-ink: oklch(98% 0.012 82);
+  --doc-color-shadow: oklch(18% 0.035 258 / 14%);
+  --doc-color-shadow-soft: oklch(18% 0.035 258 / 7%);
+
+  --doc-font-display: "Cormorant Garamond", "Noto Serif JP", "Yu Mincho", serif;
+  --doc-font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  --doc-font-numeric: var(--doc-font-display);
+
+  --doc-space-3xs: 0.125rem;
+  --doc-space-2xs: 0.25rem;
+  --doc-space-xs: 0.5rem;
+  --doc-space-sm: 0.75rem;
+  --doc-space-md: 1rem;
+  --doc-space-lg: 1.5rem;
+  --doc-space-xl: 2.5rem;
+  --doc-space-2xl: 4rem;
+  --doc-space-3xl: 6rem;
+  --doc-space-4xl: 9rem;
+
+  --doc-text-xs: 0.75rem;
+  --doc-text-sm: 0.875rem;
+  --doc-text-base: 1rem;
+  --doc-text-md: 1.25rem;
+  --doc-text-lg: 1.5625rem;
+  --doc-text-xl: 1.953rem;
+  --doc-text-2xl: 2.441rem;
+  --doc-text-3xl: 3.052rem;
+  --doc-text-display: clamp(2.7rem, 7vw, 5.25rem);
+  --doc-text-stat: clamp(4.8rem, 19vw, 10rem);
+
+  --doc-radius-sm: 0.25rem;
+  --doc-radius-md: 0.5rem;
+  --doc-radius-lg: 1rem;
+  --doc-radius-circle: 50%;
+  --doc-rule-hair: 1px;
+  --doc-rule-double: 3px;
+
+  --doc-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --doc-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --doc-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --doc-dur-micro: 120ms;
+  --doc-dur-short: 240ms;
+  --doc-dur-long: 480ms;
+
+  --doc-z-base: 1;
+  --doc-z-raised: 10;
+  --doc-z-sticky: 200;
+}

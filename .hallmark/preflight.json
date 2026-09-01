@@ -1,0 +1,9 @@
+{
+  "scanned_at": "2026-09-01",
+  "framework": "Astro 5",
+  "font_stack": ["Noto Sans JP", "Noto Serif JP"],
+  "palette": "Existing OKLCH story tokens: warm paper, navy ink, red accent",
+  "motion": "motion-cut; no external motion library",
+  "spacing": "Existing 4px-based story scale",
+  "preserve": ["Astro routes", "tracking contract", "affiliate URL", "existing story pages", "existing generated assets"]
+}
