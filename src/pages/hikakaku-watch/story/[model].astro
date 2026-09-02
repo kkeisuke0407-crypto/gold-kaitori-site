@@ -37,6 +37,7 @@ const faqItems = [
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/hikakaku-watch-story/site.css" />
     <link rel="stylesheet" href="/hikakaku-watch-story/visual-test.css" />
+    <link rel="stylesheet" href="/hikakaku-watch-story/model-visual.css" />
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -112,7 +113,7 @@ const faqItems = [
         <p class="story-note">※本ページは複数の{story.referenceLabel}を参考に再構成したモデルストーリーです。掲載額は実際の申込結果ではなく、査定・売却額を保証するものではありません。価格は状態・付属品・時期・業者によって変動します。※掲載の画像はイメージです。<br />参考：{story.sourceReferences.map((source, index) => <><a href={source.url} target="_blank" rel="nofollow noreferrer">{source.label}</a>{index < story.sourceReferences.length - 1 ? ' ／ ' : ''}</>)}（2026年9月1日確認）</p>
       </section>
 
-      <section class="story-section" aria-labelledby="sell-intent-title">
+      <section class="story-section story-section--story-image" aria-labelledby="sell-intent-title">
         <h2 class="section-heading" id="sell-intent-title">そもそも、売るつもりはなかった</h2>
         <div class="story-copy with-visual--wrap">
           <p>きっかけは、時計ケースの整理でした。</p>
@@ -124,7 +125,7 @@ const faqItems = [
         </div>
       </section>
 
-      <section class="story-section story-section--tint" aria-labelledby="nearby-title">
+      <section class="story-section story-section--tint story-section--story-image" aria-labelledby="nearby-title">
         <h2 class="section-heading" id="nearby-title">検索で相場を見ても、自分の時計の値段は分からない</h2>
         <div class="story-copy with-visual--wrap">
           <p>スマホで、<strong class="neutral-strong">「{story.searchLabel}」</strong>と検索しました。</p>

@@ -1,0 +1,23 @@
+/* モデルLPの冒頭2章だけは、通常 /story/ と同じ画像の見せ方にする。 */
+.watch-story--visual-test .story-section--story-image .visual-card--flat,
+.watch-story--visual-test .story-section--story-image .visual-card--person {
+  height: 302px;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 599px) {
+  .watch-story--visual-test .story-section--story-image .with-visual--wrap .visual-card {
+    float: right;
+    width: 42%;
+    height: 172px;
+    margin: 3px 0 12px 13px;
+  }
+
+  .watch-story--visual-test .story-section--story-image .with-visual--wrap .visual-card--flat {
+    height: 158px;
+  }
+
+  .watch-story--visual-test .story-section--story-image .with-visual--wrap .visual-card--person {
+    background: var(--story-surface);
+  }
+}
