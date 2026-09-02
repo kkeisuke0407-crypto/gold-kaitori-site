@@ -1,0 +1,187 @@
+/* 型番検索専用の入口だけを調整。本文は story-visual-test の見た目を継承する。 */
+.watch-story--search-model .hero--search-model {
+  min-height: 650px;
+}
+
+.watch-story--search-model .hero--search-model .hero__content {
+  width: 71%;
+  padding-bottom: 30px;
+}
+
+.watch-story--search-model .hero--search-model h1 {
+  margin-bottom: 14px;
+  letter-spacing: -0.045em;
+}
+
+.watch-story--search-model .hero--search-model h1 .hero__watch-name {
+  margin: 0;
+  color: var(--story-navy-strong);
+  font-size: 0.74em;
+  line-height: 1.34;
+  letter-spacing: -0.035em;
+}
+
+.watch-story--search-model .hero--search-model h1 .hero__question {
+  margin-top: 18px;
+  color: var(--story-navy-strong);
+  font-size: 0.9em;
+  line-height: 1.35;
+}
+
+.watch-story--search-model .hero--search-model h1 .hero__question strong {
+  display: block;
+  color: var(--story-red);
+  font-size: 1.12em;
+}
+
+.watch-story--search-model .hero--search-model .hero__lead {
+  max-width: 25em;
+  margin-bottom: 12px;
+  line-height: 1.72;
+}
+
+.watch-story--search-model .hero--search-model .hero__lead strong {
+  color: var(--story-navy-strong);
+}
+
+.watch-story--search-model .hero__message {
+  margin: 0 0 14px;
+  color: var(--story-navy-strong);
+  font-family: var(--story-font-serif);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.watch-story--search-model .price-strip__label {
+  min-height: 54px;
+  line-height: 1.45;
+}
+
+.watch-story--search-model .price-strip__label br {
+  display: block;
+}
+
+.watch-story--search-model .story-section--search-answer .section-heading {
+  font-size: clamp(20px, 4.8vw, 27px);
+  line-height: 1.55;
+}
+
+.watch-story--search-model .search-factors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin: 8px 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.watch-story--search-model .search-factors li {
+  position: relative;
+  padding: 11px 10px 11px 34px;
+  border: 1px solid var(--story-line);
+  border-radius: var(--story-radius-sm);
+  background: var(--story-surface);
+  color: var(--story-navy-strong);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+  box-shadow: var(--story-shadow-xs);
+}
+
+.watch-story--search-model .search-factors li::before {
+  content: '✓';
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  display: grid;
+  width: 17px;
+  height: 17px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--story-navy);
+  color: var(--story-surface);
+  font-size: 11px;
+  line-height: 1;
+}
+
+@media (max-width: 599px) {
+  .watch-story--search-model .hero--search-model {
+    min-height: 610px;
+  }
+
+  .watch-story--search-model .hero--search-model::after {
+    background: linear-gradient(90deg, var(--story-paper) 0%, var(--story-paper) 62%, rgba(249, 247, 241, 0.96) 72%, rgba(249, 247, 241, 0.2) 100%);
+  }
+
+  .watch-story--search-model .hero--search-model .hero__image {
+    width: 48%;
+    object-position: 70% 46%;
+  }
+
+  .watch-story--search-model .hero--search-model .hero__content {
+    width: 88%;
+    padding: 24px 16px 24px;
+  }
+
+  .watch-story--search-model .hero--search-model h1 {
+    font-size: 26px;
+  }
+
+  .watch-story--search-model .hero--search-model h1 .hero__watch-name {
+    font-size: 0.73em;
+  }
+
+  .watch-story--search-model .hero--search-model h1 .hero__question {
+    margin-top: 14px;
+    font-size: 0.88em;
+  }
+
+  .watch-story--search-model .hero--search-model .hero__lead {
+    max-width: 22em;
+    font-size: 13px;
+  }
+
+  .watch-story--search-model .hero__message {
+    font-size: 16px;
+  }
+
+  .watch-story--search-model .hero--search-model .hero__tagline {
+    max-width: 270px;
+  }
+
+  .watch-story--search-model .hero--search-model .story-cta--hero {
+    width: min(100%, 310px);
+    padding-inline: 10px;
+    font-size: 13px;
+  }
+
+  .watch-story--search-model .price-strip__label {
+    min-height: 62px;
+    padding-inline: 10px;
+    font-size: 11px;
+  }
+
+  .watch-story--search-model .story-section--search-answer .section-heading {
+    font-size: 19px;
+  }
+
+  .watch-story--search-model .search-factors {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 340px) {
+  .watch-story--search-model .hero--search-model {
+    min-height: 625px;
+  }
+
+  .watch-story--search-model .hero--search-model .hero__content {
+    width: 92%;
+    padding-inline: 13px;
+  }
+
+  .watch-story--search-model .hero--search-model h1 {
+    font-size: 24px;
+  }
+}
