@@ -5,7 +5,7 @@ type Props = { storyVariant?: string; modelStory?: WatchModelStory };
 const { storyVariant = 'omega-speedmaster-3511-50', modelStory } = Astro.props as Props;
 const activeModelStory = modelStory ?? watchModelStoryBySlug[storyVariant];
 const isModelStory = Boolean(activeModelStory);
-const modelAssetRoot = activeModelStory ? `/hikakaku-watch-story/models/${activeModelStory.slug}-v2` : '';
+const modelAssetRoot = activeModelStory ? `/hikakaku-watch-story/models/${activeModelStory.slug}-${activeModelStory.assetVersion ?? 'v2'}` : '';
 
 const watchConfig = activeModelStory ? {
   search: {
@@ -291,7 +291,7 @@ const faqItems = [
           <div class="price-cell price-cell--best"><small>D社</small><strong>{storyData.amountD}</strong></div>
         </div>
         {isModelStory ? (
-          <p class="story-note">※公開されている査定・買取実績をもとに、状態・付属品を想定して再構成したモデルストーリーです。特定の一個体・一取引の結果ではなく、実際の査定・売却額を保証するものではありません。※掲載画像はイメージです。<br />参考：{storyData.sourceLinks.map((source, index) => (<><a href={source.url} target="_blank" rel="nofollow noreferrer">{source.label}</a>{index < storyData.sourceLinks.length - 1 ? '／' : ''}</>))}</p>
+          <p class="story-note">※本ページは公開されている買取相場・査定実績等を参考に、状態や付属品等を想定して構成したモデルストーリーです。掲載金額は特定の1取引の実績ではなく、実際の査定・売却額を保証するものではありません。※掲載画像はイメージです。<br />参考：{storyData.sourceLinks.map((source, index) => (<><a href={source.url} target="_blank" rel="nofollow noreferrer">{source.label}</a>{index < storyData.sourceLinks.length - 1 ? '／' : ''}</>))}</p>
         ) : (
           <p class="story-note">※本ページは筆者の実体験をもとにしています。査定額は商品・状態・時期・買取業者によって異なり、実際の査定・売却額を保証するものではありません。※掲載の画像はイメージです。<br />参考：ヒカカク！公式サイト「OMEGA スピードマスター デイト 3511.50 の買取価格を比較」 <a href={sourceModelUrl} target="_blank" rel="nofollow noreferrer">{sourceModelUrl}</a></p>
         )}
@@ -559,7 +559,7 @@ const faqItems = [
       </section>
 
       {isModelStory ? (
-        <p class="disclaimer">※本記事は公開されている査定・買取実績をもとに再構成したモデルストーリーです。特定の個人の体験や一取引の結果を示すものではありません。査定額は商品・状態・時期・買取業者等により異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
+        <p class="disclaimer">※本ページは公開されている買取相場・査定実績等を参考に、状態や付属品等を想定して構成したモデルストーリーです。掲載金額は特定の1取引の実績ではなく、実際の査定・売却額を保証するものではありません。査定額は商品・状態・時期・買取業者等により異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
       ) : (
         <p class="disclaimer">※本記事の内容は個人の実体験に基づくものです。記載の査定額は筆者の事例であり、査定額は商品・状態・時期・買取業者等により異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
       )}

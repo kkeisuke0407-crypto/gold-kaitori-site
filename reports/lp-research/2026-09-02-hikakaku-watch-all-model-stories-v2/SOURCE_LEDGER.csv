@@ -6,11 +6,13 @@ model_ref,source_name,source_url,checked_at,source_type
 14000,Daikokuya,https://kaitori.e-daikoku.com/brand/brand/rolex_airking.html,2026-09-02,dealer reference price
 14000,Rodeo Drive,https://kaitori.rodeodrive.co.jp/brand/rolex/airking/,2026-09-02,dealer reference price
 14060,Brand Revalue,https://brandrevalue.com/cat/watch/purchase-watch/rolex/submariner/14060,2026-09-02,dealer purchase record
-16570,Camera no Kitamura,https://ns-prod.kitamura.shop/watch/sell/brand/%E3%83%AD%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9%28rolex%29/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BCii/ref/16570/,2026-09-02,dealer purchase records
-16570,Premier Value,https://premiervalue.jp/rolex/explorer2/ref_16570/product_202608_16570/,2026-09-02,dealer reference price
+16570,Nanboya black dial records,https://nanboya.com/search/item-list/b-948/bc-2/mc-83/m-1367/n-687/ym-202606/,2026-09-02,dealer purchase records
+16570,Nanboya black dial market,https://nanboya.com/tokei-kaitori/price-list/rolex/explorer/ref-16570/,2026-09-02,dealer reference price
+16570,Camera no Kitamura,https://ns-prod.kitamura.shop/watch/sell/brand/%E3%83%AD%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9%28rolex%29/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BCii/ref/16570/,2026-09-02,dealer reference price
 16520,Nanboya,https://nanboya.com/tokei-kaitori/price-list/rolex/daytona/ref-16520/,2026-09-02,dealer market and purchase records
 16520,Brand Revalue,https://brandrevalue.com/cat/watch/rolex/rolex-daytona/16520,2026-09-02,dealer market and purchase records
 116520,Brand Revalue,https://brandrevalue.com/cat/watch/rolex/rolex-daytona/116520,2026-09-02,dealer market and purchase records
+16700,Camera no Kitamura,https://ns-prod.kitamura.shop/watch/sell/item/0000900929/price/,2026-09-02,dealer purchase record
 16700,Commit Ginza,https://commit-watch.co.jp/blogs/kaitori/kb16700-b,2026-09-02,dealer reference price
 116500LN,Nanboya,https://nanboya.com/tokei-kaitori/price-list/rolex/daytona/ref-116500ln/,2026-09-02,dealer market price
 16234,Nanboya,https://nanboya.com/tokei-kaitori/price-list/rolex/datejust/ref-16234/,2026-09-02,dealer market and purchase records
@@ -23,6 +25,6 @@ model_ref,source_name,source_url,checked_at,source_type
 116610LN,Brand Revalue,https://brandrevalue.com/cat/watch/rolex/rolex-submariner/116610ln,2026-09-02,dealer market and purchase records
 124060,Daikokuya,https://kaitori.e-daikoku.com/rolex/shop/kokubunji/,2026-09-02,dealer reference price
 16710,Nanboya,https://nanboya.com/tokei-kaitori/price-list/rolex/gmt-master/ref-16710/,2026-09-02,dealer market price
-16710,Enity,https://brand-enity.com/watch/rolex/gmt-master/16710,2026-09-02,dealer reference examples
+16710,Brand Revalue,https://brandrevalue.com/cat/watch/rolex/rolex-gmt-master2/16710,2026-09-02,dealer market and purchase records
 126610LN,Nanboya,https://nanboya.com/tokei-kaitori/price-list/rolex/submarina/,2026-09-02,dealer market price
 126610LN,Daikokuya,https://kaitori.e-daikoku.com/rolex/shop/hakata/,2026-09-02,dealer reference price

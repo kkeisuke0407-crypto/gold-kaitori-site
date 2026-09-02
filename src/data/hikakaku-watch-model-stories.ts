@@ -8,6 +8,7 @@ export type AppraisalEvidence = {
 
 export type WatchModelStory = {
   slug: string;
+  assetVersion?: string;
   modelName: string;
   shortName: string;
   reference: string;
@@ -92,25 +93,25 @@ export const watchModelStories: WatchModelStory[] = [
     ] },
   }),
   build({
-    slug: 'rolex-explorer-ii-16570', modelName: 'エクスプローラーII ホワイト', shortName: 'エクスプローラーII', reference: '16570',
+    slug: 'rolex-explorer-ii-16570', assetVersion: 'v3', modelName: 'エクスプローラーII ブラック', shortName: 'エクスプローラーII', reference: '16570',
     officialUrl: 'https://hikakaku.com/category/all-category/watch/items/2657132/', decision: 'GO-A',
-    evidenceNote: 'ホワイト文字盤について掲載された別々の査定実績です。文字盤違いの価格を示すものではありません。',
-    appraisals: [e('2025-01-28','中古美品','買取屋アップ',850000),e('2025-02-08','中古美品','エステメ大阪支店',1100000)],
-    appraisalFocus: ['ホワイト文字盤と型番','24時間ベゼルとGMT針','ケース・ブレスレットの傷','保証書・製造時期'],
-    modelCase: { amountA: 1072728, amountB: 1100000, amountC: 1200000, amountD: 1270000, amountFinal: 1200000, sourceLinks: [
+    evidenceNote: '2026年6〜8月に公開されたブラック文字盤・通常使用個体の実績と参考相場を照合したモデルケースです。',
+    appraisals: [e('2026-06','ブラック文字盤・Bランク','なんぼや',900000),e('2026-06','ブラック文字盤・Bランク','なんぼや',955000),e('2026-06','ブラック文字盤・Bランク','なんぼや',1050000)],
+    appraisalFocus: ['ブラック文字盤と型番','24時間ベゼルとGMT針','ケース・ブレスレットの傷','保証書・製造時期'],
+    modelCase: { amountA: 900000, amountB: 955000, amountC: 1050000, amountD: 1100000, amountFinal: 1050000, sourceLinks: [
       { label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/items/2657132/' },
-      { label: 'カメラのキタムラ買取実績', url: 'https://ns-prod.kitamura.shop/watch/sell/brand/%E3%83%AD%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9%28rolex%29/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BCii/ref/16570/' },
-      { label: 'プレミアバリュー参考価格', url: 'https://premiervalue.jp/rolex/explorer2/ref_16570/product_202608_16570/' },
-      { label: 'コミット銀座参考価格', url: 'https://commit-watch.co.jp/blogs/kaitori/kb16570w' },
+      { label: 'なんぼや買取実績', url: 'https://nanboya.com/search/item-list/b-948/bc-2/mc-83/m-1367/n-687/ym-202606/' },
+      { label: 'なんぼや参考相場', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/explorer/ref-16570/' },
+      { label: 'カメラのキタムラ参考価格', url: 'https://ns-prod.kitamura.shop/watch/sell/brand/%E3%83%AD%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9%28rolex%29/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BCii/ref/16570/' },
     ] },
   }),
   build({
-    slug: 'rolex-daytona-16520', modelName: 'デイトナ', shortName: 'デイトナ', reference: '16520',
+    slug: 'rolex-daytona-16520', modelName: 'デイトナ ブラック', shortName: 'デイトナ', reference: '16520',
     officialUrl: 'https://hikakaku.com/category/all-category/watch/items/288712/', decision: 'GO-A',
-    evidenceNote: '2025年5〜6月に掲載された、同型番・同状態の別々の査定実績です。',
-    appraisals: [e('2025-06-12','中古品・使用感あり','エステメ大阪支店',2850000),e('2025-06-12','中古品・使用感あり','シグマ',3000000),e('2025-05-18','中古品・使用感あり','エステメ',3600000)],
-    appraisalFocus: ['文字盤とシリアル','タキメーターベゼル','クロノグラフの動作','保証書・付属品の年代'],
-    modelCase: { amountA: 2700000, amountB: 3105000, amountC: 3800000, amountD: 4282700, amountFinal: 3800000, sourceLinks: [
+    evidenceNote: '2026年のブラック文字盤・通常使用個体の公開実績と参考相場を照合したモデルケースです。',
+    appraisals: [e('2026-01','ブラック文字盤・Bランク','ブラリバ',3659500),e('2026-05','ブラック文字盤・Bランク','ブラリバ',4282700)],
+    appraisalFocus: ['ブラック文字盤とシリアル','タキメーターベゼル','クロノグラフの動作','保証書・付属品の年代'],
+    modelCase: { amountA: 3550000, amountB: 3700000, amountC: 3820000, amountD: 4280000, amountFinal: 4100000, sourceLinks: [
       { label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/items/288712/' },
       { label: 'なんぼや相場・買取実績', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/daytona/ref-16520/' },
       { label: 'ブラリバ相場・買取実績', url: 'https://brandrevalue.com/cat/watch/rolex/rolex-daytona/16520' },
@@ -129,12 +130,12 @@ export const watchModelStories: WatchModelStory[] = [
     ] },
   }),
   build({
-    slug: 'rolex-gmt-master-16700', modelName: 'GMTマスター', shortName: 'GMTマスター', reference: '16700',
+    slug: 'rolex-gmt-master-16700', assetVersion: 'v3', modelName: 'GMTマスター ブラック', shortName: 'GMTマスター', reference: '16700',
     officialUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master/assessment_achievements/', decision: 'GO-A',
-    evidenceNote: 'ベゼル色やシリアルの記載がある、別々の公式掲載実績です。仕様差も含めて確認してください。',
-    appraisals: [e('2025-10-13','中古美品','エステメ',1650000),e('2025-11-09','中古美品・N番・赤青ベゼル','銀座パリス 梅田店',1700000),e('2025-11-13','中古美品・N番・赤青ベゼル','買虎',1800000)],
-    appraisalFocus: ['シリアルとベゼル色','GMT針・日付の動作','ケース・ブレスレットの傷','保証書・余りコマ'],
-    modelCase: { amountA: 1228873, amountB: 1650000, amountC: 1800000, amountD: 1950000, amountFinal: 1800000, sourceLinks: [
+    evidenceNote: 'ブラックベゼル・通常使用個体として、希少仕様やベゼル違いを混ぜずに再構成したモデルケースです。',
+    appraisals: [e('2026-07','ブラック文字盤・通常使用個体','カメラのキタムラ',1228873),e('2026-07','ブラック仕様・通常使用個体','コミット銀座',1800000)],
+    appraisalFocus: ['ブラックベゼルとシリアル','GMT針・日付の動作','ケース・ブレスレットの傷','保証書・余りコマ'],
+    modelCase: { amountA: 1300000, amountB: 1500000, amountC: 1650000, amountD: 1800000, amountFinal: 1650000, sourceLinks: [
       { label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master/assessment_achievements/' },
       { label: 'カメラのキタムラ買取実績', url: 'https://ns-prod.kitamura.shop/watch/sell/item/0000900929/price/' },
       { label: 'コミット銀座参考価格', url: 'https://commit-watch.co.jp/blogs/kaitori/kb16700-b' },
@@ -155,10 +156,10 @@ export const watchModelStories: WatchModelStory[] = [
   build({
     slug: 'rolex-datejust-16234', modelName: 'デイトジャスト ブラック', shortName: 'デイトジャスト', reference: '16234',
     officialUrl: 'https://hikakaku.com/category/all-category/watch/items/2846863/', decision: 'GO-A',
-    evidenceNote: '同日に掲載された例を含みますが、同一個体の同時査定とは確認できないため、別々の公式掲載実績として示しています。',
-    appraisals: [e('2025-12-10','中古品・使用感あり','Watch7',700000),e('2025-12-10','中古品・使用感あり','買虎',1000000),e('2025-09-30','中古品・使用感あり','買虎',1010000)],
+    evidenceNote: '2026年のブラック文字盤・Bランク実績と参考相場を照合したモデルケースです。',
+    appraisals: [e('2026','ブラック文字盤・Bランク','なんぼや',940000),e('2026','ブラック文字盤・Bランク','ブラリバ',1031000)],
     appraisalFocus: ['ブラック文字盤と型番','フルーテッドベゼル','ブレスレットの伸び・傷','箱・保証書の有無'],
-    modelCase: { amountA: 700000, amountB: 837000, amountC: 1000000, amountD: 1031000, amountFinal: 1000000, sourceLinks: [
+    modelCase: { amountA: 900000, amountB: 940000, amountC: 990000, amountD: 1030000, amountFinal: 980000, sourceLinks: [
       { label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/items/2846863/' },
       { label: 'なんぼや相場・買取実績', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/datejust/ref-16234/' },
       { label: 'ブラリバ買取実績', url: 'https://brandrevalue.com/cat/watch/rolex/rolex-datejust/16234' },
@@ -215,12 +216,12 @@ export const watchModelStories: WatchModelStory[] = [
     ] },
   }),
   build({
-    slug: 'rolex-gmt-master-ii-16710', modelName: 'GMTマスターII', shortName: 'GMTマスターII', reference: '16710',
+    slug: 'rolex-gmt-master-ii-16710', assetVersion: 'v3', modelName: 'GMTマスターII ブラック', shortName: 'GMTマスターII', reference: '16710',
     officialUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/', decision: 'GO-A',
-    evidenceNote: 'シリアルやベゼル仕様の異なる例を含む、別々の公式掲載実績です。各条件を併記しています。',
-    appraisals: [e('2026-06-29','中古美品','エステメ',1800000),e('2026-06-28','中古美品','戸越銀座屋',1850000),e('2025-12-26','中古美品・A番','買虎',2050000,'シリアル差あり')],
-    appraisalFocus: ['シリアルとベゼル色','GMT針・日付の動作','ケース・ブレスレットの傷','保証書・余りコマ'],
-    modelCase: { amountA: 1385000, amountB: 1549000, amountC: 1658000, amountD: 1949000, amountFinal: 1658000, sourceLinks: [
+    evidenceNote: 'ブラック仕様・通常使用個体として、赤青・赤黒ベゼルなどの条件差を混ぜずに再構成したモデルケースです。',
+    appraisals: [e('2026-08','ブラック仕様','ブラリバ',1744800),e('2026-08','ブラック仕様','ブラリバ',1880700),e('2026-08','ブラック仕様','ブラリバ',1960000)],
+    appraisalFocus: ['ブラックベゼルとシリアル','GMT針・日付の動作','ケース・ブレスレットの傷','保証書・余りコマ'],
+    modelCase: { amountA: 1620000, amountB: 1740000, amountC: 1880000, amountD: 1960000, amountFinal: 1880000, sourceLinks: [
       { label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/' },
       { label: 'なんぼや相場', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/gmt-master/ref-16710/' },
       { label: 'ブラリバ相場', url: 'https://brandrevalue.com/cat/watch/rolex/rolex-gmt-master2/16710' },
@@ -230,10 +231,10 @@ export const watchModelStories: WatchModelStory[] = [
   build({
     slug: 'rolex-submariner-126610ln', modelName: 'サブマリーナ デイト', shortName: 'サブマリーナ', reference: '126610LN',
     officialUrl: 'https://hikakaku.com/category/all-category/watch/items/3785901/', decision: 'GO-A',
-    evidenceNote: '2025年8月〜2026年8月に掲載された別々の査定実績です。明らかな桁違いの掲載値は使用していません。',
-    appraisals: [e('2025-08-08','中古品・使用感あり','おたからや',1980000),e('2026-08-19','中古美品','エステメ 福岡天神店',2030000),e('2026-03-12','中古品・使用感あり','買虎',2200000)],
+    evidenceNote: '2026年8月の参考相場と中古Bランク実績を照合した、通常使用個体のモデルケースです。',
+    appraisals: [e('2026-08','中古Bランク','なんぼや',1990000),e('2026-08','中古Bランク','なんぼや',2030000),e('2026-08','通常使用個体','大黒屋',2300000)],
     appraisalFocus: ['型番と41mm仕様','セラミックベゼル','ケース・ブレスレットの傷','箱・保証書・余りコマ'],
-    modelCase: { amountA: 1980000, amountB: 2030000, amountC: 2050000, amountD: 2190000, amountFinal: 2050000, sourceLinks: [
+    modelCase: { amountA: 1990000, amountB: 2050000, amountC: 2180000, amountD: 2300000, amountFinal: 2180000, sourceLinks: [
       { label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/items/3785901/' },
       { label: 'なんぼや相場', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/submarina/' },
       { label: '大黒屋参考価格', url: 'https://kaitori.e-daikoku.com/rolex/shop/hakata/' },
