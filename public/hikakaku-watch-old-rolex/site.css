@@ -1,0 +1,143 @@
+/* ============================================================
+   /hikakaku-watch/old-rolex/ 専用の追加パーツ
+
+   ベースは /hikakaku-watch-compare/site.css を読み込んだうえで、
+   このファイルで古いロレックス版だけのパーツを足す。
+   compare 側とは非共有なので /compare/ には影響しない。
+   ============================================================ */
+/* ============================================================
+   古いロレックス向けリライトで追加したパーツ
+   ============================================================ */
+
+/* ヒーロー：小見出しと補足 */
+.hero__kicker {
+  position: relative;
+  z-index: 1;
+  color: var(--hwc-gold-dark);
+  font-family: var(--hwc-font-serif);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.hero__note {
+  position: relative;
+  z-index: 1;
+  margin-top: 11px;
+  color: var(--hwc-ink-soft);
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+
+/* 台本2：FV直下で不安に即答するリスト */
+.section--doubt { background: var(--hwc-ivory); }
+.doubt-list {
+  display: grid;
+  gap: 7px;
+  margin-top: 13px;
+  list-style: none;
+}
+.doubt-list li {
+  padding: 9px 12px 9px 30px;
+  position: relative;
+  border: 1px solid var(--hwc-line);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+  box-shadow: 0 1px 3px var(--hwc-shadow);
+}
+.doubt-list li::before {
+  position: absolute;
+  top: 9px;
+  left: 11px;
+  color: var(--hwc-gold-dark);
+  content: "✓";
+  font-weight: 900;
+}
+.doubt-note {
+  margin-top: 12px;
+  color: var(--hwc-navy);
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.7;
+}
+
+/* 主張を1行で立てるブロック */
+.pull {
+  margin-top: 17px;
+  padding: 14px 16px;
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-gold-pale);
+  color: var(--hwc-ink);
+  font-family: var(--hwc-font-serif);
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: center;
+}
+.pull strong { color: var(--hwc-red-dark); font-size: 15.5px; font-weight: 900; }
+
+/* 台本4：査定実績の抜粋3件 */
+.record-picks { display: grid; gap: 9px; margin-top: 13px; }
+@media (min-width: 600px) { .record-picks { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.record-pick {
+  padding: 13px 14px;
+  border: 1px solid var(--hwc-line);
+  border-left: 4px solid var(--hwc-gold);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+  box-shadow: 0 2px 5px var(--hwc-shadow);
+}
+.record-pick h4 {
+  color: var(--hwc-navy);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.record-pick__state { margin-top: 5px; color: var(--hwc-muted); font-size: 11px; }
+.record-pick__price {
+  margin-top: 6px;
+  color: var(--hwc-red-dark);
+  font-family: var(--hwc-font-serif);
+  font-size: 21px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+}
+.record-pick__date { margin-top: 3px; color: var(--hwc-muted); font-size: 11px; }
+
+/* 事例カードを単独で置くとき */
+.case-card--solo { margin-top: 13px; }
+
+/* 台本8・15 のセクション地色 */
+.section--prepare { background: var(--hwc-ivory); }
+.section--closing { background: var(--hwc-cream); }
+.closing-kicker {
+  color: var(--hwc-gold-dark);
+  font-family: var(--hwc-font-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+.cta--closing { margin-top: 17px; }
+
+/* 台本12：ステップの補足文 */
+.flow-list li small {
+  display: block;
+  margin-top: 3px;
+  color: var(--hwc-muted);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* 向かない場合のボックス（.fit-box と対に） */
+.unfit-box {
+  padding: 13px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+}
+.unfit-box h3 { color: var(--hwc-navy); font-size: 14px; font-weight: 800; }
+.unfit-box ul { margin-top: 8px; list-style: none; }
+.unfit-box li { padding: 6px 0; font-size: 11.5px; line-height: 1.6; }
+.unfit-box li b { color: var(--hwc-ink); }
