@@ -33,12 +33,17 @@ const otherSpreads = [
   { brand: 'BREGUET', model: 'マリーン ラージデイト ブラック', high: '114万円', low: '75万円', gap: '39万円' },
 ];
 
-// 付属品・状態が査定額をどう動かしたかの実例。買取業者が残したコメント
+// 付属品・状態が査定額をどう動かしたかの実例。いずれも買取業者（査定担当者）が
+// 残したコメントであり、利用者の口コミではない。人物画像はイメージ。
 const appraisalComments = [
-  { tag: '完品・美品', body: '「付属品完品＋ノベルティをお持ちいただき、お時計はほぼ新品に近い状態のため最大金額にてお買取り成立となりました」', src: 'ブライトリング A23310／中古美品／450,000円（2024年4月25日・オルロージュ東京）' },
-  { tag: '保証書なし', body: '「全体的に使用傷はあるものの目立った傷はありませんでしたが、保証書が欠品していたためこちらの査定金額となりました」', src: 'ロレックス デイデイト 118206 アイスブルー／中古美品／3,200,000円（2024年3月25日・オルロージュ東京）' },
-  { tag: '保証書なし', body: '「とても綺麗で状態も良かったのですが、保証書が欠品していたため減額となってしまいました」', src: 'ハミルトン ジャズマスター ビューマチック H32565735／中古品・使用感あり／25,000円（2024年4月22日・オルロージュ東京）' },
-  { tag: '傷が多い', body: '「付属品完品ではありましたが、外装使用傷が多数ありましたので最低額でのご案内となりました」', src: 'ロンジン L4.774.4.726／中古品・使用感あり／50,000円（2024年4月29日・オルロージュ東京）' },
+  { tag: '完品・美品', avatar: '/hikakaku-watch-old-rolex/img/avatar-1.png', shop: 'オルロージュ東京', item: 'ブライトリング A23310', meta: '中古美品／450,000円（2024年4月25日）',
+    body: '付属品完品＋ノベルティをお持ちいただき、お時計はほぼ新品に近い状態のため最大金額にてお買取り成立となりました' },
+  { tag: '保証書なし', avatar: '/hikakaku-watch-old-rolex/img/avatar-2.png', shop: 'オルロージュ東京', item: 'ロレックス デイデイト 118206 アイスブルー', meta: '中古美品／3,200,000円（2024年3月25日）',
+    body: '全体的に使用傷はあるものの目立った傷はありませんでしたが、保証書が欠品していたためこちらの査定金額となりました' },
+  { tag: '保証書なし', avatar: '/hikakaku-watch-old-rolex/img/avatar-3.png', shop: 'オルロージュ東京', item: 'ハミルトン ジャズマスター ビューマチック H32565735', meta: '中古品・使用感あり／25,000円（2024年4月22日）',
+    body: 'とても綺麗で状態も良かったのですが、保証書が欠品していたため減額となってしまいました' },
+  { tag: '傷が多い', avatar: '/hikakaku-watch-old-rolex/img/avatar-4.webp', shop: 'オルロージュ東京', item: 'ロンジン L4.774.4.726', meta: '中古品・使用感あり／50,000円（2024年4月29日）',
+    body: '付属品完品ではありましたが、外装使用傷が多数ありましたので最低額でのご案内となりました' },
 ];
 
 // 「こんな時計でも」＝検索者の不安に即答するチェック項目
@@ -165,6 +170,23 @@ const faqs = [
             <path d="M3.5 17.5 9 11.5l3.6 3.4 7.4-8" />
             <path d="M15.6 6.9h4.4v4.4" />
           </symbol>
+          <symbol id="ic-bulk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6.5h16M4 12h11M4 17.5h7" />
+          </symbol>
+          <symbol id="ic-shop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.2 9.2 5.8 4.4h12.4l1.6 4.8" />
+            <path d="M5 9.2v10.4h14V9.2" />
+            <path d="M9.8 19.6v-5.4h4.4v5.4" />
+          </symbol>
+          <symbol id="ic-flea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6.6" y="3" width="10.8" height="18" rx="2.2" />
+            <path d="M10.7 17.8h2.6" />
+            <path d="M9.6 8.2h4.8M9.6 11.4h3.2" />
+          </symbol>
+          <symbol id="ic-pawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.6 20.4h16.8M5.2 20.4V9.6L12 5.1l6.8 4.5v10.8" />
+            <rect x="10" y="13.2" width="4" height="4.2" rx="1" />
+          </symbol>
         </defs>
       </svg>
 
@@ -172,9 +194,6 @@ const faqs = [
 
       <!-- 1. 約束 -->
       <section class="hero" aria-labelledby="page-title">
-        {/* 装飾。img だとモバイルでも読み込んでしまうため、PCのメディアクエリ内でだけ
-            背景画像として指定する（該当しないルールの画像は取得されない） */}
-        <div class="hero__art" aria-hidden="true"></div>
         <div class="hero__inner content">
           <p class="hero__kicker">昔買ったロレックス</p>
           <h1 id="page-title">古いからといって、<br /><strong>価値がないとは限りません。</strong></h1>
@@ -184,22 +203,6 @@ const faqs = [
           <p class="image-note">※査定を行う業者数は商品・地域・条件等によって異なります。※査定の可否・査定額は時計の状態・型番・付属品・時期・買取業者等によって異なります。</p>
         </div>
       </section>
-
-      {/* キャンペーン告知。画像内の注記は縮小すると判読できないため、本文として別途組み直している */}
-      <aside class="campaign" aria-label="買取ボーナスキャンペーンのお知らせ">
-        <div class="content">
-          <a class="campaign__link" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">
-            <img src="/hikakaku-watch-old-rolex/img/campaign-bonus.webp" width="1200" height="300" loading="lazy" decoding="async" alt="買取ボーナスキャンペーン開催中。対象カテゴリーで買取が成立すると、対象者全員にPayPayまたはAmazonのデジタルギフト10,000円分をプレゼント。" />
-          </a>
-          <p class="campaign__terms">
-            ※本キャンペーンは株式会社じげんによる提供です。対象カテゴリーで買取が成立した対象者が対象となります。<br />
-            ※本キャンペーンについてのお問い合わせは Amazon ではお受けしておりません。ヒカカク！の問い合わせフォームよりお願いいたします。<br />
-            ※Amazon、Amazon.co.jp およびそれらのロゴは Amazon.com, Inc. またはその関連会社の商標です。<br />
-            ※PayPayマネーライトは出金できません。<br />
-            ※実施状況・対象条件・進呈額は変更または終了する場合があります。最新の内容はヒカカク！公式サイトでご確認ください。
-          </p>
-        </div>
-      </aside>
 
       <!-- 2. 不安に即答 -->
       <section class="section section--doubt" aria-labelledby="doubt-title">
@@ -299,14 +302,18 @@ const faqs = [
           </div>
 
           <div class="quotes">
-            <h3 class="quotes__head">状態と付属品は、実際にこう効いています</h3>
-            <p class="quotes__lead">買取業者が査定時に残したコメントの実例です。</p>
-            <ul class="quotes__list">
+            <h3 class="quotes__head">査定担当者のコメント</h3>
+            <p class="quotes__lead">状態や付属品が査定額をどう動かしたか。買取業者の査定担当者が実際に残したコメントです。</p>
+            <ul class="comments">
               {appraisalComments.map((c) => (
-                <li>
-                  <span class="quotes__tag">{c.tag}</span>
-                  <blockquote>{c.body}</blockquote>
-                  <cite>{c.src}</cite>
+                <li class="comment">
+                  <img class="comment__avatar" src={c.avatar} width="160" height="160" loading="lazy" decoding="async" alt="" />
+                  <div class="comment__main">
+                    <p class="comment__who"><b>{c.shop}</b><span>査定担当者</span></p>
+                    <span class="comment__tag">{c.tag}</span>
+                    <blockquote class="comment__text">{c.body}</blockquote>
+                    <p class="comment__item">{c.item}<span>{c.meta}</span></p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -351,10 +358,10 @@ const faqs = [
             <table class="opt-table">
               <thead><tr><th>方法</th><th>特徴</th><th>向いている人</th></tr></thead>
               <tbody>
-                <tr class="is-focus"><th>一括査定</th><td>複数社の査定額を比較して判断できる</td><td>なるべく比較してから決めたい</td></tr>
-                <tr><th>買取店へ持込</th><td>その場で査定できる</td><td>早く現金化したい</td></tr>
-                <tr><th>フリマ・個人売買</th><td>自分で価格を設定できる</td><td>出品・発送の手間をかけられる</td></tr>
-                <tr><th>質屋</th><td>売却せず預けて借入できる場合がある</td><td>手放したくない</td></tr>
+                <tr class="is-focus"><th><svg class="opt-icon" aria-hidden="true"><use href="#ic-bulk" /></svg>一括査定</th><td>複数社の査定額を比較して判断できる</td><td>なるべく比較してから決めたい</td></tr>
+                <tr><th><svg class="opt-icon" aria-hidden="true"><use href="#ic-shop" /></svg>買取店へ持込</th><td>その場で査定できる</td><td>早く現金化したい</td></tr>
+                <tr><th><svg class="opt-icon" aria-hidden="true"><use href="#ic-flea" /></svg>フリマ・個人売買</th><td>自分で価格を設定できる</td><td>出品・発送の手間をかけられる</td></tr>
+                <tr><th><svg class="opt-icon" aria-hidden="true"><use href="#ic-pawn" /></svg>質屋</th><td>売却せず預けて借入できる場合がある</td><td>手放したくない</td></tr>
               </tbody>
             </table>
           </div>
@@ -394,6 +401,22 @@ const faqs = [
           <div class="faq-list">{faqs.map((item) => <details><summary><span>Q</span>{item.q}</summary><div><b>A.</b><p>{item.a}</p></div></details>)}</div>
         </div>
       </section>
+
+      {/* キャンペーン告知。画像内の注記は縮小すると判読できないため、本文として別途組み直している */}
+      <aside class="campaign" aria-label="買取ボーナスキャンペーンのお知らせ">
+        <div class="content">
+          <a class="campaign__link" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">
+            <img src="/hikakaku-watch-old-rolex/img/campaign-bonus.webp" width="1200" height="300" loading="lazy" decoding="async" alt="買取ボーナスキャンペーン開催中。対象カテゴリーで買取が成立すると、対象者全員にPayPayまたはAmazonのデジタルギフト10,000円分をプレゼント。" />
+          </a>
+          <p class="campaign__terms">
+            ※本キャンペーンは株式会社じげんによる提供です。対象カテゴリーで買取が成立した対象者が対象となります。<br />
+            ※本キャンペーンについてのお問い合わせは Amazon ではお受けしておりません。ヒカカク！の問い合わせフォームよりお願いいたします。<br />
+            ※Amazon、Amazon.co.jp およびそれらのロゴは Amazon.com, Inc. またはその関連会社の商標です。<br />
+            ※PayPayマネーライトは出金できません。<br />
+            ※実施状況・対象条件・進呈額は変更または終了する場合があります。最新の内容はヒカカク！公式サイトでご確認ください。
+          </p>
+        </div>
+      </aside>
 
       <!-- 10. クロージング -->
       <section class="section section--closing" aria-labelledby="closing-title">

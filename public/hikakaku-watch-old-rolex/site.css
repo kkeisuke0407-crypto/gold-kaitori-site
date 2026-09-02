@@ -661,52 +661,13 @@
   font-size: var(--r-note);
   line-height: 1.6;
 }
-.watch-compare--rolex .quotes__list {
-  display: grid;
-  gap: 11px;
-  margin: 12px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.watch-compare--rolex .quotes__list li {
-  padding: 12px 13px;
-  border-radius: var(--hwc-radius-small);
-  background: var(--hwc-ivory);
-}
-/* 何が効いたのかを一目で拾えるようにラベルを付ける */
-.watch-compare--rolex .quotes__tag {
-  display: inline-block;
-  margin-bottom: 7px;
-  padding: 2px 9px;
-  border-radius: 4px;
-  background: var(--hwc-navy);
-  color: var(--hwc-paper);
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-}
-.watch-compare--rolex .quotes__list blockquote {
-  margin: 0;
-  color: var(--hwc-ink);
-  font-size: var(--r-body);
-  font-weight: 600;
-  line-height: 1.8;
-}
-.watch-compare--rolex .quotes__list cite {
-  display: block;
-  margin-top: 6px;
-  color: var(--hwc-muted);
-  font-size: 10.5px;
-  font-style: normal;
-  line-height: 1.55;
-}
 .watch-compare--rolex .quotes .source-note { margin-top: 11px; }
 
 @media (min-width: 720px) {
   .watch-compare--rolex .alsoseen__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .watch-compare--rolex .alsoseen__list li { grid-template-columns: minmax(0, 1fr); }
   .watch-compare--rolex .alsoseen__gap { grid-column: 1; grid-row: auto; text-align: left; }
-  .watch-compare--rolex .quotes__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .watch-compare--rolex .comments { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* ------------------------------------------------------------
@@ -767,27 +728,9 @@
 }
 .watch-compare--rolex .spread__model { margin-bottom: 0; }
 
-/* ヒーローの装飾画像。モバイルはCTA位置を優先して出さない */
-.watch-compare--rolex .hero { position: relative; overflow: clip; }
-.watch-compare--rolex .hero__art { display: none; }
 .watch-compare--rolex .hero__inner { position: relative; z-index: 1; }
 
 @media (min-width: 720px) {
-  .watch-compare--rolex .hero__art {
-    display: block;
-    position: absolute;
-    z-index: 0;
-    right: max(0px, calc(50% - 400px));
-    bottom: -8%;
-    width: 210px;
-    height: auto;
-    aspect-ratio: 2 / 3;
-    border-radius: 10px;
-    opacity: 0.92;
-    box-shadow: 0 10px 28px var(--hwc-shadow);
-    background: url("/hikakaku-watch-old-rolex/img/hero-datejust.webp") center 42% / cover no-repeat;
-  }
-  .watch-compare--rolex .hero__inner { width: min(100%, 720px); padding-right: 250px; }
   /* PCでは3列になるためカードは縦積みにして写真を大きく見せる */
   .watch-compare--rolex .proof-card { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .watch-compare--rolex .proof-card__img { width: 100%; aspect-ratio: 4 / 3; }
@@ -827,3 +770,96 @@
   font-size: var(--r-note);
   line-height: 1.75;
 }
+
+/* ------------------------------------------------------------
+   査定担当者のコメント
+   利用者の口コミではなく買取業者のコメントなので、店舗名と
+   「査定担当者」を必ず出したうえで人物画像を添える。
+   ------------------------------------------------------------ */
+.watch-compare--rolex .comments {
+  display: grid;
+  gap: 11px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--rolex .comment {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 12px;
+  padding: 13px;
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-ivory);
+}
+.watch-compare--rolex .comment__avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--hwc-paper);
+  box-shadow: 0 1px 3px var(--hwc-shadow);
+}
+.watch-compare--rolex .comment__main { min-width: 0; }
+.watch-compare--rolex .comment__who {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 7px;
+  margin: 0;
+}
+.watch-compare--rolex .comment__who b {
+  color: var(--hwc-navy);
+  font-size: 13px;
+  font-weight: 800;
+}
+.watch-compare--rolex .comment__who span {
+  padding: 1px 7px;
+  border: 1px solid var(--hwc-line);
+  border-radius: 3px;
+  color: var(--hwc-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+.watch-compare--rolex .comment__tag {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 2px 9px;
+  border-radius: 4px;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.watch-compare--rolex .comment__text {
+  margin: 7px 0 0;
+  color: var(--hwc-ink);
+  font-size: var(--r-body);
+  font-weight: 600;
+  line-height: 1.8;
+}
+.watch-compare--rolex .comment__text::before { content: "「"; }
+.watch-compare--rolex .comment__text::after { content: "」"; }
+.watch-compare--rolex .comment__item {
+  margin: 7px 0 0;
+  padding-top: 7px;
+  border-top: 1px dashed var(--hwc-line);
+  color: var(--hwc-muted);
+  font-size: 10.5px;
+  line-height: 1.55;
+}
+.watch-compare--rolex .comment__item span { display: block; }
+
+/* 売る方法の比較表にアイコンを添える */
+.watch-compare--rolex .opt-table tbody th { white-space: normal; }
+.watch-compare--rolex .opt-icon {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin-bottom: 5px;
+  padding: 4px;
+  border-radius: 6px;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+}
+.watch-compare--rolex .opt-table tr.is-focus .opt-icon { background: var(--hwc-gold-dark); }
