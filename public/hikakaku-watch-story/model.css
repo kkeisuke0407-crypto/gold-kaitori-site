@@ -225,3 +225,161 @@
     font-size: 15px;
   }
 }
+
+/* ============================================================
+   story-visual-test で検証した改善をモデルページへ適用
+   site.css は /story/ と共有しているため、上書きはすべて
+   .watch-story--model 配下に閉じ込める。
+   ============================================================ */
+.watch-story--model {
+  --story-marker: oklch(90% 0.135 96);
+  --icon-fill: var(--story-surface);
+  counter-reset: chapter;
+}
+
+/* 章番号：時系列の記事なので番号を振る根拠がある（FAQは対象外） */
+.watch-story--model .story-section:not(.story-section--dense) > .section-heading::before {
+  counter-increment: chapter;
+  content: counter(chapter, decimal-leading-zero);
+  display: block;
+  margin-bottom: 5px;
+  color: var(--story-gold);
+  font-family: var(--story-font-sans);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+/* 本文の可読性 */
+.watch-story--model .story-copy { font-size: 16px; line-height: 1.9; }
+.watch-story--model .story-copy p { margin-bottom: var(--story-space-md); }
+
+/* 赤字＝心情・主張、マーカー＝事実・固有名詞・金額 */
+.watch-story--model .story-copy strong { color: var(--story-red); font-weight: 900; }
+.watch-story--model .story-copy .neutral-strong,
+.watch-story--model .story-copy .mark {
+  color: var(--story-ink);
+  font-weight: 900;
+  background: linear-gradient(transparent 56%, var(--story-marker) 56%, var(--story-marker) 93%, transparent 93%);
+}
+
+/* 小さすぎる文字の底上げ */
+.watch-story--model .story-disclosure { font-size: 12px; }
+.watch-story--model .hero__tagline { font-size: 12px; }
+.watch-story--model .hero__lead { font-size: 15px; }
+.watch-story--model .faq summary { font-size: 15px; line-height: 1.55; }
+.watch-story--model .faq p { font-size: 15px; line-height: 1.8; }
+.watch-story--model .steps-note { font-size: 13px; line-height: 1.7; }
+.watch-story--model .story-note { font-size: 12px; line-height: 1.65; }
+.watch-story--model .under-price,
+.watch-story--model .compare-difference small { font-size: 13px; }
+.watch-story--model .disclaimer { font-size: 12px; line-height: 1.75; }
+.watch-story--model .closing__copy p { font-size: 16px; }
+.watch-story--model .step b { font-size: 13px; }
+.watch-story--model .step span:not(.step-number) { font-size: 12px; line-height: 1.45; }
+.watch-story--model .step .step-number { font-size: 13px; }
+.watch-story--model .three-points p { font-size: 15px; }
+
+/* 写真は元比率を維持（固定高だと最大4割トリミングされる） */
+.watch-story--model .visual-card--flat { height: auto; aspect-ratio: 1 / 1; }
+.watch-story--model .visual-card--person { height: auto; aspect-ratio: 2 / 3; }
+
+/* 4項目アイコン（意味と絵の不一致を解消した新SVG） */
+.watch-story--model .proof-icon {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto var(--story-space-xs);
+  color: var(--story-navy);
+}
+.watch-story--model .process-proof p { font-size: 13px; line-height: 1.45; }
+
+/* FV内のCTAはヒーローの余白を圧迫しないよう一回り小さく */
+.watch-story--model .story-cta--hero {
+  width: min(100%, 320px);
+  min-height: 48px;
+  margin-top: var(--story-space-md);
+  font-size: 14px;
+}
+.watch-story--model .story-cta--hero span { font-size: 19px; }
+
+/* 光沢が横切るアニメーション */
+.watch-story--model .story-cta { position: relative; overflow: hidden; }
+.watch-story--model .story-cta::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -85%;
+  width: 46%;
+  height: 200%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgb(255 255 255 / 14%) 34%,
+    rgb(255 255 255 / 58%) 50%,
+    rgb(255 255 255 / 14%) 66%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: cta-shine 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes cta-shine {
+  0%, 58% { left: -85%; }
+  100% { left: 160%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .watch-story--model .story-cta::after { animation: none; opacity: 0; }
+}
+
+/* 運営者フッター（他ページと統一） */
+.site-footer {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: var(--story-space-lg) var(--story-space-md);
+  background: var(--story-navy-strong);
+  color: var(--story-surface);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.site-footer p { margin: 0; }
+.site-footer__name {
+  margin-bottom: var(--story-space-xs);
+  font-family: var(--story-font-display);
+  font-size: 16px;
+  font-weight: 900;
+}
+.site-footer__name b {
+  display: inline-block;
+  margin-left: var(--story-space-xs);
+  padding: 1px 7px;
+  border-radius: var(--story-radius-sm);
+  background: var(--story-gold);
+  color: var(--story-navy-strong);
+  font-size: 11px;
+  font-weight: 900;
+  vertical-align: 2px;
+}
+
+@media (max-width: 599px) {
+  /* site.css は 375px でも float:right/42% のままで本文が
+     79px＝1行4文字まで潰れる。float の解除が必須。 */
+  .watch-story--model .with-visual { grid-template-columns: minmax(0, 1fr); }
+  .watch-story--model .with-visual--wrap .visual-card,
+  .watch-story--model .visual-card {
+    float: none;
+    width: min(100%, 264px);
+    height: auto;
+    margin: var(--story-space-md) auto;
+  }
+
+  /* 4項目・4ステップは375pxだと1枠80pxで文字が潰れるため2列に */
+  .watch-story--model .process-proof,
+  .watch-story--model .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .watch-story--model .step:not(:last-child)::after { display: none; }
+  .watch-story--model .proof-icon { width: 40px; height: 40px; }
+
+  /* 9px は小さすぎる */
+  .watch-story--model .price-cell small { font-size: 12px; }
+}
+.watch-story--model .model-answer__eyebrow { font-size: 12px; }

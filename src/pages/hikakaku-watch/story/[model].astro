@@ -81,6 +81,44 @@ const faqItems = [
   </head>
   <body data-intent={pageIntent}>
     <main class="watch-story watch-story--model">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+          <symbol id="ic-review" viewBox="0 0 48 48">
+            <path d="M27 11h11a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-1v4l-4.5-4H31" fill="none" stroke="currentColor" stroke-width="1.7" opacity=".4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9 12h20a4 4 0 0 1 4 4v11a4 4 0 0 1-4 4H19l-7 6v-6H9a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z" fill="var(--icon-fill)" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            <path d="M19 15.6l2.6 5.3 5.8.9-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.9z" fill="var(--story-gold)" stroke="var(--story-gold)" stroke-width="1.2" stroke-linejoin="round" />
+          </symbol>
+          <symbol id="ic-record" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.5 15.5V10a1.5 1.5 0 0 1 1.5-1.5h6A1.5 1.5 0 0 1 21.5 10v5.5" />
+              <path d="M12.5 32.5V38a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5v-5.5" />
+              <circle cx="17" cy="24" r="9.5" />
+              <path d="M17 24v-4.6M17 24l3.6 2.1" />
+            </g>
+            <path d="M29 40h16" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".38" stroke-linecap="round" />
+            <g stroke="var(--story-gold)" stroke-width="2.6" stroke-linecap="round" fill="none">
+              <path d="M31.5 36.5v-5" /><path d="M37.5 36.5v-10" /><path d="M43.5 36.5v-15" />
+            </g>
+          </symbol>
+          <symbol id="ic-support" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="16.5" cy="17.5" r="6" />
+              <path d="M6 40c0-5.8 4.7-10.5 10.5-10.5S27 34.2 27 40" />
+            </g>
+            <path d="M30 8h11a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3h-4.5L32 27v-4.5h-2a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" fill="var(--icon-fill)" stroke="var(--story-gold)" stroke-width="2" stroke-linejoin="round" />
+            <path d="M31.5 13.5h8M31.5 17.5h5" fill="none" stroke="var(--story-gold)" stroke-width="1.8" stroke-linecap="round" />
+          </symbol>
+          <symbol id="ic-fee" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="16" width="26" height="22" rx="2.5" />
+              <path d="M5 23.5h26" /><path d="M18 16v7.5" />
+            </g>
+            <circle cx="36" cy="31" r="9.5" fill="var(--icon-fill)" stroke="var(--story-gold)" stroke-width="2" />
+            <path d="M32.4 26.2l3.6 4.1 3.6-4.1M32.4 31.8h7.2M32.4 34.6h7.2M36 30.3V37" fill="none" stroke="var(--story-gold)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+          </symbol>
+        </defs>
+      </svg>
+
       <div class="story-disclosure">当サイトは提携広告を含む比較・案内メディアです</div>
 
       <section class="hero hero--model" aria-labelledby="story-title">
@@ -90,6 +128,7 @@ const faqItems = [
           <h1 id="story-title">その買取価格、<br /><span>1社だけで</span>決めていませんか。</h1>
           <p class="hero__lead">同じ型番でも、<br />査定額に<span>{formatMan(quoteGap)}の差</span>が出ることも。</p>
           <p class="hero__tagline">{story.shortName} {story.reference}の{story.referenceLabel}を参考にしたモデルストーリー</p>
+          <a class="story-cta story-cta--hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">まずは査定額だけ調べてみる <span aria-hidden="true">›</span></a>
         </div>
       </section>
 
@@ -119,7 +158,7 @@ const faqItems = [
         <div class="story-copy with-visual--wrap">
           <p>きっかけは、時計ケースの整理でした。</p>
           <p>出てきたのは、<strong class="neutral-strong">ROLEX {story.modelName} {story.reference}</strong>。{story.origin}です。</p>
-          <figure class="visual-card visual-card--flat"><img src="/hikakaku-watch-story/assets/watch-accessories.webp" width="960" height="960" alt="腕時計と箱、付属品のイメージ" /></figure>
+          <figure class="visual-card visual-card--flat"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/watch-accessories.webp" width="960" height="960" alt="腕時計と箱、付属品のイメージ" /></figure>
           <p>{story.unusedReason}。</p>
           <p>売ると決めていたわけではありません。ただ、<strong>「{story.shortName}の買取相場って、今どのくらいなんだろう？」</strong>と気になりました。</p>
         </div>
@@ -129,7 +168,7 @@ const faqItems = [
         <h2 class="section-heading" id="nearby-title">検索で相場を見ても、自分の時計の値段は分からない</h2>
         <div class="story-copy with-visual--wrap">
           <p>スマホで、<strong class="neutral-strong">「{story.searchLabel}」</strong>と検索しました。</p>
-          <figure class="visual-card visual-card--person"><img src="/hikakaku-watch-story/assets/story-person.webp" width="640" height="960" alt="時計の売却先を考える男性のイラスト" /></figure>
+          <figure class="visual-card visual-card--person"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/story-person.webp" width="640" height="960" alt="時計の売却先を考える男性のイラスト" /></figure>
           <p>相場表や高額な事例は見つかります。でも、同じモデル名でも型番や状態が違い、<span class="mark">自分の時計がその金額になるのかは分かりません。</span></p>
           <p>一店舗で金額を聞いても、それが高いのか安いのか判断できない。比較の基準が欲しいと思いました。</p>
         </div>
@@ -160,7 +199,7 @@ const faqItems = [
         <p class="section-lead">このモデルケースでは、次の内容で査定を依頼します。</p>
         <div class="form-visual">
           <figure class="form-visual__generated">
-            <img src={story.entryImage} width="1024" height="1536" alt={`入力画面のイメージ。ブランド ROLEX、モデル ${story.modelName}、型番 ${story.reference}、状態 使用感あり、${story.conditionDetail}、動作 正常、付属品 箱・保証書・余りコマあり。`} />
+            <img loading="lazy" decoding="async" src={story.entryImage} width="1024" height="1536" alt={`入力画面のイメージ。ブランド ROLEX、モデル ${story.modelName}、型番 ${story.reference}、状態 使用感あり、${story.conditionDetail}、動作 正常、付属品 箱・保証書・余りコマあり。`} />
           </figure>
           <div class="story-copy">
             <p>型番は時計本体や保証書を見ながら確認。分からない部分は写真でも伝えます。</p>
@@ -194,10 +233,10 @@ const faqItems = [
           <p>高額な時計ほど、<span class="mark">「いくらか」と同じくらい「誰に売るか」</span>が重要です。比較できる状態をつくってから、納得できる相手を選びます。</p>
         </div>
         <div class="process-proof" aria-label="確認すること">
-          <article><span class="sprite-icon sprite-icon--1"></span><p>口コミ・評判</p></article>
-          <article><span class="sprite-icon sprite-icon--2"></span><p>時計の買取実績</p></article>
-          <article><span class="sprite-icon sprite-icon--3"></span><p>査定後の対応</p></article>
-          <article><span class="sprite-icon sprite-icon--4"></span><p>買取方法・手数料</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-review" /></svg><p>口コミ・評判</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-record" /></svg><p>時計の買取実績</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-support" /></svg><p>査定後の対応</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-fee" /></svg><p>買取方法・手数料</p></article>
         </div>
       </section>
 
@@ -205,7 +244,7 @@ const faqItems = [
         <h2 class="section-heading" id="message-title">業者へ状態を詳しく伝える</h2>
         <div class="story-copy"><p>最高額を提示した業者へ、傷・付属品・整備履歴を追加で伝え、現物確認後に正式な査定額が決まることを確認します。</p></div>
         <figure class="conversation-visual">
-          <img src="/hikakaku-watch-story/assets/dealer-conversation-with-copy-v3.webp" width="1536" height="1024" alt="時計の傷、箱・保証書・余りコマ、オーバーホール状況を伝え、現物確認後の正式査定を確認するやり取りのイメージ" />
+          <img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/dealer-conversation-with-copy-v3.webp" width="1536" height="1024" alt="時計の傷、箱・保証書・余りコマ、オーバーホール状況を伝え、現物確認後の正式査定を確認するやり取りのイメージ" />
         </figure>
         <div class="story-copy"><p>この段階でも、金額に納得できなければ売らない選択ができます。先に比較しているので、判断の基準を持ったまま現物査定へ進めます。</p></div>
       </section>
@@ -279,6 +318,11 @@ const faqItems = [
 
       <p class="disclaimer">※本記事は公開査定例を参考に再構成したモデルストーリーです。掲載額は実際の申込結果ではなく、査定・売却額を保証するものではありません。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
     </main>
+
+    <footer class="site-footer">
+      <p class="site-footer__name">時計査定ナビ <b>PR</b></p>
+      <p>当サイトはアフィリエイトプログラムを利用した第三者メディアです。掲載内容は株式会社じげん（ZIGExN Co., Ltd.）の公式サイト掲載情報をもとに作成しています。実際の条件は各社公式サイトでご確認ください。</p>
+    </footer>
     <script is:inline src="https://js.slvrbullet.com/pt.min.js"></script>
   </body>
 </html>
