@@ -1,22 +1,27 @@
 ---
-const { storyVariant = 'omega-speedmaster-3511-50' } = Astro.props;
-const isSubmariner16610 = storyVariant === 'rolex-submariner-16610';
+import { watchModelStoryBySlug, type WatchModelStory } from '../../../../data/hikakaku-watch-model-stories';
 
-const watchConfig = isSubmariner16610 ? {
+type Props = { storyVariant?: string; modelStory?: WatchModelStory };
+const { storyVariant = 'omega-speedmaster-3511-50', modelStory } = Astro.props as Props;
+const activeModelStory = modelStory ?? watchModelStoryBySlug[storyVariant];
+const isModelStory = Boolean(activeModelStory);
+const modelAssetRoot = activeModelStory ? `/hikakaku-watch-story/models/${activeModelStory.slug}-v2` : '';
+
+const watchConfig = activeModelStory ? {
   search: {
     brand: 'ROLEX',
     brandSlug: 'rolex',
-    model: 'サブマリーナ デイト',
-    modelSlug: 'submariner-date',
-    ref: '16610',
-    slug: 'rolex-submariner-16610',
+    model: activeModelStory.modelName,
+    modelSlug: activeModelStory.slug.replace(/^rolex-/, '').replace(/-\d+[a-z]*$/i, ''),
+    ref: activeModelStory.reference,
+    slug: activeModelStory.slug,
   },
   story: {
     brand: 'ROLEX',
-    model: 'サブマリーナ デイト',
-    ref: '16610',
+    model: activeModelStory.modelName,
+    ref: activeModelStory.reference,
   },
-  heroImage: '/hikakaku-watch-story/models/rolex-submariner-16610-v2/hero.webp',
+  heroImage: `${modelAssetRoot}/hero.webp`,
   tracking: {
     landingIntent: 'hikakaku_watch_model_value',
   },
@@ -40,26 +45,42 @@ const watchConfig = isSubmariner16610 ? {
   },
 } as const;
 
-const storyData = isSubmariner16610 ? {
-  amountA: '1,200,000円',
-  amountB: '1,309,000円',
-  amountC: '1,438,900円',
-  amountD: '1,500,000円',
-  amountFinal: '1,438,900円',
-  amountASpoken: '120万円',
-  amountFirstNarrative: '120万円',
-  amountBSpoken: '130万9,000円',
-  amountCSpoken: '143万8,900円',
-  amountDSpoken: '150万円',
-  amountFinalSpoken: '143万8,900円',
-  preToFinalDifference: '61,100円',
-  finalDifference: '238,900円',
-  roundedDifference: '20万円以上',
-  searchTerm: 'サブマリーナ 16610 買取相場',
+const formatYen = (value: number) => `${value.toLocaleString('ja-JP')}円`;
+const formatSpokenYen = (value: number) => {
+  if (value < 10000) return formatYen(value);
+  const man = Math.floor(value / 10000);
+  const remainder = value % 10000;
+  return `${man}万${remainder ? remainder.toLocaleString('ja-JP') : ''}円`;
+};
+
+const modelCase = activeModelStory?.modelCase;
+const modelSpread = modelCase ? modelCase.amountD - modelCase.amountA : 0;
+const roundedModelSpread = activeModelStory?.slug === 'rolex-submariner-16610'
+  ? '20万円以上'
+  : `${Math.max(1, Math.floor(modelSpread / 50000) * 5)}万円以上`;
+
+const storyData = activeModelStory && modelCase ? {
+  amountA: formatYen(modelCase.amountA),
+  amountB: formatYen(modelCase.amountB),
+  amountC: formatYen(modelCase.amountC),
+  amountD: formatYen(modelCase.amountD),
+  amountFinal: formatYen(modelCase.amountFinal),
+  amountASpoken: formatSpokenYen(modelCase.amountA),
+  amountFirstNarrative: formatSpokenYen(modelCase.amountA),
+  amountBSpoken: formatSpokenYen(modelCase.amountB),
+  amountCSpoken: formatSpokenYen(modelCase.amountC),
+  amountDSpoken: formatSpokenYen(modelCase.amountD),
+  amountFinalSpoken: formatSpokenYen(modelCase.amountFinal),
+  preToFinalDifference: formatYen(Math.abs(modelCase.amountD - modelCase.amountFinal)),
+  finalDifference: formatYen(Math.abs(modelCase.amountFinal - modelCase.amountA)),
+  maxDifference: formatYen(modelSpread),
+  roundedDifference: roundedModelSpread,
+  searchTerm: `${activeModelStory.shortName} ${activeModelStory.reference} 買取相場`,
   nearbySearchTerm: 'ロレックス 買取',
-  accessoriesImage: '/hikakaku-watch-story/models/rolex-submariner-16610-v2/watch-accessories.webp',
-  entryImage: '/hikakaku-watch-story/models/rolex-submariner-16610-v2/entry-form-with-copy.webp',
-  sourceModelUrl: 'https://hikakaku.com/category/all-category/watch/items/127258/',
+  accessoriesImage: `${modelAssetRoot}/watch-accessories.webp`,
+  entryImage: `${modelAssetRoot}/entry-form-with-copy.webp`,
+  sourceModelUrl: activeModelStory.officialUrl,
+  sourceLinks: modelCase.sourceLinks,
 } : {
   amountA: '155,000円',
   amountB: '180,000円',
@@ -74,12 +95,14 @@ const storyData = isSubmariner16610 ? {
   amountFinalSpoken: '21万8,000円',
   preToFinalDifference: '10,000円',
   finalDifference: '63,000円',
+  maxDifference: '73,000円',
   roundedDifference: '7万円以上',
   searchTerm: 'スピードマスター 3511.50 買取相場',
   nearbySearchTerm: 'オメガ 買取',
   accessoriesImage: '/hikakaku-watch-story/assets/watch-accessories.webp',
   entryImage: '/hikakaku-watch-story/assets/entry-form-with-copy-v3.webp',
   sourceModelUrl: 'https://hikakaku.com/category/all-category/watch/items/3311449/',
+  sourceLinks: [{ label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/items/3311449/' }],
 };
 
 const searchWatch = {
@@ -88,7 +111,7 @@ const searchWatch = {
 };
 const storyWatch = watchConfig.story;
 const pageTitle = `${searchWatch.model} ${searchWatch.ref}の買取相場を調べる前に｜時計査定ナビ`;
-const metaDescription = isSubmariner16610
+const metaDescription = isModelStory
   ? `${searchWatch.fullName}の買取相場を調べている方向けに、${storyData.amountA}〜${storyData.amountD}の査定額モデルと、複数社比較で分かる価格差を紹介します。`
   : `${searchWatch.fullName}の買取相場を調べている方向けに、実際の査定額155,000円〜228,000円と、複数社比較で分かった価格差を紹介します。`;
 const canonicalUrl = `https://kaitori.hakobu-family.com/hikakaku-watch/story/${searchWatch.slug}/`;
@@ -97,8 +120,8 @@ const canonicalUrl = `https://kaitori.hakobu-family.com/hikakaku-watch/story/${s
 // ヒカカク！の直リンクに戻すと成果が Google 広告へ連携されなくなる。
 const affiliateUrl = 'https://tr.slvrbullet.com/cl/w0000678724/47671/39865/6';
 
-// 参考元（ヒカカク！公式サイト）。本記事で扱う型番の買取価格比較ページ。
-// ストーリー内の査定額は筆者の実体験であり、この参考元からの引用ではない。
+// 型番別ページでは複数の公開査定・買取実績、元のオメガページではヒカカク！公式ページを参考元として表示する。
+// 型番別ページの金額は公開情報をもとに再構成したモデルケースで、特定の一取引結果ではない。
 const sourceModelUrl = storyData.sourceModelUrl;
 
 const faqItems = [
@@ -112,7 +135,7 @@ const faqItems = [
   },
   {
     q: '査定額は確定価格？',
-    a: isSubmariner16610
+    a: isModelStory
       ? `事前査定の場合、確定価格ではありません。実物の傷や使用状態、付属品などを確認した結果、最終査定額が変わる場合があります。このモデルケースでも、${storyData.amountD}前後から${storyData.amountFinal}になっています。`
       : '事前査定の場合、確定価格ではありません。実物の傷や使用状態、付属品などを確認した結果、最終査定額が変わる場合があります。僕の場合も、228,000円前後から218,000円になりました。',
   },
@@ -142,13 +165,13 @@ const faqItems = [
     <link rel="stylesheet" href="/hikakaku-watch-story/site.css" />
     <link rel="stylesheet" href="/hikakaku-watch-story/visual-test.css" />
     <link rel="stylesheet" href="/hikakaku-watch-story/search-model.css" />
-    {isSubmariner16610 && (
+    {isModelStory && (
       <style is:global>
         @media (max-width: 340px) {
-          body[data-watch-ref="16610"] .story-disclosure { padding-inline: 8px; font-size: 10px; letter-spacing: 0; }
-          body[data-watch-ref="16610"] .price-strip { padding-inline: 10px; gap: 14px 8px; }
-          body[data-watch-ref="16610"] .price-strip__label { font-size: 10px; letter-spacing: 0.02em; }
-          body[data-watch-ref="16610"] .price-cell strong { font-size: 18px; }
+          .story-disclosure { padding-inline: 8px; font-size: 10px; letter-spacing: 0; }
+          .price-strip { padding-inline: 10px; gap: 14px 8px; }
+          .price-strip__label { font-size: 10px; letter-spacing: 0.02em; }
+          .price-cell strong { font-size: 18px; }
         }
       </style>
     )}
@@ -246,7 +269,7 @@ const faqItems = [
       <div class="story-disclosure">当サイトは提携広告を含む比較・案内メディアです</div>
 
       <section class="hero hero--search-model" aria-labelledby="story-title">
-        <img class="hero__image" src={watchConfig.heroImage} width="1080" height="1620" alt={isSubmariner16610 ? `${searchWatch.fullName}をイメージしたステンレス製腕時計` : `${searchWatch.fullName}をイメージした銀色のクロノグラフ腕時計`} />
+        <img class="hero__image" src={watchConfig.heroImage} width="1080" height="1620" alt={isModelStory ? `${searchWatch.fullName}をイメージした腕時計` : `${searchWatch.fullName}をイメージした銀色のクロノグラフ腕時計`} />
         <div class="hero__content">
           <h1 id="story-title">
             <span class="hero__watch-name">{searchWatch.brand}<br />{searchWatch.model}<br />{searchWatch.ref}。</span>
@@ -254,21 +277,21 @@ const faqItems = [
           </h1>
           <p class="hero__lead"><strong>最初の査定は{storyData.amountA}。</strong><br />でも、複数の買取店を比べてみると<br />査定額に<span>{storyData.roundedDifference}の差</span>が出ました。</p>
           <p class="hero__message">近所の店にそのまま<br />売らなくて、本当によかった。</p>
-          <p class="hero__tagline">{isSubmariner16610 ? '35歳の僕が「ヒカカク！」で査定額を比べてみた話' : '35歳の僕が「ヒカカク！」を実際に使ってみた話'}</p>
+          <p class="hero__tagline">{isModelStory ? '35歳の僕が「ヒカカク！」で査定額を比べてみた話' : '35歳の僕が「ヒカカク！」を実際に使ってみた話'}</p>
           <a class="story-cta story-cta--hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">{searchWatch.ref}の査定額を調べてみる <span aria-hidden="true">›</span></a>
         </div>
       </section>
 
       <section aria-label="査定額の比較">
         <div class="price-strip">
-          <div class="price-strip__label">{searchWatch.fullName}<br />{isSubmariner16610 ? '査定額比較' : '実際の査定額比較'}</div>
+          <div class="price-strip__label">{searchWatch.fullName}<br />{isModelStory ? '査定額比較' : '実際の査定額比較'}</div>
           <div class="price-cell"><small>A社（最初の査定）</small><strong>{storyData.amountA}</strong></div>
           <div class="price-cell"><small>B社</small><strong>{storyData.amountB}</strong></div>
           <div class="price-cell"><small>C社</small><strong>{storyData.amountC}</strong></div>
           <div class="price-cell price-cell--best"><small>D社</small><strong>{storyData.amountD}</strong></div>
         </div>
-        {isSubmariner16610 ? (
-          <p class="story-note">※公開されている査定・買取実績をもとに、状態・付属品を想定して再構成したモデルストーリーです。特定の一個体・一取引の結果ではなく、実際の査定・売却額を保証するものではありません。※掲載画像はイメージです。<br />参考：<a href={sourceModelUrl} target="_blank" rel="nofollow noreferrer">ヒカカク！</a>／<a href="https://brandrevalue.com/cat/watch/purchase-watch/rolex/submariner/16610" target="_blank" rel="nofollow noreferrer">ブラリバ買取実績</a>／<a href="https://nanboya.com/tokei-kaitori/rolex/submarina/" target="_blank" rel="nofollow noreferrer">なんぼや買取実績</a>／<a href="https://commit-watch.co.jp/blogs/kaitori/kb16610" target="_blank" rel="nofollow noreferrer">コミット銀座参考価格</a>／<a href="https://piazo.jp/rolex/submariner/ref16610/" target="_blank" rel="nofollow noreferrer">ピアゾ相場</a></p>
+        {isModelStory ? (
+          <p class="story-note">※公開されている査定・買取実績をもとに、状態・付属品を想定して再構成したモデルストーリーです。特定の一個体・一取引の結果ではなく、実際の査定・売却額を保証するものではありません。※掲載画像はイメージです。<br />参考：{storyData.sourceLinks.map((source, index) => (<><a href={source.url} target="_blank" rel="nofollow noreferrer">{source.label}</a>{index < storyData.sourceLinks.length - 1 ? '／' : ''}</>))}</p>
         ) : (
           <p class="story-note">※本ページは筆者の実体験をもとにしています。査定額は商品・状態・時期・買取業者によって異なり、実際の査定・売却額を保証するものではありません。※掲載の画像はイメージです。<br />参考：ヒカカク！公式サイト「OMEGA スピードマスター デイト 3511.50 の買取価格を比較」 <a href={sourceModelUrl} target="_blank" rel="nofollow noreferrer">{sourceModelUrl}</a></p>
         )}
@@ -298,12 +321,12 @@ const faqItems = [
         <h2 class="section-heading" id="sell-intent-title">そもそも、売るつもりはなかった</h2>
         <div class="story-copy with-visual--wrap">
           <p>きっかけは、クローゼットの整理でした。</p>
-          {isSubmariner16610 ? (
+          {isModelStory ? (
             <p>奥から出てきたのは、昔買った{storyWatch.brand}の腕時計。<strong class="neutral-strong">{storyWatch.brand} {storyWatch.model} {storyWatch.ref}。</strong>20代の頃から大切に使ってきた時計です。</p>
           ) : (
             <p>奥から出てきたのは、昔買ったオメガの腕時計。<strong class="neutral-strong">OMEGA スピードマスター デイト 3511.50。</strong>20代の頃によく使っていた時計です。</p>
           )}
-          <figure class="visual-card visual-card--flat"><img loading="lazy" decoding="async" src={storyData.accessoriesImage} width="960" height="960" alt={isSubmariner16610 ? `${searchWatch.fullName}と箱、付属品のイメージ` : '腕時計と箱、付属品のイメージ'} /></figure>
+          <figure class="visual-card visual-card--flat"><img loading="lazy" decoding="async" src={storyData.accessoriesImage} width="960" height="960" alt={isModelStory ? `${searchWatch.fullName}と箱、付属品のイメージ` : '腕時計と箱、付属品のイメージ'} /></figure>
           <p>当時は仕事でも休日でもかなり使っていましたが、最近はスマートウォッチばかり。気づけば、<span class="mark">ほとんど出番がなくなっていました</span>。</p>
           <p>時計自体が嫌いになったわけでもありません。ただ、<strong>「これ、今いくらくらいになるんだろう？」</strong>と、ふと思いました。</p>
           <p>最初はそれだけでした。売るかどうかまで決めていたわけではありません。</p>
@@ -316,7 +339,7 @@ const faqItems = [
           <p>スマホで、<strong class="neutral-strong">「{storyData.nearbySearchTerm}」</strong>と検索しました。すると、近所にも買取店がたくさん出てきます。</p>
           <figure class="visual-card visual-card--person"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/story-person.webp" width="640" height="960" alt="時計を売る店を考える男性のイラスト" /></figure>
           <p>どのサイトを見ても、似たようなキャッチコピーが並びます。でも、<span class="mark">正直どこが高いのか分かりません。</span></p>
-          {isSubmariner16610 ? (
+          {isModelStory ? (
             <p>仮に近所の店へ持っていって、「{storyData.amountASpoken}ですね」と言われたとしても、<strong>その金額が高いのか、安いのか、自分には判断できない。</strong></p>
           ) : (
             <p>仮に近所の店へ持っていって、「15万円ですね」と言われたとしても、<strong>その15万円が高いのか、安いのか、自分には判断できない。</strong></p>
@@ -341,12 +364,12 @@ const faqItems = [
         <p class="section-lead">僕が入力した内容はこちらです。</p>
         <div class="form-visual">
           <figure class="form-visual__generated">
-            <img loading="lazy" decoding="async" src={storyData.entryImage} width="1024" height="1536" alt={isSubmariner16610 ? `入力画面のイメージ。ヒカカク！で、ブランド ${searchWatch.brand}、モデル ${searchWatch.model}、型番 ${searchWatch.ref}、状態 使用感あり、ケース・ブレスに細かい傷あり、動作 正常に動作、付属品 箱あり・保証書あり・余りコマありと入力した様子。` : '入力画面のイメージ。ヒカカク！で、ブランド OMEGA、モデル スピードマスター、型番 3511.50、状態 使用感あり、ベルトに細かい傷あり、動作 正常に動作、付属品 箱あり・保証書あり・余りコマありと入力した様子。'} />
-            <figcaption class="sr-only">{isSubmariner16610 ? 'ヒカカク！。ブランド ROLEX。モデル サブマリーナ デイト。型番 16610。状態 使用感あり。ケース・ブレスに細かい傷あり。動作 正常に動作。付属品 箱あり、保証書あり、余りコマあり。' : 'ヒカカク！。ブランド OMEGA。モデル スピードマスター。型番 3511.50。状態 使用感あり、ベルトに細かい傷あり。動作 正常に動作。付属品 箱あり、保証書あり、余りコマあり。'}</figcaption>
+            <img loading="lazy" decoding="async" src={storyData.entryImage} width="1024" height="1536" alt={isModelStory ? `入力画面のイメージ。ヒカカク！で、ブランド ${searchWatch.brand}、モデル ${searchWatch.model}、型番 ${searchWatch.ref}、状態 使用感あり、ケース・ブレスに細かい傷あり、動作 正常に動作、付属品 箱あり・保証書あり・余りコマありと入力した様子。` : '入力画面のイメージ。ヒカカク！で、ブランド OMEGA、モデル スピードマスター、型番 3511.50、状態 使用感あり、ベルトに細かい傷あり、動作 正常に動作、付属品 箱あり・保証書あり・余りコマありと入力した様子。'} />
+            <figcaption class="sr-only">{isModelStory ? `ヒカカク！。ブランド ROLEX。モデル ${searchWatch.model}。型番 ${searchWatch.ref}。状態 使用感あり。ケース・ブレスに細かい傷あり。動作 正常に動作。付属品 箱あり、保証書あり、余りコマあり。` : 'ヒカカク！。ブランド OMEGA。モデル スピードマスター。型番 3511.50。状態 使用感あり、ベルトに細かい傷あり。動作 正常に動作。付属品 箱あり、保証書あり、余りコマあり。'}</figcaption>
           </figure>
           <div class="story-copy">
             <p>型番なんて覚えていなかったので、時計本体と保証書を見ながら確認しました。</p>
-            <p>状態についても、できるだけ正直に入力。{isSubmariner16610 ? 'ブレスレット' : 'ベルト'}やケースには細かい使用傷があります。ガラス面には大きな傷はありません。オーバーホールについても、最近はしていません。</p>
+            <p>状態についても、できるだけ正直に入力。{isModelStory ? 'ブレスレット' : 'ベルト'}やケースには細かい使用傷があります。ガラス面には大きな傷はありません。オーバーホールについても、最近はしていません。</p>
             <p>写真もスマホで撮りました。正面、裏側、ベルト、箱、保証書、余りコマ。特別きれいに撮影したわけではなく、普通にスマホで撮っただけです。</p>
             <p>入力自体は、思っていたより簡単でした。</p>
           </div>
@@ -368,7 +391,7 @@ const faqItems = [
       <section class="story-section story-section--tint" aria-labelledby="change-title">
         <h2 class="section-heading" id="change-title">査定額がどんどん変わった</h2>
         <div class="story-copy">
-          <p>少しすると、次の査定が届きました。B社は<span class="amount">{storyData.amountB}</span>前後。<span class="mark mark--red">{isSubmariner16610 ? '「え、さっきより金額が上がった」' : '「え、さっきより2万5,000円高い」'}</span>。さらに、C社は<span class="amount">{storyData.amountC}</span>前後。そして、D社は<span class="amount">{storyData.amountD}</span>前後。</p>
+          <p>少しすると、次の査定が届きました。B社は<span class="amount">{storyData.amountB}</span>前後。<span class="mark mark--red">{isModelStory ? '「え、さっきより金額が上がった」' : '「え、さっきより2万5,000円高い」'}</span>。さらに、C社は<span class="amount">{storyData.amountC}</span>前後。そして、D社は<span class="amount">{storyData.amountD}</span>前後。</p>
           <p>ここでかなり驚きました。<span class="mark">同じ時計、同じ入力内容</span>。それなのに、<span class="mark mark--red">査定額にこれだけの差が出ました。</span></p>
         </div>
         <div class="result-reveal">
@@ -378,10 +401,10 @@ const faqItems = [
             <div><dt>C社</dt><dd>{storyData.amountC}</dd></div>
             <div><dt>D社（最高額）</dt><dd>最大 {storyData.amountD}前後</dd></div>
           </dl>
-          <div class="difference"><span>最大と最小の差額</span><strong>{isSubmariner16610 ? '300,000円' : '73,000円以上'}</strong></div>
+          <div class="difference"><span>最大と最小の差額</span><strong>{isModelStory ? storyData.maxDifference : '73,000円以上'}</strong></div>
         </div>
         <a class="story-cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分の{searchWatch.ref}はいくらか調べてみる <span aria-hidden="true">›</span></a>
-        <p class="under-price">※{isSubmariner16610 ? '公開実績をもとに再構成したモデルケースであり' : '個人の体験にもとづく例であり'}、実際の査定・売却額を保証するものではありません。</p>
+        <p class="under-price">※{isModelStory ? '公開実績をもとに再構成したモデルケースであり' : '個人の体験にもとづく例であり'}、実際の査定・売却額を保証するものではありません。</p>
         <div class="story-copy">
           <p>最初の{storyData.amountASpoken}だけ見ていたら、「こんなものなんだ」と思って、そのまま売っていたかもしれません。でも比較したことで、<strong class="neutral-strong">「複数の店を見る意味って、こういうことか」</strong>と初めて実感しました。</p>
         </div>
@@ -440,7 +463,7 @@ const faqItems = [
           <div class="price-arrow" aria-hidden="true">›</div>
           <div class="final-price__box final-price__box--confirmed"><b>現物確認後の査定額</b><strong>{storyData.amountFinal}</strong></div>
         </div>
-        {isSubmariner16610 ? (
+        {isModelStory ? (
           <p class="under-price">理由：使用傷や個体条件などを確認した想定で、事前査定より{storyData.preToFinalDifference}下がるモデルとしています。<br />※公開実績をもとに再構成したモデルケースであり、実際の査定・売却額を保証するものではありません。</p>
         ) : (
           <p class="under-price">理由：使用傷などを確認したため、事前査定より1万円下がりました。<br />※個人の体験にもとづく例であり、実際の査定・売却額を保証するものではありません。</p>
@@ -453,18 +476,18 @@ const faqItems = [
 
       <section class="story-section" aria-labelledby="what-if-title">
         <h2 class="section-heading" id="what-if-title">もし最初の査定で売っていたら？</h2>
-        <div class="story-copy"><p>最初に届いた査定額は<span class="amount">{storyData.amountA}</span>。{isSubmariner16610 ? '現物確認後の査定額は' : '今回実際に売却した金額は'}<span class="amount">{storyData.amountFinal}</span>でした。</p></div>
+        <div class="story-copy"><p>最初に届いた査定額は<span class="amount">{storyData.amountA}</span>。{isModelStory ? '現物確認後の査定額は' : '今回実際に売却した金額は'}<span class="amount">{storyData.amountFinal}</span>でした。</p></div>
         <div class="compare-price">
           <div class="compare-price__box"><span>最初の査定額</span><strong>{storyData.amountA}</strong></div>
           <div class="compare-price__arrow" aria-hidden="true">vs</div>
-          <div class="compare-price__box compare-price__box--red"><span>{isSubmariner16610 ? '現物確認後の査定額' : '実際の売却額'}</span><strong>{storyData.amountFinal}</strong></div>
+          <div class="compare-price__box compare-price__box--red"><span>{isModelStory ? '現物確認後の査定額' : '実際の売却額'}</span><strong>{storyData.amountFinal}</strong></div>
         </div>
         <p class="compare-difference"><small>差額</small> {storyData.finalDifference}</p>
         <a class="story-cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">{searchWatch.ref}を売る前に査定額を比べる <span aria-hidden="true">›</span></a>
-        <p class="under-price">※{isSubmariner16610 ? '公開実績をもとに再構成したモデルケースであり' : '個人の体験にもとづく例であり'}、実際の査定・売却額を保証するものではありません。</p>
+        <p class="under-price">※{isModelStory ? '公開実績をもとに再構成したモデルケースであり' : '個人の体験にもとづく例であり'}、実際の査定・売却額を保証するものではありません。</p>
         <div class="story-copy">
           <p>もちろん、一社目でも現物査定後に金額が変わった可能性はあります。逆に、もっと高く買ってくれる業者があった可能性もあります。</p>
-          <p>だから、<strong class="neutral-strong">{isSubmariner16610 ? '「ヒカカク！を使えば必ず高く売れる」' : '「ヒカカク！を使えば必ず6万円以上高く売れる」'}</strong>という話ではありません。</p>
+          <p>だから、<strong class="neutral-strong">{isModelStory ? '「ヒカカク！を使えば必ず高く売れる」' : '「ヒカカク！を使えば必ず6万円以上高く売れる」'}</strong>という話ではありません。</p>
           <p>僕が一番怖いと思ったのは、<strong>比較しなければ、その金額が安いことにすら気づけない可能性がある</strong>ということでした。もし何も知らず近所の店へ行って、「{storyData.amountASpoken}です」と言われていたら、僕は普通に、「そんなものなのかな」と思っていたかもしれません。</p>
         </div>
       </section>
@@ -478,7 +501,7 @@ const faqItems = [
         </div>
         <div class="story-copy">
           <p>一店舗だけで査定すると、その金額しか見えません。複数社を見ることで、<span class="mark">「この時計はこのくらいなんだ」というおおよその基準</span>が分かります。</p>
-          {isSubmariner16610 ? (
+          {isModelStory ? (
             <p>今回のモデルケースでも、{storyData.amountASpoken}から{storyData.amountDSpoken}前後まで差が出ました。業者によって在庫状況や販売ルート、得意なブランドなどが違うため、査定額も変わります。</p>
           ) : (
             <p>今回、自分の時計でも、15万5,000円から22万8,000円前後まで差が出ました。業者によって在庫状況や販売ルート、得意なブランドなどが違うため、査定額も変わります。</p>
@@ -535,7 +558,7 @@ const faqItems = [
         <a class="story-cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">まずは今の{searchWatch.ref}の価格だけ確認する <span aria-hidden="true">›</span></a>
       </section>
 
-      {isSubmariner16610 ? (
+      {isModelStory ? (
         <p class="disclaimer">※本記事は公開されている査定・買取実績をもとに再構成したモデルストーリーです。特定の個人の体験や一取引の結果を示すものではありません。査定額は商品・状態・時期・買取業者等により異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
       ) : (
         <p class="disclaimer">※本記事の内容は個人の実体験に基づくものです。記載の査定額は筆者の事例であり、査定額は商品・状態・時期・買取業者等により異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
