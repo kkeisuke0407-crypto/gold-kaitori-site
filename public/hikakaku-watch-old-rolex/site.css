@@ -1044,3 +1044,56 @@
   .watch-compare--rolex .hero__lead { font-size: 14px; }
   .watch-compare--rolex .hero__trust li { font-size: 10.5px; }
 }
+
+/* キャンペーンの進呈額。バナー画像の文字は縮小すると読めないので、
+   金額だけ本文側でも大きく出す。 */
+.watch-compare--rolex .campaign__amount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 12px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--hwc-gold);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-gold-pale);
+  text-align: center;
+}
+.watch-compare--rolex .campaign__amount span {
+  color: var(--hwc-gold-dark);
+  font-size: var(--r-note);
+  font-weight: 800;
+  line-height: 1.5;
+}
+.watch-compare--rolex .campaign__amount b {
+  color: var(--hwc-red-dark);
+  font-family: var(--hwc-font-serif);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.watch-compare--rolex .campaign__amount i {
+  margin-left: 2px;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 800;
+}
+@media (min-width: 720px) {
+  .watch-compare--rolex .campaign__amount b { font-size: 42px; }
+  .watch-compare--rolex .campaign__amount span { font-size: 13px; }
+}
+
+/* 比較表：375pxでは460pxになり3列目「向いている人」が画面外に出ていた。
+   nowrap を解いて折り返させ、横スクロールなしで収める。 */
+@media (max-width: 600px) {
+  .watch-compare--rolex .opt-table { font-size: 12.5px; }
+  .watch-compare--rolex .opt-table th,
+  .watch-compare--rolex .opt-table td { padding: 9px 8px; line-height: 1.55; }
+  .watch-compare--rolex .opt-table thead th,
+  .watch-compare--rolex .opt-table tbody th { white-space: normal; }
+  .watch-compare--rolex .opt-table tbody th { word-break: auto-phrase; }
+  /* 基底の min-width:460px が横スクロールの原因。折り返せるので解除する */
+  .watch-compare--rolex .opt-table { min-width: 0; }
+}
