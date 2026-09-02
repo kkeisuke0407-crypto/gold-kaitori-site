@@ -6,90 +6,57 @@ const privacyUrl = 'https://hikakaku.com/privacypolicy';
 // 引用元（ヒカカク！公式サイト）
 const sourceRecordsUrl = 'https://hikakaku.com/category/all-category/watch/assessment_achievements/';
 const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
-const disclaimerText = '掲載内容は引用時点の情報であり、実際の査定・売却額を保証するものではありません。';
 
-// 台本6：同一型番でも業者によって提示額が変わる事例（1件に絞る）
-const submarinerCase = {
-  brand: 'ROLEX',
-  model: 'サブマリーナ デイト 16610',
-  prices: ['850,000円', '750,000円', '590,000円'],
-  gap: '260,000円',
+// 証拠①：古いロレックスの査定実績（ヒカカク！公式の掲載実績より抜粋）
+const pickRecords = [
+  { model: 'デイトナ 16520', state: '中古品・使用感あり', price: '3,300,000', date: '2025.03.29' },
+  { model: 'GMTマスターⅠ 16700 N番 赤青ベゼル', state: '中古美品', price: '1,600,000', date: '2025.03.11' },
+  { model: 'エクスプローラーⅠ 114270', state: '中古美品', price: '880,000', date: '2025.03.16' },
+];
+
+// 証拠②：同一型番でも業者で提示額が変わる事例。棒の長さは最高額を100%とした相対値。
+const spread = {
+  model: 'ROLEX サブマリーナ デイト 16610',
+  rows: [
+    { label: 'A社', yen: '850,000', pct: 100, best: true },
+    { label: 'B社', yen: '750,000', pct: 88, best: false },
+    { label: 'C社', yen: '590,000', pct: 69, best: false },
+  ],
+  gap: '260,000',
 };
 
-// 台本2：FV直下で即答する「よくある不安」
+// 「こんな時計でも」＝検索者の不安に即答するチェック項目
 const doubts = [
-  '昔買って、そのまま何年も使っていない',
-  '傷や使用感がかなりある',
-  '箱をなくしてしまった',
-  '保証書が見つからない',
-  '正確な型番を覚えていない',
-  '長いあいだ動かしていない',
-  '親や家族から譲り受けた',
+  '何年も使っていない',
+  '傷や使用感がある',
+  '箱をなくした',
+  '保証書がない',
+  '型番が分からない',
+  '長く動かしていない',
+  '譲り受けたもの',
 ];
 
-// 台本3：査定額を左右する4つ
-const appraisalFactors = [
-  { no: '01', title: 'モデル・型番', body: '同じロレックスでも、モデルや型番によって評価は異なります。生産終了モデルなども含め、現在どの程度の査定になるかは型番ごとに確認する必要があります。' },
-  { no: '02', title: '時計の状態', body: '傷、使用感、動作状態、修理歴などが確認されます。' },
-  { no: '03', title: '付属品', body: '箱・保証書・余りコマなどの有無によって、査定額が変わる場合があります。' },
-  { no: '04', title: '査定する業者', body: 'ロレックスを得意とする業者、海外販路を持つ業者、欲しい在庫が違う業者。同じ時計でも、査定する会社が違えば評価も変わることがあります。' },
+// 査定額を決める要素：時計側と業者側に分けて示す
+const watchFactors = [
+  { title: 'モデル・型番', body: '同じロレックスでもモデルや型番で評価は異なります。生産終了モデルなども含め、型番ごとの確認が必要です。' },
+  { title: '時計の状態', body: '傷、使用感、動作状態、修理歴などが確認されます。' },
+  { title: '付属品', body: '箱・保証書・余りコマなどの有無で査定額が変わる場合があります。' },
+];
+const shopFactors = [
+  { title: '在庫状況', body: 'そのモデルを今欲しい店と、すでに在庫を多く持っている店では評価が変わることがあります。' },
+  { title: '得意ジャンル', body: 'ロレックスの販売・買取を得意とする業者、アンティーク時計に強い業者など、得意分野は会社ごとに異なります。' },
+  { title: '販売ルート', body: '国内店舗、海外販売、業者間取引など、買い取った時計を販売する方法も業者ごとに異なります。' },
+  { title: '相場・タイミング', body: '為替や海外需要などによって、高級時計の相場が動く場合があります。' },
 ];
 
-// 台本7：査定額に差が生まれる4つの理由
-const priceFactors = [
-  { no: '01', title: '在庫状況', body: 'そのモデルを今欲しい店と、すでに在庫を多く持っている店では評価が変わることがあります。' },
-  { no: '02', title: '得意ジャンル', body: 'ロレックスの販売・買取を得意とする業者、アンティーク時計に強い業者など、得意分野は会社ごとに異なります。' },
-  { no: '03', title: '販売ルート', body: '国内店舗、海外販売、業者間取引など、買い取った時計を販売する方法も業者ごとに異なります。' },
-  { no: '04', title: '相場・タイミング', body: '為替や海外需要などによって、高級時計の相場が動く場合があります。' },
-];
-
-// 台本4：古いロレックスの査定実績（抜粋）
-const pickRecords = [
-  { model: 'ロレックス デイトナ 16520', state: '中古品・使用感あり', price: '3,300,000円', date: '2025年3月29日' },
-  { model: 'ロレックス GMTマスターⅠ 16700 N番 赤青ベゼル', state: '中古美品', price: '1,600,000円', date: '2025年3月11日' },
-  { model: 'ロレックス エクスプローラーⅠ 114270', state: '中古美品', price: '880,000円', date: '2025年3月16日' },
-];
-
-// 台本8：査定前に確認しておきたい4つ
+// 査定前に確認しておきたいこと
 const prepareItems = [
-  { title: '型番', body: '分かる場合は保証書などで確認しておきます。型番が分からなくても、時計本体や写真などから確認できる場合があります。' },
+  { title: '型番', body: '分かる場合は保証書などで確認。分からなくても、時計本体や写真から確認できる場合があります。' },
   { title: '箱・保証書・余りコマ', body: '残っているものがあれば、一緒に確認しておきます。' },
   { title: '時計の状態', body: '傷や使用感があっても、無理に自分で磨いたり修理したりする必要はありません。' },
-  { title: '長く使っていない場合', body: '「古いから」「動かしていないから」と自己判断で処分せず、そのままの状態で査定可能か確認します。' },
+  { title: '長く使っていない場合', body: '自己判断で処分せず、そのままの状態で査定可能か確認します。' },
 ];
 
-// 台本11：一括査定と相性がいい人
-const fitList = [
-  '自分のロレックスの相場が分からない',
-  '古いモデルなので今の価値を知りたい',
-  '1店舗だけで決めるのが不安',
-  '複数の買取店を自分で回るのは面倒',
-  '売るかどうかは査定額を見てから決めたい',
-];
-
-const rolex2025 = [
-  ['コスモグラフ デイトナ ブラック 126500LN', '中古美品', '4,100,000円', '2025.08.20', 'エステメ'],
-  ['デイトナ 116500LN BK', '中古美品', '3,400,000円', '2025.04.19', 'エステメ'],
-  ['デイトナ 16520', '中古品・使用感あり', '3,300,000円', '2025.03.29', '買虎'],
-  ['スカイドゥエラー Ref.336933', '中古美品', '3,150,000円', '2025.03.21', 'シグマ'],
-  ['デイトジャスト36 126231', '新品・未開封', '2,300,000円', '2025.09.18', '買虎'],
-  ['ヨットマスター 116621 チョコレート', '中古品・使用感あり', '1,880,000円', '2025.05.12', 'エステメ'],
-  ['GMTマスターⅠ 16700 N番 赤青ベゼル', '中古美品', '1,600,000円', '2025.03.11', 'シグマ'],
-  ['サブマリーナー 114060 ノンデイト', '中古美品', '1,550,000円', '2025.03.06', 'エステメ'],
-  ['サブマリーナデイト 116610LN', '中古美品', '1,350,000円', '2025.03.09', '買取屋アップ'],
-  ['デイトジャスト28 279174 ダークロジウム', '中古美品', '1,200,000円', '2025.08.21', 'エステメ'],
-  ['デイトジャスト 116234 ホワイト ローマ', '中古美品', '1,000,000円', '2025.03.07', 'かいきり'],
-  ['エクスプローラーⅠ 114270 ブラック', '中古美品', '880,000円', '2025.03.16', 'オルロージュ東京'],
-  ['チェリーニ 5112', '中古品・使用感あり', '460,000円', '2025.03.06', 'エステメ'],
-];
-const rolex2024 = [
-  ['デイトナ 116519LN', '中古美品', '5,650,000円', '2024.03.10', 'オルロージュ東京'],
-  ['116518LN', '中古美品', '5,250,000円', '2024.03.25', 'オルロージュ東京'],
-  ['デイデイト 118206 アイスブルー', '中古美品', '3,200,000円', '2024.03.25', 'オルロージュ東京'],
-  ['エクスプローラーⅠ 124270', '中古美品', '1,430,000円', '2024.08.16', 'エステメ'],
-];
-
-// 台本14：よくある質問
 const faqs = [
   { q: '査定だけでも利用できますか？', a: '査定額を確認してから、売るかどうかを判断できます。金額に納得できなければ、売らない選択もできます。' },
   { q: '古いロレックスでも査定できますか？', a: 'モデル・状態等によりますが、古い時計でも査定対象になる場合があります。具体的な査定可否や査定額は各買取業者が判断します。' },
@@ -98,8 +65,6 @@ const faqs = [
   { q: '必ず20社から査定が来ますか？', a: 'いいえ。「最大20社」であり、商品・地域・条件等によって査定を行う業者数は異なります。' },
   { q: '査定額は確定価格ですか？', a: '事前査定の場合、現物確認後に金額が変わる場合があります。傷・動作状態・付属品などを確認したうえで最終的な査定額が決まります。' },
 ];
-
-const recordTable = (rows: string[][]) => rows;
 ---
 
 <!doctype html>
@@ -154,170 +119,177 @@ const recordTable = (rows: string[][]) => rows;
       <div class="pr-bar">当サイトは提携広告を含む比較・案内メディアです</div>
       <div class="single-column-layout">
 
+      <!-- 1. 約束 -->
       <section class="hero" aria-labelledby="page-title">
         <div class="hero__inner content">
-          <p class="hero__kicker">昔買ったロレックス。</p>
-          <h1 id="page-title"><strong>古いからといって、<br />価値がないとは限りません。</strong></h1>
-          <p class="hero__lead">20年前、30年前に買った時計。最近ほとんど使っていない時計。<br />「これ、今売ったらいくらになるんだろう？」と思ったら、まず現在の査定額を確認できます。</p>
-          <p class="hero__note">ただし、1社だけの査定では、その金額が高いのか安いのか分かりません。ヒカカク！なら、複数の買取業者へまとめて査定を依頼して、金額を比べてから売るかどうかを決められます。</p>
-          <a class="cta cta--hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">古いロレックスの査定額を調べてみる <span aria-hidden="true">›</span></a>
-          <ul class="trust-list"><li>利用無料</li><li>査定額を見てから売却を判断</li><li>最大20社へまとめて査定依頼</li></ul>
-          <p class="image-note">※査定を行う業者数は商品・地域・条件等によって異なります。<br />※査定の可否・査定額は時計の状態・型番・付属品・時期・買取業者等によって異なります。</p>
+          <p class="hero__kicker">昔買ったロレックス</p>
+          <h1 id="page-title">古いからといって、<br /><strong>価値がないとは限りません。</strong></h1>
+          <p class="hero__lead">まず今の査定額を確認して、<br />複数社を比べてから決められます。</p>
+          <a class="cta cta--hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">古いロレックスの査定額を調べる <span aria-hidden="true">›</span></a>
+          <ul class="trust-list"><li>利用無料</li><li>査定だけでもOK</li><li>最大20社へ一括依頼</li></ul>
+          <p class="image-note">※査定を行う業者数は商品・地域・条件等によって異なります。※査定の可否・査定額は時計の状態・型番・付属品・時期・買取業者等によって異なります。</p>
         </div>
       </section>
 
-      <section class="section section--doubt" id="doubt" aria-labelledby="doubt-title">
+      <!-- 2. 不安に即答 -->
+      <section class="section section--doubt" aria-labelledby="doubt-title">
         <div class="content">
-          <h2 id="doubt-title">「こんな古いロレックスでも売れるの？」と思っていませんか？</h2>
-          <p class="section-lead">例えば、こんな時計です。</p>
-          <ul class="doubt-list">
-            {doubts.map((item) => <li>{item}</li>)}
-          </ul>
-          <p class="doubt-note">こんな時計でも、査定対象になる場合があります。</p>
-          <p class="pull">大事なのは、<br /><strong>「古いから安いだろう」と自分だけで判断しないこと。</strong></p>
-          <p class="closing-text">ロレックスは、同じブランドでもモデル・型番・状態・付属品・査定する業者によって評価が変わります。だからまず確認したいのは、「古いロレックスの一般的な相場」ではなく、<b>「自分が持っているロレックスはいくらか？」</b>です。</p>
-          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分のロレックスはいくらか確認する <span aria-hidden="true">›</span></a>
+          <p class="eyebrow">まず、よくある不安から</p>
+          <h2 id="doubt-title">「こんな古いロレックスでも売れるの？」</h2>
+          <p class="lead">下のような時計でも、査定対象になる場合があります。</p>
+          <ul class="chips">{doubts.map((d) => <li>{d}</li>)}</ul>
+          <p class="statement">「古いから安いだろう」と<br /><strong>自分だけで判断しないこと。</strong></p>
+          <p class="lead">ロレックスはモデル・型番・状態・付属品・査定する業者によって評価が変わります。確認したいのは一般的な相場ではなく、<b>自分の1本がいくらか</b>です。</p>
+          <p class="note-inline">※査定の可否・査定額は提携買取業者が時計の状態等を確認したうえで判断します。</p>
         </div>
       </section>
 
-      <section class="section section--factor" id="factor" aria-labelledby="factor-title">
+      <!-- 3. 証拠①：実際の査定額 -->
+      <section class="section section--proof" aria-labelledby="proof-title">
         <div class="content">
-          <h2 id="factor-title">ネット相場だけでは分からない</h2>
-          <p class="section-lead">検索して出てきた「買取相場」が、あなたの査定額とは限りません。「ロレックス 買取相場」「古い ロレックス 価値」などで調べると、さまざまな金額が出てきます。でも、その数字だけでは、自分の時計が実際にいくらになるのかまでは分かりません。</p>
-          <div class="subsection-head"><span>要素</span><h3>査定額を左右する4つ</h3></div>
-          <div class="factor-list">
-            {appraisalFactors.map((item) => <article><span class="factor-icon" aria-hidden="true"></span><div><h3><small>{item.no}</small>{item.title}</h3><p>{item.body}</p></div></article>)}
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--model" id="model" aria-labelledby="model-title">
-        <div class="content">
-          <h2 id="model-title">実際に古いロレックスも査定されています</h2>
-          <p class="section-lead">昔のモデルだからといって、一律に同じ評価になるわけではありません。ヒカカク！公式サイトには、ロレックスの型番別査定実績も掲載されています。</p>
-          <div class="subsection-head"><span>実績</span><h3>査定実績の例</h3></div>
-          <div class="record-picks">
-            {pickRecords.map((item) => (
-              <article class="record-pick">
-                <h4>{item.model}</h4>
-                <p class="record-pick__state">{item.state}</p>
-                <p class="record-pick__price">{item.price}</p>
-                <p class="record-pick__date">{item.date}</p>
+          <p class="eyebrow">実績</p>
+          <h2 id="proof-title">古いモデルも、実際に<br />この金額で査定されています</h2>
+          <div class="proof-cards">
+            {pickRecords.map((r) => (
+              <article class="proof-card">
+                <h3>{r.model}</h3>
+                <p class="proof-card__state">{r.state}</p>
+                <p class="proof-card__price"><b>{r.price}</b><span>円</span></p>
+                <p class="proof-card__date">{r.date} 査定</p>
               </article>
             ))}
           </div>
           <p class="notice">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」 <a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a> 掲載実績より抜粋。<br />※掲載金額は各査定日時点の事例です。現在の査定額を保証するものではありません。実際の査定額は状態・付属品・相場・時期・買取業者等によって異なります。</p>
-          <details class="record-details"><summary>ロレックスの査定実績をもっと見る <small>（2025年）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2025).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
-          <details class="record-details"><summary>ロレックスの査定実績をもっと見る <small>（2024年）</small></summary><div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2024).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div></details>
-          <p class="pull">つまり、<br /><strong>「古いロレックスはいくら？」ではなく、自分のモデル・状態ならいくらなのかを確認する。</strong></p>
-          <p class="closing-text">ここが重要です。</p>
-          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">今の査定額を確認してみる <span aria-hidden="true">›</span></a>
+          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分のロレックスはいくらか確認する <span aria-hidden="true">›</span></a>
         </div>
       </section>
 
-      <section class="section section--reason" id="reason" aria-labelledby="reason-title">
+      <!-- 4. 証拠②：業者による差 -->
+      <section class="section section--spread" aria-labelledby="spread-title">
         <div class="content">
-          <h2 id="reason-title">そして、1社だけでは判断しにくい</h2>
-          <p class="section-lead">査定額が出ても、それが高いのか安いのか分かりますか。例えば、近所の買取店へ持っていって「60万円です」と言われたとします。普段からロレックスの買取相場を見ていなければ、その60万円が高いのか、普通なのか、安いのか判断するのは難しいはずです。</p>
-          <div class="subsection-head"><span>事例</span><h3>同じ16610でも査定額に差</h3></div>
-          <article class="case-card case-card--navy case-card--solo">
-            <span class="case-watch" role="img" aria-label="腕時計のイメージ"></span>
-            <div class="case-card__text">
-              <b>{submarinerCase.brand}</b>
-              <h3>{submarinerCase.model}</h3>
-              <dl><div><dt>A社</dt><dd>{submarinerCase.prices[0]}</dd></div><div><dt>B社</dt><dd>{submarinerCase.prices[1]}</dd></div><div><dt>C社</dt><dd>{submarinerCase.prices[2]}</dd></div></dl>
+          <p class="eyebrow">業者による差</p>
+          <h2 id="spread-title">同じ型番でも、<br />提示額はここまで変わります</h2>
+          <p class="lead">近所の1社で「60万円です」と言われたとして、その金額が高いのか安いのか。普段から相場を見ていなければ、判断は難しいはずです。</p>
+
+          <figure class="spread">
+            <figcaption class="spread__model">{spread.model}</figcaption>
+            <div class="spread__rows">
+              {spread.rows.map((r) => (
+                <div class:list={['spread__row', r.best && 'is-best']}>
+                  <span class="spread__label">{r.label}</span>
+                  <span class="spread__bar" style={`--w:${r.pct}%`}><b>{r.yen}<i>円</i></b></span>
+                </div>
+              ))}
             </div>
-            <p class="case-card__gap">差額 <strong>{submarinerCase.gap}</strong></p>
-          </article>
-          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※過去の査定事例であり、現在の16610の査定相場を示すものではありません。現在の査定額を保証するものでもありません。※{disclaimerText}※掲載の時計画像はイメージです。</p>
-          <p class="closing-text">重要なのは、「16610が今85万円」ということではありません。この事例から分かるのは、<b>同じ時計でも、査定する業者によって提示額が変わることがある</b>ということです。だから、1社だけを見るよりも、複数社を比べてから判断する意味があります。</p>
-          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">売る前に査定額を比べてみる <span aria-hidden="true">›</span></a>
+            <p class="spread__gap"><span>最高額と最低額の差</span><strong>{spread.gap}<i>円</i></strong></p>
+          </figure>
 
-          <div class="subsection-head"><span>理由</span><h3>なぜ買取店によって金額が違う？</h3></div>
-          <p class="reason-lead">査定額に差が生まれる4つの理由です。</p>
-          <div class="reason-list">
-            {priceFactors.map((item) => <article><span class="reason-icon" aria-hidden="true"></span><div><h3><small>{item.no}</small>{item.title}</h3><p>{item.body}</p></div></article>)}
+          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※過去の査定事例であり、現在の16610の査定相場を示すものではありません。現在の査定額を保証するものでもありません。※掲載内容は引用時点の情報です。</p>
+          <p class="statement statement--quiet">この事例が示すのは「16610が85万円」ではなく、<br /><strong>同じ時計でも、聞く相手で提示額が変わること。</strong></p>
+          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">売る前に複数社の査定額を比べる <span aria-hidden="true">›</span></a>
+        </div>
+      </section>
+
+      <!-- 5. 仕組み：時計側／業者側 -->
+      <section class="section section--why" aria-labelledby="why-title">
+        <div class="content">
+          <p class="eyebrow">仕組み</p>
+          <h2 id="why-title">査定額は、何で決まるのか</h2>
+          <p class="lead">検索して出てくる「買取相場」は平均値です。実際の金額は、<b>時計側の要素</b>と<b>業者側の事情</b>の両方で決まります。</p>
+
+          <div class="why-col">
+            <h3 class="why-head why-head--watch"><span>あなたの時計側</span>3つの要素</h3>
+            <dl class="deflist">
+              {watchFactors.map((f) => <div><dt>{f.title}</dt><dd>{f.body}</dd></div>)}
+            </dl>
           </div>
-        </div>
-      </section>
 
-      <section class="section section--prepare" id="prepare" aria-labelledby="prepare-title">
-        <div class="content">
-          <h2 id="prepare-title">古い時計だからこそ、状態も重要</h2>
-          <p class="section-lead">査定前に確認しておきたい4つのことです。</p>
-          <aside class="prepare-box">
-            <ul>{prepareItems.map((item) => <li><b>{item.title}</b><br />{item.body}</li>)}</ul>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section section--condition" id="condition" aria-labelledby="condition-title">
-        <div class="content">
-          <h2 id="condition-title">付属品がなくても、まず確認</h2>
-          <p class="section-lead">箱や保証書がないからといって、査定前に諦める必要はありません。</p>
-          <div class="condition-grid">
-            <article><h3>使用中・美品</h3><span class="condition-icon" aria-hidden="true"></span><p>現在使っている時計も査定できます。</p></article>
-            <article><h3>キズ・使用感あり</h3><span class="condition-icon" aria-hidden="true"></span><p>使用傷がある時計も、状態を確認したうえで査定されます。</p></article>
-            <article><h3>長く使っていない</h3><span class="condition-icon" aria-hidden="true"></span><p>しばらく使っていない時計でも査定対象になる場合があります。</p></article>
-            <article><h3>箱・保証書なし</h3><span class="condition-icon" aria-hidden="true"></span><p>付属品が揃っていない時計も、査定対象になる場合があります。</p></article>
+          <div class="why-col">
+            <h3 class="why-head why-head--shop"><span>買取業者側</span>4つの事情</h3>
+            <dl class="deflist">
+              {shopFactors.map((f) => <div><dt>{f.title}</dt><dd>{f.body}</dd></div>)}
+            </dl>
           </div>
-          <p class="source-note">※査定の可否・査定額は提携買取業者が時計の状態等を確認したうえで判断します。※掲載の時計画像はイメージです。</p>
-          <p class="pull"><strong>「これは売れないだろう」と思う前に、まず今の査定額を確認。</strong></p>
-          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">状態を入力して査定額を調べる <span aria-hidden="true">›</span></a>
+
+          <p class="statement statement--quiet">時計側は変えられませんが、<br /><strong>「どの業者に聞くか」は選べます。</strong></p>
+          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">まとめて査定を依頼してみる <span aria-hidden="true">›</span></a>
         </div>
       </section>
 
-      <section class="section section--compare" id="compare" aria-labelledby="compare-title">
+      <!-- 6. 準備 -->
+      <section class="section section--prepare" aria-labelledby="prepare-title">
         <div class="content">
-          <h2 id="compare-title">時計を売る方法を比較</h2>
-          <p class="section-lead">古いロレックスを売る方法は、一括査定だけではありません。</p>
-          <div class="table-scroll"><table class="method-table"><thead><tr><th></th><th class="method-table__bulk"><span class="method-icon" aria-hidden="true"></span>一括査定</th><th><span class="method-icon" aria-hidden="true"></span>買取店へ直接持込</th><th><span class="method-icon" aria-hidden="true"></span>フリマ・個人売買</th><th><span class="method-icon" aria-hidden="true"></span>質屋</th></tr></thead><tbody><tr><th>特徴</th><td>複数社の査定額を比較して判断できる</td><td>その場で査定できる</td><td>自分で価格を設定できる</td><td>売却せず、時計を預けて借入できる場合がある</td></tr><tr><th>向いている人</th><td>なるべく比較してから決めたい人</td><td>早く現金化したい人</td><td>出品・やり取り・発送などの手間をかけられる人</td><td>時計を手放したくない人</td></tr></tbody></table></div>
-          <div class="subsection-head"><span>相性</span><h3>こんな人は一括査定と相性がいい</h3></div>
-          <div class="compare-guides">
-            <article class="fit-box"><h3>一括査定が向いている人</h3><ul>{fitList.map((item) => <li>{item}</li>)}</ul></article>
-            <article class="unfit-box"><h3>別の方法が向く場合</h3><ul><li><b>今日中に必ず現金化したい</b><br />→ 店頭買取など別の方法の方が向いている場合があります。</li></ul></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section section--howto" id="howto" aria-labelledby="howto-title">
-        <div class="content">
-          <h2 id="howto-title">ヒカカク！なら一度の入力で比較できる</h2>
-          <p class="section-lead">複数の買取店を1店舗ずつ回る必要はありません。ヒカカク！では、時計の情報を入力して、複数の買取業者へ査定を依頼できます。</p>
-          <ol class="flow-list">
-            <li><i class="flow-icon" aria-hidden="true"></i><b>1</b><span>時計の情報を入力<small>ブランド・型番・状態・付属品などを入力。</small></span></li>
-            <li><i class="flow-icon" aria-hidden="true"></i><b>2</b><span>査定を依頼<small>対応可能な買取業者へ査定依頼。</small></span></li>
-            <li><i class="flow-icon" aria-hidden="true"></i><b>3</b><span>査定額を確認<small>各社から届いた査定内容を確認。</small></span></li>
-            <li><i class="flow-icon" aria-hidden="true"></i><b>4</b><span>比較して決める<small>金額や業者の情報を見て、売るかどうかを判断。</small></span></li>
+          <p class="eyebrow">準備</p>
+          <h2 id="prepare-title">査定前に確認しておく4つ</h2>
+          <ol class="prep-list">
+            {prepareItems.map((p) => <li><b>{p.title}</b><span>{p.body}</span></li>)}
           </ol>
-          <p class="closing-text">査定額を見てから、売らないという選択もできます。</p>
-          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">古いロレックスの査定額を比べてみる <span aria-hidden="true">›</span></a>
-
-          <div class="subsection-head"><span>補足</span><h3>型番が分からなくても</h3></div>
-          <p class="section-lead">「昔買ったから型番なんて覚えていない」という場合もあります。型番が分かる場合は、その情報を入力。分からない場合は、時計本体や保証書を確認したり、写真を使ってブランドなどを確認する方法もあります。</p>
-          <div class="entrance-grid">
-            <article><span class="entrance-visual entrance-visual--form" aria-hidden="true"></span><h3>型番が分かる方<br /><b>入力して査定</b></h3><p>型番・ブランド・状態を入力するだけで、査定を依頼できます。型番は時計の裏蓋や保証書に記載されています。</p></article>
-            <article><span class="entrance-visual entrance-visual--photo" aria-hidden="true"></span><h3>型番が分からない方<br /><b>写真から査定</b></h3><p>スマートフォンで写真を撮ると、AIがブランドを検出します。「もらったものでブランドが分からない」という場合はこちらから。</p></article>
-          </div>
-          <p class="closing-text">「型番が分からないから査定できない」と最初から諦める必要はありません。</p>
+          <p class="note-inline">※無理に自分で研磨・修理をすると、かえって評価が下がることがあります。</p>
         </div>
       </section>
 
-      <section class="section section--faq" id="faq" aria-labelledby="faq-title">
+      <!-- 7. 選択肢 -->
+      <section class="section section--options" aria-labelledby="options-title">
         <div class="content">
+          <p class="eyebrow">選択肢</p>
+          <h2 id="options-title">売る方法は、一括査定だけではありません</h2>
+          <div class="table-scroll">
+            <table class="opt-table">
+              <thead><tr><th>方法</th><th>特徴</th><th>向いている人</th></tr></thead>
+              <tbody>
+                <tr class="is-focus"><th>一括査定</th><td>複数社の査定額を比較して判断できる</td><td>なるべく比較してから決めたい</td></tr>
+                <tr><th>買取店へ持込</th><td>その場で査定できる</td><td>早く現金化したい</td></tr>
+                <tr><th>フリマ・個人売買</th><td>自分で価格を設定できる</td><td>出品・発送の手間をかけられる</td></tr>
+                <tr><th>質屋</th><td>売却せず預けて借入できる場合がある</td><td>手放したくない</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="verdict">
+            <p><b>今日中に必ず現金化したい</b>なら、店頭買取のほうが向いています。</p>
+            <p><b>金額を比べてから決めたい</b>なら、一括査定が向いています。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. 手順 -->
+      <section class="section section--steps" aria-labelledby="steps-title">
+        <div class="content">
+          <p class="eyebrow">手順</p>
+          <h2 id="steps-title">一度の入力で、比較まで進みます</h2>
+          <ol class="steps4">
+            <li><b>時計の情報を入力</b><span>ブランド・型番・状態・付属品など</span></li>
+            <li><b>査定を依頼</b><span>対応可能な買取業者へまとめて依頼</span></li>
+            <li><b>査定額を確認</b><span>各社から届いた内容を確認</span></li>
+            <li><b>比較して決める</b><span>金額と業者の情報を見て判断</span></li>
+          </ol>
+          <p class="statement statement--quiet"><strong>査定額を見てから、売らないという選択もできます。</strong></p>
+
+          <div class="callout">
+            <h3>型番が分からなくても大丈夫</h3>
+            <p>「昔買ったから型番なんて覚えていない」という場合も進められます。時計本体や保証書から確認する方法のほか、写真を撮ってブランドを判別する入口も用意されています。</p>
+          </div>
+          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">古いロレックスの査定額を比べてみる <span aria-hidden="true">›</span></a>
+        </div>
+      </section>
+
+      <!-- 9. 疑問 -->
+      <section class="section section--faq" aria-labelledby="faq-title">
+        <div class="content">
+          <p class="eyebrow">疑問</p>
           <h2 id="faq-title">よくある質問</h2>
           <div class="faq-list">{faqs.map((item) => <details><summary><span>Q</span>{item.q}</summary><div><b>A.</b><p>{item.a}</p></div></details>)}</div>
         </div>
       </section>
 
-      <section class="section section--closing" id="closing" aria-labelledby="closing-title">
+      <!-- 10. クロージング -->
+      <section class="section section--closing" aria-labelledby="closing-title">
         <div class="content">
-          <p class="closing-kicker">昔買ったロレックス。</p>
+          <p class="eyebrow">最後に</p>
           <h2 id="closing-title">今いくらになるのか、<br />確認してから決めればいい。</h2>
-          <p class="section-lead">古いから安い。傷があるから売れない。箱がないから価値がない。そう思っていても、実際に査定してみなければ分からないことがあります。そして1社の金額だけでは、その査定額が高いのか安いのかも判断しにくい。</p>
-          <p class="closing-text">まず今の査定額を確認する。複数社を比べる。その結果を見てから、売る。まだ持っておく。決めればいいと思います。</p>
+          <p class="lead">古いから安い。傷があるから売れない。箱がないから価値がない。そう思っていても、実際に査定してみなければ分からないことがあります。</p>
+          <p class="statement">まず査定額を確認する。複数社を比べる。<br /><strong>売るかどうかは、そのあとで決められます。</strong></p>
           <a class="cta cta--closing" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分のロレックスの査定額を調べてみる <span aria-hidden="true">›</span></a>
-          <p class="source-note">※査定額は時計のモデル・型番・状態・付属品・時期・買取業者等によって異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。詳細は<a href={privacyUrl} target="_blank" rel="nofollow noreferrer">ヒカカク！プライバシーポリシー</a>をご確認ください。</p>
+          <p class="source-note">※査定額は時計のモデル・型番・状態・付属品・時期・買取業者等によって異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。個人情報の取り扱いは<a href={privacyUrl} target="_blank" rel="nofollow noreferrer">ヒカカク！プライバシーポリシー</a>をご確認ください。</p>
         </div>
       </section>
 

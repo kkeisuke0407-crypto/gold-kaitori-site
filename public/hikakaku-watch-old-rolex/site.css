@@ -1,143 +1,558 @@
 /* ============================================================
-   /hikakaku-watch/old-rolex/ 専用の追加パーツ
+   /hikakaku-watch/old-rolex/ 専用スタイル
 
-   ベースは /hikakaku-watch-compare/site.css を読み込んだうえで、
-   このファイルで古いロレックス版だけのパーツを足す。
-   compare 側とは非共有なので /compare/ には影響しない。
+   ベースは /hikakaku-watch-compare/site.css。このファイルは
+   .watch-compare--rolex 配下だけを上書きするので /compare/ には
+   影響しない。
+
+   設計方針:
+   - 文字サイズは6段階に固定する（旧版は9種類が混在していた）
+   - 見出しは h2 / h3 の2階層だけ。h3 のサイズは1つ
+   - セクションごとに地色と役割ラベルを変え、読み進むリズムを作る
+   - 証拠（実績・業者差）をページ最大の見せ場として濃色で立てる
+   - PCは本文の行長を抑える（旧版は1行106文字あった）
    ============================================================ */
-/* ============================================================
-   古いロレックス向けリライトで追加したパーツ
-   ============================================================ */
 
-/* ヒーロー：小見出しと補足 */
-.hero__kicker {
-  position: relative;
-  z-index: 1;
-  color: var(--hwc-gold-dark);
-  font-family: var(--hwc-font-serif);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-.hero__note {
-  position: relative;
-  z-index: 1;
-  margin-top: 11px;
-  color: var(--hwc-ink-soft);
-  font-size: 12.5px;
-  line-height: 1.8;
+.watch-compare--rolex {
+  /* 使う文字サイズはこの6段階だけ */
+  --r-h2: 22px;
+  --r-h3: 16px;
+  --r-lead: 15px;
+  --r-body: 14.5px;
+  --r-note: 11.5px;
+  --r-eyebrow: 11px;
+  --r-gap: 18px;
 }
 
-/* 台本2：FV直下で不安に即答するリスト */
-.section--doubt { background: var(--hwc-ivory); }
-.doubt-list {
-  display: grid;
-  gap: 7px;
-  margin-top: 13px;
-  list-style: none;
+/* ------------------------------------------------------------
+   土台：横幅とセクションの余白
+   ------------------------------------------------------------ */
+.watch-compare--rolex .content {
+  width: min(100%, 720px);
+  margin-inline: auto;
+  padding-inline: 18px;
 }
-.doubt-list li {
-  padding: 9px 12px 9px 30px;
-  position: relative;
-  border: 1px solid var(--hwc-line);
-  border-radius: var(--hwc-radius-small);
-  background: var(--hwc-paper);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.6;
-  box-shadow: 0 1px 3px var(--hwc-shadow);
-}
-.doubt-list li::before {
-  position: absolute;
-  top: 9px;
-  left: 11px;
+.watch-compare--rolex .section { padding-block: 40px; }
+.watch-compare--rolex .section > .content > * + * { margin-top: var(--r-gap); }
+
+/* ------------------------------------------------------------
+   共通のタイポグラフィ
+   ------------------------------------------------------------ */
+.watch-compare--rolex .eyebrow {
+  display: inline-block;
+  margin: 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--hwc-gold-pale);
   color: var(--hwc-gold-dark);
-  content: "✓";
-  font-weight: 900;
-}
-.doubt-note {
-  margin-top: 12px;
-  color: var(--hwc-navy);
-  font-size: 13.5px;
+  font-size: var(--r-eyebrow);
   font-weight: 800;
-  line-height: 1.7;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
 }
+.watch-compare--rolex h2 {
+  margin: 10px 0 0;
+  color: var(--hwc-navy);
+  font-family: var(--hwc-font-serif);
+  font-size: var(--r-h2);
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.watch-compare--rolex .lead {
+  margin: 0;
+  color: var(--hwc-ink-soft);
+  font-size: var(--r-lead);
+  line-height: 1.85;
+}
+.watch-compare--rolex .lead b { color: var(--hwc-ink); font-weight: 800; }
 
-/* 主張を1行で立てるブロック */
-.pull {
-  margin-top: 17px;
-  padding: 14px 16px;
+/* 主張を一段強く置くブロック */
+.watch-compare--rolex .statement {
+  margin: 0;
+  padding: 15px 16px;
   border-radius: var(--hwc-radius-small);
   background: var(--hwc-gold-pale);
   color: var(--hwc-ink);
   font-family: var(--hwc-font-serif);
-  font-size: 14px;
+  font-size: var(--r-lead);
   line-height: 1.8;
   text-align: center;
 }
-.pull strong { color: var(--hwc-red-dark); font-size: 15.5px; font-weight: 900; }
+.watch-compare--rolex .statement strong {
+  color: var(--hwc-red-dark);
+  font-size: 1.12em;
+  font-weight: 900;
+}
+.watch-compare--rolex .statement--quiet {
+  padding: 4px 0 4px 13px;
+  border-left: 3px solid var(--hwc-gold);
+  border-radius: 0;
+  background: none;
+  text-align: left;
+}
 
-/* 台本4：査定実績の抜粋3件 */
-.record-picks { display: grid; gap: 9px; margin-top: 13px; }
-@media (min-width: 600px) { .record-picks { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.record-pick {
-  padding: 13px 14px;
+/* 注記は本文と明確に差をつける */
+.watch-compare--rolex .note-inline {
+  margin: 0;
+  color: var(--hwc-muted);
+  font-size: var(--r-note);
+  line-height: 1.6;
+}
+.watch-compare--rolex .notice,
+.watch-compare--rolex .source-note {
+  font-size: var(--r-note);
+  line-height: 1.65;
+}
+
+/* ------------------------------------------------------------
+   セクションごとの地色。読み進むリズムを作る
+   ------------------------------------------------------------ */
+.watch-compare--rolex .section--doubt,
+.watch-compare--rolex .section--why,
+.watch-compare--rolex .section--options,
+.watch-compare--rolex .section--faq { background: var(--hwc-ivory); }
+.watch-compare--rolex .section--spread,
+.watch-compare--rolex .section--prepare,
+.watch-compare--rolex .section--steps { background: var(--hwc-paper); }
+.watch-compare--rolex .section--closing { background: var(--hwc-cream); }
+
+/* ------------------------------------------------------------
+   1. ヒーロー
+   ------------------------------------------------------------ */
+.watch-compare--rolex .hero__kicker {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--hwc-gold-dark);
+  font-family: var(--hwc-font-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.watch-compare--rolex .hero h1 {
+  margin-top: 8px;
+  font-size: clamp(25px, 6.6vw, 38px);
+  line-height: 1.46;
+}
+.watch-compare--rolex .hero h1 strong { color: var(--hwc-red-dark); }
+.watch-compare--rolex .hero__lead {
+  margin-top: 12px;
+  font-size: var(--r-lead);
+  line-height: 1.85;
+}
+.watch-compare--rolex .hero .image-note { margin-top: 12px; font-size: var(--r-note); line-height: 1.6; }
+
+/* ------------------------------------------------------------
+   2. 不安チェック：7項目をチップで一目に収める
+   ------------------------------------------------------------ */
+.watch-compare--rolex .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--rolex .chips li {
+  position: relative;
+  padding: 7px 12px 7px 26px;
   border: 1px solid var(--hwc-line);
-  border-left: 4px solid var(--hwc-gold);
+  border-radius: 999px;
+  background: var(--hwc-paper);
+  color: var(--hwc-ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.watch-compare--rolex .chips li::before {
+  position: absolute;
+  left: 10px;
+  color: var(--hwc-gold-dark);
+  content: "✓";
+  font-weight: 900;
+}
+
+/* ------------------------------------------------------------
+   3. 証拠①：ページ最大の見せ場。濃色で立てる
+   ------------------------------------------------------------ */
+.watch-compare--rolex .section--proof {
+  background: var(--hwc-navy);
+  color: var(--hwc-ivory);
+}
+.watch-compare--rolex .section--proof .eyebrow {
+  background: var(--hwc-gold);
+  color: var(--hwc-navy);
+}
+.watch-compare--rolex .section--proof h2 { color: var(--hwc-ivory); }
+.watch-compare--rolex .section--proof .notice { color: oklch(88% 0.02 86); }
+.watch-compare--rolex .section--proof .notice a { color: var(--hwc-gold); }
+
+.watch-compare--rolex .proof-cards { display: grid; gap: 10px; }
+.watch-compare--rolex .proof-card {
+  padding: 14px 16px;
   border-radius: var(--hwc-radius-small);
   background: var(--hwc-paper);
-  box-shadow: 0 2px 5px var(--hwc-shadow);
+  box-shadow: 0 3px 10px oklch(10% 0.03 260 / 30%);
 }
-.record-pick h4 {
+.watch-compare--rolex .proof-card h3 {
+  margin: 0;
   color: var(--hwc-navy);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 800;
   line-height: 1.5;
 }
-.record-pick__state { margin-top: 5px; color: var(--hwc-muted); font-size: 11px; }
-.record-pick__price {
-  margin-top: 6px;
+.watch-compare--rolex .proof-card__state {
+  margin: 4px 0 0;
+  color: var(--hwc-muted);
+  font-size: var(--r-note);
+}
+.watch-compare--rolex .proof-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  margin: 6px 0 0;
   color: var(--hwc-red-dark);
   font-family: var(--hwc-font-serif);
-  font-size: 21px;
+  line-height: 1.15;
+}
+.watch-compare--rolex .proof-card__price b {
+  font-size: 27px;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
-  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
-.record-pick__date { margin-top: 3px; color: var(--hwc-muted); font-size: 11px; }
-
-/* 事例カードを単独で置くとき */
-.case-card--solo { margin-top: 13px; }
-
-/* 台本8・15 のセクション地色 */
-.section--prepare { background: var(--hwc-ivory); }
-.section--closing { background: var(--hwc-cream); }
-.closing-kicker {
-  color: var(--hwc-gold-dark);
-  font-family: var(--hwc-font-serif);
-  font-size: 13.5px;
-  font-weight: 700;
-}
-.cta--closing { margin-top: 17px; }
-
-/* 台本12：ステップの補足文 */
-.flow-list li small {
-  display: block;
-  margin-top: 3px;
+.watch-compare--rolex .proof-card__price span { font-size: 14px; font-weight: 800; }
+.watch-compare--rolex .proof-card__date {
+  margin: 4px 0 0;
   color: var(--hwc-muted);
-  font-size: 11.5px;
-  font-weight: 500;
+  font-size: var(--r-note);
+}
+
+/* ------------------------------------------------------------
+   4. 証拠②：業者差を棒グラフで見せる
+   ------------------------------------------------------------ */
+.watch-compare--rolex .spread {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--hwc-line);
+  border-radius: var(--hwc-radius);
+  background: var(--hwc-paper);
+  box-shadow: 0 2px 8px var(--hwc-shadow);
+}
+.watch-compare--rolex .spread__model {
+  margin-bottom: 13px;
+  color: var(--hwc-navy);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.watch-compare--rolex .spread__rows { display: grid; gap: 9px; }
+.watch-compare--rolex .spread__row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+}
+.watch-compare--rolex .spread__label {
+  color: var(--hwc-muted);
+  font-size: 12.5px;
+  font-weight: 800;
+}
+.watch-compare--rolex .spread__bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: var(--w);
+  min-width: 116px;
+  height: 36px;
+  padding-right: 11px;
+  border-radius: 5px;
+  background: var(--hwc-blue-pale);
+}
+.watch-compare--rolex .spread__bar b {
+  color: var(--hwc-navy);
+  font-size: 15px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.watch-compare--rolex .spread__bar i { margin-left: 1px; font-size: 11.5px; font-style: normal; }
+.watch-compare--rolex .spread__row.is-best .spread__bar { background: var(--hwc-gold); }
+.watch-compare--rolex .spread__row.is-best .spread__bar b { color: var(--hwc-navy); }
+.watch-compare--rolex .spread__gap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 9px;
+  margin: 14px 0 0;
+  padding: 11px;
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-red-pale);
+}
+.watch-compare--rolex .spread__gap span { color: var(--hwc-red-dark); font-size: 12px; font-weight: 800; }
+.watch-compare--rolex .spread__gap strong {
+  color: var(--hwc-red);
+  font-family: var(--hwc-font-serif);
+  font-size: 26px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.watch-compare--rolex .spread__gap i { font-size: 14px; font-style: normal; }
+
+/* ------------------------------------------------------------
+   5. 仕組み：時計側／業者側の2ブロック
+   ------------------------------------------------------------ */
+.watch-compare--rolex .why-col + .why-col { margin-top: 16px; }
+.watch-compare--rolex .why-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--hwc-line);
+  color: var(--hwc-navy);
+  font-size: var(--r-h3);
+  font-weight: 900;
+}
+.watch-compare--rolex .why-head span {
+  padding: 2px 9px;
+  border-radius: 4px;
+  font-size: var(--r-eyebrow);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.watch-compare--rolex .why-head--watch span { background: var(--hwc-navy); color: var(--hwc-paper); }
+.watch-compare--rolex .why-head--shop span { background: var(--hwc-gold-dark); color: var(--hwc-paper); }
+
+.watch-compare--rolex .deflist { margin: 0; }
+.watch-compare--rolex .deflist > div {
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--hwc-line);
+}
+.watch-compare--rolex .deflist > div:last-child { padding-bottom: 0; border-bottom: 0; }
+.watch-compare--rolex .deflist dt {
+  margin: 0 0 3px;
+  color: var(--hwc-ink);
+  font-size: var(--r-h3);
+  font-weight: 800;
   line-height: 1.5;
 }
+.watch-compare--rolex .deflist dd {
+  margin: 0;
+  color: var(--hwc-ink-soft);
+  font-size: var(--r-body);
+  line-height: 1.8;
+}
 
-/* 向かない場合のボックス（.fit-box と対に） */
-.unfit-box {
-  padding: 13px;
-  border: 1px solid var(--hwc-line-dark);
+/* ------------------------------------------------------------
+   6. 準備：番号つきリスト
+   ------------------------------------------------------------ */
+.watch-compare--rolex .prep-list {
+  counter-reset: prep;
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--rolex .prep-list li {
+  counter-increment: prep;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 11px;
+  padding: 13px 15px;
+  border: 1px solid var(--hwc-line);
   border-radius: var(--hwc-radius-small);
   background: var(--hwc-paper);
 }
-.unfit-box h3 { color: var(--hwc-navy); font-size: 14px; font-weight: 800; }
-.unfit-box ul { margin-top: 8px; list-style: none; }
-.unfit-box li { padding: 6px 0; font-size: 11.5px; line-height: 1.6; }
-.unfit-box li b { color: var(--hwc-ink); }
+.watch-compare--rolex .prep-list li::before {
+  content: counter(prep);
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: 12.5px;
+  font-weight: 900;
+}
+.watch-compare--rolex .prep-list b {
+  display: block;
+  color: var(--hwc-ink);
+  font-size: var(--r-h3);
+  font-weight: 800;
+  line-height: 1.5;
+}
+.watch-compare--rolex .prep-list span {
+  display: block;
+  margin-top: 3px;
+  color: var(--hwc-ink-soft);
+  font-size: var(--r-body);
+  line-height: 1.75;
+}
+
+/* ------------------------------------------------------------
+   7. 選択肢：比較表と結論
+   ------------------------------------------------------------ */
+.watch-compare--rolex .table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--hwc-line);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+}
+.watch-compare--rolex .opt-table {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.watch-compare--rolex .opt-table th,
+.watch-compare--rolex .opt-table td {
+  padding: 11px 13px;
+  border-bottom: 1px solid var(--hwc-line);
+  line-height: 1.65;
+  text-align: left;
+  vertical-align: top;
+}
+.watch-compare--rolex .opt-table thead th {
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.watch-compare--rolex .opt-table tbody th {
+  color: var(--hwc-navy);
+  font-weight: 800;
+  white-space: nowrap;
+}
+.watch-compare--rolex .opt-table tbody tr:last-child th,
+.watch-compare--rolex .opt-table tbody tr:last-child td { border-bottom: 0; }
+.watch-compare--rolex .opt-table tr.is-focus { background: var(--hwc-gold-pale); }
+.watch-compare--rolex .opt-table tr.is-focus th { color: var(--hwc-gold-dark); }
+
+.watch-compare--rolex .verdict {
+  padding: 14px 16px;
+  border-left: 3px solid var(--hwc-navy);
+  border-radius: 0 var(--hwc-radius-small) var(--hwc-radius-small) 0;
+  background: var(--hwc-blue-pale);
+}
+.watch-compare--rolex .verdict p {
+  margin: 0;
+  color: var(--hwc-ink);
+  font-size: var(--r-body);
+  line-height: 1.8;
+}
+.watch-compare--rolex .verdict p + p { margin-top: 6px; }
+.watch-compare--rolex .verdict b { color: var(--hwc-navy); font-weight: 900; }
+
+/* ------------------------------------------------------------
+   8. 手順：4ステップ
+   ------------------------------------------------------------ */
+.watch-compare--rolex .steps4 {
+  counter-reset: st;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--rolex .steps4 li {
+  counter-increment: st;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 11px;
+  align-items: center;
+  padding: 12px 15px;
+  border: 1px solid var(--hwc-line);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+}
+.watch-compare--rolex .steps4 li::before {
+  content: "0" counter(st);
+  display: grid;
+  place-items: center;
+  color: var(--hwc-gold-dark);
+  font-family: var(--hwc-font-serif);
+  font-size: 15px;
+  font-weight: 900;
+}
+.watch-compare--rolex .steps4 b {
+  display: block;
+  color: var(--hwc-ink);
+  font-size: var(--r-h3);
+  font-weight: 800;
+  line-height: 1.45;
+}
+.watch-compare--rolex .steps4 span {
+  display: block;
+  margin-top: 2px;
+  color: var(--hwc-muted);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.watch-compare--rolex .callout {
+  padding: 15px 16px;
+  border: 1px dashed var(--hwc-gold);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-gold-pale);
+}
+.watch-compare--rolex .callout h3 {
+  margin: 0 0 5px;
+  color: var(--hwc-gold-dark);
+  font-size: var(--r-h3);
+  font-weight: 900;
+}
+.watch-compare--rolex .callout p {
+  margin: 0;
+  color: var(--hwc-ink);
+  font-size: var(--r-body);
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   9. FAQ / 10. クロージング
+   ------------------------------------------------------------ */
+.watch-compare--rolex .faq-list summary { font-size: var(--r-h3); }
+.watch-compare--rolex .faq-list p { font-size: var(--r-body); line-height: 1.8; }
+.watch-compare--rolex .section--closing h2 { font-size: clamp(22px, 5.6vw, 30px); }
+
+/* ------------------------------------------------------------
+   CTA：文脈から浮かないよう上に余白を置く
+   ------------------------------------------------------------ */
+.watch-compare--rolex .cta { margin-top: 22px; }
+.watch-compare--rolex .cta--hero { margin-top: 18px; }
+.watch-compare--rolex .cta--closing { margin-top: 4px; }
+
+/* ------------------------------------------------------------
+   PC：行長を抑え、カードを横に並べる
+   ------------------------------------------------------------ */
+@media (min-width: 720px) {
+  .watch-compare--rolex { --r-h2: 28px; --r-h3: 17px; --r-lead: 16px; --r-body: 15.5px; --r-gap: 22px; }
+  .watch-compare--rolex .section { padding-block: 60px; }
+  .watch-compare--rolex .proof-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .watch-compare--rolex .prep-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .watch-compare--rolex .steps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .watch-compare--rolex .opt-table { min-width: 0; }
+  .watch-compare--rolex .spread__row { grid-template-columns: 44px minmax(0, 1fr); }
+  .watch-compare--rolex .cta { width: min(100%, 480px); margin-inline: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .watch-compare--rolex * { animation: none !important; transition: none !important; }
+}
+
+/* ------------------------------------------------------------
+   grid の落とし穴の修正
+   li::before / b / span の3要素を2カラムgridに置くと、span が
+   2行目の狭いカラム（26px）へ回り込んでテキストが縦に潰れる。
+   b と span を明示的に2列目へ固定する。
+   ------------------------------------------------------------ */
+.watch-compare--rolex .prep-list b,
+.watch-compare--rolex .prep-list span,
+.watch-compare--rolex .steps4 b,
+.watch-compare--rolex .steps4 span { grid-column: 2; }
