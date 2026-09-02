@@ -865,73 +865,74 @@
 .watch-compare--rolex .opt-table tr.is-focus .opt-icon { background: var(--hwc-gold-dark); }
 
 /* ============================================================
-   FV：添付モックアップの再現
-   ベース compare/site.css の .hero は時計写真を background に
-   敷いている（442行）。ここで background を完全に上書きしないと
-   写真が二重になるため、background と ::before を明示的に殺す。
+   FV
+   写真は hero の背景として全面に敷き、上からクリームのスクリムで
+   下半分を覆う。テキストは左寄せ。
+   ベース compare/site.css の .hero も background に時計写真を
+   敷いている（442行）ため、ここで background と ::before を
+   明示的に打ち消さないと写真が二重になる。
    ============================================================ */
 .watch-compare--rolex .hero {
   min-height: 0;
   overflow: hidden;
-  background: linear-gradient(180deg, #fffdf8 0%, #fff8ec 54%, #fffdfa 100%);
+  background:
+    linear-gradient(
+      178deg,
+      rgb(255 253 248 / 26%) 0%,
+      rgb(255 253 248 / 32%) 14%,
+      rgb(255 253 248 / 80%) 30%,
+      rgb(255 253 248 / 97%) 38%,
+      #fffdf8 46%,
+      #fff9ef 100%
+    ),
+    url("/hikakaku-watch-old-rolex/img/hero-datejust.webp") center -104px / 93% auto no-repeat,
+    linear-gradient(180deg, #fffdf8, #fff9ef);
   border-bottom: 1px solid #e3d3b2;
 }
 .watch-compare--rolex .hero::before { display: none; content: none; }
-.watch-compare--rolex .hero__inner { padding-top: 0; padding-bottom: 22px; }
-
-/* 時計写真。元素材は濃い木目の上に置かれているため、
-   放射状マスクで四辺をクリーム地に溶かし込む。 */
-.watch-compare--rolex .hero__photo {
-  width: min(100%, 375px);
-  height: 256px;
-  margin-inline: auto;
-  background: url("/hikakaku-watch-old-rolex/img/hero-datejust.webp") calc(50% - 40px) 50% / auto 130% no-repeat;
-  filter: brightness(1.13) saturate(0.72);
-  -webkit-mask-image: radial-gradient(35% 45% at 39% 48%, #000 0%, #000 40%, rgb(0 0 0 / 44%) 72%, rgb(0 0 0 / 0%) 100%);
-  mask-image: radial-gradient(35% 45% at 39% 48%, #000 0%, #000 40%, rgb(0 0 0 / 44%) 72%, rgb(0 0 0 / 0%) 100%);
-}
+.watch-compare--rolex .hero__inner { padding-top: 224px; padding-bottom: 22px; }
 
 /* 王冠＋金の罫線。ロレックスの王冠紋章は商標のため、
    一般的な意匠の王冠アウトラインを使う。 */
 .watch-compare--rolex .hero__kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
-  color: #a3803c;
+  color: #9c7833;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.18em;
-  text-align: center;
+  text-align: left;
 }
 .watch-compare--rolex .hero__crown {
-  display: block;
-  width: 19px;
-  height: 19px;
-  margin: 0 auto 5px;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
   color: #b8912f;
 }
 .watch-compare--rolex .hero__kicker span {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 11px;
+  gap: 10px;
 }
-.watch-compare--rolex .hero__kicker span::before,
 .watch-compare--rolex .hero__kicker span::after {
   content: "";
-  width: 46px;
+  width: 42px;
   height: 1px;
-  background: linear-gradient(90deg, rgb(201 167 106 / 0%), #c9a76a, rgb(201 167 106 / 0%));
+  background: linear-gradient(90deg, #c9a76a, rgb(201 167 106 / 0%));
 }
 
 .watch-compare--rolex .hero h1 {
   max-width: none;
-  margin-top: 13px;
+  margin-top: 12px;
   color: #1a1a1a;
   font-family: var(--hwc-font-serif);
   font-size: 26px;
   font-weight: 900;
-  line-height: 1.62;
+  line-height: 1.6;
   letter-spacing: 0.01em;
-  text-align: center;
+  text-align: left;
 }
 .watch-compare--rolex .hero h1 mark {
   padding: 0 3px;
@@ -946,7 +947,7 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 1.9;
-  text-align: center;
+  text-align: left;
 }
 
 /* CTAカード：白面に赤ボタン＋3つの安心材料 */
@@ -973,7 +974,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   padding: 2px 3px;
   color: #4a4640;
   font-size: 11.5px;
@@ -982,9 +983,10 @@
   text-align: center;
 }
 .watch-compare--rolex .hero__trust li + li { border-left: 1px solid #efe7d8; }
+/* アイコンは Bootstrap Icons（MIT）。塗りつぶし形状なので stroke は使わない */
 .watch-compare--rolex .hero__trust svg {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   color: #b0121a;
 }
 
@@ -996,13 +998,13 @@
   margin-top: 14px;
   padding: 11px 12px;
   border-radius: 12px;
-  background: #f4f2ee;
+  background: rgb(244 242 238 / 88%);
 }
 .watch-compare--rolex .hero__note svg {
   flex: 0 0 auto;
-  width: 18px;
-  height: 18px;
-  margin-top: 1px;
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
   color: #8a8378;
 }
 .watch-compare--rolex .hero__note p {
@@ -1013,17 +1015,31 @@
 }
 
 @media (min-width: 720px) {
-  .watch-compare--rolex .hero__photo { width: min(100%, 480px); height: 328px; background-position: calc(50% - 51px) 50%; }
+  .watch-compare--rolex .hero {
+    background:
+      linear-gradient(
+        96deg,
+        rgb(255 253 248 / 98%) 0%,
+        rgb(255 253 248 / 96%) 30%,
+        rgb(255 251 242 / 52%) 54%,
+        rgb(255 251 242 / 6%) 80%
+      ),
+      url("/hikakaku-watch-old-rolex/img/hero-datejust.webp") right 40% / auto 152% no-repeat,
+      linear-gradient(180deg, #fffdf8, #fff9ef);
+  }
+  .watch-compare--rolex .hero__inner { padding-top: 46px; padding-bottom: 42px; }
+  /* 本文は左寄せだが、左端はページ全体の content 幅に揃える */
+  .watch-compare--rolex .hero__inner > * { max-width: 420px; }
   .watch-compare--rolex .hero h1 { font-size: 34px; }
   .watch-compare--rolex .hero__lead { font-size: 15.5px; }
   .watch-compare--rolex .hero__card { padding: 20px 22px 18px; }
   .watch-compare--rolex .hero__trust li { font-size: 12.5px; }
+  .watch-compare--rolex .hero__trust svg { width: 26px; height: 26px; }
   .watch-compare--rolex .hero__note p { font-size: 11.5px; }
 }
 
 @media (max-width: 360px) {
+  .watch-compare--rolex .hero__inner { padding-top: 200px; }
   .watch-compare--rolex .hero h1 { font-size: 23px; }
-  .watch-compare--rolex .hero__kicker span::before,
-  .watch-compare--rolex .hero__kicker span::after { width: 28px; }
   .watch-compare--rolex .hero__trust li { font-size: 10.5px; }
 }
