@@ -1,6 +1,6 @@
 /* 型番検索専用の入口だけを調整。本文は story-visual-test の見た目を継承する。 */
 .watch-story--search-model .hero--search-model {
-  min-height: 650px;
+  min-height: 610px;
 }
 
 .watch-story--search-model .hero--search-model .hero__content {
@@ -107,7 +107,7 @@
 
 @media (max-width: 599px) {
   .watch-story--search-model .hero--search-model {
-    min-height: 610px;
+    min-height: 530px;
   }
 
   .watch-story--search-model .hero--search-model::after {
@@ -173,7 +173,7 @@
 
 @media (max-width: 340px) {
   .watch-story--search-model .hero--search-model {
-    min-height: 625px;
+    min-height: 535px;
   }
 
   .watch-story--search-model .hero--search-model .hero__content {
