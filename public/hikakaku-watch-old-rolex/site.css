@@ -556,3 +556,155 @@
 .watch-compare--rolex .prep-list span,
 .watch-compare--rolex .steps4 b,
 .watch-compare--rolex .steps4 span { grid-column: 2; }
+
+/* ------------------------------------------------------------
+   復活：他モデルでも起きている業者差（16610の補強）
+   16610の棒グラフを主役に残し、こちらは「一例ではない」ことを
+   示す補強なので、差額だけを立てたコンパクトな作りにする。
+   ------------------------------------------------------------ */
+.watch-compare--rolex .alsoseen {
+  padding: 15px 16px;
+  border: 1px solid var(--hwc-line);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-ivory);
+}
+.watch-compare--rolex .alsoseen__head {
+  margin: 0 0 11px;
+  color: var(--hwc-navy);
+  font-size: var(--r-h3);
+  font-weight: 900;
+  line-height: 1.5;
+}
+.watch-compare--rolex .alsoseen__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--rolex .alsoseen__list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 12px;
+  padding: 11px 13px;
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+  box-shadow: 0 1px 3px var(--hwc-shadow);
+}
+.watch-compare--rolex .alsoseen__name {
+  grid-column: 1;
+  margin: 0;
+  color: var(--hwc-ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.watch-compare--rolex .alsoseen__name b {
+  display: block;
+  color: var(--hwc-navy);
+  font-size: var(--r-note);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+.watch-compare--rolex .alsoseen__range {
+  grid-column: 1;
+  margin: 0;
+  color: var(--hwc-muted);
+  font-size: var(--r-note);
+  font-variant-numeric: tabular-nums;
+}
+.watch-compare--rolex .alsoseen__gap {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+.watch-compare--rolex .alsoseen__gap span {
+  display: block;
+  color: var(--hwc-red-dark);
+  font-size: 10.5px;
+  font-weight: 800;
+}
+.watch-compare--rolex .alsoseen__gap strong {
+  color: var(--hwc-red);
+  font-family: var(--hwc-font-serif);
+  font-size: 20px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+/* ------------------------------------------------------------
+   復活：実際の査定コメント
+   「状態・付属品が効く」という主張の直後に置く根拠。
+   仕組み（何が効くか）→ 実例（実際にこう効いた）の順で読ませる。
+   ------------------------------------------------------------ */
+.watch-compare--rolex .quotes {
+  margin-top: 16px;
+  padding: 16px;
+  border-left: 3px solid var(--hwc-navy);
+  border-radius: 0 var(--hwc-radius-small) var(--hwc-radius-small) 0;
+  background: var(--hwc-paper);
+}
+.watch-compare--rolex .quotes__head {
+  margin: 0;
+  color: var(--hwc-navy);
+  font-size: var(--r-h3);
+  font-weight: 900;
+  line-height: 1.5;
+}
+.watch-compare--rolex .quotes__lead {
+  margin: 4px 0 0;
+  color: var(--hwc-muted);
+  font-size: var(--r-note);
+  line-height: 1.6;
+}
+.watch-compare--rolex .quotes__list {
+  display: grid;
+  gap: 11px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--rolex .quotes__list li {
+  padding: 12px 13px;
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-ivory);
+}
+/* 何が効いたのかを一目で拾えるようにラベルを付ける */
+.watch-compare--rolex .quotes__tag {
+  display: inline-block;
+  margin-bottom: 7px;
+  padding: 2px 9px;
+  border-radius: 4px;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.watch-compare--rolex .quotes__list blockquote {
+  margin: 0;
+  color: var(--hwc-ink);
+  font-size: var(--r-body);
+  font-weight: 600;
+  line-height: 1.8;
+}
+.watch-compare--rolex .quotes__list cite {
+  display: block;
+  margin-top: 6px;
+  color: var(--hwc-muted);
+  font-size: 10.5px;
+  font-style: normal;
+  line-height: 1.55;
+}
+.watch-compare--rolex .quotes .source-note { margin-top: 11px; }
+
+@media (min-width: 720px) {
+  .watch-compare--rolex .alsoseen__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .watch-compare--rolex .alsoseen__list li { grid-template-columns: minmax(0, 1fr); }
+  .watch-compare--rolex .alsoseen__gap { grid-column: 1; grid-row: auto; text-align: left; }
+  .watch-compare--rolex .quotes__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

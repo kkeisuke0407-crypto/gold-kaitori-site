@@ -25,6 +25,21 @@ const spread = {
   gap: '260,000',
 };
 
+// 業者差は16610だけの話ではない。同じ出典の他モデル事例（差額の大きい順）
+const otherSpreads = [
+  { brand: 'ROLEX', model: 'デイトナ 116520 ブラック', high: '240万円', low: '128万円', gap: '112万円' },
+  { brand: 'HUBLOT', model: 'ビッグバン ゴールドセラミック', high: '207万円', low: '140万円', gap: '67万円' },
+  { brand: 'BREGUET', model: 'マリーン ラージデイト ブラック', high: '114万円', low: '75万円', gap: '39万円' },
+];
+
+// 付属品・状態が査定額をどう動かしたかの実例。買取業者が残したコメント
+const appraisalComments = [
+  { tag: '完品・美品', body: '「付属品完品＋ノベルティをお持ちいただき、お時計はほぼ新品に近い状態のため最大金額にてお買取り成立となりました」', src: 'ブライトリング A23310／中古美品／450,000円（2024年4月25日・オルロージュ東京）' },
+  { tag: '保証書なし', body: '「全体的に使用傷はあるものの目立った傷はありませんでしたが、保証書が欠品していたためこちらの査定金額となりました」', src: 'ロレックス デイデイト 118206 アイスブルー／中古美品／3,200,000円（2024年3月25日・オルロージュ東京）' },
+  { tag: '保証書なし', body: '「とても綺麗で状態も良かったのですが、保証書が欠品していたため減額となってしまいました」', src: 'ハミルトン ジャズマスター ビューマチック H32565735／中古品・使用感あり／25,000円（2024年4月22日・オルロージュ東京）' },
+  { tag: '傷が多い', body: '「付属品完品ではありましたが、外装使用傷が多数ありましたので最低額でのご案内となりました」', src: 'ロンジン L4.774.4.726／中古品・使用感あり／50,000円（2024年4月29日・オルロージュ東京）' },
+];
+
 // 「こんな時計でも」＝検索者の不安に即答するチェック項目
 const doubts = [
   '何年も使っていない',
@@ -184,7 +199,20 @@ const faqs = [
             <p class="spread__gap"><span>最高額と最低額の差</span><strong>{spread.gap}<i>円</i></strong></p>
           </figure>
 
-          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※過去の査定事例であり、現在の16610の査定相場を示すものではありません。現在の査定額を保証するものでもありません。※掲載内容は引用時点の情報です。</p>
+          <div class="alsoseen">
+            <h3 class="alsoseen__head">同じことは、他のモデルでも起きています</h3>
+            <ul class="alsoseen__list">
+              {otherSpreads.map((c) => (
+                <li>
+                  <p class="alsoseen__name"><b>{c.brand}</b>{c.model}</p>
+                  <p class="alsoseen__range">最高 {c.high} ／ 最低 {c.low}</p>
+                  <p class="alsoseen__gap"><span>差額</span><strong>{c.gap}</strong></p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※いずれも過去の査定事例であり、現在の各モデルの査定相場を示すものではありません。現在の査定額を保証するものでもありません。※掲載内容は引用時点の情報です。</p>
           <p class="statement statement--quiet">この事例が示すのは「16610が85万円」ではなく、<br /><strong>同じ時計でも、聞く相手で提示額が変わること。</strong></p>
           <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">売る前に複数社の査定額を比べる <span aria-hidden="true">›</span></a>
         </div>
@@ -202,6 +230,21 @@ const faqs = [
             <dl class="deflist">
               {watchFactors.map((f) => <div><dt>{f.title}</dt><dd>{f.body}</dd></div>)}
             </dl>
+          </div>
+
+          <div class="quotes">
+            <h3 class="quotes__head">状態と付属品は、実際にこう効いています</h3>
+            <p class="quotes__lead">買取業者が査定時に残したコメントの実例です。</p>
+            <ul class="quotes__list">
+              {appraisalComments.map((c) => (
+                <li>
+                  <span class="quotes__tag">{c.tag}</span>
+                  <blockquote>{c.body}</blockquote>
+                  <cite>{c.src}</cite>
+                </li>
+              ))}
+            </ul>
+            <p class="source-note">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」 <a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a> 掲載の査定コメントより引用。<br />※各業者のコメントであり、実際の査定・売却額を保証するものではありません。</p>
           </div>
 
           <div class="why-col">
