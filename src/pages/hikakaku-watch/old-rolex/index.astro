@@ -8,10 +8,11 @@ const sourceRecordsUrl = 'https://hikakaku.com/category/all-category/watch/asses
 const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
 
 // 証拠①：古いロレックスの査定実績（ヒカカク！公式の掲載実績より抜粋）
+// 画像はいずれも自社で生成したイメージ画像。実機の写真ではない。
 const pickRecords = [
-  { model: 'デイトナ 16520', state: '中古品・使用感あり', price: '3,300,000', date: '2025.03.29' },
-  { model: 'GMTマスターⅠ 16700 N番 赤青ベゼル', state: '中古美品', price: '1,600,000', date: '2025.03.11' },
-  { model: 'エクスプローラーⅠ 114270', state: '中古美品', price: '880,000', date: '2025.03.16' },
+  { model: 'デイトナ 16520', state: '中古品・使用感あり', price: '3,300,000', date: '2025.03.29', img: '/hikakaku-watch-old-rolex/img/daytona-16520.webp' },
+  { model: 'GMTマスターⅠ 16700 N番 赤青ベゼル', state: '中古美品', price: '1,600,000', date: '2025.03.11', img: '/hikakaku-watch-old-rolex/img/gmt-16700.webp' },
+  { model: 'エクスプローラーⅠ 114270', state: '中古美品', price: '880,000', date: '2025.03.16', img: '/hikakaku-watch-old-rolex/img/explorer-114270.webp' },
 ];
 
 // 証拠②：同一型番でも業者で提示額が変わる事例。棒の長さは最高額を100%とした相対値。
@@ -53,15 +54,15 @@ const doubts = [
 
 // 査定額を決める要素：時計側と業者側に分けて示す
 const watchFactors = [
-  { title: 'モデル・型番', body: '同じロレックスでもモデルや型番で評価は異なります。生産終了モデルなども含め、型番ごとの確認が必要です。' },
-  { title: '時計の状態', body: '傷、使用感、動作状態、修理歴などが確認されます。' },
-  { title: '付属品', body: '箱・保証書・余りコマなどの有無で査定額が変わる場合があります。' },
+  { icon: 'ic-ref', title: 'モデル・型番', body: '同じロレックスでもモデルや型番で評価は異なります。生産終了モデルなども含め、型番ごとの確認が必要です。' },
+  { icon: 'ic-cond', title: '時計の状態', body: '傷、使用感、動作状態、修理歴などが確認されます。' },
+  { icon: 'ic-box', title: '付属品', body: '箱・保証書・余りコマなどの有無で査定額が変わる場合があります。' },
 ];
 const shopFactors = [
-  { title: '在庫状況', body: 'そのモデルを今欲しい店と、すでに在庫を多く持っている店では評価が変わることがあります。' },
-  { title: '得意ジャンル', body: 'ロレックスの販売・買取を得意とする業者、アンティーク時計に強い業者など、得意分野は会社ごとに異なります。' },
-  { title: '販売ルート', body: '国内店舗、海外販売、業者間取引など、買い取った時計を販売する方法も業者ごとに異なります。' },
-  { title: '相場・タイミング', body: '為替や海外需要などによって、高級時計の相場が動く場合があります。' },
+  { icon: 'ic-stock', title: '在庫状況', body: 'そのモデルを今欲しい店と、すでに在庫を多く持っている店では評価が変わることがあります。' },
+  { icon: 'ic-star', title: '得意ジャンル', body: 'ロレックスの販売・買取を得意とする業者、アンティーク時計に強い業者など、得意分野は会社ごとに異なります。' },
+  { icon: 'ic-route', title: '販売ルート', body: '国内店舗、海外販売、業者間取引など、買い取った時計を販売する方法も業者ごとに異なります。' },
+  { icon: 'ic-trend', title: '相場・タイミング', body: '為替や海外需要などによって、高級時計の相場が動く場合があります。' },
 ];
 
 // 査定前に確認しておきたいこと
@@ -132,10 +133,48 @@ const faqs = [
   <body>
     <main class="watch-compare watch-compare--rolex">
       <div class="pr-bar">当サイトは提携広告を含む比較・案内メディアです</div>
+
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+          <g id="ic-base" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></g>
+          <symbol id="ic-ref" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 10.6V4.6a1.1 1.1 0 0 1 1.1-1.1h6l9.9 9.9a1.6 1.6 0 0 1 0 2.2l-5.8 5.8a1.6 1.6 0 0 1-2.2 0L3.5 11.5z" />
+            <circle cx="7.8" cy="7.8" r="1.4" />
+          </symbol>
+          <symbol id="ic-cond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10.4" cy="10.4" r="6.6" />
+            <path d="M10.4 7v3.4l2.3 1.4M15.3 15.3l5.2 5.2" />
+          </symbol>
+          <symbol id="ic-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 8.2 12 4l8.5 4.2v7.6L12 20l-8.5-4.2z" />
+            <path d="M3.5 8.2 12 12.4l8.5-4.2M12 12.4V20" />
+          </symbol>
+          <symbol id="ic-stock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="13" width="8" height="8" rx="1.2" />
+            <rect x="13" y="13" width="8" height="8" rx="1.2" />
+            <rect x="8" y="3.4" width="8" height="8" rx="1.2" />
+          </symbol>
+          <symbol id="ic-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3.5 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.9l6-.9z" />
+          </symbol>
+          <symbol id="ic-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M3.5 12h17M12 3.5c2.2 2.4 3.4 5.4 3.4 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.4-5.4-3.4-8.5S9.8 5.9 12 3.5z" />
+          </symbol>
+          <symbol id="ic-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 17.5 9 11.5l3.6 3.4 7.4-8" />
+            <path d="M15.6 6.9h4.4v4.4" />
+          </symbol>
+        </defs>
+      </svg>
+
       <div class="single-column-layout">
 
       <!-- 1. 約束 -->
       <section class="hero" aria-labelledby="page-title">
+        {/* 装飾。img だとモバイルでも読み込んでしまうため、PCのメディアクエリ内でだけ
+            背景画像として指定する（該当しないルールの画像は取得されない） */}
+        <div class="hero__art" aria-hidden="true"></div>
         <div class="hero__inner content">
           <p class="hero__kicker">昔買ったロレックス</p>
           <h1 id="page-title">古いからといって、<br /><strong>価値がないとは限りません。</strong></h1>
@@ -145,6 +184,22 @@ const faqs = [
           <p class="image-note">※査定を行う業者数は商品・地域・条件等によって異なります。※査定の可否・査定額は時計の状態・型番・付属品・時期・買取業者等によって異なります。</p>
         </div>
       </section>
+
+      {/* キャンペーン告知。画像内の注記は縮小すると判読できないため、本文として別途組み直している */}
+      <aside class="campaign" aria-label="買取ボーナスキャンペーンのお知らせ">
+        <div class="content">
+          <a class="campaign__link" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">
+            <img src="/hikakaku-watch-old-rolex/img/campaign-bonus.webp" width="1200" height="300" loading="lazy" decoding="async" alt="買取ボーナスキャンペーン開催中。対象カテゴリーで買取が成立すると、対象者全員にPayPayまたはAmazonのデジタルギフト10,000円分をプレゼント。" />
+          </a>
+          <p class="campaign__terms">
+            ※本キャンペーンは株式会社じげんによる提供です。対象カテゴリーで買取が成立した対象者が対象となります。<br />
+            ※本キャンペーンについてのお問い合わせは Amazon ではお受けしておりません。ヒカカク！の問い合わせフォームよりお願いいたします。<br />
+            ※Amazon、Amazon.co.jp およびそれらのロゴは Amazon.com, Inc. またはその関連会社の商標です。<br />
+            ※PayPayマネーライトは出金できません。<br />
+            ※実施状況・対象条件・進呈額は変更または終了する場合があります。最新の内容はヒカカク！公式サイトでご確認ください。
+          </p>
+        </div>
+      </aside>
 
       <!-- 2. 不安に即答 -->
       <section class="section section--doubt" aria-labelledby="doubt-title">
@@ -167,10 +222,13 @@ const faqs = [
           <div class="proof-cards">
             {pickRecords.map((r) => (
               <article class="proof-card">
-                <h3>{r.model}</h3>
-                <p class="proof-card__state">{r.state}</p>
-                <p class="proof-card__price"><b>{r.price}</b><span>円</span></p>
-                <p class="proof-card__date">{r.date} 査定</p>
+                <img class="proof-card__img" src={r.img} width="1024" height="1536" loading="lazy" decoding="async" alt={`${r.model}のイメージ`} />
+                <div class="proof-card__body">
+                  <h3>{r.model}</h3>
+                  <p class="proof-card__state">{r.state}</p>
+                  <p class="proof-card__price"><b>{r.price}</b><span>円</span></p>
+                  <p class="proof-card__date">{r.date} 査定</p>
+                </div>
               </article>
             ))}
           </div>
@@ -187,7 +245,10 @@ const faqs = [
           <p class="lead">近所の1社で「60万円です」と言われたとして、その金額が高いのか安いのか。普段から相場を見ていなければ、判断は難しいはずです。</p>
 
           <figure class="spread">
-            <figcaption class="spread__model">{spread.model}</figcaption>
+            <div class="spread__head">
+              <img class="spread__img" src="/hikakaku-watch-old-rolex/img/submariner-16610.webp" width="1024" height="1536" loading="lazy" decoding="async" alt="サブマリーナ デイト 16610 のイメージ" />
+              <figcaption class="spread__model">{spread.model}</figcaption>
+            </div>
             <div class="spread__rows">
               {spread.rows.map((r) => (
                 <div class:list={['spread__row', r.best && 'is-best']}>
@@ -228,7 +289,12 @@ const faqs = [
           <div class="why-col">
             <h3 class="why-head why-head--watch"><span>あなたの時計側</span>3つの要素</h3>
             <dl class="deflist">
-              {watchFactors.map((f) => <div><dt>{f.title}</dt><dd>{f.body}</dd></div>)}
+              {watchFactors.map((f) => (
+                <div>
+                  <dt><svg class="deflist__icon" aria-hidden="true"><use href={`#${f.icon}`} /></svg>{f.title}</dt>
+                  <dd>{f.body}</dd>
+                </div>
+              ))}
             </dl>
           </div>
 
@@ -250,7 +316,12 @@ const faqs = [
           <div class="why-col">
             <h3 class="why-head why-head--shop"><span>買取業者側</span>4つの事情</h3>
             <dl class="deflist">
-              {shopFactors.map((f) => <div><dt>{f.title}</dt><dd>{f.body}</dd></div>)}
+              {shopFactors.map((f) => (
+                <div>
+                  <dt><svg class="deflist__icon" aria-hidden="true"><use href={`#${f.icon}`} /></svg>{f.title}</dt>
+                  <dd>{f.body}</dd>
+                </div>
+              ))}
             </dl>
           </div>
 
