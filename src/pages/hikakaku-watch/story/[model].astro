@@ -36,6 +36,7 @@ const faqItems = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/hikakaku-watch-story/site.css" />
+    <link rel="stylesheet" href="/hikakaku-watch-story/visual-test.css" />
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -56,16 +57,45 @@ const faqItems = [
     </script>
   </head>
   <body data-intent={pageIntent}>
-    <main class="watch-story">
+    <main class="watch-story watch-story--visual-test">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+          <symbol id="ic-review" viewBox="0 0 48 48">
+            <path d="M27 11h11a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-1v4l-4.5-4H31" fill="none" stroke="currentColor" stroke-width="1.7" opacity=".4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9 12h20a4 4 0 0 1 4 4v11a4 4 0 0 1-4 4H19l-7 6v-6H9a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z" fill="var(--icon-fill)" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            <path d="M19 15.6l2.6 5.3 5.8.9-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.9z" fill="var(--story-gold)" stroke="var(--story-gold)" stroke-width="1.2" stroke-linejoin="round" />
+          </symbol>
+          <symbol id="ic-record" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.5 15.5V10a1.5 1.5 0 0 1 1.5-1.5h6A1.5 1.5 0 0 1 21.5 10v5.5" />
+              <path d="M12.5 32.5V38a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5v-5.5" />
+              <circle cx="17" cy="24" r="9.5" /><path d="M17 24v-4.6M17 24l3.6 2.1" />
+            </g>
+            <path d="M29 40h16" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".38" stroke-linecap="round" />
+            <g stroke="var(--story-gold)" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M31.5 36.5v-5" /><path d="M37.5 36.5v-10" /><path d="M43.5 36.5v-15" /></g>
+          </symbol>
+          <symbol id="ic-support" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16.5" cy="17.5" r="6" /><path d="M6 40c0-5.8 4.7-10.5 10.5-10.5S27 34.2 27 40" /></g>
+            <path d="M30 8h11a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3h-4.5L32 27v-4.5h-2a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" fill="var(--icon-fill)" stroke="var(--story-gold)" stroke-width="2" stroke-linejoin="round" />
+            <path d="M31.5 13.5h8M31.5 17.5h5" fill="none" stroke="var(--story-gold)" stroke-width="1.8" stroke-linecap="round" />
+          </symbol>
+          <symbol id="ic-fee" viewBox="0 0 48 48">
+            <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="16" width="26" height="22" rx="2.5" /><path d="M5 23.5h26" /><path d="M18 16v7.5" /></g>
+            <circle cx="36" cy="31" r="9.5" fill="var(--icon-fill)" stroke="var(--story-gold)" stroke-width="2" />
+            <path d="M32.4 26.2l3.6 4.1 3.6-4.1M32.4 31.8h7.2M32.4 34.6h7.2M36 30.3V37" fill="none" stroke="var(--story-gold)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+          </symbol>
+        </defs>
+      </svg>
       <div class="story-disclosure">当サイトは提携広告を含む比較・案内メディアです</div>
 
       <section class="hero" aria-labelledby="story-title">
         <img class="hero__image" src={story.heroImage} width="1024" height="1536" alt={`木目の上に置かれた${story.shortName} ${story.reference}をイメージした腕時計`} />
         <div class="hero__content">
-          <p class="story-kicker">使わなくなった{story.shortName}。</p>
-          <h1 id="story-title">その買取価格、<br /><span>1社だけで</span>決めていませんか。</h1>
-          <p class="hero__lead">同じ型番でも、<br />査定額に<span>{formatMan(quoteGap)}の差</span>が出ることも。</p>
+          <p class="story-kicker">使っていなかった{story.shortName}。</p>
+          <h1 id="story-title">近所の店にそのまま<br />売らなくて、<span>本当によかった。</span></h1>
+          <p class="hero__lead">同じ{story.shortName}なのに、<br />査定額に<span>{formatMan(quoteGap)}の差</span>が出ました。</p>
           <p class="hero__tagline">{story.shortName} {story.reference}の{story.referenceLabel}を参考にしたモデルストーリー</p>
+          <a class="story-cta story-cta--hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">まずは査定額だけ調べてみる <span aria-hidden="true">›</span></a>
         </div>
       </section>
 
@@ -159,6 +189,7 @@ const faqItems = [
           </dl>
           <div class="difference"><span>最大と最小の差額</span><strong>{formatYen(quoteGap)}</strong></div>
         </div>
+        <a class="story-cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分の{story.shortName}はいくらか調べてみる <span aria-hidden="true">›</span></a>
         <p class="under-price">※{story.referenceLabel}を参考にしたモデルケースであり、実際の査定・売却額を保証するものではありません。</p>
         <div class="story-copy"><p>最初の提示額だけ見ていたら、その金額が相場どおりなのか判断できません。でも比較したことで、<strong class="neutral-strong">「複数の店を見る意味って、こういうことか」</strong>と考えやすくなります。</p></div>
       </section>
@@ -170,10 +201,10 @@ const faqItems = [
           <p>そこで、<span class="mark">査定額だけではなく「売る相手」も</span>確認します。</p>
         </div>
         <div class="process-proof" aria-label="確認すること">
-          <article><span class="sprite-icon sprite-icon--1"></span><p>口コミ・評判</p></article>
-          <article><span class="sprite-icon sprite-icon--2"></span><p>時計の買取実績</p></article>
-          <article><span class="sprite-icon sprite-icon--3"></span><p>査定後の対応</p></article>
-          <article><span class="sprite-icon sprite-icon--4"></span><p>買取方法・手数料</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-review" /></svg><p>口コミ・評判</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-record" /></svg><p>時計の買取実績</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-support" /></svg><p>査定後の対応</p></article>
+          <article><svg class="proof-icon" aria-hidden="true"><use href="#ic-fee" /></svg><p>買取方法・手数料</p></article>
         </div>
         <div class="story-copy">
           <p>見るのは、時計の買取実績があるか、口コミや評判はどうか、査定後に大きく減額されたという声が多くないか、対応について不安がないか、入金までのスピード、手数料の有無、宅配・店頭などどの買取方法に対応しているかというところです。</p>
@@ -226,6 +257,7 @@ const faqItems = [
           <div class="compare-price__box compare-price__box--red"><span>現物確認後の査定額</span><strong>{formatYen(story.finalPrice)}</strong></div>
         </div>
         <p class="compare-difference"><small>差額</small> {formatYen(saleGap)}</p>
+        <a class="story-cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">売る前に{story.shortName}の査定額を比べてみる <span aria-hidden="true">›</span></a>
         <p class="under-price">※モデルケースの比較です。この差額が実際に生じることを保証するものではありません。</p>
         <div class="story-copy">
           <p>もちろん、一社目でも現物査定後に金額が変わった可能性はあります。逆に、もっと高く買ってくれる業者があった可能性もあります。</p>
