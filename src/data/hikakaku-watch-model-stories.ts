@@ -1,3 +1,11 @@
+export type AppraisalEvidence = {
+  date: string;
+  condition: string;
+  dealer: string;
+  price: number;
+  note?: string;
+};
+
 export type WatchModelStory = {
   slug: string;
   modelName: string;
@@ -5,126 +13,141 @@ export type WatchModelStory = {
   reference: string;
   searchLabel: string;
   heroImage: string;
-  entryImage: string;
-  referenceLabel: string;
-  sourceReferences: Array<{ label: string; url: string }>;
-  observedRange: string;
-  quotes: [number, number, number, number];
-  finalPrice: number;
-  conditionDetail: string;
-  origin: string;
-  unusedReason: string;
+  heroAlt: string;
+  officialUrl: string;
+  sourceCheckedAt: string;
+  decision: 'GO-A' | 'GO-B';
+  evidenceNote: string;
+  appraisals: AppraisalEvidence[];
   appraisalFocus: string[];
 };
 
+type RawStory = Omit<WatchModelStory, 'searchLabel' | 'heroImage' | 'heroAlt' | 'sourceCheckedAt'>;
+const build = (story: RawStory): WatchModelStory => ({
+  ...story,
+  searchLabel: `${story.modelName} ${story.reference}の買取価格・買取相場`,
+  heroImage: `/hikakaku-watch-story/models/${story.slug}/hero-20260902.webp`,
+  heroAlt: `木目の上に置かれた${story.modelName} ${story.reference}をイメージした腕時計`,
+  sourceCheckedAt: '2026-09-02',
+});
+const e = (date: string, condition: string, dealer: string, price: number, note?: string): AppraisalEvidence =>
+  ({ date, condition, dealer, price, ...(note ? { note } : {}) });
+
 export const watchModelStories: WatchModelStory[] = [
-  {
-    slug: 'submariner',
-    modelName: 'サブマリーナ',
-    shortName: 'サブマリーナ',
-    reference: '14060M',
-    searchLabel: 'サブマリーナの買取価格・買取相場',
-    heroImage: '/hikakaku-watch-story/models/submariner/hero-v1.webp',
-    entryImage: '/hikakaku-watch-story/models/submariner/entry-form-v1.webp',
-    referenceLabel: '公開査定例',
-    sourceReferences: [
-      { label: 'ヒカカク！「サブマリーナの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/submariner-men/assessment_achievements/' },
-    ],
-    observedRange: '同一型番・中古品（使用感あり）の公開査定例 1,200,000〜1,400,000円',
-    quotes: [1200000, 1280000, 1350000, 1400000],
-    finalPrice: 1360000,
-    conditionDetail: 'ベルトに細かい傷あり',
-    origin: '仕事の節目に買い、休日にもよく使っていた一本',
-    unusedReason: '最近はスマートウォッチを使うことが増え、出番が減っていました',
-    appraisalFocus: ['ノンデイトの型番確認', 'ベゼル・ブレスレットの傷', '箱・保証書・余りコマ', '動作と整備履歴'],
-  },
-  {
-    slug: 'datejust',
-    modelName: 'デイトジャスト',
-    shortName: 'デイトジャスト',
-    reference: '116234 ホワイト ローマ',
-    searchLabel: 'デイトジャストの買取価格・買取相場',
-    heroImage: '/hikakaku-watch-story/models/datejust/hero-v1.webp',
-    entryImage: '/hikakaku-watch-story/models/datejust/entry-form-v1.webp',
-    referenceLabel: '公開査定例・公開買取相場',
-    sourceReferences: [
-      { label: 'ヒカカク！「デイトジャストの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/datejust-mens/assessment_achievements/' },
-      { label: 'ブラリバ「デイトジャスト Ref.116234 買取価格相場」', url: 'https://brandrevalue.com/cat/watch/rolex/rolex-datejust/116234' },
-    ],
-    observedRange: '同一型番の公開査定例と、2026年8月の公開買取相場を参考にした 960,000〜1,050,000円のモデルケース',
-    quotes: [960000, 990000, 1020000, 1050000],
-    finalPrice: 1020000,
-    conditionDetail: 'ベゼルとベルトに細かい傷あり',
-    origin: '就職した頃に買い、仕事の日によく着けていた一本',
-    unusedReason: '服装が変わってから着ける機会が少なくなっていました',
-    appraisalFocus: ['文字盤・インデックスの仕様', 'フルーテッドベゼルの状態', 'ブレスレットの伸び・傷', '箱・保証書の有無'],
-  },
-  {
-    slug: 'daytona',
-    modelName: 'デイトナ',
-    shortName: 'デイトナ',
-    reference: '116500LN ブラック',
-    searchLabel: 'デイトナの買取価格・買取相場',
-    heroImage: '/hikakaku-watch-story/models/daytona/hero-v1.webp',
-    entryImage: '/hikakaku-watch-story/models/daytona/entry-form-v1.webp',
-    referenceLabel: '公開査定例・公開買取相場',
-    sourceReferences: [
-      { label: 'ヒカカク！「デイトナの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/daytona-men/assessment_achievements/' },
-      { label: 'なんぼや「デイトナ Ref.116500LN ブラック買取価格相場」', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/daytona/ref-116500ln/' },
-      { label: 'ブラリバ「デイトナ Ref.116500LN 買取価格相場」', url: 'https://brandrevalue.com/cat/watch/rolex/rolex-daytona/116500ln' },
-    ],
-    observedRange: '黒文字盤・中古品の公開査定例と、2026年8月の公開買取相場を参考にした 4,050,000〜4,380,000円のモデルケース',
-    quotes: [4050000, 4180000, 4260000, 4380000],
-    finalPrice: 4280000,
-    conditionDetail: 'ベゼルとケースに細かい傷あり',
-    origin: '何年も探して手に入れ、特別な日に着けていた一本',
-    unusedReason: '傷を増やしたくない気持ちもあり、しまったままの時間が長くなっていました',
-    appraisalFocus: ['文字盤色と正確な型番', 'セラミックベゼルの状態', 'クロノグラフの動作', '保証書・付属品の年代'],
-  },
-  {
-    slug: 'gmt-master-ii',
-    modelName: 'GMTマスター II',
-    shortName: 'GMTマスターII',
-    reference: '116710LN',
-    searchLabel: 'GMTマスターIIの買取価格・買取相場',
-    heroImage: '/hikakaku-watch-story/models/gmt-master-ii/hero-v1.webp',
-    entryImage: '/hikakaku-watch-story/models/gmt-master-ii/entry-form-v1.webp',
-    referenceLabel: '公開査定例・公開買取相場',
-    sourceReferences: [
-      { label: 'ヒカカク！「GMTマスター IIの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/' },
-      { label: 'なんぼや「GMTマスター Ref.116710LN 買取価格相場」', url: 'https://nanboya.com/tokei-kaitori/price-list/rolex/gmt-master/ref-116710ln/' },
-    ],
-    observedRange: '同一型番・中古品の公開査定例と、2026年8月の公開買取相場を参考にした 1,600,000〜1,820,000円のモデルケース',
-    quotes: [1600000, 1680000, 1750000, 1820000],
-    finalPrice: 1780000,
-    conditionDetail: 'ベルトに細かい傷あり',
-    origin: '出張が多かった頃に買い、旅先でも使っていた一本',
-    unusedReason: '海外へ行く機会が減り、時計ケースに入れたままになっていました',
-    appraisalFocus: ['型番とベゼル仕様', 'GMT針・日付の動作', 'ケース・ブレスレットの傷', '保証書・余りコマ'],
-  },
-  {
-    slug: 'explorer',
-    modelName: 'エクスプローラー I',
-    shortName: 'エクスプローラーI',
-    reference: '214270',
-    searchLabel: 'エクスプローラーIの買取価格・買取相場',
-    heroImage: '/hikakaku-watch-story/models/explorer/hero-v1.webp',
-    entryImage: '/hikakaku-watch-story/models/explorer/entry-form-v1.webp',
-    referenceLabel: '公開査定例',
-    sourceReferences: [
-      { label: 'ヒカカク！「エクスプローラー Iの査定実績・事例」', url: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/explorer-i-men/assessment_achievements/' },
-    ],
-    observedRange: '同一型番・中古美品の公開査定例 950,000〜1,200,000円を確認',
-    quotes: [950000, 1020000, 1120000, 1200000],
-    finalPrice: 1160000,
-    conditionDetail: 'ケースとベルトに細かい傷あり',
-    origin: '派手すぎないデザインが気に入り、日常使いしていた一本',
-    unusedReason: '仕事でもスマートウォッチを使うようになり、着ける日が減っていました',
-    appraisalFocus: ['新旧文字盤と型番', 'ケース・ブレスレットの傷', '夜光・針の状態', '保証書・製造時期'],
-  },
+  build({
+    slug: 'rolex-submariner-16610', modelName: 'サブマリーナ デイト', shortName: 'サブマリーナ', reference: '16610',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/127258/', decision: 'GO-A',
+    evidenceNote: '2026年2〜3月に掲載された、同型番・同程度の状態の別々の査定実績です。',
+    appraisals: [e('2026-02-16','中古品・使用感あり','エステメ',1330000),e('2026-02-17','中古品・使用感あり','買虎',1450000),e('2026-03-12','中古品・使用感あり','買虎',1500000)],
+    appraisalFocus: ['型番と製造年代','ベゼル・ブレスレットの状態','動作と整備履歴','箱・保証書・余りコマ'],
+  }),
+  build({
+    slug: 'rolex-datejust-16233', modelName: 'デイトジャスト', shortName: 'デイトジャスト', reference: '16233',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/676274/', decision: 'GO-B',
+    evidenceNote: '確認できた信頼性の高い過去の掲載例です。古い事例のため、現在相場や複数業者の比較を示すものではありません。',
+    appraisals: [e('2021-10-27','故障品','買取屋アップ',450000,'状態差の参考'),e('2024-02-12','中古美品','買取屋アップ',650000,'過去の掲載例')],
+    appraisalFocus: ['文字盤・インデックスの仕様','コンビ素材の状態','ブレスレットの伸び','箱・保証書の有無'],
+  }),
+  build({
+    slug: 'rolex-air-king-14000', modelName: 'エアキング', shortName: 'エアキング', reference: '14000',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/2847292/', decision: 'GO-A',
+    evidenceNote: '2025年4月〜2026年8月に掲載された中古美品の別々の査定実績です。',
+    appraisals: [e('2025-04-22','中古美品','エステメ',600000),e('2025-04-23','中古美品','買虎',680000),e('2026-08-08','中古美品','エステメ',780000)],
+    appraisalFocus: ['文字盤と正確な型番','ケース・ブレスレットの傷','動作と整備履歴','箱・保証書の有無'],
+  }),
+  build({
+    slug: 'rolex-submariner-14060', modelName: 'サブマリーナ', shortName: 'サブマリーナ', reference: '14060',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/3408826/', decision: 'GO-A',
+    evidenceNote: '2024年5月の近い日付に掲載された、同型番・同状態の別々の査定実績です。',
+    appraisals: [e('2024-05-31','中古品・使用感あり','買虎',1200000),e('2024-05-28','中古品・使用感あり','エステメ',1270000)],
+    appraisalFocus: ['ノンデイトの型番確認','ベゼル・ブレスレットの傷','動作と整備履歴','箱・保証書・余りコマ'],
+  }),
+  build({
+    slug: 'rolex-explorer-ii-16570', modelName: 'エクスプローラーII ホワイト', shortName: 'エクスプローラーII', reference: '16570',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/2657132/', decision: 'GO-A',
+    evidenceNote: 'ホワイト文字盤について掲載された別々の査定実績です。文字盤違いの価格を示すものではありません。',
+    appraisals: [e('2025-01-28','中古美品','買取屋アップ',850000),e('2025-02-08','中古美品','エステメ大阪支店',1100000)],
+    appraisalFocus: ['ホワイト文字盤と型番','24時間ベゼルとGMT針','ケース・ブレスレットの傷','保証書・製造時期'],
+  }),
+  build({
+    slug: 'rolex-daytona-16520', modelName: 'デイトナ', shortName: 'デイトナ', reference: '16520',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/288712/', decision: 'GO-A',
+    evidenceNote: '2025年5〜6月に掲載された、同型番・同状態の別々の査定実績です。',
+    appraisals: [e('2025-06-12','中古品・使用感あり','エステメ大阪支店',2850000),e('2025-06-12','中古品・使用感あり','シグマ',3000000),e('2025-05-18','中古品・使用感あり','エステメ',3600000)],
+    appraisalFocus: ['文字盤とシリアル','タキメーターベゼル','クロノグラフの動作','保証書・付属品の年代'],
+  }),
+  build({
+    slug: 'rolex-daytona-116520', modelName: 'デイトナ ブラック', shortName: 'デイトナ', reference: '116520',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/125921/', decision: 'GO-A',
+    evidenceNote: 'ブラック文字盤について掲載された別々の査定実績です。掲載時期と状態も併記しています。',
+    appraisals: [e('2024-12-05','目立つ傷がある','買取天国ティキソルtikisol',2000000,'状態差の参考'),e('2024-07-25','中古美品','買虎',3300000),e('2026-03-06','中古美品','アサカの買取',3750000)],
+    appraisalFocus: ['ブラック文字盤と型番','スチールベゼルの状態','クロノグラフの動作','保証書・付属品'],
+  }),
+  build({
+    slug: 'rolex-gmt-master-16700', modelName: 'GMTマスター', shortName: 'GMTマスター', reference: '16700',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master/assessment_achievements/', decision: 'GO-A',
+    evidenceNote: 'ベゼル色やシリアルの記載がある、別々の公式掲載実績です。仕様差も含めて確認してください。',
+    appraisals: [e('2025-10-13','中古美品','エステメ',1650000),e('2025-11-09','中古美品・N番・赤青ベゼル','銀座パリス 梅田店',1700000),e('2025-11-13','中古美品・N番・赤青ベゼル','買虎',1800000)],
+    appraisalFocus: ['シリアルとベゼル色','GMT針・日付の動作','ケース・ブレスレットの傷','保証書・余りコマ'],
+  }),
+  build({
+    slug: 'rolex-daytona-116500ln', modelName: 'デイトナ ブラック', shortName: 'デイトナ', reference: '116500LN',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/1034255/', decision: 'GO-A',
+    evidenceNote: '2026年4月に掲載されたブラック文字盤・中古美品の別々の査定実績です。明らかな桁違いの掲載値は使用していません。',
+    appraisals: [e('2026-04-15','中古美品','買取天国ティキソルtikisol',3500000),e('2026-04-16','中古美品','買虎',4100000)],
+    appraisalFocus: ['ブラック文字盤と型番','セラミックベゼルの状態','クロノグラフの動作','保証書・付属品の年代'],
+  }),
+  build({
+    slug: 'rolex-datejust-16234', modelName: 'デイトジャスト ブラック', shortName: 'デイトジャスト', reference: '16234',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/2846863/', decision: 'GO-A',
+    evidenceNote: '同日に掲載された例を含みますが、同一個体の同時査定とは確認できないため、別々の公式掲載実績として示しています。',
+    appraisals: [e('2025-12-10','中古品・使用感あり','Watch7',700000),e('2025-12-10','中古品・使用感あり','買虎',1000000),e('2025-09-30','中古品・使用感あり','買虎',1010000)],
+    appraisalFocus: ['ブラック文字盤と型番','フルーテッドベゼル','ブレスレットの伸び・傷','箱・保証書の有無'],
+  }),
+  build({
+    slug: 'rolex-datejust-16013', modelName: 'デイトジャスト', shortName: 'デイトジャスト', reference: '16013',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/288862/', decision: 'GO-A',
+    evidenceNote: '掲載時期の異なる別々の査定実績です。差額は当時の掲載例の幅として確認してください。',
+    appraisals: [e('2024-01-28','中古品・使用感あり','エステメ大阪支店',640000),e('2025-07-04','中古美品','エステメ',750000),e('2026-02-12','中古品・使用感あり','エステメ 福岡天神店',950000)],
+    appraisalFocus: ['文字盤とシリアル','コンビ素材の状態','ブレスレットの伸び','箱・保証書の有無'],
+  }),
+  build({
+    slug: 'rolex-date-15200', modelName: 'オイスターパーペチュアル デイト N番', shortName: 'オイスターパーペチュアル デイト', reference: '15200',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/3536029/', decision: 'GO-B',
+    evidenceNote: '確認できた2件は2022年に同一業者が掲載した過去事例です。現在相場や業者間の価格差を示すものではありません。',
+    appraisals: [e('2022-01-14','中古美品','エステメ',470000,'過去の掲載例'),e('2022-05-11','中古品・使用感あり','エステメ',450000,'過去の掲載例')],
+    appraisalFocus: ['N番と正確な型番','文字盤・ケースの状態','ブレスレットの伸び','箱・保証書の有無'],
+  }),
+  build({
+    slug: 'rolex-submariner-116610ln', modelName: 'サブマリーナ', shortName: 'サブマリーナ', reference: '116610LN',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/2847312/', decision: 'GO-A',
+    evidenceNote: '2024年12月〜2025年2月に掲載された別々の査定実績です。同一個体の同時比較ではありません。',
+    appraisals: [e('2024-12-22','中古美品','エステメ',1900000),e('2025-02-13','中古品・使用感あり','エステメ 福岡天神店',1950000),e('2025-01-16','中古美品','エステメ大阪支店',2080000)],
+    appraisalFocus: ['型番とセラミックベゼル','ケース・ブレスレットの傷','動作と整備履歴','箱・保証書・余りコマ'],
+  }),
+  build({
+    slug: 'rolex-submariner-124060', modelName: 'サブマリーナ', shortName: 'サブマリーナ', reference: '124060',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/3785900/', decision: 'GO-A',
+    evidenceNote: '2025年8〜11月に掲載された中古美品の別々の査定実績です。明らかな桁違いの掲載値は使用していません。',
+    appraisals: [e('2025-08-13','中古美品','エステメ 神戸三宮店',1680000),e('2025-11-06','中古美品','エステメ 福岡天神店',1750000),e('2025-10-19','中古美品','エステメ 福岡天神店',1780000)],
+    appraisalFocus: ['ノンデイトと41mm仕様','セラミックベゼル','ケース・ブレスレットの傷','箱・保証書・余りコマ'],
+  }),
+  build({
+    slug: 'rolex-gmt-master-ii-16710', modelName: 'GMTマスターII', shortName: 'GMTマスターII', reference: '16710',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/high_brand_watch/rolex-men/gmt-master-ii-men/assessment_achievements/', decision: 'GO-A',
+    evidenceNote: 'シリアルやベゼル仕様の異なる例を含む、別々の公式掲載実績です。各条件を併記しています。',
+    appraisals: [e('2026-06-29','中古美品','エステメ',1800000),e('2026-06-28','中古美品','戸越銀座屋',1850000),e('2025-12-26','中古美品・A番','買虎',2050000,'シリアル差あり')],
+    appraisalFocus: ['シリアルとベゼル色','GMT針・日付の動作','ケース・ブレスレットの傷','保証書・余りコマ'],
+  }),
+  build({
+    slug: 'rolex-submariner-126610ln', modelName: 'サブマリーナ デイト', shortName: 'サブマリーナ', reference: '126610LN',
+    officialUrl: 'https://hikakaku.com/category/all-category/watch/items/3785901/', decision: 'GO-A',
+    evidenceNote: '2025年8月〜2026年8月に掲載された別々の査定実績です。明らかな桁違いの掲載値は使用していません。',
+    appraisals: [e('2025-08-08','中古品・使用感あり','おたからや',1980000),e('2026-08-19','中古美品','エステメ 福岡天神店',2030000),e('2026-03-12','中古品・使用感あり','買虎',2200000)],
+    appraisalFocus: ['型番と41mm仕様','セラミックベゼル','ケース・ブレスレットの傷','箱・保証書・余りコマ'],
+  }),
 ];
 
 export const watchModelStoryBySlug = Object.fromEntries(
   watchModelStories.map((story) => [story.slug, story]),
 ) as Record<string, WatchModelStory>;
-

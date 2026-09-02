@@ -1,0 +1,17 @@
+no,ref,decision,route,status,note
+1,16610,GO-A,/hikakaku-watch/story/rolex-submariner-16610/,実装・QA済み,別々の公式査定実績3件
+2,16233,GO-B,/hikakaku-watch/story/rolex-datejust-16233/,実装・QA済み,古い事例・同一業者である注意書き付き
+3,14000,GO-A,/hikakaku-watch/story/rolex-air-king-14000/,実装・QA済み,別々の公式査定実績3件
+4,14060,GO-A,/hikakaku-watch/story/rolex-submariner-14060/,実装・QA済み,別々の公式査定実績2件
+5,16570,GO-A,/hikakaku-watch/story/rolex-explorer-ii-16570/,実装・QA済み,ホワイト文字盤を明記
+6,16520,GO-A,/hikakaku-watch/story/rolex-daytona-16520/,実装・QA済み,別々の公式査定実績3件
+7,116520,GO-A,/hikakaku-watch/story/rolex-daytona-116520/,実装・QA済み,ブラック文字盤を明記
+8,16700,GO-A,/hikakaku-watch/story/rolex-gmt-master-16700/,実装・QA済み,ベゼル・シリアル差を明記
+9,116500LN,GO-A,/hikakaku-watch/story/rolex-daytona-116500ln/,実装・QA済み,桁違い値と外れ値を除外
+10,16234,GO-A,/hikakaku-watch/story/rolex-datejust-16234/,実装・QA済み,同一個体の同時査定ではないと明記
+11,16013,GO-A,/hikakaku-watch/story/rolex-datejust-16013/,実装・QA済み,掲載時期差を明記
+12,15200,GO-B,/hikakaku-watch/story/rolex-date-15200/,実装・QA済み,2022年・同一業者の過去事例と明記
+13,116610LN,GO-A,/hikakaku-watch/story/rolex-submariner-116610ln/,実装・QA済み,別々の公式査定実績3件
+14,124060,GO-A,/hikakaku-watch/story/rolex-submariner-124060/,実装・QA済み,桁違い値を除外
+15,16710,GO-A,/hikakaku-watch/story/rolex-gmt-master-ii-16710/,実装・QA済み,ベゼル・シリアル差を明記
+16,126610LN,GO-A,/hikakaku-watch/story/rolex-submariner-126610ln/,実装・QA済み,桁違い値を除外
