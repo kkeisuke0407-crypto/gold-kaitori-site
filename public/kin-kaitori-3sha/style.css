@@ -3049,3 +3049,51 @@ h2, h3,
 
 /* ---- ⑮ FVを抜けたら、すぐランキング比較 ---- */
 .kin-banner-label--campaign + .ui-rk { margin-top: 1em; }
+
+/* ---- ⑯ 追従CTAをまねきや1本にする ----
+   バーの高さ（62px）は変えず、空いた横幅に4行を収める。
+   1行目の「まねきや」はロゴが担う。 */
+@media screen and (max-width: 834px) {
+  .kin-fixed-cta--solo a {
+    flex: 1 1 100%;
+    border-left: none;
+    gap: .5em;
+    padding: 4px 10px;
+    text-align: left;
+  }
+  .kin-fixed-cta--solo a > img {
+    width: 54px;
+    max-height: 26px;
+  }
+  .kin-fixed-cta--solo a > span {
+    text-align: left;
+    font-size: 17px;
+    line-height: 1.25;
+  }
+  .kin-fixed-cta--solo .kin-fixed-badge {
+    display: block;
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: 0;
+    color: #ffe8b0;
+    margin-bottom: 2px;
+    white-space: nowrap;
+  }
+  .kin-fixed-cta--solo a small {
+    font-size: 10px;
+    line-height: 1.25;
+    margin-top: 2px;
+    color: #ffe0dd;
+    white-space: nowrap;
+  }
+}
+
+/* 幅の狭い端末では、はみ出す前に文字を詰める */
+@media screen and (max-width: 359px) {
+  .kin-fixed-cta--solo a > img { width: 46px; }
+  .kin-fixed-cta--solo a > span { font-size: 15.5px; }
+  .kin-fixed-cta--solo .kin-fixed-badge,
+  .kin-fixed-cta--solo a small { font-size: 9px; }
+}
