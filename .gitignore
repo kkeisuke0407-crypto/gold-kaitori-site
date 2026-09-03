@@ -4,3 +4,6 @@ dist/
 .env
 .env.local
 .claude/settings.local.json
+
+# 比較記事LPひな形の動作確認で生成されるサンプル（公開しない）
+public/sample-hikaku/

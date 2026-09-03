@@ -12,7 +12,8 @@
     "check": "astro check",
     "new-lp": "node scripts/new-lp.mjs",
     "test:ppc-engine": "node --test tools/ppc-affiliate-os/tests-js/run.mjs",
-    "test:ppc-backend": "cd tools/ppc-affiliate-os/backend && PYTHONPATH=. python3 -m unittest discover -s tests"
+    "test:ppc-backend": "cd tools/ppc-affiliate-os/backend && PYTHONPATH=. python3 -m unittest discover -s tests",
+    "new-hikaku": "node scripts/new-hikaku.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
