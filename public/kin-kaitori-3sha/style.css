@@ -2684,3 +2684,30 @@ h2, h3,
 
 /* FV直下のCTA（結論のすぐ下） */
 .ui-fvcta { margin: .9em 0 1.4em; }
+
+/* ---- 本日の相場バー（/rates.json 連動） ---------------------------------- */
+.ui-rate { margin: 1.1em 0; padding: .85em 1em .9em; border: 2px solid #c9a227; border-radius: 12px; background: linear-gradient(180deg,#fffdf4 0%,#fff 70%); font-family: var(--gothic); }
+.ui-rate__ttl { margin: 0 0 .2em; font-size: 13px; font-weight: 900; color: #8a6d1f; }
+.ui-rate__v { margin: 0; font-weight: 900; font-size: clamp(24px,7vw,32px); line-height: 1.2; color: var(--sumi); }
+.ui-rate__v small { font-size: .5em; margin-left: .1em; }
+.ui-rate__diff { margin-left: .35em; font-size: 14px; font-weight: 900; }
+.ui-rate__diff--up { color: #a11919; } .ui-rate__diff--down { color: #1f5fc4; }
+.ui-rate__note { margin: .5em 0 0; font-size: 12.5px; line-height: 1.65; color: var(--ink); }
+.ui-rate__upd { margin: .4em 0 0; font-size: 11px; color: var(--ink-sub); }
+
+/* ---- CTAの上に置く誘い文 -------------------------------------------------- */
+.ui-ctalead { margin: 1.4em 0 -.4em; text-align: center; font-family: var(--gothic); font-weight: 900; font-size: 14.5px; color: var(--sumi); }
+
+/* ---- 会社情報テーブル ------------------------------------------------------ */
+.ui-spec { width: 100%; margin: 1em 0; border-collapse: collapse; font-family: var(--gothic); font-size: 13.5px; }
+.ui-spec th, .ui-spec td { padding: .6em .7em; border: 1px solid var(--rule); line-height: 1.6; vertical-align: top; text-align: left; }
+.ui-spec th { width: 6.6em; background: #f6f4ee; font-weight: 900; color: var(--sumi); }
+
+/* ---- 買取実績カード -------------------------------------------------------- */
+.ui-result { display: grid; gap: .5em; margin: 1em 0; font-family: var(--gothic); }
+.ui-result__c { display: grid; grid-template-columns: 5.4em 1fr; gap: .1em .6em; padding: .7em .85em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; font-size: 13.5px; }
+.ui-result__k { color: var(--ink-sub); font-size: 12px; line-height: 1.9; }
+.ui-result__v { line-height: 1.9; }
+.ui-result__p { grid-column: 1 / -1; margin-top: .3em; padding-top: .4em; border-top: 1px dashed var(--rule-2); font-weight: 900; font-size: 18px; color: #a11919; text-align: right; }
+.ui-rk__go { display: inline-block; padding: .34em .8em; border-radius: 999px; background: #8a6d1f; color: #fff !important; font-size: 11.5px; font-weight: 900; text-decoration: none !important; }
+.ui-rk__cell--1 .ui-rk__go { background: #a11919; }
