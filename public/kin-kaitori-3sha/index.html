@@ -33,33 +33,23 @@
 
     <figure class="kin-fv__visual">
       <img src="images/fv-gold-ranking-v3.webp" alt="金の高価買取業者 おすすめランキングTOP3" width="1400" height="788" fetchpriority="high">
+      <p class="kin-fv__date" id="kin-fv-date">《2026年9月3日》</p>
     </figure>
+    <script>
+    /* 日付は毎日そのまま最新になるようクライアント側で書き換える。
+       JSが動かない環境ではビルド時点の日付（上のHTML）がそのまま出る。 */
+    (function () {
+      var el = document.getElementById('kin-fv-date');
+      if (!el) return;
+      var d = new Date();
+      el.textContent = '《' + d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日》';
+    })();
+    </script>
   </div>
 
   <div class="entry-content">
 
     <p class="kin-banner-label kin-banner-label--campaign">PR</p>
-
-    <p class="kin-dateline"><span class="ui-conclusion__lbl">《2026年9月版》</span></p>
-
-    <div class="ui-say">
-      <img class="ui-say__av" src="images/advisor.svg" alt="" width="120" height="120">
-      <div class="ui-say__bubble">
-        <p>1位は、<strong>業者間の取引単価</strong>で買取をしてくれて、金の買取手数料が無料の<strong class="em-mark">「まねきや」</strong>。<br>お電話なら<strong class="em-green">買取額最大20%UP</strong>キャンペーン中です。</p>
-      </div>
-    </div>
-
-    <figure class="kin-photo"><img src="images/banner-manekiya-gold.webp" alt="安心安全の買取保障／出張料・査定料無料／大切な金製品を高く売るなら「まねきや」" width="660" height="710" loading="lazy"></figure>
-
-    <p class="ui-ctalead">↓「まずは査定だけ」でもOK↓</p>
-    <div class="kin-cta-block ui-fvcta">
-      <a class="kin-phone" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">
-        <span class="kin-cta-brand">まねきや</span>
-        <span class="kin-phone__badge">手数料10%無料 ＋ 買取額20%UP<small>（電話予約限定）</small></span>
-        <span class="kin-phone__num">電話で査定予約する</span>
-        <span class="kin-phone__sub">通話料無料／9:00〜21:00受付</span>
-      </a>
-    </div>
 
     <div class="ui-rk" aria-label="金・貴金属の高価買取業者 おすすめランキングTOP3">
       <div class="ui-rk__grid">
@@ -110,22 +100,21 @@
 
     <p>おすすめランキング1位は、<strong>業者間の取引単価</strong>で買取をしてくれて、金の買取手数料が無料の<strong class="em-mark">「まねきや」</strong>です。お電話なら<strong class="em-green">買取額最大20%UP</strong>のキャンペーンも実施中。</p>
 
-    <h2>『まねきや』のおすすめポイントはこれ！</h2>
+    <h2>『まねきや』が選ばれている理由はこれ！</h2>
 
     <div class="ui-reco">
+      <img class="ui-reco__fig" src="images/banner-manekiya-kaitori.webp" alt="買取と販売 まねきや。金・貴金属からブランド品まで幅広く買取" width="660" height="473" loading="lazy">
       <ol>
-        <li>金の買取は<strong>手数料無料</strong>。その分が買取価格に上乗せされる</li>
-        <li><strong>業者間の取引単価</strong>で買取。一般向けより高い単価設定</li>
-        <li>他店で断られた金、査定が難しい品も<strong>買取OK</strong></li>
-        <li>「まずは査定だけお願いしたい」でもOK！<strong class="em-green">キャンセル料も完全無料</strong></li>
-        <li>お電話なら<strong class="em-green">買取額最大20%アップ</strong>キャンペーン中</li>
+        <li>金の買取<strong>手数料が無料</strong>！その分、受取額にも期待できる</li>
+        <li><strong>業者間の取引価格</strong>をもとに査定。金を高く売りたい人は要チェック！</li>
+        <li>「これって金？」という品や、査定が難しい金も<strong>相談OK</strong>！</li>
+        <li>「とりあえず今の値段だけ知りたい」でもOK！<strong class="em-green">キャンセル料も完全無料</strong></li>
+        <li>今なら電話申込で<strong class="em-green">買取額最大20%UP</strong>！</li>
       </ol>
     </div>
 
-    <figure class="kin-photo"><img src="images/banner-manekiya-kaitori.webp" alt="買取と販売 まねきや。金・貴金属からブランド品まで幅広く買取" width="660" height="473" loading="lazy"></figure>
 
-
-    <p class="ui-ctalead">↓「まずは査定だけ」でもOK↓</p>
+    <p class="ui-ctalead">↓ 売るか迷っていても相談OK ↓</p>
     <div class="kin-cta-block">
       <a class="kin-phone" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">
         <span class="kin-cta-brand">まねきや</span>
@@ -135,9 +124,9 @@
       </a>
     </div>
 
-    <h2>金を売るタイミングはいつがベスト？</h2>
+    <h2>金を売るならいつ？今の相場で一度チェック！</h2>
 
-    <p class="kin-intro">ズバリ、買取査定は<br>今すぐがおすすめです。</p>
+    <p class="kin-intro">迷っているなら、<br>今の査定額だけでも見ておくのがおすすめ！</p>
 
     <figure class="kin-photo"><img src="images/gold-price-chart.webp" alt="金の価格推移。金相場は過去最高水準で推移している" width="1000" height="625" loading="lazy"><figcaption>金相場は高値圏で推移しています。</figcaption></figure>
 
@@ -146,7 +135,7 @@
     <p>自宅で眠っている金が、思わぬ価格になることも。タイミングを逃して後悔しないように、今すぐ無料査定で価格を確認してみましょう。</p>
 
     <div class="ui-point">
-      <p class="ui-ttl">今すぐ査定をおすすめする理由</p>
+      <p class="ui-ttl">今、査定額を確認しておきたい理由</p>
       <ul class="ui-check">
         <li>早めの査定でチャンスを逃がさない</li>
         <li><strong>査定は無料。</strong>まずは価値を知るだけでもOK</li>
@@ -154,7 +143,7 @@
       </ul>
     </div>
 
-    <p><strong class="em-mark">査定だけであればノーリスクです。</strong>気軽に一歩踏み出してみましょう。</p>
+    <p><strong class="em-mark">査定額を聞くだけなら、売る必要はありません。</strong>気軽に一歩踏み出してみましょう。</p>
 
 
     <h2>1位 まねきや</h2>
@@ -209,7 +198,7 @@
     <p>電話で気軽に査定依頼できるので、迷ったらまずは査定だけでも試してみましょう。</p>
 
 
-    <h3>金の買取は手数料無料！業者間の取引価格で高額査定</h3>
+    <h3>金を高く売りたい人注目！手数料無料＋業者間取引価格で査定</h3>
 
     <p>『まねきや』では、金製品の買取にかかる通常10%の手数料を<strong class="em-green">無料にするキャンペーン</strong>を実施中。<strong>手数料の分だけ買取価格に上乗せされます。</strong></p>
 
@@ -222,7 +211,7 @@
     <p>一般向けよりも高い買取単価の設定になるため、<strong class="em-mark">同じ金製品でも金額が変わってきます。</strong>お店の利益や手数料を還元することで、より高値での買取を実現しています。</p>
 
 
-    <p class="ui-ctalead">↓「まずは査定だけ」でもOK↓</p>
+    <p class="ui-ctalead">↓ 「これいくら？」から気軽に相談 ↓</p>
     <div class="kin-cta-block">
       <a class="kin-phone" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">
         <span class="kin-cta-brand">まねきや</span>
@@ -232,14 +221,13 @@
       </a>
     </div>
 
-    <h3>他店で断られた金でも買取OK【金か不明な場合でも】</h3>
-
-    <figure class="kin-photo"><img src="images/microscope.webp" alt="専門機器（マイクロスコープ）による査定" width="700" height="700" loading="lazy"></figure>
+    <h3>「これって金？」でもOK！査定が難しい品にも対応</h3>
 
     <p>『まねきや』では、他店で断られた金でも買取可能です。</p>
 
     <div class="ui-point">
-      <p class="ui-ttl">『まねきや』で買取可能な理由</p>
+      <p class="ui-ttl">まねきやなら査定できる理由</p>
+      <img class="ui-point__fig" src="images/microscope.webp" alt="専門機器（マイクロスコープ）による査定" width="700" height="700" loading="lazy">
       <ul class="ui-check">
         <li>高性能な専門機器を使って正確に査定</li>
         <li>豊富な商品知識による確かな目利き</li>
@@ -247,10 +235,10 @@
       </ul>
     </div>
 
-    <p>各種専門機器も使用し、その場で価値を算出します。査定が難しい品も、経験豊富なスタッフが対応。<strong class="em-mark">「これって金かな？」と思ったら、とりあえず査定してみましょう。</strong></p>
+    <p>各種専門機器も使用し、その場で価値を算出します。査定が難しい品も、経験豊富なスタッフが対応。<strong class="em-mark">金か分からなくても大丈夫。まずは一度見てもらいましょう！</strong></p>
 
 
-    <h3>『まねきや』の金の買取実績</h3>
+    <h3>実際にこんな金製品が売れています！</h3>
 
     <div class="ui-result">
       <div class="ui-result__c">
@@ -268,7 +256,7 @@
 
     <p>もう使わない貴金属を、査定に出してみませんか。高額査定が期待できるかもしれません。</p>
 
-    <h3>『まねきや』を利用した人の声</h3>
+    <h3>まねきやを使った人の口コミをチェック！</h3>
 
     <figure class="kin-photo"><img src="images/review-2025.webp" alt="まねきや利用者の口コミ" width="1000" height="408" loading="lazy"></figure>
 
@@ -337,7 +325,7 @@
       </tbody>
     </table>
 
-    <p class="ui-ctalead">↓「まずは査定だけ」でもOK↓</p>
+    <p class="ui-ctalead">↓ 今の査定額だけでも確認できます ↓</p>
     <div class="kin-cta-block">
       <a class="kin-cta kin-cta--web" href="https://www.otakaraya.jp/" target="_blank" rel="nofollow noopener noreferrer"><span class="kin-cta-brand">おたからや</span>おたからやの公式サイト</a>
       <span class="kin-cta__note">金・貴金属の買取手数料無料／9:00〜19:00受付</span>
@@ -430,15 +418,16 @@
       <p class="kin-faq__a">問題ありません。査定は無料と案内されているため、複数社に同じ品を見せて比べる方法もあります。</p>
     </div>
 
-    <h2>【売るなら今！】金の高価買取業者はここがおすすめ！</h2>
+    <h2>【迷ったらここ！】金を売るならまず「まねきや」をチェック！</h2>
 
-    <p>金やプラチナの高価買取を狙うなら<strong class="em-mark">『まねきや』が断然おすすめです。</strong></p>
+    <p>金やプラチナを少しでも高く売りたいなら、まず<strong class="em-mark">『まねきや』をチェック！</strong></p>
 
     <p>『まねきや』では、金製品の買取手数料が無料になるキャンペーンを実施中。他店で断られた品や、金かどうか不明なものでも専門機器で査定してくれるので安心です。</p>
 
     <div class="ui-conclusion">
       <span class="ui-conclusion__lbl">まとめ</span>
-      <p class="ui-conclusion__main">迷ったら、まずは<br><span class="em-mark">無料査定</span>から。</p>
+      <img class="ui-conclusion__fig" src="images/banner-manekiya.webp" alt="金・貴金属を売るなら、高価買取専門店まねきやへ" width="300" height="250" loading="lazy">
+      <p class="ui-conclusion__main">迷っているなら、まず<br>今の<span class="em-mark">査定額</span>だけ<br>聞いてみましょう！</p>
       <ul class="ui-check">
         <li>業者間相場で査定するから高額買取が可能</li>
         <li>金の買取手数料が無料</li>
@@ -446,7 +435,7 @@
       </ul>
     </div>
 
-    <p class="ui-ctalead">↓「まずは査定だけ」でもOK↓</p>
+    <p class="ui-ctalead">↓ 売るか迷っていても相談OK ↓</p>
     <div class="kin-cta-block">
       <a class="kin-phone" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">
         <span class="kin-cta-brand">まねきや</span>

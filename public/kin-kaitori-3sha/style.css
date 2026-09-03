@@ -2934,3 +2934,118 @@ h2, h3,
   margin: .2em 0 1em;
   text-align: center;
 }
+
+/* ==========================================================================
+   調整（2026-09-03 その2）
+   ========================================================================== */
+
+/* ---- ⑩ 枠の中に画像を入れる ---- */
+
+/* おすすめポイント：箇条書きの一番上にバナー */
+.ui-reco__fig {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto .9em;
+  border-radius: 6px;
+}
+
+/* 「まねきやなら査定できる理由」：余白の右側に機器の写真を回り込ませる */
+.ui-point__fig {
+  float: right;
+  width: 34%;
+  max-width: 130px;
+  height: auto;
+  margin: 0 0 .5em .8em;
+  border-radius: 6px;
+  shape-outside: circle(50%);
+}
+.ui-point .ui-check { overflow: hidden; }
+
+/* まとめ：見出しの上にまねきやのバナー */
+.ui-conclusion__fig {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  display: block;
+  margin: .2em auto .8em;
+  border-radius: 6px;
+}
+
+/* ---- ⑪ 店舗写真をもう一段小さく ---- */
+.kin-stores {
+  max-width: 300px;
+  margin: 1.1em auto .4em;
+  gap: 5px;
+}
+.kin-stores + .kin-note { text-align: center; }
+
+/* ---- ⑫ よくある質問をさらに詰める ---- */
+.kin-faq { margin: 1.2em 0; }
+.kin-faq__q {
+  font-size: 14px;
+  line-height: 1.6;
+  padding: .7em 0 .3em 1.5em;
+}
+.kin-faq__q::before { top: .7em; font-size: .95em; }
+.kin-faq__a {
+  font-size: 12.8px;
+  line-height: 1.75;
+  padding: 0 0 .8em 1.5em;
+}
+.kin-faq__a::before { font-size: .95em; }
+
+/* ---- ⑬ 比較表の見出しを中央へ ---- */
+/* 帯（総合評価・買取価格…）と、各社スペック表の項目名 */
+.ui-rk__band { text-align: center; }
+.ui-spec th { text-align: center; vertical-align: middle; }
+.ui-spec td { text-align: left; }
+
+@media (max-width: 359px) {
+  .ui-point__fig { max-width: 104px; }
+  .kin-stores { max-width: 260px; }
+}
+
+/* ==========================================================================
+   調整（2026-09-03 その3）
+   ========================================================================== */
+
+/* ---- ⑭ ヒーロー画像の中に日付を重ねる ----
+   画像側の書体に寄せる：明朝・金のグラデーション・字間を広めに。
+   日付はJSで毎日書き換わる（index.html のインラインスクリプト）。 */
+.kin-fv__visual { position: relative; }
+
+.kin-fv__date {
+  position: absolute;
+  top: 5.5%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: var(--mincho);
+  font-weight: 600;
+  font-size: clamp(13px, 3.5vw, 22px);
+  letter-spacing: .14em;
+  line-height: 1;
+  /* 画像の「金」と同じ金の質感 */
+  background: linear-gradient(180deg, #fdf3d0 0%, #e5c877 45%, #b8912f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .55);
+  pointer-events: none;
+}
+
+/* グラデーション文字に非対応なら金の単色で出す */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .kin-fv__date {
+    background: none;
+    color: #e5c877;
+    -webkit-text-fill-color: #e5c877;
+  }
+}
+
+/* ---- ⑮ FVを抜けたら、すぐランキング比較 ---- */
+.kin-banner-label--campaign + .ui-rk { margin-top: 1em; }
