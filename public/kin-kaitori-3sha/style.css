@@ -2711,3 +2711,226 @@ h2, h3,
 .ui-result__p { grid-column: 1 / -1; margin-top: .3em; padding-top: .4em; border-top: 1px dashed var(--rule-2); font-weight: 900; font-size: 18px; color: #a11919; text-align: right; }
 .ui-rk__go { display: inline-block; padding: .34em .8em; border-radius: 999px; background: #8a6d1f; color: #fff !important; font-size: 11.5px; font-weight: 900; text-decoration: none !important; }
 .ui-rk__cell--1 .ui-rk__go { background: #a11919; }
+
+/* ==========================================================================
+   kin-kaitori-3sha 調整（2026-09-03）
+   FVの結論を主役に、バナーとQAを軽く、CTAは数を絞って1本を強く。
+   ========================================================================== */
+
+/* ---- ① FVの結論ボックス：大きく、中央へ ---- */
+.ui-conclusion {
+  text-align: center;
+  padding: 1.25em 1em 1.2em;
+}
+.ui-conclusion__lbl {
+  margin-bottom: .6em;
+  padding: .28em 1.1em;
+  font-size: 13.5px;
+}
+/* .ui-conclusion p が .ui-conclusion__main（同じくp要素）に勝って
+   14.5pxまで縮んでいた。クラス指定を1段強くして主役の大きさを取り戻す */
+.ui-conclusion p.ui-conclusion__main {
+  margin: 0;
+  /* 「おすすめランキングTOP3」が375pxで1行に収まる上限に合わせている。
+     ここを上げると「おすすめ／ランキングTOP3」で割れる */
+  font-size: clamp(22px, 6.2vw, 29px);
+  line-height: 1.4;
+  letter-spacing: -.02em;
+}
+.ui-conclusion__sub {
+  display: block;
+  margin-bottom: .1em;
+  font-size: .68em;
+  letter-spacing: 0;
+}
+.ui-conclusion p.ui-conclusion__main .em-mark { padding: 0 .12em; }
+.ui-conclusion p { text-align: center; }
+
+/* ---- ② 結論の吹き出し（人物イラストつき） ---- */
+.ui-say {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 8px;
+  align-items: start;
+  margin: 1.3em 0;
+}
+.ui-say__av {
+  width: 56px;
+  height: 56px;
+  display: block;
+  border-radius: 50%;
+}
+.ui-say__bubble {
+  position: relative;
+  background: #fffdf6;
+  border: 2px solid #c9a227;
+  border-radius: 12px;
+  padding: .8em .85em;
+}
+.ui-say__bubble::before,
+.ui-say__bubble::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  width: 0;
+  height: 0;
+  border: 9px solid transparent;
+}
+.ui-say__bubble::before { left: -18px; border-right-color: #c9a227; }
+.ui-say__bubble::after { left: -15px; border-right-color: #fffdf6; }
+.ui-say__bubble p {
+  margin: 0;
+  font-family: var(--gothic);
+  font-size: 14.5px;
+  line-height: 1.8;
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+
+/* ---- ③ 各社バナーを小さくする ---- */
+.kin-pv-banner {
+  display: block;
+  max-width: 240px;
+  margin: 0 auto .4em;
+}
+.kin-pv-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.kin-banner-label { justify-content: center; }
+
+/* ---- ④ よくある質問を小さく ---- */
+.kin-faq { margin: 1.5em 0; }
+.kin-faq__q {
+  font-family: var(--gothic);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.7;
+  padding: .85em 0 .4em 1.7em;
+}
+.kin-faq__q::before { top: .85em; font-size: 1em; }
+.kin-faq__a {
+  font-size: 13.5px;
+  line-height: 1.85;
+  padding: 0 0 1.05em 1.7em;
+}
+.kin-faq__a::before { font-size: 1em; }
+
+/* ---- ⑤ 比較表の項目見出しを中央へ ---- */
+.ui-rk__band { text-align: center; }
+
+/* ---- ⑥ 不自然な改行を抑える ----
+   「店舗・出張・宅／配」のように1文字だけ送られるのを防ぐ。
+   文節単位で折り返し、行末の1文字残りを許容しない。 */
+.ui-rk__t,
+.ui-rk__d,
+.ui-rk__score,
+.ui-rk__place,
+.ui-spec td,
+.ui-spec th,
+.ui-reco li,
+.kin-phone__badge,
+.kin-phone__num,
+.kin-cta,
+.ui-ctalead,
+.ui-rate__note,
+.entry-content p {
+  word-break: auto-phrase;
+  line-break: strict;
+  /* 行末に1文字だけ残さない。ブラウザ側で最終行を持ち上げてもらう */
+  text-wrap: pretty;
+}
+
+/* 中黒でつながる短い語は、途中で切らずまとめて折り返す */
+.ui-rk__t { text-wrap: balance; }
+.ui-rk__cell { font-size: 11.5px; }
+.ui-rk__t { font-size: 12px; letter-spacing: -.01em; }
+.ui-rk__d { letter-spacing: -.01em; }
+
+/* CTAの文言は2行までに収め、1文字だけの行を作らない */
+.kin-phone__num { text-wrap: balance; }
+.kin-phone__badge { text-wrap: balance; }
+.kin-phone__badge small { font-size: .84em; font-weight: 700; white-space: nowrap; }
+
+@media (max-width: 359px) {
+  .ui-say { grid-template-columns: 54px 1fr; }
+  .ui-say__av { width: 54px; height: 54px; }
+  .ui-say__bubble p { font-size: 14px; }
+}
+
+/* 値の列が狭く「株式会社いーふらん」が1文字送りになっていたので見出し列を詰める */
+.ui-spec th { width: 5.6em; }
+.ui-spec td, .ui-spec th { text-wrap: pretty; }
+/* ラベルはinline-flexのまま中央へ。blockにするとPRバッジの行が崩れる */
+.kin-pv-banner + *, .kin-banner-label { }
+.kin-banner-label { display: flex; justify-content: center; }
+.ui-reco li, .ui-rate__note, .kin-note { text-wrap: pretty; }
+
+/* 比較表の3列は幅が狭い。社名や「店舗・出張・宅配」が1文字送りにならない大きさへ */
+.ui-rk__t { font-size: 11px; line-height: 1.5; }
+.ui-rk__d { font-size: 10px; line-height: 1.45; }
+.ui-rk__score, .ui-rk__place { text-wrap: pretty; }
+.ui-rate__note { text-wrap: pretty; }
+
+/* ---- ⑦ 店舗紹介：3枚を横に並べる ---- */
+.kin-stores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 1.2em 0 .5em;
+}
+.kin-stores img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+/* ---- ⑧ 本文中の図版・バナー ----
+   .kin-figure は相場カラム（横並びのflex）で既に使われているので別名にする */
+.kin-photo {
+  display: block;
+  margin: 1.4em 0;
+  padding: 0;
+  border: 0;
+}
+.kin-photo img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+.kin-photo figcaption {
+  margin-top: .5em;
+  font-family: var(--gothic);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-sub);
+  text-align: center;
+  text-wrap: pretty;
+}
+
+/* 行末に1文字だけ残るのを、本文系のブロック全体で抑える。
+   （追加のたびに拾い漏れるので、テキストを持つ部品はまとめて指定する） */
+.ui-check li, .ui-md li, .ui-num li, .ui-step li, .ui-ba li,
+.ui-cards3 li, .ui-cards3 p, .ui-vs p, .ui-editor p, .ui-talk__body p,
+.ui-review p, .ui-rank__body p, .ui-price p, .kin-punch,
+.kin-intro, .ui-ctalead, .kin-note, .ui-caption, .kin-photo figcaption,
+.entry-content li, .entry-content h2, .entry-content h3 {
+  word-break: auto-phrase;
+  text-wrap: pretty;
+}
+
+/* 口コミの見出し行。名前・星・タグが1行に収まらないと語の途中で折れるので、
+   名前は折らず、収まらないときは行ごと折り返す */
+.ui-review__head { flex-wrap: wrap; row-gap: .25em; }
+.ui-review__who { white-space: nowrap; }
+
+/* ---- ⑨ ランキング名はヒーロー画像に入ったので、本文側は日付バッジだけ残す ---- */
+.kin-dateline {
+  margin: .2em 0 1em;
+  text-align: center;
+}
