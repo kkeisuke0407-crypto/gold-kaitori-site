@@ -37,7 +37,7 @@ Version: 4.0.0
             "Hiragino Kaku Gothic ProN", "Noto Sans JP", Meiryo, sans-serif;
 
   --fz: 18px;
-  --lh: 2.0;
+  --lh: 1.8;
   --tap: 60px;
   --pad: clamp(18px, 5vw, 40px);
 }
@@ -58,7 +58,7 @@ body {
 }
 
 .entry-content, .article { font-size: var(--fz); line-height: var(--lh); }
-.entry-content p { margin: 0 0 1.8em; }
+.entry-content p { margin: 0 0 1.05em; }
 
 /* 流し見でも判断材料を拾える、はっきりした強調 */
 .entry-content strong {
@@ -305,7 +305,7 @@ a { color: #1b4f86; text-underline-offset: .25em; }
   border: none;
   border-left: 6px solid var(--gold-line);
   padding: .62em .82em .62em .72em;
-  margin: 2.3em calc(-1 * var(--pad)) 1.05em;
+  margin: 1.85em calc(-1 * var(--pad)) .85em;
   position: relative;
   word-break: auto-phrase;
 }
@@ -322,7 +322,7 @@ a { color: #1b4f86; text-underline-offset: .25em; }
   border: none;
   border-left: 3px solid var(--gold-line);
   padding: .1em 0 .1em .8em;
-  margin: 3em 0 1.2em;
+  margin: 2em 0 .8em;
   border-radius: 0;
 }
 
@@ -2387,3 +2387,248 @@ h2, h3,
   word-break: auto-phrase;
 }
 .kin-campband__sub { margin: .55em 0 0; font-size: 13px; line-height: 1.7; color: #6b6254; }
+
+/* ============================================================================
+   UI部品ライブラリ（記事の見やすさ用）
+   ── 24部品。既存の kin-* と併用する。命名は ui-* で衝突を避ける。
+      良かったものは templates/hikaku-lp/style.css に戻すこと。
+   ============================================================================ */
+
+/* ---- 共通 ---------------------------------------------------------------- */
+.ui-lead, .ui-check, .ui-point, .ui-caution, .ui-md, .ui-talk, .ui-review,
+.ui-rank, .ui-vs, .ui-num, .ui-price, .ui-step, .ui-ba, .ui-editor,
+.ui-reco, .ui-cards3, .ui-figrow, .ui-conclusion { margin: 1.3em 0; }
+.ui-ttl { display: flex; align-items: center; gap: .45em; margin: 0 0 .55em; font-family: var(--gothic); font-weight: 900; font-size: 16px; line-height: 1.5; }
+.ui-ttl svg { flex: 0 0 auto; width: 19px; height: 19px; }
+
+/* ---- ② 小見出し（h3 より下の段） ------------------------------------------ */
+.ui-h4 {
+  margin: 1.5em 0 .6em; padding-left: .6em;
+  border-left: 4px solid var(--gold-line);
+  font-family: var(--gothic); font-weight: 900; font-size: 17px; line-height: 1.55;
+  color: var(--sumi);
+}
+
+/* ---- ③ リード文 ----------------------------------------------------------- */
+.ui-lead {
+  padding: .85em 1em; border-radius: 10px;
+  background: var(--gold-bg); border-left: 5px solid var(--gold-line);
+  color: #3d341c;
+}
+.ui-lead p { margin: 0 0 .5em; }
+.ui-lead p:last-child { margin: 0; }
+
+/* ---- ④ チェック箇条書き ---------------------------------------------------- */
+.ui-check { list-style: none; padding: 0; }
+.ui-check li {
+  position: relative; margin: 0 0 .5em; padding: .1em 0 .1em 1.75em;
+  font-size: 15.5px; line-height: 1.7;
+}
+.ui-check li::before {
+  content: ""; position: absolute; left: 0; top: .34em;
+  width: 1.15em; height: 1.15em; border-radius: 50%;
+  background: var(--win) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/68% no-repeat;
+}
+.ui-check--x li::before { background-color: var(--alert); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E"); }
+
+/* ---- ⑤ ポイントボックス / ⑥ 注意ボックス ----------------------------------- */
+.ui-point, .ui-caution { padding: .95em 1.05em; border-radius: 12px; font-size: 15.5px; line-height: 1.8; }
+.ui-point   { background: #f2f8f4; border: 2px solid #bcd9c7; }
+.ui-caution { background: #fdf4f2; border: 2px solid #eec4bb; }
+.ui-point .ui-ttl   { color: var(--win); }
+.ui-caution .ui-ttl { color: var(--alert); }
+.ui-point p, .ui-caution p { margin: 0 0 .5em; }
+.ui-point p:last-child, .ui-caution p:last-child { margin: 0; }
+
+/* ---- ⑦ メリット／デメリット ------------------------------------------------ */
+.ui-md { display: grid; grid-template-columns: 1fr 1fr; gap: .6em; }
+.ui-md__col { padding: .8em .75em; border-radius: 12px; }
+.ui-md__col--pro { background: #f2f8f4; border: 2px solid #bcd9c7; }
+.ui-md__col--con { background: #fdf4f2; border: 2px solid #eec4bb; }
+.ui-md__head { margin: 0 0 .45em; font-family: var(--gothic); font-weight: 900; font-size: 14px; text-align: center; }
+.ui-md__col--pro .ui-md__head { color: var(--win); }
+.ui-md__col--con .ui-md__head { color: var(--alert); }
+.ui-md ul { list-style: none; margin: 0; padding: 0; }
+.ui-md li { margin: 0 0 .4em; padding-left: 1.05em; text-indent: -1.05em; font-size: 13.5px; line-height: 1.65; }
+.ui-md__col--pro li::before { content: "○ "; color: var(--win); font-weight: 900; }
+.ui-md__col--con li::before { content: "× "; color: var(--alert); font-weight: 900; }
+@media (max-width: 359px) { .ui-md { grid-template-columns: 1fr; } }
+
+/* ---- ⑧ 吹き出し ----------------------------------------------------------- */
+.ui-talk { display: flex; align-items: flex-start; gap: .6em; }
+.ui-talk--r { flex-direction: row-reverse; }
+.ui-talk__ico {
+  flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--gold-bg); border: 2px solid var(--gold-line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; line-height: 1;
+}
+.ui-talk__body {
+  position: relative; flex: 1 1 auto; padding: .75em .9em;
+  border: 2px solid var(--rule); border-radius: 12px; background: #fff;
+  font-size: 15px; line-height: 1.75;
+}
+.ui-talk__body::before {
+  content: ""; position: absolute; top: 14px; left: -9px;
+  border: 5px solid transparent; border-right-color: var(--rule);
+}
+.ui-talk--r .ui-talk__body::before { left: auto; right: -9px; border-right-color: transparent; border-left-color: var(--rule); }
+.ui-talk__body p { margin: 0; }
+
+/* ---- ⑨ 口コミカード -------------------------------------------------------- */
+.ui-review { padding: .9em 1em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; }
+.ui-review__head { display: flex; align-items: center; gap: .5em; margin-bottom: .45em; }
+.ui-review__who { font-family: var(--gothic); font-weight: 900; font-size: 13.5px; color: var(--sumi); }
+.ui-review__star { color: #d8a531; font-size: 13px; letter-spacing: .06em; }
+.ui-review__tag { margin-left: auto; padding: .12em .6em; border-radius: 999px; background: var(--gold-bg); border: 1px solid var(--gold-line); font-size: 11px; font-weight: 700; color: #6b5424; }
+.ui-review p { margin: 0; font-size: 15px; line-height: 1.75; }
+.ui-review--bad { background: #fcfaf7; border-color: #e2d6c6; }
+
+/* ---- ⑩ ランキングカード ---------------------------------------------------- */
+.ui-rank { border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; background: #fff; }
+.ui-rank--1 { border-color: #c9a227; box-shadow: 0 2px 0 #e8dcae; }
+.ui-rank__head { display: flex; align-items: center; gap: .55em; padding: .6em .85em; background: #f6f4ee; }
+.ui-rank--1 .ui-rank__head { background: linear-gradient(100deg, #8a6d1f 0%, #b8912f 100%); }
+.ui-rank__no {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: var(--sumi);
+  font-family: var(--gothic); font-weight: 900; font-size: 15px;
+}
+.ui-rank--1 .ui-rank__no { background: #fff; color: #8a6d1f; }
+.ui-rank__name { font-family: var(--gothic); font-weight: 900; font-size: 17px; color: var(--sumi); }
+.ui-rank--1 .ui-rank__name { color: #fff; }
+.ui-rank__tag { margin-left: auto; font-size: 11.5px; font-weight: 700; color: var(--ink-sub); }
+.ui-rank--1 .ui-rank__tag { color: #fff6dc; }
+.ui-rank__body { padding: .8em .9em .95em; }
+.ui-rank__body p { margin: 0 0 .55em; font-size: 15px; line-height: 1.75; }
+.ui-rank__body p:last-child { margin: 0; }
+
+/* ---- ⑪ 比較表（縦カード型。横スクロールしない） --------------------------- */
+.ui-vs { display: grid; gap: .7em; }
+.ui-vs__card { border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; background: #fff; }
+.ui-vs__card--pick { border-color: #c9a227; }
+.ui-vs__head { display: flex; align-items: center; gap: .5em; padding: .55em .8em; background: #f6f4ee; }
+.ui-vs__card--pick .ui-vs__head { background: linear-gradient(100deg, #8a6d1f 0%, #b8912f 100%); }
+.ui-vs__no {
+  flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; background: #fff;
+  font-family: var(--gothic); font-weight: 900; font-size: 13px; color: var(--sumi);
+}
+.ui-vs__card--pick .ui-vs__no { color: #8a6d1f; }
+.ui-vs__name { font-family: var(--gothic); font-weight: 900; font-size: 16px; color: var(--sumi); }
+.ui-vs__card--pick .ui-vs__name { color: #fff; }
+.ui-vs__for { margin-left: auto; font-size: 11.5px; font-weight: 700; color: var(--ink-sub); text-align: right; line-height: 1.4; }
+.ui-vs__card--pick .ui-vs__for { color: #fff6dc; }
+.ui-vs__rows { margin: 0; padding: .2em .8em .7em; }
+.ui-vs__row { display: grid; grid-template-columns: 6.6em 1fr; gap: .5em; padding: .5em 0; border-bottom: 1px dashed var(--rule-2); }
+.ui-vs__row:last-child { border-bottom: none; }
+.ui-vs__k { font-size: 12.5px; font-weight: 700; color: var(--ink-sub); line-height: 1.5; }
+.ui-vs__v { font-size: 14px; line-height: 1.6; color: var(--ink); }
+.ui-vs__v strong { font-weight: 900; }
+.ui-vs__v small { display: block; margin-top: .15em; font-size: 11.5px; color: var(--ink-sub); line-height: 1.5; }
+.ui-vs__ref { display: inline-block; margin-top: .3em; font-size: 11.5px; font-weight: 700; color: #6b5424; text-decoration: underline; }
+@media (max-width: 339px) { .ui-vs__row { grid-template-columns: 1fr; gap: .1em; } }
+
+/* ---- ⑫ 数字強調 ----------------------------------------------------------- */
+.ui-num { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5em; text-align: center; }
+.ui-num__item { padding: .75em .3em; border: 2px solid var(--gold-line); border-radius: 12px; background: var(--gold-bg); }
+.ui-num__v { display: block; font-family: var(--gothic); font-weight: 900; font-size: clamp(20px, 6vw, 26px); line-height: 1.15; color: #8a6d1f; }
+.ui-num__v small { font-size: .58em; font-weight: 800; }
+.ui-num__k { display: block; margin-top: .3em; font-size: 11.5px; line-height: 1.45; color: var(--ink-sub); }
+
+/* ---- ⑭ 料金カード --------------------------------------------------------- */
+.ui-price { display: grid; gap: .5em; }
+.ui-price__row { display: flex; align-items: center; gap: .6em; padding: .7em .9em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; }
+.ui-price__k { font-size: 14.5px; font-weight: 700; color: var(--sumi); }
+.ui-price__v { margin-left: auto; font-family: var(--gothic); font-weight: 900; font-size: 17px; color: var(--win); }
+.ui-price__v--zero { color: var(--win); }
+.ui-price__note { margin: .2em 0 0; font-size: 12px; color: var(--ink-sub); }
+
+/* ---- ⑮ STEP図 ------------------------------------------------------------- */
+.ui-step { list-style: none; padding: 0; counter-reset: uistep; }
+.ui-step li { position: relative; margin: 0 0 .55em; padding: .75em .9em .8em 3.1em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; }
+.ui-step li::before {
+  counter-increment: uistep; content: "STEP" counter(uistep);
+  position: absolute; left: .6em; top: .8em; width: 2.05em; padding: .18em 0;
+  border-radius: 6px; background: var(--sumi); color: #fff; text-align: center;
+  font-family: var(--gothic); font-weight: 900; font-size: 9.5px; letter-spacing: .02em; line-height: 1.35;
+}
+.ui-step__t { margin: 0 0 .25em; font-family: var(--gothic); font-weight: 900; font-size: 15.5px; line-height: 1.5; color: var(--sumi); }
+.ui-step li p { margin: 0; font-size: 14.5px; line-height: 1.7; }
+
+/* ---- ⑯ Before / After ----------------------------------------------------- */
+.ui-ba { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: .45em; }
+.ui-ba__col { padding: .75em .7em; border-radius: 12px; text-align: center; }
+.ui-ba__col--b { background: #f4f2ee; border: 2px solid var(--rule); }
+.ui-ba__col--a { background: #f2f8f4; border: 2px solid #bcd9c7; }
+.ui-ba__lbl { display: block; margin-bottom: .3em; font-family: var(--gothic); font-weight: 900; font-size: 11px; letter-spacing: .06em; color: var(--ink-sub); }
+.ui-ba__col--a .ui-ba__lbl { color: var(--win); }
+.ui-ba__v { display: block; font-family: var(--gothic); font-weight: 900; font-size: clamp(15px, 4.4vw, 19px); line-height: 1.4; color: var(--sumi); }
+.ui-ba__col--a .ui-ba__v { color: var(--win); }
+.ui-ba__arrow { display: flex; align-items: center; font-size: 17px; color: var(--gold); }
+
+/* ---- ⑳ 編集部コメント ------------------------------------------------------ */
+.ui-editor { display: flex; gap: .7em; padding: .9em 1em; border-radius: 12px; background: #f6f7f9; border: 2px solid #dfe3ea; }
+.ui-editor__ico { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%; background: var(--sumi); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--gothic); font-weight: 900; font-size: 10.5px; line-height: 1.2; text-align: center; }
+.ui-editor__b { flex: 1 1 auto; }
+.ui-editor__t { margin: 0 0 .3em; font-family: var(--gothic); font-weight: 900; font-size: 13px; color: var(--sumi); }
+.ui-editor p { margin: 0; font-size: 14.5px; line-height: 1.75; }
+
+/* ---- ㉑ おすすめポイント ---------------------------------------------------- */
+.ui-reco { padding: .9em 1em; border: 2px solid var(--gold-line); border-radius: 12px; background: var(--gold-bg); }
+.ui-reco ol { list-style: none; margin: 0; padding: 0; counter-reset: uireco; }
+.ui-reco li { position: relative; margin: 0 0 .5em; padding-left: 1.9em; font-size: 15px; line-height: 1.7; }
+.ui-reco li:last-child { margin: 0; }
+.ui-reco li::before {
+  counter-increment: uireco; content: counter(uireco);
+  position: absolute; left: 0; top: .18em; width: 1.35em; height: 1.35em; border-radius: 50%;
+  background: #8a6d1f; color: #fff; text-align: center; line-height: 1.35em;
+  font-family: var(--gothic); font-weight: 900; font-size: 12px;
+}
+
+/* ---- ㉒ アイコン付き3列カード ------------------------------------------------ */
+.ui-cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5em; }
+.ui-cards3__c { padding: .8em .5em .85em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; text-align: center; }
+.ui-cards3__ico { display: block; margin: 0 auto .4em; width: 30px; height: 30px; color: var(--gold); }
+.ui-cards3__t { display: block; margin-bottom: .25em; font-family: var(--gothic); font-weight: 900; font-size: 13.5px; line-height: 1.45; color: var(--sumi); }
+.ui-cards3__d { display: block; font-size: 11.5px; line-height: 1.55; color: var(--ink-sub); }
+@media (max-width: 339px) { .ui-cards3 { grid-template-columns: 1fr; } }
+
+/* ---- ㉓ 写真＋テキスト ------------------------------------------------------ */
+.ui-figrow { display: grid; grid-template-columns: 40% 1fr; gap: .8em; align-items: start; }
+.ui-figrow--r { grid-template-columns: 1fr 40%; }
+.ui-figrow--r .ui-figrow__fig { order: 2; }
+.ui-figrow__fig { margin: 0; }
+.ui-figrow__fig img { width: 100%; height: auto; border-radius: 10px; display: block; }
+.ui-figrow__b p { margin: 0 0 .5em; font-size: 14.5px; line-height: 1.75; }
+.ui-figrow__b p:last-child { margin: 0; }
+@media (max-width: 359px) { .ui-figrow, .ui-figrow--r { grid-template-columns: 1fr; } .ui-figrow--r .ui-figrow__fig { order: 0; } }
+
+/* ---- ㉔ 結論ボックス -------------------------------------------------------- */
+.ui-conclusion {
+  padding: 1em 1.05em 1.05em; border-radius: 14px;
+  background: linear-gradient(180deg, #fffdf6 0%, #fff 70%);
+  border: 3px solid #c9a227;
+}
+.ui-conclusion__lbl {
+  display: inline-block; margin-bottom: .45em; padding: .2em .85em; border-radius: 999px;
+  background: #8a6d1f; color: #fff; font-family: var(--gothic); font-weight: 900; font-size: 11.5px; letter-spacing: .04em;
+}
+.ui-conclusion__main { margin: 0 0 .4em; font-family: var(--gothic); font-weight: 900; font-size: clamp(18px, 5.2vw, 22px); line-height: 1.55; color: var(--sumi); word-break: auto-phrase; }
+.ui-conclusion p { margin: 0; font-size: 14.5px; line-height: 1.75; }
+
+/* ---- UI部品の共通調整 ------------------------------------------------------
+   本文は明朝が地。UI部品の短文はゴシックにして締める。
+   併せて社名リンクの色・下線を部品側で統一する（既定のリンク色が混ざるため）。 */
+.ui-check, .ui-md, .ui-cards3, .ui-num, .ui-price, .ui-step, .ui-ba,
+.ui-review, .ui-rank__body, .ui-vs, .ui-editor, .ui-reco, .ui-talk__body,
+.ui-point, .ui-caution { font-family: var(--gothic); }
+
+.ui-vs__head a, .ui-rank__head a { color: inherit; text-decoration: none; }
+.ui-vs__head a:hover, .ui-rank__head a:hover { text-decoration: underline; }
+.ui-vs__card--pick .ui-vs__head a { color: #fff; }
+
+/* 部品内の強調は、地のマーカーを弱めて詰まりを防ぐ */
+.ui-vs__v strong, .ui-md strong, .ui-check strong, .ui-cards3 strong { background: none; padding: 0; }
+.ui-vs__v strong { color: var(--sumi); }
