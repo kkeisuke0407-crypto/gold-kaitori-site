@@ -1184,11 +1184,25 @@
 }());
 </script>
 
-<!-- CV計測：LP3系と同一のイベント体系（gold_kaitori_affiliate_click ほか） -->
+<!-- CV計測：LP3系と同一のイベント体系（gold_kaitori_affiliate_click ほか）
+     ★対象の選び方：class ではなく「リンク先ホスト」で決める。
+       以前は SEL に列挙する方式だったため、クラス名を変えたり付け忘れると
+       そのCTAが丸ごと計測から消えていた（実際に2回発生）。
+       ホスト判定なら、新しいCTAをどこに足しても自動で計測に乗る。 -->
 <script>
 (function(){
   var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
   var LANDING = "manekiya_otakaraya";
+
+  // 遷移先ホストで役割を決める
+  var AFF   = /ad-fam\.com/;      // まねきや成果リンク（アフィリ）＝主CV
+  var OTA   = /otakaraya\.jp/;    // おたからや＝非成果CV
+  var MSHOP = /manekiya\.shop/;   // まねきや公式への直リンク＝成果にならない（CVに数えない）
+
+  // 出典・根拠として置いているリンクはCVに数えない。ただし計測はする（流出量を見るため）
+  var SOURCE_SEL = ".cmp9-ref, [data-noct], .kin-quote-check__sources, .kin-ota-sources," +
+                   " .kin-note, .kin-area__note, .kin-calc__src, .kin-media__cap, .kin-disclaimer";
+
   function track(name, params){
     try{
       if(window.dataLayer) window.dataLayer.push(Object.assign({event:name}, params||{}));
@@ -1204,32 +1218,38 @@
       return u.toString();
     }catch(_){ return raw; }
   }
-  var SEL = ".kin-phone, .kin-cta--web, .kin-fixed-tel, .kin-fixed-web, .kin-official-cta__manekiya, .kin-official-cta__otakaraya, .kin-aff, .kin-camp, .kin-pv-banner, .kin-pv-cta, .kin-verdict__banner, .cmp9-official";
-  Array.prototype.forEach.call(document.querySelectorAll(SEL), function(el){
-    var cls = el.className || "", href = el.getAttribute("href") || "";
-    // おたからや公式のみ非成果。それ以外（まねきやアフィリンク）は成果CV
-    // 成果CVはまねきや(ad-fam)のみ。他社はドメインで区別して非成果にする。
-    var isManekiya = /ad-fam\.com/.test(href);
-    var key = isManekiya ? "manekiya"
-            : (/otakaraya\.jp/.test(href) || /official-cta__otakaraya/.test(cls)) ? "otakaraya"
-            : (href.match(/^https?:\/\/(?:www\.)?([^\/]+)/) || [,"other"])[1];
+
+  var links = Array.prototype.filter.call(document.querySelectorAll("a[href]"), function(a){
+    var h = a.getAttribute("href") || "";
+    return AFF.test(h) || OTA.test(h) || MSHOP.test(h);
+  });
+
+  links.forEach(function(el){
+    var cls = (el.className || "").toString(), href = el.getAttribute("href") || "";
+    var isOtakaraya = OTA.test(href) || /official-cta__otakaraya/.test(cls);
+    var key = isOtakaraya ? "otakaraya" : "manekiya";
     var ctaType = /kin-phone|kin-fixed-tel/.test(cls) ? "phone" : "web";
+    // まねきや公式への直リンクは成果が付かないので、CTAの見た目でもCVには数えない
+    var isSource = MSHOP.test(href) || !!(el.closest && el.closest(SOURCE_SEL));
+    var role = isSource ? "source" : "cta";
     var url = fwd(href);
     if(url) el.setAttribute("href", url);
     el.addEventListener("click", function(){
       if(el.__ctaBusy) return;            // 連打による二重CVを防止（遷移は既定動作に委ねる）
       el.__ctaBusy = true; setTimeout(function(){ el.__ctaBusy = false; }, 1200);
-      var params = { affiliate_key:key, cta_type:ctaType, landing_intent:LANDING, link_url:url };
+      var params = { affiliate_key:key, cta_type:ctaType, link_role:role, landing_intent:LANDING, link_url:url };
+      if(role === "source"){
+        // 出典リンク＝CVではない。GA4だけに送って流出量を把握する
+        if(typeof gtag==="function") gtag("event", "gold_kaitori_source_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
+        return;
+      }
       var cv = (key === "manekiya") ? "gold_kaitori_affiliate_click" : "gold_kaitori_other_click";
       // GTM併用時の保険としてdataLayerにも積む
       if(window.dataLayer) window.dataLayer.push(Object.assign({event:cv}, params));
       // 主CV（まねきや＝成果／おたからや＝非成果）
       if(typeof gtag==="function") gtag("event", cv, Object.assign({}, params, { transport_type:"beacon" }));
       // GA4限定：電話/WEB別の質イベント（Google広告の主要CVには送らず send_to でGA4のみ）
-      //   ★まねきやのクリック時のみ発火させる。他社(公式サイト)への遷移まで含めると
-      //     「電話 vs WEB」の比率が競合クリックで薄まり、質の指標として使えなくなるため。
-      if(isManekiya && typeof gtag==="function") gtag("event", "gold_kaitori_"+ctaType+"_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
-      // CTAは target=_blank（新規タブ）。既定遷移はそのまま活かし、送信は beacon で確実化
+      if(typeof gtag==="function") gtag("event", "gold_kaitori_"+ctaType+"_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
     });
   });
   track("gold_kaitori_landing_intent", { landing_intent:LANDING }); // 全ページ共通の計測軸

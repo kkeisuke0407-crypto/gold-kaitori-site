@@ -31,6 +31,14 @@
 - `gold_kaitori_ai_check_complete`（査定前チェック完了）
 - `comparison_view`（比較ブロック到達）
 
+### 非CV（計測はするが、CVには数えない）
+- **`gold_kaitori_source_click`**（＝出典・根拠リンクと、成果が付かない公式直リンクのクリック）。
+  - `link_role: "source"` が付く。CTAは `link_role: "cta"`。
+  - 比較記事型LP（`/manekiya-otakaraya/` 系）で使用。出典リンクをCVに混ぜると
+    非成果クリックが水増しされて2社のクリック比率が歪むため、別イベントに分けている。
+  - **アフィリを経由しない公式直リンク**（例 `manekiya.shop`）もここに入る。
+    成果にならない流出量を把握するための軸。
+
 ### マイクロCV（Micro／LPの中間KPI。ABテストの判定補助）
 - `scroll_50` / `scroll_75`（スクロール深度）
 - `gold_kaitori_ai_message_copy`（相談文コピー）
