@@ -2632,3 +2632,82 @@ h2, h3,
 /* 部品内の強調は、地のマーカーを弱めて詰まりを防ぐ */
 .ui-vs__v strong, .ui-md strong, .ui-check strong, .ui-cards3 strong { background: none; padding: 0; }
 .ui-vs__v strong { color: var(--sumi); }
+
+/* ============================================================================
+   ランキング比較（王冠つき3列）— 画像のイメージに合わせた形
+   ── 3列固定。1行あたりの文字を短く保てば320pxでも横スクロールなしで収まる。
+   ============================================================================ */
+.ui-rk { margin: 1.2em 0; border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; background: #fff; font-family: var(--gothic); }
+.ui-rk__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ui-rk__col, .ui-rk__cell { box-sizing: border-box; padding: .7em .35em; border-right: 1px solid var(--rule-2); text-align: center; }
+.ui-rk__col:last-child, .ui-rk__cell:last-child { border-right: none; }
+
+/* 見出し行：王冠＋ロゴ */
+.ui-rk__col { padding-top: .9em; background: #fff; }
+.ui-rk__col--1 { background: #fffdf4; }
+.ui-rk__crown { display: block; margin: 0 auto .45em; width: 42px; height: 34px; }
+/* ロゴ枠。ブラリバはスプライトなので、表示幅ごとに拡大率を計算して切り出す
+   （実測：スプライト2685x1425 内で x34-403・y310-394 がロゴ本体）。 */
+.ui-rk__logo { display: block; margin: 0 auto; width: 96px; height: 24px; background-repeat: no-repeat; background-position: center; background-size: contain; border-radius: 3px; }
+.ui-rk__logo--manekiya  { background-color: #9e1d2a; background-image: url("images/logos/logo-manekiya.svg"); background-size: 84% auto; }
+.ui-rk__logo--otakaraya { background-image: url("images/logos/logo-otakaraya.png"); }
+.ui-rk__logo--brariba   { background-image: url("images/logos/logo-brariba-sprite.png"); background-size: 698.5px auto; background-position: -8.85px -80.65px; }
+@media (max-width: 379px) {
+  .ui-rk__logo { width: 84px; height: 21px; }
+  .ui-rk__logo--brariba { background-size: 611.2px auto; background-position: -7.74px -70.57px; }
+}
+@media (max-width: 339px) {
+  .ui-rk__logo { width: 72px; height: 19px; }
+  .ui-rk__logo--brariba { background-size: 523.9px auto; background-position: -6.63px -60.49px; }
+}
+
+/* 帯（右寄せの行ラベル） */
+.ui-rk__band { padding: .3em .9em .3em; background: #efece4; color: var(--sumi); font-size: 12px; font-weight: 900; text-align: right; letter-spacing: .02em; }
+
+/* 評価セル */
+.ui-rk__cell { font-size: 12px; line-height: 1.55; color: var(--ink); }
+.ui-rk__cell--1 { background: #fffdf4; }
+.ui-rk__star { display: block; color: #e8a838; font-size: 15px; letter-spacing: .01em; line-height: 1.2; }
+.ui-rk__score { display: block; margin-top: .3em; font-size: 11.5px; color: var(--ink-sub); }
+.ui-rk__place { display: block; margin-top: .1em; font-size: 11.5px; font-weight: 900; color: var(--sumi); }
+.ui-rk__mark { display: block; margin: 0 auto .3em; width: 26px; height: 26px; }
+.ui-rk__t { display: block; font-weight: 900; color: var(--sumi); }
+.ui-rk__cell--1 .ui-rk__t { color: #a11919; }
+.ui-rk__d { display: block; margin-top: .2em; font-size: 11px; line-height: 1.5; color: var(--ink-sub); }
+.ui-rk__cell--1 .ui-rk__d { color: #a11919; font-weight: 700; }
+.ui-rk__cta { padding: .7em .5em .8em; border-top: 1px solid var(--rule-2); text-align: center; }
+@media (max-width: 339px) {
+  .ui-rk__col, .ui-rk__cell { padding-left: .2em; padding-right: .2em; }
+  .ui-rk__cell { font-size: 11px; }
+  .ui-rk__d { font-size: 10px; }
+}
+
+/* FV直下のCTA（結論のすぐ下） */
+.ui-fvcta { margin: .9em 0 1.4em; }
+
+/* ---- 本日の相場バー（/rates.json 連動） ---------------------------------- */
+.ui-rate { margin: 1.1em 0; padding: .85em 1em .9em; border: 2px solid #c9a227; border-radius: 12px; background: linear-gradient(180deg,#fffdf4 0%,#fff 70%); font-family: var(--gothic); }
+.ui-rate__ttl { margin: 0 0 .2em; font-size: 13px; font-weight: 900; color: #8a6d1f; }
+.ui-rate__v { margin: 0; font-weight: 900; font-size: clamp(24px,7vw,32px); line-height: 1.2; color: var(--sumi); }
+.ui-rate__v small { font-size: .5em; margin-left: .1em; }
+.ui-rate__diff { margin-left: .35em; font-size: 14px; font-weight: 900; }
+.ui-rate__diff--up { color: #a11919; } .ui-rate__diff--down { color: #1f5fc4; }
+.ui-rate__note { margin: .5em 0 0; font-size: 12.5px; line-height: 1.65; color: var(--ink); }
+.ui-rate__upd { margin: .4em 0 0; font-size: 11px; color: var(--ink-sub); }
+
+/* ---- CTAの上に置く誘い文 -------------------------------------------------- */
+.ui-ctalead { margin: 1.4em 0 -.4em; text-align: center; font-family: var(--gothic); font-weight: 900; font-size: 14.5px; color: var(--sumi); }
+
+/* ---- 会社情報テーブル ------------------------------------------------------ */
+.ui-spec { width: 100%; margin: 1em 0; border-collapse: collapse; font-family: var(--gothic); font-size: 13.5px; }
+.ui-spec th, .ui-spec td { padding: .6em .7em; border: 1px solid var(--rule); line-height: 1.6; vertical-align: top; text-align: left; }
+.ui-spec th { width: 6.6em; background: #f6f4ee; font-weight: 900; color: var(--sumi); }
+
+/* ---- 買取実績カード -------------------------------------------------------- */
+.ui-result { display: grid; gap: .5em; margin: 1em 0; font-family: var(--gothic); }
+.ui-result__c { display: grid; grid-template-columns: 5.4em 1fr; gap: .1em .6em; padding: .7em .85em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; font-size: 13.5px; }
+.ui-result__k { color: var(--ink-sub); font-size: 12px; line-height: 1.9; }
+.ui-result__v { line-height: 1.9; }
+.ui-result__p { grid-column: 1 / -1; margin-top: .3em; padding-top: .4em; border-top: 1px dashed var(--rule-2); font-weight: 900; font-size: 18px; color: #a11919; text-align: right; }
+.ui-rk__go { display: inline-block; padding: .34em .8em; border-radius: 999px; background: #8a6d1f; color: #fff !important; font-size: 11.5px; font-weight: 900; text-decoration: none !important; }
+.ui-rk__cell--1 .ui-rk__go { background: #a11919; }
