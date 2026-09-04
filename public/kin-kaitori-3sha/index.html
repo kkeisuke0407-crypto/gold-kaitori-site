@@ -10,7 +10,7 @@
 <meta property="og:title" content="金を売るなら結局どこがいい？まねきや・おたからや・ブラリバを徹底比較">
 <meta property="og:description" content="金買取の人気3社を公式情報で比較。K18・喜平・古い金なら、まず確認したいのはまねきや。価格の見方と電話で聞く4つまで解説します。">
 <meta property="og:url" content="https://kaitori.hakobu-family.com/kin-kaitori-3sha/">
-<meta property="og:image" content="https://kaitori.hakobu-family.com/kin-kaitori-3sha/images/fv-gold-ranking-v3.webp">
+<meta property="og:image" content="https://kaitori.hakobu-family.com/kin-kaitori-3sha/images/fv-gold-ranking-v4.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css?v=20260903">
 <!-- Google tag (gtag.js)：LP3系と同一のGA4 + Google広告CV計測 -->
@@ -32,8 +32,8 @@
     <h1 class="visually-hidden">金を売るなら、結局どこがいい？まねきや・おたからや・ブラリバの3社を比較</h1>
 
     <figure class="kin-fv__visual">
-      <img src="images/fv-gold-ranking-v3.webp" alt="金の高価買取業者 おすすめランキングTOP3" width="1400" height="788" fetchpriority="high">
-      <p class="kin-fv__date" id="kin-fv-date">《2026年9月3日》</p>
+      <img src="images/fv-gold-ranking-v4.webp" alt="金を売るなら、どこがいい？金の高額買取業者 おすすめランキングTOP3" width="1200" height="650" fetchpriority="high">
+      <p class="kin-fv__date" id="kin-fv-date">9月4日最新</p>
     </figure>
     <script>
     /* 日付は毎日そのまま最新になるようクライアント側で書き換える。
@@ -42,7 +42,7 @@
       var el = document.getElementById('kin-fv-date');
       if (!el) return;
       var d = new Date();
-      el.textContent = '《' + d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日》';
+      el.textContent = (d.getMonth() + 1) + '月' + d.getDate() + '日最新';
     })();
     </script>
   </div>
@@ -51,7 +51,7 @@
 
     <p class="kin-banner-label kin-banner-label--campaign">PR</p>
 
-    <div class="ui-rk" aria-label="金・貴金属の高価買取業者 おすすめランキングTOP3">
+    <div class="ui-rk" id="compare" aria-label="金・貴金属の高価買取業者 おすすめランキングTOP3">
       <div class="ui-rk__grid">
         <div class="ui-rk__col ui-rk__col--1"><svg class="ui-rk__crown" viewBox="0 0 48 38" aria-hidden="true"><path d="M4 30 L2 9 l12 8 L24 3 l10 14 12-8 -2 21z" fill="#f0c419" stroke="#c99a12" stroke-width="1.4" stroke-linejoin="round"/><rect x="4" y="30" width="40" height="5" rx="1.6" fill="#c99a12"/><text x="24" y="26" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" font-family="sans-serif">1</text></svg>
           <a class="kin-aff ui-rk__logo ui-rk__logo--manekiya" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer" aria-label="まねきや公式サイト"></a>
@@ -91,7 +91,7 @@
       </div>
     </div>
 
-    <div class="ui-rate">
+    <div class="ui-rate" id="gold-price">
       <p class="ui-rate__ttl">▼本日の金の買取相場</p>
       <p class="ui-rate__v"><span id="kin-rate-val">—</span><small>円/g</small><span class="ui-rate__diff" id="kin-rate-diff"></span></p>
       <p class="ui-rate__note">上記は参考価格です。まねきやの無料電話相談で、詳細の査定価格を確認できます。<br>※まねきやでは<strong class="em-green">9/30までお電話申込限定で、買取価格20%UPキャンペーンを実施中</strong>です。「まずは査定だけ」でもOKなので、この機会に査定価格を確認してみてください。</p>
@@ -122,6 +122,7 @@
         <span class="kin-phone__num">電話で査定予約する</span>
         <span class="kin-phone__sub">通話料無料／9:00〜21:00受付</span>
       </a>
+      <a class="kin-cta kin-cta--web kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">まねきやの公式サイト</a>
     </div>
 
     <h2>金を売るならいつ？今の相場で一度チェック！</h2>
@@ -146,7 +147,7 @@
     <p><strong class="em-mark">査定額を聞くだけなら、売る必要はありません。</strong>気軽に一歩踏み出してみましょう。</p>
 
 
-    <h2>1位 まねきや</h2>
+    <h2 id="manekiya">1位 まねきや</h2>
 
     <p class="kin-banner-label">まねきや <small>PR</small></p>
     <a class="kin-pv-banner kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer" aria-label="まねきや公式サイト">
@@ -198,7 +199,7 @@
     <p>電話で気軽に査定依頼できるので、迷ったらまずは査定だけでも試してみましょう。</p>
 
 
-    <h3>金を高く売りたい人注目！手数料無料＋業者間取引価格で査定</h3>
+    <h3 id="fees">金を高く売りたい人注目！<br>手数料無料＋業者間取引価格で査定</h3>
 
     <p>『まねきや』では、金製品の買取にかかる通常10%の手数料を<strong class="em-green">無料にするキャンペーン</strong>を実施中。<strong>手数料の分だけ買取価格に上乗せされます。</strong></p>
 
@@ -219,9 +220,10 @@
         <span class="kin-phone__num">電話で査定予約する</span>
         <span class="kin-phone__sub">通話料無料／9:00〜21:00受付</span>
       </a>
+      <a class="kin-cta kin-cta--web kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">まねきやの公式サイト</a>
     </div>
 
-    <h3>「これって金？」でもOK！査定が難しい品にも対応</h3>
+    <h3 id="sellable">「これって金？」でもOK！査定が難しい品にも対応</h3>
 
     <p>『まねきや』では、他店で断られた金でも買取可能です。</p>
 
@@ -240,15 +242,19 @@
 
     <h3>実際にこんな金製品が売れています！</h3>
 
+    <figure class="kin-photo"><img src="images/manekiya-gold-items.webp" alt="金の地金・貴金属アクセサリーのイメージ" width="660" height="295" loading="lazy"><figcaption>※写真はイメージです。</figcaption></figure>
+
     <div class="ui-result">
       <div class="ui-result__c">
         <span class="ui-result__k">品名</span><span class="ui-result__v">御在位61年記念 10万円金貨</span>
-        <span class="ui-result__k">買取時期／店名</span><span class="ui-result__v">2025年07月／あべの店</span>
+        <span class="ui-result__k">買取時期</span><span class="ui-result__v">2025年07月</span>
+        <span class="ui-result__k">店舗</span><span class="ui-result__v">あべの店</span>
         <span class="ui-result__p">339,000円</span>
       </div>
       <div class="ui-result__c">
         <span class="ui-result__k">品名</span><span class="ui-result__v">K18 ブレスレット</span>
-        <span class="ui-result__k">買取時期／店名</span><span class="ui-result__v">2025年07月／横浜本店</span>
+        <span class="ui-result__k">買取時期</span><span class="ui-result__v">2025年07月</span>
+        <span class="ui-result__k">店舗</span><span class="ui-result__v">横浜本店</span>
         <span class="ui-result__p">64,342円</span>
       </div>
     </div>
@@ -261,15 +267,15 @@
     <figure class="kin-photo"><img src="images/review-2025.webp" alt="まねきや利用者の口コミ" width="1000" height="408" loading="lazy"></figure>
 
     <div class="ui-review">
-      <div class="ui-review__head"><span class="ui-review__who">公式サイト掲載</span><span class="ui-review__star">★★★★★</span><span class="ui-review__tag">店頭</span></div>
+      <div class="ui-review__head"><img class="ui-review__av" src="images/avatar-1.svg" alt=""><span class="ui-review__who">ご利用者様</span><span class="ui-review__star">★★★★★</span><span class="ui-review__tag">店頭</span></div>
       <p>このようなお店は少し怖いイメージがありましたが、実際に行ってみるとおしゃれで居心地も良く、店員さんに一つ一つ説明していただけました。古いお金や、最近の金の高騰で金貨が高く付いたのには驚きでした。</p>
     </div>
     <div class="ui-review">
-      <div class="ui-review__head"><span class="ui-review__who">公式サイト掲載</span><span class="ui-review__star">★★★★★</span><span class="ui-review__tag">X線測定</span></div>
+      <div class="ui-review__head"><img class="ui-review__av" src="images/avatar-2.svg" alt=""><span class="ui-review__who">ご利用者様</span><span class="ui-review__star">★★★★★</span><span class="ui-review__tag">X線測定</span></div>
       <p>以前お世話になった買取店が休みだったので見て頂いたところ、X線の機械で細かく計測して頂き、前回売却した時よりも随分高く買い取って頂きました。刻印のない金やプラチナ製品でも含有量を測定できるとのことで、もっと早く伺えば良かったと後悔しました。</p>
     </div>
     <div class="ui-review ui-review--bad">
-      <div class="ui-review__head"><span class="ui-review__who">公式サイト掲載</span><span class="ui-review__star">★★★★☆</span><span class="ui-review__tag">インゴット</span></div>
+      <div class="ui-review__head"><img class="ui-review__av" src="images/avatar-3.svg" alt=""><span class="ui-review__who">ご利用者様</span><span class="ui-review__star">★★★★☆</span><span class="ui-review__tag">インゴット</span></div>
       <p>今回も50gのインゴットを数枚買取って頂き、金相場が上がっているとの事で購入金額よりも高く売れました。</p>
     </div>
     <p class="kin-note">※ 公式サイト掲載の口コミを要約したものです。感想には個人差があり、同等の対応・金額を保証するものではありません。</p>
@@ -378,7 +384,7 @@
       <a class="kin-cta kin-cta--web" href="https://brandrevalue.com/" target="_blank" rel="nofollow noopener noreferrer"><span class="kin-cta-brand">ブラリバ</span>【公式】『ブラリバ』で高価買取</a>
     </div>
 
-    <h2>よくある質問</h2>
+    <h2 id="faq">よくある質問</h2>
 
     <div class="kin-faq">
       <p class="kin-faq__q">金かどうか分からなくても、査定してもらえますか。</p>
@@ -460,12 +466,6 @@
   </div>
 </div>
 
-<div class="kin-fixed-cta kin-fixed-cta--solo">
-  <a class="kin-fixed-tel" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer" aria-label="まねきやで電話査定を予約する">
-    <img src="images/logos/logo-manekiya.svg" alt="まねきや"><span><em class="kin-fixed-badge">手数料10%無料 ＋ 買取額20%UP（電話予約限定）</em>電話で査定予約する<small>通話料無料／9:00〜21:00受付</small></span>
-  </a>
-</div>
-
 <script>
 /* キャンペーンは「当月1日〜当月末日」。JST基準で毎月自動更新する。
    台本の「9月30日まで」を固定文字にせず、月末日をここで書き込む。 */
@@ -509,7 +509,11 @@
       el('kin-rate-upd').textContent = jst.getFullYear() + '/' + pad(jst.getMonth() + 1) + '/' + pad(jst.getDate())
         + ' ' + pad(jst.getHours()) + ':' + pad(jst.getMinutes());
     })
-    .catch(function () { el('kin-rate-val').textContent = '公式サイトでご確認ください'; });
+        .catch(function () {
+      var v = el('kin-rate-val');
+      v.textContent = '公式サイトでご確認ください';
+      v.classList.add('ui-rate__v--fallback');
+    });
 }());
 </script>
 

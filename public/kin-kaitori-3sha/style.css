@@ -909,70 +909,6 @@ a { color: #1b4f86; text-underline-offset: .25em; }
 }
 
 /* =========================================================
-   12. スマホ固定CTA
-   ========================================================= */
-.kin-fixed-cta { display: none; }
-
-@media screen and (max-width: 834px) {
-  .kin-fixed-cta {
-    display: flex;
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    z-index: 9999;
-    background: var(--sumi);
-    border-top: 2px solid var(--gold-line);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-
-  .kin-fixed-cta a {
-    flex: 1 1 0;
-    min-width: 0;
-    min-height: var(--tap);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: .42em;
-    padding: .42em .3em;
-    color: #fff !important;
-    font-weight: 700;
-    font-size: clamp(13px, 3.6vw, 15px);
-    line-height: 1.4;
-    letter-spacing: .02em;
-    text-decoration: none !important;
-    border-left: 1px solid rgba(255,255,255,.14);
-  }
-  .kin-fixed-cta a:first-child { border-left: none; }
-
-  .kin-fixed-cta a small {
-    display: block;
-    font-size: .74em;
-    font-weight: 400;
-    color: #9aa6ba;
-    margin-top: .15em;
-  }
-  .kin-fixed-cta a > img {
-    width: 48px;
-    max-height: 21px;
-    object-fit: contain;
-    flex: 0 0 auto;
-  }
-  .kin-fixed-cta a > span { min-width: 0; text-align: center; }
-
-  /* 電話が成果の主役。面積を広く取り、赤で目立たせる。WEBは緑で差別化 */
-  .kin-fixed-cta .kin-fixed-tel {
-    flex: 1 1 0;
-    background: linear-gradient(180deg, #e8342f 0%, #d1221d 100%);
-  }
-  .kin-fixed-cta .kin-fixed-tel small { color: #ffe0dd; }
-  .kin-fixed-cta .kin-fixed-web { background: linear-gradient(180deg, #08b451 0%, #06a044 100%); }
-  .kin-fixed-cta .kin-fixed-web > img { background: #fff; border-radius: 3px; padding: 2px; }
-  .kin-fixed-cta .kin-fixed-web small { color: #d7f2e1; }
-
-  body { padding-bottom: calc(var(--tap) + 24px + env(safe-area-inset-bottom, 0px)); }
-}
-
-/* =========================================================
    12.5 画像
    ========================================================= */
 .kin-fig { margin: 1.8em 0 2.2em; }
@@ -1907,8 +1843,8 @@ p.kin-verdict__why { font-size: .95em; line-height: 1.85; margin: 0; color: var(
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
 /* CTAがキラッと光るシャイン演出（LP3系 bbCtaShine に準拠） */
-.kin-phone, .kin-cta, .kin-fixed-cta a { position: relative; overflow: hidden; }
-.kin-phone::after, .kin-cta::after, .kin-fixed-cta a::after {
+.kin-phone, .kin-cta, .ui-rk__go { position: relative; overflow: hidden; }
+.kin-phone::after, .kin-cta::after, .ui-rk__go::after {
   content: "";
   position: absolute;
   top: -30%;
@@ -2477,7 +2413,8 @@ h2, h3,
 
 /* ---- ⑨ 口コミカード -------------------------------------------------------- */
 .ui-review { padding: .9em 1em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; }
-.ui-review__head { display: flex; align-items: center; gap: .5em; margin-bottom: .45em; }
+.ui-review__head { display: flex; align-items: center; gap: .55em; margin-bottom: .45em; }
+.ui-review__av { width: 34px; height: 34px; border-radius: 50%; flex: 0 0 auto; }
 .ui-review__who { font-family: var(--gothic); font-weight: 900; font-size: 13.5px; color: var(--sumi); }
 .ui-review__star { color: #d8a531; font-size: 13px; letter-spacing: .06em; }
 .ui-review__tag { margin-left: auto; padding: .12em .6em; border-radius: 999px; background: var(--gold-bg); border: 1px solid var(--gold-line); font-size: 11px; font-weight: 700; color: #6b5424; }
@@ -2689,6 +2626,7 @@ h2, h3,
 .ui-rate { margin: 1.1em 0; padding: .85em 1em .9em; border: 2px solid #c9a227; border-radius: 12px; background: linear-gradient(180deg,#fffdf4 0%,#fff 70%); font-family: var(--gothic); }
 .ui-rate__ttl { margin: 0 0 .2em; font-size: 13px; font-weight: 900; color: #8a6d1f; }
 .ui-rate__v { margin: 0; font-weight: 900; font-size: clamp(24px,7vw,32px); line-height: 1.2; color: var(--sumi); }
+.ui-rate__v--fallback { font-size: 16px; font-weight: 700; line-height: 1.6; }
 .ui-rate__v small { font-size: .5em; margin-left: .1em; }
 .ui-rate__diff { margin-left: .35em; font-size: 14px; font-weight: 900; }
 .ui-rate__diff--up { color: #a11919; } .ui-rate__diff--down { color: #1f5fc4; }
@@ -2709,7 +2647,7 @@ h2, h3,
 .ui-result__k { color: var(--ink-sub); font-size: 12px; line-height: 1.9; }
 .ui-result__v { line-height: 1.9; }
 .ui-result__p { grid-column: 1 / -1; margin-top: .3em; padding-top: .4em; border-top: 1px dashed var(--rule-2); font-weight: 900; font-size: 18px; color: #a11919; text-align: right; }
-.ui-rk__go { display: inline-block; padding: .34em .8em; border-radius: 999px; background: #8a6d1f; color: #fff !important; font-size: 11.5px; font-weight: 900; text-decoration: none !important; }
+.ui-rk__go { display: block; width: 100%; box-sizing: border-box; padding: .68em .3em; border-radius: 10px; background: #8a6d1f; color: #fff !important; font-size: 13.5px; font-weight: 900; letter-spacing: .01em; text-decoration: none !important; text-align: center; }
 .ui-rk__cell--1 .ui-rk__go { background: #a11919; }
 
 /* ==========================================================================
@@ -2873,18 +2811,20 @@ h2, h3,
 .ui-rk__score, .ui-rk__place { text-wrap: pretty; }
 .ui-rate__note { text-wrap: pretty; }
 
-/* ---- ⑦ 店舗紹介：3枚を横に並べる ---- */
+/* ---- ⑦ 店舗紹介：3枚を横に並べる。本文と同じ幅いっぱいに表示する ---- */
 .kin-stores {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin: 1.2em 0 .5em;
+  gap: 8px;
+  width: 100%;
+  margin: 1.3em 0 .6em;
 }
 .kin-stores img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 4px;
+  border-radius: 6px;
+  border: 1px solid var(--rule);
 }
 
 /* ---- ⑧ 本文中の図版・バナー ----
@@ -2973,12 +2913,6 @@ h2, h3,
   border-radius: 6px;
 }
 
-/* ---- ⑪ 店舗写真をもう一段小さく ---- */
-.kin-stores {
-  max-width: 300px;
-  margin: 1.1em auto .4em;
-  gap: 5px;
-}
 .kin-stores + .kin-note { text-align: center; }
 
 /* ---- ⑫ よくある質問をさらに詰める ---- */
@@ -3004,7 +2938,6 @@ h2, h3,
 
 @media (max-width: 359px) {
   .ui-point__fig { max-width: 104px; }
-  .kin-stores { max-width: 260px; }
 }
 
 /* ==========================================================================
@@ -3016,84 +2949,29 @@ h2, h3,
    日付はJSで毎日書き換わる（index.html のインラインスクリプト）。 */
 .kin-fv__visual { position: relative; }
 
+/* 画像の上部中央にはキャッチが入っているため、日付は左上のバッジとして重ねる。
+   背景が金でにぎやかなので、濃色の下敷きを敷いて可読性を確保する。 */
 .kin-fv__date {
   position: absolute;
-  top: 5.5%;
-  left: 0;
-  right: 0;
+  top: 3.2%;
+  left: 3%;
   margin: 0;
-  text-align: center;
-  font-family: var(--mincho);
-  font-weight: 600;
-  font-size: clamp(13px, 3.5vw, 22px);
-  letter-spacing: .14em;
-  line-height: 1;
-  /* 画像の「金」と同じ金の質感 */
-  background: linear-gradient(180deg, #fdf3d0 0%, #e5c877 45%, #b8912f 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, .55);
+  padding: .3em .8em;
+  border-radius: 999px;
+  background: rgba(28, 22, 12, .72);
+  border: 1px solid rgba(229, 200, 119, .8);
+  font-family: var(--gothic);
+  font-weight: 700;
+  font-size: clamp(10px, 2.6vw, 15px);
+  letter-spacing: .06em;
+  line-height: 1.2;
+  color: #f4e3b4;
+  white-space: nowrap;
   pointer-events: none;
-}
-
-/* グラデーション文字に非対応なら金の単色で出す */
-@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-  .kin-fv__date {
-    background: none;
-    color: #e5c877;
-    -webkit-text-fill-color: #e5c877;
-  }
 }
 
 /* ---- ⑮ FVを抜けたら、すぐランキング比較 ---- */
 .kin-banner-label--campaign + .ui-rk { margin-top: 1em; }
 
-/* ---- ⑯ 追従CTAをまねきや1本にする ----
-   バーの高さ（62px）は変えず、空いた横幅に4行を収める。
-   1行目の「まねきや」はロゴが担う。 */
-@media screen and (max-width: 834px) {
-  .kin-fixed-cta--solo a {
-    flex: 1 1 100%;
-    border-left: none;
-    gap: .5em;
-    padding: 4px 10px;
-    text-align: left;
-  }
-  .kin-fixed-cta--solo a > img {
-    width: 54px;
-    max-height: 26px;
-  }
-  .kin-fixed-cta--solo a > span {
-    text-align: left;
-    font-size: 17px;
-    line-height: 1.25;
-  }
-  .kin-fixed-cta--solo .kin-fixed-badge {
-    display: block;
-    font-style: normal;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 1.25;
-    letter-spacing: 0;
-    color: #ffe8b0;
-    margin-bottom: 2px;
-    white-space: nowrap;
-  }
-  .kin-fixed-cta--solo a small {
-    font-size: 10px;
-    line-height: 1.25;
-    margin-top: 2px;
-    color: #ffe0dd;
-    white-space: nowrap;
-  }
-}
-
-/* 幅の狭い端末では、はみ出す前に文字を詰める */
-@media screen and (max-width: 359px) {
-  .kin-fixed-cta--solo a > img { width: 46px; }
-  .kin-fixed-cta--solo a > span { font-size: 15.5px; }
-  .kin-fixed-cta--solo .kin-fixed-badge,
-  .kin-fixed-cta--solo a small { font-size: 9px; }
-}
+/* アンカーリンクの飛び先に少し余白を持たせる */
+[id] { scroll-margin-top: 14px; }
