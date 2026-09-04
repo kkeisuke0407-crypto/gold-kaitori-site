@@ -80,7 +80,6 @@ const storyData = activeModelStory && modelCase ? {
   accessoriesImage: `${modelAssetRoot}/watch-accessories.webp`,
   entryImage: `${modelAssetRoot}/entry-form-with-copy.webp`,
   sourceModelUrl: activeModelStory.officialUrl,
-  sourceLinks: modelCase.sourceLinks,
 } : {
   amountA: '155,000円',
   amountB: '180,000円',
@@ -102,7 +101,6 @@ const storyData = activeModelStory && modelCase ? {
   accessoriesImage: '/hikakaku-watch-story/assets/watch-accessories.webp',
   entryImage: '/hikakaku-watch-story/assets/entry-form-with-copy-v3.webp',
   sourceModelUrl: 'https://hikakaku.com/category/all-category/watch/items/3311449/',
-  sourceLinks: [{ label: 'ヒカカク！', url: 'https://hikakaku.com/category/all-category/watch/items/3311449/' }],
 };
 
 const searchWatch = {
@@ -120,7 +118,7 @@ const canonicalUrl = `https://kaitori.hakobu-family.com/hikakaku-watch/story/${s
 // ヒカカク！の直リンクに戻すと成果が Google 広告へ連携されなくなる。
 const affiliateUrl = 'https://tr.slvrbullet.com/cl/w0000678724/47671/39865/6';
 
-// 型番別ページでは複数の公開査定・買取実績、元のオメガページではヒカカク！公式ページを参考元として表示する。
+// 参考元はヒカカク！の該当ページのみを表示する（型番別ページは各型番のヒカカク！実績ページ）。
 // 型番別ページの金額は公開情報をもとに再構成したモデルケースで、特定の一取引結果ではない。
 const sourceModelUrl = storyData.sourceModelUrl;
 
@@ -291,7 +289,7 @@ const faqItems = [
           <div class="price-cell price-cell--best"><small>D社</small><strong>{storyData.amountD}</strong></div>
         </div>
         {isModelStory ? (
-          <p class="story-note">※本ページは公開されている買取相場・査定実績等を参考に、状態や付属品等を想定して構成したモデルストーリーです。掲載金額は特定の1取引の実績ではなく、実際の査定・売却額を保証するものではありません。※掲載画像はイメージです。<br />参考：{storyData.sourceLinks.map((source, index) => (<><a href={source.url} target="_blank" rel="nofollow noreferrer">{source.label}</a>{index < storyData.sourceLinks.length - 1 ? '／' : ''}</>))}</p>
+          <p class="story-note">※本ページは公開されている買取相場・査定実績等を参考に、状態や付属品等を想定して構成したモデルストーリーです。掲載金額は特定の1取引の実績ではなく、実際の査定・売却額を保証するものではありません。※掲載画像はイメージです。<br />参考：ヒカカク！ <a href={sourceModelUrl} target="_blank" rel="nofollow noreferrer">{sourceModelUrl}</a></p>
         ) : (
           <p class="story-note">※本ページは筆者の実体験をもとにしています。査定額は商品・状態・時期・買取業者によって異なり、実際の査定・売却額を保証するものではありません。※掲載の画像はイメージです。<br />参考：ヒカカク！公式サイト「OMEGA スピードマスター デイト 3511.50 の買取価格を比較」 <a href={sourceModelUrl} target="_blank" rel="nofollow noreferrer">{sourceModelUrl}</a></p>
         )}
