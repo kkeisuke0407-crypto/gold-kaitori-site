@@ -307,7 +307,7 @@ a { color: #1b4f86; text-underline-offset: .25em; }
   padding: .62em .82em .62em .72em;
   margin: 1.85em calc(-1 * var(--pad)) .85em;
   position: relative;
-  word-break: auto-phrase;
+  word-break: keep-all;
 }
 .entry-content h2::after { content: none; }
 
@@ -1863,7 +1863,7 @@ h2, h3,
 .kin-conclusion-title, .kin-box__title, .kin-why__ttl,
 .kin-verdict__head, .kin-verdict__question, .kin-verdict__answer,
 .kin-valuation__title, .kin-step__title, .kin-cta-block__head,
-.kin-faq__q { word-break: auto-phrase; }
+.kin-faq__q { word-break: keep-all; }
 
 /* スマホ：verdictの「対応エリアを確認」を質問文の下段へ回して読みやすく */
 @media screen and (max-width: 600px) {
@@ -2002,7 +2002,7 @@ h2, h3,
   margin-right: auto;
   font-family: inherit;
   text-wrap: pretty;
-  word-break: auto-phrase;
+  word-break: keep-all;
 }
 .kin-opening__opener {
   color: var(--sumi);
@@ -2320,7 +2320,7 @@ h2, h3,
   font-size: clamp(21px, 6.4vw, 27px);
   font-weight: 900;
   line-height: 1.4;
-  word-break: auto-phrase;
+  word-break: keep-all;
 }
 .kin-campband__sub { margin: .55em 0 0; font-size: 13px; line-height: 1.7; color: #6b6254; }
 
@@ -2552,7 +2552,7 @@ h2, h3,
   display: inline-block; margin-bottom: .45em; padding: .2em .85em; border-radius: 999px;
   background: #8a6d1f; color: #fff; font-family: var(--gothic); font-weight: 900; font-size: 11.5px; letter-spacing: .04em;
 }
-.ui-conclusion__main { margin: 0 0 .4em; font-family: var(--gothic); font-weight: 900; font-size: clamp(18px, 5.2vw, 22px); line-height: 1.55; color: var(--sumi); word-break: auto-phrase; }
+.ui-conclusion__main { margin: 0 0 .4em; font-family: var(--gothic); font-weight: 900; font-size: clamp(18px, 5.2vw, 22px); line-height: 1.55; color: var(--sumi); word-break: keep-all; }
 .ui-conclusion p { margin: 0; font-size: 14.5px; line-height: 1.75; }
 
 /* ---- UI部品の共通調整 ------------------------------------------------------
@@ -2721,7 +2721,7 @@ h2, h3,
   font-family: var(--gothic);
   font-size: 14.5px;
   line-height: 1.8;
-  word-break: auto-phrase;
+  word-break: keep-all;
   text-wrap: pretty;
 }
 
@@ -2774,7 +2774,7 @@ h2, h3,
 .ui-ctalead,
 .ui-rate__note,
 .entry-content p {
-  word-break: auto-phrase;
+  word-break: keep-all;
   line-break: strict;
   /* 行末に1文字だけ残さない。ブラウザ側で最終行を持ち上げてもらう */
   text-wrap: pretty;
@@ -2860,7 +2860,7 @@ h2, h3,
 .ui-review p, .ui-rank__body p, .ui-price p, .kin-punch,
 .kin-intro, .ui-ctalead, .kin-note, .ui-caption, .kin-photo figcaption,
 .entry-content li, .entry-content h2, .entry-content h3 {
-  word-break: auto-phrase;
+  word-break: keep-all;
   text-wrap: pretty;
 }
 
@@ -2975,3 +2975,79 @@ h2, h3,
 
 /* アンカーリンクの飛び先に少し余白を持たせる */
 [id] { scroll-margin-top: 14px; }
+
+/* ==========================================================================
+   日本語の折り返し（Safari対応）
+   auto-phrase は Chrome系だけの機能で iOS Safari では効かないため、
+   本文には scripts/wrap-japanese-phrases.py で <wbr> を打ってある。
+   keep-all と組み合わせると、日本語は <wbr> の位置でしか折れなくなる。
+   ========================================================================== */
+.entry-content,
+.entry-content p,
+.entry-content li,
+.entry-content h2,
+.entry-content h3,
+.ui-review p,
+.ui-point,
+.ui-caution,
+.ui-md li,
+.ui-check li,
+.ui-reco li,
+.kin-faq__q,
+.kin-faq__a,
+.kin-note,
+.kin-intro,
+.kin-punch,
+.ui-ctalead,
+.ui-rate__note,
+.kin-photo figcaption,
+.kin-disclaimer li {
+  word-break: keep-all;
+  /* keep-all のままだと長い英数字やURLが枠外へ出るので逃げ道を作る */
+  overflow-wrap: break-word;
+}
+
+/* 幅の狭い枠は <wbr> だけでは収まらず、かえって行数が増える。
+   比較表・2カラムの枠・バッジ類は従来どおりどこでも折れてよい */
+.ui-rk__t,
+.ui-rk__d,
+.ui-rk__score,
+.ui-rk__place,
+.ui-spec th,
+.ui-spec td,
+.ui-md li,
+.ui-md__head,
+.kin-phone__badge,
+.kin-phone__num,
+.kin-phone__sub,
+.kin-cta,
+.ui-review__who,
+.ui-review__tag,
+.ui-result__k,
+.ui-result__v,
+.kin-fv__date {
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* 枠の中の最後の要素が下マージンを持つと、囲みの底に空白が溜まる。
+   （.ui-check の margin 1.3em ＋ 最後の li の .5em ＋ 枠の padding で約45px空いていた） */
+.ui-point > *:last-child,
+.ui-caution > *:last-child,
+.ui-reco > *:last-child,
+.ui-conclusion > *:last-child,
+.ui-md__col > *:last-child { margin-bottom: 0; }
+
+.ui-check li:last-child,
+.ui-md li:last-child,
+.ui-reco li:last-child { margin-bottom: 0; }
+
+/* スペック表の見出し列。keep-all を外した際に「運営／会社」と割れたので、
+   語が収まる幅を確保して折らない */
+.ui-spec th {
+  width: 5.9em;
+  white-space: nowrap;
+}
+@media screen and (max-width: 359px) {
+  .ui-spec th { width: 5.2em; font-size: 12.5px; }
+}
