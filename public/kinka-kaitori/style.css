@@ -3069,18 +3069,6 @@ h2, h3,
   .kin-cta-brand { font-size: 9px; margin-right: .3em; }
 }
 
-/* ---- 普通の10万円 / 10万円金貨 の対比図 ----------------------------------- */
-.ui-diff { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: .5em; margin: 1em 0 1.2em; font-family: var(--gothic); }
-.ui-diff__c { box-sizing: border-box; display: flex; flex-direction: column; padding: .8em .6em .7em; border: 2px solid var(--rule); border-radius: 12px; background: #f7f5f1; text-align: center; }
-.ui-diff__c--a { border-color: #c9a227; background: #fffdf4; }
-.ui-diff__h { margin: 0 0 .5em; font-weight: 900; font-size: 14px; line-height: 1.4; color: var(--ink-sub); }
-.ui-diff__c--a .ui-diff__h { color: #8a6d1f; }
-.ui-diff__c ul { list-style: none; margin: 0; padding: 0; flex: 1 0 auto; }
-.ui-diff__c li { margin: 0 0 .25em; font-size: 12.5px; line-height: 1.6; color: var(--sumi); }
-.ui-diff__r { margin: .55em 0 0; align-self: stretch; padding-top: .5em; border-top: 1px dashed var(--rule); font-weight: 900; font-size: 14px; line-height: 1.3; color: var(--sumi); }
-.ui-diff__c--a .ui-diff__r { color: #a11919; }
-@media screen and (max-width: 339px) { .ui-diff__h, .ui-diff__r { font-size: 13px; } .ui-diff__c li { font-size: 11.5px; } }
-
 /* ---- 買取例カード（商品／買取例／店舗／時期） ------------------------------ */
 .ui-case { margin: 1em 0 .5em; border: 2px solid #c9a227; border-radius: 12px; background: #fffdf4; overflow: clip; font-family: var(--gothic); }
 .ui-case dl { margin: 0; }
