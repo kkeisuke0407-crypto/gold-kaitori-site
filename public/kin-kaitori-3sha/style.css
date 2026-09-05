@@ -2574,7 +2574,9 @@ h2, h3,
    ランキング比較（王冠つき3列）— 画像のイメージに合わせた形
    ── 3列固定。1行あたりの文字を短く保てば320pxでも横スクロールなしで収まる。
    ============================================================================ */
-.ui-rk { margin: 1.2em 0; border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; background: #fff; font-family: var(--gothic); }
+/* overflow:hidden はスクロール文脈を作って position:sticky を無効化するため clip を使う。
+   clip は角丸のはみ出しだけを切り、スクロール文脈を作らない。 */
+.ui-rk { margin: 1.2em 0; border: 2px solid var(--rule); border-radius: 14px; overflow: clip; background: #fff; font-family: var(--gothic); }
 .ui-rk__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .ui-rk__col, .ui-rk__cell { box-sizing: border-box; padding: .7em .35em; border-right: 1px solid var(--rule-2); text-align: center; }
 .ui-rk__col:last-child, .ui-rk__cell:last-child { border-right: none; }
@@ -3065,4 +3067,30 @@ h2, h3,
 @media screen and (max-width: 359px) {
   .kin-cta { font-size: 15px; letter-spacing: 0; }
   .kin-cta-brand { font-size: 9px; margin-right: .3em; }
+}
+
+/* ---- ピーク比較（過去最高値 → 本日） -------------------------------------- */
+.ui-peak { margin: 1.1em 0; padding: .9em 1em 1em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; font-family: var(--gothic); }
+.ui-peak__row { display: flex; align-items: baseline; gap: .5em; padding: .45em 0; }
+.ui-peak__k { flex: 0 0 auto; font-size: 12.5px; font-weight: 900; color: var(--ink-sub); }
+.ui-peak__k small { display: block; font-size: 10.5px; font-weight: 700; }
+.ui-peak__v { margin-left: auto; font-weight: 900; font-size: clamp(20px,5.6vw,25px); line-height: 1.1; color: var(--ink-sub); }
+.ui-peak__v small { font-size: .55em; margin-left: .08em; }
+.ui-peak__row--now { border-top: 1px dashed var(--rule); }
+.ui-peak__row--now .ui-peak__k { color: #a11919; }
+.ui-peak__row--now .ui-peak__v { color: #a11919; }
+.ui-peak__gap { margin: .5em 0 0; padding: .55em .7em; border-radius: 8px; background: #fdf4f2; font-size: 13px; line-height: 1.7; color: #7a2318; text-align: center; }
+.ui-peak__gap b { font-size: 16px; }
+.ui-peak__src { margin: .5em 0 0; font-size: 10.5px; color: var(--ink-sub); line-height: 1.55; }
+
+/* ---- 比較表：社名（王冠＋ロゴ）の行を上部に固定 --------------------------- */
+.ui-rk__grid--head {
+  position: sticky; top: 0; z-index: 5;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(26,33,48,.10);
+}
+.ui-rk__grid--head .ui-rk__col { padding-top: .6em; padding-bottom: .55em; }
+.ui-rk__grid--head .ui-rk__crown { width: 34px; height: 27px; margin-bottom: .3em; }
+@media (max-width: 359px) {
+  .ui-rk__grid--head .ui-rk__crown { width: 28px; height: 23px; }
 }
