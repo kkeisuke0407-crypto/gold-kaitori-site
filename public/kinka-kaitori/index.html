@@ -113,7 +113,7 @@
     <p class="kin-banner-label kin-banner-label--campaign">PR</p>
 
     <div class="ui-rk" id="compare" aria-label="金・貴金属の高価買取業者 おすすめランキングTOP3">
-      <div class="ui-rk__grid">
+      <div class="ui-rk__grid ui-rk__grid--head">
         <div class="ui-rk__col ui-rk__col--1"><svg class="ui-rk__crown" viewBox="0 0 48 38" aria-hidden="true"><path d="M4 30 L2 9 l12 8 L24 3 l10 14 12-8 -2 21z" fill="#f0c419" stroke="#c99a12" stroke-width="1.4" stroke-linejoin="round"/><rect x="4" y="30" width="40" height="5" rx="1.6" fill="#c99a12"/><text x="24" y="26" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" font-family="sans-serif">1</text></svg>
           <a class="kin-aff ui-rk__logo ui-rk__logo--manekiya" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer" aria-label="まねきや公式サイト"></a>
         </div>
@@ -192,7 +192,22 @@
 
     <figure class="kin-photo"><img src="images/gold-price-chart.webp" alt="金の価格推移。金相場は過去最高水準で推移している" width="1000" height="625" loading="lazy"><figcaption>金相場は高値圏で推移しています。</figcaption></figure>
 
-    <p>歴史的な高値を記録し続けている金の相場。ですが、相場というのは流動的なもの。<strong class="em-red">いつ下落するかは誰にもわかりません。</strong></p>
+    <p>金の相場は歴史的な高水準にあります。ですが、<strong class="em-red">実はピークからは値を下げています。</strong></p>
+
+    <div class="ui-peak">
+      <div class="ui-peak__row">
+        <span class="ui-peak__k">過去最高値<small>2026年3月</small></span>
+        <span class="ui-peak__v">29,969<small>円/g</small></span>
+      </div>
+      <div class="ui-peak__row ui-peak__row--now">
+        <span class="ui-peak__k">本日<small id="kin-peak-date">—</small></span>
+        <span class="ui-peak__v"><span id="kin-peak-now">—</span><small>円/g</small></span>
+      </div>
+      <p class="ui-peak__gap">ピークとの差は<br><b id="kin-peak-diff">—</b>／50gなら <b id="kin-peak-50">—</b></p>
+      <p class="ui-peak__src">出典：<a href="https://gold.tanaka.co.jp/commodity/souba/d-gold.php" target="_blank" rel="noopener noreferrer">田中貴金属 公表の店頭小売価格</a>。本日の価格は毎営業日の公表値を自動反映しています。</p>
+    </div>
+
+    <p><strong class="em-mark">「もう少し待てば」と眠らせているうちに、これだけの価値が失われることもあります。</strong>相場は流動的なもの。この先どう動くかは誰にもわかりません。</p>
 
     <p>自宅で眠っている金が、思わぬ価格になることも。タイミングを逃して後悔しないように、今すぐ無料査定で価格を確認してみましょう。</p>
 
@@ -565,6 +580,15 @@
         var up = d.goldDiff > 0;
         diff.textContent = '（前日比' + (d.goldDiff === 0 ? '±0円' : (up ? '+' : '−') + yen(Math.abs(d.goldDiff)) + '円') + '）';
         diff.className = 'ui-rate__diff ' + (d.goldDiff === 0 ? '' : up ? 'ui-rate__diff--up' : 'ui-rate__diff--down');
+      }
+      // ピーク比較（過去最高値は 2026年3月の 29,969円/g で固定。本日値は自動）
+      var PEAK = 29969;
+      if (el('kin-peak-now')) {
+        el('kin-peak-now').textContent = yen(d.k24);
+        el('kin-peak-date').textContent = d.updatedAt || '';
+        var gap = PEAK - d.k24;
+        el('kin-peak-diff').textContent = (gap > 0 ? '−' : '+') + yen(Math.abs(gap)) + '円';
+        el('kin-peak-50').textContent = (gap > 0 ? '−' : '+') + yen(Math.abs(gap) * 50) + '円';
       }
       var jst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
       el('kin-rate-upd').textContent = jst.getFullYear() + '/' + pad(jst.getMonth() + 1) + '/' + pad(jst.getDate())
