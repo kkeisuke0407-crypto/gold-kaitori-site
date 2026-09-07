@@ -16,17 +16,17 @@ const comparisonCases = [
 ];
 
 const priceFactors = [
-  { no: '01', title: '在庫状況', body: '買取業者は、仕入れた時計を再販して利益を出しています。そのため同じモデルの在庫が少ない店ほど「今ほしい」状態になり、高めの査定額を提示しやすくなります。逆に在庫が余っている店には、無理に買い取る理由がありません。' },
-  { no: '02', title: '得意ジャンル', body: 'ロレックスの流通に強い店、国産時計を得意とする店、アンティークの修理体制を持つ店。業者にはそれぞれ得意分野があります。自分の時計を得意とする店に当たるかどうかで、金額が変わります。' },
-  { no: '03', title: '販路', body: '国内の店頭で売る業者、海外に輸出する業者、業者間オークションに流す業者では、利益の取り方が違います。海外相場が国内より高いモデルの場合、輸出ルートを持つ業者の方が高く出せることがあります。' },
-  { no: '04', title: 'タイミング', body: '時計の相場は為替と海外需要の影響を受けます。同じ時計でも、査定を受ける時期によって金額が動きます。' },
+  { no: '01', icon: 'ic-stock', title: '在庫状況', body: '買取業者は、仕入れた時計を再販して利益を出しています。そのため同じモデルの在庫が少ない店ほど「今ほしい」状態になり、高めの査定額を提示しやすくなります。逆に在庫が余っている店には、無理に買い取る理由がありません。' },
+  { no: '02', icon: 'ic-star', title: '得意ジャンル', body: 'ロレックスの流通に強い店、国産時計を得意とする店、アンティークの修理体制を持つ店。業者にはそれぞれ得意分野があります。自分の時計を得意とする店に当たるかどうかで、金額が変わります。' },
+  { no: '03', icon: 'ic-route', title: '販路', body: '国内の店頭で売る業者、海外に輸出する業者、業者間オークションに流す業者では、利益の取り方が違います。海外相場が国内より高いモデルの場合、輸出ルートを持つ業者の方が高く出せることがあります。' },
+  { no: '04', icon: 'ic-trend', title: 'タイミング', body: '時計の相場は為替と海外需要の影響を受けます。同じ時計でも、査定を受ける時期によって金額が動きます。' },
 ];
 
 const appraisalFactors = [
-  { no: '01', title: '型番・モデル', body: '同じブランドでも、モデルによって評価は大きく変わります。生産が終了したモデルや、海外で人気の高いモデルは相場が上がりやすい傾向があります。型番が分かっていれば、より具体的な査定額が出ます。' },
-  { no: '02', title: '状態', body: '動作の状況、文字盤やケースの傷、研磨の履歴などが見られます。長く使っていない時計でも、部品やケース素材に価値があるため査定の対象になることがあります。査定の可否・査定額は提携買取業者が判断します。' },
-  { no: '03', title: '付属品', body: '箱、保証書（ギャランティカード）、余りのコマ、購入時の明細。これらが揃っているかどうかで査定額は変わります。特に保証書は、本物であることの裏付けとして重視されます。' },
-  { no: '04', title: '相場のタイミング', body: '高級時計の相場は、為替や海外需要で動きます。「去年見た買取価格」と今の価格が同じとは限りません。' },
+  { no: '01', icon: 'ic-ref', title: '型番・モデル', body: '同じブランドでも、モデルによって評価は大きく変わります。生産が終了したモデルや、海外で人気の高いモデルは相場が上がりやすい傾向があります。型番が分かっていれば、より具体的な査定額が出ます。' },
+  { no: '02', icon: 'ic-cond', title: '状態', body: '動作の状況、文字盤やケースの傷、研磨の履歴などが見られます。長く使っていない時計でも、部品やケース素材に価値があるため査定の対象になることがあります。査定の可否・査定額は提携買取業者が判断します。' },
+  { no: '03', icon: 'ic-box', title: '付属品', body: '箱、保証書（ギャランティカード）、余りのコマ、購入時の明細。これらが揃っているかどうかで査定額は変わります。特に保証書は、本物であることの裏付けとして重視されます。' },
+  { no: '04', icon: 'ic-trend', title: '相場のタイミング', body: '高級時計の相場は、為替や海外需要で動きます。「去年見た買取価格」と今の価格が同じとは限りません。' },
 ];
 
 const rolex2025 = [
@@ -137,6 +137,66 @@ const recordTable = (rows: string[][]) => rows;
   <body>
     <main class="watch-compare">
       <div class="pr-bar">当サイトは提携広告を含む比較・案内メディアです</div>
+
+      {/* アイコン定義。/hikakaku-watch/old-rolex/ と同じ線画セットに統一。 */}
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+          <symbol id="ic-ref" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 10.6V4.6a1.1 1.1 0 0 1 1.1-1.1h6l9.9 9.9a1.6 1.6 0 0 1 0 2.2l-5.8 5.8a1.6 1.6 0 0 1-2.2 0L3.5 11.5z" />
+            <circle cx="7.8" cy="7.8" r="1.4" />
+          </symbol>
+          <symbol id="ic-cond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10.4" cy="10.4" r="6.6" />
+            <path d="M10.4 7v3.4l2.3 1.4M15.3 15.3l5.2 5.2" />
+          </symbol>
+          <symbol id="ic-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 8.2 12 4l8.5 4.2v7.6L12 20l-8.5-4.2z" />
+            <path d="M3.5 8.2 12 12.4l8.5-4.2M12 12.4V20" />
+          </symbol>
+          <symbol id="ic-stock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="13" width="8" height="8" rx="1.2" />
+            <rect x="13" y="13" width="8" height="8" rx="1.2" />
+            <rect x="8" y="3.4" width="8" height="8" rx="1.2" />
+          </symbol>
+          <symbol id="ic-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3.5 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.9l6-.9z" />
+          </symbol>
+          <symbol id="ic-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M3.5 12h17M12 3.5c2.2 2.4 3.4 5.4 3.4 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.4-5.4-3.4-8.5S9.8 5.9 12 3.5z" />
+          </symbol>
+          <symbol id="ic-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 17.5 9 11.5l3.6 3.4 7.4-8" />
+            <path d="M15.6 6.9h4.4v4.4" />
+          </symbol>
+          <symbol id="ic-bulk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 6.5h16M4 12h11M4 17.5h7" />
+          </symbol>
+          <symbol id="ic-shop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.2 9.2 5.8 4.4h12.4l1.6 4.8" />
+            <path d="M5 9.2v10.4h14V9.2" />
+            <path d="M9.8 19.6v-5.4h4.4v5.4" />
+          </symbol>
+          <symbol id="ic-flea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6.6" y="3" width="10.8" height="18" rx="2.2" />
+            <path d="M10.7 17.8h2.6" />
+            <path d="M9.6 8.2h4.8M9.6 11.4h3.2" />
+          </symbol>
+          <symbol id="ic-pawn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.6 20.4h16.8M5.2 20.4V9.6L12 5.1l6.8 4.5v10.8" />
+            <rect x="10" y="13.2" width="4" height="4.2" rx="1" />
+          </symbol>
+          <symbol id="ic-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13.4 3.6H6.2a1.8 1.8 0 0 0-1.8 1.8v13.2a1.8 1.8 0 0 0 1.8 1.8h11.6a1.8 1.8 0 0 0 1.8-1.8v-7.1" />
+            <path d="M8.4 8.8h4.2M8.4 12.4h3.2M8.4 16h5.4" />
+            <path d="m17.3 3.1 3.6 3.6-5.2 5.2h-3.6V8.3z" />
+          </symbol>
+          <symbol id="ic-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.4 8.6a1.9 1.9 0 0 1 1.9-1.9h2.2l1.3-2.3h6.4l1.3 2.3h2.2a1.9 1.9 0 0 1 1.9 1.9v9.2a1.9 1.9 0 0 1-1.9 1.9H5.3a1.9 1.9 0 0 1-1.9-1.9z" />
+            <circle cx="12" cy="12.9" r="3.7" />
+          </symbol>
+        </defs>
+      </svg>
       <div class="single-column-layout">
       <section class="hero" aria-labelledby="page-title">
         <div class="hero__inner content">
@@ -165,7 +225,7 @@ const recordTable = (rows: string[][]) => rows;
           <div class="subsection-head"><span>理由</span><h3>査定額に差が生まれる4つの理由</h3></div>
           <p class="reason-lead">同じ時計なのに、なぜこれだけ差が出るのか。理由は業者側の事情にあります。</p>
           <div class="reason-list">
-            {priceFactors.map((item) => <article><span class="reason-icon" aria-hidden="true"></span><div><h3><small>{item.no}</small>{item.title}</h3><p>{item.body}</p></div></article>)}
+            {priceFactors.map((item) => <article><svg class="reason-icon" aria-hidden="true"><use href={`#${item.icon}`} /></svg><div><h3><small>{item.no}</small>{item.title}</h3><p>{item.body}</p></div></article>)}
           </div>
           <p class="closing-text">つまり、1社の査定額だけを見ても、それが高いのか安いのかは判断できません。複数社に出して初めて、自分の時計の相場感がつかめます。</p>
         </div>
@@ -175,7 +235,7 @@ const recordTable = (rows: string[][]) => rows;
         <div class="content">
           <h2 id="factor-title">査定額を左右する4つの要素</h2>
           <div class="factor-list">
-            {appraisalFactors.map((item) => <article><span class="factor-icon" aria-hidden="true"></span><div><h3><small>{item.no}</small>{item.title}</h3><p>{item.body}</p></div></article>)}
+            {appraisalFactors.map((item) => <article><svg class="factor-icon" aria-hidden="true"><use href={`#${item.icon}`} /></svg><div><h3><small>{item.no}</small>{item.title}</h3><p>{item.body}</p></div></article>)}
           </div>
           <aside class="prepare-box"><h3>売る前にやっておくと差が出ること</h3><ul><li><b>箱、保証書、余りコマを探しておく</b><br />引き出しや購入時の紙袋に入っていることがあります。</li><li><b>使える状態なら電池を入れておく</b><br />動作を確認できる状態の方が評価されやすくなります。</li><li><b>自分で研磨や洗浄をしない</b><br />素人研磨はケースの形状を崩し、かえって査定額を下げることがあります。</li></ul></aside>
           <div class="quote-heading"><h3 class="quote-title">実際の査定コメントから</h3></div>
@@ -189,7 +249,7 @@ const recordTable = (rows: string[][]) => rows;
         <div class="content">
           <h2 id="compare-title">時計を売る4つの方法を比べる</h2>
           <p class="section-lead">時計を売る手段は一括査定だけではありません。それぞれに向き不向きがあるので、自分の状況に合うものを選んでください。</p>
-          <div class="table-scroll"><table class="method-table"><thead><tr><th></th><th class="method-table__bulk"><span class="method-icon" aria-hidden="true"></span>一括査定</th><th><span class="method-icon" aria-hidden="true"></span>買取専門店に持込</th><th><span class="method-icon" aria-hidden="true"></span>フリマアプリ</th><th><span class="method-icon" aria-hidden="true"></span>質屋</th></tr></thead><tbody><tr><th>手間</th><td>入力のみ</td><td>来店が必要</td><td>撮影・梱包・発送</td><td>来店が必要</td></tr><tr><th>スピード</th><td>数日</td><td>即日</td><td>売れるまで不定</td><td>即日</td></tr><tr><th>価格</th><td>複数社を比較して判断できる</td><td>1社の提示のみ</td><td>高くなる可能性／手数料あり</td><td>低めになりやすい</td></tr><tr><th>リスク</th><td>複数社の金額を比べて判断できる</td><td>他社の金額が分からない場合があります</td><td>返品・トラブルが生じる場合があります</td><td>期限管理が必要になる場合があります</td></tr><tr><th>向いている人</th><td>損を避けたい／急いでいない</td><td>今日中に現金化したい</td><td>手間をかけられる</td><td>一時的に借りたい</td></tr></tbody></table></div>
+          <div class="table-scroll"><table class="method-table"><thead><tr><th></th><th class="method-table__bulk"><svg class="method-icon" aria-hidden="true"><use href="#ic-bulk" /></svg>一括査定</th><th><svg class="method-icon" aria-hidden="true"><use href="#ic-shop" /></svg>買取専門店に持込</th><th><svg class="method-icon" aria-hidden="true"><use href="#ic-flea" /></svg>フリマアプリ</th><th><svg class="method-icon" aria-hidden="true"><use href="#ic-pawn" /></svg>質屋</th></tr></thead><tbody><tr><th>手間</th><td>入力のみ</td><td>来店が必要</td><td>撮影・梱包・発送</td><td>来店が必要</td></tr><tr><th>スピード</th><td>数日</td><td>即日</td><td>売れるまで不定</td><td>即日</td></tr><tr><th>価格</th><td>複数社を比較して判断できる</td><td>1社の提示のみ</td><td>高くなる可能性／手数料あり</td><td>低めになりやすい</td></tr><tr><th>リスク</th><td>複数社の金額を比べて判断できる</td><td>他社の金額が分からない場合があります</td><td>返品・トラブルが生じる場合があります</td><td>期限管理が必要になる場合があります</td></tr><tr><th>向いている人</th><td>損を避けたい／急いでいない</td><td>今日中に現金化したい</td><td>手間をかけられる</td><td>一時的に借りたい</td></tr></tbody></table></div>
           <div class="compare-guides"><article class="fit-box"><h3>一括査定が向いている人</h3><ul><li>今日中でなくてよく、なるべく高く売りたい</li><li>複数の店を回る時間がない</li><li>自分の時計の相場が分からない</li></ul></article><article class="unfit-box"><h3>こんな方には向きません</h3><ul><li><b>今日中に現金化したい</b><br />→ 店頭買取の方が早く済みます。</li><li><b>査定の連絡を一切受けたくない</b><br />→ 複数の業者から連絡が来る仕組みです。</li><li><b>時計の現物が手元にない</b><br />→ 状態を確認できないため、正確な査定が出せません。</li></ul></article></div>
           <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分に合うか確かめる（無料・査定だけOK） <span aria-hidden="true">›</span></a>
         </div>
@@ -223,7 +283,7 @@ const recordTable = (rows: string[][]) => rows;
       <section class="section section--howto" id="howto" aria-labelledby="howto-title">
         <div class="content">
           <h2 id="howto-title">2つの入口から査定を依頼できます</h2>
-          <div class="entrance-grid"><article><span class="entrance-visual entrance-visual--form" aria-hidden="true"></span><h3>型番が分かっている方<br /><b>入力して査定</b></h3><p>型番・ブランド・状態を入力するだけで、査定を依頼できます。型番は時計の裏蓋や保証書に記載されています。</p></article><article><span class="entrance-visual entrance-visual--photo" aria-hidden="true"></span><h3>モデルが分からない方<br /><b>写真から査定</b></h3><p>スマートフォンで写真を撮ると、AIがブランドを検出します。「もらったものでブランドが分からない」「遺品で詳細が不明」という場合はこちらから。</p></article></div>
+          <div class="entrance-grid"><article><svg class="entrance-visual entrance-visual--form" aria-hidden="true"><use href="#ic-form" /></svg><h3>型番が分かっている方<br /><b>入力して査定</b></h3><p>型番・ブランド・状態を入力するだけで、査定を依頼できます。型番は時計の裏蓋や保証書に記載されています。</p></article><article><svg class="entrance-visual entrance-visual--photo" aria-hidden="true"><use href="#ic-camera" /></svg><h3>モデルが分からない方<br /><b>写真から査定</b></h3><p>スマートフォンで写真を撮ると、AIがブランドを検出します。「もらったものでブランドが分からない」「遺品で詳細が不明」という場合はこちらから。</p></article></div>
           <h3 class="flow-title">申込〜査定の流れ（4ステップ）</h3>
           <ol class="flow-list"><li><i class="flow-icon" aria-hidden="true"></i><b>1</b><span>時計の情報を入力</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>2</b><span>査定を依頼</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>3</b><span>各社から査定額が届く</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>4</b><span>比較して売却先を決める</span></li></ol>
           <p class="closing-text">査定額を見てから、売るかどうかを判断できます。</p>

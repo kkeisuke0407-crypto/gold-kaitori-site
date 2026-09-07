@@ -802,3 +802,84 @@ table { width: 100%; border-collapse: collapse; }
 /* 広告審査対応（2026-08）：状態別カードの「故障」を想起させる赤アクセントを解消。 */
 .condition-grid article:nth-child(3) { border-color: var(--hwc-gold-dark); }
 .condition-grid article:nth-child(3) .condition-icon { border-color: var(--hwc-gold-dark); color: var(--hwc-gold-dark); }
+
+/* ============================================================
+   4セクションのアイコンを PNG スプライトから SVG 線画へ差し替え
+   （/hikakaku-watch/old-rolex/ と同じアイコンセットに統一）
+
+     査定額に差が生まれる4つの理由   .reason-icon
+     査定額を左右する4つの要素       .factor-icon
+     時計を売る4つの方法を比べる     .method-icon
+     2つの入口から査定を依頼できます .entrance-visual
+
+   スプライトは 4x2 / 4x1 / 2x1 の background-position で切り出して
+   おり、その指定が複数のブレークポイントに散っている。background
+   一式を打ち消さないと SVG の背後に PNG が残る。
+   このファイルは old-rolex も読み込むが、あちらは上記4クラスを
+   使っていないため影響しない（:not で明示的にも除外している）。
+   ============================================================ */
+.watch-compare:not(.watch-compare--rolex) .reason-list article > .reason-icon,
+.watch-compare:not(.watch-compare--rolex) .factor-icon,
+.watch-compare:not(.watch-compare--rolex) .method-icon,
+.watch-compare:not(.watch-compare--rolex) .entrance-grid > article > .entrance-visual {
+  box-sizing: border-box;
+  border: 0;
+  background-image: none;
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--hwc-paper);
+}
+
+/* 業者側の事情＝ゴールド、時計側の要素＝ネイビー。
+   old-rolex の「業者側／時計側」の色分けに合わせる。 */
+.watch-compare:not(.watch-compare--rolex) .reason-list article > .reason-icon,
+.watch-compare:not(.watch-compare--rolex) .factor-icon {
+  flex: 0 0 auto;
+  display: block;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+}
+.watch-compare:not(.watch-compare--rolex) .reason-list article > .reason-icon { background-color: var(--hwc-gold-dark); }
+.watch-compare:not(.watch-compare--rolex) .factor-icon { background-color: var(--hwc-navy); }
+
+/* 表ヘッダは既にネイビー／赤で塗られているので、台座は付けず線画のみ */
+.watch-compare:not(.watch-compare--rolex) .method-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 4px auto 4px;
+  padding: 0;
+}
+
+/* 入口2つ。元は写真ブロックだったので、アイコン台座に置き換える */
+.watch-compare:not(.watch-compare--rolex) .entrance-grid > article > .entrance-visual {
+  display: block;
+  width: 62px;
+  height: 62px;
+  min-width: 0;
+  max-height: none;
+  margin: 0 auto 10px;
+  padding: 13px;
+  border-radius: 14px;
+  background-color: var(--hwc-navy);
+}
+.watch-compare:not(.watch-compare--rolex) .entrance-grid > article > .entrance-visual--photo {
+  background-color: var(--hwc-gold-dark);
+}
+
+@media (min-width: 600px) {
+  .watch-compare:not(.watch-compare--rolex) .reason-list article > .reason-icon,
+  .watch-compare:not(.watch-compare--rolex) .factor-icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    padding: 9px;
+  }
+  .watch-compare:not(.watch-compare--rolex) .method-icon { width: 34px; height: 34px; }
+  .watch-compare:not(.watch-compare--rolex) .entrance-grid > article > .entrance-visual { width: 72px; height: 72px; padding: 15px; }
+}
