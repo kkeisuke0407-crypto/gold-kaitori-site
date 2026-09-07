@@ -391,29 +391,59 @@
   border-radius: 12px;
   background: var(--hwc-paper);
 }
+/* 事例カードの時計イメージ。comparison-watches.png は 2x2 の
+   スプライトで、ブランドを特定しない汎用イラスト。実機写真では
+   ないため、本文側に「イメージ」である旨を明記している。 */
+.watch-compare--hikaku .casebox__head {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 11px;
+  align-items: center;
+  margin-bottom: 9px;
+}
+.watch-compare--hikaku .casebox__pic {
+  display: block;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--hwc-line);
+  border-radius: 8px;
+  background-image: url("/hikakaku-watch-compare/reference-assets/comparison-watches.png");
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+}
+.watch-compare--hikaku .caselist > li:nth-child(1) .casebox__pic { background-position: 0% 0%; }
+.watch-compare--hikaku .caselist > li:nth-child(2) .casebox__pic { background-position: 100% 0%; }
+.watch-compare--hikaku .caselist > li:nth-child(3) .casebox__pic { background-position: 0% 100%; }
+.watch-compare--hikaku .caselist > li:nth-child(4) .casebox__pic { background-position: 100% 100%; }
+
 .watch-compare--hikaku .casebox__no {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   color: var(--hwc-gold-dark);
   font-size: 10.5px;
   font-weight: 900;
   letter-spacing: 0.12em;
 }
-.watch-compare--hikaku .casebox__name { margin: 0 0 9px; }
-.watch-compare--hikaku .casebox__name b {
+/* ブランドバッジはCASE番号と同じ行に置く。モデル名の行に混ぜると
+   「…セラミッ／ク」のような汚い折り返しが起きる。 */
+.watch-compare--hikaku .casebox__no b {
   display: inline-block;
-  margin-right: 6px;
+  margin-left: 8px;
   padding: 2px 7px;
   border-radius: 4px;
   background: var(--hwc-navy);
   color: var(--hwc-paper);
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 800;
-  vertical-align: 2px;
+  letter-spacing: 0.02em;
+  vertical-align: 1px;
 }
-.watch-compare--hikaku .casebox__name span {
+.watch-compare--hikaku .casebox__name {
+  margin: 0;
   color: var(--hwc-navy);
   font-size: 13.5px;
   font-weight: 900;
+  line-height: 1.45;
+  word-break: auto-phrase;
 }
 .watch-compare--hikaku .casebox__gap {
   display: flex;
@@ -642,8 +672,20 @@
   border-radius: 10px;
   background: var(--hwc-paper);
 }
-/* 画像のない実績は1カラムに落として、空の枠が出ないようにする */
-.watch-compare--hikaku .reccard:not(:has(.reccard__img)) { grid-template-columns: minmax(0, 1fr); }
+/* 素材のないブランド（IWC・OMEGA）には代わりのタイルを置く。
+   1カラムに落とすと3枚だけ写真ありになって不揃いに見えるため。 */
+.watch-compare--hikaku .reccard__noimg {
+  display: grid;
+  width: 68px;
+  aspect-ratio: 2 / 3;
+  border: 1px solid var(--hwc-line);
+  border-radius: 6px;
+  background: var(--hwc-cream);
+  color: var(--hwc-navy);
+  opacity: 0.55;
+  place-items: center;
+}
+.watch-compare--hikaku .reccard__noimg svg { width: 26px; height: 26px; }
 .watch-compare--hikaku .reccard__img {
   width: 68px;
   height: auto;
@@ -913,4 +955,32 @@
   .watch-compare--hikaku .hero h1 { font-size: 25px; }
   .watch-compare--hikaku .gapcard__gap strong { font-size: 30px; }
   .watch-compare--hikaku .hero__trust li { font-size: 10.5px; }
+}
+
+
+/* 付属品セクションの実物イメージ */
+.watch-compare--hikaku .accfig {
+  margin: 16px 0 0;
+  padding: 0;
+}
+.watch-compare--hikaku .accfig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center 54%;
+}
+.watch-compare--hikaku .accfig figcaption {
+  margin-top: 9px;
+  color: var(--hwc-ink-soft);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.watch-compare--hikaku .accfig figcaption span {
+  display: block;
+  margin-top: 3px;
+  color: var(--hwc-muted);
+  font-size: 10.5px;
 }

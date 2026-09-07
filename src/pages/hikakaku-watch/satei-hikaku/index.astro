@@ -197,6 +197,11 @@ const recordTable = (rows: string[][]) => rows;
       {/* アイコン定義。/compare/ /old-rolex/ と同じ線画セットに揃えている。 */}
       <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <defs>
+          <symbol id="ic-watch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12.6" r="6.2" />
+            <path d="M12 9.4v3.2l2.2 1.4" />
+            <path d="M9.2 6.7 9.6 3.2h4.8l.4 3.5M9.2 18.5l.4 3.5h4.8l.4-3.5" />
+          </symbol>
           <symbol id="ic-ref" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3.5 10.6V4.6a1.1 1.1 0 0 1 1.1-1.1h6l9.9 9.9a1.6 1.6 0 0 1 0 2.2l-5.8 5.8a1.6 1.6 0 0 1-2.2 0L3.5 11.5z" />
             <circle cx="7.8" cy="7.8" r="1.4" />
@@ -342,8 +347,13 @@ const recordTable = (rows: string[][]) => rows;
           <ol class="caselist">
             {comparisonCases.map((c, i) => (
               <li class="casebox">
-                <p class="casebox__no">CASE {String(i + 1).padStart(2, '0')}</p>
-                <p class="casebox__name"><b>{c.brand}</b><span>{c.model}</span></p>
+                <div class="casebox__head">
+                  <span class="casebox__pic" role="img" aria-label="腕時計のイメージ"></span>
+                  <div>
+                    <p class="casebox__no">CASE {String(i + 1).padStart(2, '0')}<b>{c.brand}</b></p>
+                    <p class="casebox__name">{c.model}</p>
+                  </div>
+                </div>
                 <ul class="casebox__rows">
                   <li class="is-best"><span>A社</span><b>{c.prices[0]}</b></li>
                   <li><span>B社</span><b>{c.prices[1]}</b></li>
@@ -354,7 +364,7 @@ const recordTable = (rows: string[][]) => rows;
             ))}
           </ol>
 
-          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例 <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※2018年7月3日時点の掲載情報です。現在の査定相場を示すものではありません。</p>
+          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例 <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※2018年7月3日時点の掲載情報です。現在の査定相場を示すものではありません。※掲載の時計画像はイメージであり、実際の査定品の写真ではありません。</p>
 
           <div class="turn">
             <p class="turn__deny">この事例で大事なのは、<br />「デイトナなら240万円」ということではありません。</p>
@@ -427,6 +437,11 @@ const recordTable = (rows: string[][]) => rows;
             ))}
           </ul>
 
+          <figure class="accfig">
+            <img src="/hikakaku-watch-story/assets/watch-accessories.webp" width="960" height="960" loading="lazy" decoding="async" alt="腕時計と、空いた化粧箱・カード・余りコマ・タグを並べたイメージ" />
+            <figcaption>箱、保証書、余りコマ。残っているものがあれば、一緒に確認しておくと査定がスムーズです。<span>※画像はイメージです。</span></figcaption>
+          </figure>
+
           <h3 class="subhead">実際の査定担当者コメントを見ると</h3>
           <ul class="comments">
             {appraisalComments.map((c) => (
@@ -494,7 +509,9 @@ const recordTable = (rows: string[][]) => rows;
           <ul class="reclist">
             {pickRecords.map((r) => (
               <li class="reccard">
-                {r.img && <img class="reccard__img" src={r.img} width="1024" height="1536" loading="lazy" decoding="async" alt={`${r.model}のイメージ`} />}
+                {r.img
+                  ? <img class="reccard__img" src={r.img} width="1024" height="1536" loading="lazy" decoding="async" alt={r.model + "のイメージ"} />
+                  : <span class="reccard__noimg" role="img" aria-label="画像はありません"><svg aria-hidden="true"><use href="#ic-watch" /></svg></span>}
                 <div class="reccard__body">
                   <h3>{r.model}</h3>
                   <p class="reccard__state">{r.state}</p>
