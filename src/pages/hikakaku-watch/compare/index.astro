@@ -186,6 +186,22 @@ const recordTable = (rows: string[][]) => rows;
             <path d="M3.6 20.4h16.8M5.2 20.4V9.6L12 5.1l6.8 4.5v10.8" />
             <rect x="10" y="13.2" width="4" height="4.2" rx="1" />
           </symbol>
+          <symbol id="ic-input" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.4" y="4.2" width="17.2" height="15.6" rx="2.2" />
+            <path d="M7.6 9.4h6M7.6 13h8.8M7.6 16.4h4.4" />
+          </symbol>
+          <symbol id="ic-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 3.1 2.8 10.7l7.5 2.9 3 7.3z" />
+            <path d="M20.9 3.1 10.3 13.6" />
+          </symbol>
+          <symbol id="ic-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2.2" />
+            <path d="m3.6 6.6 8.4 5.9 8.4-5.9" />
+          </symbol>
+          <symbol id="ic-decide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4.4v15.2M8.2 19.6h7.6M4.4 7.6h15.2" />
+            <path d="M4.4 7.6 2.1 13.3h4.6zM19.6 7.6l-2.3 5.7h4.6z" />
+          </symbol>
           <symbol id="ic-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
             <path d="M13.4 3.6H6.2a1.8 1.8 0 0 0-1.8 1.8v13.2a1.8 1.8 0 0 0 1.8 1.8h11.6a1.8 1.8 0 0 0 1.8-1.8v-7.1" />
             <path d="M8.4 8.8h4.2M8.4 12.4h3.2M8.4 16h5.4" />
@@ -285,7 +301,7 @@ const recordTable = (rows: string[][]) => rows;
           <h2 id="howto-title">2つの入口から査定を依頼できます</h2>
           <div class="entrance-grid"><article><svg class="entrance-visual entrance-visual--form" aria-hidden="true"><use href="#ic-form" /></svg><h3>型番が分かっている方<br /><b>入力して査定</b></h3><p>型番・ブランド・状態を入力するだけで、査定を依頼できます。型番は時計の裏蓋や保証書に記載されています。</p></article><article><svg class="entrance-visual entrance-visual--photo" aria-hidden="true"><use href="#ic-camera" /></svg><h3>モデルが分からない方<br /><b>写真から査定</b></h3><p>スマートフォンで写真を撮ると、AIがブランドを検出します。「もらったものでブランドが分からない」「遺品で詳細が不明」という場合はこちらから。</p></article></div>
           <h3 class="flow-title">申込〜査定の流れ（4ステップ）</h3>
-          <ol class="flow-list"><li><i class="flow-icon" aria-hidden="true"></i><b>1</b><span>時計の情報を入力</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>2</b><span>査定を依頼</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>3</b><span>各社から査定額が届く</span></li><li><i class="flow-icon" aria-hidden="true"></i><b>4</b><span>比較して売却先を決める</span></li></ol>
+          <ol class="flow-list"><li><svg class="flow-icon" aria-hidden="true"><use href="#ic-input" /></svg><b>1</b><span>時計の情報を入力</span></li><li><svg class="flow-icon" aria-hidden="true"><use href="#ic-send" /></svg><b>2</b><span>査定を依頼</span></li><li><svg class="flow-icon" aria-hidden="true"><use href="#ic-inbox" /></svg><b>3</b><span>各社から査定額が届く</span></li><li><svg class="flow-icon" aria-hidden="true"><use href="#ic-decide" /></svg><b>4</b><span>比較して売却先を決める</span></li></ol>
           <p class="closing-text">査定額を見てから、売るかどうかを判断できます。</p>
         </div>
       </section>
