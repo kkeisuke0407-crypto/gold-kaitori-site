@@ -1,0 +1,916 @@
+/* ============================================================
+   /hikakaku-watch/satei-hikaku/ 専用スタイル
+
+   ベースは /hikakaku-watch-compare/site.css。共有ファイルなので
+   ここでの指定はすべて .watch-compare--hikaku 配下に閉じ込め、
+   /compare/ と /old-rolex/ には一切影響させない。
+
+   注意：ベースの .hero は背景に時計写真を敷いている（442行）。
+   打ち消さないと写真が二重になる。
+   ============================================================ */
+.watch-compare--hikaku {
+  --h-h2: 23px;
+  --h-h3: 16px;
+  --h-lead: 15px;
+  --h-body: 14.5px;
+  --h-note: 11.5px;
+  --h-eyebrow: 11px;
+  --h-gap: 18px;
+}
+@media (min-width: 720px) {
+  .watch-compare--hikaku {
+    --h-h2: 30px;
+    --h-h3: 17px;
+    --h-lead: 16px;
+    --h-body: 15.5px;
+    --h-gap: 22px;
+  }
+}
+
+.watch-compare--hikaku .content {
+  width: min(100%, 720px);
+  margin-inline: auto;
+  padding-inline: 18px;
+}
+.watch-compare--hikaku .section {
+  padding-block: 34px;
+  border-bottom: 1px solid var(--hwc-line);
+}
+@media (min-width: 720px) {
+  .watch-compare--hikaku .section { padding-block: 46px; }
+}
+
+/* ------------------------------------------------------------
+   共通パーツ
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .eyebrow {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--hwc-gold-pale);
+  color: var(--hwc-gold-dark);
+  font-size: var(--h-eyebrow);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.watch-compare--hikaku h2 {
+  margin: 0 0 14px;
+  color: var(--hwc-navy);
+  font-family: var(--hwc-font-serif);
+  font-size: var(--h-h2);
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+.watch-compare--hikaku .subhead {
+  margin: 26px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--hwc-line);
+  color: var(--hwc-navy);
+  font-size: var(--h-h3);
+  font-weight: 900;
+}
+.watch-compare--hikaku .lead {
+  margin: 0 0 14px;
+  color: var(--hwc-ink);
+  font-size: var(--h-lead);
+  line-height: 1.9;
+}
+.watch-compare--hikaku .lead b { color: var(--hwc-navy); font-weight: 900; }
+.watch-compare--hikaku .note-inline {
+  margin: 10px 0 0;
+  color: var(--hwc-muted);
+  font-size: var(--h-note);
+  line-height: 1.7;
+}
+.watch-compare--hikaku .note-inline b { color: var(--hwc-navy); }
+
+/* 章の結論。左に赤の縦罫を立てて本文と区別する */
+.watch-compare--hikaku .statement {
+  margin: 20px 0 0;
+  padding: 14px 16px;
+  border-left: 4px solid var(--hwc-red);
+  border-radius: 0 var(--hwc-radius-small) var(--hwc-radius-small) 0;
+  background: var(--hwc-red-pale);
+  color: var(--hwc-ink);
+  font-size: var(--h-lead);
+  font-weight: 700;
+  line-height: 1.75;
+}
+.watch-compare--hikaku .statement strong { color: var(--hwc-red-dark); font-weight: 900; }
+.watch-compare--hikaku .statement__step {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: var(--h-eyebrow);
+  font-weight: 800;
+  vertical-align: 2px;
+}
+
+/* 「Aではなく、B」の言い換えブロック */
+.watch-compare--hikaku .turn {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+}
+.watch-compare--hikaku .turn__deny {
+  margin: 0 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--hwc-line-dark);
+  color: var(--hwc-muted);
+  font-size: var(--h-body);
+  line-height: 1.7;
+}
+.watch-compare--hikaku .turn__main {
+  margin: 0;
+  color: var(--hwc-navy);
+  font-family: var(--hwc-font-serif);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.6;
+}
+.watch-compare--hikaku .turn__main strong { color: var(--hwc-red-dark); }
+@media (min-width: 720px) {
+  .watch-compare--hikaku .turn__main { font-size: 24px; }
+}
+
+.watch-compare--hikaku .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--hikaku .chips li {
+  padding: 6px 11px;
+  border: 1px solid var(--hwc-gold);
+  border-radius: 999px;
+  background: var(--hwc-paper);
+  color: var(--hwc-gold-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.watch-compare--hikaku .checklist { margin: 0; padding: 0; list-style: none; }
+.watch-compare--hikaku .checklist li {
+  position: relative;
+  padding: 8px 0 8px 26px;
+  border-bottom: 1px dashed var(--hwc-line-dark);
+  font-size: var(--h-body);
+  font-weight: 700;
+  line-height: 1.65;
+}
+.watch-compare--hikaku .checklist li:last-child { border-bottom: 0; }
+.watch-compare--hikaku .checklist li::before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  color: var(--hwc-red);
+  content: "✓";
+  font-weight: 900;
+}
+
+/* ------------------------------------------------------------
+   1｜FV
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .hero {
+  min-height: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      178deg,
+      rgb(255 253 248 / 22%) 0%,
+      rgb(255 253 248 / 30%) 8%,
+      rgb(255 253 248 / 78%) 13%,
+      rgb(255 253 248 / 96%) 18%,
+      #fffdf8 22%,
+      #fff9ef 100%
+    ),
+    url("/hikakaku-watch-old-rolex/img/hero-datejust.webp") center -178px / 88% auto no-repeat,
+    linear-gradient(180deg, #fffdf8, #fff9ef);
+  border-bottom: 1px solid #e3d3b2;
+}
+.watch-compare--hikaku .hero::before { display: none; content: none; }
+.watch-compare--hikaku .hero__inner { padding-top: 150px; padding-bottom: 24px; }
+
+.watch-compare--hikaku .hero h1 {
+  max-width: none;
+  margin: 0;
+  color: #1a1a1a;
+  font-family: var(--hwc-font-serif);
+  font-size: 29px;
+  font-weight: 900;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+.watch-compare--hikaku .hero h1 mark {
+  padding: 0 3px;
+  color: #b0121a;
+  background: linear-gradient(transparent 60%, #fbe7c4 60%, #fbe7c4 96%, transparent 96%);
+}
+.watch-compare--hikaku .hero__lead {
+  max-width: none;
+  margin: 14px 0 0;
+  color: #4a4640;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.85;
+  text-align: left;
+}
+.watch-compare--hikaku .hero__lead b { color: var(--hwc-navy); font-weight: 900; }
+.watch-compare--hikaku .hero__note-lead {
+  margin: 13px 0 0;
+  color: #4a4640;
+  font-size: var(--h-body);
+  line-height: 1.8;
+}
+.watch-compare--hikaku .hero__note-lead b { color: var(--hwc-navy); font-weight: 900; }
+
+/* FVの価格差カード。ここが最初のフックなので数字を最も大きく出す */
+.watch-compare--hikaku .gapcard {
+  margin: 16px 0 0;
+  padding: 14px 15px 12px;
+  border: 2px solid var(--hwc-navy);
+  border-radius: 14px;
+  background: var(--hwc-paper);
+  box-shadow: 0 8px 22px rgb(58 44 20 / 12%);
+}
+.watch-compare--hikaku .gapcard__head { margin: 0 0 10px; }
+.watch-compare--hikaku .gapcard__head span {
+  display: block;
+  color: var(--hwc-gold-dark);
+  font-size: var(--h-eyebrow);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.watch-compare--hikaku .gapcard__head b {
+  display: block;
+  margin-top: 3px;
+  color: var(--hwc-navy);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+.watch-compare--hikaku .gapcard__rows,
+.watch-compare--hikaku .casebox__rows { margin: 0; padding: 0; list-style: none; }
+.watch-compare--hikaku .gapcard__rows li,
+.watch-compare--hikaku .casebox__rows li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+.watch-compare--hikaku .gapcard__rows li b,
+.watch-compare--hikaku .casebox__rows li b {
+  font-size: 17px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+.watch-compare--hikaku .gapcard__rows .is-best,
+.watch-compare--hikaku .casebox__rows .is-best {
+  background: var(--hwc-gold-pale);
+  color: var(--hwc-gold-dark);
+}
+.watch-compare--hikaku .gapcard__rows .is-best b,
+.watch-compare--hikaku .casebox__rows .is-best b { font-size: 20px; }
+.watch-compare--hikaku .gapcard__gap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--hwc-line-dark);
+  color: var(--hwc-red-dark);
+}
+.watch-compare--hikaku .gapcard__gap span { font-size: 13px; font-weight: 800; }
+.watch-compare--hikaku .gapcard__gap strong {
+  font-family: var(--hwc-font-serif);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+/* 720px以上は、モバイルの縦積みでは時計が切れるため
+   左テキスト／右写真の分割に切り替える。 */
+@media (min-width: 720px) {
+  .watch-compare--hikaku .hero {
+    background:
+      linear-gradient(
+        96deg,
+        rgb(255 253 248 / 98%) 0%,
+        rgb(255 253 248 / 96%) 32%,
+        rgb(255 251 242 / 52%) 56%,
+        rgb(255 251 242 / 6%) 80%
+      ),
+      url("/hikakaku-watch-old-rolex/img/hero-datejust.webp") right 40% / auto 152% no-repeat,
+      linear-gradient(180deg, #fffdf8, #fff9ef);
+  }
+  .watch-compare--hikaku .hero__inner { padding-top: 46px; padding-bottom: 44px; }
+  /* 本文は左寄せだが、左端はページ全体の content 幅に揃える */
+  .watch-compare--hikaku .hero__inner > * { max-width: 440px; }
+  .watch-compare--hikaku .hero h1 { font-size: 38px; }
+  .watch-compare--hikaku .gapcard__gap strong { font-size: 42px; }
+  .watch-compare--hikaku .gapcard__head b { font-size: 16px; }
+}
+
+/* CTAカード（FV・クロージング共通） */
+.watch-compare--hikaku .hero__card {
+  margin-top: 18px;
+  padding: 15px 13px 13px;
+  border: 1px solid #ede3d2;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 26px rgb(58 44 20 / 10%);
+}
+.watch-compare--hikaku .hero__card .cta--hero {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.watch-compare--hikaku .hero__trust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-compare--hikaku .hero__trust li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 3px;
+  color: #4a4640;
+  font-size: 11.5px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+}
+.watch-compare--hikaku .hero__trust li + li { border-left: 1px solid #efe7d8; }
+/* Bootstrap Icons（MIT）。塗りつぶし形状なので stroke は使わない */
+.watch-compare--hikaku .hero__trust svg { width: 24px; height: 24px; color: #b0121a; }
+.watch-compare--hikaku .hero__trust--closing {
+  margin-top: 14px;
+  padding: 13px 0 0;
+  border-top: 1px solid var(--hwc-line);
+}
+.watch-compare--hikaku .image-note {
+  margin-top: 13px;
+  color: var(--hwc-muted);
+  font-size: 10.5px;
+  line-height: 1.7;
+}
+
+/* ------------------------------------------------------------
+   2｜CASE 01〜04
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .caselist {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 600px) {
+  .watch-compare--hikaku .caselist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.watch-compare--hikaku .casebox {
+  padding: 13px 14px 11px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 12px;
+  background: var(--hwc-paper);
+}
+.watch-compare--hikaku .casebox__no {
+  margin: 0 0 6px;
+  color: var(--hwc-gold-dark);
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+.watch-compare--hikaku .casebox__name { margin: 0 0 9px; }
+.watch-compare--hikaku .casebox__name b {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: 10.5px;
+  font-weight: 800;
+  vertical-align: 2px;
+}
+.watch-compare--hikaku .casebox__name span {
+  color: var(--hwc-navy);
+  font-size: 13.5px;
+  font-weight: 900;
+}
+.watch-compare--hikaku .casebox__gap {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 7px;
+  margin: 9px 0 0;
+  padding-top: 9px;
+  border-top: 1px dashed var(--hwc-line-dark);
+  color: var(--hwc-red-dark);
+}
+.watch-compare--hikaku .casebox__gap span { font-size: 11.5px; font-weight: 800; }
+.watch-compare--hikaku .casebox__gap strong {
+  font-family: var(--hwc-font-serif);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+/* ------------------------------------------------------------
+   3・5・6・7｜アイコン付き4項目グリッド
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .pointgrid {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 600px) {
+  .watch-compare--hikaku .pointgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.watch-compare--hikaku .pointgrid li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 4px 12px;
+  align-items: center;
+  padding: 13px 14px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 10px;
+  background: var(--hwc-paper);
+}
+.watch-compare--hikaku .pointgrid__icon {
+  grid-row: span 2;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+}
+.watch-compare--hikaku .pointgrid li b {
+  align-self: end;
+  color: var(--hwc-navy);
+  font-size: var(--h-h3);
+  font-weight: 900;
+  line-height: 1.4;
+}
+.watch-compare--hikaku .pointgrid li span {
+  align-self: start;
+  color: var(--hwc-ink-soft);
+  font-size: 13px;
+  line-height: 1.65;
+}
+/* 「こんな時計でも」はゴールドにして、査定の可否＝前向きな話として見せる */
+.watch-compare--hikaku .section--anyway .pointgrid__icon { background: var(--hwc-gold-dark); }
+
+/* ------------------------------------------------------------
+   4｜安かった／納得できた の分岐
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .branch {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 600px) {
+  .watch-compare--hikaku .branch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.watch-compare--hikaku .branch li {
+  padding: 13px 14px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 10px;
+  background: var(--hwc-paper);
+}
+.watch-compare--hikaku .branch li b {
+  display: block;
+  color: var(--hwc-navy);
+  font-size: var(--h-body);
+  font-weight: 900;
+}
+.watch-compare--hikaku .branch li span {
+  display: block;
+  margin-top: 7px;
+  padding-top: 7px;
+  border-top: 1px dashed var(--hwc-line-dark);
+  color: var(--hwc-red-dark);
+  font-size: var(--h-body);
+  font-weight: 900;
+}
+.watch-compare--hikaku .branch li span::before { margin-right: 5px; content: "→"; }
+
+/* ------------------------------------------------------------
+   5｜最高査定額カード
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .topamount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 10px;
+  margin: 0 0 14px;
+  padding: 14px 16px;
+  border: 2px solid var(--hwc-gold);
+  border-radius: 12px;
+  background: var(--hwc-gold-pale);
+  text-align: center;
+}
+.watch-compare--hikaku .topamount span {
+  color: var(--hwc-gold-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+.watch-compare--hikaku .topamount b {
+  color: var(--hwc-navy);
+  font-family: var(--hwc-font-serif);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+/* ------------------------------------------------------------
+   6｜査定担当者コメント
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .comments { margin: 0; padding: 0; list-style: none; }
+.watch-compare--hikaku .comment {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--hwc-line-dark);
+}
+.watch-compare--hikaku .comment:last-child { border-bottom: 0; }
+.watch-compare--hikaku .comment__avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.watch-compare--hikaku .comment__main { min-width: 0; }
+.watch-compare--hikaku .comment__who { margin: 0 0 6px; font-size: 12px; }
+.watch-compare--hikaku .comment__who b { margin-right: 6px; color: var(--hwc-navy); font-weight: 900; }
+.watch-compare--hikaku .comment__who span { color: var(--hwc-muted); }
+.watch-compare--hikaku .comment__tag {
+  display: inline-block;
+  margin-bottom: 7px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: 10.5px;
+  font-weight: 800;
+}
+.watch-compare--hikaku .comment__text {
+  margin: 0;
+  padding: 11px 13px;
+  border-radius: 10px;
+  background: var(--hwc-cream);
+  color: var(--hwc-ink);
+  font-size: 13.5px;
+  line-height: 1.75;
+}
+.watch-compare--hikaku .comment__item {
+  margin: 7px 0 0;
+  color: var(--hwc-muted);
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+.watch-compare--hikaku .comment__item span { display: block; }
+
+/* ------------------------------------------------------------
+   8｜向き不向きの表
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .fit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.watch-compare--hikaku .fit-table th,
+.watch-compare--hikaku .fit-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--hwc-line);
+  line-height: 1.6;
+  text-align: left;
+  vertical-align: middle;
+}
+.watch-compare--hikaku .fit-table thead th {
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  font-size: 12px;
+  font-weight: 800;
+}
+.watch-compare--hikaku .fit-table tbody th {
+  width: 38%;
+  color: var(--hwc-navy);
+  font-weight: 900;
+}
+.watch-compare--hikaku .fit-table tbody tr:last-child th,
+.watch-compare--hikaku .fit-table tbody tr:last-child td { border-bottom: 0; }
+.watch-compare--hikaku .fit-table tr.is-focus { background: var(--hwc-gold-pale); }
+.watch-compare--hikaku .fit-table tr.is-focus th { color: var(--hwc-gold-dark); }
+.watch-compare--hikaku .fit-table tr.is-focus td { font-weight: 800; }
+
+/* ------------------------------------------------------------
+   9｜査定実績
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .reclist { display: grid; gap: 10px; margin: 0 0 14px; padding: 0; list-style: none; }
+.watch-compare--hikaku .reccard {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 13px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 10px;
+  background: var(--hwc-paper);
+}
+/* 画像のない実績は1カラムに落として、空の枠が出ないようにする */
+.watch-compare--hikaku .reccard:not(:has(.reccard__img)) { grid-template-columns: minmax(0, 1fr); }
+.watch-compare--hikaku .reccard__img {
+  width: 68px;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  object-fit: cover;
+}
+.watch-compare--hikaku .reccard__body h3 {
+  margin: 0 0 5px;
+  color: var(--hwc-navy);
+  font-size: 13.5px;
+  font-weight: 900;
+  line-height: 1.5;
+}
+.watch-compare--hikaku .reccard__state { margin: 0; color: var(--hwc-muted); font-size: 11.5px; }
+.watch-compare--hikaku .reccard__price { margin: 4px 0 0; color: var(--hwc-red-dark); }
+.watch-compare--hikaku .reccard__price b {
+  font-family: var(--hwc-font-serif);
+  font-size: 24px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+.watch-compare--hikaku .reccard__price span { margin-left: 2px; font-size: 13px; font-weight: 800; }
+.watch-compare--hikaku .reccard__date { margin: 2px 0 0; color: var(--hwc-muted); font-size: 11px; }
+
+.watch-compare--hikaku .morerec {
+  margin: 0 0 14px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 10px;
+  background: var(--hwc-paper);
+}
+.watch-compare--hikaku .morerec > summary {
+  padding: 13px 15px;
+  color: var(--hwc-navy);
+  font-size: var(--h-body);
+  font-weight: 900;
+  cursor: pointer;
+  list-style: none;
+}
+.watch-compare--hikaku .morerec > summary::-webkit-details-marker { display: none; }
+.watch-compare--hikaku .morerec > summary::after { float: right; color: var(--hwc-gold-dark); content: "＋"; }
+.watch-compare--hikaku .morerec[open] > summary::after { content: "−"; }
+.watch-compare--hikaku .morerec__body { padding: 0 15px 15px; }
+.watch-compare--hikaku .morerec__body h3 {
+  margin: 16px 0 8px;
+  color: var(--hwc-navy);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* ------------------------------------------------------------
+   11｜2つの入口とステップ
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .entrances { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 600px) {
+  .watch-compare--hikaku .entrances { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.watch-compare--hikaku .entrances li {
+  padding: 16px 15px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 12px;
+  background: var(--hwc-paper);
+  text-align: center;
+}
+.watch-compare--hikaku .entrances__icon {
+  box-sizing: border-box;
+  display: block;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 10px;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+}
+.watch-compare--hikaku .entrances__icon--alt { background: var(--hwc-gold-dark); }
+.watch-compare--hikaku .entrances__label {
+  margin: 0 0 5px;
+  color: var(--hwc-muted);
+  font-size: 11.5px;
+  font-weight: 800;
+}
+.watch-compare--hikaku .entrances li b {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--hwc-navy);
+  font-size: var(--h-h3);
+  font-weight: 900;
+  line-height: 1.45;
+}
+.watch-compare--hikaku .entrances li span {
+  display: block;
+  color: var(--hwc-ink-soft);
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.watch-compare--hikaku .steplist { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.watch-compare--hikaku .steplist li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 3px 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 10px;
+  background: var(--hwc-paper);
+}
+.watch-compare--hikaku .steplist__no {
+  grid-column: 2;
+  color: var(--hwc-gold-dark);
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+.watch-compare--hikaku .steplist__icon {
+  grid-row: span 3;
+  width: 34px;
+  height: 34px;
+  color: var(--hwc-navy);
+}
+.watch-compare--hikaku .steplist li b {
+  grid-column: 2;
+  color: var(--hwc-navy);
+  font-size: var(--h-body);
+  font-weight: 900;
+  line-height: 1.4;
+}
+.watch-compare--hikaku .steplist__body {
+  grid-column: 2;
+  color: var(--hwc-ink-soft);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------
+   12｜利用者の声
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .voices { display: grid; gap: 12px; margin: 0 0 14px; padding: 0; list-style: none; }
+@media (min-width: 600px) {
+  .watch-compare--hikaku .voices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.watch-compare--hikaku .voice {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 15px;
+  border: 1px solid var(--hwc-line-dark);
+  border-radius: 12px;
+  background: var(--hwc-paper);
+}
+.watch-compare--hikaku .voice__avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.watch-compare--hikaku .voice__age { margin: 0 0 6px; color: var(--hwc-muted); font-size: 11.5px; font-weight: 800; }
+.watch-compare--hikaku .voice__text {
+  margin: 0;
+  color: var(--hwc-ink);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+/* ------------------------------------------------------------
+   14｜キャンペーン
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .campaign__amount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 12px;
+  margin: 0 0 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--hwc-gold);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-gold-pale);
+  text-align: center;
+}
+.watch-compare--hikaku .campaign__amount span { color: var(--hwc-gold-dark); font-size: var(--h-note); font-weight: 800; }
+.watch-compare--hikaku .campaign__amount b {
+  color: var(--hwc-red-dark);
+  font-family: var(--hwc-font-serif);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+.watch-compare--hikaku .campaign__amount i { margin-left: 2px; font-size: 15px; font-style: normal; font-weight: 800; }
+.watch-compare--hikaku .campaign__link { display: block; margin-bottom: 10px; }
+.watch-compare--hikaku .campaign__link img { width: 100%; height: auto; border-radius: 8px; }
+.watch-compare--hikaku .campaign__terms { margin: 0; color: var(--hwc-muted); font-size: 10.5px; line-height: 1.7; }
+
+/* ------------------------------------------------------------
+   15｜クロージング
+   ------------------------------------------------------------ */
+.watch-compare--hikaku .closingflow { margin: 0 0 4px; padding: 0; list-style: none; counter-reset: cf; }
+.watch-compare--hikaku .closingflow li {
+  position: relative;
+  padding: 11px 0 11px 34px;
+  color: var(--hwc-ink);
+  font-size: var(--h-body);
+  font-weight: 700;
+  line-height: 1.6;
+}
+.watch-compare--hikaku .closingflow li::before {
+  position: absolute;
+  top: 11px;
+  left: 0;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  counter-increment: cf;
+  content: counter(cf);
+  font-size: 11px;
+  font-weight: 900;
+  place-items: center;
+}
+/* 手順のつながりを示す縦線 */
+.watch-compare--hikaku .closingflow li:not(:last-child)::after {
+  position: absolute;
+  top: 35px;
+  left: 10px;
+  width: 2px;
+  height: calc(100% - 26px);
+  background: var(--hwc-line-dark);
+  content: "";
+}
+
+.watch-compare--hikaku .source-note {
+  margin: 14px 0 0;
+  color: var(--hwc-muted);
+  font-size: 10.5px;
+  line-height: 1.75;
+}
+
+/* CTA。光沢が横切るアニメーションで視線を止める */
+.watch-compare--hikaku .cta { position: relative; overflow: hidden; }
+.watch-compare--hikaku .cta::after {
+  position: absolute;
+  top: -50%;
+  left: -85%;
+  width: 46%;
+  height: 200%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgb(255 255 255 / 14%) 34%,
+    rgb(255 255 255 / 58%) 50%,
+    rgb(255 255 255 / 14%) 66%,
+    transparent 100%
+  );
+  content: "";
+  transform: skewX(-20deg);
+  animation: hikaku-cta-shine 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes hikaku-cta-shine {
+  0%, 58% { left: -85%; }
+  100% { left: 160%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .watch-compare--hikaku .cta::after { animation: none; opacity: 0; }
+}
+
+@media (max-width: 360px) {
+  .watch-compare--hikaku .hero__inner { padding-top: 132px; }
+  .watch-compare--hikaku .hero h1 { font-size: 25px; }
+  .watch-compare--hikaku .gapcard__gap strong { font-size: 30px; }
+  .watch-compare--hikaku .hero__trust li { font-size: 10.5px; }
+}

@@ -1,0 +1,664 @@
+---
+// SLVRbullet の広告リンク（計測URL）。ページ末尾の引き継ぎタグが gclid 等を
+// 引き継ぐ対象がこのURL。ヒカカクの直リンクに戻すと成果がGoogle広告へ連携されない。
+const affiliateUrl = 'https://tr.slvrbullet.com/cl/w0000678724/47671/39865/6';
+const privacyUrl = 'https://hikakaku.com/privacypolicy';
+const sourceRecordsUrl = 'https://hikakaku.com/category/all-category/watch/assessment_achievements/';
+const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
+
+// キャンペーンは公式で実施中を確認できたときだけ出す。
+// 確認が取れていない間は false にしてセクションごと非表示にする。
+const showCampaign = false;
+
+const comparisonCases = [
+  { brand: 'ROLEX', model: 'デイトナ 116520 ブラック', prices: ['240万円', '185万円', '128万円'], gap: '112万円', tone: 'silver' },
+  { brand: 'HUBLOT', model: 'ビッグバン ゴールドセラミック', prices: ['207万円', '172万円', '140万円'], gap: '67万円', tone: 'gold' },
+  { brand: 'BREGUET', model: 'マリーン ラージデイト ブラック', prices: ['114万円', '95万円', '75万円'], gap: '39万円', tone: 'charcoal' },
+  { brand: 'ROLEX', model: 'サブマリーナ デイト 16610', prices: ['85万円', '75万円', '59万円'], gap: '26万円', tone: 'navy' },
+];
+const rolex2025 = [
+  ['コスモグラフ デイトナ ブラック 126500LN', '中古美品', '4,100,000円', '2025.08.20', 'エステメ'],
+  ['デイトナ 116500LN BK', '中古美品', '3,400,000円', '2025.04.19', 'エステメ'],
+  ['デイトナ 16520', '中古品・使用感あり', '3,300,000円', '2025.03.29', '買虎'],
+  ['スカイドゥエラー Ref.336933', '中古美品', '3,150,000円', '2025.03.21', 'シグマ'],
+  ['デイトジャスト36 126231', '新品・未開封', '2,300,000円', '2025.09.18', '買虎'],
+  ['ヨットマスター 116621 チョコレート', '中古品・使用感あり', '1,880,000円', '2025.05.12', 'エステメ'],
+  ['GMTマスターⅠ 16700 N番 赤青ベゼル', '中古美品', '1,600,000円', '2025.03.11', 'シグマ'],
+  ['サブマリーナー 114060 ノンデイト', '中古美品', '1,550,000円', '2025.03.06', 'エステメ'],
+  ['サブマリーナデイト 116610LN', '中古美品', '1,350,000円', '2025.03.09', '買取屋アップ'],
+  ['デイトジャスト28 279174 ダークロジウム', '中古美品', '1,200,000円', '2025.08.21', 'エステメ'],
+  ['デイトジャスト 116234 ホワイト ローマ', '中古美品', '1,000,000円', '2025.03.07', 'かいきり'],
+  ['エクスプローラーⅠ 114270 ブラック', '中古美品', '880,000円', '2025.03.16', 'オルロージュ東京'],
+  ['チェリーニ 5112', '中古品・使用感あり', '460,000円', '2025.03.06', 'エステメ'],
+];
+const rolex2024 = [
+  ['デイトナ 116519LN', '中古美品', '5,650,000円', '2024.03.10', 'オルロージュ東京'],
+  ['116518LN', '中古美品', '5,250,000円', '2024.03.25', 'オルロージュ東京'],
+  ['デイデイト 118206 アイスブルー', '中古美品', '3,200,000円', '2024.03.25', 'オルロージュ東京'],
+  ['エクスプローラーⅠ 124270', '中古美品', '1,430,000円', '2024.08.16', 'エステメ'],
+];
+const omegaRecords = [
+  ['スピードマスター プロフェッショナル アポロ15号35周年記念 3366.51.00', '中古美品', '840,000円', '2024.08.16', 'エステメ'],
+  ['シーマスター ダイバー300M 210.22.42.20.01.002', '中古美品', '720,000円', '2024.03.10', 'オルロージュ東京'],
+  ['5161.34', '中古美品', '150,000円', '2025.03.13', '大吉 中目黒駅前店'],
+  ['レディース シーマスター', '中古品・使用感あり', '52,400円', '2023.11.01', 'KaiRy'],
+];
+const otherRecords = [
+  ['ブレゲ マリーンGMT 5857ST/12/5ZU', '中古美品', '1,690,000円', '2023.07.21', '&WHITE 川崎店'],
+  ['H.モーザー パイオニア センターセコンド 3200-1202', '中古美品', '1,200,000円', '2025.04.05', 'エステメ 横浜店'],
+  ['IWC ポルトギーゼ ヨットクラブ IW390704', '新品・未開封', '1,100,000円', '2025.06.05', 'エステメ大阪支店'],
+  ['カルティエ パシャ ドゥ WSPA0013', '中古美品', '480,000円', '2025.03.14', 'エステメ大阪支店'],
+  ['ブライトリング A23310', '中古美品', '450,000円', '2024.04.25', 'オルロージュ東京'],
+  ['チューダー 79210', '中古美品', '405,000円', '2024.04.04', 'オルロージュ東京'],
+  ['ブライトリング クロノマット32 A77310', '中古美品', '230,000円', '2025.04.05', 'ベルスーガ'],
+  ['セイコー プロスペックス マリンマスター', '目立つ傷がある', '100,000円', '2024.04.15', 'KaiRy'],
+  ['タグホイヤー カレラ', '中古品・使用感あり', '81,200円', '2024.05.15', 'KaiRy'],
+  ['アップルウォッチ エルメス', '中古品・使用感あり', '76,000円', '2023.10.10', 'KaiRy'],
+  ['カルティエ タグホイヤー セル クロノグラフ', '中古品・使用感あり', '71,500円', '2024.02.20', 'KaiRy'],
+  ['カルティエ マスト21', '中古品・使用感あり', '68,000円', '2024.02.22', 'KaiRy'],
+  ['ロンジン L4.774.4.726', '中古品・使用感あり', '50,000円', '2024.04.29', 'オルロージュ東京'],
+  ['アップルウォッチ A2770', '中古美品', '38,000円', '2023.06.30', 'ソクガイ'],
+  ['ハミルトン ジャズマスター ビューマチック H32565735', '中古品・使用感あり', '25,000円', '2024.04.22', 'オルロージュ東京'],
+  ['ダンヘンリー', '中古美品', '13,000円', '2023.07.19', 'ソクガイ'],
+  ['エニカ 手巻', '中古品・使用感あり', '4,000円', '2023.10.10', 'ソクガイ'],
+];
+
+// FVで使う代表事例（comparisonCases の1件目と同一データ）
+const headline = comparisonCases[0];
+
+// 業者ごとに提示額が変わる理由
+const whyDiffer = [
+  { icon: 'ic-stock', title: 'そのモデルを今ほしいか', body: '在庫が少なく、そのモデルを探している業者なら、他店より高い査定額を出すことがあります。' },
+  { icon: 'ic-star', title: 'そのブランドが得意か', body: 'ロレックスに強い業者、アンティーク時計に強い業者など、得意分野は会社ごとに異なります。' },
+  { icon: 'ic-route', title: 'どこで販売できるか', body: '国内店舗、海外販売、業者間取引など、買い取った時計の販売ルートも業者ごとに違います。' },
+  { icon: 'ic-trend', title: '査定するタイミング', body: '為替や海外需要などによって、高級時計の相場そのものが動くこともあります。' },
+];
+
+// 最高額だけで決める前に見ておきたい項目
+const pickPoints = [
+  { icon: 'ic-review', title: '口コミ・評判', body: '実際の利用者の評価や、対応について気になる声がないか。' },
+  { icon: 'ic-record', title: '時計の買取実績', body: 'ブランド時計を扱った実績があるか。' },
+  { icon: 'ic-explain', title: '査定後の対応', body: '現物確認後の金額や、減額理由について説明が分かりやすいか。' },
+  { icon: 'ic-terms', title: '買取方法・条件', body: '手数料、入金、宅配・店頭などの買取方法を確認。' },
+];
+
+// 査定で見られるポイント
+const seenPoints = [
+  { icon: 'ic-ref', title: 'モデル・型番', body: '同じブランドでも、モデル・型番が違えば評価は変わります。' },
+  { icon: 'ic-cond', title: '時計の状態', body: '傷、使用感、動作状態などが確認されます。' },
+  { icon: 'ic-box', title: '箱・保証書・余りコマ', body: '付属品の有無によって査定額が変わることがあります。' },
+  { icon: 'ic-trend', title: '査定時の相場', body: '同じ時計でも、時期によって相場が変わることがあります。' },
+];
+
+// 査定担当者コメント（ヒカカク！公式サイト掲載の査定コメントより引用）
+const appraisalComments = [
+  { tag: '付属品完品＋美品', avatar: '/hikakaku-watch-old-rolex/img/avatar-1.png', shop: 'オルロージュ東京',
+    item: 'ブライトリング A23310', meta: '中古美品／450,000円（2024年4月25日）',
+    body: '付属品完品＋ノベルティをお持ちいただき、お時計はほぼ新品に近い状態のため最大金額にてお買取り成立となりました' },
+  { tag: '保証書なし', avatar: '/hikakaku-watch-old-rolex/img/avatar-2.png', shop: 'オルロージュ東京',
+    item: 'ハミルトン ジャズマスター ビューマチック H32565735', meta: '中古品・使用感あり／25,000円（2024年4月22日）',
+    body: 'とても綺麗で状態も良かったのですが、保証書が欠品していたため減額となってしまいました' },
+  { tag: '傷が多い', avatar: '/hikakaku-watch-old-rolex/img/avatar-3.png', shop: 'オルロージュ東京',
+    item: 'ロンジン L4.774.4.726', meta: '中古品・使用感あり／50,000円（2024年4月29日）',
+    body: '付属品完品ではありましたが、外装使用傷が多数ありましたので最低額でのご案内となりました' },
+];
+
+// 「こんな時計でも」
+const anyway = [
+  { icon: 'ic-scratch', title: 'キズ・使用感あり', body: 'そのままの状態で査定できます。' },
+  { icon: 'ic-sleep', title: '長く使っていない', body: 'しばらく動かしていない時計でも、査定対象になる場合があります。' },
+  { icon: 'ic-nobox', title: '箱・保証書なし', body: '付属品が揃っていなくても査定対象になる場合があります。' },
+  { icon: 'ic-unknown', title: '型番が分からない', body: '型番が分からない場合でも、時計本体や写真から確認して進められる場合があります。' },
+];
+
+// 代表的な査定実績（先に見せる5件）
+const pickRecords = [
+  { model: 'ROLEX デイトナ 16520', state: '中古品・使用感あり', price: '3,300,000', date: '2025.03.29', img: '/hikakaku-watch-old-rolex/img/daytona-16520.webp' },
+  { model: 'ROLEX GMTマスターⅠ 16700', state: '中古美品', price: '1,600,000', date: '2025.03.11', img: '/hikakaku-watch-old-rolex/img/gmt-16700.webp' },
+  { model: 'ROLEX エクスプローラーⅠ 114270', state: '中古美品', price: '880,000', date: '2025.03.16', img: '/hikakaku-watch-old-rolex/img/explorer-114270.webp' },
+  { model: 'IWC ポルトギーゼ ヨットクラブ IW390704', state: '新品・未開封', price: '1,100,000', date: '2025.06.05', img: '' },
+  { model: 'OMEGA スピードマスター プロフェッショナル アポロ15号35周年記念 3366.51.00', state: '中古美品', price: '840,000', date: '2024.08.16', img: '' },
+];
+
+// 申込〜売却判断までの5ステップ
+const steps = [
+  { icon: 'ic-input', title: '時計の情報を入力', body: '型番・状態・付属品など。' },
+  { icon: 'ic-send', title: '対応できる業者へ査定依頼', body: '入力内容をもとにまとめて依頼されます。' },
+  { icon: 'ic-inbox', title: '各社から査定額が届く', body: '届いた順に金額を確認できます。' },
+  { icon: 'ic-decide', title: '金額と業者を比較', body: '査定額だけでなく、業者の情報も見て判断。' },
+];
+
+const testimonials = [
+  { age: '30代 男性', avatar: '/hikakaku-watch/testimonial-avatar-man30.png',
+    quote: '買取価格を比較できるというイメージ通りだった。無料でまとめて査定ができるので、所持品を高く売りたいときに便利なサービスだと思う。' },
+  { age: '40代 女性', avatar: '/hikakaku-watch/testimonial-avatar-woman40.png',
+    quote: '複数の買取業者さんから回答が届くのが早く驚いたし、買取ができない場合でもきちんと返答があったので助かった。' },
+];
+
+const faqs = [
+  { q: '査定だけでも利用できますか？', a: 'はい。査定額を確認したうえで、売らないという選択もできます。ヒカカク！公式サイトにも「査定価格に納得しない場合は買取依頼しなくてもOK」と明記されています。' },
+  { q: '利用料はかかりますか？', a: 'ヒカカク！公式サイトでは、サービス利用手数料は一切かからないと案内されています。何社に査定を依頼しても、成約後に別途料金が発生することはないと記載されています。' },
+  { q: '必ず20社から査定が来ますか？', a: 'いいえ。「最大20社」であり、実際に査定する業者数は、時計のブランド・状態・地域などによって異なります。' },
+  { q: '事前査定額は確定価格ですか？', a: '確定価格とは限りません。傷、動作状態、付属品などを現物確認した結果、最終査定額が変わる場合があります。' },
+  { q: '査定額に納得できなかった場合は？', a: '売却する必要はありません。今回は売らず、そのまま時計を持っておくこともできます。' },
+  { q: '箱や保証書がなくても査定できますか？', a: '付属品が揃っていない場合でも、査定対象になることがあります。ただし付属品の有無は査定額に影響する場合があります。' },
+  { q: '個人情報はどう扱われますか？', a: '公式サイトには「入力情報は、SSL通信により暗号化されて送信されます」と記載されています。詳細はヒカカク！プライバシーポリシーでご確認ください。' },
+];
+
+const recordTable = (rows: string[][]) => rows;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="同じ腕時計でも、査定する業者によって提示額は変わります。実際の査定事例と業者差の理由を示したうえで、最大20社へまとめて査定を依頼し、金額と業者を比べてから売るかどうかを決められる比較・案内ページです。" />
+    <title>その時計、最初の査定額だけで決めていませんか？ | 時計査定ナビ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Noto+Serif+JP:wght@600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/hikakaku-watch-compare/site.css" />
+    <link rel="stylesheet" href="/hikakaku-watch-satei-hikaku/site.css" />
+    <!-- 計測タグ（他の時計LPと同じプロパティに相乗り）。GA4 → Clarity の順。 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+    </script>
+    <script is:inline>
+      (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+        t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wxnujpnscp");
+    </script>
+    <!-- 中間CV（MCV）＝CTAクリックの計測。GA4イベントとして送る。 -->
+    <script is:inline>
+      (function(){
+        var INTENT = "hikakaku_watch_satei_hikaku";
+        document.addEventListener("click", function(e){
+          var a = e.target && e.target.closest ? e.target.closest("a.cta") : null;
+          if (!a) return;
+          if (typeof gtag !== "function") return;
+          gtag("event", "hikakaku_watch_mcv", {
+            landing_intent: INTENT,
+            cta_position: a.getAttribute("data-cta") || "unknown",
+            link_url: a.href
+          });
+        }, true);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="watch-compare watch-compare--hikaku">
+      <div class="pr-bar">当サイトは提携広告を含む比較・案内メディアです</div>
+
+      {/* アイコン定義。/compare/ /old-rolex/ と同じ線画セットに揃えている。 */}
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+          <symbol id="ic-ref" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 10.6V4.6a1.1 1.1 0 0 1 1.1-1.1h6l9.9 9.9a1.6 1.6 0 0 1 0 2.2l-5.8 5.8a1.6 1.6 0 0 1-2.2 0L3.5 11.5z" />
+            <circle cx="7.8" cy="7.8" r="1.4" />
+          </symbol>
+          <symbol id="ic-cond" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10.4" cy="10.4" r="6.6" />
+            <path d="M10.4 7v3.4l2.3 1.4M15.3 15.3l5.2 5.2" />
+          </symbol>
+          <symbol id="ic-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 8.2 12 4l8.5 4.2v7.6L12 20l-8.5-4.2z" />
+            <path d="M3.5 8.2 12 12.4l8.5-4.2M12 12.4V20" />
+          </symbol>
+          <symbol id="ic-stock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="13" width="8" height="8" rx="1.2" />
+            <rect x="13" y="13" width="8" height="8" rx="1.2" />
+            <rect x="8" y="3.4" width="8" height="8" rx="1.2" />
+          </symbol>
+          <symbol id="ic-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3.5 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.9l6-.9z" />
+          </symbol>
+          <symbol id="ic-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M3.5 12h17M12 3.5c2.2 2.4 3.4 5.4 3.4 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.4-5.4-3.4-8.5S9.8 5.9 12 3.5z" />
+          </symbol>
+          <symbol id="ic-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.5 17.5 9 11.5l3.6 3.4 7.4-8" />
+            <path d="M15.6 6.9h4.4v4.4" />
+          </symbol>
+          <symbol id="ic-input" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.4" y="4.2" width="17.2" height="15.6" rx="2.2" />
+            <path d="M7.6 9.4h6M7.6 13h8.8M7.6 16.4h4.4" />
+          </symbol>
+          <symbol id="ic-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 3.1 2.8 10.7l7.5 2.9 3 7.3z" />
+            <path d="M20.9 3.1 10.3 13.6" />
+          </symbol>
+          <symbol id="ic-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2.2" />
+            <path d="m3.6 6.6 8.4 5.9 8.4-5.9" />
+          </symbol>
+          <symbol id="ic-decide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 4.4v15.2M8.2 19.6h7.6M4.4 7.6h15.2" />
+            <path d="M4.4 7.6 2.1 13.3h4.6zM19.6 7.6l-2.3 5.7h4.6z" />
+          </symbol>
+          <symbol id="ic-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.4 8.6a1.9 1.9 0 0 1 1.9-1.9h2.2l1.3-2.3h6.4l1.3 2.3h2.2a1.9 1.9 0 0 1 1.9 1.9v9.2a1.9 1.9 0 0 1-1.9 1.9H5.3a1.9 1.9 0 0 1-1.9-1.9z" />
+            <circle cx="12" cy="12.9" r="3.7" />
+          </symbol>
+          <symbol id="ic-free" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M5 6.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m1.138-1.496A6.6 6.6 0 0 1 7.964 4.5c.666 0 1.303.097 1.893.273a.5.5 0 0 0 .286-.958A7.6 7.6 0 0 0 7.964 3.5c-.734 0-1.441.103-2.102.292a.5.5 0 1 0 .276.962"/>
+            <path fill-rule="evenodd" d="M7.964 1.527c-2.977 0-5.571 1.704-6.32 4.125h-.55A1 1 0 0 0 .11 6.824l.254 1.46a1.5 1.5 0 0 0 1.478 1.243h.263c.3.513.688.978 1.145 1.382l-.729 2.477a.5.5 0 0 0 .48.641h2a.5.5 0 0 0 .471-.332l.482-1.351c.635.173 1.31.267 2.011.267.707 0 1.388-.095 2.028-.272l.543 1.372a.5.5 0 0 0 .465.316h2a.5.5 0 0 0 .478-.645l-.761-2.506C13.81 9.895 14.5 8.559 14.5 7.069q0-.218-.02-.431c.261-.11.508-.266.705-.444.315.306.815.306.815-.417 0 .223-.5.223-.461-.026a1 1 0 0 0 .09-.255.7.7 0 0 0-.202-.645.58.58 0 0 0-.707-.098.74.74 0 0 0-.375.562c-.024.243.082.48.32.654a2 2 0 0 1-.259.153c-.534-2.664-3.284-4.595-6.442-4.595M2.516 6.26c.455-2.066 2.667-3.733 5.448-3.733 3.146 0 5.536 2.114 5.536 4.542 0 1.254-.624 2.41-1.67 3.248a.5.5 0 0 0-.165.535l.66 2.175h-.985l-.59-1.487a.5.5 0 0 0-.629-.288c-.661.23-1.39.359-2.157.359a6.6 6.6 0 0 1-2.157-.359.5.5 0 0 0-.635.304l-.525 1.471h-.979l.633-2.15a.5.5 0 0 0-.17-.534 4.65 4.65 0 0 1-1.284-1.541.5.5 0 0 0-.446-.275h-.56a.5.5 0 0 1-.492-.414l-.254-1.46h.933a.5.5 0 0 0 .488-.393m12.621-.857a.6.6 0 0 1-.098.21l-.044-.025c-.146-.09-.157-.175-.152-.223a.24.24 0 0 1 .117-.173c.049-.027.08-.021.113.012a.2.2 0 0 1 .064.199"/>
+          </symbol>
+          <symbol id="ic-quote" viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+          </symbol>
+          <symbol id="ic-shops" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022M6 8.694 1 10.36V15h5zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5z"/>
+            <path d="M2 11h1v1H2zm2 0h1v1H4zm-2 2h1v1H2zm2 0h1v1H4zm4-4h1v1H8zm2 0h1v1h-1zm-2 2h1v1H8zm2 0h1v1h-1zm2-2h1v1h-1zm0 2h1v1h-1zM8 7h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zM8 5h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zm0-2h1v1h-1z"/>
+          </symbol>
+          <symbol id="ic-review" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.4 14.6a1.9 1.9 0 0 1-1.9 1.9H7.9L4 20.4V5.5a1.9 1.9 0 0 1 1.9-1.9h12.6a1.9 1.9 0 0 1 1.9 1.9z" />
+            <path d="M8.4 8.4h7.2M8.4 12h4.6" />
+          </symbol>
+          <symbol id="ic-record" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4.4 6.2h11M4.4 12h11M4.4 17.8h6.6" />
+            <path d="m17.6 15.6 1.7 1.7 3-3.2" />
+          </symbol>
+          <symbol id="ic-explain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.4 13.8a1.9 1.9 0 0 1-1.9 1.9h-6.6L7.4 19.8v-4.1H5.5a1.9 1.9 0 0 1-1.9-1.9V6.1a1.9 1.9 0 0 1 1.9-1.9h13a1.9 1.9 0 0 1 1.9 1.9z" />
+            <path d="M9.9 8.2a2.2 2.2 0 0 1 4.2.8c0 1.5-2.1 1.8-2.1 3.1" />
+            <path d="M12 13.9v.1" />
+          </symbol>
+          <symbol id="ic-terms" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6.2 3.4h8.2l5 5v12.2a1.4 1.4 0 0 1-1.4 1.4H6.2a1.4 1.4 0 0 1-1.4-1.4V4.8a1.4 1.4 0 0 1 1.4-1.4z" />
+            <path d="M14 3.6v5.2h5" />
+            <path d="m8.6 15.4 2 2 4.2-4.4" />
+          </symbol>
+          <symbol id="ic-scratch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="13.4" r="6.6" />
+            <path d="M9.4 3.6h5.2M12 3.6v3.2" />
+            <path d="m9.6 15.6 3-4.4 2 3 1.6-2" />
+          </symbol>
+          <symbol id="ic-sleep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="13.4" r="6.6" />
+            <path d="M9.4 3.6h5.2M12 3.6v3.2" />
+            <path d="M12 10.2v3.6l2.6 1.6" />
+          </symbol>
+          <symbol id="ic-nobox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.6 8.3 12 4.1l8.4 4.2v7.5L12 20l-8.4-4.2z" />
+            <path d="M3.6 8.3 12 12.5l8.4-4.2" />
+            <path d="M4.2 20.2 19.8 4.4" />
+          </symbol>
+          <symbol id="ic-unknown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.6 10.7V4.7a1.1 1.1 0 0 1 1.1-1.1h6l9.8 9.8a1.6 1.6 0 0 1 0 2.2l-5.7 5.7a1.6 1.6 0 0 1-2.2 0L3.6 11.6z" />
+            <path d="M8.4 7.6v.1" />
+            <path d="M11.6 12.4a1.9 1.9 0 0 1 3.6.7c0 1.3-1.8 1.5-1.8 2.7M13.4 18.2v.1" />
+          </symbol>
+        </defs>
+      </svg>
+
+      <div class="single-column-layout">
+
+      {/* 1｜FV：価格差で興味を引く */}
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero__inner content">
+          <h1 id="page-title">その時計、<br />最初の査定額だけで<br /><mark>決めていませんか？</mark></h1>
+          <p class="hero__lead">同じ時計でも、<br /><b>査定する業者によって提示額は変わります。</b></p>
+
+          <figure class="gapcard">
+            <figcaption class="gapcard__head"><span>実際の査定事例では</span><b>{headline.brand} {headline.model}</b></figcaption>
+            <ul class="gapcard__rows">
+              <li class="is-best"><span>A社</span><b>{headline.prices[0]}</b></li>
+              <li><span>B社</span><b>{headline.prices[1]}</b></li>
+              <li><span>C社</span><b>{headline.prices[2]}</b></li>
+            </ul>
+            <p class="gapcard__gap"><span>最大</span><strong>{headline.gap}</strong><span>差</span></p>
+          </figure>
+
+          <div class="hero__card">
+            <a class="cta cta--hero" data-cta="hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">無料で査定額を比べてみる <span aria-hidden="true">›</span></a>
+            <ul class="hero__trust">
+              <li><svg aria-hidden="true"><use href="#ic-free" /></svg><span>利用無料</span></li>
+              <li><svg aria-hidden="true"><use href="#ic-quote" /></svg><span>査定だけでもOK</span></li>
+              <li><svg aria-hidden="true"><use href="#ic-shops" /></svg><span>最大20社へ<br />一括依頼</span></li>
+            </ul>
+          </div>
+
+          <p class="hero__note-lead">ヒカカク！なら<b>最大20社へまとめて査定依頼。</b>届いた査定額を比べてから、売るかどうかを決められます。</p>
+          <p class="image-note">※査定を行う業者数は、商品・地域・条件等によって異なります。<br />※上記は過去の査定事例です。現在の査定額を保証するものではありません。<br />※査定額は時計の状態・付属品・相場・査定時期・買取業者等によって異なります。</p>
+        </div>
+      </section>
+
+      {/* 2｜同じ時計でも、ここまで違う */}
+      <section class="section section--cases" aria-labelledby="cases-title">
+        <div class="content">
+          <p class="eyebrow">同じ時計でも、ここまで違う</p>
+          <h2 id="cases-title">同じモデルでも、<br />査定額は1つではありません</h2>
+          <p class="lead">近所の買取店で<b>「この時計は60万円ですね」</b>と言われたとします。でも、その60万円が高いのか安いのか。普段から時計の買取相場を見ていなければ、なかなか判断できません。</p>
+          <p class="lead">実際の査定事例を見ると、同じモデルでも業者によって金額に差が出ています。</p>
+
+          <ol class="caselist">
+            {comparisonCases.map((c, i) => (
+              <li class="casebox">
+                <p class="casebox__no">CASE {String(i + 1).padStart(2, '0')}</p>
+                <p class="casebox__name"><b>{c.brand}</b><span>{c.model}</span></p>
+                <ul class="casebox__rows">
+                  <li class="is-best"><span>A社</span><b>{c.prices[0]}</b></li>
+                  <li><span>B社</span><b>{c.prices[1]}</b></li>
+                  <li><span>C社</span><b>{c.prices[2]}</b></li>
+                </ul>
+                <p class="casebox__gap"><span>差額</span><strong>{c.gap}</strong></p>
+              </li>
+            ))}
+          </ol>
+
+          <p class="notice">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例 <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※2018年7月3日時点の掲載情報です。現在の査定相場を示すものではありません。</p>
+
+          <div class="turn">
+            <p class="turn__deny">この事例で大事なのは、<br />「デイトナなら240万円」ということではありません。</p>
+            <p class="turn__main">同じ時計でも、<br />査定を頼む業者によって<br /><strong>金額が変わること。</strong></p>
+          </div>
+          <p class="lead">一社の査定額しか知らなければ、<b>それが高いのか安いのかも分からない。</b>複数社の数字を見ることで、初めて<b>「自分の時計なら、このくらいなのか」</b>という目安が見えてきます。</p>
+          <a class="cta" data-cta="cases" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分の時計も査定額を比べてみる <span aria-hidden="true">›</span></a>
+        </div>
+      </section>
+
+      {/* 3｜なぜ店によって金額が違う？ */}
+      <section class="section section--why" aria-labelledby="why-title">
+        <div class="content">
+          <p class="eyebrow">なぜ店によって金額が違う？</p>
+          <h2 id="why-title">同じ時計なのに、<br />なぜ査定額が変わるのか？</h2>
+          <p class="lead">理由はシンプルです。<b>業者ごとに「今ほしい時計」が違うから。</b></p>
+          <ul class="pointgrid">
+            {whyDiffer.map((p) => (
+              <li><svg class="pointgrid__icon" aria-hidden="true"><use href={"#" + p.icon} /></svg><b>{p.title}</b><span>{p.body}</span></li>
+            ))}
+          </ul>
+          <p class="statement">時計そのものは同じでも、<br /><strong>「誰に査定してもらうか」で評価が変わる。</strong></p>
+          <p class="lead">だから最初から一店舗に決める必要はありません。</p>
+        </div>
+      </section>
+
+      {/* 4｜まだ売ると決めていなくても大丈夫 */}
+      <section class="section section--nopressure" aria-labelledby="nop-title">
+        <div class="content">
+          <p class="eyebrow">まだ売ると決めていなくても大丈夫</p>
+          <h2 id="nop-title">「いくらになるのかだけ知りたい」<br />から始めてもOKです</h2>
+          <p class="lead">一括査定というと、<b>「査定したら、そのまま売らないといけないのでは？」</b>と思うかもしれません。でも、査定額を確認してから、売るかどうかを判断できます。</p>
+          <ul class="branch">
+            <li><b>思ったより安かった</b><span>今回は売らない</span></li>
+            <li><b>納得できる金額だった</b><span>そのとき売却を考える</span></li>
+          </ul>
+          <p class="lead">最初から売却先を決めておく必要はありません。</p>
+          <p class="statement">まず金額を見る。<br /><strong>売るかどうかは、そのあと。</strong></p>
+          <a class="cta" data-cta="nopressure" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">今の査定額を確認してみる <span aria-hidden="true">›</span></a>
+          <p class="note-inline">無料・査定だけでもOK</p>
+        </div>
+      </section>
+
+      {/* 5｜最高額だけで即決もしなくていい */}
+      <section class="section section--pick" aria-labelledby="pick-title">
+        <div class="content">
+          <p class="eyebrow">でも「一番高い店」で即決もしなくていい</p>
+          <h2 id="pick-title">査定額だけでなく、<br />「誰に売るか」も比べる</h2>
+          <p class="lead">複数社から査定額が届いたら、<b>一番高い金額だけを見て、すぐ決める必要はありません。</b>大切な時計だからこそ、売却先についても確認しておきたいところです。</p>
+          <p class="topamount"><span>最高査定額</span><b>だけで決めない</b></p>
+          <ul class="pointgrid">
+            {pickPoints.map((p) => (
+              <li><svg class="pointgrid__icon" aria-hidden="true"><use href={"#" + p.icon} /></svg><b>{p.title}</b><span>{p.body}</span></li>
+            ))}
+          </ul>
+          <p class="statement">「いくらで売れるか」だけでなく、<br /><strong>「誰に売るか」も見てから決める。</strong></p>
+          <p class="lead">ヒカカク！では、査定額だけでなく、業者ごとの情報や口コミも確認できます。</p>
+        </div>
+      </section>
+
+      {/* 6｜あなたの時計は、ここを見られます */}
+      <section class="section section--seen" aria-labelledby="seen-title">
+        <div class="content">
+          <p class="eyebrow">あなたの時計は、ここを見られます</p>
+          <h2 id="seen-title">査定額は「モデル名」だけでは<br />決まりません</h2>
+          <p class="lead">同じ時計でも、状態や付属品によって金額は変わります。</p>
+          <ul class="pointgrid">
+            {seenPoints.map((p) => (
+              <li><svg class="pointgrid__icon" aria-hidden="true"><use href={"#" + p.icon} /></svg><b>{p.title}</b><span>{p.body}</span></li>
+            ))}
+          </ul>
+
+          <h3 class="subhead">実際の査定担当者コメントを見ると</h3>
+          <ul class="comments">
+            {appraisalComments.map((c) => (
+              <li class="comment">
+                <img class="comment__avatar" src={c.avatar} width="160" height="160" loading="lazy" decoding="async" alt="" />
+                <div class="comment__main">
+                  <p class="comment__who"><b>{c.shop}</b><span>査定担当者</span></p>
+                  <span class="comment__tag">{c.tag}</span>
+                  <blockquote class="comment__text">{c.body}</blockquote>
+                  <p class="comment__item">{c.item}<span>{c.meta}</span></p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p class="notice">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」 <a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a> 掲載の査定コメントより引用。<br />※各業者の査定コメントであり、実際の査定・売却額を保証するものではありません。</p>
+        </div>
+      </section>
+
+      {/* 7｜箱なし・キズあり・古い時計でも */}
+      <section class="section section--anyway" aria-labelledby="anyway-title">
+        <div class="content">
+          <p class="eyebrow">箱なし・キズあり・古い時計でも</p>
+          <h2 id="anyway-title">「値段はつかないだろう」と<br />自分で決めなくても大丈夫</h2>
+          <p class="lead">下のような時計でも、査定対象になる場合があります。</p>
+          <ul class="pointgrid">
+            {anyway.map((p) => (
+              <li><svg class="pointgrid__icon" aria-hidden="true"><use href={"#" + p.icon} /></svg><b>{p.title}</b><span>{p.body}</span></li>
+            ))}
+          </ul>
+          <p class="statement">「古いから」「傷があるから」「箱がないから」という理由だけで、<br /><strong>価値がないと決めつける必要はありません。</strong></p>
+          <a class="cta" data-cta="anyway" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">状態を伝えて査定額を確認する <span aria-hidden="true">›</span></a>
+        </div>
+      </section>
+
+      {/* 8｜一括査定が向いているのはこんな人 */}
+      <section class="section section--fit" aria-labelledby="fit-title">
+        <div class="content">
+          <p class="eyebrow">一括査定が向いているのはこんな人</p>
+          <h2 id="fit-title">時計を売る方法は、<br />一括査定だけではありません</h2>
+          <table class="fit-table">
+            <thead><tr><th>こんな場合</th><th>向いている方法</th></tr></thead>
+            <tbody>
+              <tr><td>今日中にできるだけ早く売りたい</td><th>店頭買取</th></tr>
+              <tr><td>自分で出品・発送できる</td><th>フリマ・個人売買</th></tr>
+              <tr><td>時計を手放したくない</td><th>質屋</th></tr>
+              <tr class="is-focus"><td>複数社の金額を比べてから決めたい</td><th>一括査定</th></tr>
+            </tbody>
+          </table>
+          <h3 class="subhead">特に、こんな人なら一括査定と相性があります</h3>
+          <ul class="checklist">
+            <li>「この査定額、本当に高い？」と判断できない</li>
+            <li>何店舗も買取店を回るのは面倒</li>
+            <li>売るかどうかは、金額を見て決めたい</li>
+            <li>できれば複数社を比較してから決めたい</li>
+          </ul>
+          <p class="note-inline">反対に、<b>今日中にすぐ現金化したい</b>という場合は、店頭買取の方が向いていることもあります。</p>
+        </div>
+      </section>
+
+      {/* 9｜型番別の査定実績 */}
+      <section class="section section--records" aria-labelledby="rec-title">
+        <div class="content">
+          <p class="eyebrow">型番別の査定実績</p>
+          <h2 id="rec-title">実際に査定された時計を見る</h2>
+          <ul class="reclist">
+            {pickRecords.map((r) => (
+              <li class="reccard">
+                {r.img && <img class="reccard__img" src={r.img} width="1024" height="1536" loading="lazy" decoding="async" alt={`${r.model}のイメージ`} />}
+                <div class="reccard__body">
+                  <h3>{r.model}</h3>
+                  <p class="reccard__state">{r.state}</p>
+                  <p class="reccard__price"><b>{r.price}</b><span>円</span></p>
+                  <p class="reccard__date">{r.date} 査定</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <details class="morerec">
+            <summary>ほかの査定実績を見る</summary>
+            <div class="morerec__body">
+              <h3>ロレックス（2025年の実績）</h3>
+              <div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2025).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div>
+              <h3>ロレックス（2024年の実績）</h3>
+              <div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(rolex2024).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div>
+              <h3>オメガ</h3>
+              <div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(omegaRecords).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div>
+              <h3>その他ブランド</h3>
+              <div class="table-scroll"><table class="record-table"><thead><tr><th>モデル・型番</th><th>状態</th><th>査定額</th><th>査定日</th><th>査定した業者</th></tr></thead><tbody>{recordTable(otherRecords).map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody></table></div>
+            </div>
+          </details>
+
+          <p class="notice">出典：ヒカカク！公式サイト「腕時計の売買価格相場・査定実績」 <a href={sourceRecordsUrl} target="_blank" rel="nofollow noreferrer">{sourceRecordsUrl}</a> 掲載の実績より抜粋。<br />※掲載金額は各査定日時点の事例です。現在の査定額を保証するものではありません。</p>
+        </div>
+      </section>
+
+      {/* 10｜ここが重要 */}
+      <section class="section section--yours" aria-labelledby="yours-title">
+        <div class="content">
+          <p class="eyebrow">ここが重要</p>
+          <h2 id="yours-title">この金額が、そのまま<br />「あなたの時計の査定額」<br />ではありません</h2>
+          <p class="lead">掲載している査定実績は、あくまで過去の事例です。同じモデル・同じ型番でも、次の要素によって金額は変わります。</p>
+          <ul class="chips">
+            <li>状態</li>
+            <li>傷や使用感</li>
+            <li>箱・保証書などの付属品</li>
+            <li>査定する時期</li>
+            <li>査定する業者</li>
+          </ul>
+          <div class="turn">
+            <p class="turn__deny">だから本当に知りたいのは、<br />「このモデルはいくら？」ではなく、</p>
+            <p class="turn__main">「自分が持っている、<br /><strong>この1本はいくら？」</strong></p>
+          </div>
+          <p class="lead">ネットに載っている相場を見るだけでは、自分の時計の査定額までは分かりません。</p>
+          <a class="cta" data-cta="yours" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">自分の時計はいくらか確認してみる <span aria-hidden="true">›</span></a>
+        </div>
+      </section>
+
+      {/* 11｜型番が分からなくても始められる＋流れ */}
+      <section class="section section--flow" aria-labelledby="flow-title">
+        <div class="content">
+          <p class="eyebrow">型番が分からなくても始められます</p>
+          <h2 id="flow-title">査定は2つの方法から</h2>
+          <ul class="entrances">
+            <li>
+              <svg class="entrances__icon" aria-hidden="true"><use href="#ic-input" /></svg>
+              <p class="entrances__label">型番・モデルが分かる</p>
+              <b>時計の情報を入力して査定</b>
+              <span>ブランド、型番、状態、付属品などを入力して進めます。</span>
+            </li>
+            <li>
+              <svg class="entrances__icon entrances__icon--alt" aria-hidden="true"><use href="#ic-camera" /></svg>
+              <p class="entrances__label">型番が分からない</p>
+              <b>写真からブランドを確認して始める</b>
+              <span>スマートフォンで時計を撮影して、ブランド確認から進める方法もあります。</span>
+            </li>
+          </ul>
+
+          <h3 class="subhead">流れはシンプルです</h3>
+          <ol class="steplist">
+            {steps.map((s, i) => (
+              <li>
+                <span class="steplist__no">STEP {i + 1}</span>
+                <svg class="steplist__icon" aria-hidden="true"><use href={"#" + s.icon} /></svg>
+                <b>{s.title}</b>
+                <span class="steplist__body">{s.body}</span>
+              </li>
+            ))}
+          </ol>
+          <p class="statement"><span class="statement__step">STEP 5</span>売るかどうかを決める<br /><strong>納得できなければ売らなくてOK。</strong></p>
+        </div>
+      </section>
+
+      {/* 12｜利用者の声 */}
+      <section class="section section--voices" aria-labelledby="voices-title">
+        <div class="content">
+          <p class="eyebrow">実際に利用した人の声</p>
+          <h2 id="voices-title">「比較できること」を<br />評価した声もあります</h2>
+          <ul class="voices">
+            {testimonials.map((t) => (
+              <li class="voice">
+                <img class="voice__avatar" src={t.avatar} width="160" height="160" loading="lazy" decoding="async" alt="" />
+                <div>
+                  <p class="voice__age">{t.age}</p>
+                  <blockquote class="voice__text">{t.quote}</blockquote>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p class="notice">出典：ヒカカク！公式サイト掲載の利用者の声<br />※個人の感想です。回答速度・査定額等を保証するものではありません。</p>
+        </div>
+      </section>
+
+      {/* 13｜よくある質問 */}
+      <section class="section section--faq" aria-labelledby="faq-title">
+        <div class="content">
+          <p class="eyebrow">よくある質問</p>
+          <h2 id="faq-title">気になるところを先に</h2>
+          <div class="faq-list">{faqs.map((item, i) => <details open={i === 0}><summary><span>Q</span>{item.q}</summary><div><b>A.</b><p>{item.a}</p></div></details>)}</div>
+          <p class="note-inline">個人情報の取り扱いは<a href={privacyUrl} target="_blank" rel="nofollow noreferrer">ヒカカク！プライバシーポリシー</a>をご確認ください。</p>
+        </div>
+      </section>
+
+      {/* 14｜キャンペーン。公式で実施中を確認できたときだけ showCampaign を true にする。 */}
+      {showCampaign && (
+        <section class="section section--campaign" aria-labelledby="campaign-title">
+          <div class="content">
+            <p class="eyebrow">キャンペーン</p>
+            <h2 id="campaign-title">査定後に売却まで進むなら、<br />キャンペーンも確認</h2>
+            <p class="lead">対象カテゴリーで買取が成立した場合に、デジタルギフトが進呈されるキャンペーンが実施されている場合があります。</p>
+            <p class="campaign__amount"><span>PayPay または Amazon のデジタルギフト</span><b>10,000<i>円分</i></b></p>
+            <a class="campaign__link" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">
+              <img src="/hikakaku-watch-old-rolex/img/campaign-bonus.webp" width="1200" height="300" loading="lazy" decoding="async" alt="買取ボーナスキャンペーン開催中。対象カテゴリーで買取が成立すると、対象者全員にPayPayまたはAmazonのデジタルギフト10,000円分をプレゼント。" />
+            </a>
+            <p class="campaign__terms">
+              ※査定を受けただけでは対象になりません。<br />
+              ※対象カテゴリー・期間・条件・進呈内容は、掲載時点の公式キャンペーンページをご確認ください。<br />
+              ※本キャンペーンは株式会社じげんによる提供です。<br />
+              ※Amazon、Amazon.co.jp およびそれらのロゴは Amazon.com, Inc. またはその関連会社の商標です。<br />
+              ※PayPayマネーライトは出金できません。
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* 15｜最終クロージング */}
+      <section class="section section--closing" aria-labelledby="closing-title">
+        <div class="content">
+          <p class="eyebrow">最後に</p>
+          <h2 id="closing-title">一番高く売れる店を、<br />最初から知っている<br />必要はありません。</h2>
+          <p class="lead">同じ時計でも、査定する業者によって金額は変わります。だから、いきなり一店舗に決める必要も、最初から売ると決める必要もありません。</p>
+          <ol class="closingflow">
+            <li>まず、複数社の査定額を見る。</li>
+            <li>金額と業者を比べる。</li>
+            <li>納得できれば売る。</li>
+            <li>納得できなければ、今回は売らない。</li>
+          </ol>
+          <p class="statement">それでいいと思います。<br /><strong>まずは、自分の時計が今いくらなのか確認する。</strong></p>
+          <a class="cta cta--closing" data-cta="closing" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">無料で査定額を比べてみる <span aria-hidden="true">›</span></a>
+          <ul class="hero__trust hero__trust--closing">
+            <li><svg aria-hidden="true"><use href="#ic-free" /></svg><span>利用無料</span></li>
+            <li><svg aria-hidden="true"><use href="#ic-quote" /></svg><span>査定だけでもOK</span></li>
+            <li><svg aria-hidden="true"><use href="#ic-shops" /></svg><span>最大20社へ<br />一括依頼</span></li>
+          </ul>
+          <p class="source-note">※査定を行う業者数は商品・地域・条件等によって異なります。<br />※査定額は時計のモデル・型番・状態・付属品・査定時期・買取業者等によって異なります。<br />※ヒカカク！は買取業者の査定・比較サービスであり、実際の買取は各買取業者との取引になります。</p>
+        </div>
+      </section>
+
+      </div>
+      <footer class="footer"><div class="content"><p class="footer__name">時計査定ナビ <b>PR</b></p><p>当サイトはアフィリエイトプログラムを利用した第三者メディアです。掲載内容は株式会社じげん（ZIGExN Co., Ltd.）の公式サイト掲載情報をもとに作成しています。実際のサービス内容・条件は公式サイトでご確認ください。</p></div></footer>
+    </main>
+    <!-- is:inline 必須。外すと Astro が type="module" でバンドルし、CORSヘッダの無い外部スクリプトの読み込みに失敗する。 -->
+    <script is:inline src="https://js.slvrbullet.com/pt.min.js"></script>
+  </body>
+</html>
