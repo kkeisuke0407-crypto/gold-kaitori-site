@@ -2484,10 +2484,10 @@ h2, h3,
 
 /* ---- ⑮ STEP図 ------------------------------------------------------------- */
 .ui-step { list-style: none; padding: 0; counter-reset: uistep; }
-.ui-step li { position: relative; margin: 0 0 .55em; padding: .75em .9em .8em 3.1em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; }
+.ui-step li { position: relative; margin: 0 0 .55em; padding: .75em .9em .8em 3.6em; border: 2px solid var(--rule); border-radius: 12px; background: #fff; }
 .ui-step li::before {
   counter-increment: uistep; content: "STEP" counter(uistep);
-  position: absolute; left: .6em; top: .8em; width: 2.05em; padding: .18em 0;
+  position: absolute; left: .6em; top: .8em; padding: .18em .4em; white-space: nowrap;
   border-radius: 6px; background: var(--sumi); color: #fff; text-align: center;
   font-family: var(--gothic); font-weight: 900; font-size: 9.5px; letter-spacing: .02em; line-height: 1.35;
 }
