@@ -1208,3 +1208,68 @@
   background: var(--hwc-line-dark);
   content: "";
 }
+
+/* ============================================================
+   本文の強調（4段階）
+
+     b       ネイビー太字   … 事実・条件・固有名詞
+     mark    黄マーカー     … 拾い読みでも拾ってほしい要点
+     strong  赤太字         … 主張・結論
+     u       赤の波線       … 一言だけ強く言い切るところ
+
+   同じ段落に2つ以上は置かない。全部を強調すると、どれも
+   強調に見えなくなるため。
+   ============================================================ */
+.watch-compare--rolex {
+  --r-marker: #ffe9a3;
+}
+
+.watch-compare--rolex .lead b,
+.watch-compare--rolex .callout p b,
+.watch-compare--rolex .deflist dd b,
+.watch-compare--rolex .note-inline b {
+  color: var(--hwc-navy);
+  font-weight: 900;
+}
+
+.watch-compare--rolex .lead mark,
+.watch-compare--rolex .callout p mark,
+.watch-compare--rolex .deflist dd mark,
+.watch-compare--rolex .bullets li mark {
+  padding: 0 2px;
+  color: var(--hwc-ink);
+  background: linear-gradient(
+    transparent 56%,
+    var(--r-marker) 56%,
+    var(--r-marker) 94%,
+    transparent 94%
+  );
+  font-weight: 800;
+}
+
+.watch-compare--rolex .lead strong,
+.watch-compare--rolex .callout p strong,
+.watch-compare--rolex .deflist dd strong {
+  color: var(--hwc-red-dark);
+  font-weight: 900;
+}
+
+.watch-compare--rolex .lead u,
+.watch-compare--rolex .callout p u {
+  color: var(--hwc-red-dark);
+  font-weight: 900;
+  text-decoration: underline wavy var(--hwc-red);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+}
+
+/* 読者の心の声。地の文と混ざらないよう一段落として見せる */
+.watch-compare--rolex .innervoice {
+  margin: 0 0 14px;
+  padding: 12px 15px;
+  border-left: 3px solid var(--hwc-line-dark);
+  color: var(--hwc-muted);
+  font-size: var(--r-lead);
+  font-style: normal;
+  line-height: 1.8;
+}
