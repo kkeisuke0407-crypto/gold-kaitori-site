@@ -59,15 +59,15 @@ const doubts = [
 
 // 査定額を決める要素：時計側と業者側に分けて示す
 const watchFactors = [
-  { icon: 'ic-ref', title: 'モデル・型番', body: '同じロレックスでも、モデルや型番が違えば評価は変わります。すでに生産が終わっているモデルも、型番ごとに見ていくことになります。' },
-  { icon: 'ic-cond', title: '時計の状態', body: '傷や使用感、いま動いているかどうか、修理に出した履歴。このあたりが見られます。' },
-  { icon: 'ic-box', title: '付属品', body: '箱・保証書・余りコマが残っているかどうかで、金額が動くことがあります。' },
+  { icon: 'ic-ref', title: 'モデル・型番', body: '同じロレックスでも、モデルや型番によって評価は変わります。' },
+  { icon: 'ic-cond', title: '時計の状態', body: '傷や使用感、今きちんと動いているかなどが確認されます。' },
+  { icon: 'ic-box', title: '付属品', body: '箱・保証書・余りコマが残っているかどうかで、査定額が変わる場合があります。' },
 ];
 const shopFactors = [
-  { icon: 'ic-stock', title: '在庫状況', body: 'そのモデルをいま探している店と、すでに何本も抱えている店。同じ時計でも見方が変わってきます。' },
-  { icon: 'ic-star', title: '得意ジャンル', body: 'ロレックスの売買に強い業者もあれば、アンティーク時計を専門にしている業者もいます。得意分野は会社ごとに違います。' },
-  { icon: 'ic-route', title: '販売ルート', body: '買い取った時計をどこで売るか。国内の店頭、海外向け、業者間の取引と、出口は業者ごとに違います。' },
-  { icon: 'ic-trend', title: '相場・タイミング', body: '為替や海外の需要しだいで、高級時計の相場そのものが動くこともあります。' },
+  { icon: 'ic-stock', title: '在庫状況', body: 'そのモデルを今探している店もあれば、すでに在庫を持っている店もあります。' },
+  { icon: 'ic-star', title: '得意な時計', body: 'ロレックスを得意とする業者もあれば、古い時計の販売に強い業者もあります。' },
+  { icon: 'ic-route', title: '販売先', body: '国内だけでなく、海外などに販売できる業者もあります。' },
+  { icon: 'ic-trend', title: '相場・タイミング', body: '為替や需要によって、時計の相場が動くこともあります。' },
 ];
 
 // 査定前に確認しておきたいこと
@@ -233,16 +233,46 @@ const faqs = [
         </div>
       </section>
 
-      <!-- 2. 不安に即答 -->
+      <!-- 2. 問題提起：1社では判断しにくい -->
       <section class="section section--doubt" aria-labelledby="doubt-title">
         <div class="content">
-          <p class="eyebrow">まず、よくある不安から</p>
-          <h2 id="doubt-title">「こんな古いロレックスでも売れるの？」</h2>
-          <p class="lead">下のような時計でも、査定対象になる場合があります。</p>
+          <p class="eyebrow">まず知っておきたいこと</p>
+          <h2 id="doubt-title">古いロレックスは、<br />1社だけでは値段を判断しにくい。</h2>
+          <p class="lead">「何年も使っていないし、もうそんなに値段はつかないだろう」</p>
+          <p class="lead">昔買ったロレックスを見て、そう思う人も多いと思います。でも、時計の値段は<b>古い・新しいだけで決まるわけではありません。</b></p>
+          <p class="lead">同じロレックスでも、モデルや型番が違えば評価は変わります。さらに、こうした違いでも査定額は変わります。</p>
+          <ul class="bullets">
+            <li>傷や使用感があるか</li>
+            <li>今きちんと動いているか</li>
+            <li>箱や保証書が残っているか</li>
+            <li>どの買取業者が査定するか</li>
+          </ul>
+
+          <h3 class="subhead">こんな時計も、自分だけで値段を決めない</h3>
           <ul class="chips">{doubts.map((d) => <li>{d}</li>)}</ul>
-          <p class="statement">「古いから安いだろう」と<br /><strong>自分だけで判断しないこと。</strong></p>
-          <p class="lead">ロレックスはモデル・型番・状態・付属品・査定する業者によって評価が変わります。知りたいのは一般的な相場ではなく、<b>自分の時計にいくらの値がつくのか</b>です。</p>
-          <p class="note-inline">※査定の可否・査定額は提携買取業者が時計の状態等を確認したうえで判断します。</p>
+          <p class="lead">こういう時計を見ると、<b>「古いから安いだろう」「この状態じゃ値段はつかないかも」</b>と思ってしまいがちです。でも、実際にいくらになるかは、<b>時計を見てもらわないと分かりません。</b></p>
+
+          <h3 class="subhead">そして大事なのが、「どこに査定を頼むか」です</h3>
+          <p class="lead">同じロレックスでも、買取業者によって得意なモデルや販売先、在庫の状況は違います。ある業者では「このくらいですね」という金額でも、別の業者ではそのモデルを探していて<b>もっと高い査定額が出ることもあります。</b></p>
+          <p class="bigquote"><span>つまり、最初の店で</span><b>「50万円です」</b><span>と言われても、</span></p>
+          <p class="lead">その50万円が高いのか安いのかは、<b>ほかの査定額を見ないと判断しにくい</b>ということです。</p>
+
+          <p class="statement">だから、古いロレックスほど<br /><strong>1社だけで決めない。</strong></p>
+          <ol class="orderflow">
+            <li>まず何社かに見てもらう。</li>
+            <li>届いた査定額を比べる。</li>
+            <li>「この金額なら売ってもいい」と思えたら売る。</li>
+            <li>納得できなければ、今回は売らない。</li>
+          </ol>
+          <p class="lead">その順番で大丈夫です。ヒカカク！なら、一度時計の情報を入力して、<b>最大20社へまとめて査定を依頼できます。</b></p>
+
+          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">古いロレックスの査定額を比べてみる <span aria-hidden="true">›</span></a>
+          <ul class="trust-list">
+            <li>利用無料</li>
+            <li>査定だけでもOK</li>
+            <li>最大20社へ一括依頼</li>
+          </ul>
+          <p class="note-inline">※査定を行う業者数は商品・地域・条件等によって異なります。<br />※査定の可否・査定額は時計の状態・型番・付属品・時期・買取業者等によって異なります。</p>
         </div>
       </section>
 
@@ -274,7 +304,8 @@ const faqs = [
         <div class="content">
           <p class="eyebrow">業者による違い</p>
           <h2 id="spread-title">同じ型番でも、<br />提示額はここまで変わります</h2>
-          <p class="lead">近所の1社で「60万円です」と言われたとして、その金額が高いのか安いのか。普段から相場を見ていなければ、判断は難しいはずです。</p>
+          <p class="lead">では、実際に同じ時計を複数の業者が見たらどうなるのでしょうか。たとえば最初の店で「60万円です」と言われても、その金額しか知らなければ、<b>高いのか安いのか判断できません。</b></p>
+          <p class="lead">実際の事例では、同じ型番でも業者によって提示額に差が出ています。</p>
 
           <figure class="spread">
             <div class="spread__head">
@@ -315,11 +346,11 @@ const faqs = [
       <section class="section section--why" aria-labelledby="why-title">
         <div class="content">
           <p class="eyebrow">査定額の決まり方</p>
-          <h2 id="why-title">査定額は、何で決まるのか</h2>
-          <p class="lead"><b>ネットで見かける「買取相場」は、あくまで目安です。</b><br />同じロレックスでも、型番や状態、付属品が違えば査定額は変わります。さらに、まったく同じ時計でも「どの業者が査定するか」で金額が変わることがあります。</p>
+          <h2 id="why-title">なぜ、同じロレックスでも<br />査定額が変わるのか？</h2>
+          <p class="lead"><b>ネットで見かける「買取相場」は、あくまで目安です。</b><br />実際の査定では、<b>「どんな時計なのか」</b>と、<b>「どの業者が見るのか」</b>。この両方で金額が変わります。</p>
 
           <div class="why-col">
-            <h3 class="why-head why-head--watch"><span>時計側</span>査定で見られる3つのポイント</h3>
+            <h3 class="why-head why-head--watch"><span>時計側</span>時計で見られる3つのポイント</h3>
             <dl class="deflist">
               {watchFactors.map((f) => (
                 <div>
@@ -350,7 +381,7 @@ const faqs = [
           </div>
 
           <div class="why-col">
-            <h3 class="why-head why-head--shop"><span>業者側</span>さらに、金額が変わる4つの理由</h3>
+            <h3 class="why-head why-head--shop"><span>業者側</span>さらに、査定する業者によっても金額は変わります</h3>
             <dl class="deflist">
               {shopFactors.map((f) => (
                 <div>
@@ -361,8 +392,9 @@ const faqs = [
             </dl>
           </div>
 
-          <p class="statement statement--quiet">時計の状態はすぐには変えられません。でも、<br /><strong>「どの業者に査定を頼むか」は選べます。</strong></p>
-          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">まとめて査定を依頼してみる <span aria-hidden="true">›</span></a>
+          <p class="statement">時計そのものは変えられなくても、<br /><strong>「何社に見てもらうか」は選べます。</strong></p>
+          <p class="lead">古いロレックスは、<b>どの業者が見るかによって評価が変わることがあります。</b>だから最初の1社だけで決めず、<b>いくつかの査定額を見てから判断する。</b>それが、一番分かりやすい方法です。</p>
+          <a class="cta" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額をまとめて確認する <span aria-hidden="true">›</span></a>
         </div>
       </section>
 

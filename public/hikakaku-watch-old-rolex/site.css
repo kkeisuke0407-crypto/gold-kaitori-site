@@ -1097,3 +1097,114 @@
   /* 基底の min-width:460px が横スクロールの原因。折り返せるので解除する */
   .watch-compare--rolex .opt-table { min-width: 0; }
 }
+
+/* ============================================================
+   FV直下「1社だけでは値段を判断しにくい」セクションの追加パーツ
+   ============================================================ */
+.watch-compare--rolex .subhead {
+  margin: 26px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--hwc-line);
+  color: var(--hwc-navy);
+  font-size: var(--r-h3);
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+/* 査定額を左右する条件の箇条書き */
+.watch-compare--rolex .bullets {
+  margin: 0 0 4px;
+  padding: 13px 15px;
+  border-left: 3px solid var(--hwc-gold);
+  border-radius: 0 var(--hwc-radius-small) var(--hwc-radius-small) 0;
+  background: var(--hwc-gold-pale);
+  list-style: none;
+}
+.watch-compare--rolex .bullets li {
+  position: relative;
+  padding: 5px 0 5px 18px;
+  color: var(--hwc-navy);
+  font-size: var(--r-body);
+  font-weight: 800;
+  line-height: 1.6;
+}
+.watch-compare--rolex .bullets li::before {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  color: var(--hwc-gold-dark);
+  content: "●";
+  font-size: 9px;
+  line-height: 1.9;
+}
+
+/* 「50万円です」＝最初の1社の提示額。ここを起点に比較の必要性へつなぐ */
+.watch-compare--rolex .bigquote {
+  margin: 18px 0;
+  padding: 16px;
+  border: 1px dashed var(--hwc-line-dark);
+  border-radius: var(--hwc-radius-small);
+  background: var(--hwc-paper);
+  text-align: center;
+}
+.watch-compare--rolex .bigquote span {
+  display: block;
+  color: var(--hwc-muted);
+  font-size: var(--r-note);
+  font-weight: 700;
+  line-height: 1.7;
+}
+.watch-compare--rolex .bigquote b {
+  display: block;
+  margin: 5px 0;
+  color: var(--hwc-navy);
+  font-family: var(--hwc-font-serif);
+  font-size: 27px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+@media (min-width: 720px) {
+  .watch-compare--rolex .bigquote b { font-size: 34px; }
+}
+
+/* 売るかどうかを決めるまでの順番 */
+.watch-compare--rolex .orderflow {
+  margin: 16px 0 14px;
+  padding: 0;
+  list-style: none;
+  counter-reset: of;
+}
+.watch-compare--rolex .orderflow li {
+  position: relative;
+  padding: 10px 0 10px 34px;
+  color: var(--hwc-ink);
+  font-size: var(--r-body);
+  font-weight: 700;
+  line-height: 1.6;
+}
+.watch-compare--rolex .orderflow li::before {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--hwc-navy);
+  color: var(--hwc-paper);
+  counter-increment: of;
+  content: counter(of);
+  font-size: 11px;
+  font-weight: 900;
+  place-items: center;
+}
+/* 順番のつながりを示す縦線 */
+.watch-compare--rolex .orderflow li:not(:last-child)::after {
+  position: absolute;
+  top: 34px;
+  left: 10px;
+  width: 2px;
+  height: calc(100% - 24px);
+  background: var(--hwc-line-dark);
+  content: "";
+}
