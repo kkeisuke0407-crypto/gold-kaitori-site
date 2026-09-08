@@ -173,19 +173,42 @@ const recordTable = (rows: string[][]) => rows;
         y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "wxnujpnscp");
     </script>
-    <!-- 中間CV（MCV）＝CTAクリックの計測。GA4イベントとして送る。 -->
+    <!-- 中間CV（MCV）＝アフィリエイトリンクのクリック計測。GA4へ1クリック1回だけ送る。 -->
     <script is:inline>
       (function(){
         var INTENT = "hikakaku_watch_satei_hikaku";
         document.addEventListener("click", function(e){
-          var a = e.target && e.target.closest ? e.target.closest("a.cta") : null;
-          if (!a) return;
-          if (typeof gtag !== "function") return;
+          var a = e.target && e.target.closest ? e.target.closest('a[href^="https://tr.slvrbullet.com/"]') : null;
+          if(!a) return;
+          if(typeof gtag !== "function") return;
+          // クリック位置。data-cta があればそれを、無ければ包含セクションから導出する。
+          var img = a.querySelector("img");
+          var pos = a.getAttribute("data-cta");
+          if(!pos){
+            var sec = a.closest("section");
+            if(sec){
+              var m = String(sec.className || "").match(/section--([\w-]+)/);
+              // /story/ のようにセクションへ id も section-- も付いていないページ向けに、
+              // 最後の手段として aria-labelledby（"xxx-title"）から名前を取る。
+              var al = (sec.getAttribute("aria-labelledby") || "").replace(/-title$/, "");
+              pos = sec.id || (m && m[1]) || (/\bhero\b/.test(sec.className) ? "hero" : "") || al;
+            }
+          }
+          // window.dataLayer.push({event:...}) は併用しない。gtag が同じ dataLayer に
+          // 積むため、GTM を導入した時点で同一クリックが二重計上される。
           gtag("event", "hikakaku_watch_mcv", {
             landing_intent: INTENT,
-            cta_position: a.getAttribute("data-cta") || "unknown",
-            link_url: a.href
+            cta_position: pos || "unknown",
+            // 画像だけのリンク（キャンペーンバナー）は textContent が改行だけになる。
+            // trim してから候補を切り替えないと alt に到達しない。
+            cta_label: ((a.getAttribute("aria-label") || "").trim()
+              || (a.textContent || "").trim()
+              || (img && img.getAttribute("alt") || "").trim()).slice(0, 60),
+            link_url: a.getAttribute("href"),
+            transport_type: "beacon"
           });
+          // ★Google広告のイベントスニペット（CV-B）が届いたらここに追加：
+          // gtag("event", "conversion", { send_to: "AW-18129603657/XXXXXXXX" });
         }, true);
       })();
     </script>
