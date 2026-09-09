@@ -1,0 +1,254 @@
+---
+/* 3shaシリーズ共通レイアウト。
+   head / FV / PR表記 / 共通部 / 計測タグ をここ1箇所に集約している。
+   各LPは KW専用部（<slot />）とデータだけを書く。 */
+import Sha3Common from "../components/Sha3Common.astro";
+import { FAQ_DEFAULT, type Faq } from "../data/sha3/faq";
+
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+  eyebrow: string;          /* 読み上げ用の一言（visually-hidden） */
+  h1: string;
+  fv: string;               /* /sha3/images/ 配下のファイル名 */
+  fvAlt: string;
+  fvW?: number;
+  fvH?: number;
+  landing: string;          /* landing_intent。LPごとに必ず変える */
+  faq?: Faq[];
+  compareLabel?: string;
+  dateBadge?: "left" | "right";  /* FV画像の左上にラベルがある場合は right */
+}
+
+const {
+  slug, title, description, ogTitle, ogDescription, eyebrow, h1,
+  fv, fvAlt, fvW = 1200, fvH = 675, landing,
+  faq = FAQ_DEFAULT,
+  compareLabel = "金・貴金属の高価買取業者 おすすめランキングTOP3",
+  dateBadge = "left",
+} = Astro.props;
+
+const BASE = "https://kaitori.hakobu-family.com";
+const url = `${BASE}/${slug}/`;
+const ogImage = `${BASE}/sha3/images/${fv}`;
+
+/* 構造化データは本文と同じ faq から作る。手で二重管理しない。 */
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={url}>
+<meta property="og:type" content="article">
+<meta property="og:title" content={ogTitle}>
+<meta property="og:description" content={ogDescription}>
+<meta property="og:url" content={url}>
+<meta property="og:image" content={ogImage}>
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/sha3/style.css?v=20260903">
+<!-- Google tag (gtag.js)：LP3系と同一のGA4 + Google広告CV計測 -->
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DMCWVLP3E3"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date()); gtag('config', 'G-DMCWVLP3E3'); gtag('config', 'AW-18129603657');
+</script>
+
+<!-- Microsoft Clarity：LP3系と同一プロジェクト（ヒートマップ・セッション録画） -->
+<script is:inline>
+  (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){ (c[a].q=c[a].q||[]).push(arguments); };
+    t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "wxnujpnscp");
+</script>
+<script type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ============ FV ============ -->
+  <div class:list={["kin-fv", "kin-fv--visual", dateBadge === "right" && "kin-fv--date-right"]}>
+    <p class="visually-hidden">{eyebrow}</p>
+    <h1 class="visually-hidden">{h1}</h1>
+
+    <figure class="kin-fv__visual">
+      <img src={`/sha3/images/${fv}`} alt={fvAlt} width={fvW} height={fvH} fetchpriority="high">
+      <p class="kin-fv__date" id="kin-fv-date">9月4日最新</p>
+    </figure>
+    <script is:inline>
+    /* 日付は毎日そのまま最新になるようクライアント側で書き換える。
+       JSが動かない環境ではビルド時点の日付（上のHTML）がそのまま出る。 */
+    (function () {
+      var el = document.getElementById('kin-fv-date');
+      if (!el) return;
+      var d = new Date();
+      el.textContent = (d.getMonth() + 1) + '月' + d.getDate() + '日最新';
+    })();
+    </script>
+  </div>
+
+  <div class="entry-content">
+
+    <p class="kin-banner-label kin-banner-label--campaign">PR</p>
+
+    <slot />
+
+    <Sha3Common faq={faq} compareLabel={compareLabel} />
+
+  </div>
+</div>
+
+<script is:inline>
+/* キャンペーンは「当月1日〜当月末日」。JST基準で毎月自動更新する。
+   台本の「9月30日まで」を固定文字にせず、月末日をここで書き込む。 */
+(function () {
+  var jst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  var y = jst.getFullYear(), m = jst.getMonth();
+  var end = new Date(y, m + 1, 0); // 当月末日
+  var md = function (dt) { return (dt.getMonth() + 1) + '月' + dt.getDate() + '日'; };
+  var days = Math.max(0, Math.ceil((new Date(y, m + 1, 0, 23, 59, 59) - jst) / 86400000));
+  var range = md(end) + 'まで' + (days > 0 ? '｜あと' + days + '日' : '｜本日まで');
+
+  ['kin-camp-range', 'kin-camp-range2'].forEach(function (id) {
+    var el = document.getElementById(id); if (el) el.textContent = range;
+  });
+  ['kin-camp-end', 'kin-camp-end2'].forEach(function (id) {
+    var el = document.getElementById(id); if (el) el.textContent = md(end);
+  });
+  var today = document.getElementById('kin-today');
+  if (today) today.textContent = y + '年' + (m + 1) + '月' + jst.getDate() + '日';
+}());
+</script>
+
+<script is:inline>
+/* 本日の金相場を /rates.json（毎日自動更新）から読み込んで表示する */
+(function () {
+  var el = function (id) { return document.getElementById(id); };
+  if (!el('kin-rate-val')) return;
+  function yen(n) { return n.toLocaleString('ja-JP'); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  fetch('/rates.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      el('kin-rate-val').textContent = yen(d.k24);
+      var diff = el('kin-rate-diff');
+      if (typeof d.goldDiff === 'number') {
+        var up = d.goldDiff > 0;
+        diff.textContent = '（前日比' + (d.goldDiff === 0 ? '±0円' : (up ? '+' : '−') + yen(Math.abs(d.goldDiff)) + '円') + '）';
+        diff.className = 'ui-rate__diff ' + (d.goldDiff === 0 ? '' : up ? 'ui-rate__diff--up' : 'ui-rate__diff--down');
+      }
+      // ピーク比較（過去最高値は 2026年3月の 29,969円/g で固定。本日値は自動）
+      var PEAK = 29969;
+      if (el('kin-peak-now')) {
+        el('kin-peak-now').textContent = yen(d.k24);
+        el('kin-peak-date').textContent = d.updatedAt || '';
+        var gap = PEAK - d.k24;
+        el('kin-peak-diff').textContent = (gap > 0 ? '−' : '+') + yen(Math.abs(gap)) + '円';
+        el('kin-peak-50').textContent = (gap > 0 ? '−' : '+') + yen(Math.abs(gap) * 50) + '円';
+      }
+      var jst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+      el('kin-rate-upd').textContent = jst.getFullYear() + '/' + pad(jst.getMonth() + 1) + '/' + pad(jst.getDate())
+        + ' ' + pad(jst.getHours()) + ':' + pad(jst.getMinutes());
+    })
+        .catch(function () {
+      var v = el('kin-rate-val');
+      v.textContent = '公式サイトでご確認ください';
+      v.classList.add('ui-rate__v--fallback');
+    });
+}());
+</script>
+
+<!-- CV計測：LP3系と同一のイベント体系
+     ★対象はリンク先ホストで決める。class の付け忘れ・改名で計測が消えないようにするため。
+     ★3社なので提携先テーブルで管理する。社を増やすときはここに1行足すだけ。 -->
+<script is:inline define:vars={{ SHA3_LANDING: landing }}>
+(function(){
+  var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+  var LANDING = SHA3_LANDING;
+
+  // 遷移先ホスト → 役割。上から順に判定する
+  var PARTNERS = [
+    { re: /ad-fam\.com/,       key: "manekiya",    cv: "gold_kaitori_affiliate_click" }, // 成果
+    { re: /otakaraya\.jp/,     key: "otakaraya",   cv: "gold_kaitori_other_click" },
+    { re: /brandrevalue\.com/, key: "brandrevalue", cv: "gold_kaitori_other_click" }
+  ];
+  // 成果が付かない公式直リンク。CVには数えず source_click で流出量だけ見る
+  var OFFICIAL = /manekiya\.shop/;
+  // 出典・根拠として置いているリンクもCVに数えない
+  var SOURCE_SEL = ".cmp9-ref, [data-noct], .kin-quote-check__sources, .kin-ota-sources," +
+                   " .kin-note, .kin-area__note, .kin-calc__src, .kin-media__cap, .kin-disclaimer";
+
+  function track(name, params){
+    try{
+      if(window.dataLayer) window.dataLayer.push(Object.assign({event:name}, params||{}));
+      if(typeof gtag==="function") gtag("event", name, Object.assign({}, params||{}, { transport_type:"beacon" }));
+    }catch(_){}
+  }
+  // 着地URLのクエリ（utm_/gclid 等）をCTAへ転送し、タグ発火の取りこぼしを減らす
+  function fwd(raw){
+    if(!raw || raw.charAt(0)==="#") return raw;
+    try{
+      var u=new URL(raw, location.href);
+      new URLSearchParams(location.search).forEach(function(v,k){ if(KEEP.test(k)&&!u.searchParams.has(k)) u.searchParams.set(k,v); });
+      return u.toString();
+    }catch(_){ return raw; }
+  }
+  function partnerOf(href){
+    for(var i=0;i<PARTNERS.length;i++){ if(PARTNERS[i].re.test(href)) return PARTNERS[i]; }
+    return null;
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function(el){
+    var href = el.getAttribute("href") || "";
+    var p = partnerOf(href);
+    var official = OFFICIAL.test(href);
+    if(!p && !official) return;
+
+    var cls = (el.className || "").toString();
+    var key = p ? p.key : "manekiya";
+    var ctaType = /kin-phone|kin-fixed-tel/.test(cls) ? "phone" : "web";
+    var isSource = official || !!(el.closest && el.closest(SOURCE_SEL));
+    var role = isSource ? "source" : "cta";
+    var url = fwd(href);
+    if(url) el.setAttribute("href", url);
+
+    el.addEventListener("click", function(){
+      if(el.__ctaBusy) return;            // 連打による二重CVを防止（遷移は既定動作に委ねる）
+      el.__ctaBusy = true; setTimeout(function(){ el.__ctaBusy = false; }, 1200);
+      var params = { affiliate_key:key, cta_type:ctaType, link_role:role, landing_intent:LANDING, link_url:url };
+      if(role === "source"){
+        if(typeof gtag==="function") gtag("event", "gold_kaitori_source_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
+        return;
+      }
+      // GTM併用時の保険としてdataLayerにも積む
+      if(window.dataLayer) window.dataLayer.push(Object.assign({event:p.cv}, params));
+      // 主CV（まねきや＝成果／その他＝非成果）
+      if(typeof gtag==="function") gtag("event", p.cv, Object.assign({}, params, { transport_type:"beacon" }));
+      // GA4限定：電話/WEB別の質イベント
+      if(typeof gtag==="function") gtag("event", "gold_kaitori_"+ctaType+"_click", Object.assign({}, params, { send_to:"G-DMCWVLP3E3", transport_type:"beacon" }));
+    });
+  });
+  track("gold_kaitori_landing_intent", { landing_intent:LANDING });
+  track(LANDING + "_open", { landing_intent:LANDING });
+})();
+</script>
+
+
+</body>
+</html>
