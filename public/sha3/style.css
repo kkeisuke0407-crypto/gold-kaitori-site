@@ -3095,6 +3095,6 @@ h2, h3,
   .ui-rk__grid--head .ui-rk__crown { width: 28px; height: 23px; }
 }
 
-/* ずらしKW用FV：画像の左上に「保存版」ラベルが入っているため、日付バッジは右上へ。
-   （3sha系の金FVは左上のままなので、このページ側でだけ上書きする） */
-.kin-fv--visual .kin-fv__date { left: auto; right: 3%; }
+/* FV画像の左上に「保存版」等のラベルが入るLPは、日付バッジを右上へ逃がす。
+   レイアウトの dateBadge="right" でこのクラスが付く。 */
+.kin-fv--date-right .kin-fv__date { left: auto; right: 3%; }
