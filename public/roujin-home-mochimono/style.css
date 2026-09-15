@@ -3132,3 +3132,9 @@ body.sk-has-sticky { padding-bottom: 76px; }
 .sk-chips li { margin: 0; padding: .32em .75em; background: #fff; border: 1.5px solid var(--rule); border-radius: 999px; font-size: 14px; font-weight: 700; line-height: 1.45; color: var(--sumi); word-break: normal; overflow-wrap: break-word; }
 .sk-chips--mono li { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; letter-spacing: .04em; }
 @media screen and (max-width: 339px) { .sk-groups { grid-template-columns: 1fr; } }
+.sk-btn { position: relative; overflow: hidden; display: block; max-width: 460px; margin: 0 auto; padding: 1em 1.1em; background: linear-gradient(180deg, #e8342f 0%, #d1221d 100%); border-bottom: 4px solid #a3140f; text-align: center; text-decoration: none !important; color: #fff !important; font-family: var(--gothic); }
+.sk-btn:hover, .sk-btn:focus { background: #c71f1a; color: #fff !important; }
+.sk-btn::after { content: ""; position: absolute; top: -30%; left: -65%; width: 35%; height: 160%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent); transform: skewX(-18deg); pointer-events: none; animation: kinCtaShine 3.2s ease-in-out infinite; }
+.sk-btn__brand { display: block; margin-bottom: .22em; color: #ffe0dd; font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+.sk-btn__label { display: block; font-size: clamp(19px, 5.3vw, 25px); font-weight: 700; line-height: 1.35; letter-spacing: .02em; text-wrap: balance; word-break: normal; overflow-wrap: break-word; }
+.sk-btn__sub { display: block; margin-top: .35em; color: #ffe0dd; font-size: 12.5px; line-height: 1.55; word-break: normal; overflow-wrap: break-word; }
