@@ -1,0 +1,452 @@
+/* ============================================================
+   /hikakaku-watch/ikkatsu-satei/ 専用スタイル
+
+   ベースは型番LPと同じ story の3ファイル（site / visual-test /
+   search-model）。共有ファイルなので、ここでの指定はすべて
+   .watch-story--ikkatsu 配下に閉じ込め、型番LPには影響させない。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   SECTION 1｜FV
+   型番LPの h1 は「ブランド／型番＋問い」の2段構成を前提にしている。
+   このLPは問いだけの見出しなので、サイズと行間を組み直す。
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .hero__kicker {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 4px 11px;
+  border-radius: var(--story-radius-pill);
+  background: var(--story-navy-strong);
+  color: var(--story-surface);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.watch-story--ikkatsu .hero--ikkatsu h1 {
+  margin-bottom: 14px;
+  color: var(--story-navy-strong);
+  font-size: 31px;
+  letter-spacing: -0.04em;
+  line-height: 1.4;
+}
+.watch-story--ikkatsu .hero--ikkatsu h1 strong {
+  display: block;
+  color: var(--story-red);
+}
+.watch-story--ikkatsu .hero--ikkatsu .hero__lead {
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.watch-story--ikkatsu .hero--ikkatsu .hero__message {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+.watch-story--ikkatsu .hero--ikkatsu .hero__message span {
+  color: var(--story-red);
+}
+.watch-story--ikkatsu .hero__point {
+  margin: 0 0 14px;
+  padding: 9px 12px;
+  border-left: 3px solid var(--story-gold);
+  background: rgb(255 255 255 / 72%);
+  color: var(--story-ink);
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+.watch-story--ikkatsu .hero__point b {
+  display: block;
+  color: var(--story-navy-strong);
+  font-size: 13.5px;
+  font-weight: 900;
+}
+.watch-story--ikkatsu .hero__checks,
+.watch-story--ikkatsu .closing__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-story--ikkatsu .hero__checks li,
+.watch-story--ikkatsu .closing__checks li {
+  padding: 4px 10px;
+  border: 1px solid var(--story-gold);
+  border-radius: var(--story-radius-pill);
+  background: var(--story-surface);
+  color: var(--story-navy-strong);
+  font-size: 11.5px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.watch-story--ikkatsu .hero__checks li::before,
+.watch-story--ikkatsu .closing__checks li::before {
+  margin-right: 4px;
+  color: var(--story-gold);
+  content: "✓";
+}
+.watch-story--ikkatsu .hero__note {
+  margin: 8px 0 0;
+  color: var(--story-muted);
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .hero--ikkatsu h1 { font-size: 40px; }
+  .watch-story--ikkatsu .hero--ikkatsu .hero__lead { font-size: 15px; }
+  .watch-story--ikkatsu .hero--ikkatsu .hero__message { font-size: 20px; }
+}
+
+/* ------------------------------------------------------------
+   共通：セクション内の小見出し・言い換え行
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .section-kicker {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 3px 10px;
+  border-radius: var(--story-radius-pill);
+  background: var(--story-red);
+  color: var(--story-surface);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+/* 「AではなくB」を一段大きく置く締めの一文 */
+.watch-story--ikkatsu .turn-line {
+  margin: var(--story-space-lg) 0 0;
+  padding: 16px;
+  border: 2px solid var(--story-navy-strong);
+  border-radius: var(--story-radius-md);
+  background: var(--story-surface);
+  text-align: center;
+}
+.watch-story--ikkatsu .turn-line span {
+  display: block;
+  color: var(--story-ink-soft);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+.watch-story--ikkatsu .turn-line strong {
+  display: block;
+  margin: 4px 0;
+  color: var(--story-navy-strong);
+  font-family: var(--story-font-display);
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.55;
+}
+.watch-story--ikkatsu .turn-line--middle strong { color: var(--story-red); }
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .turn-line strong { font-size: 23px; }
+}
+
+/* 共感セクションのチェックは文が長いので1列にする */
+.watch-story--ikkatsu .story-section--empathy .check-list {
+  grid-template-columns: minmax(0, 1fr);
+  margin-bottom: var(--story-space-md);
+}
+.watch-story--ikkatsu .story-section--empathy .check-list li { font-size: 14px; }
+
+/* ------------------------------------------------------------
+   SECTION 2｜買取店へ直接 × 一括査定 の比較表
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .method-compare {
+  margin: var(--story-space-md) 0;
+  overflow-x: auto;
+  border: 1px solid var(--story-line-dark);
+  border-radius: var(--story-radius-md);
+  background: var(--story-surface);
+}
+.watch-story--ikkatsu .method-compare table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: fixed;
+}
+.watch-story--ikkatsu .method-compare th,
+.watch-story--ikkatsu .method-compare td {
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--story-line);
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+}
+.watch-story--ikkatsu .method-compare thead th {
+  background: var(--story-navy);
+  color: var(--story-surface);
+  font-size: 13px;
+  font-weight: 900;
+}
+.watch-story--ikkatsu .method-compare thead th:first-child { width: 27%; background: var(--story-paper-deep); }
+.watch-story--ikkatsu .method-compare thead th.is-bulk { background: var(--story-red); }
+.watch-story--ikkatsu .method-compare tbody th {
+  background: var(--story-paper);
+  color: var(--story-navy-strong);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: left;
+}
+.watch-story--ikkatsu .method-compare td.is-bulk {
+  background: var(--story-red-pale);
+  color: var(--story-red-deep);
+  font-weight: 900;
+}
+.watch-story--ikkatsu .method-compare tbody tr:last-child > * { border-bottom: 0; }
+
+.watch-story--ikkatsu .verdict-box {
+  margin: 0 0 var(--story-space-sm);
+  padding: 14px 16px;
+  border-left: 4px solid var(--story-red);
+  border-radius: 0 var(--story-radius-sm) var(--story-radius-sm) 0;
+  background: var(--story-surface);
+}
+.watch-story--ikkatsu .verdict-box p { margin: 0; font-size: 14px; line-height: 1.85; }
+.watch-story--ikkatsu .verdict-box p + p { margin-top: 6px; }
+
+/* ------------------------------------------------------------
+   SECTION 5｜POINT
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .point-box {
+  margin: var(--story-space-md) 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--story-gold);
+  border-radius: var(--story-radius-md);
+  background: var(--story-gold-pale);
+}
+.watch-story--ikkatsu .point-box__label {
+  margin: 0 0 8px;
+  color: var(--story-gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+.watch-story--ikkatsu .point-box__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-story--ikkatsu .point-box__list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--story-navy-strong);
+  font-size: 15px;
+  font-weight: 900;
+}
+.watch-story--ikkatsu .point-box__list li span {
+  display: grid;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--story-navy-strong);
+  color: var(--story-surface);
+  font-size: 12px;
+  place-items: center;
+}
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .point-box__list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ------------------------------------------------------------
+   SECTION 6｜A店→B店→C店
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .store-route {
+  display: grid;
+  gap: 18px;
+  margin: var(--story-space-sm) 0 var(--story-space-md);
+  padding: 0;
+  list-style: none;
+}
+.watch-story--ikkatsu .store-route li {
+  position: relative;
+  padding: 10px 14px;
+  border: 1px solid var(--story-line-dark);
+  border-radius: var(--story-radius-sm);
+  background: var(--story-surface);
+  font-size: 14px;
+  font-weight: 700;
+}
+.watch-story--ikkatsu .store-route li b {
+  margin-right: 6px;
+  color: var(--story-navy-strong);
+  font-size: 16px;
+  font-weight: 900;
+}
+.watch-story--ikkatsu .store-route li:not(:last-child)::after {
+  position: absolute;
+  bottom: -17px;
+  left: 50%;
+  color: var(--story-gold);
+  content: "▼";
+  font-size: 11px;
+  line-height: 1;
+  transform: translateX(-50%);
+}
+.watch-story--ikkatsu .store-route__end {
+  border-color: var(--story-navy-strong);
+  background: var(--story-navy-pale);
+}
+.watch-story--ikkatsu .store-route__end b { margin: 0 0 0 6px; }
+
+/* ------------------------------------------------------------
+   SECTION 8｜あなたなら、どっち？
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .chooser {
+  display: grid;
+  gap: 12px;
+  margin-top: var(--story-space-md);
+}
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .chooser { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.watch-story--ikkatsu .chooser__card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid var(--story-line-dark);
+  border-radius: var(--story-radius-md);
+  background: var(--story-surface);
+}
+.watch-story--ikkatsu .chooser__card--bulk {
+  border: 2px solid var(--story-red);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 8%);
+}
+.watch-story--ikkatsu .chooser__title {
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--story-line);
+  color: var(--story-navy-strong);
+  font-size: 16px;
+  font-weight: 900;
+}
+.watch-story--ikkatsu .chooser__card--bulk .chooser__title { color: var(--story-red); }
+.watch-story--ikkatsu .chooser ul { flex: 1; margin: 0; padding: 0; list-style: none; }
+.watch-story--ikkatsu .chooser li {
+  position: relative;
+  padding: 5px 0 5px 22px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+.watch-story--ikkatsu .chooser li::before {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  color: var(--story-navy);
+  content: "☑";
+}
+.watch-story--ikkatsu .chooser__card--bulk li::before { color: var(--story-red); }
+.watch-story--ikkatsu .chooser__result {
+  margin: 12px 0 0;
+  color: var(--story-navy-strong);
+  font-size: 14px;
+  font-weight: 900;
+}
+.watch-story--ikkatsu .chooser__cta { width: 100%; margin-top: 14px; }
+
+/* ------------------------------------------------------------
+   SECTION 9｜3ステップ（説明文が長いので、狭い幅では縦積み）
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .steps--three { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.watch-story--ikkatsu .steps--three .step {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 2px 12px;
+  align-items: center;
+  padding: 12px 14px;
+  text-align: left;
+}
+.watch-story--ikkatsu .steps--three .step::after { display: none; }
+.watch-story--ikkatsu .steps--three .step .step-number {
+  grid-row: span 2;
+  position: static;
+  margin: 0;
+  transform: none;
+}
+.watch-story--ikkatsu .steps--three .step b { font-size: 15px; }
+.watch-story--ikkatsu .steps--three .step span:not(.step-number) {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+@media (min-width: 720px) {
+  .watch-story--ikkatsu .steps--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .watch-story--ikkatsu .steps--three .step { grid-template-columns: minmax(0, 1fr); text-align: center; }
+  .watch-story--ikkatsu .steps--three .step .step-number { grid-row: auto; margin: 0 auto 6px; }
+}
+
+/* ------------------------------------------------------------
+   SECTION 10｜ブランド
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .brand-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: var(--story-space-md) 0 var(--story-space-sm);
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .brand-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.watch-story--ikkatsu .brand-grid li {
+  padding: 12px 8px;
+  border: 1px solid var(--story-line-dark);
+  border-radius: var(--story-radius-sm);
+  background: var(--story-surface);
+  color: var(--story-navy-strong);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+/* ?brand= で指定されたブランドは先頭に移動して強調する */
+.watch-story--ikkatsu .brand-grid li.is-current {
+  border: 2px solid var(--story-red);
+  background: var(--story-red-pale);
+  color: var(--story-red-deep);
+}
+.watch-story--ikkatsu .brand-grid__other {
+  grid-column: 1 / -1;
+  color: var(--story-muted) !important;
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+}
+
+/* ------------------------------------------------------------
+   SECTION 12｜最終CTA
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .closing__checks {
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+}
+
+/* ------------------------------------------------------------
+   型番LPから継承したスタイルの打ち消し
+   ------------------------------------------------------------ */
+/* 型番LPは見出しの金色バー（幅4px）に章番号 "01" を content で入れている。
+   このLPは章番号を使わないので、数字がバーからはみ出して記号のように見える。
+   バーは残して数字だけ消す。セレクタは継承元と同じ詳細度にして後勝ちさせる。 */
+.watch-story--ikkatsu .story-section:not(.story-section--dense) > .section-heading::before {
+  content: "";
+}
+
+/* .story-cta span は末尾の「›」用に 19px へ拡大される。
+   ブランド名を差し込む span まで巨大化しないよう、ボタン本文の大きさに戻す。 */
+.watch-story--ikkatsu .story-cta [data-brand-label] {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* .story-cta は flex＋gap のため、ブランド名の span と後続テキストが
+   別アイテム扱いになり「時計　の査定額」と隙間が空く。1要素にまとめる。 */
+.watch-story--ikkatsu .story-cta .cta-text {
+  font-style: normal;
+  font-weight: inherit;
+}
