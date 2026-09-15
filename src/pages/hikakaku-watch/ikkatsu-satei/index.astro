@@ -8,6 +8,20 @@
 // ページ末尾の引き継ぎタグが gclid 等をこのURLへ引き継ぐ。直リンクに変えると成果が広告へ連携されない。
 const affiliateUrl = 'https://tr.slvrbullet.com/cl/w0000678724/47671/39865/6';
 const canonicalUrl = 'https://kaitori.hakobu-family.com/hikakaku-watch/ikkatsu-satei/';
+// 査定事例の出典（ヒカカク！公式 腕時計の一括査定ページ）
+const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
+
+// 同じ時計で査定額が分かれた実例。/compare/ と /old-rolex/ で出典付き掲載中のデータと同一。
+// 金額は変えないこと（架空の数字は載せない）。bar は最高額を100%とした棒の長さ。
+const evidenceCase = {
+  model: 'ROLEX サブマリーナ デイト 16610',
+  rows: [
+    { label: 'A社', yen: '85万円', bar: 100, best: true },
+    { label: 'B社', yen: '75万円', bar: 88, best: false },
+    { label: 'C社', yen: '59万円', bar: 69, best: false },
+  ],
+  gap: '26万円',
+};
 
 // ?brand= に使える値。URLから任意の文字列を表示させないため、必ずこの表に通す。
 // label は本文に差し込む日本語表記、grid は「こんな時計も査定対象」の表示名。
@@ -123,7 +137,7 @@ const faqItems = [
           <p class="hero__lead">1店舗だけで決めるのはちょっと不安。<br />でも、買取店を3店も4店も回って、そのたびに査定を待つのは正直めんどうです。</p>
           <p class="hero__message">一括査定で<br /><span>「比べてから売る」</span><br />という方法があります。</p>
           <p class="hero__point"><b>一度の申込みで複数社へ査定依頼</b>査定額を確認してから、売るかどうかを決められます。</p>
-          <a class="story-cta story-cta--hero" data-cta="hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer"><em class="cta-text"><span data-brand-label>時計</span>の査定額を無料で比較する</em> <span aria-hidden="true">›</span></a>
+          <a class="story-cta story-cta--hero" data-cta="hero" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
           <ul class="hero__checks">
             <li>最大20社へ査定依頼可能</li>
             <li>査定額に納得できなければ売却しなくてもOK</li>
@@ -156,12 +170,13 @@ const faqItems = [
           <p><strong class="neutral-strong">今日すぐ近くのお店で売りたいなら、直接買取でもOK。</strong></p>
           <p>でも、<span class="mark">「何店舗も回りたくない」</span>その一方で、<span class="mark">「最初の1店舗だけで決めるのも不安」</span>という人には、<strong>一括査定が向いています。</strong></p>
         </div>
-        <a class="story-cta" data-cta="conclusion" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額をまとめて確認する <span aria-hidden="true">›</span></a>
+        <a class="story-cta" data-cta="conclusion" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
       </section>
 
       {/* SECTION 3｜共感 */}
       <section class="story-section story-section--empathy" aria-labelledby="empathy-title">
         <h2 class="section-heading" id="empathy-title">こんな時計、<br />家に眠っていませんか？</h2>
+        <figure class="wide-visual"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/watch-accessories.webp" width="960" height="960" alt="箱や付属品と一緒にしまわれている腕時計のイメージ" /></figure>
         <ul class="check-list">
           <li>昔買ったけど、最近ほとんど使っていない</li>
           <li>プレゼントでもらったけど、今は着けていない</li>
@@ -192,6 +207,17 @@ const faqItems = [
         <div class="quote-panel">
           <p>そのため、<strong>同じ時計でも買取店によって査定額が変わることがあります。</strong></p>
         </div>
+        <figure class="evidence" aria-label="同じ時計で査定額が分かれた実際の事例">
+          <figcaption class="evidence__head"><span>実際の査定事例</span><b>{evidenceCase.model}</b></figcaption>
+          <ul class="evidence__rows">
+            {evidenceCase.rows.map((r) => (
+              <li class:list={[r.best && 'is-best']}><span class="evidence__label">{r.label}</span><span class="evidence__bar" style={`--w:${r.bar}%`}><b>{r.yen}</b></span></li>
+            ))}
+          </ul>
+          <p class="evidence__gap"><span>同じ時計でも</span><strong>{evidenceCase.gap}</strong><span>の差</span></p>
+          <p class="evidence__so">だから、<b>比較してから決める意味があります。</b></p>
+        </figure>
+        <p class="story-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※過去の査定事例であり、現在の査定相場を示すものではありません。現在の査定額を保証するものでもありません。</p>
         <div class="story-copy">
           <p>高く売りたいなら、複数店舗で査定してもらう方法があります。ただし問題は、<span class="mark">そのために何店舗も回るのが面倒なこと。</span></p>
         </div>
@@ -201,7 +227,9 @@ const faqItems = [
       {/* SECTION 5｜一括査定とは */}
       <section class="story-section story-section--service" aria-labelledby="service-title">
         <h2 class="section-heading" id="service-title">店舗を何軒も回る前に、<br />まず査定額を比べてみる</h2>
-        <div class="story-copy">
+        <p class="service-logo"><img src="/hikakaku-watch-ikkatsu/img/hikakaku-logo.webp" width="350" height="100" loading="lazy" decoding="async" alt="ヒカカク！ 買取価格を比較するなら" /><span>最大20社の査定額をまとめて比較できるサービス</span></p>
+        <div class="story-copy with-visual--wrap">
+          <figure class="visual-card visual-card--flat visual-card--dealers"><img loading="lazy" decoding="async" src="/hikakaku-watch-ikkatsu/img/multi-dealers.webp" width="558" height="605" alt="複数の買取業者へまとめて査定を依頼するイメージ" /></figure>
           <p>ヒカカク！では、時計の情報を入力して査定を申し込むことで、<span class="mark">最大20社へ査定依頼</span>ができます。</p>
           <p>複数の査定結果を確認して、<strong class="neutral-strong">「この金額なら売ってもいい」</strong>と思える買取先があれば、その業者との売却を検討できます。</p>
           <p>逆に、<strong class="neutral-strong">「この金額なら今は売らなくていいかな」</strong>と思えば、無理に売却する必要はありません。</p>
@@ -214,20 +242,36 @@ const faqItems = [
             <li><span>3</span>査定後に売るか判断</li>
           </ol>
         </div>
-        <a class="story-cta" data-cta="service" href={affiliateUrl} target="_blank" rel="sponsored noreferrer"><em class="cta-text">今の<span data-brand-label>時計</span>の査定額を比較してみる</em> <span aria-hidden="true">›</span></a>
+        <a class="story-cta" data-cta="service" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
       </section>
 
       {/* SECTION 6｜核心：店舗巡りの手間 */}
       <section class="story-section story-section--tint story-section--route" aria-labelledby="route-title">
         <h2 class="section-heading" id="route-title">時計を売るために、<br />休日を使って3店舗回りますか？</h2>
-        <div class="story-copy"><p>例えば、こんな順番です。</p></div>
-        <ol class="store-route" aria-label="店舗を回って比較する場合の流れ">
-          <li><b>A店</b><span>で査定</span></li>
-          <li><b>B店</b><span>へ移動して査定</span></li>
-          <li><b>C店</b><span>でも査定</span></li>
-          <li class="store-route__end"><span>結果を比べて</span><b>売る店を決める</b></li>
-        </ol>
-        <div class="story-copy">
+        <div class="story-copy"><p>店舗を回って比べる場合と、一括査定で比べる場合を並べると、こうなります。</p></div>
+        <div class="route-vs" role="group" aria-label="店舗を回る場合と一括査定の比較">
+          <div class="route-vs__col route-vs__col--stores">
+            <p class="route-vs__head">店舗を回る</p>
+            <ol>
+              <li>A店へ移動</li>
+              <li class="is-wait">査定待ち</li>
+              <li>B店へ移動</li>
+              <li class="is-wait">査定待ち</li>
+              <li>C店へ移動</li>
+            </ol>
+          </div>
+          <p class="route-vs__vs" aria-hidden="true">VS</p>
+          <div class="route-vs__col route-vs__col--bulk">
+            <p class="route-vs__head">一括査定</p>
+            <ol>
+              <li>一度入力</li>
+              <li>複数社から査定</li>
+              <li class="is-goal">比較</li>
+            </ol>
+          </div>
+        </div>
+        <div class="story-copy with-visual--wrap">
+          <figure class="visual-card visual-card--person"><img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/story-person.webp" width="640" height="960" alt="時計を売るためにどうするか考える男性のイラスト" /></figure>
           <p>もちろん、これでも比較できます。でも、<strong>時計1本を売るためにそこまで時間を使うのは大変。</strong></p>
           <p>一括査定なら、最初の査定依頼をまとめて行い、届いた査定結果から比較できます。</p>
         </div>
@@ -240,6 +284,13 @@ const faqItems = [
         <div class="story-copy">
           <p>一括査定だからといって、何もかも手間がなくなるわけではありません。</p>
           <p>申し込み後は、<span class="mark">買取業者から連絡が入ったり、商品の状態について確認される場合があります。</span>複数社を比較する以上、1店舗だけに査定をお願いするより、やり取りが増えることもあります。</p>
+        </div>
+        <figure class="conversation-visual">
+          <img loading="lazy" decoding="async" src="/hikakaku-watch-story/assets/dealer-conversation-with-copy-v3.webp" width="1536" height="1024" alt="利用者と買取業者のやり取りのイメージ。利用者が傷や付属品、オーバーホールの状況を伝え、業者が現物確認後に正式な査定額を案内すると回答している。" />
+          <figcaption class="sr-only">自分：ベルトに細かい傷があります。箱・保証書・余りコマはあります。オーバーホールは数年前からしていません。業者：詳しい情報ありがとうございます。現物を確認後、正式な査定額をご案内させていただきます。</figcaption>
+        </figure>
+        <p class="story-note">※やり取りの内容はイメージです。</p>
+        <div class="story-copy">
           <p>だから、<strong class="neutral-strong">「とにかく今日中に売りたい」</strong><strong class="neutral-strong">「比較は必要ないから1店舗だけで済ませたい」</strong>という人には、直接買取の方が向いています。</p>
         </div>
         <div class="quote-panel">
@@ -268,7 +319,7 @@ const faqItems = [
               <li>査定額を比べてから決めたい</li>
               <li>金額を見てから売るか考えたい</li>
             </ul>
-            <a class="story-cta chooser__cta" data-cta="chooser" href={affiliateUrl} target="_blank" rel="sponsored noreferrer"><em class="cta-text"><span data-brand-label>時計</span>の一括査定を試してみる</em> <span aria-hidden="true">›</span></a>
+            <a class="story-cta chooser__cta" data-cta="chooser" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
           </div>
         </div>
       </section>
@@ -277,11 +328,12 @@ const faqItems = [
       <section class="story-section story-section--flow" aria-labelledby="flow-title">
         <h2 class="section-heading" id="flow-title">一括査定の流れはシンプル</h2>
         <div class="steps steps--three" aria-label="一括査定の流れ">
-          <div class="step"><span class="step-number">1</span><b>時計の情報を入力</b><span>ブランドやモデル、時計の状態などを分かる範囲で入力します。</span></div>
-          <div class="step"><span class="step-number">2</span><b>買取業者から査定</b><span>条件に合った買取業者から査定結果や連絡が届きます。</span></div>
-          <div class="step"><span class="step-number">3</span><b>査定額を比較</b><span>金額や条件を確認して、売却したい業者を選びます。</span></div>
+          <div class="step"><img class="step__img" loading="lazy" decoding="async" src="/hikakaku-watch-ikkatsu/img/step-1.webp" width="255" height="559" alt="スマートフォンで時計を撮影する画面のイメージ" /><span class="step-number">1</span><b>時計の情報を入力</b><span>ブランドやモデル、時計の状態などを分かる範囲で入力します。</span></div>
+          <div class="step"><img class="step__img" loading="lazy" decoding="async" src="/hikakaku-watch-ikkatsu/img/step-2.webp" width="254" height="559" alt="入力内容を確認して査定を依頼する画面のイメージ" /><span class="step-number">2</span><b>買取業者から査定</b><span>条件に合った買取業者から査定結果や連絡が届きます。</span></div>
+          <div class="step"><img class="step__img" loading="lazy" decoding="async" src="/hikakaku-watch-ikkatsu/img/step-3.webp" width="258" height="559" alt="届いた査定結果から売却先や買取方法を選ぶ画面のイメージ" /><span class="step-number">3</span><b>査定額を比較</b><span>金額や条件を確認して、売却したい業者を選びます。</span></div>
         </div>
-        <a class="story-cta" data-cta="flow" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">無料で査定を申し込む <span aria-hidden="true">›</span></a>
+        <p class="steps-note">※画面はイメージです。</p>
+        <a class="story-cta" data-cta="flow" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
       </section>
 
       {/* SECTION 10｜ブランド表示 */}
@@ -305,6 +357,30 @@ const faqItems = [
         ))}
       </section>
 
+      {/* キャンペーン告知。/old-rolex/ で公開中の文言・注記と同一。
+          バナーだけ置くと文脈から浮くため、先に何のキャンペーンかを文章で説明する。
+          画像内の注記は縮小すると判読できないので本文としても出す。 */}
+      <section class="story-section story-section--tint story-section--campaign" aria-labelledby="campaign-title">
+        <p class="section-kicker">キャンペーン</p>
+        <h2 class="section-heading" id="campaign-title">売却まで進むなら、<br />キャンペーンも確認しておきたい</h2>
+        <p class="campaign-logo"><img src="/hikakaku-watch-ikkatsu/img/hikakaku-logo.webp" width="350" height="100" loading="lazy" decoding="async" alt="ヒカカク！" /></p>
+        <div class="story-copy">
+          <p>現在ヒカカク！では、<span class="mark">対象カテゴリーで買取が成立した方全員に、デジタルギフトが進呈される</span>キャンペーンが案内されています。提供は株式会社じげんです。</p>
+        </div>
+        <p class="campaign__amount"><span>PayPay または Amazon のデジタルギフト</span><b>10,000<i>円分</i></b></p>
+        <a class="campaign__link" data-cta="campaign" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">
+          <img src="/hikakaku-watch-old-rolex/img/campaign-bonus.webp" width="1200" height="300" loading="lazy" decoding="async" alt="買取ボーナスキャンペーン開催中。対象カテゴリーで買取が成立すると、対象者全員にPayPayまたはAmazonのデジタルギフト10,000円分をプレゼント。" />
+        </a>
+        <p class="campaign__lead-note">※査定を受けただけでは対象になりません。複数社を比べたうえで、いずれかの業者で売却まで進んだ場合の上乗せになります。対象カテゴリーや適用条件はヒカカク！公式サイトでご確認ください。</p>
+        <p class="campaign__terms">
+          ※本キャンペーンは株式会社じげんによる提供です。対象カテゴリーで買取が成立した方全員が対象です。<br />
+          ※本キャンペーンについてのお問い合わせは Amazon ではお受けしておりません。ヒカカク！の問い合わせフォームよりお願いいたします。<br />
+          ※Amazon、Amazon.co.jp およびそれらのロゴは Amazon.com, Inc. またはその関連会社の商標です。<br />
+          ※PayPayマネーライトは出金できません。<br />
+          ※実施状況・対象条件・進呈額は変更または終了する場合があります。最新の内容はヒカカク！公式サイトでご確認ください。
+        </p>
+      </section>
+
       {/* SECTION 12｜最終CTA */}
       <section class="closing" aria-labelledby="closing-title">
         <div class="closing__copy">
@@ -313,7 +389,7 @@ const faqItems = [
           <p>時計を売るために、<strong>最初から何店舗も回る必要はありません。</strong></p>
           <p>まずは査定額を確認。比較したうえで、<span class="mark">「この金額なら売ってもいい」</span>と思える業者があれば、売却を検討すればOKです。</p>
         </div>
-        <a class="story-cta" data-cta="closing" href={affiliateUrl} target="_blank" rel="sponsored noreferrer"><em class="cta-text"><span data-brand-label>時計</span>の査定額を無料で比較する</em> <span aria-hidden="true">›</span></a>
+        <a class="story-cta" data-cta="closing" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
         <ul class="closing__checks">
           <li>最大20社へ査定依頼可能</li>
           <li>査定額を見てから売却判断</li>

@@ -253,47 +253,6 @@
 }
 
 /* ------------------------------------------------------------
-   SECTION 6｜A店→B店→C店
-   ------------------------------------------------------------ */
-.watch-story--ikkatsu .store-route {
-  display: grid;
-  gap: 18px;
-  margin: var(--story-space-sm) 0 var(--story-space-md);
-  padding: 0;
-  list-style: none;
-}
-.watch-story--ikkatsu .store-route li {
-  position: relative;
-  padding: 10px 14px;
-  border: 1px solid var(--story-line-dark);
-  border-radius: var(--story-radius-sm);
-  background: var(--story-surface);
-  font-size: 14px;
-  font-weight: 700;
-}
-.watch-story--ikkatsu .store-route li b {
-  margin-right: 6px;
-  color: var(--story-navy-strong);
-  font-size: 16px;
-  font-weight: 900;
-}
-.watch-story--ikkatsu .store-route li:not(:last-child)::after {
-  position: absolute;
-  bottom: -17px;
-  left: 50%;
-  color: var(--story-gold);
-  content: "▼";
-  font-size: 11px;
-  line-height: 1;
-  transform: translateX(-50%);
-}
-.watch-story--ikkatsu .store-route__end {
-  border-color: var(--story-navy-strong);
-  background: var(--story-navy-pale);
-}
-.watch-story--ikkatsu .store-route__end b { margin: 0 0 0 6px; }
-
-/* ------------------------------------------------------------
    SECTION 8｜あなたなら、どっち？
    ------------------------------------------------------------ */
 .watch-story--ikkatsu .chooser {
@@ -444,9 +403,285 @@
   line-height: inherit;
 }
 
-/* .story-cta は flex＋gap のため、ブランド名の span と後続テキストが
-   別アイテム扱いになり「時計　の査定額」と隙間が空く。1要素にまとめる。 */
-.watch-story--ikkatsu .story-cta .cta-text {
-  font-style: normal;
-  font-weight: inherit;
+
+/* ------------------------------------------------------------
+   画像
+   ------------------------------------------------------------ */
+/* SECTION 3：見出し直下の横長ビジュアル。元画像は正方形なので上下を切る */
+.watch-story--ikkatsu .wide-visual {
+  margin: var(--story-space-sm) 0 var(--story-space-md);
+  overflow: clip;
+  border-radius: var(--story-radius-md);
 }
+.watch-story--ikkatsu .wide-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+/* SECTION 5：複数業者のアイコン。白地の立体アイコンなので切らずに全体を見せる */
+.watch-story--ikkatsu .visual-card--dealers {
+  background: var(--story-surface);
+}
+.watch-story--ikkatsu .visual-card--dealers img {
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+
+/* SECTION 9：各ステップの画面イメージ。
+   狭い幅は「番号｜説明｜画面」の横並び、720px以上は画面を上に置く縦積み。 */
+.watch-story--ikkatsu .steps--three .step {
+  grid-template-columns: 34px minmax(0, 1fr) 52px;
+}
+.watch-story--ikkatsu .steps--three .step__img {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  display: block;
+  width: 52px;
+  height: auto;
+  justify-self: end;
+}
+.watch-story--ikkatsu .steps--three .step b,
+.watch-story--ikkatsu .steps--three .step span:not(.step-number) {
+  grid-column: 2;
+}
+.watch-story--ikkatsu .steps--three + .steps-note {
+  margin-top: 8px;
+  text-align: right;
+}
+@media (min-width: 720px) {
+  .watch-story--ikkatsu .steps--three .step { grid-template-columns: minmax(0, 1fr); }
+  .watch-story--ikkatsu .steps--three .step__img {
+    grid-column: 1;
+    grid-row: auto;
+    width: 88px;
+    margin: 0 auto 8px;
+    justify-self: center;
+  }
+  .watch-story--ikkatsu .steps--three .step b,
+  .watch-story--ikkatsu .steps--three .step span:not(.step-number) {
+    grid-column: 1;
+  }
+}
+
+/* ------------------------------------------------------------
+   SECTION 4｜同じ時計で査定額が分かれた実例
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .evidence {
+  margin: var(--story-space-md) 0 var(--story-space-xs);
+  padding: 14px 15px 12px;
+  border: 2px solid var(--story-navy-strong);
+  border-radius: var(--story-radius-md);
+  background: var(--story-surface);
+}
+.watch-story--ikkatsu .evidence__head { margin: 0 0 10px; }
+.watch-story--ikkatsu .evidence__head span {
+  display: inline-block;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  border-radius: var(--story-radius-pill);
+  background: var(--story-gold-pale);
+  color: var(--story-navy-strong);
+  font-size: 11px;
+  font-weight: 800;
+}
+.watch-story--ikkatsu .evidence__head b {
+  display: block;
+  color: var(--story-navy-strong);
+  font-size: 15px;
+  font-weight: 900;
+}
+.watch-story--ikkatsu .evidence__rows { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.watch-story--ikkatsu .evidence__rows li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+.watch-story--ikkatsu .evidence__label { color: var(--story-ink-soft); font-size: 13px; font-weight: 800; }
+/* 金額に比例した棒。最高額を100%とする */
+.watch-story--ikkatsu .evidence__bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: var(--w);
+  min-width: 96px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 4px;
+  background: var(--story-navy-pale);
+}
+.watch-story--ikkatsu .evidence__bar b {
+  color: var(--story-navy-strong);
+  font-size: 15px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.watch-story--ikkatsu .evidence__rows .is-best .evidence__bar { background: var(--story-red); }
+.watch-story--ikkatsu .evidence__rows .is-best .evidence__bar b { color: var(--story-surface); font-size: 17px; }
+.watch-story--ikkatsu .evidence__gap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--story-line-dark);
+  color: var(--story-red-deep);
+}
+.watch-story--ikkatsu .evidence__gap span { font-size: 13px; font-weight: 800; }
+.watch-story--ikkatsu .evidence__gap strong {
+  font-family: var(--story-font-display);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+.watch-story--ikkatsu .evidence__so {
+  margin: 8px 0 0;
+  color: var(--story-ink);
+  font-size: 14px;
+  text-align: center;
+}
+.watch-story--ikkatsu .evidence__so b { color: var(--story-navy-strong); font-weight: 900; }
+
+/* ------------------------------------------------------------
+   SECTION 6｜店舗を回る vs 一括査定（横並びの図）
+   左は5工程、右は3工程。高さを揃えず、右が短く終わること自体で差を見せる。
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .route-vs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr);
+  align-items: start;
+  margin: var(--story-space-sm) 0 var(--story-space-md);
+}
+.watch-story--ikkatsu .route-vs__col {
+  padding: 10px 8px 12px;
+  border-radius: var(--story-radius-md);
+  background: var(--story-surface);
+}
+.watch-story--ikkatsu .route-vs__col--stores { border: 1px solid var(--story-line-dark); }
+.watch-story--ikkatsu .route-vs__col--bulk { border: 2px solid var(--story-red); }
+.watch-story--ikkatsu .route-vs__head {
+  margin: 0 0 10px;
+  padding: 5px 4px;
+  border-radius: var(--story-radius-sm);
+  background: var(--story-navy);
+  color: var(--story-surface);
+  font-size: 13px;
+  font-weight: 900;
+  text-align: center;
+}
+.watch-story--ikkatsu .route-vs__col--bulk .route-vs__head { background: var(--story-red); }
+.watch-story--ikkatsu .route-vs ol {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.watch-story--ikkatsu .route-vs li {
+  position: relative;
+  padding: 8px 4px;
+  border: 1px solid var(--story-line);
+  border-radius: var(--story-radius-sm);
+  background: var(--story-paper);
+  color: var(--story-navy-strong);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.4;
+  text-align: center;
+}
+.watch-story--ikkatsu .route-vs li:not(:last-child)::after {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  color: var(--story-gold);
+  content: "▼";
+  font-size: 9px;
+  line-height: 1;
+  transform: translateX(-50%);
+}
+/* 待ち時間は色を落として「何も進まない時間」に見せる */
+.watch-story--ikkatsu .route-vs li.is-wait {
+  border-style: dashed;
+  background: transparent;
+  color: var(--story-muted);
+  font-weight: 700;
+}
+.watch-story--ikkatsu .route-vs li.is-goal {
+  border-color: var(--story-red);
+  background: var(--story-red-pale);
+  color: var(--story-red-deep);
+}
+.watch-story--ikkatsu .route-vs__vs {
+  align-self: center;
+  margin: 0;
+  color: var(--story-gold);
+  font-size: 12px;
+  font-weight: 900;
+  text-align: center;
+}
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .route-vs { grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr); }
+  .watch-story--ikkatsu .route-vs li { font-size: 15px; padding: 10px 6px; }
+  .watch-story--ikkatsu .route-vs__head { font-size: 15px; }
+  .watch-story--ikkatsu .route-vs__vs { font-size: 16px; }
+}
+
+/* ------------------------------------------------------------
+   ヒカカク！ロゴ（SECTION 5・キャンペーン）
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .service-logo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin: 0 0 var(--story-space-md);
+  padding: 10px 14px;
+  border: 1px solid var(--story-line);
+  border-radius: var(--story-radius-md);
+  background: var(--story-surface);
+}
+.watch-story--ikkatsu .service-logo img { display: block; width: 168px; height: auto; }
+.watch-story--ikkatsu .service-logo span {
+  color: var(--story-ink-soft);
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.watch-story--ikkatsu .campaign-logo { margin: 0 0 var(--story-space-sm); }
+.watch-story--ikkatsu .campaign-logo img { display: block; width: 140px; height: auto; }
+
+/* ------------------------------------------------------------
+   キャンペーン
+   ------------------------------------------------------------ */
+.watch-story--ikkatsu .campaign__amount {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 12px;
+  margin: var(--story-space-md) 0;
+  padding: 14px 16px;
+  border: 1px solid var(--story-gold);
+  border-radius: var(--story-radius-md);
+  background: var(--story-gold-pale);
+  text-align: center;
+}
+.watch-story--ikkatsu .campaign__amount span { color: var(--story-navy-strong); font-size: 12px; font-weight: 800; }
+.watch-story--ikkatsu .campaign__amount b {
+  color: var(--story-red-deep);
+  font-family: var(--story-font-display);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+.watch-story--ikkatsu .campaign__amount i { margin-left: 2px; font-size: 15px; font-style: normal; font-weight: 800; }
+.watch-story--ikkatsu .campaign__link { display: block; margin-bottom: 10px; }
+.watch-story--ikkatsu .campaign__link img { display: block; width: 100%; height: auto; border-radius: var(--story-radius-sm); }
+.watch-story--ikkatsu .campaign__lead-note { margin: 0 0 8px; color: var(--story-ink); font-size: 12.5px; line-height: 1.7; }
+.watch-story--ikkatsu .campaign__terms { margin: 0; color: var(--story-muted); font-size: 10.5px; line-height: 1.7; }
