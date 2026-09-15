@@ -36,14 +36,17 @@ const brands = [
   { slug: 'rolex', label: 'ロレックス', grid: 'ROLEX' },
 ];
 
-const compareRows = [
-  { label: '査定依頼', direct: '1店舗ずつ', bulk: 'まとめて依頼' },
-  { label: '査定額の比較', direct: '自分で他店にも依頼', bulk: '複数社を比較しやすい' },
-  { label: '店舗巡り', direct: '店頭なら必要', bulk: '基本不要' },
-  { label: 'やり取り', direct: '基本1社', bulk: '複数社になる場合あり' },
-  { label: '売却まで', direct: '早い', bulk: '比較してから決定' },
-  { label: '向いている人', direct: 'すぐ売りたい人', bulk: '1社だけで決めたくない人' },
+// 「買取店へ直接 vs 一括査定」の比較表。◎=向いている / △=やや不向き。
+// 片側だけを持ち上げないよう、スピードとやり取りの少なさは買取店側を◎にしている。
+const fitRows = [
+  { label: 'すぐ売りたい', direct: ['good', '向いている'], bulk: ['fair', '比較する分、時間がかかることも'] },
+  { label: '1店舗だけで決めるのが不安', direct: ['fair', '他店にも査定が必要'], bulk: ['good', '複数社を比べやすい'] },
+  { label: '何店舗も回りたくない', direct: ['fair', '店舗ごとに移動・査定'], bulk: ['good', '店舗巡りを減らせる'] },
+  { label: '査定額を比べたい', direct: ['fair', '自分で各店へ依頼'], bulk: ['good', 'まとめて査定依頼'] },
+  { label: '売るかまだ迷っている', direct: ['fair', '店頭で判断しがち'], bulk: ['good', '金額を見てから考えやすい'] },
+  { label: 'やり取りを少なくしたい', direct: ['good', '基本1社'], bulk: ['fair', '複数社から連絡の場合あり'] },
 ];
+const fitMark = { good: { sym: '◎', sr: '向いている' }, fair: { sym: '△', sr: 'やや不向き' } };
 
 const faqItems = [
   { q: '査定したら必ず売らないといけませんか？', a: 'いいえ。査定結果を確認して、金額に納得できなければ売却しなくても構いません。' },
@@ -146,31 +149,70 @@ const faqItems = [
         </div>
       </section>
 
-      {/* SECTION 2｜まず結論 */}
-      <section class="story-section story-section--tint story-section--conclusion" aria-labelledby="conclusion-title">
-        <p class="section-kicker">まず結論</p>
-        <h2 class="section-heading" id="conclusion-title">買取店に直接売る？<br />一括査定で比べる？</h2>
+      {/* SECTION 2｜あなたに合うのはどっち？
+          機能説明ではなく、読者に「1店で即決したいわけじゃない／でも店は回りたくない
+          ／だから一括査定が合う」と自己判断させるためのセクション。 */}
+      <section class="story-section story-section--tint story-section--fit" aria-labelledby="fit-title">
+        <p class="fit-pre">1店舗で決めるのは不安。<br />でも、何店舗も回るのは面倒。</p>
+        <h2 class="section-heading" id="fit-title">あなたに合うのはどっち？</h2>
         <div class="story-copy">
-          <p>時計を売る方法は、大きく分けると2つあります。</p>
-          <p><strong class="neutral-strong">「早く売ることを優先するか」</strong>、それとも<strong class="neutral-strong">「何店舗も回らず、複数の査定額を比べたいか」</strong>で、選ぶ方法が変わります。</p>
+          <p>時計を売る方法は、<strong class="neutral-strong">「買取店へ直接」</strong>と<strong class="neutral-strong">「一括査定で比較」</strong>の2つ。</p>
+          <p>どちらが良い悪いではなく、<span class="mark">何を優先したいか</span>で向いている方法が変わります。</p>
         </div>
-        <div class="method-compare" role="region" aria-label="買取店へ直接売る方法と一括査定の比較" tabindex="0">
-          <table>
-            <thead>
-              <tr><th scope="col"><span class="sr-only">項目</span></th><th scope="col">買取店へ直接</th><th scope="col" class="is-bulk">一括査定</th></tr>
-            </thead>
-            <tbody>
-              {compareRows.map((row) => (
-                <tr><th scope="row">{row.label}</th><td>{row.direct}</td><td class="is-bulk">{row.bulk}</td></tr>
-              ))}
-            </tbody>
-          </table>
+
+        <table class="fit-table">
+          <caption class="sr-only">買取店へ直接売る方法と一括査定の比較（◎は向いている、△はやや不向き）</caption>
+          <colgroup><col class="fit-table__c1" /><col /><col /></colgroup>
+          <thead>
+            <tr><th scope="col">比べたいこと</th><th scope="col">買取店へ直接</th><th scope="col">一括査定</th></tr>
+          </thead>
+          <tbody>
+            {fitRows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                {[row.direct, row.bulk].map(([mark, text], i) => (
+                  <td class:list={[`is-${mark}`, i === 1 && 'is-bulk']}>
+                    <span class="fit-mark" aria-hidden="true">{fitMark[mark].sym}</span>
+                    <span class="sr-only">{fitMark[mark].sr}：</span>
+                    <span class="fit-text">{text}</span>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div class="fit-cards">
+          <div class="fit-card">
+            <p class="fit-card__if">すぐ売りたいなら</p>
+            <p class="fit-card__name">買取店へ直接</p>
+            <ul>
+              <li>売りたい店が決まっている</li>
+              <li>比較よりスピード優先</li>
+              <li>やり取りを少なくしたい</li>
+            </ul>
+          </div>
+          <div class="fit-card fit-card--bulk">
+            <p class="fit-card__if">比較してから決めたいなら</p>
+            <p class="fit-card__name">一括査定</p>
+            <ul>
+              <li><b>1店舗だけで決めるのは不安</b></li>
+              <li><b>何店舗も回るのは面倒</b></li>
+              <li><b>査定額を比べてから決めたい</b></li>
+              <li><b>金額を見て売るか考えたい</b></li>
+            </ul>
+          </div>
         </div>
-        <div class="verdict-box">
-          <p><strong class="neutral-strong">今日すぐ近くのお店で売りたいなら、直接買取でもOK。</strong></p>
-          <p>でも、<span class="mark">「何店舗も回りたくない」</span>その一方で、<span class="mark">「最初の1店舗だけで決めるのも不安」</span>という人には、<strong>一括査定が向いています。</strong></p>
+
+        <div class="fit-verdict">
+          <p class="fit-verdict__voice">「何店舗も回りたくない。<br />でも、最初の1店舗だけで<br class="sp-only" />決めるのも不安。」</p>
+          <p>そんな方には、<strong>一括査定が向いています。</strong></p>
+          <p>一度の申込みで複数社へ査定依頼できるので、店舗を探して回る手間を減らしながら、<span class="mark">査定額を比較してから判断できます。</span></p>
         </div>
-        <a class="story-cta" data-cta="conclusion" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
+
+        <p class="fit-cta-lead">まずは、今の査定額を<br class="sp-only" />比べてみませんか？</p>
+        <a class="story-cta" data-cta="fit" href={affiliateUrl} target="_blank" rel="sponsored noreferrer">複数社の査定額を無料で比較する <span aria-hidden="true">›</span></a>
+        <p class="fit-cta-note">査定額を確認してから売るか判断できます</p>
       </section>
 
       {/* SECTION 3｜共感 */}

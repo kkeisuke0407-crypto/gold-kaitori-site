@@ -150,60 +150,169 @@
 .watch-story--ikkatsu .story-section--empathy .check-list li { font-size: 14px; }
 
 /* ------------------------------------------------------------
-   SECTION 2｜買取店へ直接 × 一括査定 の比較表
+   SECTION 2｜あなたに合うのはどっち？
+   375px基準。3列を横スクロールなしで画面内に収める。
+   一括査定の列だけを色で持ち上げず、◎のマスに色を付けて
+   「自分の優先したいこと」の行で優劣が一瞬で分かるようにする。
    ------------------------------------------------------------ */
-.watch-story--ikkatsu .method-compare {
-  margin: var(--story-space-md) 0;
-  overflow-x: auto;
+.watch-story--ikkatsu .fit-pre {
+  margin: 0 0 8px;
+  color: var(--story-navy-strong);
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.6;
+}
+.watch-story--ikkatsu .fit-table {
+  width: 100%;
+  margin: var(--story-space-md) 0 var(--story-space-md);
+  overflow: hidden;
+  border: 1px solid var(--story-line-dark);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--story-radius-md);
+  background: var(--story-surface);
+  table-layout: fixed;
+}
+.watch-story--ikkatsu .fit-table__c1 { width: 30%; }
+.watch-story--ikkatsu .fit-table th,
+.watch-story--ikkatsu .fit-table td {
+  padding: 9px 6px;
+  border-bottom: 1px solid var(--story-line);
+  line-height: 1.45;
+  vertical-align: middle;
+  word-break: auto-phrase;
+}
+.watch-story--ikkatsu .fit-table thead th {
+  background: var(--story-navy-strong);
+  color: var(--story-surface);
+  font-size: 12.5px;
+  font-weight: 900;
+  text-align: center;
+}
+.watch-story--ikkatsu .fit-table thead th:first-child { background: var(--story-navy); font-size: 11.5px; }
+.watch-story--ikkatsu .fit-table tbody th {
+  background: var(--story-paper);
+  color: var(--story-navy-strong);
+  font-size: 12.5px;
+  font-weight: 900;
+  text-align: left;
+}
+.watch-story--ikkatsu .fit-table td {
+  border-left: 1px solid var(--story-line);
+  text-align: center;
+}
+.watch-story--ikkatsu .fit-table tbody tr:last-child > * { border-bottom: 0; }
+.watch-story--ikkatsu .fit-mark {
+  display: block;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+.watch-story--ikkatsu .fit-text {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
+}
+/* ◎：向いている */
+.watch-story--ikkatsu .fit-table td.is-good { background: var(--story-gold-pale); }
+.watch-story--ikkatsu .fit-table td.is-good .fit-mark { color: var(--story-orange-deep); }
+.watch-story--ikkatsu .fit-table td.is-good .fit-text { color: var(--story-navy-strong); font-weight: 900; }
+/* 一括査定側の◎だけ、文言を軽く強調 */
+.watch-story--ikkatsu .fit-table td.is-good.is-bulk .fit-text { color: var(--story-red-deep); }
+/* △：やや不向き。色を落として主張させない */
+.watch-story--ikkatsu .fit-table td.is-fair .fit-mark { color: var(--story-muted); font-size: 17px; }
+.watch-story--ikkatsu .fit-table td.is-fair .fit-text { color: var(--story-ink-soft); }
+
+/* 表の下の「すぐ売りたいなら／比較してから決めたいなら」 */
+.watch-story--ikkatsu .fit-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin-bottom: var(--story-space-md);
+}
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .fit-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.watch-story--ikkatsu .fit-card {
+  padding: 12px 14px;
   border: 1px solid var(--story-line-dark);
   border-radius: var(--story-radius-md);
   background: var(--story-surface);
 }
-.watch-story--ikkatsu .method-compare table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  table-layout: fixed;
-}
-.watch-story--ikkatsu .method-compare th,
-.watch-story--ikkatsu .method-compare td {
-  padding: 10px 8px;
-  border-bottom: 1px solid var(--story-line);
-  line-height: 1.5;
-  text-align: center;
-  vertical-align: middle;
-}
-.watch-story--ikkatsu .method-compare thead th {
-  background: var(--story-navy);
-  color: var(--story-surface);
-  font-size: 13px;
-  font-weight: 900;
-}
-.watch-story--ikkatsu .method-compare thead th:first-child { width: 27%; background: var(--story-paper-deep); }
-.watch-story--ikkatsu .method-compare thead th.is-bulk { background: var(--story-red); }
-.watch-story--ikkatsu .method-compare tbody th {
-  background: var(--story-paper);
+.watch-story--ikkatsu .fit-card--bulk { border-color: var(--story-orange-deep); }
+.watch-story--ikkatsu .fit-card__if { margin: 0; color: var(--story-muted); font-size: 12px; font-weight: 800; }
+.watch-story--ikkatsu .fit-card__name {
+  margin: 0 0 6px;
   color: var(--story-navy-strong);
-  font-size: 12px;
-  font-weight: 900;
-  text-align: left;
-}
-.watch-story--ikkatsu .method-compare td.is-bulk {
-  background: var(--story-red-pale);
-  color: var(--story-red-deep);
+  font-size: 17px;
   font-weight: 900;
 }
-.watch-story--ikkatsu .method-compare tbody tr:last-child > * { border-bottom: 0; }
+.watch-story--ikkatsu .fit-card--bulk .fit-card__name { color: var(--story-red-deep); }
+.watch-story--ikkatsu .fit-card ul { margin: 0; padding: 0; list-style: none; }
+.watch-story--ikkatsu .fit-card li {
+  position: relative;
+  padding: 3px 0 3px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+.watch-story--ikkatsu .fit-card li::before {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  color: var(--story-navy);
+  content: "✓";
+  font-weight: 900;
+}
+.watch-story--ikkatsu .fit-card--bulk li::before { color: var(--story-orange-deep); }
+.watch-story--ikkatsu .fit-card li b { color: var(--story-navy-strong); font-weight: 900; }
 
-.watch-story--ikkatsu .verdict-box {
-  margin: 0 0 var(--story-space-sm);
+/* 結論ボックス */
+.watch-story--ikkatsu .fit-verdict {
   padding: 14px 16px;
-  border-left: 4px solid var(--story-red);
-  border-radius: 0 var(--story-radius-sm) var(--story-radius-sm) 0;
+  border: 2px solid var(--story-navy-strong);
+  border-radius: var(--story-radius-md);
   background: var(--story-surface);
 }
-.watch-story--ikkatsu .verdict-box p { margin: 0; font-size: 14px; line-height: 1.85; }
-.watch-story--ikkatsu .verdict-box p + p { margin-top: 6px; }
+.watch-story--ikkatsu .fit-verdict p { margin: 0; font-size: 14.5px; line-height: 1.8; }
+.watch-story--ikkatsu .fit-verdict p + p { margin-top: 6px; }
+.watch-story--ikkatsu .fit-verdict__voice {
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--story-line-dark);
+  color: var(--story-navy-strong);
+  font-family: var(--story-font-display);
+  font-size: 16px !important;
+  font-weight: 900;
+  line-height: 1.6 !important;
+}
+.watch-story--ikkatsu .fit-verdict strong { color: var(--story-red-deep); font-weight: 900; }
+
+/* CTA前の一文と、CTA下の補足 */
+.watch-story--ikkatsu .fit-cta-lead {
+  margin: var(--story-space-lg) 0 0;
+  color: var(--story-navy-strong);
+  font-size: 17px;
+  font-weight: 900;
+  line-height: 1.55;
+  text-align: center;
+}
+.watch-story--ikkatsu .story-section--fit .story-cta { margin-top: 10px; }
+.watch-story--ikkatsu .fit-cta-note {
+  margin: 8px 0 0;
+  color: var(--story-ink-soft);
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+.watch-story--ikkatsu .sp-only { display: inline; }
+@media (min-width: 600px) {
+  .watch-story--ikkatsu .sp-only { display: none; }
+  .watch-story--ikkatsu .fit-table th,
+  .watch-story--ikkatsu .fit-table td { padding: 11px 10px; }
+  .watch-story--ikkatsu .fit-table tbody th { font-size: 14px; }
+  .watch-story--ikkatsu .fit-text { font-size: 13px; }
+}
 
 /* ------------------------------------------------------------
    SECTION 5｜POINT
