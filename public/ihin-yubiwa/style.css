@@ -3098,3 +3098,26 @@ h2, h3,
 /* ずらしKW用FV：画像の左上に「保存版」ラベルが入っているため、日付バッジは右上へ。
    （3sha系の金FVは左上のままなので、このページ側でだけ上書きする） */
 .kin-fv--visual .kin-fv__date { left: auto; right: 3%; }
+
+/* ==== ずらしKW新構成（sk-） ==== */
+.sk-lead { margin: .2em 0 0; font-size: 17px; line-height: 1.85; }
+.sk-lead p { margin: 0 0 .45em; }
+.sk-cta { margin: 1.1em 0 2em; padding: 1em .9em; }
+.sk-cta .kin-phone { margin-bottom: 0; }
+.sk-go .kin-phone__num { font-size: clamp(19px, 5.3vw, 25px); line-height: 1.35; text-wrap: balance; }
+.sk-go .kin-phone__sub { font-size: 12.5px; line-height: 1.55; }
+.sk-bridge { margin: 1.2em 0 0; padding: .9em 1em; border-left: 5px solid var(--gold); background: #fbf6e6; font-family: var(--gothic); font-size: 16px; font-weight: 700; line-height: 1.8; color: var(--sumi); }
+.sk-bridge p { margin: 0; }
+.sk-more { position: relative; margin: 2.6em 0 1.2em; text-align: center; font-family: var(--gothic); font-size: 13px; font-weight: 800; letter-spacing: .08em; color: var(--ink-sub); }
+.sk-more::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--rule); }
+.sk-more span { position: relative; padding: 0 .9em; background: var(--bg); }
+.sk-table { width: 100%; margin: 1em 0; border-collapse: collapse; font-family: var(--gothic); font-size: 15px; line-height: 1.55; background: #fff; }
+.sk-table th, .sk-table td { padding: .65em .7em; border: 1px solid var(--rule); text-align: left; vertical-align: middle; word-break: normal; overflow-wrap: break-word; }
+.sk-table th { background: #f6f4ee; font-size: 13px; font-weight: 900; color: var(--sumi); }
+.sk-table td:first-child { width: 50%; }
+.sk-table .sk-hl td { background: #fff3c9; font-weight: 900; color: var(--sumi); }
+.sk-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: .5em .75em calc(.5em + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); box-shadow: 0 -2px 12px rgba(0,0,0,.14); transform: translateY(115%); transition: transform .25s ease; }
+.sk-sticky.is-on { transform: none; }
+.sk-sticky a { display: flex; align-items: center; justify-content: center; gap: .5em; max-width: 460px; min-height: 52px; margin: 0 auto; padding: .45em .9em; background: linear-gradient(180deg, #e8342f 0%, #d1221d 100%); border-bottom: 3px solid #a3140f; color: #fff !important; text-decoration: none !important; font-family: var(--gothic); font-weight: 800; font-size: 15.5px; line-height: 1.3; }
+.sk-sticky small { flex: 0 0 auto; padding: .15em .4em; border: 1px solid rgba(255,255,255,.75); font-size: 10px; font-weight: 800; white-space: nowrap; }
+body.sk-has-sticky { padding-bottom: 76px; }
