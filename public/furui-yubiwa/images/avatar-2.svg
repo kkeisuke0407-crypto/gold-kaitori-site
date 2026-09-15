@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="ご利用者様のイラスト（男性）">
+  <defs>
+    <clipPath id="av2-clip"><circle cx="60" cy="60" r="58"/></clipPath>
+    <linearGradient id="av2-bg" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#fdf8ea"/><stop offset="1" stop-color="#f3e9d2"/>
+    </linearGradient>
+    <linearGradient id="av2-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d6b5c"/><stop offset="1" stop-color="#2c5346"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="url(#av2-bg)"/>
+  <g clip-path="url(#av2-clip)">
+    <path d="M14 122 C16 96 32 86 45 82 L60 78 L75 82 C88 86 104 96 106 122 Z" fill="url(#av2-top)"/>
+    <path d="M50 80 L60 100 L70 80 L60 76 Z" fill="#fbfaf7"/>
+    <path d="M52 66 h16 v14 c0 5 -16 5 -16 0 Z" fill="#dda87e"/>
+    <path d="M34 48 C34 27 46 17 60 17 C74 17 86 27 86 48 L85 58 C85 50 80 46 77 46 L43 46 C40 46 35 50 35 58 Z" fill="#8a8580"/>
+    <ellipse cx="60" cy="48" rx="21" ry="24" fill="#e3b48f"/>
+    <path d="M40 44 C42 30 49 22 60 22 C71 22 78 30 80 44 C77 38 70 36 60 36 C50 36 43 38 40 44 Z" fill="#9a958f"/>
+    <path d="M49 49 q3.6 -3.6 7.2 0" stroke="#2b2b2e" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M63.8 49 q3.6 -3.6 7.2 0" stroke="#2b2b2e" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M55 60 q5 3.8 10 0" stroke="#a5623f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="47.5" cy="55" rx="3.6" ry="2.4" fill="#d99168" opacity=".5"/>
+    <ellipse cx="72.5" cy="55" rx="3.6" ry="2.4" fill="#d99168" opacity=".5"/>
+  </g>
+  <circle cx="60" cy="60" r="58" fill="none" stroke="#c9a227" stroke-width="3"/>
+</svg>
