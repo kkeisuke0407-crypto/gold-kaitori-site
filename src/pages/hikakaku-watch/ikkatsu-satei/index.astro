@@ -152,7 +152,7 @@ const faqItems = [
       {/* SECTION 2｜あなたに合うのはどっち？
           機能説明ではなく、読者に「1店で即決したいわけじゃない／でも店は回りたくない
           ／だから一括査定が合う」と自己判断させるためのセクション。 */}
-      <section class="story-section story-section--tint story-section--fit" aria-labelledby="fit-title">
+      <section id="compare" class="story-section story-section--tint story-section--fit" aria-labelledby="fit-title">
         <p class="fit-pre">1店舗で決めるのは不安。<br />でも、何店舗も回るのは面倒。</p>
         <h2 class="section-heading" id="fit-title">あなたに合うのはどっち？</h2>
         <div class="story-copy">
@@ -343,7 +343,7 @@ const faqItems = [
       </section>
 
       {/* SECTION 9｜使い方 */}
-      <section class="story-section story-section--flow" aria-labelledby="flow-title">
+      <section id="flow" class="story-section story-section--flow" aria-labelledby="flow-title">
         <h2 class="section-heading" id="flow-title">一括査定の流れはシンプル</h2>
         <div class="steps steps--three" aria-label="一括査定の流れ">
           <div class="step"><span class="step-number">1</span><b>時計の情報を入力</b><span>ブランドやモデル、時計の状態などを分かる範囲で入力します。</span></div>
@@ -354,7 +354,7 @@ const faqItems = [
       </section>
 
       {/* SECTION 10｜ブランド表示 */}
-      <section class="story-section story-section--tint story-section--brands" aria-labelledby="brands-title">
+      <section id="brands" class="story-section story-section--tint story-section--brands" aria-labelledby="brands-title">
         <h2 class="section-heading" id="brands-title">こんな時計も査定対象</h2>
         <ul class="brand-watches" aria-hidden="true">
           <li><img loading="lazy" decoding="async" src="/hikakaku-watch-ikkatsu/img/watch-a.webp" width="360" height="360" alt="" /></li>
@@ -370,7 +370,7 @@ const faqItems = [
       </section>
 
       {/* SECTION 11｜FAQ */}
-      <section class="story-section story-section--dense" aria-labelledby="faq-title">
+      <section id="faq" class="story-section story-section--dense" aria-labelledby="faq-title">
         <h2 class="section-heading" id="faq-title">よくある質問</h2>
         {faqItems.map((item, i) => (
           <details class="faq" open={i === 0}>
