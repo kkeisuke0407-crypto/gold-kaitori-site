@@ -11,6 +11,7 @@ export function GET() {
     isStale: r.isStale ?? false,
     gold: r.gold,
     goldDiff: r.goldDiff,
+    goldRetail: r.goldRetail ?? null, // 田中の店頭小売価格（税込）。過去最高値（小売）との比較用
     k24: r.k24,
     k22: r.k22,
     k18: r.k18,

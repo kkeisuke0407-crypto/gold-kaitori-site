@@ -170,6 +170,8 @@ async function fromTanakaDedicated() {
     }
     return {
       gold: g.buy, pt1000: p.buy,
+      // 店頭小売価格（税込）。過去最高値（小売）との比較用。取れなければ null
+      goldRetail: inRange(g.retail ?? 0, GOLD_RANGE) ? g.retail : null,
       goldDiffOfficial: g.buyDiff, ptDiffOfficial: p.buyDiff,
       goldCtx: "", ptCtx: "", source: "田中貴金属",
     };
@@ -251,6 +253,7 @@ async function main() {
   }
 
   const { gold, pt1000, source, goldDiffOfficial, ptDiffOfficial, goldCtx, ptCtx } = fetched;
+  const goldRetail = fetched.goldRetail ?? null; // 田中の専用ページから取れた時だけ入る
   const { iso, label } = jstDateString();
 
   // 前日比：基準は「前日の最終値（クローズ）」。日中の値動きにもライブで追従させる。
@@ -307,6 +310,7 @@ async function main() {
     fetchedAt: new Date().toISOString(),
     gold,
     goldDiff,
+    goldRetail,
     pt1000,
     ptDiff,
     prevClose,
