@@ -715,7 +715,7 @@
   height: 64px;
   border-radius: var(--story-radius-sm);
   object-fit: cover;
-  object-position: 68% 60%;
+  object-position: 70% 52%;  /* デイトナ116520の文字盤に寄せる */
 }
 .watch-story--ikkatsu .evidence__meta { min-width: 0; }
 @media (min-width: 600px) {

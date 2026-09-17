@@ -11,16 +11,18 @@ const canonicalUrl = 'https://kaitori.hakobu-family.com/hikakaku-watch/ikkatsu-s
 // 査定事例の出典（ヒカカク！公式 腕時計の一括査定ページ）
 const sourceCaseUrl = 'https://hikakaku.com/estimate_form/watch';
 
-// 同じ時計で査定額が分かれた実例。/compare/ と /old-rolex/ で出典付き掲載中のデータと同一。
-// 金額は変えないこと（架空の数字は載せない）。bar は最高額を100%とした棒の長さ。
+// 同じ時計で査定額が分かれた実例。出典ページ（sourceCaseUrl）に現在掲載されている腕時計の事例と同一。
+// 2026-09-17 に先方チェックで「16610 の85万円が出典ページに見当たらない」と指摘があり、
+// 出典ページで確認できるこの事例へ差し替えた。金額は出典の表記どおり（架空の数字は載せない）。
+// bar は最高額を100%とした棒の長さ（185/240≒77、128/240≒53）。
 const evidenceCase = {
-  model: 'ROLEX サブマリーナ デイト 16610',
+  model: 'ROLEX デイトナ 116520 ブラック',
   rows: [
-    { label: 'A社', yen: '85万円', bar: 100, best: true },
-    { label: 'B社', yen: '75万円', bar: 88, best: false },
-    { label: 'C社', yen: '59万円', bar: 69, best: false },
+    { label: 'A社', yen: '240万円', bar: 100, best: true },
+    { label: 'B社', yen: '185万円', bar: 77, best: false },
+    { label: 'C社', yen: '128万円', bar: 53, best: false },
   ],
-  gap: '26万円',
+  gap: '112万円',
 };
 
 // ?brand= に使える値。URLから任意の文字列を表示させないため、必ずこの表に通す。
@@ -250,7 +252,7 @@ const faqItems = [
           <p>そのため、<strong>同じ時計でも買取店によって査定額が変わることがあります。</strong></p>
         </div>
         <figure class="evidence" aria-label="同じ時計で査定額が分かれた実際の事例">
-          <figcaption class="evidence__head"><img class="evidence__img" loading="lazy" decoding="async" src="/hikakaku-watch-old-rolex/img/submariner-16610.webp" width="1024" height="1536" alt={`${evidenceCase.model}のイメージ`} /><span class="evidence__meta"><span>実際の査定事例</span><b>{evidenceCase.model}</b></span></figcaption>
+          <figcaption class="evidence__head"><img class="evidence__img" loading="lazy" decoding="async" src="/hikakaku-watch-story/models/rolex-daytona-116520/hero-20260902.webp" width="1024" height="1536" alt={`${evidenceCase.model}のイメージ`} /><span class="evidence__meta"><span>実際の査定事例</span><b>{evidenceCase.model}</b></span></figcaption>
           <ul class="evidence__rows">
             {evidenceCase.rows.map((r) => (
               <li class:list={[r.best && 'is-best']}><span class="evidence__label">{r.label}</span><span class="evidence__bar" style={`--w:${r.bar}%`}><b>{r.yen}</b></span></li>
@@ -259,7 +261,7 @@ const faqItems = [
           <p class="evidence__gap"><span>同じ時計でも</span><strong>{evidenceCase.gap}</strong><span>の差</span></p>
           <p class="evidence__so">だから、<b>比較してから決める意味があります。</b></p>
         </figure>
-        <p class="story-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例（2018年7月3日時点の情報） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※過去の査定事例であり、現在の査定相場を示すものではありません。現在の査定額を保証するものでもありません。※時計の画像はイメージです。</p>
+        <p class="story-note">出典：ヒカカク！公式サイト 腕時計の一括査定ページ掲載の買取事例（2026年9月17日確認） <a href={sourceCaseUrl} target="_blank" rel="nofollow noreferrer">{sourceCaseUrl}</a><br />※掲載されている買取事例であり、現在の査定相場を示すものではありません。現在の査定額を保証するものでもありません。※時計の画像はイメージです。</p>
         <div class="story-copy">
           <p>高く売りたいなら、複数店舗で査定してもらう方法があります。ただし問題は、<span class="mark">そのために何店舗も回るのが面倒なこと。</span></p>
         </div>
