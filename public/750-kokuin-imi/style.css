@@ -3138,3 +3138,5 @@ body.sk-has-sticky { padding-bottom: 76px; }
 .sk-btn__brand { display: block; margin-bottom: .22em; color: #ffe0dd; font-size: 11px; font-weight: 800; letter-spacing: .12em; }
 .sk-btn__label { display: block; font-size: clamp(19px, 5.3vw, 25px); font-weight: 700; line-height: 1.35; letter-spacing: .02em; text-wrap: balance; word-break: normal; overflow-wrap: break-word; }
 .sk-btn__sub { display: block; margin-top: .35em; color: #ffe0dd; font-size: 12.5px; line-height: 1.55; word-break: normal; overflow-wrap: break-word; }
+/* CTAの文言は文節（<wbr>）でだけ改行する */
+.sk-btn__label, .sk-btn__sub { word-break: keep-all; overflow-wrap: anywhere; }
