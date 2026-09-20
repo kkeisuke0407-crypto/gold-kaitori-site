@@ -990,6 +990,18 @@
   color: #b0121a;
 }
 
+/* CTAの先で何が起きるかの補足。CTAより弱く、注記(hero__note)より強い階層に置く */
+.watch-compare--rolex .hero__howto {
+  margin: 12px 0 0;
+  padding-top: 11px;
+  border-top: 1px solid #efe7d8;
+  color: #5c564d;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.7;
+  text-align: left;
+}
+
 /* 注記カード */
 .watch-compare--rolex .hero__note {
   display: flex;
@@ -1035,6 +1047,7 @@
   .watch-compare--rolex .hero__card { padding: 20px 22px 18px; }
   .watch-compare--rolex .hero__trust li { font-size: 12.5px; }
   .watch-compare--rolex .hero__trust svg { width: 26px; height: 26px; }
+  .watch-compare--rolex .hero__howto { font-size: 12.5px; }
   .watch-compare--rolex .hero__note p { font-size: 11.5px; }
 }
 
