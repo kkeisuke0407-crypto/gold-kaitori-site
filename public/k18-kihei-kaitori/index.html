@@ -183,70 +183,44 @@
 
     <p>おすすめランキング1位は、<strong>お店同士が取引する「業者の値段」</strong>で買い取ってくれて、金の手数料が0円の<strong class="em-mark">「まねきや」</strong>です。お電話なら<strong class="em-green">買取額最大20%UP</strong>のキャンペーンも実施中（<span class="kin-camp-fixed">9月30日まで<span class="kin-left"></span></span>）。</p>
 
-    <!-- ============ なぜ今：待つと損 ============ -->
-    <div class="kin-urge">
-      <p class="kin-urge__tag">喜平を持っている方へ</p>
-      <p class="kin-urge__main">その喜平、<br><span>しまっているあいだに</span><br>値下がりしていませんか？</p>
-    </div>
+    <!-- ============ なぜ今：損する3つのパターン ============ -->
+    <h2 id="why-now">【要注意】喜平で損をする人には、3つのパターンがあります</h2>
 
-    <h2 id="price-trend">【注意】待っているあいだに、金の値段は下がることがあります</h2>
+    <p class="kin-intro">「もう少し上がったら売ろう」<br>その「もう少し」のあいだに、<br>数十万円を失った人がいます。</p>
 
-    <p class="kin-intro">「もう少し上がったら売ろう」<br>そう思っているうちに、<br>損をしている人がいます。</p>
-
-    <figure class="kin-photo"><img src="images/gold-price-chart.webp" alt="金の価格推移。金相場は過去最高水準で推移している" width="1000" height="625" loading="lazy"><figcaption>金相場は高値圏で推移しています。</figcaption></figure>
-
-    <p>金の値段は、この1年半で大きく動きました。</p>
-
-    <div class="kin-timeline">
-      <div class="kin-timeline__row"><span class="kin-timeline__k">2025年の最安値</span><span class="kin-timeline__v">14,776<small>円/g</small></span></div>
-      <div class="kin-timeline__row kin-timeline__row--peak"><span class="kin-timeline__k">2026年3月3日<b>過去最高値</b></span><span class="kin-timeline__v">29,969<small>円/g</small></span></div>
-      <div class="kin-timeline__row kin-timeline__row--now"><span class="kin-timeline__k">本日<small id="kin-now-date"></small></span><span class="kin-timeline__v"><span id="kin-now-retail">—</span><small>円/g</small></span></div>
-    </div>
-
-    <div class="kin-gap">
-      <p class="kin-gap__lead">最高値から、1gあたり</p>
-      <p class="kin-gap__num"><span id="kin-gap-g">約6,000円</span><br>下がりました</p>
-      <p class="kin-gap__sub">18金の喜平なら<br>50gで <b id="kin-gap-50">約22万円</b>、<br>100gで <b id="kh-gap-100">約45万円</b> の差です</p>
-    </div>
-
-    <p><strong class="em-red">3月に売っていれば受け取れたお金が、今はもう受け取れません。</strong></p>
-
-    <p>喜平は重いぶん、<strong>少しの値動きでも、金額の差が大きくなります。</strong></p>
-
-    <p>では、この先はどうなるのか。また上がるかもしれないし、もっと下がるかもしれない。<strong>プロでも、分かりません。</strong></p>
-
-    <p><strong class="em-mark">高額になりやすい喜平だからこそ、「今いくらになるか」だけでも知っておく意味があります。</strong></p>
-
-    <div class="kin-calc" id="loss-calc">
-      <div class="kin-calc__head"><span>あなたの喜平、今いくら？</span><span class="kin-calc__date" id="kin-calc-date"></span></div>
-      <div class="kin-calc__body">
-        <div class="kin-calc__form">
-          <label class="kin-calc__field"><span>種類</span>
-            <select id="kin-calc-kind"><option value="k18" selected>K18（18金）</option><option value="k24">K24（純金）</option><option value="k14">K14（14金）</option></select>
-          </label>
-          <label class="kin-calc__field"><span>重さ（g）</span>
-            <input id="kin-calc-g" type="number" inputmode="decimal" min="0" step="0.1" value="50">
-          </label>
-        </div>
-        <div class="kin-calc__result">
-          <span class="kin-calc__result-label">今売ったときの目安</span>
-          <span class="kin-calc__result-val" id="kin-calc-now">—</span>
-          <span class="kin-calc__result-note" id="kin-calc-loss"></span>
-          <span class="kin-calc__result-note" id="kin-calc-fee"></span>
-          <span class="kin-calc__result-note">※ 相場から出した目安です。実際の金額は、お店の査定で決まります。</span>
-        </div>
+    <div class="kh-risk">
+      <div class="kh-risk__item">
+        <p class="kh-risk__h"><b>1</b>待つうちに、値下がりする</p>
+        <p class="kh-risk__big">3月の最高値から、1gあたり<br><span id="kin-gap-g">約5,800円</span> 下がりました</p>
+        <p>18金の喜平なら、<strong>50gで<em id="kin-gap-50">約22万円</em>、100gで<em id="kh-gap-100">約44万円</em></strong>。持っていただけで、これだけ減った計算です。</p>
+      </div>
+      <div class="kh-risk__item">
+        <p class="kh-risk__h"><b>2</b>あわてて売って、後悔する</p>
+        <p class="kh-risk__big">金の買取トラブルは<br>5年で<span>約5.7倍</span></p>
+        <p>「査定だけのつもりが、断りきれずに売ってしまった」。そんな相談が増えています。<strong class="em-red">お店で売ったら、クーリング・オフはできません。</strong></p>
+      </div>
+      <div class="kh-risk__item">
+        <p class="kh-risk__h"><b>3</b>しまったまま、家族が困る</p>
+        <p class="kh-risk__big">高齢者の<span>約8人に1人</span>が<br>認知症と推計されています</p>
+        <p>価値を知らない家族が手放してしまう。相続で「誰の物か」ともめる。<strong>しまっておくだけでは、喜平は1円も生みません。</strong></p>
       </div>
     </div>
 
-    <div class="ui-point">
-      <p class="ui-ttl">今すぐ、金額だけでも聞いておきたい4つの理由</p>
-      <ul class="ui-check">
-        <li><strong>金の値段は毎日変わる。</strong>昨日の値段では、もう売れません</li>
-        <li><strong>喜平は重いぶん、差も大きい。</strong>少し下がるだけで、数万円変わります</li>
-        <li><strong>キャンペーンには締め切りがある。</strong><span class="kin-camp-fixed">9月30日まで<span class="kin-left"></span></span></li>
-        <li><strong>金額を聞くだけなら0円。</strong>売らなくても大丈夫です</li>
-      </ul>
+    <p>この先、金の値段が上がるか下がるかは、<strong>プロでも分かりません。</strong>分かっているのは、<strong>喜平は重いぶん、少しの値動きで数万円が動く</strong>ということだけです。</p>
+
+    <p><strong class="em-mark">損をしない方法は、ひとつだけ。売る前に、「今いくらか」を知っておくことです。</strong></p>
+
+    <div class="kh-flow">
+      <p class="kh-flow__ttl">喜平を売るときの、正しい順番</p>
+      <ol class="kh-flow__steps">
+        <li><b>1</b>金額を<br>聞く</li>
+        <li><b>2</b>ほかと<br>比べる</li>
+        <li><b>3</b>納得したら<br>売る</li>
+      </ol>
+      <p class="kh-flow__note">聞く・比べるだけなら、0円です</p>
     </div>
+
+    <p>査定を受けても、<strong>売る義務はありません。</strong><span class="kin-camp-fixed">しかも、まねきやの電話限定キャンペーンは<strong class="em-red">9月30日まで<span class="kin-left"></span></strong>。</span></p>
 
     <p class="ui-ctalead">↓ 値下がりする前に、喜平の今の金額を聞いておく ↓</p>
     <div class="kin-cta-block">
@@ -259,79 +233,19 @@
       <a class="kin-cta kin-cta--web kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">まねきやの公式サイト</a>
     </div>
 
-    <p class="kin-note">※ 金の値段は田中貴金属の店頭小売価格（税込）。2025年の最安値は年間最安値（税抜13,433円）を税込にした値、過去最高値は2026年3月3日の値です。本日の値は毎営業日の公表値を自動で表示しています。過去の値動きは、将来を約束するものではありません。</p>
+    <p class="kin-note">※ 金の値段は田中貴金属の店頭小売価格（税込）。過去最高値は2026年3月3日の29,969円/g。本日の値は毎営業日の公表値を自動で計算しています。18金は金75%として換算した目安です。過去の値動きは、将来を約束するものではありません。<br>※ 出典：<a href="https://www.kokusen.go.jp/news/data/n-20260902_1.html" target="_blank" rel="noopener noreferrer">国民生活センター「店舗でのアクセサリーまたは貴金属等の買取に関する消費者トラブルにご注意！」（2026年9月2日）</a>（相談件数 2020年度165件→2025年度937件）／厚生労働科学研究「認知症及び軽度認知障害の有病率調査並びに将来推計に関する研究」（研究代表者 二宮利治）</p>
 
-    <!-- ============ なぜ今：トラブル急増 ============ -->
-    <h2 id="trouble">【急増中】金の買取トラブル、5年で約6倍に</h2>
+    <!-- ============ 1位 まねきや（なぜまねきや を統合） ============ -->
+    <h2 id="manekiya"><span id="why-manekiya"></span>1位 まねきや｜迷ったら、ここ。損しないための理由</h2>
 
-    <div class="kin-quote kin-quote--bad">
-      <p>「査定だけのつもりだったのに、断りきれずに売ってしまった」</p>
-      <p>「『古い金は価値が下がる』とせかされて、手放してしまった」</p>
-    </div>
+    <p class="kin-banner-label">まねきや <small>PR</small></p>
+    <a class="kin-pv-banner kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer" aria-label="まねきや公式サイト">
+      <img src="images/banner-manekiya.webp" alt="金・貴金属を売るなら、高価買取専門店まねきやへ" width="300" height="300" loading="lazy">
+    </a>
 
-    <p>こんな相談が、国民生活センターに次々と寄せられています。</p>
-
-    <div class="kin-stat">
-      <div class="kin-stat__row"><span>2020年度</span><b>165件</b></div>
-      <div class="kin-stat__arrow" aria-hidden="true">▼</div>
-      <div class="kin-stat__row kin-stat__row--now"><span>2025年度</span><b>937件</b></div>
-      <p class="kin-stat__note">店舗での貴金属などの買取トラブルの相談件数。<strong>約5.7倍</strong>に増えています。</p>
-    </div>
-
-    <p>金の値段が高い今、あせって売った人がトラブルにあっています。</p>
-
-    <div class="ui-caution">
-      <p class="ui-ttl">お店で売ったら、あとから取り消せません</p>
-      <p><strong class="em-red">お店に持ち込んで売った場合、クーリング・オフはできません。</strong>一度売ってしまったら、取り戻せないと思ってください。</p>
-    </div>
-
-    <p>こんなお店は、注意してください。</p>
-
-    <ul class="ui-check ui-check--x">
-      <li>「査定だけ」と言ったのに、なかなか帰らせてくれない</li>
-      <li>「今日売らないと損ですよ」と、その場で決めさせようとする</li>
-      <li>手数料やキャンセル料の説明がない</li>
-      <li>金額を書いた紙をくれない</li>
-    </ul>
-
-    <p><strong class="em-red">高額な喜平ほど、その場で決めないでください。</strong>査定を受けても、<strong>売る義務はありません。</strong></p>
-
-    <div class="kh-flow">
-      <p class="kh-flow__ttl">喜平を売るときの、正しい順番</p>
-      <ol class="kh-flow__steps">
-        <li><b>1</b>金額を<br>聞く</li>
-        <li><b>2</b>ほかと<br>比べる</li>
-        <li><b>3</b>納得したら<br>売る</li>
-      </ol>
-      <p class="kh-flow__note">聞く・比べるだけなら、0円です</p>
-    </div>
-
-    <p><strong class="em-mark">だから今日やるのは、「売る」ではなく「今の金額を確認する」ことです。</strong></p>
-
-    <p class="kin-note">※ 出典：<a href="https://www.kokusen.go.jp/news/data/n-20260902_1.html" target="_blank" rel="noopener noreferrer">国民生活センター「店舗でのアクセサリーまたは貴金属等の買取に関する消費者トラブルにご注意！」（2026年9月2日）</a></p>
-
-    <!-- ============ なぜ今：いつか売ろう、が危ない ============ -->
-    <h2 id="why-now">「いつか売ろう」が、一番あぶない</h2>
-
-    <p>昔買ったまま、引き出しの奥にしまってある喜平。<strong>つけないままでは、1円も生みません。</strong>それどころか、こんなことが起こります。</p>
-
-    <ul class="ui-check ui-check--x">
-      <li>どこにしまったか、忘れてしまう</li>
-      <li>価値を知らない家族が、ただのアクセサリーだと思って手放してしまう</li>
-      <li>相続のときに、誰の物かで家族がもめる</li>
-    </ul>
-
-    <p>それに、人はいつまでも元気とは限りません。<strong>認知症の人は2025年に約472万人、高齢者の約8人に1人</strong>と推計されています。</p>
-
-    <p><strong class="em-mark">本人が元気で、家族と話し合えるうちに。まずは「この喜平が今いくらになるか」だけ、確かめておきましょう。</strong></p>
-
-    <p class="kin-note">※ 出典：厚生労働科学研究「認知症及び軽度認知障害の有病率調査並びに将来推計に関する研究」（研究代表者 二宮利治）</p>
-
-    <!-- ============ なぜまねきや ============ -->
-    <h2 id="why-manekiya">迷ったら、まねきや。損しないための理由はこれ！</h2>
+    <p>『まねきや』は、全国に30店舗以上ある<strong>買取の専門店</strong>です。選ぶ理由は、この5つです。</p>
 
     <div class="ui-reco">
-      <img class="ui-reco__fig" src="images/banner-manekiya-kaitori.webp" alt="買取と販売 まねきや。金・貴金属からブランド品まで幅広く買取" width="660" height="473" loading="lazy">
       <ol>
         <li>お店同士が取引する<strong>「業者の値段」</strong>で買い取ってくれる</li>
         <li>金の<strong>手数料が0円</strong>。そのぶん、手元に残るお金が増える</li>
@@ -363,17 +277,6 @@
       </a>
       <a class="kin-cta kin-cta--web kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer">まねきやの公式サイト</a>
     </div>
-
-    <h2 id="manekiya">1位 まねきや</h2>
-
-    <p class="kin-banner-label">まねきや <small>PR</small></p>
-    <a class="kin-pv-banner kin-aff" href="https://ad-fam.com/ad/p/r?_site=49248&_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer" aria-label="まねきや公式サイト">
-      <img src="images/banner-manekiya.webp" alt="金・貴金属を売るなら、高価買取専門店まねきやへ" width="300" height="300" loading="lazy">
-    </a>
-
-    <p>『まねきや』は、全国に30店舗以上ある<strong>買取の専門店</strong>です。金やプラチナを、<strong>お店同士が取引する「業者の値段」</strong>で買い取ってくれます。</p>
-
-    <p>今なら金の手数料が0円。さらに電話で申し込むと、<strong class="em-green">買取額が最大20%UP</strong>するキャンペーン中です（<span class="kin-camp-fixed">9月30日まで<span class="kin-left"></span></span>）。</p>
 
     <p>売り方は「お店に持っていく」「家に来てもらう」「送る」の3つ。<strong>家に来てもらう料金も、値段を見てもらう料金も0円</strong>です。</p>
 
@@ -419,14 +322,6 @@
     <h3 id="fees">【ここで差がつく】手数料0円＋業者の値段で、<br>受け取れるお金が変わる</h3>
 
     <p>金を売るとき、お店によっては<strong class="em-red">「手数料」が引かれます。</strong>『まねきや』は、金製品の手数料10%を<strong class="em-green">0円にするキャンペーン</strong>を実施中です。</p>
-
-    <div class="kin-fee">
-      <p class="kin-fee__ttl">例えば、20万円分の金を売ると…</p>
-      <div class="kin-fee__row"><span>手数料10%のお店</span><b>18万円</b></div>
-      <div class="kin-fee__row kin-fee__row--mk"><span>手数料0円のまねきや</span><b>20万円</b></div>
-      <p class="kin-fee__diff">その差、<b>2万円</b></p>
-      <p class="kin-fee__note">※ 分かりやすくするための計算例です。実際の金額は査定で決まります。</p>
-    </div>
 
     <p>さらに『まねきや』は、金やプラチナを<strong>業者の値段</strong>で買い取ります。</p>
 
@@ -615,13 +510,6 @@
       <a class="kin-cta kin-cta--web" href="https://brandrevalue.com/" target="_blank" rel="nofollow noopener noreferrer"><span class="kin-cta-brand">ブラリバ</span>公式サイトを見る</a>
     </div>
 
-    <div class="kin-which">
-      <p class="kin-which__ttl">結局、どこに頼めばいい？</p>
-      <div class="kin-which__row"><span>近くにお店が多い方がいい</span><b>おたからや</b></div>
-      <div class="kin-which__row"><span>今日すぐ現金がほしい</span><b>ブラリバ</b></div>
-      <div class="kin-which__row kin-which__row--mk"><span>高く、損せずに売りたい</span><b>まねきや</b></div>
-    </div>
-
     <h2 id="faq">よくある質問</h2>
 
     <div class="kin-faq">
@@ -760,39 +648,21 @@
 </script>
 
 <script>
-/* 待つと損ブロック：最高値（田中・小売 2026/3/3）と本日の小売価格を比べ、手持ちの金の目安を計算する。
-   本日の小売は /rates.json の goldRetail。取れない日は数字を出さない（買取価格と混ぜない）。 */
+/* 損する3つのパターン①：最高値（田中・小売 2026/3/3）と本日の小売価格の差を、18金の喜平50g／100gで出す。
+   本日の小売は /rates.json の goldRetail。取れない日はHTMLの値のまま（買取価格と混ぜない）。 */
 (function () {
   var PEAK_RETAIL = 29969;
   var $ = function (id) { return document.getElementById(id); };
   var yen = function (n) { return Math.round(n).toLocaleString('ja-JP'); };
-  var man = function (n) { return n >= 10000 ? '約' + (Math.round(n / 10000 * 10) / 10).toLocaleString('ja-JP') + '万円' : '約' + yen(n) + '円'; };
+  var man = function (n) { return '約' + Math.round(n / 10000).toLocaleString('ja-JP') + '万円'; };
   fetch('/rates.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
     var retail = typeof d.goldRetail === 'number' ? d.goldRetail : null;
-    if ($('kin-now-date')) $('kin-now-date').textContent = d.updatedAt || '';
-    if ($('kin-calc-date')) $('kin-calc-date').textContent = d.updatedAt || '';
-    var gap = retail ? PEAK_RETAIL - retail : null;
-    if (retail) {
-      $('kin-now-retail').textContent = yen(retail);
-      if (gap > 0) {
-        $('kin-gap-g').textContent = '約' + yen(Math.round(gap / 100) * 100) + '円';
-        var r18 = d.k18 && d.k24 ? d.k18 / d.k24 : 0.75;
-        $('kin-gap-50').textContent = man(gap * r18 * 50);
-        if ($('kh-gap-100')) $('kh-gap-100').textContent = man(gap * r18 * 100);
-      }
-    }
-    function calc() {
-      var kind = $('kin-calc-kind').value, g = parseFloat($('kin-calc-g').value) || 0;
-      var unit = d[kind] || 0, now = unit * g;
-      $('kin-calc-now').textContent = g > 0 && unit ? '約' + yen(now) + '円' : '—';
-      if (gap > 0 && d.k24 && g > 0) {
-        var ratio = unit / d.k24;
-        $('kin-calc-loss').innerHTML = '3月の最高値のときより <b>' + man(gap * ratio * g) + '</b> 少ない計算です（目安）';
-      } else { $('kin-calc-loss').textContent = ''; }
-      $('kin-calc-fee').innerHTML = g > 0 && unit ? '手数料10%のお店なら <b>' + man(now * 0.1) + '</b> 引かれます（例）' : '';
-    }
-    ['kin-calc-kind', 'kin-calc-g'].forEach(function (id) { $(id).addEventListener('input', calc); $(id).addEventListener('change', calc); });
-    calc();
+    var gap = retail ? PEAK_RETAIL - retail : 0;
+    if (gap <= 0) return;
+    var r18 = d.k18 && d.k24 ? d.k18 / d.k24 : 0.75;
+    $('kin-gap-g').textContent = '約' + yen(Math.round(gap / 100) * 100) + '円';
+    $('kin-gap-50').textContent = man(gap * r18 * 50);
+    $('kh-gap-100').textContent = man(gap * r18 * 100);
   }).catch(function () {});
 }());
 

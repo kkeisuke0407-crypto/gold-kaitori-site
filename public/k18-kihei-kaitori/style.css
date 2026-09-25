@@ -3228,3 +3228,13 @@ h2, h3,
 .kin-gap__sub b { white-space: nowrap; }
 .kh-flow__steps li { word-break: keep-all; }
 .kh-flow__note { margin-top: .7em !important; font-size: 13px; font-weight: 800; color: #1f7a4c; }
+
+/* 損する3つのパターン */
+.kh-risk { margin: 1.2em 0 1.4em; font-family: var(--gothic); }
+.kh-risk__item { margin: 0 0 .9em; padding: .95em 1em 1em; border: 2px solid #e6c9c9; border-left: 6px solid var(--alert); border-radius: 12px; background: #fff; }
+.kh-risk__item p { margin: 0; font-size: 15px; line-height: 1.7; }
+.kh-risk__h { display: flex; align-items: center; gap: .5em; margin-bottom: .45em !important; font-size: 17px !important; font-weight: 900; color: var(--sumi); line-height: 1.45 !important; }
+.kh-risk__h b { flex: none; display: grid; place-items: center; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--alert); color: #fff; font-size: 14px; }
+.kh-risk__big { margin: .1em 0 .55em !important; padding: .55em .5em; border-radius: 10px; background: #fdf0f0; text-align: center; font-weight: 900; color: var(--sumi); font-size: 15px !important; line-height: 1.55 !important; }
+.kh-risk__big span { color: var(--alert); font-size: 1.55em; white-space: nowrap; }
+.kh-risk__item em { font-style: normal; color: var(--alert); white-space: nowrap; }
