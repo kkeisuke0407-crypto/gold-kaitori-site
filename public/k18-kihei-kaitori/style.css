@@ -72,6 +72,10 @@
 .mt-banner__img { display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: 4px; background: linear-gradient(135deg, #cfe3f7, #f8d7e3); color: #555; font-size: 14px; line-height: 1.5; }
 .mt-banner__pr { position: absolute; top: 6px; right: 6px; padding: 0 .4em; background: rgba(0,0,0,.55); color: #fff; font-size: 11px; line-height: 1.6; }
 
+/* 写真3枚（お店・実物） */
+.mt-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 1em 0 .3em; }
+.mt-photos img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 4px; }
+
 /* 特徴リスト（黄色い箱） */
 .mt-points { margin: 1.2em 0; padding: 1em 1.1em .6em; border-radius: 6px; background: var(--mt-yellow-bg); }
 .mt-points ul { margin: 0; padding: 0; list-style: none; }
@@ -83,6 +87,11 @@
 .mt-cta__micro { margin: 0 0 .4em !important; font-size: 14px; font-weight: 700; color: #333; }
 .mt-cta__btn { display: block; max-width: 22em; margin: 0 auto; padding: 1em .8em; border-radius: 8px; background: var(--mt-blue-2); box-shadow: 0 4px 0 #0056b3; color: #fff !important; font-size: 17px; font-weight: 900; line-height: 1.4; text-decoration: none; }
 .mt-cta__btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #0056b3; }
+/* 光が走るアニメーション（動きを減らす設定の人には出さない） */
+.mt-cta__btn { position: relative; overflow: hidden; isolation: isolate; }
+.mt-cta__btn::after { content: ""; position: absolute; top: 0; left: -80%; z-index: -1; width: 50%; height: 100%; background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.6) 50%, rgba(255,255,255,0) 100%); transform: skewX(-20deg); animation: mt-shine 2.8s ease-in-out infinite; }
+@keyframes mt-shine { 0% { left: -80%; } 55%, 100% { left: 130%; } }
+@media (prefers-reduced-motion: reduce) { .mt-cta__btn::after { animation: none; display: none; } }
 .mt-cta__note { margin: .5em 0 0 !important; font-size: 12px; font-weight: 700; color: var(--mt-red); }
 .mt-textlink { margin: 1.2em 0 !important; font-weight: 700; line-height: 1.6 !important; }
 .mt-textlink a { color: var(--mt-blue); text-decoration: underline; }
@@ -146,3 +155,4 @@ img { max-width: 100%; height: auto; }
 .mt-disclaimer { margin: 2em 0 0; padding: .9em 1em; border-radius: 6px; background: #f6f6f6; font-size: 12px; line-height: 1.7; color: #666; }
 .mt-disclaimer ul { margin: 0; padding-left: 1.2em; }
 .kin-camp-fixed { white-space: nowrap; }
+.mt-points li b { color: var(--mt-ink); }
