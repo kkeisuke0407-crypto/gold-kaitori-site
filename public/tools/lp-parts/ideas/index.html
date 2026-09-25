@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>LPパーツ案（見直し）</title>
+<link rel="stylesheet" href="../../../kin-kaitori-3sha/style.css">
+<style>
+/* ==== 案ページの枠（pd-*） ==== */
+.pd-top { margin: 0 0 1.4em; padding: 1.1em; border-radius: 14px; background: var(--sumi); color: #fff; font-family: var(--gothic); }
+.pd-top h1 { margin: 0 0 .35em; font-size: 22px; line-height: 1.4; color: #fff; }
+.pd-top p { margin: 0 0 .4em; font-size: 13.5px; line-height: 1.7; color: #e8e4da; }
+.pd-top strong { background: none; color: #ffe58a; }
+.pd-chapter { margin: 2.4em 0 .5em; padding: .55em .8em; border-radius: 10px; background: #ece7da; color: var(--sumi); font-family: var(--gothic); font-size: 18px; font-weight: 900; line-height: 1.4; }
+.pd-chapter__lead { margin: 0 0 1em; font-size: 13.5px; color: var(--ink-sub); font-family: var(--gothic); }
+.pd-toc { display: flex; flex-wrap: wrap; gap: .4em; margin: 0 0 1.2em; padding: 0; list-style: none; font-family: var(--gothic); }
+.pd-toc a { display: inline-block; padding: .35em .75em; border-radius: 999px; border: 1px solid #cfc6b0; background: #fff; font-size: 13px; font-weight: 700; color: var(--sumi); text-decoration: none; }
+.pd-card { margin: 1.2em -.4em 2em; padding: .9em .6em 1em; border: 2px dashed #cfc6b0; border-radius: 14px; background: #fcfbf8; }
+.pd-card__head { display: flex; flex-wrap: wrap; align-items: center; gap: .4em .6em; margin-bottom: .5em; font-family: var(--gothic); }
+.pd-card__name { font-size: 17px; font-weight: 900; color: var(--sumi); }
+.pd-v { padding: .15em .6em; border-radius: 999px; font-size: 12px; font-weight: 900; }
+.pd-v--del { background: #fde8e6; color: #b3261e; }
+.pd-v--new { background: #e3f2e8; color: #1f7a4c; }
+.pd-v--alt { background: #fff1cc; color: #8a5a00; }
+.pd-why { margin: 0 0 .7em; font-family: var(--gothic); font-size: 13.5px; line-height: 1.7; color: var(--ink); }
+.pd-sample { padding: .3em .45em .5em; border-radius: 10px; background: #fff; border: 1px solid #e6e0d2; }
+.pd-sample + .pd-sample { margin-top: .7em; }
+.pd-sample__lbl { margin: 0 0 .2em !important; font-family: var(--gothic); font-size: 11px !important; font-weight: 900; letter-spacing: .1em; color: #a59a80; }
+
+/* ================= 案のパーツ（px-*） ================= */
+/* 見出し系の見分け */
+.px-h3 { margin: 1.6em 0 .8em; padding: 0 0 .35em; border-bottom: 3px solid var(--gold-line); font-family: var(--gothic); font-size: 19px; font-weight: 900; line-height: 1.5; color: var(--sumi); }
+.px-h3 b { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; margin-right: .35em; border-radius: 50%; background: var(--gold); color: #fff; font-size: .85em; vertical-align: .1em; }
+.px-voice { position: relative; margin: 1.2em 0; padding: 1.5em 1em 1.1em; border-radius: 16px; background: #f3f1ec; text-align: center; font-family: var(--gothic); }
+.px-voice__lbl { position: absolute; top: -.8em; left: 50%; transform: translateX(-50%); padding: .2em .9em; border-radius: 999px; background: #6b665c; color: #fff; font-size: 12px; font-weight: 800; white-space: nowrap; }
+.px-voice p { margin: 0; word-break: keep-all; font-size: 18px; font-weight: 800; line-height: 1.7; color: #4a463e; }
+.px-voice p::before { content: "“"; color: #b9b2a3; font-size: 1.6em; line-height: 0; vertical-align: -.3em; margin-right: .1em; }
+.px-voice p::after { content: "”"; color: #b9b2a3; font-size: 1.6em; line-height: 0; vertical-align: -.3em; margin-left: .1em; }
+.px-say { margin: 1.4em 0; padding: .8em 0; border-top: 1px solid var(--sumi); border-bottom: 1px solid var(--sumi); text-align: center; font-family: var(--gothic); font-size: clamp(20px, 5.8vw, 24px); font-weight: 900; line-height: 1.6; color: var(--sumi); }
+
+/* 値札 */
+.px-tag { position: relative; margin: 1.2em auto; max-width: 20em; padding: 1em 1.2em 1em 2.4em; border-radius: 10px 18px 18px 10px; background: #fffaf0; border: 3px solid var(--gold-line); font-family: var(--gothic); }
+.px-tag::before { content: ""; position: absolute; left: .8em; top: 50%; width: .8em; height: .8em; margin-top: -.4em; border-radius: 50%; background: #fff; border: 3px solid var(--gold-line); }
+.px-tag__ttl { margin: 0 0 .3em !important; font-size: 13px; font-weight: 800; color: var(--ink-sub); }
+.px-tag__row { display: flex; justify-content: space-between; align-items: baseline; gap: .5em; margin: 0 !important; font-weight: 900; }
+.px-tag__row span { font-size: 16px; color: var(--sumi); }
+.px-tag__row b { font-size: clamp(24px, 7vw, 30px); color: var(--alert); white-space: nowrap; }
+.px-tag__note { margin: .4em 0 0 !important; font-size: 11.5px; color: var(--ink-sub); }
+
+/* 3月→今日（損の差＋年表を1つに） */
+.px-then { margin: 1.2em 0; font-family: var(--gothic); }
+.px-then__pair { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .4em; }
+.px-then__c { padding: .7em .4em; border-radius: 12px; text-align: center; background: #fff; border: 2px solid var(--rule); }
+.px-then__c--now { border-color: var(--alert); background: #fdf0f0; }
+.px-then__k { display: block; font-size: 12px; font-weight: 800; color: var(--ink-sub); }
+.px-then__v { display: block; font-size: clamp(19px, 5.6vw, 24px); font-weight: 900; color: var(--sumi); white-space: nowrap; }
+.px-then__c--now .px-then__v { color: var(--alert); }
+.px-then__v small { font-size: .55em; }
+.px-then__arrow { font-size: 20px; color: var(--alert); font-weight: 900; }
+.px-then__diff { margin: .6em 0 0 !important; padding: .6em; border-radius: 10px; background: var(--alert); color: #fff; text-align: center; font-size: 15px; font-weight: 800; line-height: 1.6; }
+.px-then__diff b { color: #ffe58a; font-size: 1.25em; }
+
+/* 新聞記事風 */
+.px-news { margin: 1.2em 0; padding: .9em 1em 1em; background: #fbf8f1; border: 1px solid #cfc6b0; box-shadow: 3px 3px 0 #e6dfcf; font-family: var(--mincho, serif); }
+.px-news__src { margin: 0 0 .4em !important; padding-bottom: .3em; border-bottom: 3px double #6b665c; font-family: var(--gothic); font-size: 12px; font-weight: 800; color: #6b665c; }
+.px-news__h { margin: 0 0 .45em !important; font-size: 20px; font-weight: 900; line-height: 1.45; color: #222; }
+.px-news__h em { font-style: normal; color: var(--alert); }
+.px-news p { margin: 0 0 .3em; font-size: 14.5px; line-height: 1.75; }
+.px-news__date { font-family: var(--gothic); font-size: 11.5px !important; color: var(--ink-sub); }
+
+/* 0円スタンプ */
+.px-zero { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5em; margin: 1.2em 0; font-family: var(--gothic); text-align: center; }
+.px-zero__s { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; border: 3px double var(--win); color: var(--win); transform: rotate(-6deg); background: #f6fbf8; }
+.px-zero__s span { display: block; font-size: 12px; font-weight: 800; line-height: 1.3; }
+.px-zero__s b { display: block; font-size: clamp(24px, 7vw, 30px); font-weight: 900; line-height: 1.05; }
+
+/* 注意（見出し帯つき） */
+.px-warn { margin: 1.2em 0; border: 2px solid var(--alert); border-radius: 12px; overflow: hidden; font-family: var(--gothic); background: #fff; }
+.px-warn__h { margin: 0 !important; padding: .5em .8em; background: var(--alert); color: #fff; font-size: 15.5px; font-weight: 900; line-height: 1.5; }
+.px-warn__h::before { content: "⚠ "; }
+.px-warn__b { padding: .8em .9em; font-size: 15px; line-height: 1.75; }
+.px-warn__b p { margin: 0; }
+
+/* ○×対照表 */
+.px-ox { margin: 1.2em 0; border: 2px solid var(--rule); border-radius: 12px; overflow: hidden; font-family: var(--gothic); background: #fff; }
+.px-ox__row { display: grid; grid-template-columns: 1fr 5.2em 5.2em; align-items: center; border-top: 1px solid var(--rule); }
+.px-ox__row:first-child { border-top: 0; background: #f6f4ee; font-size: 12px; font-weight: 900; color: var(--ink-sub); }
+.px-ox__row > span { padding: .6em .6em; font-size: 14.5px; line-height: 1.5; }
+.px-ox__row > span:nth-child(n+2) { text-align: center; font-size: 22px; font-weight: 900; padding: .35em 0; }
+.px-ox__row:first-child > span:nth-child(n+2) { font-size: 12px; }
+.px-ox__row > span:nth-child(3) { background: #fffaf0; }
+.px-ox__o { color: #c0392b; }
+.px-ox__x { color: #9aa0a8; }
+
+/* 向いている人 */
+.px-fit { margin: 1.2em 0; font-family: var(--gothic); }
+.px-fit__box { padding: .8em .9em; border-radius: 12px; background: #f2f8f4; border: 2px solid #bcd9c7; }
+.px-fit__h { margin: 0 0 .4em !important; font-size: 15px; font-weight: 900; color: var(--win); }
+.px-fit ul { list-style: none; margin: 0; padding: 0; }
+.px-fit li { position: relative; padding: .15em 0 .15em 1.5em; font-size: 15px; line-height: 1.6; }
+.px-fit li::before { content: "✓"; position: absolute; left: 0; color: var(--win); font-weight: 900; }
+.px-fit__note { margin: .5em 0 0 !important; font-size: 13px; line-height: 1.6; color: var(--ink-sub); }
+.px-fit__note b { color: var(--alert); }
+
+/* YES/NO診断 */
+.px-yn { margin: 1.2em 0; font-family: var(--gothic); text-align: center; }
+.px-yn__q { margin: 0 auto !important; max-width: 19em; padding: .7em .8em; border-radius: 12px; background: var(--sumi); color: #fff; font-size: 16px; font-weight: 900; line-height: 1.5; }
+.px-yn__branch { display: grid; grid-template-columns: 1fr 1fr; gap: .5em; margin-top: .5em; }
+.px-yn__a { padding: .6em .4em; border-radius: 12px; border: 2px solid var(--rule); background: #fff; }
+.px-yn__a--yes { border-color: #c9a227; background: #fffaf0; }
+.px-yn__lbl { display: block; font-size: 13px; font-weight: 900; color: var(--ink-sub); }
+.px-yn__a--yes .px-yn__lbl { color: #8a6d1f; }
+.px-yn__to { display: block; margin-top: .2em; font-size: 17px; font-weight: 900; color: var(--sumi); }
+.px-yn__why { display: block; margin-top: .15em; font-size: 12px; line-height: 1.5; color: var(--ink-sub); }
+
+/* まとめ（ボタン直結） */
+.px-sum { margin: 1.2em 0; padding: 1em; border-radius: 14px; background: #fffaf0; border: 3px solid #c9a227; font-family: var(--gothic); }
+.px-sum__h { margin: 0 0 .5em !important; font-size: 17px; font-weight: 900; text-align: center; color: var(--sumi); }
+.px-sum ol { margin: 0 0 .8em; padding: 0; list-style: none; counter-reset: s; }
+.px-sum li { position: relative; padding: .35em 0 .35em 2em; border-bottom: 1px dashed var(--gold-line); font-size: 15.5px; font-weight: 700; line-height: 1.55; }
+.px-sum li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: .4em; width: 1.5em; height: 1.5em; border-radius: 50%; background: #8a6d1f; color: #fff; text-align: center; line-height: 1.5em; font-size: 13px; font-weight: 900; }
+.px-sum__btn { display: block; padding: .8em; border-radius: 10px; background: #d7261e; color: #fff; text-align: center; font-size: 17px; font-weight: 900; text-decoration: none; box-shadow: 0 4px 0 #9e1a14; }
+
+/* 受取額の明細 */
+.px-bill { margin: 1.2em auto; max-width: 21em; padding: 1em 1.1em; background: #fff; border: 1px solid #d9d2c1; box-shadow: 0 6px 16px rgba(0,0,0,.08); font-family: var(--gothic); }
+.px-bill__h { margin: 0 0 .6em !important; padding-bottom: .4em; border-bottom: 2px solid var(--sumi); text-align: center; font-size: 15px; font-weight: 900; letter-spacing: .15em; }
+.px-bill__r { display: flex; justify-content: space-between; gap: .5em; margin: 0 !important; padding: .35em 0; border-bottom: 1px dotted #cfc6b0; font-size: 14.5px; }
+.px-bill__r--minus b { color: var(--alert); }
+.px-bill__r--total { border-bottom: 0; padding-top: .6em; font-size: 16px; font-weight: 900; }
+.px-bill__r--total { align-items: baseline; }
+.px-bill__r--total b { font-size: 1.3em; color: var(--win); white-space: nowrap; }
+.px-bill__r b { white-space: nowrap; }
+.px-bill__note { margin: .5em 0 0 !important; font-size: 11.5px; color: var(--ink-sub); }
+
+/* 電話メモ */
+.px-memo { position: relative; margin: 1.4em auto; max-width: 21em; padding: 1.2em 1.1em 1em; background: #fff8c9; box-shadow: 0 4px 10px rgba(0,0,0,.1); transform: rotate(-1deg); font-family: var(--gothic); }
+.px-memo::before { content: ""; position: absolute; top: -10px; left: 50%; width: 70px; height: 20px; margin-left: -35px; background: rgba(201,162,39,.45); }
+.px-memo__h { margin: 0 0 .5em !important; font-size: 16px; font-weight: 900; }
+.px-memo ol { margin: 0; padding-left: 1.3em; }
+.px-memo li { margin: 0 0 .35em; font-size: 15.5px; font-weight: 700; line-height: 1.55; }
+
+/* 電話の流れ（会話例） */
+.px-call { margin: 1.2em 0; font-family: var(--gothic); }
+.px-call__m { display: flex; gap: .5em; align-items: flex-start; margin-bottom: .6em; }
+.px-call__m--me { flex-direction: row-reverse; }
+.px-call__ico { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 900; color: #fff; background: #8a6d1f; }
+.px-call__m--me .px-call__ico { background: #6b665c; }
+.px-call__b { padding: .55em .8em; border-radius: 12px; background: #fff; border: 2px solid var(--rule); font-size: 14.5px; line-height: 1.6; }
+.px-call__m--me .px-call__b { background: #f3f1ec; }
+
+/* 締切バナー */
+.px-dead { margin: 1.2em 0; display: flex; align-items: center; gap: .7em; padding: .7em .9em; border-radius: 12px; background: linear-gradient(90deg, #8a6d1f, #b8912f); color: #fff; font-family: var(--gothic); }
+.px-dead__day { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 10px; background: #fff; color: var(--alert); text-align: center; line-height: 1.1; }
+.px-dead__day small { display: block; font-size: 11px; font-weight: 800; color: var(--ink-sub); }
+.px-dead__day b { font-size: 28px; font-weight: 900; }
+.px-dead p { margin: 0; font-size: 14.5px; font-weight: 800; line-height: 1.55; }
+.px-dead p b { color: #ffe58a; font-size: 1.15em; }
+
+/* 筆者プロフィール */
+.px-prof { margin: 1.2em 0; display: flex; gap: .8em; align-items: flex-start; padding: .9em; border-radius: 14px; border: 2px solid var(--rule); background: #fff; font-family: var(--gothic); }
+.px-prof__img { flex: none; width: 64px; height: 64px; border-radius: 50%; background: var(--gold-bg); border: 2px solid var(--gold-line); }
+.px-prof__role { margin: 0 !important; font-size: 12px; font-weight: 800; color: var(--gold); }
+.px-prof__name { margin: 0 0 .3em !important; font-size: 16px; font-weight: 900; color: var(--sumi); }
+.px-prof p { margin: 0; font-size: 13.5px; line-height: 1.65; }
+
+/* 持ち物 */
+.px-bring { margin: 1.2em 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .5em; font-family: var(--gothic); text-align: center; }
+.px-bring__c { padding: .7em .3em; border-radius: 12px; background: #fff; border: 2px solid var(--rule); }
+.px-bring__c i { display: block; font-style: normal; font-size: 26px; line-height: 1.2; }
+.px-bring__c b { display: block; margin-top: .2em; font-size: 13.5px; font-weight: 900; }
+.px-bring__c span { display: block; font-size: 11px; color: var(--ink-sub); line-height: 1.4; }
+
+/* ボタン下のひとこと */
+.px-micro { margin: .5em 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .3em .8em; padding: 0; list-style: none; font-family: var(--gothic); font-size: 13px; font-weight: 800; color: var(--win); }
+.px-micro li::before { content: "✓ "; }
+
+/* 画面下の追従ボタン（見本は枠内に置く） */
+.px-sticky { display: flex; gap: .4em; padding: .5em; border-radius: 12px; background: rgba(255,255,255,.96); box-shadow: 0 -4px 14px rgba(0,0,0,.12); font-family: var(--gothic); }
+.px-sticky a { flex: 1; padding: .7em .3em; border-radius: 8px; text-align: center; font-size: 14.5px; font-weight: 900; color: #fff; text-decoration: none; line-height: 1.3; }
+.px-sticky a small { display: block; font-size: 10.5px; font-weight: 700; opacity: .9; }
+.px-sticky__tel { background: #d7261e; }
+.px-sticky__web { background: #16a34a; }
+
+/* 開閉式FAQ */
+.px-faq details { margin: 0 0 .5em; border: 2px solid var(--rule); border-radius: 10px; background: #fff; font-family: var(--gothic); }
+.px-faq summary { cursor: pointer; padding: .7em .9em; font-size: 15px; font-weight: 900; line-height: 1.5; list-style: none; }
+.px-faq summary::before { content: "Q. "; color: var(--gold); }
+.px-faq details[open] summary { border-bottom: 1px dashed var(--rule); }
+.px-faq details p { margin: 0; padding: .7em .9em; font-size: 14.5px; line-height: 1.7; }
+.px-faq details p::before { content: "A. "; color: var(--alert); font-weight: 900; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="entry-content">
+
+    <div class="pd-top">
+      <h1>LPパーツ案（見直し）</h1>
+      <p>パーツ辞典の見直し案です。<strong>まだどのLPにも使っていません。</strong>選んでもらったものだけ辞典に入れます。</p>
+      <p>1. 見た目が似ている4つの描き分け ／ 2. 指摘されたパーツの「削除」か「代わりの案」 ／ 3. 調べて出した新しいパーツ</p>
+    </div>
+
+    <ul class="pd-toc">
+      <li><a href="#s1">1. 見出し系の描き分け</a></li>
+      <li><a href="#s2">2. 削除・代わりの案</a></li>
+      <li><a href="#s3">3. 新しいパーツ案</a></li>
+    </ul>
+
+    <!-- =============== 1 =============== -->
+    <p class="pd-chapter" id="s1">1. 見出し系の描き分け</p>
+    <p class="pd-chapter__lead">今は「中見出し・小見出し・つかみ・言い切り」がどれも左に金の線が付いた形で、見分けがつきません。役割ごとに形を変えます。</p>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">中見出し（h3）→ 番号＋下線</span></div>
+      <p class="pd-why">左の線をやめて、番号の丸と全幅の下線にします。「ここから小分けの話」だと一目で分かります。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <p class="px-h3"><b>1</b>待っているうちに、値下がりする</p>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--del">削除</span><span class="pd-card__name">小見出し（ui-h4）</span></div>
+      <p class="pd-why">中見出しと役割がかぶるので廃止。見出しは h2 と h3 の2段だけにします。</p>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">つかみ（kin-intro）→ 心の声カード</span></div>
+      <p class="pd-why">見出しと違う「話し言葉」だと分かるよう、灰色の紙に大きなカギカッコ、上に「こんな気持ち、ありませんか？」のラベルを付けます。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-voice"><span class="px-voice__lbl">こんな気持ち、ありませんか？</span><p>もう少し上がってから<wbr>売ろう</p></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">言い切り（kin-punch）→ 上下の線だけ</span></div>
+      <p class="pd-why">箱も色もやめて、上下の細い線と中央寄せの大きな文字だけに。見出しとも枠とも違う「ひと呼吸の言い切り」になります。濃紺のまとめ帯の代わりもこれで兼ねます。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <p class="px-say">決めるのは、<br>金額を知ってから。</p>
+      </div>
+    </section>
+
+    <!-- =============== 2 =============== -->
+    <p class="pd-chapter" id="s2">2. 削除・代わりの案</p>
+    <p class="pd-chapter__lead">指摘された14個です。役割がかぶるものは削除、残す価値があるものは形を変えます。</p>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">重さ別の目安 → 値札</span></div>
+      <p class="pd-why">「今いくら？」の答えを値札の形に。見た瞬間に「値段の話」と分かります。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-tag"><p class="px-tag__ttl">18金の喜平　今日の目安</p><p class="px-tag__row"><span>50g</span><b>約89万円</b></p><p class="px-tag__row"><span>100g</span><b>約178万円</b></p><p class="px-tag__note">今日の18金の値段×重さの目安です</p></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案（2つを1つに）</span><span class="pd-card__name">損の差＋値動きの年表 → 「3月 → 今日」</span></div>
+      <p class="pd-why">2つとも「下がった」を見せる部品なので1つにまとめます。左右に並べて矢印、下の赤い帯に差額。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-then">
+          <div class="px-then__pair">
+            <div class="px-then__c"><span class="px-then__k">3月3日（最高値）</span><span class="px-then__v">29,969<small>円/g</small></span></div>
+            <span class="px-then__arrow">▶</span>
+            <div class="px-then__c px-then__c--now"><span class="px-then__k">今日</span><span class="px-then__v">24,150<small>円/g</small></span></div>
+          </div>
+          <p class="px-then__diff">18金の喜平50gなら <b>約22万円</b> 減った計算</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">件数の増加 → 新聞記事風</span></div>
+      <p class="pd-why">国民生活センターなどの公的な発表を「ニュースの切り抜き」の形で。数字だけより「本当に起きていること」に見えます（記事LPの「ニュース型」）。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-news">
+          <p class="px-news__src">国民生活センター 発表</p>
+          <p class="px-news__h">貴金属の買取トラブル、<br>5年で<em>約5.7倍</em>に</p>
+          <p>「査定だけのつもりが、断りきれずに売ってしまった」などの相談が増えています。</p>
+          <p class="px-news__date">2026年9月2日公表／2020年度165件→2025年度937件</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--del">削除</span><span class="pd-card__name">数字3つ（ui-num）</span></div>
+      <p class="pd-why">3列カードと役割がかぶるので廃止。数字を見せたいときは値札か「0円スタンプ」を使います。</p>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">料金の一覧 → 0円スタンプ</span></div>
+      <p class="pd-why">表ではなく、はんこの形で「0円」を3つ並べます。読まなくても「お金がかからない」が伝わります。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-zero">
+          <div class="px-zero__s"><div><span>査定料</span><b>0円</b></div></div>
+          <div class="px-zero__s"><div><span>出張料</span><b>0円</b></div></div>
+          <div class="px-zero__s"><div><span>キャンセル料</span><b>0円</b></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--del">削除</span><span class="pd-card__name">ビフォー・アフター（ui-ba）</span></div>
+      <p class="pd-why">中身がぼんやりしやすいので廃止。「知っている／知らない」の差は、下の「受取額の明細」で具体的に見せます。</p>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">注意の枠 → ⚠ 見出し帯つき</span></div>
+      <p class="pd-why">薄いピンクの枠だとポイント枠と似て見えるので、上に赤い帯と⚠を付けます。×のチェックリストはこのまま残します。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-warn"><p class="px-warn__h">お店で売ったら、取り消せません</p><div class="px-warn__b"><p>お店に持ち込んで売った場合、<strong class="em-red">クーリング・オフはできません。</strong></p></div></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--del">削除</span><span class="pd-card__name">赤い帯（kin-urge）</span></div>
+      <p class="pd-why">強すぎて浮くので廃止。呼びかけは「心の声カード」で。</p>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">結論ボックス → まとめ＋ボタン直結</span></div>
+      <p class="pd-why">まとめを読んだ直後に押せるよう、番号付き3行とボタンを1つの枠に入れます。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-sum"><p class="px-sum__h">ここまでのまとめ</p><ol><li>喜平は、お店で金額が変わる</li><li>待つほど得とは限らない</li><li>聞くだけなら0円。売らなくてOK</li></ol><a class="px-sum__btn" href="#" onclick="return false">今の金額を電話で聞く</a></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--del">削除</span><span class="pd-card__name">濃紺のまとめ帯（kh-bridge）</span></div>
+      <p class="pd-why">新しい「言い切り（上下の線）」で代用します。</p>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">よくあるお店との違い → ○×対照表</span></div>
+      <p class="pd-why">文字の表をやめて、大きな○と×だけで比べます。50代以上でも一瞬で読めます。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-ox">
+          <div class="px-ox__row"><span></span><span>よくある店</span><span>まねきや</span></div>
+          <div class="px-ox__row"><span>手数料が引かれない</span><span class="px-ox__x">×</span><span class="px-ox__o">○</span></div>
+          <div class="px-ox__row"><span>断っても0円</span><span class="px-ox__x">△</span><span class="px-ox__o">○</span></div>
+          <div class="px-ox__row"><span>刻印がなくても査定</span><span class="px-ox__x">△</span><span class="px-ox__o">○</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">おすすめな人／確認したいこと → 向いている人＋ひとこと注意</span></div>
+      <p class="pd-why">左右2列だと文字が小さく詰まるので、1列の「向いている人」と、下に小さく注意を1行。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-fit"><div class="px-fit__box"><p class="px-fit__h">こんな人に向いています</p><ul><li>喜平・K18を高く売りたい</li><li>他のお店で断られた品がある</li><li>まず金額だけ知りたい</li></ul></div><p class="px-fit__note">注意：<b>20%UPは電話で申し込んだ人だけ</b>。上限・対象品の条件があります。</p></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--alt">代わりの案</span><span class="pd-card__name">結局どこ？の表 → YES/NO診断</span></div>
+      <p class="pd-why">表で他社を並べると成果にならないクリックが増えるので、質問1つで答えが出る形に。答えは「金ならまねきや」に自然に着地します。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-yn"><p class="px-yn__q">売りたいのは、喜平・指輪など<br>「金」の物ですか？</p>
+          <div class="px-yn__branch">
+            <div class="px-yn__a px-yn__a--yes"><span class="px-yn__lbl">はい</span><span class="px-yn__to">まねきや</span><span class="px-yn__why">手数料0円・業者の値段</span></div>
+            <div class="px-yn__a"><span class="px-yn__lbl">いいえ（ブランド品が中心）</span><span class="px-yn__to">ブラリバ</span><span class="px-yn__why">ブランド・宝石に強い</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============== 3 =============== -->
+    <p class="pd-chapter" id="s3">3. 新しいパーツ案（調べて出したもの）</p>
+    <p class="pd-chapter__lead">記事LPでよく使われる「診断」「ニュース型」「権威」「マイクロコピー」「追従ボタン」などをもとに、金買取×50代以上向けに絞りました。特に電話への不安をなくす部品を多めにしています。</p>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">受取額の明細</span></div>
+      <p class="pd-why">「最後にもらえる金額」を買取明細の形で見せます。喜平LPの一番伝えたいこと（今日の値段ではなく、全部でいくら）が1枚で伝わります。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-bill"><p class="px-bill__h">買取明細（例）</p>
+          <p class="px-bill__r"><span>18金の喜平 50g</span><b>891,050円</b></p>
+          <p class="px-bill__r px-bill__r--minus"><span>手数料10%のお店なら</span><b>−89,105円</b></p>
+          <p class="px-bill__r px-bill__r--total"><span>受取額（手数料0円）</span><b>891,050円</b></p>
+          <p class="px-bill__note">※ 仕組みを説明するための計算例です。実際の金額は査定で決まります。</p></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">電話で聞くことメモ（付箋）</span></div>
+      <p class="pd-why">電話が苦手な人向け。「これだけ聞けばいい」を付箋の形で。電話ボタンの直前に置くと、押すハードルが下がります。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-memo"><p class="px-memo__h">電話では、この3つだけ</p><ol><li>全部でいくらになりますか？</li><li>手数料は引かれますか？</li><li>断っても費用はかかりませんか？</li></ol></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">電話の流れ（会話の例）</span></div>
+      <p class="pd-why">「電話したら何を聞かれるの？」の不安を先に消します。3往復まで。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-call">
+          <div class="px-call__m"><span class="px-call__ico">お店</span><div class="px-call__b">お電話ありがとうございます。何をお売りになりたいですか？</div></div>
+          <div class="px-call__m px-call__m--me"><span class="px-call__ico">私</span><div class="px-call__b">18金の喜平ネックレスです。重さは分かりません。</div></div>
+          <div class="px-call__m"><span class="px-call__ico">お店</span><div class="px-call__b">大丈夫です。お店か、ご自宅で見てから金額をお伝えします。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">締切バナー（残り日数）</span></div>
+      <p class="pd-why">キャンペーンの締切を、日めくりの形で。残り日数は固定の締切日から自動計算し、過ぎたら消えます。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-dead"><span class="px-dead__day"><span><small>あと</small><b>5</b><small>日</small></span></span><p>まねきやの電話限定<br><b>買取額 最大20%UP</b>は9月30日まで</p></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">筆者プロフィール</span></div>
+      <p class="pd-why">「元買取業者」の権威を、ページの前半で1回だけ見せます。書いてよいのは事実だけ（経験年数・扱った品など）。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-prof"><span class="px-prof__img"></span><div><p class="px-prof__role">この記事を書いた人</p><p class="px-prof__name">元買取業者　◯◯</p><p>買取店で◯年、金・貴金属の査定をしてきました。売る側の目線で、損しないお店の選び方をやさしく解説します。</p></div></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">持ち物チェック</span></div>
+      <p class="pd-why">「何を持っていけばいい？」を3つのアイコンで。行動の直前（ステップの後）に置きます。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案</p>
+        <div class="px-bring"><div class="px-bring__c"><i>💍</i><b>売りたい物</b><span>壊れていてもOK</span></div><div class="px-bring__c"><i>🪪</i><b>身分証</b><span>免許証など</span></div><div class="px-bring__c"><i>📄</i><b>保証書など</b><span>無くてもOK</span></div></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">ボタン下のひとこと（マイクロコピー）</span></div>
+      <p class="pd-why">ボタンのすぐ下に、押す不安を消す短い言葉を3つ。調べた記事LPの事例でも、最後のひと押しとして使われています。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案（ボタンの下に置く）</p>
+        <div class="kin-cta-block"><a class="kin-phone" href="#" onclick="return false"><span class="kin-cta-brand">まねきや</span><span class="kin-phone__num">電話で査定予約する</span><span class="kin-phone__sub">通話料無料／9:00〜21:00受付</span></a></div>
+        <ul class="px-micro"><li>売らなくてもOK</li><li>聞くだけ0円</li><li>重さが分からなくてもOK</li></ul>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">画面下の追従ボタン</span></div>
+      <p class="pd-why">比較表を過ぎたら画面の下に出る、電話とWEBのボタン。3shaには今ありません（前回の分析で一番効きそうとした部品）。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案（実際は画面の下に固定）</p>
+        <div class="px-sticky"><a class="px-sticky__tel" href="#" onclick="return false">電話で査定予約<small>通話無料・9〜21時</small></a><a class="px-sticky__web" href="#" onclick="return false">公式サイト<small>24時間受付</small></a></div>
+      </div>
+    </section>
+
+    <section class="pd-card">
+      <div class="pd-card__head"><span class="pd-v pd-v--new">新しい案</span><span class="pd-card__name">開閉式のよくある質問</span></div>
+      <p class="pd-why">14問を全部開いたままだと長いので、質問だけ並べてタップで開く形に。ページが短くなります。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">案（タップで開きます）</p>
+        <div class="px-faq"><details open><summary>値段を聞くだけで、売らなくてもいいですか？</summary><p>はい、大丈夫です。査定を受けても、売る義務はありません。</p></details><details><summary>断ったら、お金はかかりませんか？</summary><p>まねきやは、査定料・出張料・キャンセル料を無料と案内しています。</p></details></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+</body>
+</html>
