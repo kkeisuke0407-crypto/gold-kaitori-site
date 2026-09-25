@@ -108,13 +108,6 @@
 .lp-faq details p::before { content: "A. "; color: var(--alert); font-weight: 900; }
 
 /* ---- 喜平LPで追加したパーツ ---- */
-.kh-est { margin: 1.1em 0 1.4em; padding: 1em 1em .9em; border: 3px solid var(--gold-line); border-radius: 14px; background: var(--gold-bg); font-family: var(--gothic); }
-.kh-est p { margin: 0; }
-.kh-est__ttl { text-align: center; font-size: 15px; font-weight: 900; color: var(--sumi); margin-bottom: .5em !important; }
-.kh-est__row { display: flex; align-items: baseline; justify-content: space-between; gap: .6em; padding: .55em .3em; border-top: 1px dashed var(--gold-line); }
-.kh-est__g { font-size: 18px; font-weight: 900; color: var(--ink-sub); }
-.kh-est__v { font-size: clamp(26px, 7.6vw, 34px); font-weight: 900; color: var(--alert); white-space: nowrap; }
-.kh-est__note { margin-top: .5em !important; font-size: 12px; line-height: 1.6; color: var(--ink-sub); }
 .kh-lead { margin: 1.4em 0 .6em; text-align: center; font-family: var(--gothic); font-size: 16px; font-weight: 900; line-height: 1.6; color: var(--sumi); }
 .kihei-infographic { margin: 24px auto; text-align: center; }
 .kihei-infographic img { display: block; width: 100%; height: auto; border-radius: 12px; }

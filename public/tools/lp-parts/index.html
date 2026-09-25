@@ -53,7 +53,7 @@
       <h1>LPパーツ辞典（3sha系）</h1>
       <p>kin-kaitori-3sha と、そこから作ったLPで使うパーツの一覧です。見た目は3shaのCSSをそのまま読んでいるので、本番と同じです。</p>
       <p><strong>ここに無いパーツは作らない。</strong>必要なときは、先に相談してこの辞典に足してから使う。</p>
-      <p>全53パーツ ／ ◎よく使う ○使える △使用注意 …保留</p>
+      <p>全47パーツ ／ ◎よく使う ○使える △使用注意</p>
       <p>「新パーツ（parts.css）」の付いた部品は3shaのCSSに無いので、使うLPの style.css に <code style="color:#ffe58a">tools/lp-parts/parts.css</code> から該当ルールをコピーする。</p>
       <p>見直し案 → <a href="ideas/" style="color:#ffe58a">LPパーツ案（見直し）</a></p>
     </div>
@@ -364,80 +364,6 @@
 
     <section class="pd-card" id="number-3">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--d">… 保留</span>
-        <span class="pd-card__name">重さ別の目安</span>
-        <code class="pd-card__cls">kh-est</code>
-        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>「◯gならいくら？」にすぐ答えるとき。</dd>
-        <dt>ルール</dt><dd>重さは2つまで。「今日の値段×重さの目安」と必ず書く。</dd>
-        <dt class="pd-ng">NG</dt><dd>査定額のように見せる</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kh-est">
-  <p class="kh-est__ttl">18金の喜平、今日の目安</p>
-  <div class="kh-est__row"><span class="kh-est__g">50g</span><span class="kh-est__v">約89.1万円</span></div>
-  <div class="kh-est__row"><span class="kh-est__g">100g</span><span class="kh-est__v">約178.2万円</span></div>
-  <p class="kh-est__note">今日の18金の値段×重さで出した目安です。</p>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kh-est"&gt;
-  &lt;p class="kh-est__ttl"&gt;18金の喜平、今日の目安&lt;/p&gt;
-  &lt;div class="kh-est__row"&gt;&lt;span class="kh-est__g"&gt;50g&lt;/span&gt;&lt;span class="kh-est__v"&gt;約89.1万円&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="kh-est__row"&gt;&lt;span class="kh-est__g"&gt;100g&lt;/span&gt;&lt;span class="kh-est__v"&gt;約178.2万円&lt;/span&gt;&lt;/div&gt;
-  &lt;p class="kh-est__note"&gt;今日の18金の値段×重さで出した目安です。&lt;/p&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="number-4">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--d">… 保留</span>
-        <span class="pd-card__name">損の差（赤枠）</span>
-        <code class="pd-card__cls">kin-gap</code>
-        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>「待ったらこれだけ減った」を1つの数字で見せるとき。</dd>
-        <dt>ルール</dt><dd>1ページ1回。数字は出典のある値から計算する。</dd>
-        <dt class="pd-ng">NG</dt><dd>根拠のない予測の金額</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kin-gap">
-  <p class="kin-gap__lead">最高値から、1gあたり</p>
-  <p class="kin-gap__num"><span>約5,800円</span><br>下がりました</p>
-  <p class="kin-gap__sub">18金の喜平なら<br>50gで <b>約22万円</b>、<br>100gで <b>約44万円</b> の差です</p>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-gap"&gt;
-  &lt;p class="kin-gap__lead"&gt;最高値から、1gあたり&lt;/p&gt;
-  &lt;p class="kin-gap__num"&gt;&lt;span&gt;約5,800円&lt;/span&gt;&lt;br&gt;下がりました&lt;/p&gt;
-  &lt;p class="kin-gap__sub"&gt;18金の喜平なら&lt;br&gt;50gで &lt;b&gt;約22万円&lt;/b&gt;、&lt;br&gt;100gで &lt;b&gt;約44万円&lt;/b&gt; の差です&lt;/p&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="number-5">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--d">… 保留</span>
-        <span class="pd-card__name">値動きの年表</span>
-        <code class="pd-card__cls">kin-timeline</code>
-        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>過去の安値・最高値・今日を並べるとき。</dd>
-        <dt>ルール</dt><dd>3行まで。最高値の行は --peak、今日の行は --now。</dd>
-        <dt class="pd-ng">NG</dt><dd>4行以上並べる</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kin-timeline">
-  <div class="kin-timeline__row"><span class="kin-timeline__k">2025年の最安値</span><span class="kin-timeline__v">14,776<small>円/g</small></span></div>
-  <div class="kin-timeline__row kin-timeline__row--peak"><span class="kin-timeline__k">2026年3月3日<b>過去最高値</b></span><span class="kin-timeline__v">29,969<small>円/g</small></span></div>
-  <div class="kin-timeline__row kin-timeline__row--now"><span class="kin-timeline__k">本日<small>2026年9月25日</small></span><span class="kin-timeline__v">24,150<small>円/g</small></span></div>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-timeline"&gt;
-  &lt;div class="kin-timeline__row"&gt;&lt;span class="kin-timeline__k"&gt;2025年の最安値&lt;/span&gt;&lt;span class="kin-timeline__v"&gt;14,776&lt;small&gt;円/g&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="kin-timeline__row kin-timeline__row--peak"&gt;&lt;span class="kin-timeline__k"&gt;2026年3月3日&lt;b&gt;過去最高値&lt;/b&gt;&lt;/span&gt;&lt;span class="kin-timeline__v"&gt;29,969&lt;small&gt;円/g&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="kin-timeline__row kin-timeline__row--now"&gt;&lt;span class="kin-timeline__k"&gt;本日&lt;small&gt;2026年9月25日&lt;/small&gt;&lt;/span&gt;&lt;span class="kin-timeline__v"&gt;24,150&lt;small&gt;円/g&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="number-6">
-      <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">ニュース（新聞記事風）</span>
         <code class="pd-card__cls">lp-news</code>
@@ -459,30 +385,6 @@
   &lt;p class="lp-news__h"&gt;貴金属の買取トラブル、&lt;br&gt;5年で&lt;em&gt;約5.7倍&lt;/em&gt;に&lt;/p&gt;
   &lt;p&gt;「査定だけのつもりが、断りきれずに売ってしまった」などの相談が増えています。&lt;/p&gt;
   &lt;p class="lp-news__date"&gt;2026年9月2日公表／2020年度165件→2025年度937件&lt;/p&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="number-7">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--d">… 保留</span>
-        <span class="pd-card__name">料金の一覧</span>
-        <code class="pd-card__cls">ui-price</code>
-        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>査定料・出張料などの「0円」を並べるとき。</dd>
-        <dt>ルール</dt><dd>4行まで。無料の行は ui-price__v--zero。</dd>
-        <dt class="pd-ng">NG</dt><dd>有料の項目を隠す</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="ui-price">
-  <div class="ui-price__row"><span class="ui-price__k">査定料</span><span class="ui-price__v ui-price__v--zero">無料</span></div>
-  <div class="ui-price__row"><span class="ui-price__k">出張料</span><span class="ui-price__v ui-price__v--zero">無料</span></div>
-  <div class="ui-price__row"><span class="ui-price__k">キャンセル料</span><span class="ui-price__v ui-price__v--zero">無料</span></div>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="ui-price"&gt;
-  &lt;div class="ui-price__row"&gt;&lt;span class="ui-price__k"&gt;査定料&lt;/span&gt;&lt;span class="ui-price__v ui-price__v--zero"&gt;無料&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="ui-price__row"&gt;&lt;span class="ui-price__k"&gt;出張料&lt;/span&gt;&lt;span class="ui-price__v ui-price__v--zero"&gt;無料&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="ui-price__row"&gt;&lt;span class="ui-price__k"&gt;キャンセル料&lt;/span&gt;&lt;span class="ui-price__v ui-price__v--zero"&gt;無料&lt;/span&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
@@ -672,32 +574,6 @@
 
     <section class="pd-card" id="compare-2">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--d">… 保留</span>
-        <span class="pd-card__name">よくあるお店との違い</span>
-        <code class="pd-card__cls">kin-diff</code>
-        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>推薦するお店と一般的なお店の違いを表で見せるとき。</dd>
-        <dt>ルール</dt><dd>4行まで。右の列は太字で短く。</dd>
-        <dt class="pd-ng">NG</dt><dd>他社の実名を入れる</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kin-diff">
-  <div class="kin-diff__row kin-diff__row--head"><span></span><span>よくあるお店</span><span>まねきや</span></div>
-  <div class="kin-diff__row"><span>手数料</span><span>引かれることがある</span><span><b>0円</b></span></div>
-  <div class="kin-diff__row"><span>断ったとき</span><span>費用がかかる店もある</span><span><b>0円</b></span></div>
-  <div class="kin-diff__row"><span>刻印がない金</span><span>断られることもある</span><span><b>機械で測って査定</b></span></div>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-diff"&gt;
-  &lt;div class="kin-diff__row kin-diff__row--head"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;よくあるお店&lt;/span&gt;&lt;span&gt;まねきや&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="kin-diff__row"&gt;&lt;span&gt;手数料&lt;/span&gt;&lt;span&gt;引かれることがある&lt;/span&gt;&lt;span&gt;&lt;b&gt;0円&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="kin-diff__row"&gt;&lt;span&gt;断ったとき&lt;/span&gt;&lt;span&gt;費用がかかる店もある&lt;/span&gt;&lt;span&gt;&lt;b&gt;0円&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="kin-diff__row"&gt;&lt;span&gt;刻印がない金&lt;/span&gt;&lt;span&gt;断られることもある&lt;/span&gt;&lt;span&gt;&lt;b&gt;機械で測って査定&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="compare-3">
-      <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
         <span class="pd-card__name">向いている人＋ひとこと注意</span>
         <code class="pd-card__cls">lp-fit</code>
@@ -720,7 +596,7 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="compare-4">
+    <section class="pd-card" id="compare-3">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">こんな人向け（1行）</span>
@@ -736,7 +612,7 @@
       <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;p class="kin-fit"&gt;こんな人向け：&lt;strong&gt;近くにお店がたくさんある方がいい人&lt;/strong&gt;&lt;/p&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="compare-5">
+    <section class="pd-card" id="compare-4">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">縦カードの比較</span>
@@ -768,7 +644,7 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="compare-6">
+    <section class="pd-card" id="compare-5">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">ランキングカード</span>
@@ -787,30 +663,6 @@
       <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="ui-rank ui-rank--1"&gt;
   &lt;div class="ui-rank__head"&gt;&lt;span class="ui-rank__no"&gt;1&lt;/span&gt;&lt;span class="ui-rank__name"&gt;まねきや&lt;/span&gt;&lt;span class="ui-rank__tag"&gt;K18・喜平・古い金なら&lt;/span&gt;&lt;/div&gt;
   &lt;div class="ui-rank__body"&gt;&lt;p&gt;公式サイトで&lt;strong&gt;品位別の価格&lt;/strong&gt;を確認でき、刻印が読めない品も専門機器で調べられます。&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="compare-7">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--d">… 保留</span>
-        <span class="pd-card__name">結局どこ？の表</span>
-        <code class="pd-card__cls">kin-which</code>
-        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>3shaのランキングの最後だけ。</dd>
-        <dt>ルール</dt><dd>喜平LPでは不要として削除した。使うかは都度確認。</dd>
-        <dt class="pd-ng">NG</dt><dd>2社以外への流出を増やす置き方</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kin-which">
-  <p class="kin-which__ttl">結局、どこに頼めばいい？</p>
-  <div class="kin-which__row"><span>近くにお店が多い方がいい</span><b>おたからや</b></div>
-  <div class="kin-which__row kin-which__row--mk"><span>高く、損せずに売りたい</span><b>まねきや</b></div>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-which"&gt;
-  &lt;p class="kin-which__ttl"&gt;結局、どこに頼めばいい？&lt;/p&gt;
-  &lt;div class="kin-which__row"&gt;&lt;span&gt;近くにお店が多い方がいい&lt;/span&gt;&lt;b&gt;おたからや&lt;/b&gt;&lt;/div&gt;
-  &lt;div class="kin-which__row kin-which__row--mk"&gt;&lt;span&gt;高く、損せずに売りたい&lt;/span&gt;&lt;b&gt;まねきや&lt;/b&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
@@ -1285,6 +1137,7 @@
       <li><strong>緑の順番図（kh-flow）・文字の順番（kh-steps）</strong>：→ ui-step か図解画像で</li>
       <li><strong>小見出し（ui-h4）・数字3つ（ui-num）・ビフォー・アフター（ui-ba）</strong>：役割がかぶるので廃止</li>
       <li><strong>赤い帯（kin-urge）・濃紺のまとめ帯（kh-bridge）</strong>：強すぎる／言い切り（lp-say）で代用</li>
+      <li><strong>重さ別の目安（kh-est）・損の差（kin-gap）・値動きの年表（kin-timeline）・料金の一覧（ui-price）・よくあるお店との違い（kin-diff）・結局どこ？の表（kin-which）</strong>：2026-09-25 削除</li>
       <li><strong>見直し案で不採用：値札・「3月→今日」・0円スタンプ・○×対照表・YES/NO診断・締切バナー・画面下の追従ボタン</strong>：2026-09-25 不採用</li>
       <li><strong>相場の計算機（kin-calc）</strong>：喜平LPでは削除。3shaでは使用中。新しく使うときは確認</li>
     </ul>
