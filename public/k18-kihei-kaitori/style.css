@@ -156,15 +156,4 @@ img { max-width: 100%; height: auto; }
 .mt-disclaimer ul { margin: 0; padding-left: 1.2em; }
 .kin-camp-fixed { white-space: nowrap; }
 .mt-points li b { color: var(--mt-ink); }
-/* 相場の数字の表 */
-.mt-price { width: 100%; margin: 1em 0 1.2em; border-collapse: collapse; background: #fff; font-size: 15px; line-height: 1.5; }
-.mt-price caption { padding: .5em; background: #333; color: #fff; font-size: 14px; font-weight: 700; }
-.mt-price th, .mt-price td { padding: .6em .7em; border: 1px solid var(--mt-rule); }
-.mt-price th { width: 55%; background: #f7f7f7; text-align: left; font-weight: 700; }
-.mt-price th small { display: block; font-size: 11.5px; font-weight: 400; color: var(--mt-sub); }
-.mt-price td { text-align: right; font-size: 18px; font-weight: 900; white-space: nowrap; }
-.mt-price .is-peak th small { color: var(--mt-red); font-weight: 700; }
-.mt-price .is-now td { color: var(--mt-blue); }
-.mt-price .is-diff th, .mt-price .is-diff td { background: var(--mt-red-bg); color: var(--mt-red); }
-.mt-price--kihei caption { background: var(--mt-red); }
-.mt-price--kihei td { color: var(--mt-red); font-size: 20px; }
+
