@@ -25,7 +25,7 @@ FV
 ## 1. 店によって査定が変わる図
 
 画像:
-`images/kihei-store-difference.webp`
+`images/kihei-store-difference.svg`
 
 配置位置:
 `<h2 id="kihei-shop">ただし、喜平は「今日の金の値段」だけで店を決めないでください</h2>`
@@ -66,7 +66,7 @@ HTML例:
 ```html
 <figure class="kihei-infographic">
   <img
-    src="images/kihei-store-difference.webp"
+    src="images/kihei-store-difference.svg"
     alt="同じ18金の喜平でも、買取店によって査定の見方や手数料が違うため査定額が変わる"
     width="900"
     height="675"
@@ -80,7 +80,7 @@ HTML例:
 ## 2. 元買取業者が見る3つ
 
 画像:
-`images/kihei-advisor-3points.webp`
+`images/kihei-advisor-3points.svg`
 
 配置位置:
 `<h2 id="kihei-check">元買取業者の私なら、ここを見ます</h2>`
@@ -112,7 +112,7 @@ HTML例:
 ```html
 <figure class="kihei-infographic">
   <img
-    src="images/kihei-advisor-3points.webp"
+    src="images/kihei-advisor-3points.svg"
     alt="元買取業者が喜平査定で確認する3つのポイント。全部でいくらか、手数料が引かれないか、喜平として見てくれるか"
     width="800"
     height="600"
@@ -134,7 +134,7 @@ HTML例:
 ## 4. 相場下落の図
 
 画像:
-`images/kihei-price-drop.webp`
+`images/kihei-price-drop.svg`
 
 配置位置:
 `<h2 id="why-now">【今が売り時？】喜平は、待つほど得とは限りません</h2>`
@@ -177,7 +177,7 @@ HTML例:
 ```html
 <figure class="kihei-infographic">
   <img
-    src="images/kihei-price-drop.webp"
+    src="images/kihei-price-drop.svg"
     alt="2026年3月3日の金価格29,969円から9月25日の24,150円まで下落。18金喜平では50gで約22万円、100gで約44万円の差"
     width="800"
     height="600"
@@ -188,7 +188,7 @@ HTML例:
 
 ### 重要
 
-この画像には
+このSVGには
 「2026年9月25日」「24,150円/g」
 が固定で入っている。
 
@@ -200,7 +200,7 @@ HTML例:
 ## 5. 売る正しい順番
 
 画像:
-`images/kihei-selling-steps.webp`
+`images/kihei-selling-steps.svg`
 
 配置位置:
 `<h3 id="trouble">ただし、あわてて売る必要はありません</h3>`
@@ -246,7 +246,7 @@ HTML例:
 ```html
 <figure class="kihei-infographic">
   <img
-    src="images/kihei-selling-steps.webp"
+    src="images/kihei-selling-steps.svg"
     alt="喜平を売る正しい順番。今いくらか聞く、ほかのお店と比べる、納得したら売る"
     width="800"
     height="600"
