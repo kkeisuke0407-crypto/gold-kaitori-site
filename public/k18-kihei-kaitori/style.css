@@ -3234,3 +3234,8 @@ h2, h3,
 .kh-steps strong, .kh-steps span { display: block; }
 .kh-steps strong { font-size: 17px; background: none; }
 .kh-steps span { margin: .15em 0; color: var(--gold-line); font-weight: 900; }
+
+/* 画像差し込み（IMAGE_PLACEMENT_PLAN.md） */
+.kihei-infographic { margin: 24px auto; text-align: center; }
+.kihei-infographic img { display: block; width: 100%; height: auto; border-radius: 12px; }
+@media (min-width: 768px) { .kihei-infographic { max-width: 800px; } }
