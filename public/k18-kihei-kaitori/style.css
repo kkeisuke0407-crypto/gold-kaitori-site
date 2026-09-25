@@ -3228,3 +3228,9 @@ h2, h3,
 .kin-gap__sub b { white-space: nowrap; }
 .kh-flow__steps li { word-break: keep-all; }
 .kh-flow__note { margin-top: .7em !important; font-size: 13px; font-weight: 800; color: #1f7a4c; }
+
+/* 売る順番（① → ② → ③） */
+.kh-steps { margin: 1em 0 1.2em; text-align: center; line-height: 1.6; }
+.kh-steps strong, .kh-steps span { display: block; }
+.kh-steps strong { font-size: 17px; background: none; }
+.kh-steps span { margin: .15em 0; color: var(--gold-line); font-weight: 900; }
