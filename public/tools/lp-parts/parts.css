@@ -1,0 +1,120 @@
+/* ============================================================================
+   LPパーツ辞典（3sha系）の追加パーツ
+   kin-kaitori-3sha/style.css に無いパーツだけをここに置く。
+   LPで使うときは、使うパーツのルールをそのLPの style.css にコピーする。
+   ============================================================================ */
+
+/* ---- 中見出し：番号＋下線（h3 に class="lp-h3"） ---- */
+.entry-content h3.lp-h3 { margin: 1.6em 0 .8em; padding: 0 0 .35em; border-left: 0; border-bottom: 3px solid var(--gold-line); font-size: clamp(18px, 5vw, 21px); line-height: 1.5; }
+.lp-h3 b { display: inline-grid; place-items: center; width: 1.6em; height: 1.6em; margin-right: .35em; border-radius: 50%; background: var(--gold); color: #fff; font-size: .85em; vertical-align: .1em; }
+
+/* ---- つかみ：心の声カード ---- */
+.lp-voice { position: relative; margin: 1.4em 0 1.2em; padding: 1.5em 1em 1.1em; border-radius: 16px; background: #f3f1ec; text-align: center; font-family: var(--gothic); }
+.lp-voice__lbl { position: absolute; top: -.8em; left: 50%; transform: translateX(-50%); padding: .2em .9em; border-radius: 999px; background: #6b665c; color: #fff; font-size: 12px; font-weight: 800; white-space: nowrap; }
+.lp-voice p { margin: 0; word-break: keep-all; font-size: 18px; font-weight: 800; line-height: 1.7; color: #4a463e; }
+.lp-voice p::before { content: "“"; color: #b9b2a3; font-size: 1.6em; line-height: 0; vertical-align: -.3em; margin-right: .1em; }
+.lp-voice p::after { content: "”"; color: #b9b2a3; font-size: 1.6em; line-height: 0; vertical-align: -.3em; margin-left: .1em; }
+
+/* ---- 言い切り：上下の線だけ ---- */
+.lp-say { margin: 1.4em 0; padding: .8em 0; border-top: 1px solid var(--sumi); border-bottom: 1px solid var(--sumi); text-align: center; font-family: var(--gothic); font-size: clamp(20px, 5.8vw, 24px); font-weight: 900; line-height: 1.6; color: var(--sumi); }
+.lp-say strong { background: none; }
+
+/* ---- 新聞記事風（公的な発表・ニュース） ---- */
+.lp-news { margin: 1.2em 0; padding: .9em 1em 1em; background: #fbf8f1; border: 1px solid #cfc6b0; box-shadow: 3px 3px 0 #e6dfcf; }
+.lp-news__src { margin: 0 0 .4em !important; padding-bottom: .3em; border-bottom: 3px double #6b665c; font-family: var(--gothic); font-size: 12px; font-weight: 800; color: #6b665c; }
+.lp-news__h { margin: 0 0 .45em !important; font-size: 20px; font-weight: 900; line-height: 1.45; color: #222; }
+.lp-news__h em { font-style: normal; color: var(--alert); }
+.lp-news p { margin: 0 0 .3em; font-size: 14.5px; line-height: 1.75; }
+.lp-news__date { font-family: var(--gothic); font-size: 11.5px !important; color: var(--ink-sub); }
+
+/* ---- 注意：⚠ 見出し帯つき ---- */
+.lp-warn { margin: 1.2em 0; border: 2px solid var(--alert); border-radius: 12px; overflow: hidden; font-family: var(--gothic); background: #fff; }
+.lp-warn__h { margin: 0 !important; padding: .5em .8em; background: var(--alert); color: #fff; font-size: 15.5px; font-weight: 900; line-height: 1.5; }
+.lp-warn__h::before { content: "⚠ "; }
+.lp-warn__b { padding: .8em .9em; font-size: 15px; line-height: 1.75; }
+.lp-warn__b p { margin: 0 0 .4em; }
+.lp-warn__b p:last-child { margin: 0; }
+
+/* ---- まとめ＋ボタン直結 ---- */
+.lp-sum { margin: 1.2em 0; padding: 1em; border-radius: 14px; background: #fffaf0; border: 3px solid #c9a227; font-family: var(--gothic); }
+.lp-sum__h { margin: 0 0 .5em !important; font-size: 17px; font-weight: 900; text-align: center; color: var(--sumi); }
+.lp-sum ol { margin: 0 0 .8em; padding: 0; list-style: none; counter-reset: lpsum; }
+.lp-sum li { position: relative; padding: .35em 0 .35em 2em; border-bottom: 1px dashed var(--gold-line); font-size: 15.5px; font-weight: 700; line-height: 1.55; }
+.lp-sum li::before { counter-increment: lpsum; content: counter(lpsum); position: absolute; left: 0; top: .4em; width: 1.5em; height: 1.5em; border-radius: 50%; background: #8a6d1f; color: #fff; text-align: center; line-height: 1.5em; font-size: 13px; font-weight: 900; }
+.lp-sum .kin-cta-block { margin: 0; }
+
+/* ---- 向いている人＋ひとこと注意 ---- */
+.lp-fit { margin: 1.2em 0; font-family: var(--gothic); }
+.lp-fit__box { padding: .8em .9em; border-radius: 12px; background: #f2f8f4; border: 2px solid #bcd9c7; }
+.lp-fit__h { margin: 0 0 .4em !important; font-size: 15px; font-weight: 900; color: var(--win); }
+.lp-fit ul { list-style: none; margin: 0; padding: 0; }
+.lp-fit li { position: relative; padding: .15em 0 .15em 1.5em; font-size: 15px; line-height: 1.6; }
+.lp-fit li::before { content: "✓"; position: absolute; left: 0; color: var(--win); font-weight: 900; }
+.lp-fit__note { margin: .5em 0 0 !important; font-size: 13px; line-height: 1.6; color: var(--ink-sub); }
+.lp-fit__note b { color: var(--alert); }
+
+/* ---- 受取額の明細 ---- */
+.lp-bill { margin: 1.2em auto; max-width: 21em; padding: 1em 1.1em; background: #fff; border: 1px solid #d9d2c1; box-shadow: 0 6px 16px rgba(0,0,0,.08); font-family: var(--gothic); }
+.lp-bill__h { margin: 0 0 .6em !important; padding-bottom: .4em; border-bottom: 2px solid var(--sumi); text-align: center; font-size: 15px; font-weight: 900; letter-spacing: .15em; }
+.lp-bill__r { display: flex; justify-content: space-between; align-items: baseline; gap: .5em; margin: 0 !important; padding: .35em 0; border-bottom: 1px dotted #cfc6b0; font-size: 14.5px; }
+.lp-bill__r b { white-space: nowrap; }
+.lp-bill__r--minus b { color: var(--alert); }
+.lp-bill__r--total { border-bottom: 0; padding-top: .6em; font-size: 16px; font-weight: 900; }
+.lp-bill__r--total b { font-size: 1.3em; color: var(--win); }
+.lp-bill__note { margin: .5em 0 0 !important; font-size: 11.5px; color: var(--ink-sub); }
+
+/* ---- 電話で聞くことメモ（付箋） ---- */
+.lp-memo { position: relative; margin: 1.4em auto; max-width: 21em; padding: 1.2em 1.1em 1em; background: #fff8c9; box-shadow: 0 4px 10px rgba(0,0,0,.1); transform: rotate(-1deg); font-family: var(--gothic); }
+.lp-memo::before { content: ""; position: absolute; top: -10px; left: 50%; width: 70px; height: 20px; margin-left: -35px; background: rgba(201,162,39,.45); }
+.lp-memo__h { margin: 0 0 .5em !important; font-size: 16px; font-weight: 900; }
+.lp-memo ol { margin: 0; padding-left: 1.3em; }
+.lp-memo li { margin: 0 0 .35em; font-size: 15.5px; font-weight: 700; line-height: 1.55; }
+
+/* ---- 電話の流れ（会話の例） ---- */
+.lp-call { margin: 1.2em 0; font-family: var(--gothic); }
+.lp-call__m { display: flex; gap: .5em; align-items: flex-start; margin-bottom: .6em; }
+.lp-call__m--me { flex-direction: row-reverse; }
+.lp-call__ico { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 900; color: #fff; background: #8a6d1f; }
+.lp-call__m--me .lp-call__ico { background: #6b665c; }
+.lp-call__b { padding: .55em .8em; border-radius: 12px; background: #fff; border: 2px solid var(--rule); font-size: 14.5px; line-height: 1.6; }
+.lp-call__m--me .lp-call__b { background: #f3f1ec; }
+
+/* ---- 筆者プロフィール ---- */
+.lp-prof { margin: 1.2em 0; display: flex; gap: .8em; align-items: flex-start; padding: .9em; border-radius: 14px; border: 2px solid var(--rule); background: #fff; font-family: var(--gothic); }
+.lp-prof__img { flex: none; width: 64px; height: 64px; border-radius: 50%; background: var(--gold-bg); border: 2px solid var(--gold-line); object-fit: cover; }
+.lp-prof__role { margin: 0 !important; font-size: 12px; font-weight: 800; color: var(--gold); }
+.lp-prof__name { margin: 0 0 .3em !important; font-size: 16px; font-weight: 900; color: var(--sumi); }
+.lp-prof p { margin: 0; font-size: 13.5px; line-height: 1.65; }
+
+/* ---- 持ち物チェック ---- */
+.lp-bring { margin: 1.2em 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: .5em; font-family: var(--gothic); text-align: center; }
+.lp-bring__c { padding: .7em .3em; border-radius: 12px; background: #fff; border: 2px solid var(--rule); }
+.lp-bring__c i { display: block; font-style: normal; font-size: 26px; line-height: 1.2; }
+.lp-bring__c b { display: block; margin-top: .2em; font-size: 13.5px; font-weight: 900; }
+.lp-bring__c span { display: block; font-size: 11px; color: var(--ink-sub); line-height: 1.4; }
+
+/* ---- ボタン下のひとこと ---- */
+.lp-micro { margin: .5em 0 1.2em; display: flex; flex-wrap: wrap; justify-content: center; gap: .3em .8em; padding: 0; list-style: none; font-family: var(--gothic); font-size: 13px; font-weight: 800; color: var(--win); }
+.lp-micro li::before { content: "✓ "; }
+
+/* ---- 開閉式のよくある質問 ---- */
+.lp-faq { margin: 1.2em 0; }
+.lp-faq details { margin: 0 0 .5em; border: 2px solid var(--rule); border-radius: 10px; background: #fff; font-family: var(--gothic); }
+.lp-faq summary { cursor: pointer; padding: .7em .9em; font-size: 15px; font-weight: 900; line-height: 1.5; list-style: none; }
+.lp-faq summary::-webkit-details-marker { display: none; }
+.lp-faq summary::before { content: "Q. "; color: var(--gold); }
+.lp-faq details[open] summary { border-bottom: 1px dashed var(--rule); }
+.lp-faq details p { margin: 0; padding: .7em .9em; font-size: 14.5px; line-height: 1.7; }
+.lp-faq details p::before { content: "A. "; color: var(--alert); font-weight: 900; }
+
+/* ---- 喜平LPで追加したパーツ ---- */
+.kh-est { margin: 1.1em 0 1.4em; padding: 1em 1em .9em; border: 3px solid var(--gold-line); border-radius: 14px; background: var(--gold-bg); font-family: var(--gothic); }
+.kh-est p { margin: 0; }
+.kh-est__ttl { text-align: center; font-size: 15px; font-weight: 900; color: var(--sumi); margin-bottom: .5em !important; }
+.kh-est__row { display: flex; align-items: baseline; justify-content: space-between; gap: .6em; padding: .55em .3em; border-top: 1px dashed var(--gold-line); }
+.kh-est__g { font-size: 18px; font-weight: 900; color: var(--ink-sub); }
+.kh-est__v { font-size: clamp(26px, 7.6vw, 34px); font-weight: 900; color: var(--alert); white-space: nowrap; }
+.kh-est__note { margin-top: .5em !important; font-size: 12px; line-height: 1.6; color: var(--ink-sub); }
+.kh-lead { margin: 1.4em 0 .6em; text-align: center; font-family: var(--gothic); font-size: 16px; font-weight: 900; line-height: 1.6; color: var(--sumi); }
+.kihei-infographic { margin: 24px auto; text-align: center; }
+.kihei-infographic img { display: block; width: 100%; height: auto; border-radius: 12px; }

@@ -6,22 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <title>LPパーツ辞典（3sha系）</title>
 <link rel="stylesheet" href="../../kin-kaitori-3sha/style.css">
+<link rel="stylesheet" href="parts.css">
 <style>
-/* 喜平LPで追加したパーツ（3shaのCSSには無いのでここで読む） */
-.kh-est { margin: 1.1em 0 1.4em; padding: 1em 1em .9em; border: 3px solid var(--gold-line); border-radius: 14px; background: var(--gold-bg); font-family: var(--gothic); }
-.kh-est p { margin: 0; }
-.kh-est__ttl { text-align: center; font-size: 15px; font-weight: 900; color: var(--sumi); margin-bottom: .5em !important; }
-.kh-est__row { display: flex; align-items: baseline; justify-content: space-between; gap: .6em; padding: .55em .3em; border-top: 1px dashed var(--gold-line); }
-.kh-est__g { font-size: 18px; font-weight: 900; color: var(--ink-sub); }
-.kh-est__v { font-size: clamp(26px, 7.6vw, 34px); font-weight: 900; color: var(--alert); white-space: nowrap; }
-.kh-est__note { margin-top: .5em !important; font-size: 12px; line-height: 1.6; color: var(--ink-sub); }
-.kh-bridge { margin: 1.3em 0 1em; padding: 1em; border-radius: 12px; background: var(--sumi); color: #fff; text-align: center; font-family: var(--gothic); }
-.kh-bridge p { margin: 0; font-size: 15px; line-height: 1.7; }
-.kh-bridge strong { background: none; display: block; margin-top: .3em; color: #ffe58a; font-size: 17px; }
-.kh-lead { margin: 1.4em 0 .6em; text-align: center; font-family: var(--gothic); font-size: 16px; font-weight: 900; line-height: 1.6; color: var(--sumi); }
-.kihei-infographic { margin: 24px auto; text-align: center; }
-.kihei-infographic img { display: block; width: 100%; height: auto; border-radius: 12px; }
-
 /* ==== 辞典の枠（pd-*）。パーツの見た目には影響しない ==== */
 .pd-top { margin: 0 0 1.5em; padding: 1.1em 1.1em 1em; border-radius: 14px; background: var(--sumi); color: #fff; font-family: var(--gothic); }
 .pd-top h1 { margin: 0 0 .35em; font-size: 22px; line-height: 1.4; color: #fff; }
@@ -44,6 +30,7 @@
 .pd-st--a { background: #e3f2e8; color: #1f7a4c; }
 .pd-st--b { background: #eef0f4; color: #3d4556; }
 .pd-st--c { background: #fde8e6; color: #b3261e; }
+.pd-st--d { background: #eeeeee; color: #666; }
 .pd-meta { display: grid; grid-template-columns: 5.2em 1fr; gap: .25em .6em; margin: 0 0 .8em; font-family: var(--gothic); font-size: 13.5px; line-height: 1.65; }
 .pd-meta dt { font-weight: 900; color: var(--ink-sub); }
 .pd-meta dd { margin: 0; }
@@ -66,7 +53,8 @@
       <h1>LPパーツ辞典（3sha系）</h1>
       <p>kin-kaitori-3sha と、そこから作ったLPで使うパーツの一覧です。見た目は3shaのCSSをそのまま読んでいるので、本番と同じです。</p>
       <p><strong>ここに無いパーツは作らない。</strong>必要なときは、先に相談してこの辞典に足してから使う。</p>
-      <p>全52パーツ ／ ◎よく使う ○使える △使用注意</p>
+      <p>全53パーツ ／ ◎よく使う ○使える △使用注意 …保留</p>
+      <p>「新パーツ（parts.css）」の付いた部品は3shaのCSSに無いので、使うLPの style.css に <code style="color:#ffe58a">tools/lp-parts/parts.css</code> から該当ルールをコピーする。</p>
       <p>見直し案 → <a href="ideas/" style="color:#ffe58a">LPパーツ案（見直し）</a></p>
     </div>
 
@@ -89,7 +77,7 @@
       <p class="pd-chapter">基本ルール（先にここだけ読む）</p>
       <table class="pd-table">
         <tr><th>色</th><td><strong class="em-mark">黄マーカー</strong>＝そのセクションの結論（1〜2個）／<strong class="em-red">赤</strong>＝損・危険・否定／<strong class="em-green">緑</strong>＝得・無料・数字／<strong>太字</strong>＝事実・条件（このサイトでは黄色の下線になる）</td></tr>
-        <tr><th>上限</th><td>1セクションに：黄マーカー2個・太字4か所・つかみ（kin-intro）1回・言い切り（kin-punch）1回・注意の枠1つ</td></tr>
+        <tr><th>上限</th><td>1セクションに：黄マーカー2個・太字4か所・つかみ（lp-voice）1回・言い切り（lp-say）1回・注意（lp-warn）1つ</td></tr>
         <tr><th>見出し</th><td>h2＝セクション（【注意】型／問い型／言い切り型の3つ）。h3＝h2の中を2〜3に分けるときだけ</td></tr>
         <tr><th>文章</th><td>1文30字・1段落2〜3文。中学生でも分かる言葉。「1g単価・控除・販路」などの業界用語は使わない</td></tr>
         <tr><th>不安→行動</th><td>不安を見せたら、次に必ず「どうすればいいか」（ui-point・ui-step・CTA）を置く</td></tr>
@@ -122,32 +110,16 @@
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
         <span class="pd-card__name">中見出し（h3）</span>
-        <code class="pd-card__cls">h3</code>
-        
+        <code class="pd-card__cls">h3.lp-h3</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>h2 の中を2〜3に分けるとき。</dd>
-        <dt>ルール</dt><dd>番号を付けるときは「① 〜」「② 〜」。1つのh2に3つまで。</dd>
+        <dt>ルール</dt><dd>番号の丸＋全幅の下線。1つのh2に3つまで。</dd>
         <dt class="pd-ng">NG</dt><dd>h3 だけが続いて h2 が無い状態</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><h3>ただし、あわてて売る必要はありません</h3></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;h3&gt;ただし、あわてて売る必要はありません&lt;/h3&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="heading-3">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--b">○ 使える</span>
-        <span class="pd-card__name">小見出し</span>
-        <code class="pd-card__cls">ui-h4</code>
-        
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>h3 の下をさらに分けたいとき（ほぼ使わない）。</dd>
-        <dt>ルール</dt><dd>使うのは長い解説の中だけ。</dd>
-        <dt class="pd-ng">NG</dt><dd>h3 の代わりに使う</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><p class="ui-h4">刻印が読めないとき</p></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;p class="ui-h4"&gt;刻印が読めないとき&lt;/p&gt;</code></pre></details>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><h3 class="lp-h3"><b>1</b>待っているうちに、値下がりする</h3></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;h3 class="lp-h3"&gt;&lt;b&gt;1&lt;/b&gt;待っているうちに、値下がりする&lt;/h3&gt;</code></pre></details>
     </section>
 
     <p class="pd-chapter" id="text">B. 本文と強調</p>
@@ -236,33 +208,33 @@
     <section class="pd-card" id="text-6">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
-        <span class="pd-card__name">つかみ（読者の心の声）</span>
-        <code class="pd-card__cls">kin-intro</code>
-        
+        <span class="pd-card__name">つかみ（心の声カード）</span>
+        <code class="pd-card__cls">lp-voice</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>h2 のすぐ下で、読者の本音を代わりに言うとき。</dd>
-        <dt>ルール</dt><dd>3〜4行。1行15字まで。改行は文節で。1セクションに1回。</dd>
+        <dt>ルール</dt><dd>1〜2文。ラベルは「こんな気持ち、ありませんか？」。1セクションに1回。</dd>
         <dt class="pd-ng">NG</dt><dd>説明文をここに入れる</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><p class="kin-intro">「もう少し上がってから<br>売ろう」<br>そう思って、<br>そのままにしていませんか？</p></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;p class="kin-intro"&gt;「もう少し上がってから&lt;br&gt;売ろう」&lt;br&gt;そう思って、&lt;br&gt;そのままにしていませんか？&lt;/p&gt;</code></pre></details>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-voice"><span class="lp-voice__lbl">こんな気持ち、ありませんか？</span><p>もう少し上がってから<wbr>売ろう</p></div></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-voice"&gt;&lt;span class="lp-voice__lbl"&gt;こんな気持ち、ありませんか？&lt;/span&gt;&lt;p&gt;もう少し上がってから&lt;wbr&gt;売ろう&lt;/p&gt;&lt;/div&gt;</code></pre></details>
     </section>
 
     <section class="pd-card" id="text-7">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
-        <span class="pd-card__name">言い切り2行</span>
-        <code class="pd-card__cls">kin-punch</code>
-        
+        <span class="pd-card__name">言い切り（上下の線）</span>
+        <code class="pd-card__cls">lp-say</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
-        <dt>使う場面</dt><dd>説明のあとに、1行で言い切って締めたいとき。</dd>
+        <dt>使う場面</dt><dd>説明のあとに、ひと呼吸おいて言い切るとき。比較表の直前の「だから比べる」にも使う。</dd>
         <dt>ルール</dt><dd>2行・各15字まで。1セクションに1回。</dd>
         <dt class="pd-ng">NG</dt><dd>長い文を入れる</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><p class="kin-punch">決めるのは、<br>金額を知ってから。</p></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;p class="kin-punch"&gt;決めるのは、&lt;br&gt;金額を知ってから。&lt;/p&gt;</code></pre></details>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><p class="lp-say">決めるのは、<br>金額を知ってから。</p></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;p class="lp-say"&gt;決めるのは、&lt;br&gt;金額を知ってから。&lt;/p&gt;</code></pre></details>
     </section>
 
     <section class="pd-card" id="text-8">
@@ -343,6 +315,30 @@
     <section class="pd-card" id="number-1">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
+        <span class="pd-card__name">受取額の明細</span>
+        <code class="pd-card__cls">lp-bill</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
+      </div>
+      <dl class="pd-meta">
+        <dt>使う場面</dt><dd>「今日の値段」ではなく「最後にもらえる金額」を見せるとき。</dd>
+        <dt>ルール</dt><dd>3行（品物と金額／引かれる額／受取額）。「計算例」と必ず書く。</dd>
+        <dt class="pd-ng">NG</dt><dd>実際の査定額のように見せる</dd>
+      </dl>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-bill"><p class="lp-bill__h">買取明細（例）</p>
+  <p class="lp-bill__r"><span>18金の喜平 50g</span><b>891,050円</b></p>
+  <p class="lp-bill__r lp-bill__r--minus"><span>手数料10%のお店なら</span><b>−89,105円</b></p>
+  <p class="lp-bill__r lp-bill__r--total"><span>受取額（手数料0円）</span><b>891,050円</b></p>
+  <p class="lp-bill__note">※ 仕組みを説明するための計算例です。実際の金額は査定で決まります。</p></div></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-bill"&gt;&lt;p class="lp-bill__h"&gt;買取明細（例）&lt;/p&gt;
+  &lt;p class="lp-bill__r"&gt;&lt;span&gt;18金の喜平 50g&lt;/span&gt;&lt;b&gt;891,050円&lt;/b&gt;&lt;/p&gt;
+  &lt;p class="lp-bill__r lp-bill__r--minus"&gt;&lt;span&gt;手数料10%のお店なら&lt;/span&gt;&lt;b&gt;−89,105円&lt;/b&gt;&lt;/p&gt;
+  &lt;p class="lp-bill__r lp-bill__r--total"&gt;&lt;span&gt;受取額（手数料0円）&lt;/span&gt;&lt;b&gt;891,050円&lt;/b&gt;&lt;/p&gt;
+  &lt;p class="lp-bill__note"&gt;※ 仕組みを説明するための計算例です。実際の金額は査定で決まります。&lt;/p&gt;&lt;/div&gt;</code></pre></details>
+    </section>
+
+    <section class="pd-card" id="number-2">
+      <div class="pd-card__head">
+        <span class="pd-st pd-st--a">◎ よく使う</span>
         <span class="pd-card__name">本日の相場</span>
         <code class="pd-card__cls">ui-rate</code>
         
@@ -366,12 +362,12 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="number-2">
+    <section class="pd-card" id="number-3">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--b">○ 使える</span>
+        <span class="pd-st pd-st--d">… 保留</span>
         <span class="pd-card__name">重さ別の目安</span>
         <code class="pd-card__cls">kh-est</code>
-        <span class="pd-card__extra">喜平LPで追加（3shaのCSSには無い）</span>
+        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>「◯gならいくら？」にすぐ答えるとき。</dd>
@@ -392,12 +388,12 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="number-3">
+    <section class="pd-card" id="number-4">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--a">◎ よく使う</span>
+        <span class="pd-st pd-st--d">… 保留</span>
         <span class="pd-card__name">損の差（赤枠）</span>
         <code class="pd-card__cls">kin-gap</code>
-        
+        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>「待ったらこれだけ減った」を1つの数字で見せるとき。</dd>
@@ -416,12 +412,12 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="number-4">
+    <section class="pd-card" id="number-5">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--b">○ 使える</span>
+        <span class="pd-st pd-st--d">… 保留</span>
         <span class="pd-card__name">値動きの年表</span>
         <code class="pd-card__cls">kin-timeline</code>
-        
+        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>過去の安値・最高値・今日を並べるとき。</dd>
@@ -440,62 +436,38 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="number-5">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--b">○ 使える</span>
-        <span class="pd-card__name">件数の増加</span>
-        <code class="pd-card__cls">kin-stat</code>
-        
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>トラブルや相談の件数が増えたことを見せるとき。</dd>
-        <dt>ルール</dt><dd>2時点だけ。下に出典（kin-note）を必ず付ける。</dd>
-        <dt class="pd-ng">NG</dt><dd>出典なしの数字</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kin-stat">
-  <div class="kin-stat__row"><span>2020年度</span><b>165件</b></div>
-  <div class="kin-stat__arrow" aria-hidden="true">▼</div>
-  <div class="kin-stat__row kin-stat__row--now"><span>2025年度</span><b>937件</b></div>
-  <p class="kin-stat__note">店舗での貴金属などの買取トラブルの相談件数。<strong>約5.7倍</strong>に増えています。</p>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-stat"&gt;
-  &lt;div class="kin-stat__row"&gt;&lt;span&gt;2020年度&lt;/span&gt;&lt;b&gt;165件&lt;/b&gt;&lt;/div&gt;
-  &lt;div class="kin-stat__arrow" aria-hidden="true"&gt;▼&lt;/div&gt;
-  &lt;div class="kin-stat__row kin-stat__row--now"&gt;&lt;span&gt;2025年度&lt;/span&gt;&lt;b&gt;937件&lt;/b&gt;&lt;/div&gt;
-  &lt;p class="kin-stat__note"&gt;店舗での貴金属などの買取トラブルの相談件数。&lt;strong&gt;約5.7倍&lt;/strong&gt;に増えています。&lt;/p&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
     <section class="pd-card" id="number-6">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
-        <span class="pd-card__name">数字3つ</span>
-        <code class="pd-card__cls">ui-num</code>
-        
+        <span class="pd-card__name">ニュース（新聞記事風）</span>
+        <code class="pd-card__cls">lp-news</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
-        <dt>使う場面</dt><dd>会社やサービスの特徴を数字3つで見せるとき。</dd>
-        <dt>ルール</dt><dd>必ず3つ。1つ8字まで。</dd>
-        <dt class="pd-ng">NG</dt><dd>数字でないものを入れる</dd>
+        <dt>使う場面</dt><dd>公的機関の発表や、件数の増加などを見せるとき。</dd>
+        <dt>ルール</dt><dd>発表元・日付を必ず入れる。見出し2行まで。</dd>
+        <dt class="pd-ng">NG</dt><dd>出典のないニュース風の見せ方</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="ui-num">
-  <div class="ui-num__item"><span class="ui-num__v">9:00<small>〜21:00</small></span><span class="ui-num__k">電話受付／年中無休</span></div>
-  <div class="ui-num__item"><span class="ui-num__v">0<small>円</small></span><span class="ui-num__k">査定料・出張料</span></div>
-  <div class="ui-num__item"><span class="ui-num__v">最大20<small>%UP</small></span><span class="ui-num__k">期間限定・条件あり</span></div>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-news">
+  <p class="lp-news__src">国民生活センター 発表</p>
+  <p class="lp-news__h">貴金属の買取トラブル、<br>5年で<em>約5.7倍</em>に</p>
+  <p>「査定だけのつもりが、断りきれずに売ってしまった」などの相談が増えています。</p>
+  <p class="lp-news__date">2026年9月2日公表／2020年度165件→2025年度937件</p>
 </div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="ui-num"&gt;
-  &lt;div class="ui-num__item"&gt;&lt;span class="ui-num__v"&gt;9:00&lt;small&gt;〜21:00&lt;/small&gt;&lt;/span&gt;&lt;span class="ui-num__k"&gt;電話受付／年中無休&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="ui-num__item"&gt;&lt;span class="ui-num__v"&gt;0&lt;small&gt;円&lt;/small&gt;&lt;/span&gt;&lt;span class="ui-num__k"&gt;査定料・出張料&lt;/span&gt;&lt;/div&gt;
-  &lt;div class="ui-num__item"&gt;&lt;span class="ui-num__v"&gt;最大20&lt;small&gt;%UP&lt;/small&gt;&lt;/span&gt;&lt;span class="ui-num__k"&gt;期間限定・条件あり&lt;/span&gt;&lt;/div&gt;
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-news"&gt;
+  &lt;p class="lp-news__src"&gt;国民生活センター 発表&lt;/p&gt;
+  &lt;p class="lp-news__h"&gt;貴金属の買取トラブル、&lt;br&gt;5年で&lt;em&gt;約5.7倍&lt;/em&gt;に&lt;/p&gt;
+  &lt;p&gt;「査定だけのつもりが、断りきれずに売ってしまった」などの相談が増えています。&lt;/p&gt;
+  &lt;p class="lp-news__date"&gt;2026年9月2日公表／2020年度165件→2025年度937件&lt;/p&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
     <section class="pd-card" id="number-7">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--b">○ 使える</span>
+        <span class="pd-st pd-st--d">… 保留</span>
         <span class="pd-card__name">料金の一覧</span>
         <code class="pd-card__cls">ui-price</code>
-        
+        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>査定料・出張料などの「0円」を並べるとき。</dd>
@@ -514,52 +486,28 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="number-8">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--b">○ 使える</span>
-        <span class="pd-card__name">ビフォー・アフター</span>
-        <code class="pd-card__cls">ui-ba</code>
-        
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>行動する前と後の違いを1つだけ見せるとき。</dd>
-        <dt>ルール</dt><dd>左右とも10字まで。</dd>
-        <dt class="pd-ng">NG</dt><dd>金額の保証に見える書き方</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="ui-ba">
-  <div class="ui-ba__col ui-ba__col--b"><span class="ui-ba__lbl">BEFORE</span><span class="ui-ba__v">いくらか<br>分からない</span></div>
-  <span class="ui-ba__arrow">▶</span>
-  <div class="ui-ba__col ui-ba__col--a"><span class="ui-ba__lbl">AFTER</span><span class="ui-ba__v">今日の金額を<br>知っている</span></div>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="ui-ba"&gt;
-  &lt;div class="ui-ba__col ui-ba__col--b"&gt;&lt;span class="ui-ba__lbl"&gt;BEFORE&lt;/span&gt;&lt;span class="ui-ba__v"&gt;いくらか&lt;br&gt;分からない&lt;/span&gt;&lt;/div&gt;
-  &lt;span class="ui-ba__arrow"&gt;▶&lt;/span&gt;
-  &lt;div class="ui-ba__col ui-ba__col--a"&gt;&lt;span class="ui-ba__lbl"&gt;AFTER&lt;/span&gt;&lt;span class="ui-ba__v"&gt;今日の金額を&lt;br&gt;知っている&lt;/span&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
     <p class="pd-chapter" id="risk">D. 注意・リスク（ネガティブは赤）</p>
     <p class="pd-chapter__lead">不安を見せたら、次に必ず「どうすればいいか」を置く。</p>
 
     <section class="pd-card" id="risk-1">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
-        <span class="pd-card__name">注意の枠</span>
-        <code class="pd-card__cls">ui-caution</code>
-        
+        <span class="pd-card__name">注意（⚠ 見出し帯つき）</span>
+        <code class="pd-card__cls">lp-warn</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>取り返しのつかないこと・必ず知ってほしい注意。</dd>
-        <dt>ルール</dt><dd>タイトル1行＋2文まで。1セクションに1つ。</dd>
-        <dt class="pd-ng">NG</dt><dd>ただの補足を注意の枠に入れる</dd>
+        <dt>ルール</dt><dd>帯の見出し1行＋2文まで。1セクションに1つ。</dd>
+        <dt class="pd-ng">NG</dt><dd>ただの補足を入れる</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="ui-caution">
-  <p class="ui-ttl">お店で売ったら、あとから取り消せません</p>
-  <p><strong class="em-red">お店に持ち込んで売った場合、クーリング・オフはできません。</strong></p>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-warn">
+  <p class="lp-warn__h">お店で売ったら、取り消せません</p>
+  <div class="lp-warn__b"><p>お店に持ち込んで売った場合、<strong class="em-red">クーリング・オフはできません。</strong></p></div>
 </div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="ui-caution"&gt;
-  &lt;p class="ui-ttl"&gt;お店で売ったら、あとから取り消せません&lt;/p&gt;
-  &lt;p&gt;&lt;strong class="em-red"&gt;お店に持ち込んで売った場合、クーリング・オフはできません。&lt;/strong&gt;&lt;/p&gt;
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-warn"&gt;
+  &lt;p class="lp-warn__h"&gt;お店で売ったら、取り消せません&lt;/p&gt;
+  &lt;div class="lp-warn__b"&gt;&lt;p&gt;お店に持ち込んで売った場合、&lt;strong class="em-red"&gt;クーリング・オフはできません。&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
@@ -606,28 +554,6 @@
       <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-quote kin-quote--bad"&gt;
   &lt;p&gt;「査定だけのつもりだったのに、断りきれずに売ってしまった」&lt;/p&gt;
   &lt;p&gt;「その場で急かされて、手放してしまった」&lt;/p&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="risk-4">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--c">△ 使用注意</span>
-        <span class="pd-card__name">赤い帯（強い呼びかけ）</span>
-        <code class="pd-card__cls">kin-urge</code>
-        
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>3shaの「なぜ今」の入口だけ。</dd>
-        <dt>ルール</dt><dd>1ページ1回まで。喜平LPでは「強すぎる」ため不採用。</dd>
-        <dt class="pd-ng">NG</dt><dd>何度も使う／不安をあおるだけで終わる</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kin-urge">
-  <p class="kin-urge__tag">金を持っている方へ</p>
-  <p class="kin-urge__main">その金、<br><span>しまっているあいだに</span><br>値下がりしていませんか？</p>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-urge"&gt;
-  &lt;p class="kin-urge__tag"&gt;金を持っている方へ&lt;/p&gt;
-  &lt;p class="kin-urge__main"&gt;その金、&lt;br&gt;&lt;span&gt;しまっているあいだに&lt;/span&gt;&lt;br&gt;値下がりしていませんか？&lt;/p&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
@@ -689,56 +615,28 @@
     <section class="pd-card" id="safe-3">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
-        <span class="pd-card__name">結論ボックス</span>
-        <code class="pd-card__cls">ui-conclusion</code>
-        
+        <span class="pd-card__name">まとめ＋ボタン</span>
+        <code class="pd-card__cls">lp-sum</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
-        <dt>使う場面</dt><dd>先に結論を言うとき／ページの最後のまとめ。</dd>
-        <dt>ルール</dt><dd>1ページ2回まで（冒頭の先出し・最後のまとめ）。メインは4行まで。</dd>
-        <dt class="pd-ng">NG</dt><dd>途中のセクションで何度も使う</dd>
+        <dt>使う場面</dt><dd>ページの最後のまとめ。読んだ直後に押せるようにする。</dd>
+        <dt>ルール</dt><dd>番号付き3行＋電話のボタン。1ページ1回。</dd>
+        <dt class="pd-ng">NG</dt><dd>途中のセクションで使う</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="ui-conclusion">
-  <span class="ui-conclusion__lbl">まとめ</span>
-  <p class="ui-conclusion__main">待つほど、<br>損するかもしれない。<br>まずは今の<span class="em-mark">査定額</span>だけ<br>聞いてみましょう！</p>
-  <ul class="ui-check">
-    <li>業者の値段で買い取ってくれる</li>
-    <li>値段を聞いて断っても0円</li>
-  </ul>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-sum">
+  <p class="lp-sum__h">ここまでのまとめ</p>
+  <ol><li>喜平は、お店で金額が変わる</li><li>待つほど得とは限らない</li><li>聞くだけなら0円。売らなくてOK</li></ol>
+  <div class="kin-cta-block"><a class="kin-phone" href="#sample"><span class="kin-cta-brand">まねきや</span><span class="kin-phone__num">電話で査定予約する</span><span class="kin-phone__sub">通話料無料／9:00〜21:00受付</span></a></div>
 </div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="ui-conclusion"&gt;
-  &lt;span class="ui-conclusion__lbl"&gt;まとめ&lt;/span&gt;
-  &lt;p class="ui-conclusion__main"&gt;待つほど、&lt;br&gt;損するかもしれない。&lt;br&gt;まずは今の&lt;span class="em-mark"&gt;査定額&lt;/span&gt;だけ&lt;br&gt;聞いてみましょう！&lt;/p&gt;
-  &lt;ul class="ui-check"&gt;
-    &lt;li&gt;業者の値段で買い取ってくれる&lt;/li&gt;
-    &lt;li&gt;値段を聞いて断っても0円&lt;/li&gt;
-  &lt;/ul&gt;
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-sum"&gt;
+  &lt;p class="lp-sum__h"&gt;ここまでのまとめ&lt;/p&gt;
+  &lt;ol&gt;&lt;li&gt;喜平は、お店で金額が変わる&lt;/li&gt;&lt;li&gt;待つほど得とは限らない&lt;/li&gt;&lt;li&gt;聞くだけなら0円。売らなくてOK&lt;/li&gt;&lt;/ol&gt;
+  &lt;div class="kin-cta-block"&gt;&lt;a class="kin-phone" href="https://ad-fam.com/ad/p/r?_site=49248&amp;amp;_article=16522" target="_blank" rel="sponsored nofollow noopener noreferrer"&gt;&lt;span class="kin-cta-brand"&gt;まねきや&lt;/span&gt;&lt;span class="kin-phone__num"&gt;電話で査定予約する&lt;/span&gt;&lt;span class="kin-phone__sub"&gt;通話料無料／9:00〜21:00受付&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
     <section class="pd-card" id="safe-4">
-      <div class="pd-card__head">
-        <span class="pd-st pd-st--b">○ 使える</span>
-        <span class="pd-card__name">濃紺のまとめ帯</span>
-        <code class="pd-card__cls">kh-bridge</code>
-        <span class="pd-card__extra">喜平LPで追加（3shaのCSSには無い）</span>
-      </div>
-      <dl class="pd-meta">
-        <dt>使う場面</dt><dd>比較表の直前で「だから比べる」とつなぐとき。</dd>
-        <dt>ルール</dt><dd>1ページ1回。2行まで。</dd>
-        <dt class="pd-ng">NG</dt><dd>本文の途中で何度も使う</dd>
-      </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kh-bridge">
-  <p>同じ喜平でも、持っていく店が違えば、値段が変わる。</p>
-  <p><strong>だから、まずは<br>買取店を比べることが大切です。</strong></p>
-</div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kh-bridge"&gt;
-  &lt;p&gt;同じ喜平でも、持っていく店が違えば、値段が変わる。&lt;/p&gt;
-  &lt;p&gt;&lt;strong&gt;だから、まずは&lt;br&gt;買取店を比べることが大切です。&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;</code></pre></details>
-    </section>
-
-    <section class="pd-card" id="safe-5">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">比較表への橋渡し文</span>
@@ -774,10 +672,10 @@
 
     <section class="pd-card" id="compare-2">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--a">◎ よく使う</span>
+        <span class="pd-st pd-st--d">… 保留</span>
         <span class="pd-card__name">よくあるお店との違い</span>
         <code class="pd-card__cls">kin-diff</code>
-        
+        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>推薦するお店と一般的なお店の違いを表で見せるとき。</dd>
@@ -801,26 +699,24 @@
     <section class="pd-card" id="compare-3">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
-        <span class="pd-card__name">おすすめな人／確認したいこと</span>
-        <code class="pd-card__cls">ui-md</code>
-        
+        <span class="pd-card__name">向いている人＋ひとこと注意</span>
+        <code class="pd-card__cls">lp-fit</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
-        <dt>使う場面</dt><dd>各社紹介の中で、向いている人と注意点を左右に並べるとき。</dd>
-        <dt>ルール</dt><dd>各3項目。右（確認したいこと）は本物の弱み・条件を書く。</dd>
-        <dt class="pd-ng">NG</dt><dd>右側を空にする／褒め言葉を入れる</dd>
+        <dt>使う場面</dt><dd>各社紹介の中で、向いている人と注意点を見せるとき。</dd>
+        <dt>ルール</dt><dd>向いている人3つ＋注意1行。注意は本物の条件を書く。</dd>
+        <dt class="pd-ng">NG</dt><dd>注意を書かない</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="ui-md">
-  <div class="ui-md__col ui-md__col--pro"><p class="ui-md__head">おすすめな人</p>
-    <ul><li>金やプラチナを高く売りたい人</li><li>他店で断られた品がある人</li></ul></div>
-  <div class="ui-md__col ui-md__col--con"><p class="ui-md__head">確認したいこと</p>
-    <ul><li>20%UPは電話申込限定</li><li>上限・対象品の条件あり</li></ul></div>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-fit">
+  <div class="lp-fit__box"><p class="lp-fit__h">こんな人に向いています</p>
+    <ul><li>喜平・K18を高く売りたい</li><li>他のお店で断られた品がある</li><li>まず金額だけ知りたい</li></ul></div>
+  <p class="lp-fit__note">注意：<b>20%UPは電話で申し込んだ人だけ</b>。上限・対象品の条件があります。</p>
 </div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="ui-md"&gt;
-  &lt;div class="ui-md__col ui-md__col--pro"&gt;&lt;p class="ui-md__head"&gt;おすすめな人&lt;/p&gt;
-    &lt;ul&gt;&lt;li&gt;金やプラチナを高く売りたい人&lt;/li&gt;&lt;li&gt;他店で断られた品がある人&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
-  &lt;div class="ui-md__col ui-md__col--con"&gt;&lt;p class="ui-md__head"&gt;確認したいこと&lt;/p&gt;
-    &lt;ul&gt;&lt;li&gt;20%UPは電話申込限定&lt;/li&gt;&lt;li&gt;上限・対象品の条件あり&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-fit"&gt;
+  &lt;div class="lp-fit__box"&gt;&lt;p class="lp-fit__h"&gt;こんな人に向いています&lt;/p&gt;
+    &lt;ul&gt;&lt;li&gt;喜平・K18を高く売りたい&lt;/li&gt;&lt;li&gt;他のお店で断られた品がある&lt;/li&gt;&lt;li&gt;まず金額だけ知りたい&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+  &lt;p class="lp-fit__note"&gt;注意：&lt;b&gt;20%UPは電話で申し込んだ人だけ&lt;/b&gt;。上限・対象品の条件があります。&lt;/p&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
@@ -896,10 +792,10 @@
 
     <section class="pd-card" id="compare-7">
       <div class="pd-card__head">
-        <span class="pd-st pd-st--c">△ 使用注意</span>
+        <span class="pd-st pd-st--d">… 保留</span>
         <span class="pd-card__name">結局どこ？の表</span>
         <code class="pd-card__cls">kin-which</code>
-        
+        <span class="pd-card__extra">保留：代わりの案が不採用。削除か別案かを決める</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>3shaのランキングの最後だけ。</dd>
@@ -1032,6 +928,28 @@
 
     <section class="pd-card" id="proof-1">
       <div class="pd-card__head">
+        <span class="pd-st pd-st--b">○ 使える</span>
+        <span class="pd-card__name">筆者プロフィール</span>
+        <code class="pd-card__cls">lp-prof</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
+      </div>
+      <dl class="pd-meta">
+        <dt>使う場面</dt><dd>ページの前半で1回だけ、書いている人を見せるとき。</dd>
+        <dt>ルール</dt><dd>事実だけ（経験年数・扱った品など）。写真はあれば lp-prof__img に。</dd>
+        <dt class="pd-ng">NG</dt><dd>事実でない肩書き・経歴</dd>
+      </dl>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-prof"><span class="lp-prof__img"></span><div>
+  <p class="lp-prof__role">この記事を書いた人</p><p class="lp-prof__name">元買取業者　◯◯</p>
+  <p>買取店で◯年、金・貴金属の査定をしてきました。売る側の目線で、損しないお店の選び方をやさしく解説します。</p>
+</div></div></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-prof"&gt;&lt;span class="lp-prof__img"&gt;&lt;/span&gt;&lt;div&gt;
+  &lt;p class="lp-prof__role"&gt;この記事を書いた人&lt;/p&gt;&lt;p class="lp-prof__name"&gt;元買取業者　◯◯&lt;/p&gt;
+  &lt;p&gt;買取店で◯年、金・貴金属の査定をしてきました。売る側の目線で、損しないお店の選び方をやさしく解説します。&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+    </section>
+
+    <section class="pd-card" id="proof-2">
+      <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
         <span class="pd-card__name">選ぶ理由（番号付き）</span>
         <code class="pd-card__cls">ui-reco</code>
@@ -1060,7 +978,7 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="proof-2">
+    <section class="pd-card" id="proof-3">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
         <span class="pd-card__name">会社データの表</span>
@@ -1084,7 +1002,7 @@
 &lt;/tbody&gt;&lt;/table&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="proof-3">
+    <section class="pd-card" id="proof-4">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">店舗写真3枚</span>
@@ -1108,7 +1026,7 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="proof-4">
+    <section class="pd-card" id="proof-5">
       <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">買取実績</span>
@@ -1138,7 +1056,7 @@
 &lt;/div&gt;</code></pre></details>
     </section>
 
-    <section class="pd-card" id="proof-5">
+    <section class="pd-card" id="proof-6">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
         <span class="pd-card__name">口コミ</span>
@@ -1207,6 +1125,78 @@
 
     <section class="pd-card" id="cta-2">
       <div class="pd-card__head">
+        <span class="pd-st pd-st--a">◎ よく使う</span>
+        <span class="pd-card__name">ボタン下のひとこと</span>
+        <code class="pd-card__cls">lp-micro</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
+      </div>
+      <dl class="pd-meta">
+        <dt>使う場面</dt><dd>電話ボタンのすぐ下。</dd>
+        <dt>ルール</dt><dd>3つまで。1つ12字まで。押す不安を消す言葉だけ。</dd>
+        <dt class="pd-ng">NG</dt><dd>条件や注意をここに書く</dd>
+      </dl>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><ul class="lp-micro"><li>売らなくてもOK</li><li>聞くだけ0円</li><li>重さが分からなくてもOK</li></ul></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;ul class="lp-micro"&gt;&lt;li&gt;売らなくてもOK&lt;/li&gt;&lt;li&gt;聞くだけ0円&lt;/li&gt;&lt;li&gt;重さが分からなくてもOK&lt;/li&gt;&lt;/ul&gt;</code></pre></details>
+    </section>
+
+    <section class="pd-card" id="cta-3">
+      <div class="pd-card__head">
+        <span class="pd-st pd-st--b">○ 使える</span>
+        <span class="pd-card__name">電話で聞くことメモ</span>
+        <code class="pd-card__cls">lp-memo</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
+      </div>
+      <dl class="pd-meta">
+        <dt>使う場面</dt><dd>電話ボタンの直前。電話が苦手な人の不安を消す。</dd>
+        <dt>ルール</dt><dd>3つまで。質問の形で書く。</dd>
+        <dt class="pd-ng">NG</dt><dd>4つ以上</dd>
+      </dl>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-memo"><p class="lp-memo__h">電話では、この3つだけ</p><ol><li>全部でいくらになりますか？</li><li>手数料は引かれますか？</li><li>断っても費用はかかりませんか？</li></ol></div></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-memo"&gt;&lt;p class="lp-memo__h"&gt;電話では、この3つだけ&lt;/p&gt;&lt;ol&gt;&lt;li&gt;全部でいくらになりますか？&lt;/li&gt;&lt;li&gt;手数料は引かれますか？&lt;/li&gt;&lt;li&gt;断っても費用はかかりませんか？&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</code></pre></details>
+    </section>
+
+    <section class="pd-card" id="cta-4">
+      <div class="pd-card__head">
+        <span class="pd-st pd-st--b">○ 使える</span>
+        <span class="pd-card__name">電話の流れ（会話の例）</span>
+        <code class="pd-card__cls">lp-call</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
+      </div>
+      <dl class="pd-meta">
+        <dt>使う場面</dt><dd>「電話したら何を聞かれる？」の不安を消すとき。</dd>
+        <dt>ルール</dt><dd>3往復まで。「例」であることが分かる見出しを付ける。</dd>
+        <dt class="pd-ng">NG</dt><dd>お店の実際の対応を約束するような書き方</dd>
+      </dl>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-call">
+  <div class="lp-call__m"><span class="lp-call__ico">お店</span><div class="lp-call__b">お電話ありがとうございます。何をお売りになりたいですか？</div></div>
+  <div class="lp-call__m lp-call__m--me"><span class="lp-call__ico">私</span><div class="lp-call__b">18金の喜平ネックレスです。重さは分かりません。</div></div>
+  <div class="lp-call__m"><span class="lp-call__ico">お店</span><div class="lp-call__b">大丈夫です。見てから金額をお伝えします。</div></div>
+</div></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-call"&gt;
+  &lt;div class="lp-call__m"&gt;&lt;span class="lp-call__ico"&gt;お店&lt;/span&gt;&lt;div class="lp-call__b"&gt;お電話ありがとうございます。何をお売りになりたいですか？&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="lp-call__m lp-call__m--me"&gt;&lt;span class="lp-call__ico"&gt;私&lt;/span&gt;&lt;div class="lp-call__b"&gt;18金の喜平ネックレスです。重さは分かりません。&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="lp-call__m"&gt;&lt;span class="lp-call__ico"&gt;お店&lt;/span&gt;&lt;div class="lp-call__b"&gt;大丈夫です。見てから金額をお伝えします。&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></details>
+    </section>
+
+    <section class="pd-card" id="cta-5">
+      <div class="pd-card__head">
+        <span class="pd-st pd-st--b">○ 使える</span>
+        <span class="pd-card__name">持ち物チェック</span>
+        <code class="pd-card__cls">lp-bring</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
+      </div>
+      <dl class="pd-meta">
+        <dt>使う場面</dt><dd>手順の後、行動の直前。</dd>
+        <dt>ルール</dt><dd>必ず3つ。</dd>
+        <dt class="pd-ng">NG</dt><dd>必須でない物を必須のように書く</dd>
+      </dl>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-bring"><div class="lp-bring__c"><i>💍</i><b>売りたい物</b><span>壊れていてもOK</span></div><div class="lp-bring__c"><i>🪪</i><b>身分証</b><span>免許証など</span></div><div class="lp-bring__c"><i>📄</i><b>保証書など</b><span>無くてもOK</span></div></div></div>
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-bring"&gt;&lt;div class="lp-bring__c"&gt;&lt;i&gt;💍&lt;/i&gt;&lt;b&gt;売りたい物&lt;/b&gt;&lt;span&gt;壊れていてもOK&lt;/span&gt;&lt;/div&gt;&lt;div class="lp-bring__c"&gt;&lt;i&gt;🪪&lt;/i&gt;&lt;b&gt;身分証&lt;/b&gt;&lt;span&gt;免許証など&lt;/span&gt;&lt;/div&gt;&lt;div class="lp-bring__c"&gt;&lt;i&gt;📄&lt;/i&gt;&lt;b&gt;保証書など&lt;/b&gt;&lt;span&gt;無くてもOK&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</code></pre></details>
+    </section>
+
+    <section class="pd-card" id="cta-6">
+      <div class="pd-card__head">
         <span class="pd-st pd-st--b">○ 使える</span>
         <span class="pd-card__name">PR表記＋バナー</span>
         <code class="pd-card__cls">kin-banner-label + kin-pv-banner</code>
@@ -1229,22 +1219,22 @@
     <section class="pd-card" id="end-1">
       <div class="pd-card__head">
         <span class="pd-st pd-st--a">◎ よく使う</span>
-        <span class="pd-card__name">よくある質問</span>
-        <code class="pd-card__cls">kin-faq</code>
-        
+        <span class="pd-card__name">よくある質問（開閉式）</span>
+        <code class="pd-card__cls">lp-faq</code>
+        <span class="pd-card__extra">新パーツ（parts.css）</span>
       </div>
       <dl class="pd-meta">
         <dt>使う場面</dt><dd>ページの後半。検索意図の取りこぼしを拾う。</dd>
-        <dt>ルール</dt><dd>10問以上。最初の3問は「断れる？」「お金はかかる？」「今と待つのどっちが得？」。head の FAQ schema と同じ内容にする。</dd>
+        <dt>ルール</dt><dd>10問以上。最初の1問だけ open。最初の3問は「断れる？」「お金はかかる？」「今と待つのどっちが得？」。head の FAQ schema と同じ内容にする。</dd>
         <dt class="pd-ng">NG</dt><dd>schema と本文の食い違い</dd>
       </dl>
-      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="kin-faq">
-  <p class="kin-faq__q">値段を聞くだけで、売らなくてもいいですか。</p>
-  <p class="kin-faq__a">はい、大丈夫です。査定を受けても、買い取ってもらう義務はありません。</p>
+      <div class="pd-sample"><p class="pd-sample__lbl">見本</p><div class="lp-faq">
+  <details open><summary>値段を聞くだけで、売らなくてもいいですか？</summary><p>はい、大丈夫です。査定を受けても、売る義務はありません。</p></details>
+  <details><summary>断ったら、お金はかかりませんか？</summary><p>まねきやは、査定料・出張料・キャンセル料を無料と案内しています。</p></details>
 </div></div>
-      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="kin-faq"&gt;
-  &lt;p class="kin-faq__q"&gt;値段を聞くだけで、売らなくてもいいですか。&lt;/p&gt;
-  &lt;p class="kin-faq__a"&gt;はい、大丈夫です。査定を受けても、買い取ってもらう義務はありません。&lt;/p&gt;
+      <details class="pd-code"><summary>HTMLを見る・コピー</summary><button type="button" class="pd-copy">コピー</button><pre><code>&lt;div class="lp-faq"&gt;
+  &lt;details open&gt;&lt;summary&gt;値段を聞くだけで、売らなくてもいいですか？&lt;/summary&gt;&lt;p&gt;はい、大丈夫です。査定を受けても、売る義務はありません。&lt;/p&gt;&lt;/details&gt;
+  &lt;details&gt;&lt;summary&gt;断ったら、お金はかかりませんか？&lt;/summary&gt;&lt;p&gt;まねきやは、査定料・出張料・キャンセル料を無料と案内しています。&lt;/p&gt;&lt;/details&gt;
 &lt;/div&gt;</code></pre></details>
     </section>
 
@@ -1293,6 +1283,9 @@
       <li><strong>見るところ3つのカード（kh-3q）・吹き出し（kh-advisor）</strong>：→ 図解画像か ui-editor ＋ ui-check で</li>
       <li><strong>A・B・C店の仮の金額（kh-shops）</strong>：実測データのように見えるため使わない</li>
       <li><strong>緑の順番図（kh-flow）・文字の順番（kh-steps）</strong>：→ ui-step か図解画像で</li>
+      <li><strong>小見出し（ui-h4）・数字3つ（ui-num）・ビフォー・アフター（ui-ba）</strong>：役割がかぶるので廃止</li>
+      <li><strong>赤い帯（kin-urge）・濃紺のまとめ帯（kh-bridge）</strong>：強すぎる／言い切り（lp-say）で代用</li>
+      <li><strong>見直し案で不採用：値札・「3月→今日」・0円スタンプ・○×対照表・YES/NO診断・締切バナー・画面下の追従ボタン</strong>：2026-09-25 不採用</li>
       <li><strong>相場の計算機（kin-calc）</strong>：喜平LPでは削除。3shaでは使用中。新しく使うときは確認</li>
     </ul>
 
