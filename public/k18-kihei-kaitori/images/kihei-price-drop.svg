@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="t d">
+<title id="t">金価格は3月の最高値から下がっています</title><desc id="d">2026年3月3日の29,969円から9月25日の24,150円まで下落し、18金喜平50gで約22万円、100gで約44万円の差になる図</desc>
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f3d56f"/><stop offset=".5" stop-color="#c68b16"/><stop offset="1" stop-color="#8d5907"/></linearGradient>
+ <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffefb"/><stop offset="1" stop-color="#fff5dc"/></linearGradient>
+ <filter id="s"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity=".12"/></filter>
+ <style>text{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif}.d{fill:#27231f}.g{fill:#a86e08}.r{fill:#b31d25}.b{font-weight:900}</style>
+</defs>
+<rect width="1200" height="900" rx="28" fill="url(#bg)"/>
+<text x="600" y="88" text-anchor="middle" class="d b" font-size="54">金価格は</text>
+<text x="600" y="150" text-anchor="middle" class="d b" font-size="54">3月の最高値から<tspan class="g">下がっています</tspan></text>
+
+<g filter="url(#s)">
+ <rect x="60" y="205" width="440" height="300" rx="26" fill="#fff" stroke="#ead7ac" stroke-width="2"/>
+ <rect x="700" y="205" width="440" height="300" rx="26" fill="#fff" stroke="#ead7ac" stroke-width="2"/>
+</g>
+<rect x="60" y="205" width="440" height="68" rx="26" fill="#f7e9bd"/><rect x="60" y="250" width="440" height="23" fill="#f7e9bd"/>
+<rect x="700" y="205" width="440" height="68" rx="26" fill="#f7e9bd"/><rect x="700" y="250" width="440" height="23" fill="#f7e9bd"/>
+<text x="280" y="250" text-anchor="middle" class="d b" font-size="35">2026年3月3日</text>
+<text x="920" y="250" text-anchor="middle" class="d b" font-size="35">2026年9月25日 現在</text>
+<rect x="145" y="292" width="270" height="48" rx="24" fill="url(#gold)"/><text x="280" y="326" text-anchor="middle" fill="#fff" class="b" font-size="27">過去最高値</text>
+<rect x="785" y="292" width="270" height="48" rx="24" fill="url(#gold)"/><text x="920" y="326" text-anchor="middle" fill="#fff" class="b" font-size="27">現在</text>
+<text x="280" y="420" text-anchor="middle" class="g b" font-size="72">29,969<tspan class="d" font-size="32">円/g</tspan></text>
+<text x="920" y="420" text-anchor="middle" class="g b" font-size="72">24,150<tspan class="d" font-size="32">円/g</tspan></text>
+
+<!-- down arrow -->
+<path d="M540 280 C620 300 642 350 642 405 L680 405 L610 482 L540 405 H578 C580 354 567 323 520 307z" fill="url(#gold)"/>
+<text x="610" y="355" text-anchor="middle" class="r b" font-size="36">約5,800円/g</text><text x="610" y="395" text-anchor="middle" class="r b" font-size="34">下落</text>
+
+<rect x="435" y="535" width="330" height="56" rx="28" fill="url(#gold)"/>
+<text x="600" y="574" text-anchor="middle" fill="#fff" class="b" font-size="31">18金喜平なら</text>
+
+<g filter="url(#s)">
+ <rect x="80" y="620" width="480" height="160" rx="24" fill="#fff" stroke="#ead7ac" stroke-width="2"/>
+ <rect x="640" y="620" width="480" height="160" rx="24" fill="#fff" stroke="#ead7ac" stroke-width="2"/>
+</g>
+<text x="320" y="672" text-anchor="middle" class="d b" font-size="38">50g</text>
+<text x="320" y="740" text-anchor="middle" class="r b" font-size="66">約22万円差</text>
+<text x="880" y="672" text-anchor="middle" class="d b" font-size="38">100g</text>
+<text x="880" y="740" text-anchor="middle" class="r b" font-size="66">約44万円差</text>
+<!-- decorative chain -->
+<g fill="none" stroke="url(#gold)" stroke-width="10" opacity=".7">
+ <ellipse cx="110" cy="650" rx="35" ry="18" transform="rotate(-20 110 650)"/><ellipse cx="150" cy="634" rx="35" ry="18" transform="rotate(-20 150 634)"/>
+ <ellipse cx="1050" cy="634" rx="35" ry="18" transform="rotate(20 1050 634)"/><ellipse cx="1090" cy="650" rx="35" ry="18" transform="rotate(20 1090 650)"/>
+</g>
+<rect x="70" y="815" width="1060" height="62" rx="28" fill="url(#gold)"/>
+<text x="600" y="857" text-anchor="middle" fill="#fff" class="b" font-size="34">喜平は重いから、少しの値動きでも差が大きい。</text>
+</svg>
