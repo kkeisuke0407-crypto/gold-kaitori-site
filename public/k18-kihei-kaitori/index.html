@@ -87,9 +87,28 @@
 
 <figure class="mt-figure"><img src="images/gold-price-chart.webp" alt="金の価格推移。金相場は過去最高水準で推移している" width="1000" height="625" loading="lazy"></figure>
 
-<p>3月の最高値から、1gあたり<span class="mt-red">約5,800円</span>も下がっています。</p>
+<p>実際の数字を見てみましょう。</p>
 
-<p>喜平は重いぶん、この差が大きくなります。<br>18金の喜平なら、<span class="mt-mark">50gで約22万円、100gで約44万円</span>の差です。</p>
+<table class="mt-price">
+  <caption>金の値段（1gあたり・税込）</caption>
+  <tr><th>2025年の最安値</th><td>14,776円</td></tr>
+  <tr class="is-peak"><th>2026年3月3日<small>過去最高値</small></th><td>29,969円</td></tr>
+  <tr class="is-now"><th>本日<small id="kh-now-date">2026年9月25日</small></th><td><span id="kh-now-retail">24,150</span>円</td></tr>
+  <tr class="is-diff"><th>最高値との差</th><td>−<span id="kh-gap-g">5,819</span>円</td></tr>
+</table>
+
+<p>3月の最高値から、1gあたり<span class="mt-red">約<span id="kh-gap-g2">5,800</span>円</span>も下がっています。</p>
+
+<p>喜平は重いぶん、この差が大きくなります。</p>
+
+<table class="mt-price mt-price--kihei">
+  <caption>18金の喜平なら、最高値のときとの差</caption>
+  <tr><th>30gの喜平</th><td>約<span id="kh-gap-30">13</span>万円</td></tr>
+  <tr><th>50gの喜平</th><td>約<span id="kh-gap-50">22</span>万円</td></tr>
+  <tr><th>100gの喜平</th><td>約<span id="kh-gap-100">44</span>万円</td></tr>
+</table>
+
+<p><span class="mt-mark">3月に売っていれば受け取れたお金が、今はもう受け取れません。</span></p>
 
 <p>そして、この先また上がる保証はありません。</p>
 
@@ -117,7 +136,7 @@
 
 <p>だから、<span class="mt-mark">「最初にどのお店に持っていくか」</span>がとても大事なんです。</p>
 
-<p class="mt-small">※金の値段は田中貴金属の店頭小売価格（税込）。過去最高値は2026年3月3日、現在値は2026年9月25日の値です。18金は金75%として換算した目安です。過去の値動きは、将来を約束するものではありません。</p>
+<p class="mt-small">※金の値段は田中貴金属の店頭小売価格（税込）。2025年の最安値は年間最安値（税抜13,433円）を税込にした値、過去最高値は2026年3月3日の値です。本日の値は毎営業日の公表値を自動で表示しています。18金の差は、今日の18金と純金の買取価格の比率で換算した目安です。過去の値動きは、将来を約束するものではありません。</p>
 
 <h2 class="mt-h2" id="kihei-point">自分の「喜平」に合ったお店選びが重要</h2>
 
@@ -284,6 +303,24 @@
   var jst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
   var el = document.getElementById('kin-today');
   if (el) el.textContent = jst.getFullYear() + '年' + (jst.getMonth() + 1) + '月' + jst.getDate() + '日';
+}());
+/* 相場の数字：最高値（田中・小売 2026/3/3）と本日の小売価格を /rates.json から出す。取れない日はHTMLの値のまま */
+(function () {
+  var PEAK = 29969;
+  var $ = function (id) { return document.getElementById(id); };
+  var yen = function (n) { return Math.round(n).toLocaleString('ja-JP'); };
+  fetch('/rates.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (d) {
+    var retail = typeof d.goldRetail === 'number' ? d.goldRetail : null;
+    if (!retail) return;
+    $('kh-now-retail').textContent = yen(retail);
+    if (d.updatedAt) $('kh-now-date').textContent = d.updatedAt.replace('現在', '').trim();
+    var gap = PEAK - retail;
+    if (gap <= 0) return;
+    var r18 = d.k18 && d.k24 ? d.k18 / d.k24 : 0.75;
+    $('kh-gap-g').textContent = yen(gap);
+    $('kh-gap-g2').textContent = yen(Math.round(gap / 100) * 100);
+    [30, 50, 100].forEach(function (g) { $('kh-gap-' + g).textContent = Math.round(gap * r18 * g / 10000).toLocaleString('ja-JP'); });
+  }).catch(function () {});
 }());
 /* キャンペーンの締め切り（公式LP：9月1日〜9月30日）。固定日で残り日数を出し、過ぎたら表示を隠す（自動延長しない） */
 (function () {
