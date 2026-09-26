@@ -144,6 +144,7 @@ img { max-width: 100%; height: auto; }
 .mt-fv { margin: 0 0 1.2em; }
 .mt-fv img, .mt-figure img { display: block; width: 100%; border-radius: 6px; }
 .mt-figure { margin: 1.2em 0; }
+.mt-figure--sm img { max-width: 280px; margin: 0 auto; }
 .mt-sitebar--foot { margin-top: 2em; }
 .mt-banner { max-width: 260px; margin-left: auto; margin-right: auto; }
 .mt-banner__photo { display: block; width: 100%; max-width: 260px; margin: 0 auto; border-radius: 4px; }
