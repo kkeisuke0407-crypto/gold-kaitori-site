@@ -372,7 +372,7 @@
      ★3社なので提携先テーブルで管理する。社を増やすときはここに1行足すだけ。 -->
 <script>
 (function(){
-  var KEEP = /^(utm_|gclid|gbraid|wbraid|gad_|campaignid|keyword|matchtype|device|network|creative)$/i;
+  var KEEP = /^(utm_.+|gclid|gbraid|wbraid|gad_.+|campaignid|adgroupid|keyword|matchtype|device|network|creative)$/i;
   var LANDING = "k18_kihei_kaitori";
 
   // 遷移先ホスト → 役割。上から順に判定する
