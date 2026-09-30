@@ -380,8 +380,6 @@ img { max-width: 100%; height: auto; }
 .mt-disclaimer ul { margin: 0; padding-left: 1.2em; }
 span.kin-camp-fixed { white-space: nowrap; }
 .mt-points li b { color: var(--mt-ink); }
-/* ランキング早見：2位・3位は公式サイトではなくページ内の紹介へ */
-.mt-podium__more { flex: none; font-size: 12.5px; font-weight: 700; color: var(--mt-blue); text-decoration: underline; white-space: nowrap; }
 
 
 /* 刻印の表（横スクロールしない幅） */
