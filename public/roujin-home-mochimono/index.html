@@ -280,7 +280,7 @@
     <div class="ui-rate" id="gold-price">
       <p class="ui-rate__ttl">▼本日の金の買取相場</p>
       <p class="ui-rate__v"><span id="kin-rate-val">—</span><small>円/g</small><span class="ui-rate__diff" id="kin-rate-diff"></span></p>
-      <p class="ui-rate__note">上記は参考価格です。まねきやの無料電話相談で、詳細の査定価格を確認できます。<span data-campaign><br>※まねきやでは<strong class="em-green">9/30までお電話申込限定で、買取価格20%UPキャンペーンを実施中</strong>です。「まずは査定だけ」でもOKなので、この機会に査定価格を確認してみてください。</span></p>
+      <p class="ui-rate__note">上記は参考価格です。まねきやの無料電話相談で、詳細の査定価格を確認できます。<span data-campaign><br>※まねきやでは<strong class="em-green">10/31までお電話申込限定で、買取価格20%UPキャンペーンを実施中</strong>です。「まずは査定だけ」でもOKなので、この機会に査定価格を確認してみてください。</span></p>
       <p class="ui-rate__upd">＊更新日時：<span id="kin-rate-upd">—</span>　＊参考価格になります。</p>
     </div>
 
@@ -671,7 +671,7 @@
 /* まねきや「電話申込限定 買取額20%UP」キャンペーン：終了日は固定（自動延長しない）。
    終了日を過ぎたら data-campaign を付けた訴求だけを非表示にする。終了日は公式・ASPで確認した日付に合わせて更新する。 */
 (function () {
-  var END = Date.parse('2026-09-30T23:59:59+09:00');
+  var END = Date.parse('2026-10-31T23:59:59+09:00');
   if (!(Date.now() > END)) return;
   var s = document.createElement('style');
   s.textContent = '[data-campaign]{display:none!important}';

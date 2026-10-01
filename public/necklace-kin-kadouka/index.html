@@ -203,7 +203,7 @@
     <div class="ui-rate" id="gold-price">
       <p class="ui-rate__ttl">▼本日の金の買取相場</p>
       <p class="ui-rate__v"><span id="kin-rate-val">—</span><small>円/g</small><span class="ui-rate__diff" id="kin-rate-diff"></span></p>
-      <p class="ui-rate__note">上記は参考価格です。まねきやの無料電話相談で、詳細の査定価格を確認できます。<br>※まねきやでは<strong class="em-green">9/30までお電話申込限定で、買取価格20%UPキャンペーンを実施中</strong>です。「まずは査定だけ」でもOKなので、この機会に査定価格を確認してみてください。</p>
+      <p class="ui-rate__note">上記は参考価格です。まねきやの無料電話相談で、詳細の査定価格を確認できます。<br>※まねきやでは<strong class="em-green">10/31までお電話申込限定で、買取価格20%UPキャンペーンを実施中</strong>です。「まずは査定だけ」でもOKなので、この機会に査定価格を確認してみてください。</p>
       <p class="ui-rate__upd">＊更新日時：<span id="kin-rate-upd">—</span>　＊参考価格になります。</p>
     </div>
 
@@ -591,13 +591,13 @@
 </div>
 
 <script>
-/* 公式・ASP確認済みの固定終了日：2026年9月30日（JST）。自動延長しない。 */
+/* 公式・ASP確認済みの固定終了日：2026年10月31日（JST）。自動延長しない。 */
 (function () {
   var jst = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
   var today = document.getElementById('kin-today');
   if (today) today.textContent = jst.getFullYear() + '年' + (jst.getMonth() + 1) + '月' + jst.getDate() + '日';
 
-  var campaignEnd = Date.parse('2026-10-01T00:00:00+09:00');
+  var campaignEnd = Date.parse('2026-11-01T00:00:00+09:00');
   if (Date.now() < campaignEnd) return;
 
   var root = document.getElementById('compare');
