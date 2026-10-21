@@ -1,22 +1,22 @@
 {
   "ok": true,
   "source": "田中貴金属",
-  "updatedAt": "2026年10月20日 現在",
-  "fetchedAt": "2026-10-20T04:40:19.360Z",
-  "gold": 23004,
-  "goldDiff": -127,
-  "goldRetail": 23360,
-  "pt1000": 8971,
-  "ptDiff": 19,
+  "updatedAt": "2026年10月21日 現在",
+  "fetchedAt": "2026-10-21T04:34:15.567Z",
+  "gold": 22880,
+  "goldDiff": -124,
+  "goldRetail": 23237,
+  "pt1000": 9068,
+  "ptDiff": 97,
   "prevClose": {
-    "date": "2026-10-19",
-    "gold": 23131,
-    "pt1000": 8952
-  },
-  "last": {
     "date": "2026-10-20",
     "gold": 23004,
     "pt1000": 8971
+  },
+  "last": {
+    "date": "2026-10-21",
+    "gold": 22880,
+    "pt1000": 9068
   },
   "diffSource": "田中公式"
 }
